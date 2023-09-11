@@ -1,6 +1,10 @@
 <?php
 
-echo "Controller not found";
+class _404 extends Controller {
+    public function index(){
+        echo "Controller not found";
+    }
+}
 
 
 ?>
