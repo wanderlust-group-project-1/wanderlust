@@ -4,7 +4,16 @@ class Home extends Controller {
     public function index($a = '',$b = ''){
 
         $model = new Model;
-        $result = $model->where(['id' => 1]);
+        // $arr['id'] = 1;
+        // $arr['name'] = "nirmal";
+        // $arr2['date'] = date("Y");
+        // $result = $model->where($arr);
+
+        // $arr['name'] = "Savinda";
+        // $arr['date'] = date("Y");
+        // $arr['age'] = '19';
+        
+        $result = $model->delete(3);
 
 
         show($result);
