@@ -1,6 +1,8 @@
 <?php
 
-class Product extends Controller {
+class Product{
+    use Controller;
+
     public function index($a = '',$b = ''){
         echo "This is product controller";
 
