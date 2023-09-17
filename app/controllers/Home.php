@@ -25,22 +25,19 @@ class Home {
         // $result = $user->findAll();
 
 
-        show("from the index function");
+        // show("from the index function");
 
-        show($a);
-        show($b);
-        show($c);
         // echo "This is home controller";
 
-        $this->view('home');
+        $data['email'] = empty($_SESSION['USER']) ? 'Guest' : $_SESSION['USER']->email;
+
+        $this->view('home',$data);
     }
 
 
     public function edit($a = '', $b = '', $c = ''){
         show("from the edit function");
-        show($a);
-        show($b);
-        show($c);
+
     }
 }
 
