@@ -1,6 +1,6 @@
 <?php
 
-class Controller{
+Trait Controller{
 
     public function view($name){
         $filename= "../app/views/".$name.".view.php";

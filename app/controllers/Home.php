@@ -1,25 +1,46 @@
 <?php
 
-class Home extends Controller {
-    public function index($a = '',$b = ''){
+class Home {
 
-        $model = new Model;
+    use Controller;
+
+    public function index($a = '',$b = '',$c =''){
+
+
+
+
+
+
+        // $user = new User;
         // $arr['id'] = 1;
-        // $arr['name'] = "nirmal";
+        // $arr['name'] = "Nimal";
         // $arr2['date'] = date("Y");
         // $result = $model->where($arr);
 
         // $arr['name'] = "Savinda";
         // $arr['date'] = date("Y");
-        // $arr['age'] = '19';
+        // $arr['age'] = '45';
         
-        $result = $model->delete(3);
+        // $result = $user->insert($arr);
+        // $result = $user->findAll();
 
 
-        show($result);
-        echo "This is home controller";
+        show("from the index function");
+
+        show($a);
+        show($b);
+        show($c);
+        // echo "This is home controller";
 
         $this->view('home');
+    }
+
+
+    public function edit($a = '', $b = '', $c = ''){
+        show("from the edit function");
+        show($a);
+        show($b);
+        show($c);
     }
 }
 
