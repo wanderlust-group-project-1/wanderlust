@@ -7,7 +7,7 @@ class Signup {
         $data = [];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $user = new User;
+            $user = new UserModel;
 
             if($user->validate($_POST)){
                 $user->insert($_POST);
