@@ -5,12 +5,17 @@
 if ($_SERVER['SERVER_NAME'] == 'localhost'){
 
     define('DBNAME','php');
-    define('DBHOST', 'localhost');
+    define('DBHOST', '127.0.0.1');
     define('DBUSER','php');
     define('DBPASS','php');
 
     define('ROOT_DIR', 'http://localhost/mvc/public');
 }else {
+    define('DBNAME','php');
+    define('DBHOST', '127.0.0.1');
+    define('DBUSER','php');
+    define('DBPASS','php');
+
     define('ROOT_DIR', 'http://'.$_SERVER['SERVER_NAME']);
 }
 
