@@ -1,19 +1,16 @@
 <?php
 
-function show($stuff){
+function show($stuff): void {
     echo "<pre>";
     print_r($stuff);
     echo "</pre>";
-
 }
 
 
-function esc($str)
-{
+function esc(string $str): string {
     return htmlspecialchars($str);
 }
 
-function redirect($path)
-{
-    header("Location:".ROOT_DIR."/".$path);
+function redirect(string $path): void {
+    header("Location: " . ROOT_DIR . "/" . $path);
 }

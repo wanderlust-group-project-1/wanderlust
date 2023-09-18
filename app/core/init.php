@@ -1,12 +1,14 @@
 <?php
 
 
-spl_autoload_register(function($classname){
-    require $filename = "../app/models/".trim(ucfirst($classname),'Model').".php" ;
-    // echo $filename;
+spl_autoload_register(function (string $classname): void {
+    $filename = "../app/models/" . trim(ucfirst($classname), 'Model') . ".php";
+    require $filename;
 });
 
+
 require 'config.php';
+require 'declarations.php';
 require 'functions.php';
 require 'Database.php';
 require 'Model.php';
