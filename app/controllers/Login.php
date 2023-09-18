@@ -1,5 +1,8 @@
 <?php
 
+use Firebase\JWT\JWT;
+
+
 class Login {
     use Controller;
 
@@ -19,8 +22,22 @@ class Login {
             }
         }
 
-        $this->view('login', $data);
+
+        // $secretKey = 'your_secret_key';
+
+        // $userData = [
+        //     'user_id' => 123,
+        //     'username' => 'example_user',
+        // ];
+
+        // $token = JWT::encode($userData, $secretKey, 'HS256');
+
+        // setcookie('jwt_token', $token, time() + 3600, '/', '', false, true);
+
+    // echo json_encode(['token' => $token]);
+
+            $this->view('login', $data);
+        }
     }
-}
 
 ?>
