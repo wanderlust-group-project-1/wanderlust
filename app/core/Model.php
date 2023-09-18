@@ -5,11 +5,11 @@ Trait Model  {
     use Database;
 
     // protected $table = 'users';
-    protected $limit = 10;
-    protected $offset = 0;
-    protected $order_type = "desc";
-    protected $order_column = "id";
-    public $errors = [];
+    protected int $limit = 10;
+    protected int $offset = 0;
+    protected string $order_type = "desc";
+    protected string $order_column = "id";
+    public array $errors = [];
 
 
 
@@ -17,7 +17,7 @@ Trait Model  {
 
 
 
-    public function findAll(){
+    public function findAll():array{
 
 
         $query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
@@ -30,7 +30,7 @@ Trait Model  {
     }
 
 
-    public function where($data, $data_not = []){
+    public function where(array $data, array $data_not = []): array{
 
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
@@ -57,7 +57,7 @@ Trait Model  {
 
     }
   
-    public function first($data, $data_not = []){
+    public function first(array $data, array $data_not = []): mixed{
 
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
@@ -86,7 +86,7 @@ Trait Model  {
 
     }
 
-    public function insert($data, $data_not = []){
+    public function insert(array $data,array $data_not = []):void {
 
         // remove unwanted data 
         if(!empty($this->allowedColumns)){
@@ -102,13 +102,11 @@ Trait Model  {
 
         $this->query($query,$data);
 
-        return false;
-
 
     }
 
 
-    public function update($id, $data, $id_column = 'id'){
+    public function update($id, array $data, string $id_column = 'id'):mixed {
 
         // remove unwanted data 
         if(!empty($this->allowedColumns)){
@@ -134,12 +132,11 @@ Trait Model  {
 
         // echo $query;
         return $this->query($query, $data);
-        return false;
         
     }
 
 
-    public function delete($id, $id_column = 'id'){
+    public function delete($id, string $id_column = 'id'):bool{
 
         $data[$id_column] = $id;
         $query = "delete from $this->table where $id_column = :$id_column ";
