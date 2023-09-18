@@ -4,10 +4,7 @@ class Home {
 
     use Controller;
 
-    public function index($a = '',$b = '',$c =''){
-
-
-
+    public function index(string $a = '', string $b = '', string $c = ''): void {
 
 
 
@@ -28,14 +25,14 @@ class Home {
         // show("from the index function");
 
         // echo "This is home controller";
-
         $data['email'] = empty($_SESSION['USER']) ? 'Guest' : $_SESSION['USER']->email;
 
-        $this->view('home',$data);
+        $this->view('home', $data);
     }
 
-
-    public function edit($a = '', $b = '', $c = ''){
+    public function edit(string $a = '', string $b = '', string $c = ''): void {
+     
+ 
         show("from the edit function");
 
     }

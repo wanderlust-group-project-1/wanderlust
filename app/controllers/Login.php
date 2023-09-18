@@ -3,7 +3,7 @@
 class Login {
     use Controller;
 
-    public function index() {
+    public function index(): void {
         $data = [];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -11,14 +11,6 @@ class Login {
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            // $row = $user->first(['email' => $email]);
-
-            // if ($row && $user->verifyPassword($password, $row['password'])) {
-            //     $_SESSION['USER'] = $row;
-            //     redirect('home');
-            // } else {
-            //     $data['errors'] = ['email' => 'Wrong Email or Password'];
-            // }
             if ($user->authenticate($email, $password)) {
                 $_SESSION['USER'] = $user->authenticate($email, $password);
                 redirect('home');
@@ -30,3 +22,5 @@ class Login {
         $this->view('login', $data);
     }
 }
+
+?>
