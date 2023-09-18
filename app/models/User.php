@@ -1,7 +1,7 @@
 <?php
 
 
-class User {
+class UserModel {
     
     use Model;
 
