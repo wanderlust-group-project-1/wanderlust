@@ -3,33 +3,30 @@
 class Login {
     use Controller;
 
-    
-
-    public function index(){
-
-
+    public function index() {
         $data = [];
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = new UserModel;
-            $arr['email'] = $_POST['email'];
-            $row = $user->first($arr);
+            $email = $_POST['email'];
+            $password = $_POST['password'];
 
-            if($row){
-                if($row->password == $_POST['password']){
-                    // $_SESSION['user_id'] = $row->id;
-                    $_SESSION['USER'] = $row;
-                    redirect('home');
-                }
+            // $row = $user->first(['email' => $email]);
+
+            // if ($row && $user->verifyPassword($password, $row['password'])) {
+            //     $_SESSION['USER'] = $row;
+            //     redirect('home');
+            // } else {
+            //     $data['errors'] = ['email' => 'Wrong Email or Password'];
+            // }
+            if ($user->authenticate($email, $password)) {
+                $_SESSION['USER'] = $user->authenticate($email, $password);
+                redirect('home');
+            } else {
+                $data['errors'] = ['email' => 'Wrong Email or Password'];
             }
-            $user->errors['email'] = 'Wrong Email or Password';
-           
-            $data['errors'] = $user->errors;
-
-
         }
-        
 
-
-        $this->view('login',$data);
+        $this->view('login', $data);
     }
 }
