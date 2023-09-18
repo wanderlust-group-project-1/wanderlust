@@ -2,7 +2,7 @@
 
 
 spl_autoload_register(function($classname){
-    require $filename = "../app/models/".ucfirst($classname).".php" ;
+    require $filename = "../app/models/".trim(ucfirst($classname),'Model').".php" ;
     // echo $filename;
 });
 
