@@ -1,5 +1,7 @@
 <?php 
 
+
+
 if ($_SERVER['SERVER_NAME'] == 'localhost'){
 
     define('DBNAME','php');
@@ -9,7 +11,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost'){
 
     define('ROOT_DIR', 'http://localhost/mvc/public');
 }else {
-    define('ROOT_DIR', 'http://localhost');
+    define('ROOT_DIR', 'http://'.$_SERVER['SERVER_NAME']);
 }
 
 
