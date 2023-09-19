@@ -5,12 +5,13 @@ use Firebase\JWT\Key;
 
 class AuthMiddleware {
 
-    public function handle():void {
+    private static function check():bool {
         $cookieName = 'jwt_auth_token'; 
         // print_r($_COOKIE);
         if (!isset($_COOKIE[$cookieName])) {
             setcookie('jwt_auth_token', '', time() - 1, '/');
-            redirect('login');
+            // redirect('login');
+            return false;
         }
 
         $token = $_COOKIE[$cookieName];
@@ -29,7 +30,8 @@ class AuthMiddleware {
             // $email = $decoded->email;
             if(!$user->first($data)){
                 setcookie('jwt_auth_token', '', time() - 1, '/');
-                redirect('login');
+                // redirect('login');
+                return false;
             }
              
 
@@ -41,7 +43,19 @@ class AuthMiddleware {
             // echo json_encode(['error' => 'Token is invalid']);
             // exit();
             setcookie('jwt_auth_token', '', time() - 1, '/');
+            // redirect('login');
+            return false;
+        }
+        return true;
+    }
+    public static function is_authenticated():void {
+        if(!self::check()){
             redirect('login');
+        }
+    }
+    public static function not_authenticated():void {
+        if(self::check()){
+            redirect('home');
         }
     }
 }
