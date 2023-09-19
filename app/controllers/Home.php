@@ -31,6 +31,7 @@ class Home {
 
         // echo "This is home controller";
         $data['email'] = empty($_SESSION['USER']) ? 'Guest' : $_SESSION['USER']->email;
+        
 
         $this->view('home', $data);
     }

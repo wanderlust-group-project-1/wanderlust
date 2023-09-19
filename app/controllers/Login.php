@@ -22,7 +22,7 @@ class Login {
 
         if ($user->authenticate($email, $password)) {
             $userData = $user->authenticate($email, $password);
-            $_SESSION['USER'] = $userData;
+            // $_SESSION['USER'] = $userData;
             // filter user data get id and email array 
             $userData = array_filter((array) $userData, function ($key) {
                 return in_array($key, ['id', 'email']);

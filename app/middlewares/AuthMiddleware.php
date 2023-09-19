@@ -5,6 +5,34 @@ use Firebase\JWT\Key;
 
 class AuthMiddleware {
 
+
+
+
+    public static function run_middleware(string $controller, string $method): void {
+         $authRequired = [
+            'Home' => ['index', 'method2'],
+            'Controller2' => ['method3'],
+        ];
+        $unauthRequired = [
+            'Login' => ['index'],
+            'Signup' => ['index']
+        ];
+
+        $currentController = ucfirst($controller);
+
+        if (isset($authRequired[$currentController]) &&
+            in_array($method, $authRequired[$currentController])) {
+            Self::is_authenticated();
+        }
+        if (isset($unauthRequired[$currentController]) &&
+            in_array($method, $unauthRequired[$currentController])) {
+            Self::not_authenticated();
+        }
+        
+
+            
+    }
+
     private static function check():bool {
         $cookieName = 'jwt_auth_token'; 
         // print_r($_COOKIE);
@@ -19,7 +47,7 @@ class AuthMiddleware {
         try {
             // echo $token;
             $decoded = JWT::decode($token, new Key( SECRET_KEY, 'HS256'));
-            // The token is valid; you can access the claims as $decoded->id, $decoded->email, etc.
+            // The token is valid; you can access the claims as $decoded->id, $decoded->email, 
 
             $user = new UserModel;
 
