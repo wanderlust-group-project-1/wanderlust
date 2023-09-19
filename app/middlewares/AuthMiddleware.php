@@ -6,7 +6,7 @@ use Firebase\JWT\Key;
 class AuthMiddleware {
 
 
-
+    // protected static $user;
 
     public static function run_middleware(string $controller, string $method): void {
          $authRequired = [
@@ -51,11 +51,13 @@ class AuthMiddleware {
 
             $user = new UserModel;
 
-
+            // show($user);
             // $data = []
             // $userId = $decoded->user_id;
             $data['email'] = $decoded->email;
             // $email = $decoded->email;
+            // show($user->first($data));
+
             if(!$user->first($data)){
                 setcookie('jwt_auth_token', '', time() - 1, '/');
                 // redirect('login');
