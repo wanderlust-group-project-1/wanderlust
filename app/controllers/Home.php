@@ -6,6 +6,11 @@ class Home {
 
     public function index(string $a = '', string $b = '', string $c = ''): void {
 
+        $authMiddleware = new AuthMiddleware();
+
+        // Apply the middleware to authenticate user
+        $authMiddleware->handle();
+
 
 
         // $user = new User;
