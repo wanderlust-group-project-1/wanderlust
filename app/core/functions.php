@@ -14,3 +14,6 @@ function esc(string $str): string {
 function redirect(string $path): void {
     header("Location: " . ROOT_DIR . "/" . $path);
 }
+
+// function cookie set 
+
