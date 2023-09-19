@@ -10,7 +10,7 @@ class Home {
 
         // Apply the middleware to authenticate user
         // $authMiddleware->is_authenticated();
-        AuthMiddleware::is_authenticated();
+        // AuthMiddleware::is_authenticated();
 
 
         // $user = new User;
