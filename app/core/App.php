@@ -10,33 +10,33 @@ class APP {
         return $URL;
     }
 
-    private function runMiddleware(): void {
-        // Define an array of controllers and their methods that require authentication
-        $authRequired = [
-            'Home' => ['index', 'method2'],
-            'Controller2' => ['method3'],
-            // Add more controllers and methods as needed
-        ];
-        $unauthRequired = [
-            'Login' => ['index'],
-            'Signup' => ['index']
-        ];
+    // private function runMiddleware(): void {
+    //     // Define an array of controllers and their methods that require authentication
+    //     $authRequired = [
+    //         'Home' => ['index', 'method2'],
+    //         'Controller2' => ['method3'],
+    //         // Add more controllers and methods as needed
+    //     ];
+    //     $unauthRequired = [
+    //         'Login' => ['index'],
+    //         'Signup' => ['index']
+    //     ];
 
-        $currentController = ucfirst($this->controller);
+    //     $currentController = ucfirst($this->controller);
 
-        // Check if the current controller and method require authentication
-        if (isset($authRequired[$currentController]) &&
-            in_array($this->method, $authRequired[$currentController])) {
-            AuthMiddleware::is_authenticated();
-        }
-        if (isset($unauthRequired[$currentController]) &&
-            in_array($this->method, $unauthRequired[$currentController])) {
-            AuthMiddleware::not_authenticated();
-        }
+    //     // Check if the current controller and method require authentication
+    //     if (isset($authRequired[$currentController]) &&
+    //         in_array($this->method, $authRequired[$currentController])) {
+    //         AuthMiddleware::is_authenticated();
+    //     }
+    //     if (isset($unauthRequired[$currentController]) &&
+    //         in_array($this->method, $unauthRequired[$currentController])) {
+    //         AuthMiddleware::not_authenticated();
+    //     }
         
 
             
-    }
+    // }
 
     public function loadController(): void {
         $URL = $this->splitURL();
@@ -63,7 +63,8 @@ class APP {
                 unset($URL[1]);
             }
         }
-        $this->runMiddleware();
+        // $this->runMiddleware();
+        AuthMiddleware::run_middleware($this->controller, $this->method);
 
         call_user_func_array([$controller, $this->method], $URL);
     }
