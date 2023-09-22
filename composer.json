@@ -14,5 +14,8 @@
             "name": "nsavinda",
             "email": "nirmalsavinda29@gmail.com"
         }
-    ]
+    ],
+    "license": "MIT",
+    "minimum-stability": "stable", 
+    "prefer-stable": true 
 }
