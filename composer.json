@@ -18,5 +18,8 @@
     ],
     "license": "MIT",
     "minimum-stability": "stable", 
-    "prefer-stable": true 
+    "prefer-stable": true,
+    "require-dev": {
+        "symfony/test-pack": "^1.1"
+    }
 }
