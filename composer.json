@@ -1,6 +1,7 @@
 {
     "name": "nirmal/mvc",
     "type": "project",
+    "description": "Wanderlust",
     "require": {
         "firebase/php-jwt": "^6.8"
     },
