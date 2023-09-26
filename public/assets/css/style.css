@@ -1,0 +1,136 @@
+/* Navbar container */
+.navbar {
+    background-color: #F4F4F4; /* Off-white background */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Logo styling */
+.logo {
+    color: #4C5039; /* Complementary color for text */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Menu styling */
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu-item {
+    margin-right: 20px;
+}
+
+.nav-menu-item a {
+    text-decoration: none;
+    color: #4C5039; /* Complementary color for text */
+    font-weight: bold;
+}
+
+/* Login button styling */
+.login-button {
+    background-color: #F4F4F4; /* Complementary color */
+    color: #4C5039;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #4C5039;
+}
+.login-button a {
+    text-decoration: none;
+    color: #4C5039;
+}
+
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #F4F4F4; /* Off-white background */
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .nav-menu-item {
+        margin: 10px 0;
+    }
+
+    .nav-menu-toggle {
+        display: block;
+        color: #4C5039; /* Complementary color for text */
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+
+/* Background color */
+body {
+    background-color: #F4F4F4; /* Off-white background */
+}
+
+/* Hero section container */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Hero content (title and description) */
+.hero-content {
+    max-width: 600px; /* Adjust as needed */
+}
+
+.hero-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Hero image */
+.hero-image img {
+    max-width: 100%; /* Ensure the image fits within its container */
+}
+
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .hero {
+        padding: 20px; /* Reduce padding for smaller screens */
+    }
+
+    .hero-content {
+        text-align: center;
+        order: 2; /* Move the content below the image on smaller screens */
+    }
+
+    .hero-image {
+        order: 1; /* Move the image above the content on smaller screens */
+        margin-bottom: 20px; /* Add spacing between image and content */
+    }
+
+    .hero-title {
+        font-size: 28px; /* Adjust font size for smaller screens */
+    }
+
+    .hero-description {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+}
