@@ -34,6 +34,12 @@ require_once('../app/views/layout/header.php');
 
 <?php require_once('../app/views/sections/blog.php');
 ?>
+
+<?php require_once('../app/views/sections/tips.php');
+?>
+
+<?php require_once('../app/views/sections/complaints.php');
+?>
 <!-- <h1> Home page view </h1>
 
 
