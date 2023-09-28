@@ -1,11 +1,13 @@
 <?php
 require_once('../app/views/layout/header.php');
+require_once('../app/views/components/navbar.php');
 
 
 ?>
     <div class="login-container">
     <!-- <h1>Login</h1> -->
-    <form class="login-form" action="<?=ROOT_DIR?>/login" method="post">
+    <div class="login-form">
+    <form  action="<?=ROOT_DIR?>/login" method="post">
     <h2>Login</h2>
 
     
@@ -30,6 +32,7 @@ require_once('../app/views/layout/header.php');
     </form>
     <!-- <a href="<?=ROOT_DIR?>/signup" title="Signup">Signup</a>
     <a href="<?=ROOT_DIR?>" title="Home">Home</a> -->
+    </div>
     </div>
 
 
