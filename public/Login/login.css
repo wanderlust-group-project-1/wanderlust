@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: #f8f8f8;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .background-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1300px;
+    height: 600px;
+    border-radius: 10px;
+    background: #ECECEC;
+  }
+  
+  .login-form {
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    display: block;  
+    width: 350px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4C5039;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+  }
+  
+  .login-form input[type="submit"]:hover {
+    background-color: #88915D;
+  }
+  
+  .login-form p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  
+  .login-form a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-align: right;
+  }
+  
+  .login-form a:hover {
+    color: #88915D;
+  }
+  
+  .message-text {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 10px;
+  }
