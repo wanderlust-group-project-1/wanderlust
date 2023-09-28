@@ -108,15 +108,14 @@ body {
 
 
 .home-container {
-    /* background: #F3F3F3; */
-}
-
-.hero {
-    margin: 20px 10px;
+ margin: 20px 10px;
     border-radius: 20px;
     /* opacity: 0.47; */
     background: #F3F3F3;
-    backdrop-filter: blur(67.62544250488281px);
+    backdrop-filter: blur(67.62544250488281px);}
+
+.hero {
+
 }
 
 .hero-title {
