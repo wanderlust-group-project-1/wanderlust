@@ -1,5 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
+require_once('../app/views/components/navbar.php');
 
 
 ?>
