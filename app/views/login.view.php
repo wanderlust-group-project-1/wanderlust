@@ -1,29 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form action="<?=ROOT_DIR?>/login" method="post">
-        
+<?php
+require_once('../app/views/layout/header.php');
+
+
+?>
+    <div class="login-container">
+    <!-- <h1>Login</h1> -->
+    <form class="login-form" action="<?=ROOT_DIR?>/login" method="post">
+    <h2>Login</h2>
+
     
     <?php if(isset($errors)): ?>
         <div>  <?= implode('<br>', $errors)?>  </div>
     <?php endif; ?>
     
         <label for="email">Email</label>
-        <input type="text" name="email" id="username">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <input type="submit" name="submit" value="Login">
+        <input type="text" name="email" id="email" placeholder="Email" required>
+        <label for="password" >Password</label>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <div class="message-text">
+                <a href="#">Forgot your password?</a>
+            </div>
+        <input type="submit" name="submit" value="login">
+
+        <p>
+                Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a>
+            <p>
+
 
     </form>
-    <a href="<?=ROOT_DIR?>/signup" title="Signup">Signup</a>
-    <a href="<?=ROOT_DIR?>" title="Home">Home</a>
-</body>
-</html>
+    <!-- <a href="<?=ROOT_DIR?>/signup" title="Signup">Signup</a>
+    <a href="<?=ROOT_DIR?>" title="Home">Home</a> -->
+    </div>
+
+
+
+    <?php
+require_once('../app/views/layout/footer.php');
+
+
+?>
 
 
 
