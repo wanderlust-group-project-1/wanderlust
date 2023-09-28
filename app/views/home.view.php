@@ -23,9 +23,11 @@ require_once('../app/views/layout/header.php');
 <?php require_once('../app/views/sections/hero.php');
 ?>
 
-<?php require_once('../app/views/sections/About.php');
+<?php require_once('../app/views/sections/about.php');
 ?>
 
+<?php require_once('../app/views/sections/guide.php');
+?>
 <!-- <h1> Home page view </h1>
 
 
