@@ -40,3 +40,9 @@ require_once('../app/views/layout/header.php');
 <a href="<?= ROOT_DIR ?>/signup" title="Signup">Signup</a>
 <br>
 <a href="<?= ROOT_DIR ?>/logout" title="Logout">Logout</a> -->
+
+<?php
+require_once('../app/views/layout/footer.php');
+
+
+?>
