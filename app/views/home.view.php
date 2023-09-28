@@ -28,6 +28,12 @@ require_once('../app/views/layout/header.php');
 
 <?php require_once('../app/views/sections/guide.php');
 ?>
+
+<?php require_once('../app/views/sections/rental-service.php');
+?>
+
+<?php require_once('../app/views/sections/blog.php');
+?>
 <!-- <h1> Home page view </h1>
 
 
