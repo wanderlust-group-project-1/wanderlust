@@ -156,14 +156,33 @@ body {
 }
 
 
+.col-4-3-end{
+    justify-content:right!important;
+    text-align: right!important;
+    align-items: right!important;
+    padding-right: 10%;
+}
+
 .center-all {
     justify-content: center!important;
     text-align: center!important;
     align-items: center;
 }
 .locked-aspect-ratio {
-  width: 50%; /* Automatically calculates width to maintain aspect ratio */
-  height: auto; /* Set your desired height */
+  width: 50%;
+  height: auto; 
+}
+
+.center-right {
+    justify-content: right!important;
+    text-align: right!important;
+    align-items: right;
+}
+
+.center-left {
+    justify-content: left!important;
+    text-align: left!important;
+    align-items: left;
 }
 
 .home-container {
@@ -251,6 +270,21 @@ body {
     text-align: left!important;
 }
 
+.rental-title {
+    color: #4C5039;
+    text-shadow: 0px 2.5296311378479004px 2.5296311378479004px rgba(0, 0, 0, 0.25);
+    font-family: Fredoka;
+    font-size: 79px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 117.9%; /* 136.826px */
+    margin-bottom: 0%!important;
+    margin-top: 0%!important;    
+    text-align: right!important;
+}
+
+
+
 .about-subtitle {
     color:#BCAB86;;
     font-family: Fredoka;
@@ -260,6 +294,7 @@ body {
     line-height: 117.9%;
     margin-bottom: 0%!important;
 }
+
 
 
 
