@@ -1,9 +1,12 @@
 <div class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Your Title Goes Here</h1>
-            <p class="hero-description">A short description of your hero section.</p>
+        <div class="home-container row">
+<div class="col col-2">
+            <h1 class="hero-title">Campers,</h1>
+            <p class="hero-description">Your Gateway to Outdoor Adventures: <br>
+            Gear Up & Go with Expert Guides!</p>
         </div>
-        <div class="hero-image">
-            <img src="your-image.jpg" alt="Hero Image">
+        <div class="col col-2">
+            <img src="<?=ROOT_DIR ?>/assets/images/hero.png" alt="Hero Image">
         </div>
+</div>
 </div>

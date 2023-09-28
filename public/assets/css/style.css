@@ -1,4 +1,10 @@
 /* Navbar container */
+
+
+.border-box {
+    box-sizing: border-box;
+  }
+
 .navbar {
     background-color: #F4F4F4; /* Off-white background */
     display: flex;
@@ -77,60 +83,57 @@
 
 /* Background color */
 body {
-    background-color: #F4F4F4; /* Off-white background */
+    /* background-color: #F4F4F4; Off-white background */
+    overflow-x: hidden;
+
 }
 
-/* Hero section container */
-.hero {
+
+.row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 40px;
+    flex-wrap: wrap;
+    justify-content: center!important;
+    align-items: center!important;
+    flex-direction: row!important;
 }
 
-/* Hero content (title and description) */
-.hero-content {
-    max-width: 600px; /* Adjust as needed */
+.col {
+    flex: 1;
+    padding: 10px;
+}   
+
+.col-2{
+    max-width:45%;
+}
+
+
+.home-container {
+    /* background: #F3F3F3; */
+}
+
+.hero {
+    margin: 20px 10px;
+    border-radius: 20px;
+    /* opacity: 0.47; */
+    background: #F3F3F3;
+    backdrop-filter: blur(67.62544250488281px);
 }
 
 .hero-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    color: #4C5039;
+    text-shadow: 0px 2.5296311378479004px 2.5296311378479004px rgba(0, 0, 0, 0.25);
+    font-family: Fredoka;
+    font-size: 116.053px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 117.9%; /* 136.826px */
 }
 
-.hero-description {
-    font-size: 18px;
-    margin-bottom: 40px;
-}
-
-/* Hero image */
-.hero-image img {
-    max-width: 100%; /* Ensure the image fits within its container */
-}
-
-/* Media query for mobile responsiveness */
-@media screen and (max-width: 768px) {
-    .hero {
-        padding: 20px; /* Reduce padding for smaller screens */
-    }
-
-    .hero-content {
-        text-align: center;
-        order: 2; /* Move the content below the image on smaller screens */
-    }
-
-    .hero-image {
-        order: 1; /* Move the image above the content on smaller screens */
-        margin-bottom: 20px; /* Add spacing between image and content */
-    }
-
-    .hero-title {
-        font-size: 28px; /* Adjust font size for smaller screens */
-    }
-
-    .hero-description {
-        font-size: 16px; /* Adjust font size for smaller screens */
-    }
+.hero-description{
+    color: #000;
+    font-family: Raleway;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 117.9%; /* 33.012px */
 }
