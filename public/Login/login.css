@@ -17,6 +17,7 @@ body {
     height: 600px;
     border-radius: 10px;
     background: #ECECEC;
+    backdrop-filter: blur(67px);
   }
   
   .login-form {
@@ -38,30 +39,33 @@ body {
   .login-form input[type="text"],
   .login-form input[type="password"] {
     display: block;  
+    background-color: #ECECEC;
     width: 350px;
     padding: 10px;
     margin-bottom: 10px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
   
   .login-form input[type="submit"] {
     display: block;
     width: 100%;
     padding: 10px;
-    border: none;
+    border: 1px solid #BCAB86;
     border-radius: 5px;
-    background-color: #4C5039;
+    background-color: #88915D;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     
   }
   
   .login-form input[type="submit"]:hover {
-    background-color: #88915D;
+    border: 1px solid #BCAB86;
+    background-color: #ECECEC;
+    color: #4C5039;
   }
   
   .login-form p {
