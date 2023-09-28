@@ -185,6 +185,10 @@ body {
     align-items: left;
 }
 
+.right-align{
+    align-items: right!important;
+    justify-content: right!important;
+}
 .home-container {
  margin: 20px 10px;
     border-radius: 20px;
