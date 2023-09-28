@@ -7,7 +7,7 @@ require_once('../app/views/components/navbar.php');
  <div class="login-container">
     <!-- <h1>Signup</h1> -->
 <div class="login-form">
-<div id="select" class="col col-2 ">
+<div id="select" class="col  ">
     <div class="row">
        
         <div class="signup-card"  onclick="load('customer')">
@@ -29,8 +29,8 @@ require_once('../app/views/components/navbar.php');
 </div>
     
 
-    <form hidden id="customer" class="signup-form"  action="<?=ROOT_DIR?>/signup" method="post">
-
+    <form hidden id="customer"   action="<?=ROOT_DIR?>/signup" method="post">
+    <h2>Customer Sign Up</h2>
     <?php if(isset($errors)): ?>
         <div>  <?= implode('<br>', $errors)?>  </div>
     <?php endif; ?>
@@ -45,6 +45,7 @@ require_once('../app/views/components/navbar.php');
     </form>
     <!-- Rental Services -->
     <form hidden id="rental-service"  action="<?=ROOT_DIR?>/signup" method="post">
+    <h2>Rental Services Sign Up</h2>
 
     <?php if(isset($errors)): ?>
         <div>  <?= implode('<br>', $errors)?>  </div>
@@ -61,6 +62,7 @@ require_once('../app/views/components/navbar.php');
 
         <!-- Guide -->
         <form hidden id="guide"  action="<?=ROOT_DIR?>/signup" method="post">
+        <h2>Guide Sign Up</h2>
 
     <?php if(isset($errors)): ?>
         <div>  <?= implode('<br>', $errors)?>  </div>
@@ -74,12 +76,14 @@ require_once('../app/views/components/navbar.php');
             <input type="submit" name="submit" value="Signup">
 
         </form>
-    <a href="<?=ROOT_DIR?>/signup" title="Signup">Signup</a>
 
+    <p>
+                Have an account? <a href="<?=ROOT_DIR?>/login">Login</a>
+            <p>
 
-    <a href="<?=ROOT_DIR?>/login" title="Login">Login</a>
+    <!-- <a href="<?=ROOT_DIR?>/login" title="Login">Login</a>
     <br>
-    <a href="<?=ROOT_DIR?>" title="Home">Home</a>
+    <a href="<?=ROOT_DIR?>" title="Home">Home</a> -->
 
     </div>
  </div>
@@ -87,16 +91,9 @@ require_once('../app/views/components/navbar.php');
 
  
  <script>
-        function load(id){
-            // use css display none and block
-            document.getElementById(id).style.display = "flex";
-            document.getElementById('select').style.display = "none";
-
-           
-        }
+        
 
     </script>
- <!-- script -->
     <script src="<?=ROOT_DIR?>/assets/js/signup.js"></script>
 
     <?php
