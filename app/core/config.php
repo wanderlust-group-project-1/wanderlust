@@ -1,8 +1,8 @@
 <?php 
 
 
-
-if ($_SERVER['SERVER_NAME'] == 'localhost'){
+// server and port
+if ($_SERVER['SERVER_NAME'] == 'localhost' && $_SERVER['SERVER_PORT'] == 80){
 
     define('DBNAME','php');
     define('DBHOST', '127.0.0.1');
@@ -16,7 +16,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost'){
     define('DBUSER','php');
     define('DBPASS','php');
 
-    define('ROOT_DIR', 'http://'.$_SERVER['SERVER_NAME']);
+    define('ROOT_DIR', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
 }
 
 define ('SECRET_KEY','fnkejwfkrfuwehjf');
