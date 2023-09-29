@@ -1,4 +1,4 @@
-FROM composer:2.6.3 AS composer
+FROM composer:2.6.4 AS composer
 FROM php:8.2-apache
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
