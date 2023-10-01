@@ -7,7 +7,7 @@ require_once('../app/views/components/navbar.php');
     <div class="login-container">
     <!-- <h1>Login</h1> -->
     <div class="login-form">
-    <form  action="<?=ROOT_DIR?>/login" method="post">
+    <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
     <h2>Login</h2>
 
     
@@ -36,6 +36,7 @@ require_once('../app/views/components/navbar.php');
     </div>
 
 
+    <script src="<?=ROOT_DIR?>/assets/js/login.js"></script>
 
     <?php
 require_once('../app/views/layout/footer.php');
