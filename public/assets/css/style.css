@@ -314,7 +314,7 @@ body {
     flex-direction: column;
     max-width: 450px;
     width:450px;
-    height: 500px;
+    height: 600px;
     padding: 40px;
     border-radius: 10px;
     background-color: #fff;
@@ -330,7 +330,8 @@ body {
   }
   
   .login-form input[type="text"],
-  .login-form input[type="password"] {
+  .login-form input[type="password"],
+  .login-form select {
     display: block;  
     background-color: #ECECEC;
     width: 100%;
@@ -408,4 +409,35 @@ body {
 }
 .login-form form {
     flex-direction: column;
+}
+
+/* Style for the custom file input */
+.file-input-container {
+    position: relative;
+    margin-top: 10px;
+    padding: 10px;
+    /* align center */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.file-label {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
 }
