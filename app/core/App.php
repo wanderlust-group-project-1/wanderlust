@@ -57,6 +57,19 @@ class APP {
                 require "../app/controllers/_404.php";
                 $this->controller = "_404";
             }
+            $controller = new $this->controller;
+
+
+            if (!empty($URL[2])) {
+                if (method_exists($controller, $URL[2])) {
+                    //  show($URL[2]);
+                    $this->method = $URL[2];
+                    unset($URL[2]);
+                }
+            }
+
+
+
         } else {
             $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
             if (file_exists($filename)) {
@@ -66,6 +79,17 @@ class APP {
             } else {
                 require "../app/controllers/_404.php";
                 $this->controller = "_404";
+            }
+
+            $controller = new $this->controller;
+
+
+            if (!empty($URL[1])) {
+                if (method_exists($controller, $URL[1])) {
+                    //  show($URL[1]);
+                    $this->method = $URL[1];
+                    unset($URL[1]);
+                }
             }
         }
 
@@ -81,15 +105,16 @@ class APP {
 
         // Run middleware before executing the controller's action
 
-        $controller = new $this->controller;
+        // $controller = new $this->controller;
 
-        // Select method
-        if (!empty($URL[1])) {
-            if (method_exists($controller, $URL[1])) {
-                $this->method = $URL[1];
-                unset($URL[1]);
-            }
-        }
+        // // Select method
+        // if (!empty($URL[1])) {
+        //     if (method_exists($controller, $URL[1])) {
+        //         //  show($URL[1]);
+        //         $this->method = $URL[1];
+        //         unset($URL[1]);
+        //     }
+        // }
         // $this->runMiddleware();
         AuthMiddleware::run_middleware($this->controller, $this->method);
 

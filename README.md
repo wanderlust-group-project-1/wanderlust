@@ -3,6 +3,7 @@
 # Setup
 
 Rename `example.env` to `.env`
+
 Rename `database/example.env` to `database/.env`
 
 
