@@ -42,15 +42,42 @@ class APP {
         $URL = $this->splitURL();
 
         // Select controller
-        $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
-        if (file_exists($filename)) {
-            require $filename;
-            $this->controller = ucfirst($URL[0]);
+        if ($URL[0] == 'admin'){
             unset($URL[0]);
+            // echo $URL[1];
+
+            $filename = "../app/controllers/Admin/" . ucfirst($URL[1]) . ".php";
+
+            if (file_exists($filename)) {
+                require $filename;
+                $this->controller = ucfirst($URL[1]);
+                // echo $this->controller;
+                unset($URL[1]);
+            } else {
+                require "../app/controllers/_404.php";
+                $this->controller = "_404";
+            }
         } else {
-            require "../app/controllers/_404.php";
-            $this->controller = "_404";
+            $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
+            if (file_exists($filename)) {
+                require $filename;
+                $this->controller = ucfirst($URL[0]);
+                unset($URL[0]);
+            } else {
+                require "../app/controllers/_404.php";
+                $this->controller = "_404";
+            }
         }
+
+        // $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
+        // if (file_exists($filename)) {
+        //     require $filename;
+        //     $this->controller = ucfirst($URL[0]);
+        //     unset($URL[0]);
+        // } else {
+        //     require "../app/controllers/_404.php";
+        //     $this->controller = "_404";
+        // }
 
         // Run middleware before executing the controller's action
 
