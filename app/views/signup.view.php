@@ -71,10 +71,10 @@ require_once('../app/views/components/navbar.php');
     <input type="text" name="address" id="address">
 
     <label for="registration_number">Business Registration Number/NIC</label>
-    <input type="text" name="registration_number" id="registration_number">
+    <input type="text" name="regNo" id="registration_number">
 
     <label for="mobile_number">Mobile Number</label>
-    <input type="text" name="mobile_number" id="mobile_number">
+    <input type="text" name="mobile" id="mobile_number">
 
     <label for="email">Email Address</label>
     <input type="text" name="email" id="email">
