@@ -17,6 +17,7 @@ COPY composer.json composer.lock /var/www/
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer install  --working-dir=/var/www
 
+COPY .env /var/www
 
 # allow .htaccess with RewriteEngine
 RUN a2enmod rewrite
