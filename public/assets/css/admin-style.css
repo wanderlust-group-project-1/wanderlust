@@ -1,0 +1,209 @@
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #F0F0F0; /* Off-white background color */
+    color: #4C5039; /* Theme color */
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+}
+
+/* Remove ul disc style */
+.nav {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.nav-item {
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    color: inherit; /* New text color */
+    font-size: 20px; /* Increase the font size */
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+
+    
+    
+}
+
+/* Submenu styles */
+.sub-menu {
+    padding-left: 20px;
+    display: none;
+}
+
+.nav-item.active .sub-menu {
+    display: block;
+}
+
+.nav-item:hover {
+    background-color: #4C5039; /* Theme color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+.nav-item a:hover {
+    background-color: #4C5039; /* Theme color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+/* Active menu item */
+.nav-item.active {
+    background-color: #4C5039; /* Theme color for active item */
+    color: #fff; /* Text color for active item */
+}
+
+/* Icons styles */
+.menu-icon {
+    margin-right: 10px;
+}
+
+/* Arrow icon rotation */
+.menu-arrow {
+    float: right;
+}
+
+.nav-item.active .menu-arrow {
+    transform: rotate(90deg);
+}
+
+/* Content container styles (adjust according to your layout) */
+.content {
+    margin-left: 260px;
+    padding: 20px;
+}
+
+/* Add more styles as needed for responsiveness, colors, etc. */
+
+/* Rental Services */
+/* Table styles */
+/*  */
+.table-container {
+    margin: 20px;
+    margin-left: 300px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px; /* Adjust the margin based on your layout */
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Row divider styles */
+.data-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+/* View button styles */
+.view-button {
+    background-color: #4C5039;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.view-button:hover {
+    background-color: #333;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.accepted {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.not-accepted {
+    background-color: #FF5733;
+    color: #fff;
+}
+
+.waiting {
+    background-color: #FFC107;
+    color: #333;
+}
+
+/* rental-service model */
+
+/* Modal styles */
+.rental-services-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.rental-services-modal .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.rental-services-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.rental-services-modal .close:hover,
+.rental-services-modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rental-services-modal .profile-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.rental-services-modal #profile-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.rental-services-modal .profile-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.rental-services-modal .profile-links a:hover {
+    color: #0056b3;
+}
