@@ -7,7 +7,7 @@ class Login {
     use Controller;
 
     private function setcookie(array $userData): void{
-        print_r($userData);
+        // print_r($userData);
         $token = JWT::encode($userData, SECRET_KEY, 'HS256');
 
         setcookie('jwt_auth_token', $token, time() + 36000, '/', '', false, true);

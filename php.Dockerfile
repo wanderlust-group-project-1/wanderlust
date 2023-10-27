@@ -22,6 +22,8 @@ COPY .env /var/www
 # allow .htaccess with RewriteEngine
 RUN a2enmod rewrite
 
+RUN rm -rf /var/www/html
+
 # create public, app folders
 RUN mkdir -p /var/www/public
 RUN mkdir -p /var/www/app
