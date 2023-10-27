@@ -36,29 +36,59 @@ require_once('../app/views/components/navbar.php');
     <?php endif; ?>
     
 
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <input type="submit" name="submit" value="Signup">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required>
 
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address" required>
+
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" required>
+
+    <label for="number">Number</label>
+    <input type="text" name="number" id="number" required>
+
+    <label for="nic">NIC Number</label>
+    <input type="text" name="nic" id="nic" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+
+    <input type="submit" name="submit" value="Signup">
     </form>
     <!-- Rental Services -->
-    <form hidden id="rental-service"  action="<?=ROOT_DIR?>/signup" method="post">
+    <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup" method="post">
     <h2>Rental Services Sign Up</h2>
 
-    <?php if(isset($errors)): ?>
-        <div>  <?= implode('<br>', $errors)?>  </div>
+    <?php if (isset($errors)): ?>
+        <div><?= implode('<br>', $errors) ?></div>
     <?php endif; ?>
-        
-    
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-            <input type="submit" name="submit" value="Signup">
 
-        </form>
+    <label for="business_name">Business Name</label>
+    <input type="text" name="name" id="business_name">
+
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address">
+
+    <label for="registration_number">Business Registration Number/NIC</label>
+    <input type="text" name="regNo" id="registration_number">
+
+    <label for="mobile_number">Mobile Number</label>
+    <input type="text" name="mobile" id="mobile_number">
+
+    <label for="email">Email Address</label>
+    <input type="text" name="email" id="email">
+
+    <div class="file-input-container">
+        <label for="verification_document" class="file-label">Choose Verification Document</label>
+        <input type="file" name="verification_document" id="verification_document" class="file-input">
+    </div>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+
+    <input type="submit" name="submit" value="Signup">
+</form>
+
 
         <!-- Guide -->
         <form hidden id="guide"  action="<?=ROOT_DIR?>/signup" method="post">
@@ -69,12 +99,37 @@ require_once('../app/views/components/navbar.php');
     <?php endif; ?>
         
     
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-            <input type="submit" name="submit" value="Signup">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required>
 
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address" required>
+
+    <label for="nic">NIC</label>
+    <input type="text" name="nic" id="nic" required>
+
+    <label for="mobile_number">Mobile Number</label>
+    <input type="text" name="mobile_number" id="mobile_number" required>
+
+    <label for="email">Email Address</label>
+    <input type="text" name="email" id="email" required>
+
+    <label for="gender">Gender</label>
+    <select name="gender" id="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select>
+
+    <div class="file-input-container">
+        <label for="verification_document" class="file-label">Choose Verification Document</label>
+        <input type="file" name="verification_document" id="verification_document" class="file-input">
+    </div>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+
+    <input type="submit" name="submit" value="Signup">
         </form>
 
     <p>
