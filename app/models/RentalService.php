@@ -1,6 +1,6 @@
 <?php
 
-class RentalServicesModel {
+class RentalServicesModel extends UserModel {
     use Model;
 
     protected string $table = 'rental_services';
@@ -10,6 +10,7 @@ class RentalServicesModel {
         'regNo',
         'mobile',
         'email',
+        'password',
     ];
 
 
