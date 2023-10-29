@@ -18,7 +18,7 @@ require_once('../app/views/components/navbar.php');
                 <div class="div-12">
                     <div class="text-wrapper">Hello Jenny!</div>
                     <div class="img-1">
-                        <img src="1.png" alt="">
+                        <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
                     </div>
                 </div>
 
@@ -107,7 +107,7 @@ require_once('../app/views/components/navbar.php');
                 <div class="sec3-booking-main">
                     <div class="text-topic">Recent Booking</div>
                     <div class="img-2">
-                        <img src="2.png" alt="">
+                        <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
                     </div>
                 </div>
 

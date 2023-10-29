@@ -59,7 +59,7 @@ require_once('../app/views/components/navbar.php');
         <div class="div">
             <text class="text-wrapper">Steve Johnson</text>
             <div class="img-1">
-                <img src="1.png" alt="">
+                <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
             </div>
             <text class="text-wrapper-2">Guide</text>
         </div>
@@ -105,7 +105,7 @@ require_once('../app/views/components/navbar.php');
         <div class="div">
             <text class="text-wrapper">Steve Johnson</text>
             <div class="img-1">
-                <img src="1.png" alt="">
+                <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
             </div>
             <text class="text-wrapper-2">Guide</text>
         </div>
@@ -152,7 +152,7 @@ require_once('../app/views/components/navbar.php');
         <div class="div">
             <text class="text-wrapper">Steve Johnson</text>
             <div class="img-1">
-                <img src="1.png" alt="">
+                <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
             </div>
             <text class="text-wrapper-2">Guide</text>
         </div>
