@@ -38,13 +38,13 @@ require_once('../app/views/components/navbar.php');
 
                     <div class="div-4">
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Name : Jenny Fernando</div>
+                            <div class="text-wrapper-2">Email : <?php echo $user->email ?></div>
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Age : 20</div>
+                            <div class="text-wrapper-2">Mobile : <?php echo $user->number ?></div>
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Role : Customer</div>
+                            <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
                         </div>
                     </div>
 
