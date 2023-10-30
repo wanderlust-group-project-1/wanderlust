@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/components/navbar.php');
+require_once('../app/views/components/navbar-auth.php');
 
 
 ?>
