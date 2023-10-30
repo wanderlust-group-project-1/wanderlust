@@ -16,23 +16,18 @@ require_once('../app/views/admin/layout/sidebar.php');
         </thead>
         <tbody>
             <tr>
-                <td>John Doe</td>
-                <td>john@example.com</td>
+                <td>Sandaruwan</td>
+                <td>sandaruwan@example.com</td>
                 <td><span class="status accepted">Accepted</span></td>
                 <td><button class="view-button">View</button></td>
             </tr>
             <tr>
-                <td>Jane Smith</td>
-                <td>jane@example.com</td>
+                <td>Sarani</td>
+                <td>sarani@example.com</td>
                 <td><span class="status not-accepted">Not Accepted</span></td>
                 <td><button class="view-button">View</button></td>
             </tr>
-            <tr>
-                <td>Bob Johnson</td>
-                <td>bob@example.com</td>
-                <td><span class="status waiting">Waiting</span></td>
-                <td><button class="view-button">View</button></td>
-            </tr>
+            
             <!-- Add more rows as needed -->
         </tbody>
     </table>
@@ -44,9 +39,9 @@ require_once('../app/views/admin/layout/sidebar.php');
         <span class="close">&times;</span>
         <div class="profile-info">
             <img src="<?php echo ROOT_DIR?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
-            <h2 id="profile-name">Sandali </h2>
-            <p id="profile-email">sandali@gmail.com</p>
-            <p id="profile-address">Maharagama</p>
+            <h2 id="profile-name">Sarani Hettiarachchci</h2>
+            <p id="profile-email">sarani@example.com</p>
+            <p id="profile-address">Homagama</p>
             <p id="profile-status" class="accepted">Accepted</p>
             <div class="profile-links">
                 <a href="#" id="link-1">Link 1</a>
