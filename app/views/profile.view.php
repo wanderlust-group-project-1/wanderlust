@@ -16,7 +16,7 @@ require_once('../app/views/components/navbar.php');
 
             <div class="div-1">
                 <div class="div-12">
-                    <div class="text-wrapper">Hello Jenny!</div>
+                    <!-- <div class="text-wrapper">Hello Jenny!</div> -->
                     <div class="img-1">
                         <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
                     </div>
@@ -26,10 +26,10 @@ require_once('../app/views/components/navbar.php');
 
                     <div class="div-4">
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Name : Jenny Fernando</div>
+                            <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Age : 20</div>
+                            <div class="text-wrapper-2">NIC : <?php echo $user->nic ?></div>
                         </div>
                         <div class="div-wrapper">
                             <div class="text-wrapper-2">Role : Customer</div>

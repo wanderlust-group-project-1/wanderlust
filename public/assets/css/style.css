@@ -48,6 +48,72 @@
     color: #4C5039;
 }
 
+
+
+/* nav profile  avatar*/
+
+
+.navbar .profile-avatar {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar .profile-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff; /* Set the default background color */
+    color: #4c5039; /* Set the default font color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.navbar .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+/* 
+.navbar .dropdown-menu ul li {
+    padding: 10px;
+} */
+
+/* Style the links inside the dropdown menu */
+.navbar .dropdown-menu ul li a {
+    text-decoration: none;
+    color: #4c5039; /* Set default link color */
+    transition: all 0.3s ease; /* Add smooth transition effect for all properties */
+    display: block;
+    padding: 10px 20px ;
+}
+
+/* Change link color and background on hover */
+.navbar .dropdown-menu ul li a:hover {
+    color: #6b6f55; /* Set a different color on hover */
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Show dropdown menu on click */
+.navbar .profile-avatar.active .dropdown-menu {
+    display: block;
+}
+
+
+
+
+
+/* nav profile end */
+
+
 .section-button {
     background-color: #F4F4F4; 
     color: #4C5039;

@@ -22,3 +22,4 @@ require 'Model.php';
 require 'Controller.php';
 require 'App.php';
 require '../app/middlewares/AuthMiddleware.php';
+require '../app/middlewares/UserMiddleware.php';
