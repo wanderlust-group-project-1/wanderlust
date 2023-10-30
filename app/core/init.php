@@ -5,7 +5,11 @@
 // use Firebase\JWT\JWT;
 
 spl_autoload_register(function (string $classname): void {
-    $filename = "../app/models/" . trim(ucfirst($classname), 'Model') . ".php";
+    // echo $classname;
+    // die();
+    // echo trim($classname, "Model");    
+    // echo str_replace("Model", "", ucfirst($classname));
+    $filename = "../app/models/" . str_replace("Model", "", ucfirst($classname)) . ".php";
     require $filename;
 });
 

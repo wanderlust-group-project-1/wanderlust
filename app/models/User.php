@@ -8,6 +8,7 @@ class UserModel {
     protected array $allowedColumns = [
         'email',
         'password',
+        'role'
     ];
 
     // Update the hashing algorithm and salt length as needed
@@ -17,7 +18,11 @@ class UserModel {
     public function registerUser(array $data){
         if ($this->validate($data)) {
             $data['password'] = $this->hashPassword($data['password']);
+            
             return $this->insert($data);
+
+            // show($this->lastInsertedRow());
+
         }
         return false;
     }

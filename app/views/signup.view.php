@@ -29,7 +29,7 @@ require_once('../app/views/components/navbar.php');
 </div>
     
 
-    <form hidden id="customer"   action="<?=ROOT_DIR?>/signup" method="post">
+    <form hidden id="customer"   action="<?=ROOT_DIR?>/signup/customer" method="post">
     <h2>Customer Sign Up</h2>
     <?php if(isset($errors)): ?>
         <div>  <?= implode('<br>', $errors)?>  </div>
@@ -57,7 +57,7 @@ require_once('../app/views/components/navbar.php');
     <input type="submit" name="submit" value="Signup">
     </form>
     <!-- Rental Services -->
-    <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup" method="post">
+    <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup/rentalService" method="post">
     <h2>Rental Services Sign Up</h2>
 
     <?php if (isset($errors)): ?>
@@ -91,7 +91,7 @@ require_once('../app/views/components/navbar.php');
 
 
         <!-- Guide -->
-        <form hidden id="guide"  action="<?=ROOT_DIR?>/signup" method="post">
+        <form hidden id="guide"  action="<?=ROOT_DIR?>/signup/guide" method="post">
         <h2>Guide Sign Up</h2>
 
     <?php if(isset($errors)): ?>
@@ -109,7 +109,7 @@ require_once('../app/views/components/navbar.php');
     <input type="text" name="nic" id="nic" required>
 
     <label for="mobile_number">Mobile Number</label>
-    <input type="text" name="mobile_number" id="mobile_number" required>
+    <input type="text" name="mobile" id="mobile_number" required>
 
     <label for="email">Email Address</label>
     <input type="text" name="email" id="email" required>

@@ -16,6 +16,51 @@ class Signup {
 
         $this->view('signup', $data);
     }
+
+    public function rentalService(): void {
+        $data = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $rental = new RentalServiceModel;
+
+            $rental->registerRentalService($_POST);
+
+            $data['errors'] = $rental->errors;
+        }
+
+        $this->view('login', $data);
+    }
+
+    public function customer(): void {
+        $data = [];
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $customerModel = new CustomerModel;
+    
+            $customerModel->registerCustomer($_POST);
+    
+            $data['errors'] = $customerModel->errors;
+        }
+    
+        $this->view('login', $data);
+    }
+
+    public function guide(): void {
+        $data = [];
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $guideModel = new GuideModel;
+    
+            $guideModel->registerGuide($_POST);
+    
+            $data['errors'] = $guideModel->errors;
+        }
+    
+        $this->view('signup', $data);
+    }
+    
+
+
 }
 
 ?>
