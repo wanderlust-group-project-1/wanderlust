@@ -86,21 +86,30 @@ Trait Model  {
 
     }
 
-    public function insert(array $data,array $data_not = []):void {
+    public function insert(array $data,array $data_not = []):int {
 
         // remove unwanted data 
-        if(!empty($this->allowedColumns)){
-            foreach($data as $key => $value){
-                if(!in_array($key,$this->allowedColumns)){
-                    unset($data[$key]);
-                }
-            }
-        }
+        // if(!empty($this->allowedColumns)){
+        //     foreach($data as $key => $value){
+        //         if(!in_array($key,$this->allowedColumns)){
+        //             unset($data[$key]);
+        //         }
+        //     }
+        // }
 
         $keys = array_keys($data);
         $query = "insert into $this->table (".implode(",",$keys).") values (:".implode(",:",$keys).") ";
 
+
+        
         $this->query($query,$data);
+        // return 1;
+        return $this->lastInsertedId();
+
+        // return $this->lastInsertId();
+
+
+
 
 
     }
@@ -147,5 +156,19 @@ Trait Model  {
         $this->query($query, $data);
 
         return false;
+    }
+
+    // private function lastInsertId():int{
+    //     return $this->pdo->lastInsertId();
+    // }
+
+    public function lastInsertedId():mixed{
+
+        $query = "select * from $this->table order by id desc limit 1";
+        $result = $this->query($query);
+        if($result)
+        // return id of last inserted row
+
+            return $result[0]->id;
     }
 }

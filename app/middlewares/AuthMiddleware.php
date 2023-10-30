@@ -5,10 +5,23 @@ use Firebase\JWT\Key;
 
 class AuthMiddleware {
 
+    static $user = [];
+
+    static $allowedColumns = ['id', 'email', 'name', 'role'];
+
+    // filter user with allowed columns
+
+    public static function getUser(): array {
+        return array_filter(Self::$user, function ($key) {
+            return in_array($key, Self::$allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+
 
     // protected static $user;
 
-    public static function run_middleware(string $controller, string $method): void {
+    public static function run_middleware(string $controller, string $method): mixed {
          $authRequired = [
             'Home' => ['index', 'method2'],
             'Controller2' => ['method3'],
@@ -29,11 +42,13 @@ class AuthMiddleware {
             Self::not_authenticated();
         }
         
+        // return Self::$user;
+        return Self::getUser();
 
             
     }
 
-    private static function check():bool {
+    private static function check():mixed {
         $cookieName = 'jwt_auth_token'; 
         // print_r($_COOKIE);
         if (!isset($_COOKIE[$cookieName])) {
@@ -58,11 +73,20 @@ class AuthMiddleware {
             // $email = $decoded->email;
             // show($user->first($data));
 
-            if(!$user->first($data)){
+            $userData = $user->first($data);
+            if(!$userData){
                 setcookie('jwt_auth_token', '', time() - 1, '/');
                 // redirect('login');
                 return false;
             }
+            // return $userData;
+            // std class to array
+            // $this->$user = (array) $userData;
+
+
+
+            Self::$user = (array) $userData;
+
              
 
             //  Authorization checks

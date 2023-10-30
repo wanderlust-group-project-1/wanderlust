@@ -5,6 +5,7 @@ require_once('../app/views/components/navbar.php');
 ?>
 
 
+<div class="guide-find"> 
 
     <div class="frame4">
         <div class="div">
@@ -193,6 +194,8 @@ require_once('../app/views/components/navbar.php');
         </div>
     </div>
 
+
+</div>
 
 </body>
 

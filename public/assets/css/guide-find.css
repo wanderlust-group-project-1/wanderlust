@@ -23,12 +23,12 @@
 }
 
 
-label {
+.guide-find label {
     font-size: 1.4rem;
     font-weight: bold;
 }
 
-input[type=text] {
+.guide-find input[type=text] {
 
     display: flex;
     width: 287px;
@@ -45,7 +45,7 @@ input[type=text] {
 }
 
 
-.search-button {
+.guide-find .search-button {
     background-color: #bcab86;
     color: #fff;
     border: none;
@@ -57,7 +57,7 @@ input[type=text] {
     font-size: 1.2rem;
 }
 
-.search-button:hover {
+.guide-find .search-button:hover {
     background-color: #87744e;
 }
 
@@ -82,7 +82,7 @@ input[type=text] {
 }
 
 
-.serach-button-2 {
+.guide-find .serach-button-2 {
     display: flex;
     height: 2rem;
     padding-left: 2rem;

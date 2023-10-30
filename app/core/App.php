@@ -116,8 +116,8 @@ class APP {
         //     }
         // }
         // $this->runMiddleware();
-        AuthMiddleware::run_middleware($this->controller, $this->method);
-
+        $user = AuthMiddleware::run_middleware($this->controller, $this->method);
+        // show($user);
         call_user_func_array([$controller, $this->method], $URL);
     }
 }
