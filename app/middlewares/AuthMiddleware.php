@@ -25,6 +25,7 @@ class AuthMiddleware {
          $authRequired = [
             'Home' => ['index', 'method2'],
             'Controller2' => ['method3'],
+            // 'Profile' => ['index', 'edit', 'update'],
         ];
         $unauthRequired = [
             'Login' => ['index'],
@@ -40,6 +41,8 @@ class AuthMiddleware {
         if (isset($unauthRequired[$currentController]) &&
             in_array($method, $unauthRequired[$currentController])) {
             Self::not_authenticated();
+        }else {
+            Self::check();
         }
         
         // return Self::$user;

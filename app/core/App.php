@@ -116,9 +116,17 @@ class APP {
         //     }
         // }
         // $this->runMiddleware();
-        $user = AuthMiddleware::run_middleware($this->controller, $this->method);
+        $user = UserMiddleware::user(AuthMiddleware::run_middleware($this->controller, $this->method));
+            // make user global to all views
+
+        $_SESSION['USER'] = $user;
+        // show($user);
+        // show($_SESSION['USER']);
+
+
         // show($user);
         call_user_func_array([$controller, $this->method], $URL);
+
     }
 }
 

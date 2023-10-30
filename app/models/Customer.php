@@ -9,6 +9,7 @@ class CustomerModel {
         'address',
         'number',
         'nic',
+        'user_id'
     ];
 
     public function registerCustomer(array $data){

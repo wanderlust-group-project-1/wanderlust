@@ -11,5 +11,7 @@
         <li class="nav-menu-item"><a href="#">Tips & Knowhows</a></li>
         <li class="nav-menu-item"><a href="#">Complaints</a></li>
     </ul>
-    <div class="login-button"><a href="#">Login</a></div>
+
+    <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+
 </nav>
