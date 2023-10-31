@@ -133,6 +133,7 @@ class APP {
 
         // show($user);
         // show($_SESSION['USER']);
+        // show($_SESSION['ADMIN']);
 
 
         // show($user);
