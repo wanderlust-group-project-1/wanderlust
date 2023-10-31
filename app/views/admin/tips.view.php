@@ -4,91 +4,144 @@ require_once('../app/views/admin/layout/sidebar.php');
 
 ?>
 
-<div class="table-container">
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Lahiru Sandaruwan</td>
-                <td>lahiru@example.com</td>
-                <td><span class="status accepted">Accepted</span></td>
-                <td><button class="view-button">View</button></td>
-            </tr>
-            <tr>
-                <td>Dasun Thathsara</td>
-                <td>dasun@example.com</td>
-                <td><span class="status not-accepted">Not Accepted</span></td>
-                <td><button class="view-button">View</button></td>
-            </tr>
+<!-- Add button -->
+<div class="tips-page">
 
-            <!-- Add more rows as needed -->
-        </tbody>
-    </table>
+<div class="table-container">
+<div > 
+    <button class="add-button" >Add</button>
+    
+
+    
+</div>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($tips as $tip): ?>
+            <tr>
+                <td><?php echo $tip->title; ?></td>
+                <td><?php echo $tip->description; ?></td>
+                <td><button key="<?php echo $tip->id; ?>" class="view-button">Update</button></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
 </div>
 
-<!-- Modal  -->
-<div class="rental-services-modal" id="rental-services-modal">
+<!-- Add Form Modal -->
+<div class="modal" id="add-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div class="profile-info">
-            <img src="<?php echo ROOT_DIR ?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
-            <h2 id="profile-name">Lahiru Sandaruwan </h2>
-            <p id="profile-email">lahiru@example.com</p>
-            <p id="profile-address">Kandy</p>
-            <p id="profile-status" class="accepted">Accepted</p>
-            <div class="profile-links">
-                <a href="#" id="link-1">Link 1</a>
-                <a href="#" id="link-2">Link 2</a>
-            </div>
-        </div>
+        <h2>Add Form</h2>
+        <form id="add-form" action="<?php echo ROOT_DIR ?>/admin/tips/add" method="post" >
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea><br>
+
+            <button type="submit">Add</button>
+        </form>
     </div>
 </div>
 
+<!-- Update Form Modal -->
+<div class="modal" id="update-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Tips Update Form</h2>
+        <form id="update-form"  action="<?php echo ROOT_DIR ?>/admin/tips/update" method="post" >
+        <input name="id" id="tip-id" type="hidden" value="">
+
+            <label for="updated-title">Title:</label>
+            <input type="text" id="updated-title" name="title" required><br>
+
+            <label for="updated-description">Description:</label>
+            <textarea id="updated-description" name="description" rows="4" required></textarea><br>
+
+            <button type="submit">Update</button>
+            <button class="delete-button"> <a id="delete-tip" href="<?php echo ROOT_DIR ?>/admin/tips/delete/  "> Delete </a> </button>
+        </form>
+    </div>
+</div>
+
+</div>
+
+</div>
 
 <script>
-    // Get the modal
-    var modal = document.getElementById("rental-services-modal");
+   // Get the modal elements
+var addModal = document.getElementById("add-modal");
+var updateModal = document.getElementById("update-modal");
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+// Get the buttons that open the modals
+var addButton = document.querySelector('.add-button');
+var updateButtons = document.querySelectorAll('.view-button');
 
-    // Get all view buttons
-    var viewButtons = document.querySelectorAll('.view-button');
+// Function to open add form modal
+function openAddModal() {
+    addModal.style.display = "block";
+}
 
-    // Function to handle modal display
-    function openModal(content) {
-        // document.getElementById("modal-content").innerHTML = content;
-        modal.style.display = "block";
-    }
+// Function to open update form modal
+function openUpdateModal(name, email,id) {
+    // Populate update form fields with existing data
+    document.getElementById("updated-title").value = name;
+    document.getElementById("updated-description").value = email;
+    document.getElementById("tip-id").value = id;
+    document.getElementById("delete-tip").href = "<?php echo ROOT_DIR ?>/admin/tips/delete/"+id;
+    updateModal.style.display = "block";
+}
 
-    // Add click event listener to view buttons
-    viewButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
+// Event listener for add button click
+addButton.addEventListener('click', function() {
+    openAddModal();
+});
 
-            var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-            var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-            openModal("Name: " + name + "<br>Email: " + email);
-        });
+// Event listeners for update buttons click
+updateButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
+        var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
+        var id = this.getAttribute('key');
+        openUpdateModal(name, email , id);
     });
+});
 
-    // Close the modal when the close button is clicked
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+// Close modals when the close button is clicked
+var closeButtons = document.querySelectorAll('.close');
 
-    // Close the modal if the user clicks outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+closeButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        addModal.style.display = "none";
+        updateModal.style.display = "none";
+    });
+});
+
+// Handle form submissions (you can add your form submission logic here)
+document.getElementById("add-form").addEventListener('submit', function(event) {
+    // event.preventDefault();
+    // Handle add form submission logic
+    // ...
+    // Close the add modal after submission if successful
+    addModal.style.display = "none";
+});
+
+document.getElementById("update-form").addEventListener('submit', function(event) {
+    // event.preventDefault();
+    // Handle update form submission logic
+    // ...
+    // Close the update modal after submission if successful
+    updateModal.style.display = "none";
+});
+
 </script>
 
 

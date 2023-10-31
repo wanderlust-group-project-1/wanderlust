@@ -15,6 +15,6 @@ class Tips
         $tips = new TipsModel();
         $tips->updateTips($_POST);
 
-        redirect('profile'); //methana mokadda?
+        redirect('profile'); 
     }
 }
