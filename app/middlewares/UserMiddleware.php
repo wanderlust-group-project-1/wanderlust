@@ -26,7 +26,7 @@ class UserMiddleware {
             $user = (object) array_merge((array) $user, (array) $guide);
             return $user;
         }
-        if ($user['role'] == 'rental_service') {
+        if ($user['role'] == 'rentalservice') {
             $rental_service = new RentalServiceModel;
             $rental_service = $rental_service->first([
                 'user_id'=> $user['id']
@@ -43,11 +43,3 @@ class UserMiddleware {
     }
     
 }
-
-
-
-
-
-
-
-?>

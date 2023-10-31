@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once('../app/views/layout/header.php');
 
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="RentalDashboard.css" rel="stylesheet">
-</head>
+require_once('../app/views/components/navbar.php');
+?>
 
 <body>
     <div class="rent-dash">
@@ -21,7 +17,7 @@
                 <div class="div-12">
                     <div class="text-wrapper">Hello Glaze Camping!</div>
                     <div class="img-1">
-                        <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/2.png" alt="">
+                        <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="">
                     </div>
                 </div>
 
@@ -110,7 +106,7 @@
                 <div class="sec3-booking-main">
                     <div class="text-topic">Recent Booking</div>
                     <div class="img-2">
-                        <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/2.png" alt="">
+                        <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/2.png" alt="">
                     </div>
                 </div>
 
@@ -145,42 +141,42 @@
 
             <div class="div-6">
                 <div class="div-wrapper-3">
-                  <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
 
-                    <tr>
-                        <td>Kamal Silva</td>
-                        <td>Upcoming</td>
-                        <td>Rs.5000</td>
-                        <td>02/12/2023</td>
-                        <td>10.00</td>
-                    </tr>
+                        <tr>
+                            <td>Kamal Silva</td>
+                            <td>Upcoming</td>
+                            <td>Rs.5000</td>
+                            <td>02/12/2023</td>
+                            <td>10.00</td>
+                        </tr>
 
-                    <tr>
-                        <td>Kumara Perera</td>
-                        <td>Upcoming</td>
-                        <td>Rs.3000</td>
-                        <td>02/12/2023</td>
-                        <td>10.00</td>
-                    </tr>
+                        <tr>
+                            <td>Kumara Perera</td>
+                            <td>Upcoming</td>
+                            <td>Rs.3000</td>
+                            <td>02/12/2023</td>
+                            <td>10.00</td>
+                        </tr>
 
-                    <tr>
-                        <td>Sarath</td>
-                        <td>Done</td>
-                        <td>Rs.4000</td>
-                        <td>01/09/2023</td>
-                        <td>10.00</td>
-                    </tr>
-                    
-                  </table>
+                        <tr>
+                            <td>Sarath</td>
+                            <td>Done</td>
+                            <td>Rs.4000</td>
+                            <td>01/09/2023</td>
+                            <td>10.00</td>
+                        </tr>
+
+                    </table>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 
