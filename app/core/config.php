@@ -1,13 +1,14 @@
-<?php 
+<?php
 
 use Dotenv\Dotenv;
 
-function loadEnv(){
+function loadEnv()
+{
     $dotenvPath = __DIR__ . '/../../.env';
 
 
     if (file_exists($dotenvPath)) {
-        $dotenv = Dotenv::createImmutable(__DIR__.'/../../');
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
         return $_ENV;
     } else {
@@ -21,36 +22,34 @@ $_ENV = loadEnv();
 
 
 
-if($_ENV){
-    define('DBNAME',$_ENV['DB_NAME']);
+if ($_ENV) {
+    define('DBNAME', $_ENV['DB_NAME']);
     define('DBHOST', $_ENV['DB_HOST']);
-    define('DBUSER',$_ENV['DB_USER']);
-    define('DBPASS',$_ENV['DB_PASSWORD']);
+    define('DBUSER', $_ENV['DB_USER']);
+    define('DBPASS', $_ENV['DB_PASSWORD']);
 
-    define('ROOT_DIR', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
-} else if ($_SERVER['SERVER_NAME'] == 'localhost' && $_SERVER['SERVER_PORT'] == 80){
+    define('ROOT_DIR', 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']);
+} else if ($_SERVER['SERVER_NAME'] == 'localhost' && $_SERVER['SERVER_PORT'] == 80) {
 
-    define('DBNAME','php');
+    define('DBNAME', 'php');
     define('DBHOST', '127.0.0.1');
-    define('DBUSER','php');
-    define('DBPASS','php');
+    define('DBUSER', 'php');
+    define('DBPASS', 'php');
 
-    define('ROOT_DIR', 'http://localhost/mvc/public');
-}else {
-    define('DBNAME','php');
+    define('ROOT_DIR', 'http://localhost/wanderlust/public');
+} else {
+    define('DBNAME', 'php');
     define('DBHOST', '127.0.0.1');
-    define('DBUSER','php');
-    define('DBPASS','php');
+    define('DBUSER', 'php');
+    define('DBPASS', 'php');
 
-    define('ROOT_DIR', 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+    define('ROOT_DIR', 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']);
 }
 
-define ('SECRET_KEY','fnkejwfkrfuwehjf');
+define('SECRET_KEY', 'fnkejwfkrfuwehjf');
 
-define ('APP_NAME', 'My Website');
-define ('APP_DESC','My Website');
+define('APP_NAME', 'My Website');
+define('APP_DESC', 'My Website');
 
 
-define ('DEBUG', true)
-
-?>
+define('DEBUG', true);
