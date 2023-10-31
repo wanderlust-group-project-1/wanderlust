@@ -36,7 +36,9 @@ class UserMiddleware {
         }
         if ($user['role'] == 'admin') {
 
+
             return (object)$user;
+
         }
     }
     

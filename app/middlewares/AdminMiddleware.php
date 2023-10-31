@@ -106,8 +106,10 @@ class AdminMiddleware {
             // Self::$user = (array) $userData;
 
             if ($userData->role == 'admin') {
+
                 Self::$user = (object) $userData;
                 $_SESSION['ADMIN'] = (object) $userData;
+
             }else{  
                 setcookie('jwt_auth_token', '', time() - 1, '/');
                 redirect('admin/login');

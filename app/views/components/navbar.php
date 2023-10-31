@@ -11,6 +11,7 @@
         <li class="nav-menu-item"><a href="#">Tips & Knowhows</a></li>
         <li class="nav-menu-item"><a href="#">Complaints</a></li>
     </ul>
+
     <?php if (isset($_SESSION['USER']  ) && $_SESSION['USER']->role != 'admin' ){ $user = $_SESSION['USER'];   ?>
 
         <!-- profile avatar with dropdown -->
@@ -25,6 +26,7 @@
             </ul>
         </div>
     </div>
+
 
 
     <?php }else if(isset($_SESSION['USER']) && $_SESSION['USER']->role == 'admin'  ){ $admin = $_SESSION['USER'];   ?>
