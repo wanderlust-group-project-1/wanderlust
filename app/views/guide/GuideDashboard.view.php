@@ -84,7 +84,7 @@ require_once('../app/views/components/navbar.php');
                     <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
 
                     <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+                    <input type="text" name="address" id="address" value="<?= $user->address ?>" disabled>
 
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
