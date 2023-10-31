@@ -23,7 +23,7 @@ class AuthMiddleware {
 
     public static function run_middleware(string $controller, string $method): mixed {
          $authRequired = [
-            'Home' => ['index', 'method2'],
+            // 'Home' => ['index', 'method2'],
             'Controller2' => ['method3'],
             'Customer' => ['index', 'edit', 'update'],
             'Profile' => ['index', 'edit', 'update'],

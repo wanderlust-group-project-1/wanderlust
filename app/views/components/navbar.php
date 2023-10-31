@@ -11,8 +11,8 @@
         <li class="nav-menu-item"><a href="#">Tips & Knowhows</a></li>
         <li class="nav-menu-item"><a href="#">Complaints</a></li>
     </ul>
-
-    <?php if (isset($_SESSION['USER']) && $_SESSION['USER']->role != 'admin') {
+<!-- check role avalable or not -->
+    <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
         $user = $_SESSION['USER'];   ?>
 
 
@@ -31,7 +31,7 @@
 
 
 
-    <?php } else if (isset($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
+    <?php } else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
         $admin = $_SESSION['USER'];   ?>
 
         <!-- profile avatar with dropdown -->
