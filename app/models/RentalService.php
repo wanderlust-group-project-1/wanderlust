@@ -100,5 +100,18 @@ class RentalServiceModel {
         return empty($this->errors);
     }
 
+    public function updateRentalservice(array $data)
+    {
 
+        // $user = new UserModel;
+
+        $data['id'] = $_SESSION['USER']->id;
+
+        // alowed column
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
+
+        return $this->update($_SESSION['USER']->id, $data, 'id');
+    }
 }
