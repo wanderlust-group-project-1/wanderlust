@@ -48,6 +48,25 @@
     color: #4C5039;
 }
 
+/* Auth Nav bar */
+
+.auth-nav {
+    background-color: #F4F4F4; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px; /* Set a background color for the navbar */
+}
+
+.auth-nav .logo {
+    text-align: center;
+}
+
+.auth-nav .logo img {
+    display: block;
+    margin: auto;
+}
+
 
 
 /* nav profile  avatar*/
@@ -368,7 +387,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height:90%;
+    /* overflow-x: hidden; */
     border-radius: 10px;
     background: #ECECEC;
     backdrop-filter: blur(67px);
@@ -380,7 +400,7 @@ body {
     flex-direction: column;
     max-width: 450px;
     width:450px;
-    height: 600px;
+    height: fit-content;
     padding: 40px;
     border-radius: 10px;
     background-color: #fff;

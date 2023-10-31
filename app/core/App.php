@@ -45,6 +45,12 @@ class APP {
         if ($URL[0] == 'admin'){
             unset($URL[0]);
             // echo $URL[1];
+            $this->controller = 'Dashboard';
+            $this->method = 'index';
+
+            if(empty($URL[1])){
+                $URL[1] = 'dashboard';
+            }
 
             $filename = "../app/controllers/Admin/" . ucfirst($URL[1]) . ".php";
 
@@ -69,6 +75,9 @@ class APP {
             }
 
 
+            AdminMiddleware::run_middleware($this->controller, $this->method);
+
+
 
         } else {
             $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
@@ -91,6 +100,11 @@ class APP {
                     unset($URL[1]);
                 }
             }
+            $user = UserMiddleware::user(AuthMiddleware::run_middleware($this->controller, $this->method));
+
+            $_SESSION['USER'] = $user;
+            // show($user);
+            
         }
 
         // $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
@@ -116,10 +130,7 @@ class APP {
         //     }
         // }
         // $this->runMiddleware();
-        $user = UserMiddleware::user(AuthMiddleware::run_middleware($this->controller, $this->method));
-            // make user global to all views
 
-        $_SESSION['USER'] = $user;
         // show($user);
         // show($_SESSION['USER']);
 
