@@ -5,7 +5,37 @@ require_once('../app/views/admin/layout/sidebar.php');
 ?>
 
 <div class="table-container">
-    <table class="data-table">
+
+<table class="data-table">
+<thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+    <?php
+    // Assuming rentalServices is an array of data
+    foreach ($rentalServices as $service) {
+    ?>
+    <tr>
+        <td><?php echo $service->name; ?></td>
+        <td><?php echo $service->mobile; ?></td>
+        <td><span class="status <?php echo $service->status;  ?>"><?php echo $service->status; ?></span></td>
+        <td><button class="view-button">View</button></td>
+    </tr>
+    <?php
+    }
+    ?>
+            </tbody>
+
+</table>
+
+
+    <!-- <table class="data-table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -33,9 +63,9 @@ require_once('../app/views/admin/layout/sidebar.php');
                 <td><span class="status waiting">Waiting</span></td>
                 <td><button class="view-button">View</button></td>
             </tr>
-            <!-- Add more rows as needed -->
         </tbody>
-    </table>
+    </table> -->
+
 </div>
 
 <!-- Modal  -->

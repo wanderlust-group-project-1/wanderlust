@@ -114,4 +114,5 @@ class RentalServiceModel {
 
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
+    
 }
