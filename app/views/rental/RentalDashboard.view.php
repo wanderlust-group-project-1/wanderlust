@@ -1,7 +1,13 @@
+<?php
+require_once('../app/views/layout/header.php');
+
+require_once('../app/views/components/navbar.php');
+?>
+
 <div class="rent-dash">
     <div class="frame">
         <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle">
+            <button type="submit" class="small-button-middle"  id="edit-profile">
                 Edit Profile
             </button>
         </div>
@@ -10,7 +16,7 @@
             <div class="div-12">
                 <div class="text-wrapper">Hello Glaze Camping!</div>
                 <div class="img-1">
-                    <img src="../imgs/2.png" alt="">
+                    <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
                 </div>
             </div>
 
@@ -53,11 +59,11 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="profile-info">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
+                <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="Profile Image" class="profile-image">
 
 
-                <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
-                    <h2>Update Customer Details</h2>
+                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalservice/update" method="post">
+                    <h2>Update Rental Service Details</h2>
                     <?php if (isset($errors)) : ?>
                         <div> <?= implode('<br>', $errors) ?> </div>
                     <?php endif; ?>
@@ -71,11 +77,11 @@
                     <!-- <label for="email">Email</label>
     <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
 
-                    <label for="mobile">Number</label>
-                    <input type="text" name="mobile" id="mobile" value="<?= $user->number ?>" required>
+                    <label for="mobile">Mobile No</label>
+                    <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
 
-                    <label for="regNo">NIC Number</label>
-                    <input type="text" name="regNo" id="regNo" value="<?= $user->nic ?>" required>
+                    <label for="regNo">Registration Number</label>
+                    <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
 
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
@@ -143,7 +149,7 @@
         <div class="sec3-booking-main">
             <div class="text-topic">Recent Booking</div>
             <div class="img-2">
-                <img src="../imgs/2.png" alt="">
+                <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
             </div>
         </div>
 
