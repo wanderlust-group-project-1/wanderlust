@@ -103,6 +103,8 @@ class APP {
             $user = UserMiddleware::user(AuthMiddleware::run_middleware($this->controller, $this->method));
 
             $_SESSION['USER'] = $user;
+            // show($user);
+            
         }
 
         // $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";

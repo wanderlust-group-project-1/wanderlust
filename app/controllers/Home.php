@@ -30,7 +30,8 @@ class Home {
         // show("from the index function");
 
         // echo "This is home controller";
-        $data['email'] = empty($_SESSION['USER']) ? 'Guest' : $_SESSION['USER']->email;
+        // $data['email'] = empty($_SESSION['USER']) ? 'Guest' : $_SESSION['USER']->email;
+        $data = [];
         
 
         $this->view('home', $data);

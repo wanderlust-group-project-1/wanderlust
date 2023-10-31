@@ -11,7 +11,7 @@
         <li class="nav-menu-item"><a href="#">Tips & Knowhows</a></li>
         <li class="nav-menu-item"><a href="#">Complaints</a></li>
     </ul>
-    <?php if (isset($_SESSION['USER'])){ $user = $_SESSION['USER'];   ?>
+    <?php if (isset($_SESSION['USER']  ) && $_SESSION['USER']['role'] != 'admin' ){ $user = $_SESSION['USER'];   ?>
 
         <!-- profile avatar with dropdown -->
 
@@ -27,10 +27,27 @@
     </div>
 
 
-    <?php }else {  ?>
+    <?php }else if(isset($_SESSION['USER']) && $_SESSION['USER']['role'] == 'admin'  ){ $admin = $_SESSION['USER'];   ?>
+
+        <!-- profile avatar with dropdown -->
+        <div class="profile-avatar">
+        <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="profile picture">
+        <div class="dropdown-menu" id="nav-dropdown">
+            <ul>
+                <li><a href="<?= ROOT_DIR ?>/admin/dashboard">Dashboard</a></li>
+                <!-- <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li> -->
+                <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
 
 
-        
+    <?php }else
+    
+    {  ?>
+
+
+
     <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
 
     <?php } ?>

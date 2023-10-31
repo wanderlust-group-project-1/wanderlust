@@ -34,6 +34,9 @@ class UserMiddleware {
             $user = (object) array_merge((array) $user, (array) $rental_service);
             return $user;
         }
+        if ($user['role'] == 'admin') {
+            return $user;
+        }
     }
     
 }

@@ -1,6 +1,8 @@
-<nav class="navbar">
+<nav class="auth-nav">
+    <!-- <div class="auth-nav">  -->
     <div class="logo" style="text-align: center;">
     <img src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo" style="display: block; margin: auto;">
+    <!-- </div> -->
 </div>
 
 
