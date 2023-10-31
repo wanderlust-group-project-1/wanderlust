@@ -26,7 +26,7 @@ require_once('../app/views/components/navbar-auth.php');
 
         <p>
                 Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a>
-            <p>
+        <p>
 
 
     </form>
