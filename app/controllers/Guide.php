@@ -11,5 +11,14 @@ class Guide {
         $this->view('guide/find');
     }
 
+    public function update(string $a = '', string $b = '', string $c = ''): void
+    {
+
+        $guide = new guideModel();
+        $guide->updateGuide($_POST);
+
+        redirect('dashboard');
+        // $this->view('customer/profile');
+    }
 
 }

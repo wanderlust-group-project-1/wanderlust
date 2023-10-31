@@ -1,6 +1,7 @@
 <?php
 
-class GuideModel {
+class GuideModel
+{
     use Model;
 
     protected string $table = 'guides';
@@ -13,7 +14,8 @@ class GuideModel {
         'user_id',
     ];
 
-    public function registerGuide(array $data) {
+    public function registerGuide(array $data)
+    {
         if ($this->validateGuideSignup($data)) {
             $user = new UserModel;
 
@@ -35,7 +37,8 @@ class GuideModel {
         return false;
     }
 
-    public function validateGuideSignup(array $data) {
+    public function validateGuideSignup(array $data)
+    {
         $this->errors = [];
 
         if (empty($data['name'])) {
@@ -71,5 +74,20 @@ class GuideModel {
         }
 
         return empty($this->errors);
+    }
+
+    public function updateGuide(array $data)
+    {
+
+        // $user = new UserModel;
+
+        $data['id'] = $_SESSION['USER']->id;
+
+        // alowed column
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
+
+        return $this->update($_SESSION['USER']->id, $data, 'id');
     }
 }
