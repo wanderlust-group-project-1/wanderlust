@@ -1,0 +1,37 @@
+.login-container .header{
+    width: 100%;
+    text-align: center;
+}
+
+.login-container .header h1{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #5d6149;
+    font-size: 50px;
+}
+
+.login-container .login-form{
+    background-color: #F4F4F4;   
+}
+
+.login-container .login-form .row .signup-card .btn-div h3{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 28px;
+    font-style:initial;
+    color: #ac9a75;
+}
+
+.login-container .login-form .row .signup-card .btn-div p{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style:inherit;
+    font-size:smaller;
+    transform: translateY(-25px);
+    color: #6c7058;
+}
+
+.login-container .login-form p{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style:inherit;
+    font-size:x-small;
+    transform: translateY(-25px);
+    color: #6c7058;
+}

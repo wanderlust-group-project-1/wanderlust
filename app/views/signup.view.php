@@ -1,32 +1,41 @@
 <?php
 require_once('../app/views/layout/header.php');
 require_once('../app/views/components/navbar-auth.php');
-
-
 ?>
- <div class="login-container">
-    <!-- <h1>Signup</h1> -->
+<div class="login-container">
+
 <div class="login-form">
-<div id="select" class="col  ">
-    <div class="row">
-       
-        <div class="signup-card"  onclick="load('customer')">
-            Customer
+    <div id="select" class="col  ">
+    <div class="header">
+        <h1>
+            Who are you?
+        </h1>
+    </div>
+        <div class="row">
+            <div class="signup-card"  onclick="load('customer')">
+                <div class="btn-div">
+                <h3>Customer</h3>
+                <p>Plan your journey now!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="signup-card"  onclick="load('customer')">
+                <div class="btn-div">
+                <h3>Guide</h3>
+                <p>Explore the extraordinary now!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="signup-card"  onclick="load('customer')">
+                <div class="btn-div">
+                <h3>Rental Services</h3>
+                <p>Register your business now!</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-       
-       <div class="signup-card"  onclick="load('rental-service')">
-          Rental Services
-       </div>
-   </div>
-   <div class="row">
-       
-       <div class="signup-card"  onclick="load('guide')">
-           Guide
-       </div>
-   </div>
-</div>
     
 
     <form hidden id="customer"   action="<?=ROOT_DIR?>/signup/customer" method="post">
