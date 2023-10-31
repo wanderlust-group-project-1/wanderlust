@@ -12,7 +12,7 @@ class Profile {
             $this->view('customer/profile');
         } else if ($user->role == 'guide') {
             $this->view('guide/profile');
-        } else if ($user->role == 'admin') {
+        } else if ($user->role == 'rentalservice') {
             $this->view('rental-service/profile');
         } 
         
