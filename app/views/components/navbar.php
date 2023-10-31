@@ -28,6 +28,9 @@
 
 
     <?php }else {  ?>
+
+
+        
     <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
 
     <?php } ?>
