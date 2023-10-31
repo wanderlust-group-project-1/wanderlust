@@ -134,6 +134,9 @@ class APP {
         // show($user);
         // show($_SESSION['USER']);
 
+        // show($_SESSION['ADMIN']);
+
+
 
         // show($user);
         call_user_func_array([$controller, $this->method], $URL);
