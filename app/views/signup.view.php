@@ -30,7 +30,7 @@ require_once('../app/views/components/navbar-auth.php');
         <div class="row">
             <div class="signup-card"  onclick="load('customer')">
                 <div class="btn-div">
-                <h3>Rental Services</h3>
+                <h3>Rental Service</h3>
                 <p>Register your business now!</p>
                 </div>
             </div>
