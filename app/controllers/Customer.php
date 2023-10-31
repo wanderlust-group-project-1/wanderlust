@@ -11,6 +11,7 @@ class Customer {
 
 
 
-        $this->view('customer/profile');
+        redirect('profile');
+        // $this->view('customer/profile');
     }
 }
