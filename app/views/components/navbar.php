@@ -15,6 +15,7 @@
     <?php if (isset($_SESSION['USER']) && $_SESSION['USER']->role != 'admin') {
         $user = $_SESSION['USER'];   ?>
 
+
         <!-- profile avatar with dropdown -->
 
         <div class="profile-avatar">

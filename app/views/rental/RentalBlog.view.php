@@ -20,7 +20,7 @@
         <div class="frameBlog">
             <div class="blog">
                 <div class="img-1">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/4.png" alt="">
+                    <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/4.png" alt="">
                 </div>
                 <div class="blog-content">
                     <div class="blog-reading">
@@ -43,7 +43,7 @@
         <div class="frameBlog">
             <div class="blog">
                 <div class="img-1">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/4.png" alt="">
+                    <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/4.png" alt="">
                 </div>
                 <div class="blog-content">
                     <div class="blog-reading">
@@ -66,7 +66,7 @@
         <div class="frameBlog">
             <div class="blog">
                 <div class="img-1">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/4.png" alt="">
+                    <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/4.png" alt="">
                 </div>
                 <div class="blog-content">
                     <div class="blog-reading">
