@@ -10,7 +10,7 @@
             <div class="div-12">
                 <div class="text-wrapper">Hello Glaze Camping!</div>
                 <div class="img-1">
-                    <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/2.png" alt="">
+                    <img src="../imgs/2.png" alt="">
                 </div>
             </div>
 
@@ -30,10 +30,10 @@
 
                 <div class="div-4">
                     <div class="div-wrapper">
-                        <div class="text-wrapper-2">.Address : <?php echo $user->address ?> </div>
+                        <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
                     </div>
                     <div class="div-wrapper">
-                        <div class="text-wrapper-2">Mobile No : <?php echo $user->moblie ?></div>
+                        <div class="text-wrapper-2">Mobile No : <?php echo $user->mobile ?></div>
                     </div>
                     <div class="div-wrapper">
                         <div class="text-wrapper-2">Registration No : <?php echo $user->regNo ?></div>
@@ -45,6 +45,7 @@
         </div>
 
     </div>
+
 
 
     <!-- Modal Box -->
@@ -67,14 +68,14 @@
                     <label for="address">Address</label>
                     <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
 
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+                    <!-- <label for="email">Email</label>
+    <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
 
-                    <label for="number">Number</label>
-                    <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
+                    <label for="mobile">Number</label>
+                    <input type="text" name="mobile" id="mobile" value="<?= $user->number ?>" required>
 
-                    <label for="nic">NIC Number</label>
-                    <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
+                    <label for="regNo">NIC Number</label>
+                    <input type="text" name="regNo" id="regNo" value="<?= $user->nic ?>" required>
 
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
@@ -82,13 +83,14 @@
                     <input type="submit" name="submit" value="Update">
                 </form>
 
+
+
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Box -->
-
 
 <div class="frame2">
     <div class="yellow-card">
@@ -141,7 +143,7 @@
         <div class="sec3-booking-main">
             <div class="text-topic">Recent Booking</div>
             <div class="img-2">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/2.png" alt="">
+                <img src="../imgs/2.png" alt="">
             </div>
         </div>
 
@@ -213,7 +215,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 
 <script>

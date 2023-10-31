@@ -1,151 +1,157 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="GuideDashboard.css" rel="stylesheet">
+    <link href="<?php echo ROOT_DIR ?>GuideDashboard.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="guide-dash">
-        <div class="frame">
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    Edit Profile
-                </button>
+<body> -->
+
+<?php
+require_once('../app/views/layout/header.php');
+
+require_once('../app/views/components/navbar.php');
+?>
+<div class="guide-dash">
+    <div class="frame">
+        <div class="edit-prof-button">
+            <button type="submit" class="small-button-middle">
+                Edit Profile
+            </button>
+        </div>
+
+        <div class="div-1">
+            <div class="div-12">
+                <div class="text-wrapper">Hello William!</div>
+                <div class="img-1">
+                    <img src="<?php echo ROOT_DIR ?>/assets/images/7.png" alt="">
+                </div>
             </div>
 
-            <div class="div-1">
-                <div class="div-12">
-                    <div class="text-wrapper">Hello William!</div>
-                    <div class="img-1">
-                        <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/7.png" alt="">
+            <form class="div-3">
+
+                <div class="div-4">
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
+                    </div>
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">NIC : <?php echo $user->nic ?></div>
+                    </div>
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">Role : Guide</div>
                     </div>
                 </div>
 
-                <form class="div-3">
-
-                    <div class="div-4">
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-2">Name : William Cooray</div>
-                        </div>
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-2">Age : 30</div>
-                        </div>
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-2">Role : Guide</div>
-                        </div>
+                <div class="div-4">
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">Email : <?php echo $user->email ?></div>
                     </div>
-
-                    <div class="div-4">
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-2">Name : William Cooray</div>
-                        </div>
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-2">Age : 30</div>
-                        </div>
-                        <div class="div-wrapper">
-                            <div class="text-wrapper-2">Role : Guide</div>
-                        </div>
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">Age : 30</div>
                     </div>
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">Role : Guide</div>
+                    </div>
+                </div>
 
-                </form>
-
-            </div>
+            </form>
 
         </div>
 
-
-
-        <div class="frame2">
-            <div class="yellow-card">
-                <div class="upper-card-text">
-                    <div class="text-card-topic">Total Tours</div>
-                    <div class="edit-prof-button">
-                        <button type="submit" class="small-button-middle">
-                            More &gt
-                        </button>
-                    </div>
-                </div>
-                <div class="number-card">10</div>
-            </div>
-
-            <div class="yellow-card">
-                <div class="upper-card-text">
-                    <div class="text-card-topic">Tours per month</div>
-                    <div class="edit-prof-button">
-                        <button type="submit" class="small-button-middle">
-                            More &gt
-                        </button>
-                    </div>
-                </div>
-                <div class="number-card">03</div>
-            </div>
-
-            <div class="yellow-card">
-                <div class="upper-card-text">
-                    <div class="text-card-topic">Tours in last month</div>
-                    <div class="edit-prof-button">
-                        <button type="submit" class="small-button-middle">
-                            More &gt
-                        </button>
-                    </div>
-                </div>
-                <div class="number-card">03</div>
-            </div>
-        </div>>
+    </div>
 
 
 
-        <div class="frame">
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-
-            <div class="sec3-booking">
-                <div class="sec3-booking-main">
-                    <div class="text-topic">Recent Booking</div>
-                    <div class="img-2">
-                        <img src="<?php echo ROOT_DIR?>/assets/images/../imgs/2.png" alt="">
-                    </div>
-                </div>
-
-                <div class="div-5">
-                    <div class="div-wrapper-2">
-                        <div class="text-wrapper-2">Place : Nuwara Eliya</div>
-                    </div>
-                    <div class="div-wrapper-2">
-                        <div class="text-wrapper-2">Name : Kamal Silva</div>
-                    </div>
-                    <div class="div-wrapper-2">
-                        <div class="text-wrapper-2">Date : 20/08/2023</div>
-                    </div>
-                    <div class="div-wrapper-2">
-                        <div class="text-wrapper-2">Time : 10:00</div>
-                    </div>
-
+    <div class="frame2">
+        <div class="yellow-card">
+            <div class="upper-card-text">
+                <div class="text-card-topic">Total Tours</div>
+                <div class="edit-prof-button">
+                    <button type="submit" class="small-button-middle">
+                        More &gt
+                    </button>
                 </div>
             </div>
+            <div class="number-card">10</div>
         </div>
 
+        <div class="yellow-card">
+            <div class="upper-card-text">
+                <div class="text-card-topic">Tours per month</div>
+                <div class="edit-prof-button">
+                    <button type="submit" class="small-button-middle">
+                        More &gt
+                    </button>
+                </div>
+            </div>
+            <div class="number-card">03</div>
+        </div>
+
+        <div class="yellow-card">
+            <div class="upper-card-text">
+                <div class="text-card-topic">Tours in last month</div>
+                <div class="edit-prof-button">
+                    <button type="submit" class="small-button-middle">
+                        More &gt
+                    </button>
+                </div>
+            </div>
+            <div class="number-card">03</div>
+        </div>
+    </div>>
 
 
-        <div class="frame">
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
+
+    <div class="frame">
+        <div class="edit-prof-button">
+            <button type="submit" class="small-button-middle">
+                More &gt
+            </button>
+        </div>
+
+        <div class="sec3-booking">
+            <div class="sec3-booking-main">
+                <div class="text-topic">Recent Booking</div>
+                <div class="img-2">
+                    <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/2.png" alt="">
+                </div>
             </div>
 
-            <div class="text-topic">Booking History</div>
+            <div class="div-5">
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Place : Nuwara Eliya</div>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Name : Kamal Silva</div>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Date : 20/08/2023</div>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Time : 10:00</div>
+                </div>
 
-            <div class="div-6">
-                <div class="div-wrapper-3">
-                  <table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="frame">
+        <div class="edit-prof-button">
+            <button type="submit" class="small-button-middle">
+                More &gt
+            </button>
+        </div>
+
+        <div class="text-topic">Booking History</div>
+
+        <div class="div-6">
+            <div class="div-wrapper-3">
+                <table>
                     <tr>
                         <th>Name</th>
                         <th>Status</th>
@@ -177,16 +183,16 @@
                         <td>01/09/2023</td>
                         <td>10.00</td>
                     </tr>
-                    
-                  </table>
-                </div>
-              </div>
+
+                </table>
+            </div>
         </div>
     </div>
+</div>
 
 
 
-    <!-- <form>
+<!-- <form>
                 <div class="div-3">
                     <div class="div-4">
                         <div class="div-wrapper">
