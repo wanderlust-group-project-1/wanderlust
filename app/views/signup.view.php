@@ -38,7 +38,7 @@ require_once('../app/views/components/navbar-auth.php');
     </div>
     
 
-    <form hidden id="customer"   action="<?=ROOT_DIR?>/signup/customer" method="post">
+    <form  hidden id="customer"   action="<?=ROOT_DIR?>/signup/customer" method="post">
     <h2>Customer Sign Up</h2>
     <?php if(isset($errors)): ?>
         <div>  <?= implode('<br>', $errors)?>  </div>
@@ -64,6 +64,7 @@ require_once('../app/views/components/navbar-auth.php');
     <input type="password" name="password" id="password" required>
 
     <input type="submit" name="submit" value="Signup">
+    <div id="error-message"></div>
     </form>
     <!-- Rental Services -->
     <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup/rentalService" method="post">
@@ -83,7 +84,7 @@ require_once('../app/views/components/navbar-auth.php');
     <input type="text" name="regNo" id="registration_number">
 
     <label for="mobile_number">Mobile Number</label>
-    <input type="text" name="mobile" id="mobile_number">
+    <input type="text" name="mobile" id="number">
 
     <label for="email">Email Address</label>
     <input type="text" name="email" id="email">
@@ -96,6 +97,8 @@ require_once('../app/views/components/navbar-auth.php');
     <input type="password" name="password" id="password">
 
     <input type="submit" name="submit" value="Signup">
+    <div id="error-message"></div>
+
 </form>
 
 
@@ -118,7 +121,7 @@ require_once('../app/views/components/navbar-auth.php');
     <input type="text" name="nic" id="nic" required>
 
     <label for="mobile_number">Mobile Number</label>
-    <input type="text" name="mobile" id="mobile_number" required>
+    <input type="text" name="mobile" id="number" required>
 
     <label for="email">Email Address</label>
     <input type="text" name="email" id="email" required>
@@ -139,6 +142,8 @@ require_once('../app/views/components/navbar-auth.php');
     <input type="password" name="password" id="password" required>
 
     <input type="submit" name="submit" value="Signup">
+    <div id="error-message"></div>
+
         </form>
 
     <p>

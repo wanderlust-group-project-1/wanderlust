@@ -453,7 +453,7 @@ body {
   .login-form p {
     text-align: center;
     margin-top: 10px;
-    font-size: 12px;
+    /* font-size: 12px; */
   }
   
   .login-form a {
@@ -497,6 +497,14 @@ body {
 }
 .login-form form {
     flex-direction: column;
+}
+
+form #error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 /* Style for the custom file input */
