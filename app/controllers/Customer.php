@@ -9,8 +9,6 @@ class Customer {
         $customer = new CustomerModel();
         $customer->updateCustomer($_POST);
 
-
-
         redirect('profile');
         // $this->view('customer/profile');
     }
