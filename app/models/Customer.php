@@ -9,6 +9,7 @@ class CustomerModel {
         'address',
         'number',
         'nic',
+        'user_id'
     ];
 
     public function registerCustomer(array $data){
@@ -70,4 +71,49 @@ class CustomerModel {
 
         return empty($this->errors);
     }
+
+    public function updateCustomer(array $data){
+        
+            // $user = new UserModel;
+
+            $data['id'] = $_SESSION['USER']->id;
+
+            // alowed column
+            $data = array_filter($data, function ($key) {
+                return in_array($key, $this->allowedColumns);
+            }, ARRAY_FILTER_USE_KEY);
+
+            return $this->update($_SESSION['USER']->id,$data,'id');
+
+
+
+
+        
+
+    
+    }
+
+    // public function validateCustomerUpdate($data){
+    //     $this->errors = [];
+
+    //     if(empty($data['name'])){
+    //         $this->errors['name'] = "Name is required";
+    //     }
+
+    //     if(empty($data['address'])){
+    //         $this->errors['address'] = "Address is required";
+    //     }
+
+    //     if(empty($data['number'])){
+    //         $this->errors['number'] = "Number is required";
+    //     }
+
+    //     if(empty($data['nic'])){
+    //         $this->errors['nic'] = "NIC Number is required";
+    //     }
+
+    //     return empty($this->errors);
+    // }
+
+
 }

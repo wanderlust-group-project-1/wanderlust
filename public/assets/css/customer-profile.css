@@ -339,3 +339,122 @@ tr {
     line-height: 28.3px;
     white-space: nowrap;
 } */
+
+
+
+/* Edit Profile Modal  */
+
+.profile-editor {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.profile-editor .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.profile-editor .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-editor .close:hover,
+.profile-editor .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-editor .profile-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-editor #profile-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile-editor .profile-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.profile-editor .profile-links a:hover {
+    color: #0056b3;
+}
+
+
+
+.profile-editor input[type="text"],
+  .profile-editor input[type="password"],
+  .profile-editor select {
+    display: block;  
+    background-color: #ECECEC;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .profile-editor input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #BCAB86;
+    border-radius: 5px;
+    background-color: #88915D;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+  }
+  
+  .profile-editor input[type="submit"]:hover {
+    border: 1px solid #BCAB86;
+    background-color: #ECECEC;
+    color: #4C5039;
+  }
+  
+  .profile-editor p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  
+  .profile-editor a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-align: right;
+  }
+  
+  .profile-editor a:hover {
+    color: #88915D;
+  }

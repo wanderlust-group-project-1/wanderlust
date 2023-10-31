@@ -9,14 +9,14 @@ require_once('../app/views/components/navbar.php');
         <div class="frame">
 
             <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
+                <button type="submit" class="small-button-middle"  id="edit-profile">
                     Edit Profile
                 </button>
             </div>
 
             <div class="div-1">
                 <div class="div-12">
-                    <div class="text-wrapper">Hello Jenny!</div>
+                    <!-- <div class="text-wrapper">Hello Jenny!</div> -->
                     <div class="img-1">
                         <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
                     </div>
@@ -26,10 +26,10 @@ require_once('../app/views/components/navbar.php');
 
                     <div class="div-4">
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Name : Jenny Fernando</div>
+                            <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Age : 20</div>
+                            <div class="text-wrapper-2">NIC : <?php echo $user->nic ?></div>
                         </div>
                         <div class="div-wrapper">
                             <div class="text-wrapper-2">Role : Customer</div>
@@ -38,13 +38,13 @@ require_once('../app/views/components/navbar.php');
 
                     <div class="div-4">
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Name : Jenny Fernando</div>
+                            <div class="text-wrapper-2">Email : <?php echo $user->email ?></div>
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Age : 20</div>
+                            <div class="text-wrapper-2">Mobile : <?php echo $user->number ?></div>
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper-2">Role : Customer</div>
+                            <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
                         </div>
                     </div>
 
@@ -53,6 +53,54 @@ require_once('../app/views/components/navbar.php');
             </div>
 
         </div>
+
+
+
+        <!-- Modal Box -->
+<div class="profile-editor" id="profile-editor">
+<div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="profile-info">
+            <img src="<?php echo ROOT_DIR?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
+
+            
+            <form id="customer" action="<?=ROOT_DIR?>/customer/update" method="post">
+    <h2>Update Customer Details</h2>
+    <?php if(isset($errors)): ?>
+        <div>  <?= implode('<br>', $errors)?>  </div>
+    <?php endif; ?>
+
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+
+    <label for="number">Number</label>
+    <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
+
+    <label for="nic">NIC Number</label>
+    <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
+
+    <!-- <label for="password">Password</label>
+    <input type="password" name="password" id="password" required> -->
+
+    <input type="submit" name="submit" value="Update">
+</form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Modal Box -->
+
+
 
 
 
@@ -226,6 +274,53 @@ require_once('../app/views/components/navbar.php');
                 <button type="submit">Submit</button>
             </form> -->
 
+
+
+
+
+            <script>
+
+var modal = document.getElementById("profile-editor");
+
+var span = document.getElementsByClassName("close")[0];
+
+// Get all view buttons
+var viewButton = document.getElementById('edit-profile');
+
+// Function to handle modal display
+function openModal() {
+    // document.getElementById("modal-content").innerHTML = content;
+    modal.style.display = "block";
+}
+
+// Add click event listener to view buttons
+    viewButton.addEventListener('click', function() {
+        
+        // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
+        // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
+        openModal();
+    });
+
+
+
+
+// Close the modal when the close button is clicked
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+
+
+
+            
 
 <?php
 require_once('../app/views/layout/footer.php');

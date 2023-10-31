@@ -48,6 +48,91 @@
     color: #4C5039;
 }
 
+/* Auth Nav bar */
+
+.auth-nav {
+    background-color: #F4F4F4; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px; /* Set a background color for the navbar */
+}
+
+.auth-nav .logo {
+    text-align: center;
+}
+
+.auth-nav .logo img {
+    display: block;
+    margin: auto;
+}
+
+
+
+/* nav profile  avatar*/
+
+
+.navbar .profile-avatar {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar .profile-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff; /* Set the default background color */
+    color: #4c5039; /* Set the default font color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.navbar .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+/* 
+.navbar .dropdown-menu ul li {
+    padding: 10px;
+} */
+
+/* Style the links inside the dropdown menu */
+.navbar .dropdown-menu ul li a {
+    text-decoration: none;
+    color: #4c5039; /* Set default link color */
+    transition: all 0.3s ease; /* Add smooth transition effect for all properties */
+    display: block;
+    padding: 10px 20px ;
+}
+
+/* Change link color and background on hover */
+.navbar .dropdown-menu ul li a:hover {
+    color: #6b6f55; /* Set a different color on hover */
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Show dropdown menu on click */
+.navbar .profile-avatar.active .dropdown-menu {
+    display: block;
+}
+
+
+
+
+
+/* nav profile end */
+
+
 .section-button {
     background-color: #F4F4F4; 
     color: #4C5039;
@@ -97,6 +182,8 @@ body {
     
     overflow-x: hidden;
     margin: 0;
+    /* background: #4C5039; */
+
 
 }
 
@@ -302,7 +389,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height:90%;
+    /* overflow-x: hidden; */
     border-radius: 10px;
     background: #ECECEC;
     backdrop-filter: blur(67px);
@@ -314,7 +402,7 @@ body {
     flex-direction: column;
     max-width: 450px;
     width:450px;
-    height: 600px;
+    height: fit-content;
     padding: 40px;
     border-radius: 10px;
     background-color: #fff;
