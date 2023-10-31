@@ -30,7 +30,7 @@ Trait Model  {
     }
 
 
-    public function where(array $data, array $data_not = []): array{
+    public function where(array $data, array $data_not = []){
 
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);

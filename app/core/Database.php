@@ -19,7 +19,7 @@ trait Database {
                 return $result;
             }
         }
-        return null;
+        return [];
     }
 
     public function get_row(string $query, array $data = []): ?object {

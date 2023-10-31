@@ -9,6 +9,8 @@ class TipsModel
         //'id',
         'title',
         'description',
+        'author',
+        'id',
     ];
 
     public function validateCustomerSignup(array $data)
@@ -25,18 +27,42 @@ class TipsModel
         return empty($this->errors);
     }
 
-    public function updateTips(array $data)
+    public function updateTip(array $data)
     {
 
         // $user = new UserModel;
 
-        $data['id'] = $_SESSION['USER']->id;
+        // $data['id'] = $_SESSION['USER']->id;
+        $id = $data['id'];
+        // alowed column
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
+
+        // show($data);
+        return $this->update($id, $data, 'id');
+    }
+
+    public function addTip(array $data)
+    {
+
+        // $user = new UserModel;
+
+        // $data['id'] = $_SESSION['USER']->id;
+        $data['author'] = "admin";
 
         // alowed column
         $data = array_filter($data, function ($key) {
             return in_array($key, $this->allowedColumns);
         }, ARRAY_FILTER_USE_KEY);
 
-        return $this->update($_SESSION['USER']->id, $data, 'id');
+        return $this->insert($data);
+    }
+
+    public function findAll(): array
+    {
+        $data['author'] = "admin";
+        return $this->where($data);
+        return false;
     }
 }

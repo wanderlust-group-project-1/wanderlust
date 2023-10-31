@@ -116,6 +116,14 @@
     transition: background-color 0.3s;
 }
 
+.add-button {
+    background-color: #4C5039;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
 .view-button:hover {
     background-color: #333;
@@ -272,4 +280,170 @@
 
 .item-details-modal .profile-links a:hover {
     color: #0056b3;
+}
+
+/* Tips */
+
+/* Modal styles
+.tips-page .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.tips-page .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.tips-page .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.tips-page .close:hover,
+.tips-page .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+} */
+
+/* n */
+
+.tips-page .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.tips-page .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    max-width: 450px;
+    width: 100%;
+}
+
+.tips-page .modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.tips-page .modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.tips-page .modal-content input[type="text"] {
+    display: block;  
+    background-color: #ECECEC;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.tips-page .modal-content button {
+    margin: 5px;
+}
+
+.tips-page .modal-content button[type="submit"] {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #BCAB86;
+    border-radius: 5px;
+    background-color: #88915D;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.tips-page .modal-content button[type="submit"]:hover {
+    border: 1px solid #BCAB86;
+    background-color: #ECECEC;
+    color: #4C5039;
+}
+
+.tips-page .modal-content .delete-button {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #e21405;
+    border-radius: 5px;
+    background-color: #b81616; /* Change background color to match the hover state of submit button */
+    color: #fafbf6; /* Change text color */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tips-page .modal-content .delete-button:hover {
+    border: 1px solid #BCAB86;
+    background-color: #ECECEC;
+    color: #4C5039;
+}
+
+.tips-page .modal-content a {
+    display: block;
+    /* margin-bottom: 10px; */
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.tips-page .modal-content .close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.tips-page .modal-content .close:hover {
+    color: #88915D;
+}
+
+.tips-page .modal-content textarea {
+    display: block;
+    width: calc(100% - 20px);
+    background-color: #ECECEC;
+
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    resize: vertical; /* Allow vertical resizing */
 }

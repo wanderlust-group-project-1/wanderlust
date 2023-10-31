@@ -56,7 +56,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/tips">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Tips and Know-hows</span>
       </a>
