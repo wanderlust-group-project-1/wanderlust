@@ -1,4 +1,4 @@
-.login-container .header{
+/* .login-container .header{
     width: 100%;
     text-align: center;
 }
@@ -7,7 +7,7 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     color: #5d6149;
     font-size: 50px;
-}
+} */
 
 .login-container .login-form{
     background-color: #F4F4F4;   
@@ -28,10 +28,10 @@
     color: #6c7058;
 }
 
-.login-container .login-form p{
+/* .login-container .login-form p{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style:inherit;
     font-size:x-small;
     transform: translateY(-25px);
     color: #6c7058;
-}
+} */
