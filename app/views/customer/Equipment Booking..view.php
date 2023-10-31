@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="CustomerEquipment.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="cus-Equ">
+        <div class="frame4">
+            <div class="div">
+
+                <div class="div-2">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Search">
+                </div>
+
+                <div class="div-2">
+                    <label for="name">Date:</label>
+                    <input type="text" id="name" name="name" placeholder="Search">
+                </div>
+
+                <div class="div-2">
+                    <label for="name">Location:</label>
+                    <input type="text" id="name" name="name" placeholder="Search">
+                </div>
+
+                <button class="small-button">near me</button>
+
+            </div>
+
+            <div class="div-3">
+
+                <div class="frame-wrapper">
+                    <button class="search-button">Most rated</button>
+                </div>
+
+                <div class="frame-wrapper">
+                    <button class="search-button">Price low to high</button>
+                </div>
+
+                <div class="frame-wrapper">
+                    <button class="search-button">No of Tours</button>
+                </div>
+
+                <div class="frame-wrapper">
+                    <button class="search-button">hsgsh</button>
+                </div>
+
+                <button class="small-button">Search</button>
+
+            </div>
+        </div>
+
+        <div class="frameProf">
+            <div class="profImg">
+            <img src="<?php echo ROOT_DIR?>/assets/images/<?php echo ROOT_DIR?>/assets/images/3.png" alt="">
+
+                <img src="<?php echo ROOT_DIR?>/assets/images/5.png" alt="">
+            </div>
+            <div class="profText">Glaze Camping</div>
+        </div>
+
+        <div class="frame5">
+            <div class="shopFrame2">
+                <div class="shop-card">
+                    <div class="img-1">
+                        <img src="<?php echo ROOT_DIR?>/assets/images/3.png" alt="">
+                    </div>
+                    <div class="cardName">Torch</div>
+                    <div class="priceText">Rs. 300</div>
+                </div>
+            </div>
+
+            <div class="shopDetais">
+
+                <!-- <img src="<?php echo ROOT_DIR?>/assets/images/4.png" alt=""> -->
+
+                <div class="shopForm">
+                    <div class="detailsForm-wrapper">
+                        <div class="detailsForm">Brand : Orange</div>
+                    </div>
+                    <div class="detailsForm-wrapper">
+                        <div class="detailsForm">Company : Tech Com</div>
+                    </div>
+                    <div class="detailsForm-wrapper">
+                        <div class="detailsForm">Size : Small, Large</div>
+                    </div>
+                    <div class="detailsForm-wrapper">
+                        <div class="detailsForm">Colors : Red, Yellow, Black</div>
+                    </div>
+                </div>
+
+                <div class="BuyButtons">
+                    <div class="filter">
+                        <div class="frame-wrapper">
+                            <button class="search-button">Add to cart</button>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <div class="frame-wrapper">
+                            <button class="search-button">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="frame4">
+            <div class="infoBox">
+                <div class="detailsForm">Additional Information</div>
+            </div>
+        </div>
+
+        <!-- <div class="frame4">
+        <div class="infoBox">
+                <input type="text" id="detailsForm" name="detailsForm" placeholder="Additional Information">
+            < <div class="detailsForm">Additional Information</div></div> -->
+    </div>
+
+</body>
+
+</html>
