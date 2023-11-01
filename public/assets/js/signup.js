@@ -69,7 +69,7 @@ function validateForm(formId) {
     }
 
     if (!phoneNumberRegex.test(number.value)) {
-        errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number with or without "+".';
+        errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
         console.log('Invalid phone number. Please enter a valid phone number with or without "+".');
         return false;
     }
