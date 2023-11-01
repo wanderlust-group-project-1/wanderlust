@@ -1,5 +1,7 @@
 <?php
 require_once('../app/views/admin/layout/header.php');
+require_once('../app/views/admin/components/navbar.php');
+
 require_once('../app/views/admin/layout/sidebar.php');
 
 ?>
@@ -10,7 +12,7 @@ require_once('../app/views/admin/layout/sidebar.php');
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
                 <th>Action</th>
             </tr>
         </thead>
@@ -18,13 +20,13 @@ require_once('../app/views/admin/layout/sidebar.php');
             <tr>
                 <td>Sandaruwan</td>
                 <td>sandaruwan@example.com</td>
-                <td><span class="status accepted">Accepted</span></td>
+                <!-- <td><span class="status accepted">Accepted</span></td> -->
                 <td><button class="view-button">View</button></td>
             </tr>
             <tr>
                 <td>Sarani</td>
                 <td>sarani@example.com</td>
-                <td><span class="status not-accepted">Not Accepted</span></td>
+                <!-- <td><span class="status not-accepted">Not Accepted</span></td> -->
                 <td><button class="view-button">View</button></td>
             </tr>
             

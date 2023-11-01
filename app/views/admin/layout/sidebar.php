@@ -1,13 +1,13 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/rentalServices">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="rentalServices" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Rental Services</span>
         <i class="menu-arrow"></i>
@@ -21,7 +21,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="guides" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/guides" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Guides</span>
         <i class="menu-arrow"></i>
@@ -35,7 +35,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="customers" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/customers" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Customers</span>
         <i class="menu-arrow"></i>
@@ -49,7 +49,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/blogs">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Blogs</span>
       </a>
@@ -63,7 +63,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="item" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices/item" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Items</span>
         <i class="menu-arrow"></i>
