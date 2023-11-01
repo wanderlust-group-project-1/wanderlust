@@ -12,7 +12,7 @@ require_once('../app/views/admin/layout/sidebar.php');
 <thead>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Mobile</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>

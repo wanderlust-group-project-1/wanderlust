@@ -29,6 +29,7 @@ class Signup {
         }
 
         $this->view('login', $data);
+
     }
 
     public function customer(): void {
