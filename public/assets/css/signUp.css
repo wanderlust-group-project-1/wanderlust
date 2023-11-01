@@ -28,6 +28,14 @@
     color: #6c7058;
 }
 
+.signup-text {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #6c7058;
+}
+
 /* .login-container .login-form p{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style:inherit;

@@ -7,7 +7,7 @@ require_once('../app/views/components/navbar-auth.php');
 <div class="login-form">
     <div id="select" class="col  ">
     <div class="header">
-        <h1>
+        <h1 class="signup-text">
             Who are you?
         </h1>
     </div>
@@ -54,7 +54,7 @@ require_once('../app/views/components/navbar-auth.php');
     <label for="email">Email</label>
     <input type="text" name="email" id="email" required>
 
-    <label for="number">Number</label>
+    <label for="number">Mobile Number</label>
     <input type="text" name="number" id="number" required>
 
     <label for="nic">NIC Number</label>

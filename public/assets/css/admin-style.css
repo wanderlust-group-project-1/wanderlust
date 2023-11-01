@@ -1,3 +1,25 @@
+/* Navbar */
+
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.navbar {
+    width:80%;
+    background-color: #fff; /* Theme color */
+    color: #4C5039; /* Text color */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+}
+
+.nav-logo {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
 /* Sidebar styles */
 .sidebar {
     width: 250px;
@@ -140,7 +162,7 @@
     color: #fff;
 }
 
-.not-accepted {
+.rejected {
     background-color: #FF5733;
     color: #fff;
 }
