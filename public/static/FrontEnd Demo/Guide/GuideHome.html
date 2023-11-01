@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../style.css" rel="stylesheet">
+    <link href="../navbar.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="navigation-bar">
+        <div class="logo">
+            <img src="../imgs/Logo.png" alt="">
+        </div>
+        <div class="navbar">
+            <button class="navbut" id="homenav">Home</button>
+            <button class="navbut" id="dashboardnav">Dashboard</button>
+            <button class="navbut" id="guidenav">Guides</button>
+            <button class="navbut" id="rentnav">Rental Services</button>
+            <button class="navbut" id="blogsnav">Blogs</button>
+            <button class="navbut" id="tipsnav">Tips &amp; knowhows</button>
+            <button class="navbut" id="complaintsnav">Complaints</button>
+        </div>
+
+        <div class="navend">
+            <div class="notific">
+                <img src="../imgs/9.png" id="carticon" alt="">
+            </div>
+            <div class="small-button-middle">
+                <button class="small-button">Login
+            </div>
+        </div>
+    </div>
+    <div class="hero">
+        <div class="home-container row">
+            <div class="col col-2">
+                <h1 class="hero-title">Campers,</h1>
+                <p class="hero-description"><b>Your Gateway to Outdoor Adventures:</b> <br>
+                    Gear Up & Go with Expert Guides!</p>
+                <div class="section-button"><a href="#">Get Started</a></div>
+            </div>
+            <div class="col col-2">
+                <img src="../imgs/hero.png" alt="Hero Image">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="home-container">
+        <div class="row">
+            <!-- <div class="col"> -->
+            <div class="col center-all">
+                <h1 class="about-title">About us!</h1>
+                <p class="hero-description">We're your one-stop solution for hassle-free camping adventures.<br> Say
+                    goodbye to equipment woes, wasted effort, and unreliable guides.<br> We connect outdoor enthusiasts
+                    with quality gear and trustworthy guides.</p>
+                <img class="locked-aspect-ratio" src=" ../imgs/Mask group.png"
+                    alt="Mask group Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="guide">
+        <div class="home-container row">
+            <div class="col col-2">
+                <h2 class="about-subtitle">Guides</h2>
+                <h1 class="guide-title">Find Guides with Ease!</h1>
+                <p class="hero-description">Find your ideal camping guides to simplify your<br> outdoor adventures with
+                    ease, ensuring a <br>memorable and stress-free experience.</p>
+                <div class="section-button"><a href="#">Book now</a></div>
+            </div>
+            <div class="col col-2">
+                <img class=" locked-aspect-ratio" src=" ../imgs/guide.png" alt="Mask group Image">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="guide">
+        <div class="home-container row">
+
+            <div class="col col-2">
+                <img src="../imgs/Mask group.png" alt="Hero Image">
+            </div>
+            <div class="col col-4-3-end">
+                <h2 class="about-subtitle">Rental Services</h2>
+                <h1 class="rental-title">Diverse Gear Selection!</h1>
+                <p class="hero-description">Explore a diverse range of camping equipment in<br>one place, making your
+                    outdoor adventures<br>simpler and more convenient.</p>
+                <div class="center-right">
+                    <div class="section-button "><a href="#">Book now</a></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="guide">
+        <div class="home-container row">
+
+            <div class="col col-2">
+                <img src="../imgs/Mask group.png" alt="Hero Image">
+            </div>
+            <div class="col col-4-3-end">
+                <h2 class="about-subtitle">Tips & knowhows</h2>
+                <h1 class="rental-title">Outdoor Knowledge Hub!</h1>
+                <p class="hero-description">Empower your camping journey with expert tips, tutorials, and resources to
+                    help enthusiasts make the most of their adventures.</p>
+                <div class="right-align">
+                    <div class="section-button "><a href="#">Tips</a></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="guide">
+        <div class="home-container row">
+            <div class="col col-2">
+                <h2 class="about-subtitle">Complaints</h2>
+                <h1 class="guide-title">Where Complaints Find Solutions!</h1>
+                <p class="hero-description">Tired of unreliable guides and missing gear? <br>Discover our camping
+                    equipment rental and guide hiring platform, where adventure meets satisfaction.</p>
+                <div class="section-button"><a href="#">Complain</a></div>
+            </div>
+            <div class="col col-2">
+                <img class=" locked-aspect-ratio" src=" ../imgs/guide.png" alt="Mask group Image">
+            </div>
+        </div>
+
+    </div>
+    <script>
+
+        document.getElementById("homenav").addEventListener("click", function () {
+            window.location.href = "GuideHome.html";
+        });
+
+        document.getElementById("dashboardnav").addEventListener("click", function () {
+            window.location.href = "GuideDashboard.html";
+        });
+        document.getElementById("guidenav").addEventListener("click", function () {
+            window.location.href = "GuideMyBooking.html";
+        });
+
+        document.getElementById("blogsnav").addEventListener("click", function () {
+            window.location.href = "GuideBlog.html";
+        });
+
+        document.getElementById("tipsnav").addEventListener("click", function () {
+            window.location.href = "../Tips.html";
+        });
+
+        document.getElementById("complaintsnav").addEventListener("click", function () {
+            window.location.href = "../AddComplains.html";
+        });
+
+    </script>
+</body>
+
+</html>

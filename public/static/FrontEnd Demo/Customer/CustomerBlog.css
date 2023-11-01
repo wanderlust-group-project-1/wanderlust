@@ -1,0 +1,387 @@
+.Cus-Blog .frameBlog {
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px 28px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+
+    background-color: #f3f3f3;
+}
+
+.Cus-Blog .frameBlog .searchbar {
+    display: flex;
+    /* width: 1302px; */
+    align-items: center;
+    justify-content: space-between;
+    /* margin-bottom: 3rem; */
+}
+
+.Cus-Blog input[id=SearchBlogs] {
+
+    display: flex;
+    width: 1600px;
+    height: 44px;
+    padding: 4px 21px;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+}
+
+.Cus-Blog .frameBlog .searchbar{
+    position: relative;
+    width: fit-content;
+    font-family: "Raleway-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 28.3px;
+    white-space: nowrap;
+}
+
+
+.Cus-Blog .frameBlog .blog {
+    display: flex;
+    flex-direction: row;
+}
+
+.Cus-Blog .frameBlog .blog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 3rem;
+
+}
+
+.Cus-Blog .frameBlog .blog-reading {
+    display: flex;
+    flex-direction: column;
+}
+
+.Cus-Blog .text-Blog-Topic{
+    color: #4C5039;
+    text-shadow: 0px 1.1681221723556519px 1.1681221723556519px rgba(0, 0, 0, 0.25);
+    font-family: Fredoka;
+    font-size: 53.59px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 117.9%; /* 63.183px */
+}
+
+.Cus-Blog .text-Blog{
+    color: #000;
+    text-align: justify;
+    font-family: Fredoka;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 117.9%; /* 23.58px */
+}
+
+.Cus-Blog .small-button {
+    display: flex;
+    height: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+    border-radius: 7.895px;
+    border: 0.789px solid #BCAB86;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.Cus-Blog .small-button:hover {
+    background-color: #4C5039;
+    color: #f3f3f3;
+}
+
+.Cus-Blog .add-button {
+    display: flex;
+    height: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+    border-radius: 7.895px;
+    border: 0.789px solid #BCAB86;
+    cursor: pointer;
+    justify-content: center;
+    font-weight: 600;
+    font-size: large;
+}
+
+.Cus-Blog .add-button:hover {
+    background-color: #4C5039;
+    color: #f3f3f3;
+}
+
+.Cus-Blog .frameBlog .handleBlog{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.BlogPageRead {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 28px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    background-color: #f3f3f3;
+}
+
+.BlogPageRead .moreBlog{
+    display: flex;
+}
+
+.BlogPageRead .frameProf {
+    display: flex;
+    /* padding: 25px 28px; */
+    /* margin-left: 1rem;
+    margin-right: 1rem; */
+    border-radius: 1rem;
+    /* margin-bottom: 2rem; */
+    background-color: #f3f3f3;
+    align-items: center;
+}
+
+.BlogPageRead .frameProf .profImg{
+    width: 75.25px;
+    height: 75.25px;
+    padding: 1rem;
+}
+
+.BlogPageRead .frameProf .profText{
+    color: #000;
+    text-align: justify;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 117.9%; /* 28.296px */
+    width: 1227px;
+    height: 29px;
+}
+
+.BlogPageRead .frameBlog .completeBlog{
+    margin-top: 5rem;
+    color: #000;
+    text-align: justify;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 117.9%; /* 23.58px */
+}
+
+.BlogPageRead .frameBlog .small-div {
+    display: flex;
+    height: 2rem;
+    font-weight: 600;
+    /* padding-left: 2rem;
+    padding-right: 2rem; */
+    align-items: center;
+    border-radius: 7.895px;
+    /* border: 0.789px solid #BCAB86; */
+    /* cursor: pointer; */
+    /* justify-content: center; */
+}
+
+.BlogPageAdd {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 28px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    background-color: #f3f3f3;
+}
+
+.BlogPageAdd .moreBlog{
+    display: flex;
+}
+
+.BlogPageAdd .frameProf {
+    display: flex;
+    /* padding: 25px 28px; */
+    /* margin-left: 1rem;
+    margin-right: 1rem; */
+    border-radius: 1rem;
+    /* margin-bottom: 2rem; */
+    background-color: #f3f3f3;
+    align-items: center;
+}
+
+.BlogPageAdd .frameProf .profImg{
+    width: 75.25px;
+    height: 75.25px;
+    padding: 1rem;
+}
+
+.BlogPageAdd .frameProf .profText{
+    color: #000;
+    text-align: justify;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 117.9%; /* 28.296px */
+    width: 1227px;
+    height: 29px;
+}
+
+.BlogPageAdd .formBlogAdd{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+}
+
+.BlogPageAdd .formBlog {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    width: 956px;
+    height: 44px;
+    padding: 4px 21px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    /* align-items: center; */
+    gap: 10px;
+    border-radius: 10px;
+    background: #FFF;
+    justify-content: center;
+}
+
+.BlogPageAdd .Addblogsec2{
+    display: flex;
+}
+
+.BlogPageAdd .box {
+    display: flex;
+    margin-top: 2rem;
+    height: 300px; /* Replace '300px' with your desired height value */
+}
+
+.BlogPageAdd input[id=blogForm] {
+
+    display: flex;
+    width: 1600px;
+    height: 44px;
+    padding: 4px 21px;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+}
+
+.BlogPageAdd input[id=Note] {
+
+    display: flex;
+    width: 1600px;
+    height: 280px;
+    padding: 4px 21px;
+    align-items:flex-start;
+    border-radius: 10px;
+    border: none;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+}
+
+.BlogPageRead .frameBlog .blog {
+    display: flex;
+    flex-direction: row;
+}
+
+.BlogPageRead .frameBlog .blog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 3rem;
+
+}
+
+.BlogPageRead .frameBlog .blog-reading {
+    display: flex;
+    flex-direction: column;
+}
+
+.BlogPageRead .frameBlog {
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px 28px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+
+    background-color: #f3f3f3;
+}
+
+.BlogPageRead .frameBlog .searchbar {
+    display: flex;
+    /* width: 1302px; */
+    align-items: center;
+    justify-content: space-between;
+    /* margin-bottom: 3rem; */
+}
+
+.BlogPageRead input[id=SearchBlogs] {
+
+    display: flex;
+    width: 1600px;
+    height: 44px;
+    padding: 4px 21px;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+}
+
+.BlogPageRead .text-Blog-Topic{
+    color: #4C5039;
+    text-shadow: 0px 1.1681221723556519px 1.1681221723556519px rgba(0, 0, 0, 0.25);
+    font-family: Fredoka;
+    font-size: 53.59px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 117.9%; /* 63.183px */
+}
+
+.BlogPageRead .text-Blog{
+    color: #000;
+    text-align: justify;
+    font-family: Fredoka;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 117.9%; /* 23.58px */
+}
+
+.BlogPageRead .small-button {
+    display: flex;
+    height: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+    border-radius: 7.895px;
+    border: 0.789px solid #BCAB86;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.BlogPageRead .small-button:hover {
+    background-color: #4C5039;
+    color: #f3f3f3;
+}

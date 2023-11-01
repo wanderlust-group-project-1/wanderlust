@@ -1,0 +1,230 @@
+.view-guidess .frame {
+    display: flex;
+    flex-direction: column;
+    padding: 27px 42px;
+
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.view-guidess .edit-prof-button {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+
+.view-guidess .small-button-middle {
+    border-color: #bcab86;
+    border-radius: 7.895px;
+    padding: 0.5rem;
+}
+
+.view-guidess .div-1 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.view-guidess .div-12 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.view-guidess .text-wrapper {
+    font-size: 53.6px;
+    text-align: center;
+    font-family: "Fredoka-Medium", Helvetica;
+    font-weight: 600;
+    color: #4c5039;
+}
+
+.view-guidess .img-1 {
+    padding: 1rem;
+}
+
+.view-guidess .img-2 {
+    padding: 2rem;
+}
+
+.view-guidess .div-3 {
+    display: flex;
+    flex-direction: row;
+    width: 60rem;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.view-guidess .div-4 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.view-guidess .div-wrapper {
+    display: flex;
+    width: 398px;
+    height: 44px;
+    padding: 4px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: #FFF;
+
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-family: "Fredoka-Medium", Helvetica;
+}
+
+.view-guidess .frame2 {
+    display: flex;
+    flex-direction: row;
+    padding: 27px 42px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    /* justify-content: flex-start; */
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.view-guidess .yellow-card{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #BCAB86;
+    backdrop-filter: blur(67.62544250488281px);
+    width: 424px;
+    height: 169px;
+    padding: 10px 21px;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.view-guidess .upper-card-text{
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.view-guidess .text-card-topic{
+    color: #000;
+    font-family: Raleway;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 117.9%; 
+}
+
+.view-guidess .number-card{
+    display: flex;
+    justify-content: center;
+    font-size: 53.6px;
+    font-family: "Fredoka-Medium", Helvetica;
+    font-weight: 600;
+    color: #4c5039;
+    padding-bottom: 30px;
+}
+
+.view-guidess .sec3-booking{
+    display: flex;
+    flex-direction: row;
+
+    /* New */
+    justify-content: space-evenly;
+}
+
+.view-guidess .text-topic{
+    color: #000;
+    font-family: Raleway;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 117.9%; 
+}
+
+.view-guidess .div-5 {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+}
+
+.view-guidess .div-wrapper-2 {
+    display: flex;
+    width: 800px;
+    height: 44px;
+    padding: 4px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-family: "Fredoka-Medium", Helvetica;
+}
+
+.view-guidess .div-6 {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+}
+
+
+.view-guidess .text-wrapper-3{
+    font-weight: 600;
+}
+
+.view-guidess table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: "Fredoka-Medium", Helvetica;
+}
+
+.view-guidess th, td {
+    border: none;
+    padding: 8px;
+    text-align: center;
+    background: #FFF;
+    border-radius: 5px;
+
+    /* New */
+    height: 3rem;
+
+
+}
+
+.view-guidess tr {
+    background-color: #f2f2f2;
+}
+
+.view-guidess .CalendarView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-guidess .CalendarView .image{
+    padding-bottom: 1rem;
+}
