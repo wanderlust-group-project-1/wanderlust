@@ -492,17 +492,55 @@ body {
 
 
    .login-container .address-text{
-    width: 100%; /* Set width to be the same as the parent form */
-    background-color: #ECECEC !important; /* Set the background color to blue */
-    height: 10em; /* Set the height to display two lines of text */
-    /*padding: 10px; /* Optional: Add some padding for spacing inside the textarea */
-    border: 1px solid #ccc; /* Optional: Add a border for styling */
+    width: 100%;
+    background-color: #ECECEC !important;
+    height: 10em;
+    border: 1px solid #ccc;
     resize: none;
-    font-family:'Times New Roman';/*, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;*/
+    font-family:'Times New Roman';
    }
     /* backdrop-filter: blur(67px); */
 
-.signup-card:hover {
+.login-container  .tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.login-container .tooltip {
+    visibility: hidden;
+    position: absolute;
+    background-color: #fff;
+    color: #BCAB86;
+    border-radius: 4px;
+    padding: 5px;
+    top:0%;    
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    width: 75%;
+}
+.login-container .tooltip-trigger {
+    background-color: white;
+    color: #BCAB86;
+    border-radius: 50%;
+    padding: 1px;
+    margin: 1px;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.login-container .tooltip-trigger:hover + .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.login-container .hoverable-area {
+    padding: 10px; /* Adjust the padding to increase the hoverable area */
+}
+
+.login-container .signup-card:hover {
     background-color: #f0f0f0;
 }
 .login-form form {
