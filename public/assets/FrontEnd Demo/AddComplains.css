@@ -1,0 +1,84 @@
+
+.ComplainPageAdd {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 28px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    background-color: #f3f3f3;
+}
+
+.ComplainPageAdd .frameProf {
+    display: flex;
+    /* padding: 25px 28px; */
+    /* margin-left: 1rem;
+    margin-right: 1rem; */
+    border-radius: 1rem;
+    /* margin-bottom: 2rem; */
+    background-color: #f3f3f3;
+    align-items: center;
+}
+
+.ComplainPageAdd .frameProf .profImg{
+    width: 75.25px;
+    height: 75.25px;
+    padding: 1rem;
+}
+
+.ComplainPageAdd .frameProf .profText{
+    color: #000;
+    text-align: justify;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 117.9%; /* 28.296px */
+    width: 1227px;
+    height: 29px;
+}
+
+.ComplainPageAdd .formComplainAdd{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+}
+
+
+.ComplainPageAdd .AddComplainsec2{
+    display: flex;
+}
+
+.ComplainPageAdd .box {
+    display: flex;
+    margin-top: 2rem;
+    height: 300px; /* Replace '300px' with your desired height value */
+}
+
+.ComplainPageAdd input[id=name] {
+
+    display: flex;
+    width: 1600px;
+    height: 44px;
+    padding: 4px 21px;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+}
+input[id=Note] {
+
+    display: flex;
+    width: 1600px;
+    height: 280px;
+    padding: 4px 21px;
+    align-items:flex-start;
+    border-radius: 10px;
+    border: none;
+    background: #FFF;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+}
