@@ -4,37 +4,37 @@ require_once('../app/views/components/navbar-auth.php');
 ?>
 <div class="login-container">
 
-    <div class="login-form">
-        <div id="select" class="col  ">
-            <div class="header">
-                <h1 class="signup-text">
-                    Who are you?
-                </h1>
-            </div>
-            <div class="row">
-                <div class="signup-card" onclick="load('customer')">
-                    <div class="btn-div">
-                        <h3>Customer</h3>
-                        <p>Plan your journey now!</p>
-                    </div>
+<div class="login-form">
+    <div id="select" class="col  ">
+    <div class="header">
+        <h1 class="signup-text">
+            Who are you?
+        </h1>
+    </div>
+        <div class="row">
+            <button class="signup-card"  onclick="load('customer')">
+                <div class="btn-div">
+                <h3>Customer</h3>
+                <p>Plan your journey now!</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="signup-card" onclick="load('customer')">
-                    <div class="btn-div">
-                        <h3>Guide</h3>
-                        <p>Explore the extraordinary now!</p>
-                    </div>
+</button>
+        </div>
+        <div class="row">
+            <button class="signup-card"  onclick="load('guide')">
+                <div class="btn-div">
+                <h3>Guide</h3>
+                <p>Explore the extraordinary now!</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="signup-card" onclick="load('customer')">
-                    <div class="btn-div">
-                        <h3>Rental Service</h3>
-                        <p>Register your business now!</p>
-                    </div>
+</button>
+        </div>
+        <div class="row">
+            <button class="signup-card"  onclick="load('rental-service')">
+                <div class="btn-div">
+                <h3>Rental Service</h3>
+                <p>Register your business now!</p>
+
                 </div>
-            </div>
+            </button>
         </div>
 
 
