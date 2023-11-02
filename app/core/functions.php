@@ -68,7 +68,8 @@ function upload($file,$path): string {
         return "";
     } else {
         if (move_uploaded_file($file["tmp_name"], $target_file)) {
-            return basename($file["name"]);
+            // return basename($file["name"]);
+            return $filename . "." . pathinfo($file["name"], PATHINFO_EXTENSION);
         } else {
             return "";
         }
