@@ -10,7 +10,7 @@ class RentalServiceModel {
         'regNo',
         'mobile',
         'user_id',
-        // 'verification_document',
+        'verification_document',
         // 'email',
         // 'password',
     ];
@@ -35,7 +35,7 @@ class RentalServiceModel {
 
 
             // uuid
-            upload($files['verification_document'],'rental_services');
+            $data['verification_document'] = upload($files['verification_document'],'rental_services');
            
 
 
