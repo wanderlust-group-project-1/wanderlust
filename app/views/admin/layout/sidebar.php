@@ -6,6 +6,21 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Users</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="ui-basic">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+        </ul>
+      </div>
+    </li>
+
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
@@ -77,9 +92,16 @@
     </li>
 
     <li class="nav-item">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/blogs">
+        <i class="ti-shield menu-icon"></i>
+        <span class="menu-title">Complaints</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="charts" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
-        <span class="menu-title">Charts</span>
+        <span class="menu-title">Statistics</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
