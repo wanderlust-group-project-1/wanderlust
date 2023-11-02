@@ -5,7 +5,7 @@ require_once('../app/views/components/navbar-auth.php');
 <div class="login-container">
 
 <div class="login-form">
-    <div id="select" class="col  ">
+<div id="select" class="col  ">
     <div class="header">
         <h1 class="signup-text">
             Who are you?
@@ -32,10 +32,10 @@ require_once('../app/views/components/navbar-auth.php');
                 <div class="btn-div">
                 <h3>Rental Service</h3>
                 <p>Register your business now!</p>
-
                 </div>
-            </button>
+</button>
         </div>
+    </div>
 
 
         <form hidden id="customer" action="<?= ROOT_DIR ?>/signup/customer" method="post">
