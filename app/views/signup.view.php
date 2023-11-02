@@ -69,7 +69,7 @@ require_once('../app/views/components/navbar-auth.php');
             <div id="error-message"></div>
         </form>
         <!-- Rental Services -->
-        <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup/rentalService" method="post">
+        <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup/rentalService" method="post" enctype="multipart/form-data" >
             <h2>Rental Services Sign Up</h2>
 
             <?php if (isset($errors)) : ?>

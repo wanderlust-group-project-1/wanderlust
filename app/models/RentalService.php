@@ -18,13 +18,15 @@ class RentalServiceModel {
 
     public function registerRentalService(array $data,array $files){
 
-        show($data);
-        show($files);
-        die();
+        // show($data);
+        // show($files);
+        // die();
 
         if ($this->validateRentalService($data)) {
             $user = new UserModel;
 
+            // show($data['email']);
+            // show($data['password']);
             $data['user_id'] = $user->registerUser([
                 'email' => $data['email'],
                 'password' => $data['password'],
@@ -95,10 +97,10 @@ class RentalServiceModel {
         if(empty($data['mobile'])){
             $this->errors['mobile'] = "Mobile Number is required";
         }
-        if(empty($data['verification_document'])){
-            $this->errors['verification_document'] = "Verification Document is required";
+        // if(empty($files['verification_document'])){
+        //     $this->errors['verification_document'] = "Verification Document is required";
 
-        }
+        // }
 
         if(empty($data['email'])){
             $this->errors['email'] = "Email is required";
