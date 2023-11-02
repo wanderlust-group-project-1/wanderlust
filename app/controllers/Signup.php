@@ -23,7 +23,7 @@ class Signup {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $rental = new RentalServiceModel;
 
-            $rental->registerRentalService($_POST);
+            $rental->registerRentalService($_POST,$_FILES);
 
             $data['errors'] = $rental->errors;
         }

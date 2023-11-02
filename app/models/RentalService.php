@@ -9,13 +9,18 @@ class RentalServiceModel {
         'address',
         'regNo',
         'mobile',
-        'user_id'
+        'user_id',
+        // 'verification_document',
         // 'email',
         // 'password',
     ];
 
 
-    public function registerRentalService(array $data){
+    public function registerRentalService(array $data,array $files){
+
+        show($data);
+        show($files);
+        die();
 
         if ($this->validateRentalService($data)) {
             $user = new UserModel;
@@ -25,6 +30,12 @@ class RentalServiceModel {
                 'password' => $data['password'],
                 'role' => 'rentalservice',
             ]);
+
+
+            // uuid
+            upload($files['verification_document'],'rental_services');
+           
+
 
             if($data['user_id']){
                 $data = array_filter($data, function ($key) {
@@ -84,12 +95,17 @@ class RentalServiceModel {
         if(empty($data['mobile'])){
             $this->errors['mobile'] = "Mobile Number is required";
         }
+        if(empty($data['verification_document'])){
+            $this->errors['verification_document'] = "Verification Document is required";
+
+        }
 
         if(empty($data['email'])){
             $this->errors['email'] = "Email is required";
         }else if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
             $this->errors['email'] = "Email is not valid";
         }
+
 
         if(empty($data['password'])){
             $this->errors['password'] = "Password is required";
@@ -111,7 +127,7 @@ class RentalServiceModel {
         $data = array_filter($data, function ($key) {
             return in_array($key, $this->allowedColumns);
         }, ARRAY_FILTER_USE_KEY);
-
+    
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
     
