@@ -3,6 +3,9 @@ require_once('../app/views/layout/header.php');
 
 require_once('../app/views/components/navbar.php');
 ?>
+<?php
+echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+?>
 
 <div>
 
@@ -61,172 +64,176 @@ require_once('../app/views/components/navbar.php');
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="profile-info">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
+                <div class="profile-image-wrapper">
+                    <div>
+                        <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
+                        <input type="file" id="profile-image-upload" accept="image/*" style="display: none;">
+                        <button for="profile-image-upload" class="change-profile-pic-button">Change Profile Picture</button>
+                    </div>
 
+                    <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
+                        <h2>Update Customer Details</h2>
+                        <?php if (isset($errors)) : ?>
+                            <div> <?= implode('<br>', $errors) ?> </div>
+                        <?php endif; ?>
 
-                <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
-                    <h2>Update Customer Details</h2>
-                    <?php if (isset($errors)) : ?>
-                        <div> <?= implode('<br>', $errors) ?> </div>
-                    <?php endif; ?>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
 
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+                        <label for="address">Address</label>
+                        <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
 
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
 
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+                        <label for="number">Number</label>
+                        <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
 
-                    <label for="number">Number</label>
-                    <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
+                        <label for="nic">NIC Number</label>
+                        <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
 
-                    <label for="nic">NIC Number</label>
-                    <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
-
-                    <!-- <label for="password">Password</label>
+                        <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
 
-                    <input type="submit" name="submit" value="Update">
-                </form>
+                        <input type="submit" name="submit" value="Update">
+                    </form>
 
 
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Box -->
+
+
+
+
+
+    <div class="frame2">
+        <div class="yellow-card">
+            <div class="upper-card-text">
+                <div class="text-card-topic">Total Booking</div>
+                <div class="edit-prof-button">
+                    <button type="submit" class="small-button-middle">
+                        More &gt
+                    </button>
+                </div>
+            </div>
+            <div class="number-card">03</div>
+        </div>
+
+        <div class="yellow-card">
+            <div class="upper-card-text">
+                <div class="text-card-topic">Equipment Booking</div>
+                <div class="edit-prof-button">
+                    <button type="submit" class="small-button-middle">
+                        More &gt
+                    </button>
+                </div>
+            </div>
+            <div class="number-card">02</div>
+        </div>
+
+        <div class="yellow-card">
+            <div class="upper-card-text">
+                <div class="text-card-topic">Guide Booking</div>
+                <div class="edit-prof-button">
+                    <button type="submit" class="small-button-middle">
+                        More &gt
+                    </button>
+                </div>
+            </div>
+            <div class="number-card">01</div>
+        </div>
+    </div>>
+
+
+
+    <div class="frame">
+        <div class="edit-prof-button">
+            <button type="submit" class="small-button-middle">
+                More &gt
+            </button>
+        </div>
+
+        <div class="sec3-booking">
+            <div class="sec3-booking-main">
+                <div class="text-topic">Recent Booking</div>
+                <div class="img-2">
+                    <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="">
+                </div>
+            </div>
+
+            <div class="div-5">
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Booking Type : Equipment Booking</div>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Name : Glazers Camping</div>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Date : 20/08/2023</div>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="text-wrapper-2">Time : 10:00</div>
+                </div>
 
             </div>
         </div>
     </div>
-</div>
-
-<!-- Modal Box -->
 
 
 
-
-
-<div class="frame2">
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Total Booking</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Equipment Booking</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">02</div>
-    </div>
-
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Guide Booking</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">01</div>
-    </div>
-</div>>
-
-
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="sec3-booking">
-        <div class="sec3-booking-main">
-            <div class="text-topic">Recent Booking</div>
-            <div class="img-2">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="">
-            </div>
+    <div class="frame">
+        <div class="edit-prof-button">
+            <button type="submit" class="small-button-middle">
+                More &gt
+            </button>
         </div>
 
-        <div class="div-5">
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Booking Type : Equipment Booking</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Name : Glazers Camping</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Date : 20/08/2023</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Time : 10:00</div>
-            </div>
+        <div class="text-topic">Booking History</div>
 
+        <div class="div-6">
+            <div class="div-wrapper-3">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+
+                    <tr>
+                        <td>Glazers Camping</td>
+                        <td>Upcoming</td>
+                        <td>Equipment</td>
+                        <td>02/12/2023</td>
+                        <td>10.00</td>
+                    </tr>
+
+                    <tr>
+                        <td>Glazers Camping</td>
+                        <td>Upcoming</td>
+                        <td>Equipment</td>
+                        <td>02/12/2023</td>
+                        <td>10.00</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sarath</td>
+                        <td>Done</td>
+                        <td>Guide</td>
+                        <td>01/09/2023</td>
+                        <td>10.00</td>
+                    </tr>
+
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
-
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="text-topic">Booking History</div>
-
-    <div class="div-6">
-        <div class="div-wrapper-3">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-
-                <tr>
-                    <td>Glazers Camping</td>
-                    <td>Upcoming</td>
-                    <td>Equipment</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Glazers Camping</td>
-                    <td>Upcoming</td>
-                    <td>Equipment</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Sarath</td>
-                    <td>Done</td>
-                    <td>Guide</td>
-                    <td>01/09/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-            </table>
-        </div>
-    </div>
-</div>
 </div>
 
 
@@ -314,6 +321,24 @@ require_once('../app/views/components/navbar.php');
             modal.style.display = "none";
         }
     }
+</script>
+
+
+<!-- changing profile picture -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#profile-image-upload').on('change', function(e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#profile-image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
 </script>
 
 

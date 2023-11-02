@@ -457,4 +457,39 @@ tr {
   
   .profile-editor a:hover {
     color: #88915D;
+    
   }
+
+  .profile-editor .profile-image-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-editor .change-profile-pic-button {
+    cursor: pointer;
+    background: #f3f3f3; /* Button background color */
+    color: #88915D; /* Text color */
+    padding: 5px 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add rounded corners */
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    border: 1px solid #f3f3f3;
+    font-size: 16px;
+}
+
+.profile-editor .change-profile-pic-button:hover {
+    background: #88915D; /* Change background color on hover */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #BCAB86;
+    border-radius: 5px;
+}
+
+.profile-editor .profile-image {
+    max-width: 100px; /* Adjust the maximum width as needed */
+}
+
