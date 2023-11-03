@@ -65,11 +65,13 @@ echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
             <span class="close">&times;</span>
             <div class="profile-info">
                 <div class="profile-image-wrapper">
-                    <div>
+                    <!-- <div  > -->
                         <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
-                        <input type="file" id="profile-image-upload" accept="image/*" style="display: none;">
-                        <button for="profile-image-upload" class="change-profile-pic-button">Change Profile Picture</button>
-                    </div>
+                        <div class="profile-image-container">
+                        <input type="file" id="profile-image-upload" accept="image/*" style="display:none">
+                        <button for="profile-image-upload" id="change-profile-pic-button" class="change-profile-pic-button">Change Profile Picture</button>
+                        </div>
+                    <!-- </div> -->
 
                     <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
                         <h2>Update Customer Details</h2>
@@ -324,7 +326,7 @@ echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
 </script>
 
 
-<!-- changing profile picture -->
+<!-- changing profile picture
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -339,6 +341,26 @@ echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
             reader.readAsDataURL(file);
         });
     });
+</script> -->
+
+<script>
+    // Get the button and the file input element by their IDs
+var changeProfilePicButton = document.getElementById('change-profile-pic-button');
+var profileImageUpload = document.getElementById('profile-image-upload');
+
+// Add a click event listener to the button
+changeProfilePicButton.addEventListener('click', function() {
+    // Trigger click event on the file input when the button is clicked
+    profileImageUpload.click();
+});
+
+// Add an event listener to the file input to handle file selection
+profileImageUpload.addEventListener('change', function() {
+    // Code to handle the selected file (e.g., upload to server, display preview, etc.)
+    // You can add your logic here
+});
+
+
 </script>
 
 
