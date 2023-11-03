@@ -466,6 +466,11 @@ tr {
     align-items: center;
   }
 
+  .profile-editor .profile-image-container {
+    position: relative;
+    display: inline-block;
+  }
+
   .profile-editor .change-profile-pic-button {
     cursor: pointer;
     background: #f3f3f3; /* Button background color */
