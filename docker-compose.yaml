@@ -10,6 +10,9 @@ services:
     volumes:
       - ./public:/var/www/public
       - ./app:/var/www/app
+
+    networks:
+      - wanderlust-network
       
       
     ports:
@@ -17,7 +20,10 @@ services:
   mysql-server:
     hostname: wl-mysql
     container_name: wl-mysql
-    image: mysql:8.1
+    # image: mysql:8.1
+    build: 
+      dockerfile: mysql.Dockerfile
+      context: .
     restart: always
     # ports:
     #   - 8006:3306
@@ -27,18 +33,31 @@ services:
       - mysql-data:/var/lib/mysql
       # database 
       - ./database:/docker-entrypoint-initdb.d
+    # entrypoint: /usr/local/bin/docker-entrypoint.sh
+    # command: cd docker-entrypoint-initdb.d  && ./migrate.sh import
+    networks:
+      - wanderlust-network
 
   phpmyadmin:
 
     image: phpmyadmin/phpmyadmin
     restart: always
+
     ports:
       - 8007:80
     environment:
       PMA_HOST: mysql-server
       PMA_USER: root
       PMA_PASSWORD: root
+    networks:
+      - wanderlust-network
+
 
 volumes:
   mysql-data:
+
+networks:
+  wanderlust-network:
+    driver: bridge
+    name: wanderlust-network
 

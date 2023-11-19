@@ -1,4 +1,34 @@
 
+.alert {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    align-self: center;
+    position: fixed;
+    bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    z-index: 9999;
+    animation: fadeOutAlert 1s ease-in-out 3s forwards;
+}
+
+.alert-error {
+    background-color: #c71515;
+}
+
+@keyframes fadeOutAlert {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
 
 .border-box {
     box-sizing: border-box;
@@ -49,6 +79,8 @@
 }
 
 /* Auth Nav bar */
+
+
 
 .auth-nav {
     background-color: #F4F4F4; 
@@ -430,7 +462,7 @@ body {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
   
-  .login-form input[type="submit"] {
+  .login-form input[type="submit"], .login-form button[name="submit"] {
     display: block;
     width: 100%;
     padding: 10px;
@@ -444,7 +476,7 @@ body {
     
   }
   
-  .login-form input[type="submit"]:hover {
+  .login-form input[type="submit"]:hover , .login-form button[name="submit"]:hover {
     border: 1px solid #BCAB86;
     background-color: #ECECEC;
     color: #4C5039;

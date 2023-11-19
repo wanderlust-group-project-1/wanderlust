@@ -2,8 +2,15 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+interface AuthMiddlewareInterface {
+    public static function run_middleware(string $controller, string $method): mixed;
+    public static function is_authenticated():void;
+    public static function not_authenticated():void;
+}
 
-class AuthMiddleware {
+
+
+class AuthMiddleware  {
 
     static $user = [];
 
@@ -31,7 +38,7 @@ class AuthMiddleware {
         ];
         $unauthRequired = [
             'Login' => ['index'],
-            'Signup' => ['index']
+            'Signup' => 'ALL'
         ];
 
         $currentController = ucfirst($controller);
@@ -40,9 +47,12 @@ class AuthMiddleware {
             in_array($method, $authRequired[$currentController])) {
             Self::is_authenticated();
         }
-        if (isset($unauthRequired[$currentController]) &&
-            in_array($method, $unauthRequired[$currentController])) {
+        if (isset($unauthRequired[$currentController]) && ($unauthRequired[$currentController] == 'ALL' || in_array($method, $unauthRequired[$currentController]))) {
+            // in_array($method, $unauthRequired[$currentController])) {
             Self::not_authenticated();
+                
+
+
         }else {
             Self::check();
         }
