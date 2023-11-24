@@ -40,7 +40,9 @@ require_once('../app/views/components/navbar-auth.php');
         </div>
 
 
-        <form hidden id="customer" action="<?= ROOT_DIR ?>/signup/customer" method="post">
+        <!-- <form hidden id="customer" action="<?= ROOT_DIR ?>/signup/customer" method="post"> -->
+        <form hidden id="customer" >
+
             <h2>Customer Sign Up</h2>
             <?php if (isset($errors)) : ?>
                 <div> <?= implode('<br>', $errors) ?> </div>
@@ -52,6 +54,8 @@ require_once('../app/views/components/navbar-auth.php');
 
             <label for="address">Address</label>
             <textarea class="address-text" name="address" id="address" required> </textarea></br>
+
+
 
             <label for="email">Email</label>
             <input type="text" name="email" id="email" required></br>
@@ -65,7 +69,8 @@ require_once('../app/views/components/navbar-auth.php');
             <label for="password">Password</label>
             <input type="password" name="password" id="password" required></br>
 
-            <input type="submit" name="submit" value="Signup">
+            <!-- <input  type="submit" name="submit" value="Signup"> -->
+            <button id="customer-signup" name="submit" value="Sign Up"> Sign Up </button>
             <div id="error-message"></div>
         </form>
         <!-- Rental Services -->
@@ -81,6 +86,17 @@ require_once('../app/views/components/navbar-auth.php');
 
             <label for="address">Address</label>
             <textarea class="address-text" name="address" id="address" required> </textarea></br>
+
+            <!-- select location from google map -->
+
+            <div class="location-button-container">
+
+            <!-- <label for="location">Location</label> -->
+            <input  id="location"  hidden="true"></br>
+            <button  id="select-location" class="location-button" type="button" >Get Location</button>
+
+            </div>
+
 
             <label for="registration_number">Business Registration Number/NIC</label>
             <input type="text" name="regNo" id="registration_number"></br>
@@ -104,7 +120,9 @@ require_once('../app/views/components/navbar-auth.php');
             <label for="password">Password</label>
             <input type="password" name="password" id="password"></br>
 
-            <input type="submit" name="submit" value="Signup">
+            <!-- <input type="submit" name="submit" value="Signup"> -->
+            <button id="rental-service-signup" name="submit" value="Sign Up"> Sign Up </button>
+
             <div id="error-message"></div>
 
         </form>
@@ -171,7 +189,23 @@ require_once('../app/views/components/navbar-auth.php');
 </div>
 
 
+<!-- Location Modal -->
+<div id="location-modal" class="location-modal">
+    <div class="modal-content">
 
+
+        <span class="close">&times;</span>
+        <div id="map">
+            
+
+        </div>
+        <div class="location-button-container">
+            <button id="confirm-location" class="location-button" type="button">Confirm Location</button>
+        </div>
+    </div>
+
+
+</div>
 <script>
 
 

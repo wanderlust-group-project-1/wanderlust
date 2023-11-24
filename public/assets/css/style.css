@@ -588,7 +588,7 @@ form #error-message {
 }
 
 /* Style for the custom file input */
-.file-input-container {
+.file-input-container ,.location-button-container {
     position: relative;
     margin-top: 10px;
     padding: 10px;
@@ -615,5 +615,51 @@ form #error-message {
     left: 0;
     top: 0;
     opacity: 0;
+    cursor: pointer;
+}
+
+.location-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.location-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.location-modal .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.location-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.location-modal .close:hover,
+.location-modal .close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }

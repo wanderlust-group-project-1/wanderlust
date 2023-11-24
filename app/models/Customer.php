@@ -12,31 +12,75 @@ class CustomerModel {
         'user_id'
     ];
 
-    public function registerCustomer(array $data){
+    // public function registerCustomer(array $data){
+    //     if ($this->validateCustomerSignup($data)) {
+    //         $user = new UserModel;
+
+    //         $data['user_id'] = $user->registerUser([
+    //             'email' => $data['email'],
+    //             'password' => $data['password'],
+    //             'role' => 'customer',
+    //         ]);
+
+
+    //         if($data['user_id']){
+    //             $data = array_filter($data, function ($key) {
+    //                 return in_array($key, $this->allowedColumns);
+    //             }, ARRAY_FILTER_USE_KEY);
+
+
+    //             return $this->insert($data);
+
+    //         }
+
+
+    //     }
+    //     return false;
+    // }
+
+
+    public function registerCustomer(JSONRequest $request, JSONResponse $response) {
+        $data = $request->getAll();
+    
         if ($this->validateCustomerSignup($data)) {
             $user = new UserModel;
-
+    
             $data['user_id'] = $user->registerUser([
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'role' => 'customer',
             ]);
-
-
-            if($data['user_id']){
+    
+            if ($data['user_id']) {
                 $data = array_filter($data, function ($key) {
                     return in_array($key, $this->allowedColumns);
                 }, ARRAY_FILTER_USE_KEY);
-
-
-                return $this->insert($data);
-
+    
+                $this->insert($data);
+    
+                $response->success(true)
+                    ->data(['user_id' => $data['user_id']])
+                    ->message('Customer registered successfully')
+                    ->statusCode(201)
+                    ->send();
+            } else {
+                $response->success(false)
+                    ->message('User registration failed')
+                    ->statusCode(500)
+                    ->send();
             }
-
-
+        } else {
+            $response->success(false)
+                ->data(['errors' => $this->errors])
+                ->message('Validation failed')
+                ->statusCode(422)
+                ->send();
         }
-        return false;
     }
+
+    
+    
+
 
     public function validateCustomerSignup(array $data){
         $this->errors = [];

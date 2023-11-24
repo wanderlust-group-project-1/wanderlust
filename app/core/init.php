@@ -14,6 +14,7 @@ spl_autoload_register(function (string $classname): void {
 });
 
 require 'functions.php';
+require 'Classes.php';
 
 require 'config.php';
 require 'declarations.php';

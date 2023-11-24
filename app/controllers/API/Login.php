@@ -20,10 +20,18 @@ class Login {
         // $email = $_POST['email'];
         // $password = $_POST['password'];
         // get from json body
-        $data = json_decode(file_get_contents('php://input'), true);
-        $email = $data['email'];
-        $password = $data['password'];
 
+        $request = new JSONRequest;
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+
+
+        // $data = json_decode(file_get_contents('php://input'), true);
+        // $email = $data['email'];
+        // $password = $data['password'];
+
+        $response = new JSONResponse;
         if ($user->authenticate($email, $password)) {
             $userData = $user->authenticate($email, $password);
             // $_SESSION['USER'] = $userData;
@@ -32,16 +40,12 @@ class Login {
                 return in_array($key, ['id', 'email']);
             }, ARRAY_FILTER_USE_KEY);
             $this->setcookie($userData);
-            header('Content-Type: application/json');
-            echo json_encode(['success' => 'true']);
-            // redirect('home');
+            $response->success(true)->data($userData)->send();
+
         } else {
-            $data['errors'] = ['email' => 'Wrong Email or Password'];
-            // return $data;
-            header('Content-Type: application/json');
-            // status 401
-            http_response_code(401);
-            echo json_encode($data);
+
+            $response->success(false)->message('Wrong Email or Password')->statusCode(401)->send();
+
 
         }
 
