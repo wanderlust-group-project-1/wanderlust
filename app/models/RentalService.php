@@ -16,70 +16,53 @@ class RentalServiceModel {
     ];
 
 
-    public function registerRentalService(array $data,array $files){
+    public function registerRentalService(JSONRequest $request, JSONResponse $response) {
+        $data = $request->getAll();
+        $files = $_FILES; // Assuming the files are sent as part of the request
 
-        // show($data);
+
         // show($files);
-        // die();
-
-        if ($this->validateRentalService($data)) {
+        // show($request->getAll());
+        if ($this->validateRentalService($data,$files)) {
             $user = new UserModel;
 
-            // show($data['email']);
-            // show($data['password']);
             $data['user_id'] = $user->registerUser([
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'role' => 'rentalservice',
             ]);
 
+            if ($data['user_id']) {
+                $data['verification_document'] = upload($files['verification_document'], 'rental_services');
 
-            // uuid
-            $data['verification_document'] = upload($files['verification_document'],'rental_services');
-           
-
-
-            if($data['user_id']){
                 $data = array_filter($data, function ($key) {
                     return in_array($key, $this->allowedColumns);
                 }, ARRAY_FILTER_USE_KEY);
 
-                return $this->insert($data);
+                $this->insert($data);
+
+                $response->success(true)
+                    ->data(['user_id' => $data['user_id']])
+                    ->message('Rental service registered successfully')
+                    ->statusCode(201)
+                    ->send();
+            } else {
+                $response->success(false)
+                    ->message('User registration failed')
+                    ->statusCode(500)
+                    ->send();
             }
+        } else {
+            $response->success(false)
+                ->data(['errors' => $this->errors])
+                ->message('Validation failed')
+                ->statusCode(422)
+                ->send();
         }
-
-
-
-
-
-    //     if ($this->validateRentalService($data)) {
-
-
-    //         $data['user_id'] = $this->registerUser([
-    //             'email' => $data['email'],
-    //             'password' => $data['password'],
-    //         ]);
-
-    //         if ($data['user_id']) {
-
-    //             // only allowed columns
-    //             $data = array_filter($data, function ($key) {
-    //                 return in_array($key, $this->allowedColumns);
-    //             }, ARRAY_FILTER_USE_KEY);
-
-
-         
-    //             return $this->insert($data);
-    //         }
-            
-
-    //     return false;
-    // }
-
     }
 
 
-    public function validateRentalService(array $data){
+    public function validateRentalService(array $data,array $files){
         $this->errors = [];
 
         if(empty($data['name'])){
@@ -97,10 +80,12 @@ class RentalServiceModel {
         if(empty($data['mobile'])){
             $this->errors['mobile'] = "Mobile Number is required";
         }
-        // if(empty($files['verification_document'])){
-        //     $this->errors['verification_document'] = "Verification Document is required";
+        if(empty($files['verification_document'])){
+            $this->errors['verification_document'] = "Verification Document is required";
 
-        // }
+        }
+        //check file available or not 
+
 
         if(empty($data['email'])){
             $this->errors['email'] = "Email is required";
@@ -132,5 +117,30 @@ class RentalServiceModel {
     
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
+
+    // public function updateRentalService(JSONRequest $request, JSONResponse $response) {
+    //     $data = $request->getAll();
+
+    //     if ($this->validateRentalService($data)) {
+    //         $data['id'] = $_SESSION['USER']->id;
+
+    //         $data = array_filter($data, function ($key) {
+    //             return in_array($key, $this->allowedColumns);
+    //         }, ARRAY_FILTER_USE_KEY);
+
+    //         $this->update($_SESSION['USER']->id, $data, 'id');
+
+    //         $response->success(true)
+    //             ->message('Rental service updated successfully')
+    //             ->statusCode(200)
+    //             ->send();
+    //     } else {
+    //         $response->success(false)
+    //             ->data(['errors' => $this->errors])
+    //             ->message('Validation failed')
+    //             ->statusCode(422)
+    //             ->send();
+    //     }
+    // }
     
 }

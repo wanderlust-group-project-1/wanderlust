@@ -29,28 +29,46 @@ document.getElementById("submit").onclick = function(event) {
     };
     console.log(data);
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/login', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if (this.status == 200) {
-            console.log(this.responseText);
-            var response = JSON.parse(this.responseText);
+
+    // xhr.open('POST', '/api/login', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.onload = function() {
+    //     if (this.status == 200) {
+    //         console.log(this.responseText);
+    //         var response = JSON.parse(this.responseText);
+    //         if (response.success) {
+    //             alertmsg("success", "success");
+            
+    //             // window.location.href = "/";
+    //             // time out
+    //             setTimeout(function() {
+    //                 window.location.href = "/";
+    //             }, 1000);
+    //         } else {
+    //             alertmsg(response.message);
+    //         }
+    //     } else {
+    //         alertmsg("Something went wrong","error");
+    //     }
+    // };
+    // xhr.send(JSON.stringify(data));
+
+    const api = new ApiClient('/api/login');
+    api.sendJSONRequest('', 'POST', data)
+        .then(response => {
             if (response.success) {
                 alertmsg("success", "success");
-            
-                // window.location.href = "/";
-                // time out
                 setTimeout(function() {
                     window.location.href = "/";
                 }, 1000);
             } else {
                 alertmsg(response.message);
             }
-        } else {
+        })
+        .catch(error => {
+            console.error(error);
             alertmsg("Something went wrong","error");
-        }
-    };
-    xhr.send(JSON.stringify(data));
+        });
 
 
 };

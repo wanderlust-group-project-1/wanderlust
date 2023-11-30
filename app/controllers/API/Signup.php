@@ -23,9 +23,19 @@ class Signup {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $rental = new RentalServiceModel;
 
-            $rental->registerRentalService($_POST,$_FILES);
+            $request=JSONRequest::createFromFormData();
+            // show($request->getAll());
+            $response = new JSONResponse;
 
-            $data['errors'] = $rental->errors;
+
+            $rental->registerRentalService($request, $response);
+
+
+            
+
+            // $rental->registerRentalService($_POST,$_FILES);
+
+            // $data['errors'] = $rental->errors;
         }
 
         $this->view('login', $data);
@@ -37,6 +47,11 @@ class Signup {
     
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $customerModel = new CustomerModel;
+
+            $request = new JSONRequest;
+            $response = new JSONResponse;
+            
+            $customerModel->registerCustomer($request, $response);
     
             // $customerModel->registerCustomer($_POST);
     
@@ -51,8 +66,15 @@ class Signup {
     
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $guideModel = new GuideModel;
+
+            $request = JSONRequest::createFromFormData();
+
+            $response = new JSONResponse;
+            
+            $guideModel->registerGuide($request, $response);
+            
     
-            $guideModel->registerGuide($_POST);
+            // $guideModel->registerGuide($_POST);
     
             $data['errors'] = $guideModel->errors;
         }
