@@ -38,7 +38,7 @@ class Signup {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $customerModel = new CustomerModel;
     
-            $customerModel->registerCustomer($_POST);
+            // $customerModel->registerCustomer($_POST);
     
             $data['errors'] = $customerModel->errors;
         }

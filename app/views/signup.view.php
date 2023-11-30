@@ -74,7 +74,9 @@ require_once('../app/views/components/navbar-auth.php');
             <div id="error-message"></div>
         </form>
         <!-- Rental Services -->
-        <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup/rentalService" method="post" enctype="multipart/form-data" >
+        <!-- <form hidden id="rental-service" action="<?= ROOT_DIR ?>/signup/rentalService" method="post" enctype="multipart/form-data" > -->
+        <form hidden id="rental-service"  >
+
             <h2>Rental Services Sign Up</h2>
 
             <?php if (isset($errors)) : ?>
@@ -89,13 +91,12 @@ require_once('../app/views/components/navbar-auth.php');
 
             <!-- select location from google map -->
 
-            <div class="location-button-container">
+            <!-- <div class="location-button-container">
 
-            <!-- <label for="location">Location</label> -->
             <input  id="location"  hidden="true"></br>
             <button  id="select-location" class="location-button" type="button" >Get Location</button>
 
-            </div>
+            </div> -->
 
 
             <label for="registration_number">Business Registration Number/NIC</label>
@@ -121,7 +122,7 @@ require_once('../app/views/components/navbar-auth.php');
             <input type="password" name="password" id="password"></br>
 
             <!-- <input type="submit" name="submit" value="Signup"> -->
-            <button id="rental-service-signup" name="submit" value="Sign Up"> Sign Up </button>
+            <button id="rental-service-signup" name="submit" value="Sign Up" onclick="rentalServiceSignup(event)" > Sign Up </button>
 
             <div id="error-message"></div>
 
@@ -129,7 +130,9 @@ require_once('../app/views/components/navbar-auth.php');
 
 
         <!-- Guide -->
-        <form hidden id="guide" action="<?= ROOT_DIR ?>/signup/guide" method="post">
+        <!-- <form hidden id="guide" action="<?= ROOT_DIR ?>/signup/guide" method="post"> -->
+        <form hidden id="guide">
+
             <h2>Guide Sign Up</h2>
 
             <?php if (isset($errors)) : ?>
@@ -172,7 +175,8 @@ require_once('../app/views/components/navbar-auth.php');
             <label for="password">Password</label>
             <input type="password" name="password" id="password" required></br>
 
-            <input type="submit" name="submit" value="Signup">
+            <!-- <input type="submit" name="submit" value="Signup"> -->
+            <button id="guide-signup" name="submit" value="Sign Up" onclick="guideSignup(event)"> Sign Up </button>
             <div id="error-message"></div>
 
         </form>

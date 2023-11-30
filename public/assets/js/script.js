@@ -59,16 +59,29 @@ class ApiClient {
     sendFormDataRequest(endpoint, method = 'POST', formData) {
         const options = {
             method,
+            // entype: 'multipart/form-data',
             body: formData,
         };
 
+        // return fetch(this.baseURL + endpoint, options)
+        //     .then(this.handleJSONResponse)
+        //     .catch(error => {
+        //         console.error('There has been a problem with your fetch operation:', error);
+        //         throw error;
+        //     });
         return fetch(this.baseURL + endpoint, options)
-            .then(this.handleJSONResponse)
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-                throw error;
-            });
+    .then(response => {
+        console.log('Response:', response); // Add this line for logging
+        return this.handleJSONResponse(response);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        throw error;
+    });
+
     }
+
+
 
     // Function to upload an image along with JSON data
     uploadImageWithJSON(endpoint, imageData, jsonData) {
@@ -76,6 +89,22 @@ class ApiClient {
 
         // Append the image data to the form data
         formData.append('image', imageData, 'image.jpg');
+
+        // Append JSON data as a string
+        formData.append('json', JSON.stringify(jsonData));
+
+        return this.sendFormDataRequest(endpoint, 'POST', formData);
+    }
+
+    uploadFilesWithJSON(endpoint, filesData, jsonData) {
+        const formData = new FormData();
+
+        // filesData is key value pair of filename and file data
+
+        // Append the image data to the form data
+        for (const [key, value] of Object.entries(filesData)) {
+            formData.append(key, value);
+        }
 
         // Append JSON data as a string
         formData.append('json', JSON.stringify(jsonData));
