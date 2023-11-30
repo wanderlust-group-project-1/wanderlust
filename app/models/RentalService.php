@@ -21,7 +21,7 @@ class RentalServiceModel {
         $files = $_FILES; // Assuming the files are sent as part of the request
 
 
-        show($files);
+        // show($files);
         // show($request->getAll());
         if ($this->validateRentalService($data,$files)) {
             $user = new UserModel;
