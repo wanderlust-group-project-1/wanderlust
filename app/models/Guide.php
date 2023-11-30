@@ -12,13 +12,14 @@ class GuideModel
         'mobile',
         'gender',
         'user_id',
+        'verification_document'
     ];
 
     public function registerGuide(JSONRequest $request, JSONResponse $response)
     {
         $data = $request->getAll();
         $files = $_FILES; // Assuming the files are sent as part of the request
-
+        // show($files);
         if ($this->validateGuideSignup($data, $files)) {
             $user = new UserModel;
 
@@ -30,8 +31,7 @@ class GuideModel
 
             if ($data['user_id']) {
                 // Handle file upload for verification_document or any other file
-                // $data['verification_document'] = upload($files['verification_document'], 'guides');
-
+                $data['verification_document'] = upload($files['verification_document'], 'guides');
                 $data = array_filter($data, function ($key) {
                     return in_array($key, $this->allowedColumns);
                 }, ARRAY_FILTER_USE_KEY);
