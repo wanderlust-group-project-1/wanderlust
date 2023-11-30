@@ -454,6 +454,7 @@ function guideSignup(event){
         .catch(error => {
             console.error(error);
         });
+        
 
 
 }
