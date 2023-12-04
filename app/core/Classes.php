@@ -102,3 +102,6 @@ class JSONRequest {
         return $this->get('json');
     }
 }
+
+
+require '../app/core/Classes/Email.php';
