@@ -18,8 +18,33 @@ class UserModel {
     public function registerUser(array $data){
         if ($this->validate($data)) {
             $data['password'] = $this->hashPassword($data['password']);
+
+            $id = $this->insert($data);
+
+
+           
+
+            $verify = new VerificationModel;
+            $tocken = $verify->generateToken($id);
+
+            // var_dump($id);
+            // die();
+
             
-            return $this->insert($data);
+
+            try {
+                $email = new EmailSender();
+                $email->sendEmail($data['email'], "Verify your email", "Click on the link to verify your email: http://localhost:8000/verify?tocken=$tocken");  
+                
+
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+            return $id;
+
+
+
+            
 
             // show($this->lastInsertedRow());
 

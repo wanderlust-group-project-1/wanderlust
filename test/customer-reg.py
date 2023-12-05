@@ -81,7 +81,7 @@ class TestCustomerreg():
 
     assert "success" in text, "success not in text" 
 
-    sleep(40)
+    # sleep(40)
 
     
     # 20 | close |  | 

@@ -14,9 +14,11 @@ spl_autoload_register(function (string $classname): void {
 });
 
 require 'functions.php';
-require 'Classes.php';
+
 
 require 'config.php';
+
+
 require 'declarations.php';
 require 'Database.php';
 require 'Model.php';
@@ -25,3 +27,6 @@ require 'App.php';
 require '../app/middlewares/AuthMiddleware.php';
 require '../app/middlewares/UserMiddleware.php';
 require '../app/middlewares/AdminMiddleware.php';
+
+require 'Classes.php';
+
