@@ -21,7 +21,10 @@ class VerificationModel {
     public function verifyToken(string $token): mixed {
         $data = $this->first(['token' => $token]);
         if ($data) {
-            $this->delete(['token' => $token]);
+            $this->delete( $token, 'token');
+            $user = new UserModel;
+            // $user->updateUser(['id' => $data->user_id,'verified' => 1]);
+            $user->verifyUser($data->user_id);
             return $data;
         }
         return false;

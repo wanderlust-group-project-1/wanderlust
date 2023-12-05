@@ -118,13 +118,7 @@ Trait Model  {
     public function update($id, array $data, string $id_column = 'id'):mixed {
 
         // remove unwanted data 
-        if(!empty($this->allowedColumns)){
-            foreach($data as $key => $value){
-                if(!in_array($key,$this->allowedColumns)){
-                    unset($data[$key]);
-                }
-            }
-        }
+
 
         $keys = array_keys($data);
         $query = "update $this->table set ";
