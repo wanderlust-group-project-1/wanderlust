@@ -14,7 +14,18 @@ class RentalServices {
 
     public function item(string $a = '', string $b = '', string $c = ''):void {
         $this->view('admin/item');
-    }}
+    }
+
+    public function viewUser(string $a = '', string $b = '', string $c = ''):void {
+        $rental = new RentalServiceModel();
+        $data['rental'] = $rental->first(['id'=>$a]);
+        $this->view('admin/rentalservices/user', $data);
+    }
+
+}
+
+
+
 
 
 ?>

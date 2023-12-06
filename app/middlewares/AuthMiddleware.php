@@ -14,7 +14,7 @@ class AuthMiddleware  {
 
     static $user = [];
 
-    static $allowedColumns = ['id', 'email', 'name', 'role'];
+    static $allowedColumns = ['id', 'email', 'name', 'role', 'is_verified'];
 
     // filter user with allowed columns
 
