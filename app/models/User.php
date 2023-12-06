@@ -8,8 +8,11 @@ class UserModel {
     protected array $allowedColumns = [
         'email',
         'password',
-        'role'
+        'role',
+        'verified'
     ];
+
+
 
     // Update the hashing algorithm and salt length as needed
     private string $hashAlgorithm = "sha256";
@@ -34,7 +37,7 @@ class UserModel {
 
             try {
                 $email = new EmailSender();
-                $email->sendEmail($data['email'], "Verify your email", "Click on the link to verify your email: http://localhost:8000/verify?tocken=$tocken");  
+                $email->sendEmail($data['email'], "Verify your email", "Click on the link to verify your email: http://localhost:8000/verify?token=$tocken");  
                 
 
             } catch (Exception $e) {
@@ -88,5 +91,21 @@ class UserModel {
         }
          
         return empty($this->errors);
+    }
+
+    // public function updateUser(array $data){
+    //     if ($this->validate($data)) {
+    //         $data['password'] = $this->hashPassword($data['password']);
+    //         $this->update($data['id'], $data);
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    public function verifyUser($id): mixed {
+
+        // $data['is_verified'] = 1;
+        $this->update($id, ['is_verified' => 1 ], 'id');
+        return true;
+        
     }
 }

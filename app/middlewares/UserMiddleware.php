@@ -7,6 +7,9 @@ class UserMiddleware {
             return false;
         }
         // if ()
+        // if ($user['is_verified'] == 0) {
+        //     return false;
+        // }
 
         if ($user['role'] == 'customer') {
             $customer = new CustomerModel;

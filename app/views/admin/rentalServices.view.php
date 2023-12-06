@@ -23,7 +23,7 @@ require_once('../app/views/admin/layout/sidebar.php');
     // Assuming rentalServices is an array of data
     foreach ($rentalServices as $service) {
     ?>
-    <tr>
+    <tr key="<?php echo $service->id ?>" >
         <td><?php echo $service->name; ?></td>
         <td><?php echo $service->mobile; ?></td>
         <td><span class="status <?php echo $service->status;  ?>"><?php echo $service->status; ?></span></td>
@@ -74,6 +74,7 @@ require_once('../app/views/admin/layout/sidebar.php');
 <div class="rental-services-modal" id="rental-services-modal">
 <div class="modal-content">
         <span class="close">&times;</span>
+        <div id="user">
         <div class="profile-info">
             <img src="<?php echo ROOT_DIR?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
             <h2 id="profile-name">Sandali </h2>
@@ -84,6 +85,7 @@ require_once('../app/views/admin/layout/sidebar.php');
                 <a href="#" id="link-1">Link 1</a>
                 <a href="#" id="link-2">Link 2</a>
             </div>
+        </div>
         </div>
     </div>
 </div>
@@ -101,9 +103,17 @@ var span = document.getElementsByClassName("close")[0];
 var viewButtons = document.querySelectorAll('.view-button');
 
 // Function to handle modal display
-function openModal(content) {
+function openModal(id) {
     // document.getElementById("modal-content").innerHTML = content;
+    
     modal.style.display = "block";
+    $.get(`<?php echo ROOT_DIR?>/admin/rentalServices/viewUser/${id}`, function(data) {
+            // Update the modal content with the fetched data
+            $("#user").html(data);
+        });
+    span.onclick = function() {
+    modal.style.display = "none";
+}
 }
 
 // Add click event listener to view buttons
@@ -112,14 +122,17 @@ viewButtons.forEach(function(button) {
         
         var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
         var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-        openModal("Name: " + name + "<br>Email: " + email);
+        var key = this.parentElement.parentElement.getAttribute('key');
+        var modalContent = {
+            name: name,
+            email: email
+        }
+        openModal(key);
     });
 });
 
 // Close the modal when the close button is clicked
-span.onclick = function() {
-    modal.style.display = "none";
-}
+
 
 // Close the modal if the user clicks outside of it
 window.onclick = function(event) {
