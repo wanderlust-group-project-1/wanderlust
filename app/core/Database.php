@@ -40,10 +40,10 @@ trait Database {
 
 
 
-use Exception;
-use PDO;
-use PDOException;
-use PDOStatement;
+// use Exception;
+// use PDO;
+// use PDOException;
+// use PDOStatement;
 
 trait DatabaseExtended
 {
