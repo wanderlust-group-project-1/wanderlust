@@ -48,10 +48,10 @@ wait = WebDriverWait(driver, timeout=10, poll_frequency=0.1, ignored_exceptions=
 wait.until(EC.visibility_of_element_located((By.ID, "alert")))
 
 text = driver.find_element(By.ID, "alert").text
+print(text)
 assert "success" in text, "success not in text" 
 # assert "Password must be at least 8 characters long" in text
 
-print(text)
 
 sleep(3)
 
