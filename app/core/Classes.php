@@ -105,3 +105,4 @@ class JSONRequest {
 
 
 require '../app/core/Classes/Email.php';
+require '../app/core/Classes/QueryBuilder.php';

@@ -1,3 +1,4 @@
+      
         <div class="profile-info">
             <img src="<?php echo ROOT_DIR?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
             <h2 id="profile-name"> <?php echo $rental->name ?> </h2>
