@@ -118,6 +118,20 @@ class RentalServiceModel {
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
 
+    public function getRentalService(int $id): mixed {
+        $q = new QueryBuilder;
+        $q->setTable('rental_services');
+        // with user table join
+        $q->select('rental_services.*,users.email,users.role')
+            // ->from('rental_services')
+            ->join('users', 'rental_services.user_id', 'users.id')
+            ->where('rental_services.id', $id);
+        // return $this->query();
+        // show($id);
+        // show($q->getQuery());
+        return $this->query($q->getQuery(),$q->getData());
+    }
+
     // public function updateRentalService(JSONRequest $request, JSONResponse $response) {
     //     $data = $request->getAll();
 
