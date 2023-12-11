@@ -2,3 +2,4 @@
 database/.env
 .env
 public/uploads/
+.pytest_cache
