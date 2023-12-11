@@ -132,6 +132,40 @@ class RentalServiceModel {
         return $this->query($q->getQuery(),$q->getData());
     }
 
+
+    public function updateStatus(JSONRequest $request, JSONResponse $response){
+        $data = $request->getAll();
+
+        // show($data);
+        // $q = new QueryBuilder;
+        // $q->setTable('rental_services');
+        // $q->select('status')
+        //     ->where('id', $data['userId']);
+        // $rental = $this->query($q->getQuery(),$q->getData())[0];
+        // // show($rental);
+        // $newStatus = $rental->status == 'active' ? 'accepted' : 'accepted';
+
+        $newStatus = $data['newStatus'];
+
+        show($newStatus);
+        $q = new QueryBuilder;
+        $q->setTable('rental_services');
+        $q->update(['status' => $newStatus])
+            ->where('id', $data['userId']);
+        echo $q->getQuery();
+
+        $this->query($q->getQuery(),$q->getData());
+        
+        // show($q->getQuery());
+        // show($q->getData());
+        // $response->success(true)
+        //     ->data(['newStatus' => $newStatus])
+        //     ->message('Status updated successfully')
+        //     ->statusCode(200)
+        //     ->send();
+
+    }
+
     // public function updateRentalService(JSONRequest $request, JSONResponse $response) {
     //     $data = $request->getAll();
 

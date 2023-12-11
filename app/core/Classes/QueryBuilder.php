@@ -37,6 +37,17 @@ class QueryBuilder
         return $this;
     }
 
+    public function update(array $data): self
+    {
+        $this->query = "UPDATE $this->table SET ";
+        $this->data = array_values($data);
+        $this->columns = array_keys($data);
+        $this->query .= implode(" = ?, ", $this->columns) . " = ?";
+        return $this;
+    }
+
+
+
     public function count(string $column = '*')
     {
         $this->query = "SELECT COUNT($column) FROM $this->table";
