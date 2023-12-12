@@ -17,9 +17,12 @@ class Guides {
 
     public function viewUser(string $a = '', string $b = '', string $c = ''):void {
         $guide = new GuideModel();
-        // $data['guide'] = $guide->getGuide($a)[0];
+
+
+        
+        $data['guide'] = $guide->getGuide($a)[0];
         // // show(  $data['rental']);
-        // $this->view('admin/guides/user', $data);
+        $this->view('admin/guides/user', $data);
     }
 }
 
