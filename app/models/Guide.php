@@ -101,6 +101,38 @@ class GuideModel
         return empty($this->errors);
     }
 
+
+    public function getGuide(int $id)
+    {
+        $q = new QueryBuilder();
+        $q->setTable('guides');
+        $q->select('guides.*,users.email,users.role')
+            ->join('users', 'guides.user_id', 'users.id')
+            ->where('guides.id', $id);
+
+        return $this->query($q->getQuery(), $q->getData(), true);
+          
+    }
+
+    public function updateStatus(JSONRequest $request, JSONResponse $response)
+    {
+        $data = $request->getAll();
+        // show($data);
+        $q = new QueryBuilder();
+        $q->setTable('guides');
+        $q->update(['status' => $data['newStatus']])
+            ->where('id', $data['userId']);
+
+        $this->query($q->getQuery(), $q->getData());
+            $response->success(true)
+                ->data(['status' => $data['newStatus']])
+                ->message('Guide status updated successfully')
+                ->statusCode(200)
+                ->send();
+        
+    }
+
+
     public function updateGuide(array $data)
     {
 

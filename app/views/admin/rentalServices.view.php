@@ -71,7 +71,7 @@ require_once('../app/views/admin/layout/sidebar.php');
 </div>
 
 <!-- Modal  -->
-<div class="rental-services-modal" id="rental-services-modal">
+<div class="user-modal" id="rental-services-modal">
 <div class="modal-content">
         <span class="close">&times;</span>
         <div id="user">

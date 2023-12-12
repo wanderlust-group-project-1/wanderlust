@@ -11,6 +11,7 @@ class RentalServices {
 
         $this->view('admin/rentalServices', $data);
     }
+    
 
     public function item(string $a = '', string $b = '', string $c = ''):void {
         $this->view('admin/item');

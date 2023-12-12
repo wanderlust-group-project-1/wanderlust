@@ -1,6 +1,6 @@
 <?php
 
-class Rental {
+class Guide {
     use Controller;
 
 
@@ -8,13 +8,14 @@ class Rental {
         $request = new JSONRequest;
         $response = new JSONResponse;
 
-        $rental = new RentalServiceModel;
+        $rental = new GuideModel;
         // echo "success";
         // show($request->getAll());
 
         $rental->updateStatus($request, $response);
     }
 
+    
 }
 
 ?>

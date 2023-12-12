@@ -175,7 +175,7 @@
 /* rental-service model */
 
 /* Modal styles */
-.rental-services-modal {
+.user-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -187,7 +187,7 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.rental-services-modal .modal-content {
+.user-modal .modal-content {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
@@ -198,7 +198,7 @@
     border-radius: 8px;
 }
 
-.rental-services-modal .close {
+.user-modal .close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -206,14 +206,14 @@
     cursor: pointer;
 }
 
-.rental-services-modal .close:hover,
-.rental-services-modal .close:focus {
+.user-modal .close:hover,
+.user-modal .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-.rental-services-modal .profile-image {
+.user-modal .profile-image {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -221,12 +221,12 @@
     margin-bottom: 20px;
 }
 
-.rental-services-modal #profile-name {
+.user-modal #profile-name {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.rental-services-modal .profile-links a {
+.user-modal .profile-links a {
     display: block;
     margin-bottom: 10px;
     color: #007bff;
@@ -234,7 +234,7 @@
     transition: color 0.3s;
 }
 
-.rental-services-modal .profile-links a:hover {
+.user-modal .profile-links a:hover {
     color: #0056b3;
 }
 
