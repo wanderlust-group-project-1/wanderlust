@@ -1,0 +1,81 @@
+.emailBlock {
+    display: flex;
+    flex-direction: column;
+
+    padding: 150px 28px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    background-color: #f3f3f3;
+}
+
+.email-block {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    align-items: center
+  }
+
+.emailBlock .SuccessfulMessage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emailBlock .message{
+    color: #4C5039;
+    text-shadow: 0px 1.1681221723556519px 1.1681221723556519px rgba(0, 0, 0, 0.25);
+    font-family: "Montserrat", sans-serif;
+    font-size: 36.59px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 117.9%; /* 63.183px */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+}
+.emailBlock .SuccessfulMessage .logoClass{
+    max-width: 40%; /* Make sure the image doesn't exceed the container width */
+    max-height: 40%;
+    margin-bottom: 2rem;
+}
+
+.emailBlock .SuccessfulMessage .iconPay{
+    max-width: 20%; /* Make sure the image doesn't exceed the container width */
+    max-height: 30%;
+}
+
+.emailBlock .smallmessage{
+    color: #000000;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18.59px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 117.9%; /* 63.183px */
+    text-align: center;
+
+}
+
+
+.email-button {
+    background-color: #4C5039; 
+    color: #f4f4f4;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #4C5039;
+    margin-top: 2rem;
+}
+
+.email-button:hover{
+    border: 1px solid #BCAB86;
+    background-color: #88915D;
+}
