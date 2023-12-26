@@ -3,3 +3,4 @@ database/.env
 .env
 public/uploads/
 .pytest_cache
+public/uploads/rental_services/
