@@ -75,7 +75,7 @@ require_once('../app/views/admin/layout/sidebar.php');
 <div class="modal-content">
         <span class="close">&times;</span>
         <div id="user">
-        <div class="profile-info">
+        <!-- <div class="profile-info">
             <img src="<?php echo ROOT_DIR?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
             <h2 id="profile-name">Sandali </h2>
             <p id="profile-email">sandali@gmail.com</p>
@@ -85,7 +85,7 @@ require_once('../app/views/admin/layout/sidebar.php');
                 <a href="#" id="link-1">Link 1</a>
                 <a href="#" id="link-2">Link 2</a>
             </div>
-        </div>
+        </div> -->
         </div>
     </div>
 </div>

@@ -78,6 +78,12 @@ class APP {
                 }
 
             }
+
+            // show(AuthAPIMiddleware::run_middleware($this->controller, $this->method));
+            $user = UserMiddleware::user(AuthAPIMiddleware::run_middleware($this->controller, $this->method));
+            // show($user);
+            $_SESSION['USER'] = $user;
+            
         }
 
         else if ($URL[0] == 'admin' && isset($URL[1]) && $URL[1] == 'api'){
@@ -172,6 +178,7 @@ class APP {
             
             $_SESSION['USER'] = $user;
             // show($user);
+            
             
         }
 
