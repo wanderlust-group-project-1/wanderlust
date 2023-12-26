@@ -28,6 +28,7 @@ require '../app/middlewares/AuthMiddleware.php';
 require '../app/middlewares/UserMiddleware.php';
 require '../app/middlewares/AdminMiddleware.php';
 require '../app/middlewares/VerifiedMiddleware.php';
+require '../app/middlewares/APIMiddleware.php';
 
 require 'Classes.php';
 
