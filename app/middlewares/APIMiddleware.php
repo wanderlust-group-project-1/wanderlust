@@ -41,7 +41,9 @@ class AuthAPIMiddleware {
         }
 
         if (isset($unauthRequired[$currentController]) && ($unauthRequired[$currentController] == 'ALL' || in_array($method, $unauthRequired[$currentController]))) {
+            return "";
             self::not_authenticated();
+
         } else {
             self::checkApiToken();
         }
