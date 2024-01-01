@@ -1,219 +1,409 @@
-.rent-dash .frame {
-    display: flex;
-    flex-direction: column;
-    padding: 27px 42px;
-
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 1rem;
-}
-
-.rent-dash .edit-prof-button {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 2rem;
-}
-
-.rent-dash .small-button-middle {
-    border-color: #bcab86;
-    border-radius: 7.895px;
-    padding: 0.5rem;
-}
-
-.rent-dash .div-1 {
-    display: flex;
-    justify-content: space-around;
-}
-
-.rent-dash .div-12 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.rent-dash .text-wrapper {
-    font-size: 53.6px;
-    text-align: center;
-    font-family: "Fredoka-Medium", Helvetica;
-    font-weight: 600;
-    color: #4c5039;
-}
-
-.rent-dash .img-1 {
-    padding: 1rem;
-}
-
-.rent-dash .img-2 {
-    padding: 2rem;
-}
-
-.rent-dash .div-3 {
-    display: flex;
-    flex-direction: row;
-    width: 60rem;
-    justify-content: space-evenly;
-    align-items: center;
-
-}
-
-.rent-dash .div-4 {
-    display: flex;
-    flex-direction: column;
-
-}
-
-.rent-dash .div-wrapper {
-    display: flex;
-    width: 398px;
-    height: 44px;
-    padding: 4px 21px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    background: #FFF;
-
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-family: "Fredoka-Medium", Helvetica;
-}
-
-.rent-dash .frame2 {
-    display: flex;
-    flex-direction: row;
-    padding: 27px 42px;
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 1rem;
-    /* justify-content: flex-start; */
-    justify-content: space-around;
-    align-items: center;
-
-}
-
-.rent-dash .yellow-card{
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    background: #BCAB86;
-    backdrop-filter: blur(67.62544250488281px);
-    width: 424px;
-    height: 169px;
-    padding: 10px 21px;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 2rem;
-    margin-left: 2rem;
-}
-
-.rent-dash .upper-card-text{
-    padding-top: 15px;
-    display: flex;
-    flex-direction: row;
+/* Modal Box Styles */
+.profile-editor {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
     width: 100%;
-    justify-content: space-between;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.rent-dash .text-card-topic{
-    color: #000;
-    font-family: Raleway;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 117.9%; 
+.profile-editor .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    border-radius: 8px;
 }
 
-.rent-dash .number-card{
-    display: flex;
-    justify-content: center;
-    font-size: 53.6px;
-    font-family: "Fredoka-Medium", Helvetica;
-    font-weight: 600;
-    color: #4c5039;
-    padding-bottom: 30px;
+
+
+
+
+
+/* make mobile responsive */
+
+
+
+@media screen and (max-width: 768px) {
+    .profile-editor .modal-content {
+        width: 100%;
+    }
 }
 
-.rent-dash .sec3-booking{
-    display: flex;
-    flex-direction: row;
 
-    /* New */
-    justify-content: space-evenly;
-}
-
-.rent-dash .text-topic{
-    color: #000;
-    font-family: Raleway;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 117.9%; 
-}
-
-.rent-dash .div-5 {
-    margin: 1rem;
+.dashboard {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    padding: 3rem;
-}
-
-.rent-dash .div-wrapper-2 {
-    display: flex;
-    width: 800px;
-    height: 44px;
-    padding: 4px 21px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    background: #FFF;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-family: "Fredoka-Medium", Helvetica;
-}
-
-.rent-dash .div-6 {
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    padding: 3rem;
-}
-
-
-.rent-dash .text-wrapper-3{
-    font-weight: 600;
-}
-
-.rent-dash table {
-    border-collapse: collapse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-right: 0;
     width: 100%;
-    font-size: 1.2rem;
-    font-family: "Fredoka-Medium", Helvetica;
-}
-
-.rent-dash th, td {
-    border: none;
-    padding: 8px;
-    text-align: center;
-    background: #FFF;
-    border-radius: 5px;
-
-    /* New */
-    height: 3rem;
-
-
-}
-
-.rent-dash tr {
+    height: 100%;
+    padding: 0;
     background-color: #f2f2f2;
+}
+
+.sidebar-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 250px;
+    min-width: 250px;
+    height: 100%;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar-flow {
+        width: 1px;
+        min-width: 1px;
+    }
+    .dashboard {
+        margin-left: 50px;
+        width: 90%;
+    }
+}
+
+
+.dashboard .dashboard-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10%;
+    padding: 0;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+}
+
+.dashboard .dashboard-content {
+
+
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allows items to wrap onto multiple lines as needed */
+    align-items: flex-start; /* Aligns items to the start of the flex container */
+    justify-content: flex-start; /* Aligns items to the start of the main axis */
+    width: 90%;
+    /* max-width: 100%;  */
+    height: auto; /* Adjusts the height automatically */
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.dashboard .dashboard-content .dashboard-card {
+    flex: 1 1 auto; /* Allows each card to grow and shrink but not be smaller than 300px */
+    /* Rest of your styles for dashboard-card */
+}
+
+
+
+
+
+/* make mobile responsive */
+
+
+
+.dashboard-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 30%;
+    min-width: 300px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover */
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-card {
+        min-width: 90%;
+        margin: 10px auto;
+    }
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.dashboard-card .user-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    border: 3px solid #56A8CB;
+    padding: 3px;
+    margin-bottom: 20px;
+}
+
+.dashboard-card .user-name {
+    font-size: 20px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+/* Continue with your existing styles */
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .dashboard-card {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .dashboard-card .user-image img {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+    }
+
+    .dashboard-card .user-name {
+        font-size: 18px;
+    }
+}
+
+
+.user-details {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* width: auto; */
+}
+
+
+
+
+.user h2 {
+    font-size: 24px; /* Larger heading for emphasis */
+    color: #4C5039; /* Darker color for heading */
+    margin-bottom: 5px;
+}
+
+.user p {
+    font-size: 16px; /* Readable text size */
+    color: #333; /* Darker text for better readability */
+    margin: 1px 0;
+}
+
+.user-details p strong {
+    color: #000;
+}
+
+.edit-prof-button button{
+    background-color: #4C5039; /* Green background */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+
+
+/* Modal Box Styles */
+.profile-editor {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.profile-editor .modal-content {
+    background-color: #ffffff;
+    margin: 5% auto; /* Centered with margin top and bottom */
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 500px; /* Maximum width */
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Close button style */
+.profile-editor .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 25px;
+    color: #666;
+    cursor: pointer;
+}
+
+/* Profile image styles */
+.profile-editor .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Form styling */
+.profile-editor form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between form elements */
+}
+
+.profile-editor label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.profile-editor input[type="text"], .profile-editor input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit button */
+.profile-editor input[type="submit"] {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.profile-editor input[type="submit"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive Design for smaller screens */
+@media screen and (max-width: 768px) {
+    .profile-editor .modal-content {
+        width: 95%; /* Full width on smaller screens */
+        margin-top: 10%; /* Increased top margin */
+    }
+
+    .profile-editor .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+/* Equipment List Styles */
+
+.dashboard-card .equipment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.dashboard-card .equipment-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+
+
+.table-container {
+    display: flex;
+    width: 100%;
+    margin: 20px;
+    /* margin-left: 300px; */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px; /* Adjust the margin based on your layout */
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Row divider styles */
+.data-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+/* View button styles */
+.view-button {
+    background-color: #4C5039;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-button {
+    background-color: #4C5039;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-button:hover {
+    background-color: #333;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.accepted {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.rejected {
+    background-color: #FF5733;
+    color: #fff;
+}
+
+.waiting {
+    background-color: #FFC107;
+    color: #333;
 }

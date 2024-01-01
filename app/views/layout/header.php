@@ -3,8 +3,11 @@
     <head>
         <title>Wanderlust</title>
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/style.css">
-        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/customer-profile.css">
-        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/guide-find.css">
+        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/admin-style.css"> -->
+        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/sidebar.css">
+
+        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/customer-profile.css"> -->
+        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/guide-find.css">
 
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/AddComplains.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/AddEquipment.css">
@@ -24,7 +27,7 @@
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/Tips.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/viewGuide.css">
-        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/signUp.css">
+        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/signUp.css"> -->
     </head>
 <body>
 

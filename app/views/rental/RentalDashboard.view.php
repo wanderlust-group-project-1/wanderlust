@@ -1,11 +1,85 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
+// require_once('../app/views/components/navbar.php');
 ?>
 
-<div class="rent-dash">
-    <div class="frame">
+<link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
+
+
+
+<div class="dashboard">
+    <?php require_once('../app/views/layout/sidebar.php');
+    ?>
+
+<div class="sidebar-flow"></div>
+
+
+<div class="dashboard-content"> 
+
+<div class="dashboard-card user"> 
+    <div class="details"> 
+
+    <div class="user-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
+    </div>
+
+    <!-- <div class="user-details"> -->
+            <h2>  <?php echo $user->name; ?></h2>
+            <p class="email"> <?php echo $user->email; ?></p>
+            <p class="number"> <?php echo $user->mobile; ?></p>
+
+            <!-- Add more details as needed -->
+        <!-- </div> -->
+
+        </div>
+        <div class="options">
+
+        <div class="edit-prof-button">
+            <button type="submit" class="small-button-middle"  id="edit-profile">
+                Edit Profile
+            </button>
+        </div>
+        </div>
+
+</div>
+
+<!-- User Details Section -->
+<div class="dashboard-card"> 
+
+    <div class="user-details">
+            <h2>User Details</h2>
+            <p><strong>Name:</strong> <?php echo $user->name; ?></p>
+            <p><strong>Email:</strong> <?php echo $user->email; ?></p>
+            <p><strong>Role:</strong> <?php echo $user->role; ?></p>
+            <!-- Add more details as needed -->
+        </div>
+
+</div>
+
+<div class="dashboard-card"> 
+
+<div class="equipment">
+
+    <h2>Equipment</h2>
+
+    <div class="equipment-list">
+        
+    <?php require_once('../app/views/rental/components/equipmentlist.view.php'); ?>
+
+
+    </div>
+
+        </div>
+
+</div>
+
+
+    
+
+
+    <!-- <div class="rent-dash">
+        <div class="frame">
         <div class="edit-prof-button">
             <button type="submit" class="small-button-middle"  id="edit-profile">
                 Edit Profile
@@ -50,7 +124,8 @@ require_once('../app/views/components/navbar.php');
 
         </div>
 
-    </div>
+    </div> -->
+
 
 
 
@@ -62,7 +137,7 @@ require_once('../app/views/components/navbar.php');
                 <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="Profile Image" class="profile-image">
 
 
-                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalservice/update" method="post">
+                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
                     <h2>Update Rental Service Details</h2>
                     <?php if (isset($errors)) : ?>
                         <div> <?= implode('<br>', $errors) ?> </div>
@@ -98,129 +173,9 @@ require_once('../app/views/components/navbar.php');
 
 <!-- Modal Box -->
 
-<div class="frame2">
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Total Bookings</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">10</div>
-    </div>
 
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Bookings per month</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Bookings in last month</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-</div>>
-
-
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="sec3-booking">
-        <div class="sec3-booking-main">
-            <div class="text-topic">Recent Booking</div>
-            <div class="img-2">
-                <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
-            </div>
-        </div>
-
-        <div class="div-5">
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Name : Kamal Silva</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Price : Rs.5000</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Date : 20/08/2023</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Time : 10:00</div>
-            </div>
-
-        </div>
-    </div>
 </div>
 
-
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="text-topic">Booking History</div>
-
-    <div class="div-6">
-        <div class="div-wrapper-3">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Price</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-
-                <tr>
-                    <td>Kamal Silva</td>
-                    <td>Upcoming</td>
-                    <td>Rs.5000</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Kumara Perera</td>
-                    <td>Upcoming</td>
-                    <td>Rs.3000</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Sarath</td>
-                    <td>Done</td>
-                    <td>Rs.4000</td>
-                    <td>01/09/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-            </table>
-        </div>
-    </div>
-</div>
 
 
 

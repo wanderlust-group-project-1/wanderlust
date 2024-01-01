@@ -1,6 +1,6 @@
 <?php
 
-class Rentalservice {
+class RentalService {
     use Controller;
 
 
