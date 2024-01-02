@@ -1,60 +1,86 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
 ?>
 
-<div class="rent-dash">
-    <div class="frame">
+<link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
+
+
+
+<div class="dashboard">
+    <?php require_once('../app/views/layout/sidebar.php');
+    ?>
+
+<div class="sidebar-flow"></div>
+
+
+<div class="dashboard-content"> 
+
+<div class="dashboard-card user"> 
+    <div class="details"> 
+
+    <div class="user-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
+    </div>
+
+    <!-- <div class="user-details"> -->
+            <h2>  <?php echo $user->name; ?></h2>
+            <p class="email"> <?php echo $user->email; ?></p>
+            <p class="number"> <?php echo $user->mobile; ?></p>
+
+            <!-- Add more details as needed -->
+        <!-- </div> -->
+
+        </div>
+        <div class="options">
+
         <div class="edit-prof-button">
             <button type="submit" class="small-button-middle"  id="edit-profile">
                 Edit Profile
             </button>
         </div>
-
-        <div class="div-1">
-            <div class="div-12">
-                <div class="text-wrapper">Hello Glaze Camping!</div>
-                <div class="img-1">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
-                </div>
-            </div>
-
-            <form class="div-3">
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Location : Nuwara Eliya</div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Role : Rental Service</div>
-                    </div>
-                </div>
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Mobile No : <?php echo $user->mobile ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Registration No : <?php echo $user->regNo ?></div>
-                    </div>
-                </div>
-
-            </form>
-
         </div>
 
+</div>
+
+<!-- User Details Section -->
+<div class="dashboard-card"> 
+
+    <div class="user-details">
+            <h2>User Details</h2>
+            <p><strong>Name:</strong> <?php echo $user->name; ?></p>
+            <p><strong>Email:</strong> <?php echo $user->email; ?></p>
+            <p><strong>Role:</strong> <?php echo $user->role; ?></p>
+            <!-- Add more details as needed -->
+        </div>
+
+</div>
+
+<div class="dashboard-card"> 
+
+<div class="equipment">
+
+    <h2>Equipments</h2>
+
+    <!-- Add Equipment -->
+    <div class="add-equipment">
+        <button type="submit" class="add-equipment-button"  id="add-equipment">
+            Add Equipment
+        </button>
     </div>
 
 
+    <div class="equipment-list">
+        
 
-    <!-- Modal Box -->
+
+    </div>
+
+        </div>
+
+</div>
+
+    <!-- Modal Box Profile Edit -->
     <div class="profile-editor" id="profile-editor">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -62,7 +88,7 @@ require_once('../app/views/components/navbar.php');
                 <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="Profile Image" class="profile-image">
 
 
-                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalservice/update" method="post">
+                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
                     <h2>Update Rental Service Details</h2>
                     <?php if (isset($errors)) : ?>
                         <div> <?= implode('<br>', $errors) ?> </div>
@@ -96,134 +122,53 @@ require_once('../app/views/components/navbar.php');
     </div>
 </div>
 
-<!-- Modal Box -->
+<!-- Modal Box Profile Edit End -->
 
-<div class="frame2">
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Total Bookings</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">10</div>
+<!-- Modal Box Add Equipment -->
+<!-- Add Equipment Modal -->
+<div class="add-equipment-modal" id="add-equipment-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="add-equipment-form" enctype="multipart/form-data">
+            <h2>Add New Equipment</h2>
+
+            <label for="equipment-name">Equipment Name</label>
+            <input type="text" id="equipment-name" name="equipment_name" required>
+
+            <label for="equipment-type">Type</label>
+            <input type="text" id="equipment-type" name="equipment_type" required>
+
+            <label for="cost">Cost</label>
+            <input type="number" step="0.01" id="cost" name="cost" required>
+
+            <label for="rental-fee">Rental Fee</label>
+            <input type="number" step="0.01" id="rental-fee" name="rental_fee" required>
+
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" required>
+
+            <label for="count">Count</label>
+            <input type="number" id="count" name="count" required>
+
+            <label for="fee">Fee</label>
+            <input type="number" step="0.01" id="fee" name="fee" required>
+
+            <label for="equipment-image">Equipment Image</label>
+            <input type="file" id="equipment-image" name="equipment_image" required>
+
+            <input type="submit" value="Add Equipment">
+        </form>
     </div>
+</div>
 
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Bookings per month</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Bookings in last month</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-</div>>
+<!-- Modal Box Add Equipment End -->
 
 
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="sec3-booking">
-        <div class="sec3-booking-main">
-            <div class="text-topic">Recent Booking</div>
-            <div class="img-2">
-                <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
-            </div>
-        </div>
-
-        <div class="div-5">
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Name : Kamal Silva</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Price : Rs.5000</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Date : 20/08/2023</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Time : 10:00</div>
-            </div>
-
-        </div>
-    </div>
 </div>
 
 
 
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="text-topic">Booking History</div>
-
-    <div class="div-6">
-        <div class="div-wrapper-3">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Price</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-
-                <tr>
-                    <td>Kamal Silva</td>
-                    <td>Upcoming</td>
-                    <td>Rs.5000</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Kumara Perera</td>
-                    <td>Upcoming</td>
-                    <td>Rs.3000</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Sarath</td>
-                    <td>Done</td>
-                    <td>Rs.4000</td>
-                    <td>01/09/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-            </table>
-        </div>
-    </div>
-</div>
-
-
-
+</script>
 <script>
     var modal = document.getElementById("profile-editor");
 
@@ -259,6 +204,159 @@ require_once('../app/views/components/navbar.php');
         }
     }
 </script>
+
+
+<script> 
+var addEquipmentModal = document.getElementById("add-equipment-modal");
+var addEquipmentBtn = document.getElementById("add-equipment");
+var span = document.getElementsByClassName("close")[1]; // assuming this is the second modal
+
+addEquipmentBtn.onclick = function() {
+    addEquipmentModal.style.display = "block";
+}
+
+span.onclick = function() {
+    addEquipmentModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == addEquipmentModal) {
+        addEquipmentModal.style.display = "none";
+    }
+}
+
+</script>
+
+
+
+<script>
+$(document).ready(function() {
+    $("#add-equipment-form").submit(function(e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        
+        // Create JSON object from form fields
+        var jsonData = {
+            name: $("#equipment-name").val(),
+            type: $("#equipment-type").val(),
+            cost: parseFloat($("#cost").val()), // Assuming rent fee is the cost
+            fee: parseFloat($("#rental-fee").val()),
+            description: $("#description").val(), // Assuming condition is the description
+            count: parseInt($("#count").val()),
+            
+        };
+
+        var image = $("#equipment-image").prop('files')[0];
+        // var filesData = {
+        //     image: image
+        // }
+        // Append JSON data to formData
+        formData.append('json', JSON.stringify(jsonData));
+        formData.append('image', image);
+
+        // const api = new ApiClient('api/equipment/addEquipment')
+        // api.uploadImageWithJSON('',image,jsonData)
+        // .then(response => {
+        //     console.log(response);
+        //     if(response.status == 200) {
+        //         alert('Equipment added successfully');
+        //         window.location.reload();
+        //     }
+        // })
+        console.log(jsonData)
+        console.log(formData);
+
+        $.ajax({
+        //    with authorization
+           headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/equipment/addEquipment',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                if(response.success) {
+                    alertmsg('Equipment added successfully', 'success');
+                    
+                    // close
+                    addEquipmentModal.style.display = "none";
+                }
+            }
+        });
+
+    });
+});
+
+
+// read cookie and get jwt_auth_token
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+// console.log(getCookie('jwt_auth_token'));
+
+</script>
+
+<script>
+    // get equipment list using ajax , get content and append to equipment list div
+
+    function getEquipments(){
+        // use Authorization header to get data
+
+        $.ajax({
+    url: '<?= ROOT_DIR ?>/rentalService/getequipments',
+    type: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+    },
+    success: function(data) {
+        console.log(data);
+        // Update the modal content with the fetched data
+        $(".equipment-list").html(data);
+    },
+    error: function(xhr, status, error) {
+        console.error("Error fetching data: " + error);
+        // Handle errors here
+    }
+});
+
+
+
+
+
+
+
+    }
+
+    getEquipments();
+
+
+</script>
+
+
+
 
 <?php
 require_once('../app/views/layout/footer.php');

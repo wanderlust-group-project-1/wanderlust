@@ -1,0 +1,115 @@
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #F0F0F0; /* Off-white background color */
+    color: #4C5039; /* Theme color */
+    position:fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    transition: margin-left 0.5s;
+}
+
+/* Remove ul disc style */
+.nav {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.nav-item {
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    color: inherit; /* New text color */
+    font-size: 20px; /* Increase the font size */
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+
+    
+    
+}
+
+/* Submenu styles */
+.sub-menu {
+    padding-left: 20px;
+    display: none;
+}
+
+.nav-item.active .sub-menu {
+    display: block;
+}
+
+.nav-item:hover {
+    background-color: #4C5039; /* Theme color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+.nav-item a:hover {
+    background-color: #4C5039; /* Theme color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+/* Active menu item */
+.nav-item.active {
+    background-color: #4C5039; /* Theme color for active item */
+    color: #fff; /* Text color for active item */
+}
+
+/* Icons styles */
+.menu-icon {
+    margin-right: 10px;
+}
+
+/* Arrow icon rotation */
+.menu-arrow {
+    float: right;
+}
+
+.nav-item.active .menu-arrow {
+    transform: rotate(90deg);
+}
+
+/* Content container styles (adjust according to your layout) */
+.content {
+    margin-left: 260px;
+    padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        /* width: 100%; Full width sidebar when visible */
+        margin-left: -350px; /* Hide sidebar initially */
+    }
+
+    .sidebar.active {
+        margin-left: 0; /* Show sidebar when active */
+    }
+
+    .content {
+        margin-left: 0; /* Adjust content margin */
+    }
+}
+
+/* Toggle button style (Add this button in your HTML) */
+.toggle-button {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1010;
+    cursor: pointer;
+    font-size: 30px;
+    color: #4C5039;
+}
+
+/* Show toggle button on small screens */
+@media screen and (max-width: 768px) {
+    .toggle-button {
+        display: block;
+    }
+}

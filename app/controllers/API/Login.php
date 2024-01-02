@@ -10,7 +10,7 @@ class Login {
         // print_r($userData);
         $token = JWT::encode($userData, SECRET_KEY, 'HS256');
 
-        setcookie('jwt_auth_token', $token, time() + 36000, '/', '', false, true);
+        setcookie('jwt_auth_token', $token, time() + 36000, '/', '', false, false);
 
         // echo json_encode(['token' => $token]);
 

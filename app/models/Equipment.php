@@ -36,6 +36,7 @@ class EquipmentModel {
             $this->insert($data);
 
             $response->success(true)
+
                 ->message('Equipment created successfully')
                 ->statusCode(201)
                 ->send();
@@ -83,8 +84,8 @@ class EquipmentModel {
         $q = new QueryBuilder;
         $q->setTable('equipment');
         // Additional logic for joining tables if needed
-        $q->where('equipment.rentalservice_id', $id);
-
+        $q->select('equipment.*')->where('equipment.rentalservice_id', $id);
+        // show($q->getQuery());
         return $this->query($q->getQuery(), $q->getData());
     }
 
