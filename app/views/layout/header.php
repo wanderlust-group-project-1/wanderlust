@@ -8,8 +8,6 @@
         <!-- jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/customer-profile.css"> -->
-        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/guide-find.css">
 
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/AddComplains.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/AddEquipment.css">
