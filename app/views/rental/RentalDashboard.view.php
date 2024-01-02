@@ -1,7 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-// require_once('../app/views/components/navbar.php');
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
