@@ -61,11 +61,18 @@ require_once('../app/views/layout/header.php');
 
 <div class="equipment">
 
-    <h2>Equipment</h2>
+    <h2>Equipments</h2>
+
+    <!-- Add Equipment -->
+    <div class="add-equipment">
+        <button type="submit" class="add-equipment-button"  id="add-equipment">
+            Add Equipment
+        </button>
+    </div>
+
 
     <div class="equipment-list">
         
-    <?php require_once('../app/views/rental/components/equipmentlist.view.php'); ?>
 
 
     </div>
@@ -74,62 +81,7 @@ require_once('../app/views/layout/header.php');
 
 </div>
 
-
-    
-
-
-    <!-- <div class="rent-dash">
-        <div class="frame">
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle"  id="edit-profile">
-                Edit Profile
-            </button>
-        </div>
-
-        <div class="div-1">
-            <div class="div-12">
-                <div class="text-wrapper">Hello Glaze Camping!</div>
-                <div class="img-1">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/1.png" alt="">
-                </div>
-            </div>
-
-            <form class="div-3">
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Location : Nuwara Eliya</div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Role : Rental Service</div>
-                    </div>
-                </div>
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Mobile No : <?php echo $user->mobile ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Registration No : <?php echo $user->regNo ?></div>
-                    </div>
-                </div>
-
-            </form>
-
-        </div>
-
-    </div> -->
-
-
-
-
-    <!-- Modal Box -->
+    <!-- Modal Box Profile Edit -->
     <div class="profile-editor" id="profile-editor">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -171,7 +123,46 @@ require_once('../app/views/layout/header.php');
     </div>
 </div>
 
-<!-- Modal Box -->
+<!-- Modal Box Profile Edit End -->
+
+<!-- Modal Box Add Equipment -->
+<!-- Add Equipment Modal -->
+<div class="add-equipment-modal" id="add-equipment-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="add-equipment-form" enctype="multipart/form-data">
+            <h2>Add New Equipment</h2>
+
+            <label for="equipment-name">Equipment Name</label>
+            <input type="text" id="equipment-name" name="equipment_name" required>
+
+            <label for="equipment-type">Type</label>
+            <input type="text" id="equipment-type" name="equipment_type" required>
+
+            <label for="cost">Cost</label>
+            <input type="number" step="0.01" id="cost" name="cost" required>
+
+            <label for="rental-fee">Rental Fee</label>
+            <input type="number" step="0.01" id="rental-fee" name="rental_fee" required>
+
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" required>
+
+            <label for="count">Count</label>
+            <input type="number" id="count" name="count" required>
+
+            <label for="fee">Fee</label>
+            <input type="number" step="0.01" id="fee" name="fee" required>
+
+            <label for="equipment-image">Equipment Image</label>
+            <input type="file" id="equipment-image" name="equipment_image" required>
+
+            <input type="submit" value="Add Equipment">
+        </form>
+    </div>
+</div>
+
+<!-- Modal Box Add Equipment End -->
 
 
 </div>
@@ -214,6 +205,159 @@ require_once('../app/views/layout/header.php');
         }
     }
 </script>
+
+
+<script> 
+var addEquipmentModal = document.getElementById("add-equipment-modal");
+var addEquipmentBtn = document.getElementById("add-equipment");
+var span = document.getElementsByClassName("close")[1]; // assuming this is the second modal
+
+addEquipmentBtn.onclick = function() {
+    addEquipmentModal.style.display = "block";
+}
+
+span.onclick = function() {
+    addEquipmentModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == addEquipmentModal) {
+        addEquipmentModal.style.display = "none";
+    }
+}
+
+</script>
+
+
+
+<script>
+$(document).ready(function() {
+    $("#add-equipment-form").submit(function(e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        
+        // Create JSON object from form fields
+        var jsonData = {
+            name: $("#equipment-name").val(),
+            type: $("#equipment-type").val(),
+            cost: parseFloat($("#cost").val()), // Assuming rent fee is the cost
+            fee: parseFloat($("#rental-fee").val()),
+            description: $("#description").val(), // Assuming condition is the description
+            count: parseInt($("#count").val()),
+            
+        };
+
+        var image = $("#equipment-image").prop('files')[0];
+        // var filesData = {
+        //     image: image
+        // }
+        // Append JSON data to formData
+        formData.append('json', JSON.stringify(jsonData));
+        formData.append('image', image);
+
+        // const api = new ApiClient('api/equipment/addEquipment')
+        // api.uploadImageWithJSON('',image,jsonData)
+        // .then(response => {
+        //     console.log(response);
+        //     if(response.status == 200) {
+        //         alert('Equipment added successfully');
+        //         window.location.reload();
+        //     }
+        // })
+        console.log(jsonData)
+        console.log(formData);
+
+        $.ajax({
+        //    with authorization
+           headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/equipment/addEquipment',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                if(response.success) {
+                    alertmsg('Equipment added successfully', 'success');
+                    
+                    // close
+                    addEquipmentModal.style.display = "none";
+                }
+            }
+        });
+
+    });
+});
+
+
+// read cookie and get jwt_auth_token
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+// console.log(getCookie('jwt_auth_token'));
+
+</script>
+
+<script>
+    // get equipment list using ajax , get content and append to equipment list div
+
+    function getEquipments(){
+        // use Authorization header to get data
+
+        $.ajax({
+    url: '<?= ROOT_DIR ?>/rentalService/getequipments',
+    type: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+    },
+    success: function(data) {
+        console.log(data);
+        // Update the modal content with the fetched data
+        $(".equipment-list").html(data);
+    },
+    error: function(xhr, status, error) {
+        console.error("Error fetching data: " + error);
+        // Handle errors here
+    }
+});
+
+
+
+
+
+
+
+    }
+
+    getEquipments();
+
+
+</script>
+
+
+
 
 <?php
 require_once('../app/views/layout/footer.php');

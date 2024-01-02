@@ -14,8 +14,17 @@ function alertmsg(message, type="notice") {
 
 
 class ApiClient {
+
+    headers = { };
+
+
+
     constructor(baseURL) {
         this.baseURL = baseURL;
+    }
+
+    setHeaders(headers) {
+        this.headers = headers;
     }
 
     handleJSONResponse(response) {
@@ -61,6 +70,7 @@ class ApiClient {
             method,
             // entype: 'multipart/form-data',
             body: formData,
+            
         };
 
         // return fetch(this.baseURL + endpoint, options)
@@ -92,6 +102,11 @@ class ApiClient {
 
         // Append JSON data as a string
         formData.append('json', JSON.stringify(jsonData));
+
+        // Add auth headers for form data
+
+
+
 
         return this.sendFormDataRequest(endpoint, 'POST', formData);
     }

@@ -12,4 +12,13 @@ class RentalService {
         redirect('dashboard');
         // $this->view('customer/profile');
     }
+
+    public function getEquipments(string $a = '', string $b = '', string $c = ''):void {
+
+        $equipment = new EquipmentModel();
+
+        $data["equipments"] = $equipment->getEquipmentbyRentalService(UserMiddleware::getUser()['id']);
+        // show($data["equipments"]);
+        $this->view('rental/components/equipmentlist', $data);
+    }
 }

@@ -326,6 +326,102 @@
     background-color: #f2f2f2;
 }
 
+.equipment .add-equipment .add-equipment-button {
+    background-color: #4C5039;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Add Equipment Modal */
+.add-equipment-modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4); /* Unified background color */
+    /* padding-top: 60px; */
+}
+
+.add-equipment-modal .modal-content {
+    background-color: #fff;
+    margin: 4% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-equipment-modal .modal-content h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.add-equipment-modal .modal-content label {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+}
+
+.add-equipment-modal .modal-content input[type="text"],
+.add-equipment-modal .modal-content input[type="number"],
+.add-equipment-modal .modal-content input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.add-equipment-modal .modal-content input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.add-equipment-modal .modal-content input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.add-equipment-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.add-equipment-modal .close:hover,
+.add-equipment-modal .close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-equipment-modal .modal-content {
+        width: 90%;
+    }
+}
+
+/* Add Equipment Modal End */
+
+
+
+
 .dashboard-card .equipment-list {
     display: flex;
     flex-direction: row;
@@ -386,6 +482,52 @@
 .view-button:hover {
     background-color: #333;
 }
+
+
+
+@media screen and (max-width: 600px) {
+    .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
+        display: block;
+    }
+
+    .data-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .data-table tr {
+        margin: 0 0 1rem 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+
+    .data-table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+
+    .data-table td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-label);
+        font-weight: bold;
+    }
+
+    .view-button {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+
 
 .status {
     padding: 6px 12px;
