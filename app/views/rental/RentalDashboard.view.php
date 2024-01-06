@@ -278,7 +278,7 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 if(response.success) {
                     alertmsg('Equipment added successfully', 'success');
                     
@@ -293,25 +293,6 @@ $(document).ready(function() {
 
 
 // read cookie and get jwt_auth_token
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === name + '=') {
-
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 
 
 
@@ -332,9 +313,12 @@ function getCookie(name) {
         'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
     },
     success: function(data) {
-        console.log(data);
+        // console.log(data);
         // Update the modal content with the fetched data
-        $(".equipment-list").html(data);
+        $(".equipment-list").html(data).promise().done(function() {
+            console.log('equipment list updated');
+            viewEquipment();
+        });
     },
     error: function(xhr, status, error) {
         console.error("Error fetching data: " + error);

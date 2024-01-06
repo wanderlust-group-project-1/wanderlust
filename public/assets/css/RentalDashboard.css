@@ -461,7 +461,7 @@
 }
 
 /* View button styles */
-.view-button {
+.equipment-view-button {
     background-color: #4C5039;
     color: #fff;
     border: none;
@@ -479,7 +479,7 @@
     transition: background-color 0.3s;
 }
 
-.view-button:hover {
+.equipment-view-button:hover {
     background-color: #333;
 }
 
@@ -521,7 +521,7 @@
         font-weight: bold;
     }
 
-    .view-button {
+    .equipment-view-button {
         display: block;
         width: 100%;
         text-align: center;
