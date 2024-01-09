@@ -77,7 +77,7 @@ class EquipmentModel {
     }
 
 
-    public function getEquipmentbyRentalService(int $id): mixed {
+    public function getEquipmentsbyRentalService(int $id): mixed {
         // Retrieval logic for equipment attributes
         // Similar to the getRentalService method
 
@@ -91,4 +91,18 @@ class EquipmentModel {
 
     // Additional methods for EquipmentModel if needed
 
+    public function getEquipmentbyRentalService(int $id, int $equipment_id): mixed {
+        // Retrieval logic for equipment attributes
+        // Similar to the getRentalService method
+
+        $q = new QueryBuilder;
+        $q->setTable('equipment');
+        // Additional logic for joining tables if needed
+        $q->select('equipment.*');
+        $q->where('equipment.rentalservice_id', $id)->where('equipment.id', $equipment_id);
+        // show($q->getQuery());
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
 }
+

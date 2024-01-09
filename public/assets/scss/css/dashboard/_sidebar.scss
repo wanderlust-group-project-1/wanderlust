@@ -1,0 +1,128 @@
+.side-bar-nav-bottom {
+    background-color: $sidebar-bg-color;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1 1 40rem;
+
+    section {
+        color: $white-text;
+        margin: 2rem;
+        transition: margin 0.3s ease-in-out;
+    }
+
+    .top-button-wrapper {
+        display: flex;
+        flex: 3 1 30rem;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .nav-button-active {
+            color: $gray-text;
+            background-color: $shaded-white;
+        }
+
+        padding: 0.5px;
+    }
+
+    .bottom-button-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .nav-button-active {
+            color: $gray-text;
+            background-color: $shaded-white;
+        }
+    }
+}
+
+.side-bar-nav-top {
+    background-color: $sidebar-bg-header-color;
+    padding: 1rem 2rem;
+    box-shadow: 0 5px 10px -5px black;
+    z-index: 1;
+    min-height: 10vh;
+}
+
+.side-bar {
+    position: sticky;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: width 0.5s ease;
+    width: 15%;
+}
+
+.side-bar-inactive {
+    width: 5%;
+}
+
+#menu-button {
+    cursor: pointer;
+    background-color: $sidebar-bg-header-color;
+    color: $white-text;
+    font-size: 41px;
+    border-radius: 8px;
+}
+
+.logo {
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.nav-button-icon {
+    pointer-events: none;
+}
+
+.nav-button {
+    cursor: pointer;
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: 2rem;
+
+    &:hover {
+        background-color: $bg-color-darker;
+    }
+}
+
+.expand-button {
+    cursor: default;
+}
+
+.expand-button-expanded {
+    transform: rotateX(180deg);
+}
+
+.name-holder {
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    margin: 0 1rem;
+
+    h4 {
+        white-space: nowrap;
+    }
+}
+
+.nav-text {
+    i {
+        pointer-events: none;
+    }
+
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+}
+
+.change-margin {
+    margin: 1rem 2rem !important;
+}

@@ -1,0 +1,76 @@
+@import "../global";
+@import "../common";
+@import "./table-styles";
+@import "./profile";
+@import "./popup";
+@import "./loader";
+@import "./form";
+@import "./product";
+@import "./restock";
+@import "./sidebar";
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+}
+
+.btn-icon {
+  margin: 0.5rem;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+header {
+  background-color: white;
+  box-shadow: 0 5px 10px -5px black;
+}
+
+
+.search-bar-header {
+  min-height: 10vh;
+}
+
+
+main {
+  position: relative;
+  width: 90%;
+  margin: 2rem auto;
+  min-height: 80%;
+}
+
+.main-header {
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  ul {
+    flex: 1 1 40rem;
+
+    li {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+  }
+
+  .filter-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-content: stretch;
+    flex-wrap: wrap;
+  }
+}
+
+.li-active {
+  background-color: $bg-color;
+  color: $white-text;
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 40rem;
+}
+
+.error {
+  color: $danger-color;
+}

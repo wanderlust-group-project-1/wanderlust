@@ -1,0 +1,99 @@
+/* Style for the overall navigation container */
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Adding a subtle shadow for depth */
+}
+
+/* Style for the navbar itself */
+.rental .navbar {
+    background-color: #fff;
+    margin-bottom: 0;
+    min-height: 60px; /* Slightly increased height for a better look */
+    padding: 0 20px; /* Adding horizontal padding */
+    display: flex; /* Using flexbox for alignment */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space out logo and profile/avatar */
+}
+
+/* Style for the logo section */
+.rental .nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.rental  .nav-logo img {
+    height: 50px; /* Adjust as needed */
+}
+
+/* Style for the profile avatar section */
+.rental .profile-avatar {
+    position: relative;
+    cursor: pointer;
+}
+
+.rental .profile-avatar img {
+    height: 40px; /* Adjust as needed */
+    border-radius: 50%; /* Circular avatar */
+    border: 2px solid #ddd; /* Optional border */
+}
+
+/* Style for the dropdown menu */
+.rental .dropdown-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 10px;
+}
+
+.rental .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rental .dropdown-menu li {
+    padding: 8px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.rental .dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.rental .dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.rental .dropdown-menu li a:hover {
+    background-color: #f8f8f8;
+}
+
+/* Style for the login button */
+.rental .login-button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.rental .login-button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.rental .login-button a:hover {
+    background-color: #0056b3;
+}
+
+

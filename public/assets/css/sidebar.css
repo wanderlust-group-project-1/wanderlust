@@ -1,14 +1,22 @@
 /* Sidebar styles */
 .sidebar {
+
     width: 250px;
     height: 100vh;
-    background-color: #F0F0F0; /* Off-white background color */
+    background-color: #f1f1f1; /* Off-white background color */
     color: #4C5039; /* Theme color */
     position:fixed;
     left: 0;
-    top: 0;
+    top: 65px;
     padding-top: 20px;
     transition: margin-left 0.5s;
+    z-index: 5;
+    overflow-y: auto;
+    box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
+    border-radius: 15px;
+
+
+
 }
 
 /* Remove ul disc style */
@@ -19,6 +27,8 @@
 
 .nav-item {
     margin-bottom: 15px;
+    /* box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
+    border-radius: 15px; */
 }
 
 .nav-link {
@@ -38,6 +48,7 @@
 .sub-menu {
     padding-left: 20px;
     display: none;
+    
 }
 
 .nav-item.active .sub-menu {
