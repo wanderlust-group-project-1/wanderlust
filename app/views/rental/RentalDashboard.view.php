@@ -2,7 +2,6 @@
 require_once('../app/views/layout/header.php');
 require_once('../app/views/components/navbar-rental.php');
 
-// require_once('../app/views/components/navbar.php');
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
@@ -180,7 +179,7 @@ require_once('../app/views/components/navbar-rental.php');
 
 
 
-
+</script>
 <script>
     var modal = document.getElementById("profile-editor");
 
