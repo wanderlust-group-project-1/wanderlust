@@ -43,7 +43,7 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-top: 10px;
+    margin-top: 50px;
     margin-right: 0;
     width: 100%;
     height: 100%;
@@ -95,12 +95,13 @@
     flex-direction: row;
     flex-wrap: wrap; /* Allows items to wrap onto multiple lines as needed */
     align-items: flex-start; /* Aligns items to the start of the flex container */
-    justify-content: flex-start; /* Aligns items to the start of the main axis */
+    justify-content: space-around; /* Aligns items to the start of the main axis */
     width: 90%;
     /* max-width: 100%;  */
     height: auto; /* Adjusts the height automatically */
     padding: 0;
     background-color: #f2f2f2;
+    gap: 20px;
 }
 
 .dashboard .dashboard-content .dashboard-card {
@@ -123,14 +124,20 @@
     align-content: space-between;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: 30%;
+    /* width: 30%; */
     min-width: 300px;
     margin: 20px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: all 0.3s ease-in-out; /* Smooth transition for hover */
+    transition: all 0.3s ease-in-out; 
+    /* Smooth transition for hover */
+    flex: 1;
+    /* height: auto; */
+    gap: 20px;
+    /* same height for all element */
+
 }
 
 @media screen and (max-width: 768px) {
@@ -180,13 +187,19 @@
 }
 
 
-.user-details {
+.rent-status {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
     margin: 20px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* width: auto; */
+    flex: 1; /* Allows the box to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+
 }
 
 
@@ -204,8 +217,23 @@
     margin: 1px 0;
 }
 
-.user-details p strong {
+.rent-status p strong {
     color: #000;
+}
+
+.rent-status h2 {
+    font-size: 24px; /* Larger heading for emphasis */
+    color: #4C5039; /* Darker color for heading */
+    margin-bottom: 5px;
+}
+
+.rent-status h1 
+{
+    font-size: 48px; /* Larger heading for emphasis */
+    color: #4C5039; /* Darker color for heading */
+    margin-bottom: 5px;
+    text-align: center;
+
 }
 
 .edit-prof-button button{
@@ -549,3 +577,5 @@
     background-color: #FFC107;
     color: #333;
 }
+
+

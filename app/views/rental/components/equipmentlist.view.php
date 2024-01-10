@@ -29,7 +29,7 @@
 <!-- modal for view button -->
 
 <div id="view-equipment-modal" class="view-equipment-modal">
-    <div class="modal-content">
+    <div class="modal-content" id="equipment-modal-content">
         <span class="close-button">&times;</span>
         <h2>Equipment Details</h2>
         <p><strong>Name:</strong> <span id="detail-name"></span></p>
@@ -64,6 +64,39 @@
         button.addEventListener("click", function() {
             console.log('view button clicked');
             var row = button.closest('tr');
+
+            var id = row.getAttribute('data-id');
+
+            $.ajax({
+                headers:{
+                    Authorization: "Bearer " + getCookie('jwt_auth_token')
+                },
+                url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + id,
+                method: 'GET',
+                success: function(data) {
+                    console.log(data);
+                    
+                    //  create a new div element
+                    var newDiv = document.createElement("div")
+                    newDiv.innerHTML = data;
+                    var js = newDiv.querySelector('script').innerHTML;
+                    
+
+
+
+                    $('#equipment-modal-content').html(data).promise().done(function() {
+                    console.log('equipment loaded');
+                    viewEquipment();
+                    eval(js);
+
+                });
+             },
+                error: function(err) {
+                    console.log(err);
+                }
+
+
+            });
             
             
 
@@ -121,6 +154,40 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.edit-equipment-button{
+    background-color: #4CAF50; /* Green */
+    width:90%;
+    border: none;
+    color: white;
+    height: 30px;
+
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+
+    margin: auto;
+
+}
+
+
+.delete-equipment-button {
+    background-color: #f44336; /* Red */
+    width:90%;
+    border: none;
+    height: 30px;
+
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+
+
 }
 
 /* Animation for the modal */

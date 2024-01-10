@@ -1,0 +1,10 @@
+@import "../global";
+@import "../common";
+@import "./sidebar";
+
+
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+}

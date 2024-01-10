@@ -1,5 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
+require_once('../app/views/components/navbar-rental.php');
 
 ?>
 
@@ -16,7 +17,7 @@ require_once('../app/views/layout/header.php');
 
 <div class="dashboard-content"> 
 
-<div class="dashboard-card user"> 
+<div class="dashboard-card"> 
     <div class="details"> 
 
     <div class="user-image">
@@ -46,12 +47,22 @@ require_once('../app/views/layout/header.php');
 <!-- User Details Section -->
 <div class="dashboard-card"> 
 
-    <div class="user-details">
-            <h2>User Details</h2>
-            <p><strong>Name:</strong> <?php echo $user->name; ?></p>
-            <p><strong>Email:</strong> <?php echo $user->email; ?></p>
-            <p><strong>Role:</strong> <?php echo $user->role; ?></p>
-            <!-- Add more details as needed -->
+    <div class="rent-status">
+            <h2>Rents </h2>
+            <h1> 260 </h1>
+           
+        </div>
+        <div class="rent-status">
+            <h2>Total Earnings</h2>
+            <h1> 1000$ </h1>
+
+           
+        </div>
+        <div class="rent-status">
+            <h2>Equipment Count</h2>
+            <h1> 35 </h1>
+
+           
         </div>
 
 </div>

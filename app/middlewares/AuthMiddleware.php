@@ -34,6 +34,7 @@ class AuthMiddleware  {
             'Controller2' => ['method3'],
             'Customer' => ['index', 'edit', 'update'],
             'Profile' => ['index', 'edit', 'update'],
+            'Dashboard' => ['index', 'edit', 'update'],
             // 'Profile' => ['index', 'edit', 'update'],
         ];
         $unauthRequired = [

@@ -1,0 +1,57 @@
+.pop-up {
+    width: 40%;
+    min-height: 20%;
+    margin: auto;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: white;
+    top: 50%;
+}
+
+
+
+.pop-up-wrapper {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.pop-up-operation-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2rem 2rem 0 0rem;
+}
+
+.pop-up-content {
+    flex-direction: column;
+    padding: 0 0 3rem 0;
+}
+
+.inactive-blur {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.pop-up-button {
+    h3 {
+        margin: 1rem 1rem 1rem 0;
+    }
+}
+
+.pop-up-form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+
+    button {
+        align-self: center;
+    }
+}
+
+.confirm-delete-button {
+    background: $danger-color;
+    color: $white-text;
+}

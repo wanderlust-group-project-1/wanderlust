@@ -9,6 +9,8 @@ class QueryBuilder
     private string $query = "";
     private array $data = [];
 
+    private bool $isWhere = false;
+
     public function table(string $table): self
     {
         $this->table = $table;
@@ -56,7 +58,13 @@ class QueryBuilder
 
     public function where(string $column, string $value, string $operator = "="): self
     {
-        $this->query .= " WHERE $column $operator ?";
+        if (!$this->isWhere) {
+            $this->query .= " WHERE $column $operator ?";
+            $this->isWhere = true;
+        } else {
+            $this->query .= " AND $column $operator ?";
+        }
+        // $this->query .= " WHERE $column $operator ?";
         $this->data[] = $value;
         return $this;
     }
