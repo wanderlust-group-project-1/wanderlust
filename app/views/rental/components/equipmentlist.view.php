@@ -149,6 +149,12 @@
     font-weight: bold;
 }
 
+.view-equipment-modal .equipment-details img 
+{
+    max-width: 300px;
+    height: auto;
+}
+
 .close-button:hover,
 .close-button:focus {
     color: black;
