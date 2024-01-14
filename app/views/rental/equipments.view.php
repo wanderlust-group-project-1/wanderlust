@@ -2,6 +2,7 @@
 require_once('../app/views/layout/header.php');
 require_once('../app/views/components/navbar-rental.php');
 
+// require_once('../app/views/components/navbar.php');
 ?>
 
 <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css"> -->
@@ -9,65 +10,14 @@ require_once('../app/views/components/navbar-rental.php');
 
 
 <div class="dashboard">
-    <?php require_once('../app/views/rental/layout/sidebar.php');
+
+<?php require_once('../app/views/rental/layout/sidebar.php');
     ?>
 
 <div class="sidebar-flow"></div>
 
+<div class="dashboard-content">
 
-<div class="dashboard-content"> 
-
-<div class="dashboard-card"> 
-    <div class="details"> 
-
-    <div class="user-image">
-        <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
-    </div>
-
-    <!-- <div class="user-details"> -->
-            <h2>  <?php echo $user->name; ?></h2>
-            <p class="email"> <?php echo $user->email; ?></p>
-            <p class="number"> <?php echo $user->mobile; ?></p>
-
-            <!-- Add more details as needed -->
-        <!-- </div> -->
-
-        </div>
-        <div class="options">
-
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle"  id="edit-profile">
-                Edit Profile
-            </button>
-        </div>
-        </div>
-
-</div>
-
-<!-- User Details Section -->
-<div class="dashboard-card"> 
-
-    <div class="rent-status">
-            <h2>Rents </h2>
-            <h1> 260 </h1>
-           
-        </div>
-        <div class="rent-status">
-            <h2>Total Earnings</h2>
-            <h1> 1000$ </h1>
-
-           
-        </div>
-        <div class="rent-status">
-            <h2>Equipment Count</h2>
-            <h1> 35 </h1>
-
-           
-        </div>
-
-</div>
-
-<div class="dashboard-card"> 
 
 <div class="equipment">
 
@@ -89,53 +39,12 @@ require_once('../app/views/components/navbar-rental.php');
 
         </div>
 
+ </div>
+
 </div>
 
-    <!-- Modal Box Profile Edit -->
-    <div class="profile-editor" id="profile-editor">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-info">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="Profile Image" class="profile-image">
 
 
-                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
-                    <h2>Update Rental Service Details</h2>
-                    <?php if (isset($errors)) : ?>
-                        <div> <?= implode('<br>', $errors) ?> </div>
-                    <?php endif; ?>
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
-
-                    <!-- <label for="email">Email</label>
-    <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
-
-                    <label for="mobile">Mobile No</label>
-                    <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
-
-                    <label for="regNo">Registration Number</label>
-                    <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
-
-                    <!-- <label for="password">Password</label>
-    <input type="password" name="password" id="password" required> -->
-
-                    <input type="submit" name="submit" value="Update">
-                </form>
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Box Profile Edit End -->
-
-<!-- Modal Box Add Equipment -->
 <!-- Add Equipment Modal -->
 <div class="add-equipment-modal" id="add-equipment-modal">
     <div class="modal-content">
@@ -175,52 +84,13 @@ require_once('../app/views/components/navbar-rental.php');
 <!-- Modal Box Add Equipment End -->
 
 
-</div>
 
-
-
-</script>
-<script>
-    var modal = document.getElementById("profile-editor");
-
-    var span = document.getElementsByClassName("close")[0];
-
-    // Get all view buttons
-    var viewButton = document.getElementById('edit-profile');
-
-    // Function to handle modal display
-    function openModal() {
-        // document.getElementById("modal-content").innerHTML = content;
-        modal.style.display = "block";
-    }
-
-    // Add click event listener to view buttons
-    viewButton.addEventListener('click', function() {
-
-        // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-        // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-        openModal();
-    });
-
-
-    // Close the modal when the close button is clicked
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Close the modal if the user clicks outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
 
 
 <script> 
 var addEquipmentModal = document.getElementById("add-equipment-modal");
 var addEquipmentBtn = document.getElementById("add-equipment");
-var span = document.getElementsByClassName("close")[1]; // assuming this is the second modal
+var span = document.getElementsByClassName("close")[0]; // assuming this is the first modal
 
 addEquipmentBtn.onclick = function() {
     addEquipmentModal.style.display = "block";
@@ -237,6 +107,7 @@ window.onclick = function(event) {
 }
 
 </script>
+
 
 
 
@@ -350,10 +221,3 @@ $(document).ready(function() {
 
 </script>
 
-
-
-
-<?php
-require_once('../app/views/layout/footer.php');
-
-?>

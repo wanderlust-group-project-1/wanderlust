@@ -31,6 +31,8 @@ if ($_ENV) {
     // Object storage url
     define('OSURL', $_ENV['OSURL']);
 
+    define('GOOGLE_MAPS_API_KEY', $_ENV['GOOGLE_MAPS_API_KEY']);
+
     define('ROOT_DIR', 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']);
 } else if ($_SERVER['SERVER_NAME'] == 'localhost' && $_SERVER['SERVER_PORT'] == 80) {
 

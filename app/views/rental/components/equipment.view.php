@@ -1,5 +1,7 @@
 <?php
 // Assuming $equipment is an array of stdClass objects
+
+
 foreach ($equipment as $item) {
     ?>
     <div class="equipment-details">
@@ -13,7 +15,7 @@ foreach ($equipment as $item) {
         <p><strong>Count:</strong> <?php echo htmlspecialchars($item->count); ?></p>
         <p><strong>Fee:</strong> <?php echo htmlspecialchars($item->fee); ?></p>
         <?php if (!empty($item->image)) { ?>
-            <img id="detail-image" src="<?php echo htmlspecialchars($item->image); ?>" alt="Equipment Image">
+            <img id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
         <?php } ?>
     </div>
 

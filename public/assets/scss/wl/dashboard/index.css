@@ -35,14 +35,14 @@ li,
 td,
 h4,
 textarea {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 thead,
 label,
 tbody,
 tfoot {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 h2 {
@@ -50,11 +50,11 @@ h2 {
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 h5 {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 ul {
@@ -63,7 +63,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #060e11;
+  color: #3C3F3C;
 }
 
 ul,
@@ -78,8 +78,8 @@ textarea {
   padding: 1.5rem 1rem;
   border: none;
   border-radius: 12px;
-  background-color: #efefef;
-  font-size: 1rem;
+  background-color: #E0E0E0;
+  font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
 }
 input[type=text]:focus,
@@ -89,21 +89,21 @@ textarea:focus {
   outline: none;
 }
 input[type=text]::-moz-placeholder, input[type=password]::-moz-placeholder, input[type=number]::-moz-placeholder, textarea::-moz-placeholder {
-  color: #31393b;
+  color: #535956;
 }
 input[type=text]::placeholder,
 input[type=password]::placeholder,
 input[type=number]::placeholder,
 textarea::placeholder {
-  color: #31393b;
+  color: #535956;
 }
 
 thead th {
-  border-bottom: 1px solid rgba(26, 61, 73, 0.4431372549);
+  border-bottom: 1px solid rgba(41, 74, 56, 0.443);
 }
 
 .tbody-border-bottom {
-  border-bottom: 1px solid rgba(26, 61, 73, 0.4431372549);
+  border-bottom: 1px solid rgba(41, 74, 56, 0.443);
 }
 
 tfoot th {
@@ -112,7 +112,7 @@ tfoot th {
 
 select {
   background: none;
-  border: 2px solid #275868;
+  border: 2px solid #567356;
   border-radius: 1rem;
   margin: 0.5rem;
   padding: 1rem 1.5rem;
@@ -135,19 +135,34 @@ hr {
 }
 
 .action-edit-color {
-  color: #275868;
+  color: #3C5A4A;
 }
 
 .action-delete-color {
-  color: #ed5e68;
+  color: #8F4548;
 }
 
 .action-view-color {
-  color: #0dcaf0;
+  color: #567356;
 }
 
 body {
   scroll-behavior: smooth !important;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: #567356;
+  outline: none;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+}
+
+button:hover {
+  background: rgba(60, 90, 74, 0.725);
 }
 
 .loading-screen {
@@ -166,8 +181,8 @@ body {
 
 .normal-button {
   margin: 1rem;
-  background-color: #275868;
-  color: #fcecee;
+  background-color: #567356;
+  color: #FFFFFF;
   cursor: pointer;
   border: none;
 }
@@ -181,7 +196,7 @@ body {
 }
 
 .bg-active {
-  background: #275868;
+  background: #567356;
   color: white;
 }
 
@@ -320,6 +335,698 @@ fieldset {
   .toggle-button {
     display: block;
   }
+}
+
+/* Define Variables */
+/* Mixins */
+/* Modal Box Styles */
+.profile-editor {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.profile-editor .modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  border-radius: 8px;
+}
+.profile-editor .close {
+  color: #ccc;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.profile-editor .close:hover, .profile-editor .close:focus {
+  color: #000;
+  cursor: pointer;
+}
+.profile-editor .profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: block;
+}
+.profile-editor form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between form elements */
+}
+.profile-editor form label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+.profile-editor form input[type=text], .profile-editor form input[type=password], .profile-editor form input[type=file], .profile-editor form input[type=number] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.profile-editor form input[type=submit] {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.profile-editor form input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Responsive Design for Modals */
+@media screen and (max-width: 768px) {
+  .profile-editor .modal-content {
+    margin-top: 15%;
+    width: 100%;
+  }
+}
+/* Dashboard Styles */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 50px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+.dashboard-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10%;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+}
+.dashboard-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  height: auto;
+  background-color: #f2f2f2;
+  gap: 20px;
+}
+.dashboard-content .dashboard-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+.dashboard-content .dashboard-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.dashboard-content .dashboard-card .user-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  border: 3px solid #56A8CB;
+  padding: 3px;
+  margin-bottom: 20px;
+}
+
+/* Sidebar Styles */
+.sidebar-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 250px;
+  min-width: 250px;
+  height: 100%;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+/* Responsive Design for Dashboard and Sidebar */
+@media screen and (max-width: 768px) {
+  .sidebar-flow {
+    width: 1px;
+    min-width: 1px;
+  }
+  .dashboard {
+    margin-left: 50px;
+    width: 90%;
+  }
+  .dashboard-content .dashboard-card {
+    min-width: 90%;
+    margin: 10px auto;
+  }
+}
+/* Rent Status Styles */
+.rent-status {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
+/* User Styles */
+.user h2 {
+  font-size: 24px;
+  color: #4C5039;
+  margin-bottom: 5px;
+}
+.user p {
+  font-size: 16px;
+  color: #333;
+  margin: 1px 0;
+}
+
+/* Edit Profile Button Styles */
+.edit-prof-button button {
+  background-color: #4C5039;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Equipment List Styles */
+.dashboard-card .equipment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+.dashboard-card .equipment .add-equipment .add-equipment-button {
+  background-color: #4C5039;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Add Equipment Modal */
+.add-equipment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.add-equipment-modal .modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+}
+.add-equipment-modal .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between form elements */
+}
+.add-equipment-modal .modal-content form label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+.add-equipment-modal .modal-content form input[type=text], .add-equipment-modal .modal-content form input[type=password], .add-equipment-modal .modal-content form input[type=file], .add-equipment-modal .modal-content form input[type=number] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.add-equipment-modal .modal-content form input[type=submit] {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.add-equipment-modal .modal-content form input[type=submit]:hover {
+  background-color: #45a049;
+}
+.add-equipment-modal .modal-content .close {
+  color: #ccc;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.add-equipment-modal .modal-content .close:hover, .add-equipment-modal .modal-content .close:focus {
+  color: #000;
+  cursor: pointer;
+}
+
+/* Responsive adjustments for Add Equipment Modal */
+@media (max-width: 768px) {
+  .add-equipment-modal .modal-content {
+    width: 90%;
+  }
+}
+/* Equipment List Styles */
+.dashboard-card .equipment-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+/* Table Container */
+.table-container {
+  display: flex;
+  width: 100%;
+  margin: 20px;
+}
+
+/* Data Table Styles */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+}
+.data-table th, .data-table td {
+  padding: 12px;
+  text-align: left;
+}
+.data-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Button Styles */
+.equipment-view-button,
+.add-button {
+  background-color: #4C5039;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.equipment-view-button:hover,
+.add-button:hover {
+  background-color: #333;
+}
+
+/* Responsive Table Styles */
+@media screen and (max-width: 600px) {
+  .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
+    display: block;
+  }
+  .data-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .data-table tr {
+    margin: 0 0 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  .data-table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+  .data-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+  }
+  .equipment-view-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+/* Status Styles */
+.status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.status.accepted {
+  background-color: #4CAF50;
+  color: #fff;
+}
+.status.rejected {
+  background-color: #FF5733;
+  color: #fff;
+}
+.status.waiting {
+  background-color: #FFC107;
+  color: #333;
+}
+
+/* Additional styles can be converted following the same pattern */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+  border-radius: 10px;
+  background: #ECECEC;
+  -webkit-backdrop-filter: blur(67px);
+          backdrop-filter: blur(67px);
+}
+.login-container .login-form {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 450px;
+  width: 450px;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.login-container .login-form form {
+  flex-direction: column;
+}
+.login-container .login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.login-container .login-form input[type=text],
+.login-container .login-form input[type=password],
+.login-container .login-form select {
+  display: block;
+  background-color: #ECECEC;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.login-container .login-form input[type=submit],
+.login-container .login-form button[name=submit] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #BCAB86;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.login-container .login-form input[type=submit]:hover,
+.login-container .login-form button[name=submit]:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+.login-container .login-form .message-text,
+.login-container .login-form p {
+  text-align: center;
+  margin-top: 10px;
+}
+.login-container .login-form a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.login-container .login-form a:hover {
+  color: #f0f0f0;
+}
+.login-container .login-form #error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.login-container .signup-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 130px;
+  border-radius: 10px;
+  background: #ECECEC;
+  margin: 20px 0;
+  text-align: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.login-container .signup-card:hover {
+  background-color: #f0f0f0;
+}
+.login-container .signup-card .btn-div {
+  text-align: center;
+}
+.login-container .signup-card h3 {
+  color: #333;
+  margin: 0;
+  padding: 10px;
+}
+.login-container .signup-card p {
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.login-container .tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+.login-container .tooltip-container .tooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color: #fff;
+  color: #BCAB86;
+  border-radius: 4px;
+  padding: 5px;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 75%;
+}
+.login-container .tooltip-container .tooltip-trigger {
+  background-color: #fff;
+  color: #BCAB86;
+  border-radius: 50%;
+  padding: 1px;
+  margin: 1px;
+  font-size: 1.5rem;
+  position: relative;
+}
+.login-container .tooltip-container .tooltip-trigger:hover + .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.login-container .file-input-container,
+.login-container .location-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.login-container .file-input-container .file-label,
+.login-container .file-input-container .location-button,
+.login-container .location-button-container .file-label,
+.login-container .location-button-container .location-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.login-container .file-input-container .file-input,
+.login-container .location-button-container .file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Map Styles */
+/* Map Styles */
+.location-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.location-modal .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  border-radius: 10px;
+}
+.location-modal .modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.location-modal .modal-content .close:hover, .location-modal .modal-content .close:focus {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+.location-modal .modal-content .map-canvas {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  position: fixed;
+}
+
+/* Additional Styles */
+#pac-container #pac-container,
+.pac-card #pac-container,
+.pac-controls #pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+#pac-container .pac-container,
+.pac-card .pac-container,
+.pac-controls .pac-container {
+  z-index: 1051 !important;
+}
+#pac-container .pac-card,
+.pac-card .pac-card,
+.pac-controls .pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+#pac-container .pac-controls,
+.pac-card .pac-controls,
+.pac-controls .pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+#pac-container .pac-controls label,
+.pac-card .pac-controls label,
+.pac-controls .pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#pac-container #pac-input,
+.pac-card #pac-input,
+.pac-controls #pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+#pac-container #pac-input:focus,
+.pac-card #pac-input:focus,
+.pac-controls #pac-input:focus {
+  border-color: #4d90fe;
+}
+#pac-container #title,
+.pac-card #title,
+.pac-controls #title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+#pac-container #target,
+.pac-card #target,
+.pac-controls #target {
+  width: 345px;
 }
 
 .hero {

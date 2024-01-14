@@ -40,17 +40,19 @@ var span = document.getElementsByClassName("close")[0];
 // Get all view buttons
 var viewButton = document.getElementById('select-location');
 
+var confirmButton = document.getElementById('confirm-location');
 // Function to handle modal display
 function openModal() {
     modal.style.display = "block";
 }
 
 // // Add click event listener to view buttons
-// viewButton.addEventListener('click', function() {
+viewButton.addEventListener('click', function() {
 //    alertmsg('View button clicked');
 
-//     openModal();
-// });
+    openModal();
+    initialize();
+});
 
 
 
@@ -67,6 +69,13 @@ window.onclick = function(event) {
     }
 }
 
+confirmButton.onclick = function(event) {
+    event.preventDefault();
+    modal.style.display = "none";
+    var lat = document.getElementById('latitude').value;
+    var lng = document.getElementById('longitude').value;
+    console.log(lat + " " + lng);
+}
 
 
 
