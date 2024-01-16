@@ -3,8 +3,12 @@
 @import "./sidebar";
 @import "./rental";
 @import "./signup";
+@import "./modal";
 
 
+
+// load font awesome
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
 .hero {
   min-height: 100vh;
@@ -12,3 +16,33 @@
 }
 
 
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.col {
+  flex: 1 1 300px;
+  margin: 1rem;
+  padding: 1rem;
+  background: #f4f4f4;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.col-12 {
+  flex: 1 1 100%;
+}
+
+.col-6 {
+  flex: 1 1 50%;
+}
