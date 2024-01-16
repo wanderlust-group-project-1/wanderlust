@@ -169,6 +169,23 @@ textarea {
   }
 }
 
+select {
+  padding: 1.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background-color: $shaded-white;
+  font-size: $header4;
+  font-family: "Poppins", sans-serif;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $shaded-grey-text;
+  }
+}
+
 thead th {
   border-bottom: 1px solid $line-color;
 }
@@ -181,13 +198,13 @@ tfoot th {
   font-weight: 200;
 }
 
-select {
-  background: none;
-  border: 2px solid $bg-color;
-  border-radius: 1rem;
-  margin: 0.5rem;
-  padding: 1rem 1.5rem;
-}
+// select {
+//   background: none;
+//   border: 2px solid $bg-color;
+//   border-radius: 1rem;
+//   margin: 0.5rem;
+//   padding: 1rem 1.5rem;
+// }
 
 hr {
   opacity: 0.5;

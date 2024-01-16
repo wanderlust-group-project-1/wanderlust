@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/Tips.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/viewGuide.css">
-        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/signUp.css"> -->
+        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/signUp.css"> 
     </head>
 <body>
 

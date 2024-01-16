@@ -1,3 +1,4 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 * {
   margin: 0;
   padding: 0;
@@ -98,6 +99,24 @@ textarea::placeholder {
   color: #535956;
 }
 
+select {
+  padding: 1.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #E0E0E0;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+}
+select:focus {
+  outline: none;
+}
+select::-moz-placeholder {
+  color: #535956;
+}
+select::placeholder {
+  color: #535956;
+}
+
 thead th {
   border-bottom: 1px solid rgba(41, 74, 56, 0.443);
 }
@@ -108,14 +127,6 @@ thead th {
 
 tfoot th {
   font-weight: 200;
-}
-
-select {
-  background: none;
-  border: 2px solid #567356;
-  border-radius: 1rem;
-  margin: 0.5rem;
-  padding: 1rem 1.5rem;
 }
 
 hr {
@@ -911,9 +922,8 @@ fieldset {
 }
 .login-container .file-input-container .file-input,
 .login-container .location-button-container .file-input {
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
+  width: 100%;
   opacity: 0;
   cursor: pointer;
 }
@@ -1029,7 +1039,85 @@ fieldset {
   width: 345px;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+  .modal-content {
+    margin: 20% auto;
+    width: 100%;
+    padding: 10px;
+  }
+}
+.modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-content .close:hover, .modal-content .close:focus {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-content .map-canvas {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  position: fixed;
+}
+
 .hero {
   min-height: 100vh;
   display: flex;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.col {
+  flex: 1 1 300px;
+  margin: 1rem;
+  padding: 1rem;
+  background: #f4f4f4;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.col-12 {
+  flex: 1 1 100%;
+}
+
+.col-6 {
+  flex: 1 1 50%;
 }/*# sourceMappingURL=index.css.map */
