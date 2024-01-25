@@ -1,0 +1,104 @@
+@mixin rent-item-common {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 550px;
+    margin: 20px;
+    padding: 20px;
+    background-color: $color-white;
+    border-radius: 15px;
+    box-shadow: $box-shadow-default;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+
+  
+      &:hover {
+          box-shadow: $box-shadow-hover;
+      }
+      .rent-item-image{
+  
+          img {
+            position: relative;
+              width: 100%;
+            //   height: 150px;
+              border-radius: 5px;
+              border: 3px solid #56A8CB;
+              padding: 3px;
+              margin-bottom: 20px;
+          }
+          max-height: 300px;
+          overflow: hidden;
+
+      }
+
+    .rent-item-details {
+        z-index: 10;
+    }
+}
+
+.rent-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background-color: $color-light-gray;
+
+  
+    &-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 10%;
+      background-color: $color-light-gray;
+      border-bottom: 1px solid $color-medium-gray;
+    }
+  
+    &-content {
+    //   flex: 1 1 auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content: space-around;
+      width: 90%;
+      height: auto;
+      background-color: $color-light-gray;
+      gap: 20px;
+  
+      .rent-item-card {
+        @include rent-item-common;
+      }
+    }
+    .rent-item-card {
+        @include rent-item-common;
+      }
+
+
+    // media queries
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+
+        .rent-item-card {
+            width: 100%;
+            margin-bottom: 20%;
+        }
+        
+    }
+
+
+
+    
+   
+}
