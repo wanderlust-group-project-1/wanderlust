@@ -104,5 +104,37 @@ class EquipmentModel {
         return $this->query($q->getQuery(), $q->getData());
     }
 
+
+    
+
+    public function getEquipmentWithRentalService(int $id): mixed {
+        // Retrieval logic for equipment attributes
+        // Similar to the getRentalService method
+
+        $q = new QueryBuilder;
+        $q->setTable('equipment');
+        // Additional logic for joining tables if needed
+        $q->select('equipment.*', 'rentalservice.name as rentalservice_name', 'rentalservice.address as rentalservice_address', 'rentalservice.mobile as rentalservice_mobile', 'rentalservice.regNo as rentalservice_regNo');
+        $q->join('rentalservice', 'equipment.rentalservice_id', 'rentalservice.id');
+
+        $q->where('equipment.id', $id);
+        // show($q->getQuery());
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
+    // Customer Functions
+
+    function getEquipments($data){
+
+        $q = new QueryBuilder;
+        
+
+    }
+
+
 }
+
+
+
+
 

@@ -81,6 +81,10 @@ $info-color: #567356; // Dark, vibrant green
 
 
 
+$breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
+$breakpoint-md: 768px; // Medium devices (tablets, 768px and up)
+$breakpoint-lg: 992px;
+
 html {
   font-size: 62.5%;
   font-family: "Roboto","Poppins", sans-serif;

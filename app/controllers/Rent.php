@@ -20,4 +20,16 @@ Class Rent{
         $this->view('customer/search');
     }
 
+    public function items(string $a = '', string $b = '', string $c = ''):void {
+
+        $request = new JSONRequest();
+        
+        $equipment = new EquipmentModel;
+        
+        $data["equipments"] = $equipment->getEquipmentsbyRentalService(25);
+
+
+        $this->view('customer/components/items',$data);
+    }
+
 }

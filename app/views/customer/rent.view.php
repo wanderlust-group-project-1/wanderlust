@@ -28,7 +28,12 @@ require_once('../app/views/components/navbar.php');
 
 </div>
 
+
+
 <div class="row" id="search-result"> 
+</div>
+<div class="row" id="item-list">
+
 </div>
 
 <div class="modal" id="location-modal">
@@ -154,3 +159,23 @@ require_once('../app/views/components/navbar.php');
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAPS_API_KEY  ?>&libraries=places&callback=initialize" async defer></script>
 <script src="<? echo ROOT_DIR ?>/assets/js/map.js"></script>
+
+<script>
+
+// #item-list load with ajax http post request
+
+$(document).ready(function() {
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/rent/items',
+        type: 'POST',
+        success: function(response) {
+            console.log(response);
+            $('#item-list').html(response);
+        }
+    });
+});
+
+</script>
