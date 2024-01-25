@@ -133,9 +133,8 @@ require_once('../app/views/components/navbar.php');
         'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
         'Content-Type': 'application/json'  // Specify the content type as JSON
     },
-    url: '<?= ROOT_DIR ?>/rent/search',
+    url: '<?= ROOT_DIR ?>/rent/items',
     method: 'POST',
-    dataType: 'json',  // Expect JSON response from the server
     data: JSON.stringify({  // Convert the data object to a JSON string
         search: search,
         type: type,
@@ -143,11 +142,17 @@ require_once('../app/views/components/navbar.php');
         longitude: longitude
     }),
     success: function(data) {
+
         console.log(data);
-        $('#search-results').html(data);
+        // replace the contents of #item-list with the response from the server
+        
+        $('#item-list').html(data);
+
     },
     error: function(err) {
-        console.log(err);
+        console.log("abc");
+
+        // console.log(err);
     }
 });
 
@@ -169,13 +174,27 @@ $(document).ready(function() {
         headers: {
             'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
         },
+        
         url: '<?= ROOT_DIR ?>/rent/items',
+
         type: 'POST',
+        contentType:"application/json; charset=utf-8",
+
+        data: JSON.stringify({
+            search: '',
+            type: 'all',
+            latitude: '',
+            longitude: ''
+        }),
+        
         success: function(response) {
             console.log(response);
             $('#item-list').html(response);
         }
     });
 });
+
+
+
 
 </script>
