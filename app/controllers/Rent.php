@@ -26,7 +26,8 @@ Class Rent{
         
         $equipment = new EquipmentModel;
         
-        $data["equipments"] = $equipment->getEquipmentsbyRentalService(25);
+        // TODO: Replace the hardcoded ID with a dynamic value
+        $data["equipments"] = $equipment->getEquipmentsbyRentalService($dynamicId);
 
 
         $this->view('customer/components/items',$data);
