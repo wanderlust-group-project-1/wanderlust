@@ -24,11 +24,17 @@ Class Rent{
 
         $request = new JSONRequest();
         
-        $equipment = new EquipmentModel;
+        // $equipment = new EquipmentModel;
         
         // TODO: Replace the hardcoded ID with a dynamic value
-        $data["equipments"] = $equipment->getEquipmentsbyRentalService($dynamicId);
+        // $data["equipments"] = $equipment->getEquipmentsbyRentalService(25);
 
+
+        $rent = new RentModel;
+
+        $data['equipments'] = $rent->getItems($request->getAll());
+
+        // show($data['equipments']);
 
         $this->view('customer/components/items',$data);
     }

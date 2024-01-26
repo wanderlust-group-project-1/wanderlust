@@ -1153,6 +1153,26 @@ fieldset {
 .rent-items-content .rent-item-card .rent-item-details {
   z-index: 10;
 }
+.rent-items-content .rent-item-card .rent-item-details .rent-item-name {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+.rent-items-content .rent-item-card .rent-item-details .rent-item-description {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rent-items-content .rent-item-card .rent-item-details .rent-item-price h5 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
 .rent-items .rent-item-card {
   display: flex;
   flex-direction: column;
@@ -1186,6 +1206,26 @@ fieldset {
 }
 .rent-items .rent-item-card .rent-item-details {
   z-index: 10;
+}
+.rent-items .rent-item-card .rent-item-details .rent-item-name {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+.rent-items .rent-item-card .rent-item-details .rent-item-description {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rent-items .rent-item-card .rent-item-details .rent-item-price h5 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
 }
 @media screen and (max-width: 768px) {
   .rent-items {

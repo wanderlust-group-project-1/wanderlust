@@ -54,7 +54,7 @@ require_once('../app/views/components/navbar-rental.php');
         </div>
         <div class="rent-status">
             <h2>Total Earnings</h2>
-            <h1> 1000$ </h1>
+            <h1> RS 135000 </h1>
 
            
         </div>

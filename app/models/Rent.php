@@ -22,9 +22,7 @@ class RentModel {
         $data = $request->getAll();
 
         if ($this->validateRent($data)) {
-            // Additional logic for creating rent
-            // For example, uploading documents, registering with a user, etc.
-
+          
             // $data['image'] = upload($files['image'], 'images/equipment');
 
             // show(UserMiddleware::getUser());
@@ -46,11 +44,36 @@ class RentModel {
     }
 
     public function validateRent(array $data) {
-        // Validation logic for rent attributes
-        // Similar to the validateRentalService method
+        
 
         return empty($this->errors);
     }
+
+
+    public function getItems(array $data) {
+
+        $q = new QueryBuilder();
+
+        $q->setTable('equipment');
+        $q->select('equipment.*, rental_services.name As rental_service_name')
+            ->join('rental_services', 'equipment.rentalservice_id', 'rental_services.id')
+            // if   $data['search']
+           ->where('equipment.name', "%{$data['search']}%" , 'LIKE');
+
+
+           return $this->query($q->getQuery(),$q->getData());
+
+        
+
+            // ->join('rent', 'equipment.id', 'rent.equipment_id')
+
+
+
+
+
+
+      
+    }   
 
 
 
