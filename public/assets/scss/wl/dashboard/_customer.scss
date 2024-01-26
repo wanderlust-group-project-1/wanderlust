@@ -37,6 +37,31 @@
 
     .rent-item-details {
         z-index: 10;
+
+        .rent-item-name {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: $color-dark-gray;
+            margin-bottom: 10px;
+        }
+        .rent-item-description {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: $color-dark-gray;
+            margin-bottom: 10px;
+            // limit to one line
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+
+        
+        }
+        .rent-item-price h5{
+            font-size: 2rem;
+            font-weight: 600;
+            color: $color-dark-gray;
+            margin-bottom: 10px;
+        }
     }
 }
 
