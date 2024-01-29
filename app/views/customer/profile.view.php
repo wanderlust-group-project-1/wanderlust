@@ -8,9 +8,7 @@ echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
 ?>
 
 <div>
-
     <div class="frame">
-
         <div class="edit-prof-button">
             <button type="submit" class="small-button-middle" id="edit-profile">
                 Edit Profile
