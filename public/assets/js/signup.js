@@ -275,6 +275,12 @@ function rentalServiceSignup(event){
     var password = form.querySelector('input[name="password"]').value;
 
 
+    var latitude = document.getElementById('latitude').value;
+    var longitude = document.getElementById('longitude').value;
+
+    console.log(latitude + " " + longitude);
+
+
     var verification_document = form.querySelector('input[name="verification_document"]').files[0];
 
 
@@ -323,6 +329,8 @@ function rentalServiceSignup(event){
         mobile: mobile,
         email: email,
         password: password,
+        latitude: latitude,
+        longitude: longitude
         // verification_document: verification_document
     }
 

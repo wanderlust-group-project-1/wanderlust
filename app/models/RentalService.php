@@ -11,6 +11,8 @@ class RentalServiceModel {
         'mobile',
         'user_id',
         'verification_document',
+        'location_id',
+
         // 'email',
         // 'password',
     ];
@@ -31,6 +33,14 @@ class RentalServiceModel {
                 'password' => $data['password'],
                 'role' => 'rentalservice',
             ]);
+
+
+            $location = new LocationModel;
+            // show($data);
+            $data["location_id"] =  $location->createLocation(
+                $data['latitude'],
+                $data['longitude']
+            );
 
             if ($data['user_id']) {
                 $data['verification_document'] = upload($files['verification_document'], 'rental_services');

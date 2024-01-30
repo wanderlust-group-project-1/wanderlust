@@ -12,7 +12,9 @@ class GuideModel
         'mobile',
         'gender',
         'user_id',
-        'verification_document'
+        'verification_document',
+        'location_id'
+
     ];
 
     public function registerGuide(JSONRequest $request, JSONResponse $response)
@@ -28,6 +30,13 @@ class GuideModel
                 'password' => $data['password'],
                 'role' => 'guide',
             ]);
+
+            $location = new LocationModel;
+            // show($data);
+            $data["location_id"] =  $location->createLocation(
+                $data['latitude'],
+                $data['longitude']
+            );
 
             if ($data['user_id']) {
                 // Handle file upload for verification_document or any other file

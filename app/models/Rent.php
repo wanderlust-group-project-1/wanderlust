@@ -68,11 +68,6 @@ class RentModel {
             // ->join('rent', 'equipment.id', 'rent.equipment_id')
 
 
-
-
-
-
-      
     }   
 
 
