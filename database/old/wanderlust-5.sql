@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Jan 30, 2024 at 10:40 AM
--- Server version: 8.2.0
+-- Generation Time: Dec 27, 2023 at 08:13 AM
+-- Server version: 8.1.0
 -- PHP Version: 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `wanderlust`
 --
+CREATE DATABASE IF NOT EXISTS `wanderlust` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `wanderlust`;
 
 -- --------------------------------------------------------
 
@@ -100,11 +102,17 @@ CREATE TABLE `equipment` (
 --
 
 INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`, `type`, `count`, `fee`, `image`) VALUES
-(25, 25, 'Tent - 2 Persons', 3000.00, 'Tent for 2 Persons', 'Tent', 2, 1000.00, '65b365fccf6dc.jpg'),
-(33, 25, 'Torch', 4000.00, 'Torch', 'Torch', 4, 300.00, '65b367bdbc87d.png'),
-(34, 25, 'Blue Tent - 4 persons', 12000.00, 'Tent', 'Tent', 2, 1500.00, '65b3681d7fa3d.jpg'),
-(35, 25, 'Hiking Backpack', 14000.00, 'Backpack for hiking', 'Backpack', 8, 1000.00, '65b3685fa38ae.jpg'),
-(36, 25, 'Orange Tent ', 10000.00, 'Tent for 3 Persons', 'Tent', 9, 800.00, '65b3695343b1f.jpg');
+(1, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, ''),
+(2, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, ''),
+(3, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, ''),
+(4, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658a8637c85e5.jpg'),
+(5, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658a864806a5e.jpg'),
+(6, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658ae8fd8ba8b.jpg'),
+(7, 1, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658ae98854c31.jpg'),
+(8, NULL, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658aec00363de.jpg'),
+(9, NULL, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658aec39e381b.jpg'),
+(10, 25, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658aec5bd6d1c.jpg'),
+(11, 25, 'Excavator', 150.00, 'Heavy-duty excavator for construction projects', 'Construction', 5, 20.00, '658aec9caa1b0.jpg');
 
 -- --------------------------------------------------------
 
@@ -191,47 +199,6 @@ CREATE TABLE `item` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `locations`
---
-
-CREATE TABLE `locations` (
-  `id` int NOT NULL,
-  `latitude` decimal(9,6) DEFAULT NULL,
-  `longitude` decimal(10,6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `locations`
---
-
-INSERT INTO `locations` (`id`, `latitude`, `longitude`) VALUES
-(1, 3.000000, 34.000000),
-(2, 3.000000, 34.000000),
-(3, 7.807752, 80.315864);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rent`
---
-
-CREATE TABLE `rent` (
-  `id` int NOT NULL,
-  `customer_id` int NOT NULL,
-  `equipment_id` int NOT NULL,
-  `rental_service_id` int NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `total` decimal(10,2) DEFAULT NULL,
-  `payment_method` varchar(255) DEFAULT NULL,
-  `payment_status` varchar(255) DEFAULT NULL,
-  `payment_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `rental_services`
 --
 
@@ -243,70 +210,57 @@ CREATE TABLE `rental_services` (
   `mobile` varchar(15) NOT NULL,
   `user_id` int DEFAULT NULL,
   `status` enum('waiting','accepted','rejected','') NOT NULL DEFAULT 'waiting',
-  `verification_document` text,
-  `location_id` int DEFAULT NULL
+  `verification_document` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `rental_services`
 --
 
-INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user_id`, `status`, `verification_document`, `location_id`) VALUES
-(1, 'Nirmal Savinda', 'No 255, Neluwa RD', '453453', '076024489', 26, 'waiting', NULL, NULL),
-(2, 'Sandali Gunawardena', 'Colombo', '353434', '+94716033484', 27, 'waiting', NULL, NULL),
-(3, 'Gayandee Rajapaksha', 'Colombo', 'NS', '0716039989', 28, 'waiting', NULL, NULL),
-(4, 'Sarani ', 'Hettiarachchi', '342332323', '0786023989', 44, 'accepted', NULL, NULL),
-(5, 'Rental SHop', 'Colombo', 'B092342343', '0716024489', 50, 'waiting', NULL, NULL),
-(6, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS', '076024489', 52, 'waiting', NULL, NULL),
-(7, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS', '+94716024489', 53, 'waiting', NULL, NULL),
-(8, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS', '+94716024489', 54, 'waiting', NULL, NULL),
-(9, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS675757', '+94716024489', 55, 'waiting', NULL, NULL),
-(10, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 56, 'waiting', NULL, NULL),
-(11, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 57, 'waiting', NULL, NULL),
-(12, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 58, 'waiting', NULL, NULL),
-(13, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 59, 'waiting', NULL, NULL),
-(14, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 60, 'waiting', NULL, NULL),
-(15, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 61, 'waiting', NULL, NULL),
-(16, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 62, 'waiting', NULL, NULL),
-(17, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'sq32434234', '+94716024489', 66, 'waiting', NULL, NULL),
-(18, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'sq32434234', '+94716024489', 67, 'waiting', NULL, NULL),
-(19, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'sq32434234', '+94716024489', 68, 'rejected', NULL, NULL),
-(20, 'Sandali', ' ABC ABC', '200134245754', '076024489', 69, 'waiting', NULL, NULL),
-(21, 'NS', 'no 255 ', 'b2034534534', '076024489', 70, 'waiting', NULL, NULL),
-(22, 'NS', ' 255 Ns ', 'b048294873', '0832873293', 71, 'waiting', '', NULL),
-(23, 'ANDSD dad', 'No 255, Neluwa RD\r\nGorakaduwa', 'b43532423', '076024489', 72, 'accepted', '65435a34072e4.pdf', NULL),
-(24, 'Nirmal', ' ABC', 'B3243354', '082372434', 73, 'waiting', '65438a19444d3.pdf', NULL),
-(25, 'ABC Rent', ' Colombo 04', 'B873242343', '076024489', 87, 'waiting', '', NULL),
-(26, 'nirmal', 'Address is required', '200156273849', '0713458323', 91, 'waiting', '', NULL),
-(27, 'nirmal', 'Address is required', '200156273849', '0713458323', 92, 'waiting', '', NULL),
-(28, 'nirmal', 'Address is required', '200156273849', '0713458323', 93, 'waiting', '', NULL),
-(29, 'nirmal', 'Address is required', '200156273849', '0713458323', 94, 'waiting', '', NULL),
-(30, 'nirmal', 'Address is required', '200156273849', '0713458323', 95, 'waiting', '6567e605c9326.pdf', NULL),
-(31, 'nirmal', 'Address is required', '200156273849', '0713458323', 96, 'waiting', '', NULL),
-(32, 'nirmal', 'Address is required', '200156273849', '0713458323', 97, 'waiting', '6567e72d368c5.pdf', NULL),
-(33, 'New abc', ' Colombo 3', 'B7534804', '+94716024489', 98, 'waiting', '', NULL),
-(34, 'nirmal', 'Address is required', '200156273849', '0713458323', 99, 'waiting', '656816bb3db5d.pdf', NULL),
-(35, 'nirmal', 'Address is required', '200156273849', '0713458323', 100, 'waiting', '656816f01946f.pdf', NULL),
-(36, 'nirmal', 'Address is required', '200156273849', '0713458323', 101, 'waiting', '6568191366355.pdf', NULL),
-(37, 'nirmal', 'Address is required', '200156273849', '0713458323', 102, 'accepted', '65681ae928e5f.pdf', NULL),
-(38, 'nirmal', 'Address is required', '200156273849', '0713458323', 103, 'accepted', '65681afddbed4.pdf', NULL),
-(39, 'NS', 'No 255, Neluwa RD\nGorakaduwa', 'NS', '+94716024489', 104, 'waiting', '65681b3c104c8.pdf', NULL),
-(40, 'nirmal', 'Address is required', '200156273849', '0713458323', 128, 'waiting', '65684bdfa228f.pdf', NULL),
-(41, 'nirmal', 'Address is required', '200156273849', '0713458323', 132, 'rejected', '65684cb125d74.pdf', NULL),
-(42, 'nirmal', 'Address is required', '200156273849', '0713458323', 138, 'rejected', '6568539c85101.pdf', NULL),
-(43, 'Nirmal', 'No 255 Neluwa Rd\nGorakaduwa', 'B03279483409', '+94716024489', 168, 'waiting', '658ae5b7ee08d.pdf', NULL),
-(44, 'Jamey McClure', '390 Marco Mews', 'NS43454534', '+94716024489', 169, 'waiting', '65a3bbb3e45c5.webp', NULL),
-(45, 'Anahi Spinka', '47083 Homenick Run', 'NS', '+94716024489', 170, 'waiting', '65b88dde08df4.pdf', NULL),
-(46, 'Anahi Spinka', '47083 Homenick Run', 'NS', '+94716024489', 171, 'waiting', '65b88dee1b4ca.pdf', NULL),
-(47, 'Anahi Spinka', '47083 Homenick Run', 'NS', '+94716024489', 172, 'waiting', '65b88e27268f4.pdf', NULL),
-(48, 'Delaney Fadel', '87296 Keira Lock', 'NS', '+94716024489', 173, 'waiting', '65b8a94876b22.pdf', NULL),
-(49, 'Jeremy Schulist', '548 Katelyn Harbors', 'NS', '+94716024489', 174, 'waiting', '65b8a9a14ece7.pdf', NULL),
-(50, 'nirmal', 'Address is required', '200156273849', '0713458323', 175, 'waiting', '65b8aa5beea8c.pdf', NULL),
-(51, 'nirmal', 'Address is required', '200156273849', '0713458323', 176, 'waiting', '65b8aaac60fe6.pdf', NULL),
-(52, 'nirmal', 'Address is required', '200156273849', '0713458323', 177, 'waiting', '65b8aaeca63b3.pdf', NULL),
-(53, 'nirmal', 'Address is required', '200156273849', '0713458323', 179, 'waiting', '65b8ab6e2e9b5.pdf', NULL),
-(54, 'nirmal', 'Address is required', '200156273849', '0713458323', 180, 'waiting', '65b8abac9a310.pdf', 2),
-(55, 'Cruz Hills', '90826 Torphy Landing', 'NS', '+94716024489', 181, 'waiting', '65b8ac8050edf.pdf', 3);
+INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user_id`, `status`, `verification_document`) VALUES
+(1, 'Nirmal Savinda', 'No 255, Neluwa RD', '453453', '076024489', 26, 'waiting', NULL),
+(2, 'Sandali Gunawardena', 'Colombo', '353434', '+94716033484', 27, 'waiting', NULL),
+(3, 'Gayandee Rajapaksha', 'Colombo', 'NS', '0716039989', 28, 'waiting', NULL),
+(4, 'Sarani ', 'Hettiarachchi', '342332323', '0786023989', 44, 'accepted', NULL),
+(5, 'Rental SHop', 'Colombo', 'B092342343', '0716024489', 50, 'waiting', NULL),
+(6, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS', '076024489', 52, 'waiting', NULL),
+(7, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS', '+94716024489', 53, 'waiting', NULL),
+(8, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS', '+94716024489', 54, 'waiting', NULL),
+(9, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS675757', '+94716024489', 55, 'waiting', NULL),
+(10, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 56, 'waiting', NULL),
+(11, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 57, 'waiting', NULL),
+(12, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 58, 'waiting', NULL),
+(13, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 59, 'waiting', NULL),
+(14, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 60, 'waiting', NULL),
+(15, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 61, 'waiting', NULL),
+(16, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'NS765675', '+94716024489', 62, 'waiting', NULL),
+(17, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'sq32434234', '+94716024489', 66, 'waiting', NULL),
+(18, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'sq32434234', '+94716024489', 67, 'waiting', NULL),
+(19, 'NS', 'No 255, Neluwa RD\r\nGorakaduwa', 'sq32434234', '+94716024489', 68, 'rejected', NULL),
+(20, 'Sandali', ' ABC ABC', '200134245754', '076024489', 69, 'waiting', NULL),
+(21, 'NS', 'no 255 ', 'b2034534534', '076024489', 70, 'waiting', NULL),
+(22, 'NS', ' 255 Ns ', 'b048294873', '0832873293', 71, 'waiting', ''),
+(23, 'ANDSD dad', 'No 255, Neluwa RD\r\nGorakaduwa', 'b43532423', '076024489', 72, 'accepted', '65435a34072e4.pdf'),
+(24, 'Nirmal', ' ABC', 'B3243354', '082372434', 73, 'waiting', '65438a19444d3.pdf'),
+(25, 'New business', ' Colombo', 'B873242343', '076024489', 87, 'waiting', ''),
+(26, 'nirmal', 'Address is required', '200156273849', '0713458323', 91, 'waiting', ''),
+(27, 'nirmal', 'Address is required', '200156273849', '0713458323', 92, 'waiting', ''),
+(28, 'nirmal', 'Address is required', '200156273849', '0713458323', 93, 'waiting', ''),
+(29, 'nirmal', 'Address is required', '200156273849', '0713458323', 94, 'waiting', ''),
+(30, 'nirmal', 'Address is required', '200156273849', '0713458323', 95, 'waiting', '6567e605c9326.pdf'),
+(31, 'nirmal', 'Address is required', '200156273849', '0713458323', 96, 'waiting', ''),
+(32, 'nirmal', 'Address is required', '200156273849', '0713458323', 97, 'waiting', '6567e72d368c5.pdf'),
+(33, 'New abc', ' Colombo 3', 'B7534804', '+94716024489', 98, 'waiting', ''),
+(34, 'nirmal', 'Address is required', '200156273849', '0713458323', 99, 'waiting', '656816bb3db5d.pdf'),
+(35, 'nirmal', 'Address is required', '200156273849', '0713458323', 100, 'waiting', '656816f01946f.pdf'),
+(36, 'nirmal', 'Address is required', '200156273849', '0713458323', 101, 'waiting', '6568191366355.pdf'),
+(37, 'nirmal', 'Address is required', '200156273849', '0713458323', 102, 'accepted', '65681ae928e5f.pdf'),
+(38, 'nirmal', 'Address is required', '200156273849', '0713458323', 103, 'accepted', '65681afddbed4.pdf'),
+(39, 'NS', 'No 255, Neluwa RD\nGorakaduwa', 'NS', '+94716024489', 104, 'waiting', '65681b3c104c8.pdf'),
+(40, 'nirmal', 'Address is required', '200156273849', '0713458323', 128, 'waiting', '65684bdfa228f.pdf'),
+(41, 'nirmal', 'Address is required', '200156273849', '0713458323', 132, 'rejected', '65684cb125d74.pdf'),
+(42, 'nirmal', 'Address is required', '200156273849', '0713458323', 138, 'rejected', '6568539c85101.pdf'),
+(43, 'Nirmal', 'No 255 Neluwa Rd\nGorakaduwa', 'B03279483409', '+94716024489', 168, 'waiting', '658ae5b7ee08d.pdf');
 
 -- --------------------------------------------------------
 
@@ -333,8 +287,7 @@ INSERT INTO `tips` (`id`, `title`, `description`, `author`) VALUES
 (9, 'hello', 'sadfsdfdf', ''),
 (11, 'Going on a hike? Here\'s the must have medical kit', 'First Aid Kit:\r\n\r\nAlways carry a well-equipped first aid kit with items like bandages, antiseptic wipes, pain relievers, tweezers, and any necessary personal medications.\r\n\r\nKnow Basic First Aid:\r\n\r\nLearn basic first aid skills, such as how to treat minor injuries, manage blisters, and recognize signs of heat exhaustion, hypothermia, and altitude sickness.\r\n\r\n<br/>Sun Protection:\r\n\r\nUse sunscreen, wear a wide-brimmed hat, and cover exposed skin to protect against sunburn.\r\n\r\n<br/>Insect Repellent:\r\n\r\nUse insect repellent to prevent insect bites, and check for ticks regularly, especially in wooded areas.\r\n\r\n<br/>Foot Care:\r\n\r\nInvest in quality, moisture-wicking socks and well-fitting hiking boots to prevent blisters. Trim toenails to avoid ingrown nails.\r\n\r\n<br/>Proper Clothing:\r\n\r\nDress in layers, and choose moisture-wicking and breathable clothing to adapt to changing weather conditions. Don\'t forget to pack extra clothing in case of unexpected temperature drops.\r\n\r\n<br/>Stay Hydrated:\r\n\r\nDehydration can be a significant risk, especially in hot weather. Carry an adequate supply of clean water and drink regularly.', 'admin'),
 (13, 'Hello', 'abc adsdasda', 'admin'),
-(15, 'adsadasd', 'abc', 'admin'),
-(16, 'iijiljlm', 'nknk', 'admin');
+(15, 'adsadasd', 'gdgdfvsef', 'admin');
 
 -- --------------------------------------------------------
 
@@ -498,20 +451,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `date`, `role`, `is_verified`) V
 (165, 'abc@asdd.com', 'X1Pn62lsL5TtQ4oN2id6AA==:03a0d4773544e1dc28771da3bfc24c630da6b134526d4e2517fcd263a061dde6', '2023-12-05 09:07:42', 'guide', 1),
 (166, 'guide1@gmail.com', 'pERgYinRGuzxgLZU40r7gg==:e2e8aa4a2fcc230be65f212f400553e67a82e3eebb54cce66e09668fd8fd2f1e', '2023-12-07 12:44:26', 'guide', 0),
 (167, 'customer@wl.com', 'x4xFTR2fX6PGBC1zi3absw==:5dd74d32e2abdb83ee770b30afa6ea74f00566c3f9af30028b898ae4636c2b05', '2023-12-11 10:13:22', 'customer', 0),
-(168, 'rental@wl.com', 'RJz5Jof8yuIDu3TW20XJ8Q==:ffebf244573f3501f6566c9845bc4cfc3eae230761273c4652af26237abdc6e1', '2023-12-26 14:39:43', 'rentalservice', 0),
-(169, 'nirmalsavinda29@gmail.com', 'zzMG6bgDCEi95zGl5kpDjA==:1c9ff43fcbff198a9d5519bad478b2b36470a12e3b8f875b3b0d7174cf614195', '2024-01-14 10:47:09', 'rentalservice', 0),
-(170, 'nirmalsavinda29@gmail.com', '26dJwEZb3vEdEUpjpfVIcw==:b1b7f55d34caddd4b712cd41b2f948d66ce42af4c622709ff647509d5316e5f8', '2024-01-30 05:49:01', 'rentalservice', 0),
-(171, 'nirmalsavinda29@gmail.com', 'qAEpJAd4Jpo9I0YON9Wpow==:a0a7c4aaf2fe9e281bf1697e33a2974c05daba6423e070bb81efe0299d24e7e8', '2024-01-30 05:49:18', 'rentalservice', 0),
-(172, 'nirmalsavinda29@gmail.com', 'yKNq0LwIR7QNy8KFMGXPzw==:51bf30d6c5e0ebaa208a232a0cc7384ac55ca1802cb5b6f338c2ef65881153c5', '2024-01-30 05:50:15', 'rentalservice', 0),
-(173, 'nirmalsavinda29@gmail.com', '2OLlyLGPzdVbniDDmAcCEw==:b1a332cbcaca612c4a1528c343945a37e7ecd3b54da53be60d35b0eeaae35d92', '2024-01-30 07:46:11', 'rentalservice', 0),
-(174, 'nirmalsavinda29@gmail.com', 'aMtWZnPzUoktJNTQEK3uAA==:a7c8b68f08fd8d0b32db29b35b7b630726cfbad1e7314abfe6fac1cb8fb16102', '2024-01-30 07:47:41', 'rentalservice', 0),
-(175, 'abc@asdd.com', 'jTWLETH3UmnfEsNGPu/F9Q==:47e64250c1f3048ad98deebc6c0d574c732565da9310a1d49b3072a4bc87bae9', '2024-01-30 07:50:47', 'rentalservice', 0),
-(176, 'abc@asdd.com', 'g7ZkI3yjf+x7wb9zL/Dkrg==:c7190cf832be694c6ab84e21f3f9100b0dc8b60a1253b1e5e13e28e35584011e', '2024-01-30 07:52:08', 'rentalservice', 0),
-(177, 'abc@asdd.com', 'KkoHpVltSrOHLztEzymWGQ==:e4fb6ccd5e29f2233868d7f8d15ef83fa554e1d60516dc63cbfc44190871b1d5', '2024-01-30 07:53:12', 'rentalservice', 0),
-(178, 'abc@asdd.com', 'p6vvtpDy+duOUrFTieZLRQ==:90e0d5f869d4959cf8b1119c7f2edad10a8a4763071df3a72be7875837208e9b', '2024-01-30 07:54:21', 'rentalservice', 0),
-(179, 'abc@asdd.com', 'VSRLTYOEX85FsXA4tkP/rA==:fe39c7d406873f029ce251f74252a35a66f7812cd333e1edffa10fb4942ac5f5', '2024-01-30 07:55:22', 'rentalservice', 0),
-(180, 'abc@asdd.com', 'Xqpp06kMTa4vAfUubzukOg==:2664d8a289491dcc04de9dccd643bf93ee0f79f130ef4abdf904d3f91a4c0266', '2024-01-30 07:56:24', 'rentalservice', 0),
-(181, 'nirmalsavinda29@gmail.com', 'keRiLseeT1IY1cCereA2Aw==:4952f318070ef202e0d7e9ab1791da426fce63638a0f8b573c231be1fdb6e3ec', '2024-01-30 07:59:56', 'rentalservice', 0);
+(168, 'rental@wl.com', 'RJz5Jof8yuIDu3TW20XJ8Q==:ffebf244573f3501f6566c9845bc4cfc3eae230761273c4652af26237abdc6e1', '2023-12-26 14:39:43', 'rentalservice', 0);
 
 -- --------------------------------------------------------
 
@@ -545,20 +485,7 @@ INSERT INTO `verification` (`id`, `user_id`, `token`) VALUES
 (14, 159, '812b8bfc68e79270a5b5f6bd00658209939f4baed29ebf5ba8a41a714f9f5668'),
 (21, 166, '539ed68f05d8dc53e45dc2b6d75f0e4177ed06e07fcc7037765900cc831e6277'),
 (22, 167, 'a2e31b324f89ebb6d301e9184a54ab3e715303721328e4b7da000532c4ee72cf'),
-(23, 168, '867a77127f00ba4d60b02b92323c66c7d2071145d46c344d858a5053c2bfc808'),
-(24, 169, '8ea5ecef686595578c37a5c06bc296be38b60ee65f1157e503e59b1ecd4adb0f'),
-(25, 170, '434de12da0921c4093c43bfcff894235c499b1527b23949e7c956f888cf19c92'),
-(26, 171, '4017a52d3963467f613689fc1517db1d6358976f741636276efff7ee86e9c7f7'),
-(27, 172, 'e84b859d8fa654d0d5cac46b4d3ee2ee7d068d9783d84e911e37cd5edd947fcb'),
-(28, 173, '9972b6a3c801207287e2180bea1c39e24b3ff1858d75b891c13cd19f9d895105'),
-(29, 174, 'fb69d7fe658d2ef1bb643a44544831107dbe12097769a78fced32432c2d94e7d'),
-(30, 175, 'd95a34bb078967d011443cd1123f852705e8a1fd1cff8f4bd9adfc31b36fb4f1'),
-(31, 176, '70151ca2ffcc32f245896067f53fbe2e5bf03429fc64f5a705d53097be366ed3'),
-(32, 177, 'a4db3f8ff94b60f23f46bf59893796d70e3a122ca2817905461573e82ad98a12'),
-(33, 178, 'd4b507ad4a0b55bbb58e91c0495da9cf6acf63363cf9db80219249f7670cb6d6'),
-(34, 179, '1a24dc19f995a894a9edc9941d33bbddd76abd9396e38071efe7923709f7fd10'),
-(35, 180, '1991dbfb82d03f54acf8aecddb77e5629e4b460554678cde9a995c1b725d8975'),
-(36, 181, 'c6748fabe7b54060ccca007db651292b38209cc6f2474adb52b8539e54b5209a');
+(23, 168, '867a77127f00ba4d60b02b92323c66c7d2071145d46c344d858a5053c2bfc808');
 
 --
 -- Indexes for dumped tables
@@ -593,24 +520,11 @@ ALTER TABLE `item`
   ADD KEY `fk_equipment` (`equipment_id`);
 
 --
--- Indexes for table `locations`
---
-ALTER TABLE `locations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `rent`
---
-ALTER TABLE `rent`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `rental_services`
 --
 ALTER TABLE `rental_services`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `fk_rental_services_location` (`location_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `tips`
@@ -644,7 +558,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `guides`
@@ -659,40 +573,28 @@ ALTER TABLE `item`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `locations`
---
-ALTER TABLE `locations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `rent`
---
-ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `rental_services`
 --
 ALTER TABLE `rental_services`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `tips`
 --
 ALTER TABLE `tips`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `verification`
 --
 ALTER TABLE `verification`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -714,7 +616,6 @@ ALTER TABLE `guides`
 -- Constraints for table `rental_services`
 --
 ALTER TABLE `rental_services`
-  ADD CONSTRAINT `fk_rental_services_location` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
   ADD CONSTRAINT `rental_services_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
