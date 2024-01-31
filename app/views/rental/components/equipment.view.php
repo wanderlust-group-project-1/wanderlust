@@ -20,12 +20,12 @@ foreach ($equipment as $item) {
     </div>
 
     <div class="edit-button">
-        <button class="edit-equipment-button">Edit</button>
+        <button class="btn btn-full">Edit</button>
 
         
     </div>
     <div class="delete-button">
-        <button class="delete-equipment-button">Delete</button>
+        <button class="btn btn-danger btn-full">Delete</button>
     </div>
 
     

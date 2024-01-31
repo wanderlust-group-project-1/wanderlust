@@ -73,3 +73,90 @@ fieldset {
 .cursor-pointer {
   cursor: pointer;
 }
+
+
+.btn {
+  cursor: pointer;
+  border: none;
+  background: $bg-color;
+  outline: none;
+  color: $white-text;
+  border: 1px solid $bg-color;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $white-text  50%, $bg-color 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+
+  // Hover effect
+  &:hover {
+    background-position: left bottom;
+    color: $bg-color;
+    // weight
+  }
+}
+
+.btn-danger{
+  background: $danger-color;
+  border: 1px solid $danger-color;
+  color: $white-text;
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $white-text  50%, $danger-color 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $danger-color;
+  }
+}
+
+.btn-success{
+  background: $info-color;
+  border: 1px solid $info-color;
+  color: $white-text;
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $white-text  50%, $info-color 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $info-color;
+  }
+}
+
+.btn-warning{
+  background: $warning-color;
+  border: 1px solid $warning-color;
+  color: $white-text;
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $white-text  50%, $warning-color 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $warning-color;
+  }
+}
+
+// full width button
+.btn-full {
+  width: 100%;
+}
+
+
+
+

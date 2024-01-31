@@ -17,7 +17,7 @@
                     <td data-label="Type"><?= htmlspecialchars($equipment->type) ?></td>
                     <td data-label="Cost">Rs<?= htmlspecialchars($equipment->fee) ?></td>
                     <td data-label="Count"><?= htmlspecialchars($equipment->count) ?></td>
-                    <td data-label="Action"><button class="equipment-view-button">View</button></td> <!-- View Button for each row -->
+                    <td data-label="Action"><button id="equipment-view-button" class="btn">View</button></td> <!-- View Button for each row -->
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -58,7 +58,7 @@
         modal.style.display = "none";
     });
 
-    var viewButtons = document.querySelectorAll(".equipment-view-button");
+    var viewButtons = document.querySelectorAll("#equipment-view-button");
     // console.log("a",viewButtons);
     viewButtons.forEach(function(button) {
         button.addEventListener("click", function() {

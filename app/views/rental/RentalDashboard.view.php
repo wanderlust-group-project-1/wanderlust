@@ -35,8 +35,8 @@ require_once('../app/views/components/navbar-rental.php');
         </div>
         <div class="options">
 
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle"  id="edit-profile">
+        <div class="">
+            <button type="submit" class="btn"  id="edit-profile">
                 Edit Profile
             </button>
         </div>
@@ -75,7 +75,7 @@ require_once('../app/views/components/navbar-rental.php');
 
     <!-- Add Equipment -->
     <div class="add-equipment">
-        <button type="submit" class="add-equipment-button"  id="add-equipment">
+        <button type="submit" class="btn"  id="add-equipment">
             Add Equipment
         </button>
     </div>
@@ -123,7 +123,7 @@ require_once('../app/views/components/navbar-rental.php');
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
 
-                    <input type="submit" name="submit" value="Update">
+                    <input type="submit" class="btn" name="submit" value="Update">
                 </form>
 
 
@@ -167,7 +167,7 @@ require_once('../app/views/components/navbar-rental.php');
             <label for="equipment-image">Equipment Image</label>
             <input type="file" id="equipment-image" name="equipment_image" required>
 
-            <input type="submit" value="Add Equipment">
+            <input type="submit" class="btn" value="Add Equipment">
         </form>
     </div>
 </div>

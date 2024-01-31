@@ -32,7 +32,7 @@
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/GuideMyBooking.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/MyShop.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalBlog.css">
-        <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css">
+        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css"> -->
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/Tips.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/viewGuide.css">
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/signUp.css"> 
