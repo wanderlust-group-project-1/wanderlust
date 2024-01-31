@@ -78,6 +78,8 @@ $loader-color: #3C5A4A; // Green matching the sidebar-bg-color
 $primary-blue-color: $sidebar-bg-color; // Use the updated sidebar-bg-color
 $danger-color: #8F4548; // Dark, rich red, reminiscent of berries in the forest
 $info-color: #567356; // Dark, vibrant green
+// yello warning
+$warning-color: #FFC107;
 
 
 
@@ -253,18 +255,3 @@ body {
   // background-color: $bg-color;
 }
 
-
-button {
-  cursor: pointer;
-  border: none;
-  background: $bg-color;
-  outline: none;
-  color: $white-text;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
-}
-
-button:hover {
-  background: $bg-color-darker;
-}

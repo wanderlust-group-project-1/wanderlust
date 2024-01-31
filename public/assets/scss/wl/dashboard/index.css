@@ -161,21 +161,6 @@ body {
   scroll-behavior: smooth !important;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: #567356;
-  outline: none;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
-}
-
-button:hover {
-  background: rgba(60, 90, 74, 0.725);
-}
-
 .loading-screen {
   position: absolute;
   top: 0;
@@ -248,6 +233,72 @@ fieldset {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  background: #567356;
+  outline: none;
+  color: #FFFFFF;
+  border: 1px solid #567356;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+  background-image: linear-gradient(to right, #FFFFFF 50%, #567356 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+}
+.btn:hover {
+  background-position: left bottom;
+  color: #567356;
+}
+
+.btn-danger {
+  background: #8F4548;
+  border: 1px solid #8F4548;
+  color: #FFFFFF;
+  background-image: linear-gradient(to right, #FFFFFF 50%, #8F4548 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+}
+.btn-danger:hover {
+  background-position: left bottom;
+  color: #8F4548;
+}
+
+.btn-success {
+  background: #567356;
+  border: 1px solid #567356;
+  color: #FFFFFF;
+  background-image: linear-gradient(to right, #FFFFFF 50%, #567356 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+}
+.btn-success:hover {
+  background-position: left bottom;
+  color: #567356;
+}
+
+.btn-warning {
+  background: #FFC107;
+  border: 1px solid #FFC107;
+  color: #FFFFFF;
+  background-image: linear-gradient(to right, #FFFFFF 50%, #FFC107 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+}
+.btn-warning:hover {
+  background-position: left bottom;
+  color: #FFC107;
+}
+
+.btn-full {
+  width: 100%;
 }
 
 /* Sidebar styles */
@@ -406,18 +457,6 @@ fieldset {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.profile-editor form input[type=submit] {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-.profile-editor form input[type=submit]:hover {
-  background-color: #45a049;
-}
 
 /* Responsive Design for Modals */
 @media screen and (max-width: 768px) {
@@ -468,6 +507,7 @@ fieldset {
   flex-wrap: wrap;
   min-width: 300px;
   margin: 20px;
+  margin-bottom: 1.5rem;
   padding: 20px;
   background-color: #fff;
   border-radius: 15px;
@@ -545,16 +585,6 @@ fieldset {
 }
 
 /* Edit Profile Button Styles */
-.edit-prof-button button {
-  background-color: #4C5039;
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
 /* Equipment List Styles */
 .dashboard-card .equipment {
   display: flex;
@@ -612,18 +642,6 @@ fieldset {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-.add-equipment-modal .modal-content form input[type=submit] {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-.add-equipment-modal .modal-content form input[type=submit]:hover {
-  background-color: #45a049;
 }
 .add-equipment-modal .modal-content .close {
   color: #ccc;
