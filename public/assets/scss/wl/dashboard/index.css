@@ -753,24 +753,6 @@ fieldset {
   border-radius: 5px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-.login-container .login-form input[type=submit],
-.login-container .login-form button[name=submit] {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #BCAB86;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.login-container .login-form input[type=submit]:hover,
-.login-container .login-form button[name=submit]:hover {
-  background-color: #f0f0f0;
-  color: #333;
-}
 .login-container .login-form .message-text,
 .login-container .login-form p {
   text-align: center;
