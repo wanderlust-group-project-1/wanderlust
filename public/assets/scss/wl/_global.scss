@@ -9,7 +9,9 @@ $header1: 4rem;
 $header2: 2.5rem;
 $header3: 2.0rem;
 $header4: 1.5rem;
+
 $text: 2.0rem;
+$small-text: 1.5rem;
 
 // $bg-color: #4C5039;
 // $bg-color-darker: #1a3842b9;
@@ -58,14 +60,34 @@ $text: 2.0rem;
 
 
 
-$bg-color: #567356; // A darker, richer green
+
+$color-primary:#157E38;
+$color-dark:#044E29;
+$color-darker:#00241A;
+
+$color-light:#45BF55;
+$color-lighter:#95ED87;
+
+$color-lightest:#D6F5D9;
+$color-lightest2:#F0FFF0;
+
+// text colors
+$gray-text: #3C3F3C; 
+$white-text: #FFFFFF;
+$black-text: #000000;
+
+
+
+
+$bg-color:$color-primary;
+
+// $bg-color: #567356; // A darker, richer green
 $bg-color-darker: rgba(#3C5A4A, 0.725); // Even darker green, maintaining the opacity
 $half-opacity-bg-color: rgba(#6B9173, 0.5); // Medium green with original opacity
 
 $line-color: rgba(#294A38, 0.443); // Very dark green with a hint of transparency
 
-$gray-text: #3C3F3C; // Darker grey, aligning with the natural theme
-$white-text: #FFFFFF; // Crisp white for contrast
+ // Crisp white for contrast
 $shaded-grey-text: #535956; // Darker grey, complementing the richer tones
 $sidebar-bg-color: #3C5A4A; // Deep, lush green
 $sidebar-bg-header-color: #294A38; // Very dark green, evoking dense forest
@@ -89,9 +111,10 @@ $breakpoint-lg: 992px;
 
 html {
   font-size: 62.5%;
-  font-family: "Roboto","Poppins", sans-serif;
-  font-weight: 200;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
   scroll-behavior: smooth;
+
   
 }
 
@@ -100,7 +123,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-weight: 200;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -109,7 +132,7 @@ h1 {
 }
 
 p {
-  font-size: $header2;
+  font-size: $text;
 }
 
 button,
@@ -252,6 +275,7 @@ hr {
 
 body {
   scroll-behavior: smooth !important;
-  // background-color: $bg-color;
+  background-color: $color-lightest;
+
 }
 
