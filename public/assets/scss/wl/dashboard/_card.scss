@@ -1,0 +1,23 @@
+.card {
+    box-shadow: var(--bs-card-box-shadow);
+    margin-bottom: 1.875rem;
+    --bs-card-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.125);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: var(--bs-card-bg);
+    background-clip: border-box;
+    border: var(--bs-card-border);
+    border-radius: var(--bs-card-border-radius);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}

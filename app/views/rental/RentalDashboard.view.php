@@ -17,23 +17,25 @@ require_once('../app/views/components/navbar-rental.php');
 
 <div class="dashboard-content"> 
 
-<div class="dashboard-card"> 
-    <div class="details"> 
+<!-- <div class="row"> -->
+<div class="dashboard-card card  justify-content-sm-center "> 
+    <div class="details "> 
 
     <div class="user-image">
         <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
     </div>
 
     <!-- <div class="user-details"> -->
-            <h2>  <?php echo $user->name; ?></h2>
-            <p class="email"> <?php echo $user->email; ?></p>
-            <p class="number"> <?php echo $user->mobile; ?></p>
+            
 
             <!-- Add more details as needed -->
         <!-- </div> -->
 
         </div>
         <div class="options">
+        <h2>  <?php echo $user->name; ?></h2>
+            <p class="email"> <?php echo $user->email; ?></p>
+            <p class="number"> <?php echo $user->mobile; ?></p>
 
         <div class="">
             <button type="submit" class="btn"  id="edit-profile">
@@ -45,7 +47,7 @@ require_once('../app/views/components/navbar-rental.php');
 </div>
 
 <!-- User Details Section -->
-<div class="dashboard-card"> 
+<div class="dashboard-card card"> 
 
     <div class="rent-status">
             <h2>Rents </h2>
@@ -67,11 +69,16 @@ require_once('../app/views/components/navbar-rental.php');
 
 </div>
 
+<!-- </div> -->
+
+
+
 <div class="dashboard-card"> 
 
-<div class="equipment">
+<div class="equipment p-4">
 
-    <h2>Equipments</h2>
+<div class="row justify-content-between">
+    <h1>Equipments</h1>
 
     <!-- Add Equipment -->
     <div class="add-equipment">
@@ -79,6 +86,7 @@ require_once('../app/views/components/navbar-rental.php');
             Add Equipment
         </button>
     </div>
+</div>
 
 
     <div class="equipment-list">

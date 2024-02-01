@@ -7,8 +7,8 @@ $sidebar-top: 65px;
 .sidebar {
     width: $sidebar-width;
     height: 100vh;
-    background-color: $sidebar-background;
-    color: $theme-color;
+    background-color: $color-dark;
+    color: $white-text;
     position: fixed;
     left: 0;
     top: $sidebar-top;
@@ -37,8 +37,8 @@ $sidebar-top: 65px;
         margin-bottom: 15px;
 
         &:hover {
-            background-color: $theme-color;
-            color: #fff;
+            background-color: $color-light;
+            color: $white-text;
         }
 
         &.active {
@@ -63,8 +63,8 @@ $sidebar-top: 65px;
             border-radius: 5px;
 
             &:hover {
-                background-color: $theme-color;
-                color: #fff;
+                background-color: $color-light;
+                color: $white-text;
             }
         }
     }

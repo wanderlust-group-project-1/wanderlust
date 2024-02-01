@@ -1,8 +1,9 @@
 
 <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/navbar.css">
 <div class="nav-container rental"> 
-<nav class="navbar">
-    <div class="nav-logo">
+<nav class="navbar ">
+<!-- <div class="toggle-button" onclick="toggleSidebar()">☰</div> -->
+    <div class="nav-logo left-md-10">
 
     <div class="logo">
         <img src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
