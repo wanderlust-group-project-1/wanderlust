@@ -12,7 +12,7 @@
   
   
     // Initial background with transparent gradient
-    background-image: linear-gradient(to right, $white-text  50%, $color-primary 50%);
+    background-image: linear-gradient(to right, $color-lightest  50%, $color-primary 50%);
     background-size: 200% 100%;
     background-position: right bottom;
     transition: background-position 0.2s ease-out;

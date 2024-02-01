@@ -36,9 +36,14 @@ $sidebar-top: 65px;
     .nav-item {
         margin-bottom: 15px;
 
+        background-image: linear-gradient(to right, $color-lightest 50%, $color-dark 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: background-position 0.2s ease-out;
+
         &:hover {
-            background-color: $color-light;
-            color: $white-text;
+            background-position: left bottom;
+            color: $color-primary;
         }
 
         &.active {
@@ -54,6 +59,20 @@ $sidebar-top: 65px;
             }
         }
 
+        // .nav-link {
+        //     color: inherit;
+        //     font-size: 20px;
+        //     text-decoration: none;
+        //     display: block;
+        //     padding: 10px 20px;
+        //     border-radius: 5px;
+
+        //     &:hover {
+        //         background-color: $color-light;
+        //         color: $white-text;
+        //     }
+        // }
+
         .nav-link {
             color: inherit;
             font-size: 20px;
@@ -63,8 +82,8 @@ $sidebar-top: 65px;
             border-radius: 5px;
 
             &:hover {
-                background-color: $color-light;
-                color: $white-text;
+                // background-color: $color-light;
+                // color: $white-text;
             }
         }
     }
