@@ -20,12 +20,12 @@ foreach ($equipment as $item) {
     </div>
 
     <div class="edit-button">
-        <button class="btn btn-full">Edit</button>
+        <button id="edit-equipment-button" class="btn btn-full m-1">Edit</button>
 
         
     </div>
     <div class="delete-button">
-        <button class="btn btn-danger btn-full">Delete</button>
+        <button id="delete-equipment-button" class="btn btn-danger btn-full m-1">Delete</button>
     </div>
 
     
@@ -89,7 +89,7 @@ foreach ($equipment as $item) {
     <!-- edit modal end -->
 
     <script>
-        var deleteButtons = document.querySelectorAll(".delete-equipment-button");
+        var deleteButtons = document.querySelectorAll("#delete-equipment-button");
 
         deleteButtons.forEach(function(button) {
             button.addEventListener("click", function() {
@@ -103,6 +103,16 @@ foreach ($equipment as $item) {
         console.log("delete buttons", deleteButtons);
     
 
+        var editButtons = document.querySelectorAll("#edit-equipment-button");
+
+        editButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var modal = document.getElementById("edit-equipment-modal");
+                console.log("modal");
+                modal.style.display = "block";
+            });
+
+        });
 
 
         
