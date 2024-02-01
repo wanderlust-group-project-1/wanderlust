@@ -9,11 +9,14 @@
 @import "./button";
 @import "./rowcol";
 @import "./table";
+@import "./card";
+@import "./form";
 
 
 @import "./common/align";
 @import "./common/padding";
 @import "./common/_margin";
+
 
 $breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
 $breakpoint-md: 768px; // Medium devices (tablets, 768px and up)

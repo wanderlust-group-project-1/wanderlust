@@ -148,33 +148,38 @@ require_once('../app/views/components/navbar-rental.php');
 <div class="add-equipment-modal" id="add-equipment-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="add-equipment-form" enctype="multipart/form-data">
+        <form id="add-equipment-form"  class=""  enctype="multipart/form-data">
             <h2>Add New Equipment</h2>
 
+            <div class="col">
+
             <label for="equipment-name">Equipment Name</label>
-            <input type="text" id="equipment-name" name="equipment_name" required>
+            <input type="text" id="equipment-name" class="form-control-lg" name="equipment_name" required>
 
             <label for="equipment-type">Type</label>
-            <input type="text" id="equipment-type" name="equipment_type" required>
+            <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required>
 
             <label for="cost">Cost</label>
-            <input type="number" step="0.01" id="cost" name="cost" required>
+            <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required>
 
             <label for="rental-fee">Rental Fee</label>
-            <input type="number" step="0.01" id="rental-fee" name="rental_fee" required>
+            <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
 
+            </div>
+            <div class="col">
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" required>
+            <input type="text" id="description" class="form-control-lg" name="description" required>
 
             <label for="count">Count</label>
-            <input type="number" id="count" name="count" required>
+            <input type="number" id="count" class="form-control-lg" name="count" required>
 
             <label for="fee">Fee</label>
-            <input type="number" step="0.01" id="fee" name="fee" required>
+            <input type="number" step="0.01" id="fee" class="form-control-lg" name="fee" required>
 
             <label for="equipment-image">Equipment Image</label>
-            <input type="file" id="equipment-image" name="equipment_image" required>
+            <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required>
 
+            </div>
             <input type="submit" class="btn" value="Add Equipment">
         </form>
     </div>
