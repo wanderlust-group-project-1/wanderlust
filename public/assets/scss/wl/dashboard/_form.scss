@@ -109,10 +109,10 @@ form {
 
     select {
         border: none;
-        background: $color-lightest;
+        background: $color-lightest2;
         outline: none;
         color: $black-text;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-lightest;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
@@ -152,4 +152,17 @@ form {
 
 
 
+}
+
+
+
+input {
+    border: none;
+    background: $color-lightest2;
+    outline: none;
+    color: $black-text;
+    border: 2px solid $color-lightest;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 600;
 }

@@ -13,7 +13,6 @@ foreach ($equipment as $item) {
         <p><strong>Rental Fee:</strong> <?php echo htmlspecialchars($item->fee); ?></p>
         <p><strong>Description:</strong> <?php echo htmlspecialchars($item->description); ?></p>
         <p><strong>Count:</strong> <?php echo htmlspecialchars($item->count); ?></p>
-        <p><strong>Fee:</strong> <?php echo htmlspecialchars($item->fee); ?></p>
         <?php if (!empty($item->image)) { ?>
             <img id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
         <?php } ?>

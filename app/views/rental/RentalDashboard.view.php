@@ -157,8 +157,22 @@ require_once('../app/views/components/navbar-rental.php');
             <label for="equipment-name">Equipment Name</label>
             <input type="text" id="equipment-name" class="form-control-lg" name="equipment_name" required>
 
+            <!-- <label for="equipment-type">Type</label>
+            <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required> -->
             <label for="equipment-type">Type</label>
-            <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required>
+            <select id="equipment-type" class="form-control-lg" name="equipment_type" required>
+                <option value="Tent">Tent</option>
+                <option value="Cooking">Cooking</option>
+                <option value="Backpack">Backpack</option>
+                <option value="Sleeping">Sleeping</option>
+                <option value="Climbing">Climbing</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Other">Other</option>
+
+
+                
+            </select>
 
             
             <label for="description">Description</label>
@@ -179,9 +193,7 @@ require_once('../app/views/components/navbar-rental.php');
             <label for="count">Count</label>
             <input type="number" id="count" class="form-control-lg" name="count" required>
 
-            <label for="fee">Fee</label>
-            <input type="number" step="0.01" id="fee" class="form-control-lg" name="fee" required>
-
+       
             <label for="equipment-image">Equipment Image</label>
             <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required>
 

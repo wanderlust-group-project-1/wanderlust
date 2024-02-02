@@ -1203,9 +1203,6 @@ fieldset {
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-left: calc(var(--bs-gutter-x) * -0.5);
-  margin-right: calc(var(--bs-gutter-x) * -0.5);
-  margin-top: calc(var(--bs-gutter-y) * -1);
 }
 
 .col {
@@ -1232,11 +1229,13 @@ fieldset {
 .col-lg-6 {
   flex: 0 0 50%;
   max-width: 50%;
+  width: 50%;
 }
 
 .col-lg-8 {
   flex: 0 0 66.666667%;
   max-width: 66.666667%;
+  width: 66.666667%;
 }
 
 @media screen and (max-width: 768px) {
@@ -1413,10 +1412,10 @@ form textarea.form-control-lg {
 }
 form select {
   border: none;
-  background: #D6F5D9;
+  background: #F0FFF0;
   outline: none;
   color: #000000;
-  border: 2px solid #157E38;
+  border: 2px solid #D6F5D9;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1448,12 +1447,27 @@ form label {
   text-align: left;
 }
 
+input {
+  border: none;
+  background: #F0FFF0;
+  outline: none;
+  color: #000000;
+  border: 2px solid #D6F5D9;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+}
+
 .justify-content-between {
   justify-content: space-between;
 }
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
 }
 
 .align-items-center {
@@ -2004,8 +2018,6 @@ form label {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
 }
 .row .col-md-12 {
   padding-right: 15px;
