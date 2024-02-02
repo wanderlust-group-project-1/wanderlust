@@ -9,10 +9,10 @@
     font-weight: 400;
     line-height: 1.5;
     color: black-text;
-    background-color: $color-lightest;
+    background-color: $color-lightest2;
     background-clip: padding-box;
-    border: 1px solid $color-lightest2;
-    border-radius: 0.25rem;
+    border: 2px solid $color-lightest;
+    border-radius: 12px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -26,10 +26,11 @@
 
     @include form-control;
 
-    height: calc(1.5em + 1.5rem + 2px);
+    font-size: 2.0rem;
+    height: calc(2.0rem + 1.5rem + 2px);
     padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    border-radius: 0.3rem;
+    font-size: 1.5rem;
+    // border-radius: 0.3rem;
 }
 
 .form-control:focus {
@@ -62,10 +63,10 @@ form {
 
     input {
         border: none;
-        background: $color-lightest;
+        background: $color-lightest2;
         outline: none;
         color: $white-text;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-lightest;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
@@ -78,13 +79,29 @@ form {
     textarea
     {
         border: none;
-        background: $color-lightest;
+        background: $color-lightest2;
         outline: none;
         color: $black-text;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-lightest;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
+
+    
+
+    }
+
+    textarea {
+        // unchangeable size
+        resize: none;
+        height: 200px;
+
+        &.form-control-lg {
+            height: 150px;
+        }
+        
+
+
     }
 
 

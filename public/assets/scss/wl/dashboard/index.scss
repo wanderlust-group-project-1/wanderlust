@@ -16,6 +16,8 @@
 @import "./common/align";
 @import "./common/padding";
 @import "./common/_margin";
+@import "./common/_gap";
+@import "./common/flex";
 
 
 $breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
@@ -190,6 +192,5 @@ $breakpoint-lg: 992px;
     }
   }
 }
-
 
 
