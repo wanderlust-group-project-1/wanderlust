@@ -33,7 +33,10 @@ class EquipmentModel {
                 return in_array($key, $this->allowedColumns);
             }, ARRAY_FILTER_USE_KEY);
 
-            $this->insert($data);
+            $id =  $this->insert($data);
+
+            $item = new ItemModel();
+            $item->createItems(['equipment_id' => $id, 'count' => $data['count']]);
 
             $response->success(true)
 

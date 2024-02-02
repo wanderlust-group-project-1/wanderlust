@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 02, 2024 at 01:34 PM
+-- Generation Time: Jan 30, 2024 at 10:40 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -104,13 +104,7 @@ INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`
 (33, 25, 'Torch', 4000.00, 'Torch', 'Torch', 4, 300.00, '65b367bdbc87d.png'),
 (34, 25, 'Blue Tent - 4 persons', 12000.00, 'Tent', 'Tent', 2, 1500.00, '65b3681d7fa3d.jpg'),
 (35, 25, 'Hiking Backpack', 14000.00, 'Backpack for hiking', 'Backpack', 8, 1000.00, '65b3685fa38ae.jpg'),
-(36, 25, 'Orange Tent ', 10000.00, 'Tent for 3 Persons', 'Tent', 9, 800.00, '65b3695343b1f.jpg'),
-(37, 25, 'Tent', 13000.00, 'Tent for 4 ', 'Rent', 3, 1500.00, '65bcb96e5870c.jpg'),
-(38, 25, 'Abbot Jimenez', 85.00, 'Ea eiusmod id asper', 'Cooking', 70, 83.00, '65bcc5d7c9299.jpg'),
-(39, 25, 'Abbot Jimenez', 85.00, 'Ea eiusmod id asper', 'Cooking', 70, 83.00, '65bcc5db96eb1.jpg'),
-(40, 25, 'Abbot Jimenez', 85.00, 'Ea eiusmod id asper', 'Cooking', 70, 83.00, '65bcc5e2c9f3e.jpg'),
-(41, 25, 'Baker Mueller', 69.00, 'Labore quis est veni', 'Footwear', 34, 6.00, '65bcc65dcc3bf.jpg'),
-(42, 25, 'Baker Mueller', 69.00, 'Labore quis est veni', 'Footwear', 34, 6.00, '65bcc674ecbcb.jpg');
+(36, 25, 'Orange Tent ', 10000.00, 'Tent for 3 Persons', 'Tent', 9, 800.00, '65b3695343b1f.jpg');
 
 -- --------------------------------------------------------
 
@@ -190,49 +184,9 @@ INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_
 
 CREATE TABLE `item` (
   `id` int NOT NULL,
-  `equipment_id` int NOT NULL,
-  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Available'
+  `equipment_id` int DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
 ) ;
-
---
--- Dumping data for table `item`
---
-
-INSERT INTO `item` (`id`, `equipment_id`, `status`) VALUES
-(1, 42, NULL),
-(2, 42, NULL),
-(3, 42, NULL),
-(4, 42, NULL),
-(5, 42, NULL),
-(6, 42, NULL),
-(7, 42, NULL),
-(8, 42, NULL),
-(9, 42, NULL),
-(10, 42, NULL),
-(11, 42, NULL),
-(12, 42, NULL),
-(13, 42, NULL),
-(14, 42, NULL),
-(15, 42, NULL),
-(16, 42, NULL),
-(17, 42, NULL),
-(18, 42, NULL),
-(19, 42, NULL),
-(20, 42, NULL),
-(21, 42, NULL),
-(22, 42, NULL),
-(23, 42, NULL),
-(24, 42, NULL),
-(25, 42, NULL),
-(26, 42, NULL),
-(27, 42, NULL),
-(28, 42, NULL),
-(29, 42, NULL),
-(30, 42, NULL),
-(31, 42, NULL),
-(32, 42, NULL),
-(33, 42, NULL),
-(34, 42, NULL);
 
 -- --------------------------------------------------------
 
@@ -690,7 +644,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `guides`
