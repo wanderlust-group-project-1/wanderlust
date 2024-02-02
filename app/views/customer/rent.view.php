@@ -189,6 +189,29 @@ dateClose.addEventListener("click", function() {
     dateModal.style.display = "none";
 });
 
+// When the user clicks on <span> (x) or anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == dateModal) {
+        dateModal.style.display = "none";
+    }
+}
+
+// Confirm Date
+
+var confirmDateButton = document.getElementById("confirm-date");
+
+confirmDateButton.onclick = function() {
+    var startDate = document.getElementById("start-date").value;
+    var endDate = document.getElementById("end-date").value;
+
+    console.log(startDate);
+    console.log(endDate);
+
+    setNewDate(startDate, endDate);
+
+    dateModal.style.display = "none";
+}
+
 
 // Cart Modal
 
@@ -315,6 +338,18 @@ $(document).ready(function() {
         }
     });
 });
+
+
+// Create cart
+
+function setNewDate(start, end) {
+
+    // send the start and end date to the server as json data
+
+    
+
+}
+
 
 
 
