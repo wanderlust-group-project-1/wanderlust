@@ -25,7 +25,7 @@ $media-breakpoint: 768px;
 
 @mixin form-styles {
     display: flex;
-    // flex-direction: column;
+    flex-direction: column;
     gap: 10px; /* Space between form elements */
   
     label {
@@ -307,7 +307,7 @@ $media-breakpoint: 768px;
     width: 100%;
     height: auto;
     padding: 0;
-    background-color: $color-lightest2;
+    background-color: $color-white;
 
     .add-equipment {
       .add-equipment-button {
@@ -328,7 +328,7 @@ $media-breakpoint: 768px;
 
   .modal-content {
     @include modal-content-common;
-    max-width: 500px;
+    // max-width: 500px;
 
     form {
       @include form-styles;
@@ -402,7 +402,7 @@ $media-breakpoint: 768px;
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: $color-lightest2;
+  background-color: $color-white;
 }
 
 /* Table Container */

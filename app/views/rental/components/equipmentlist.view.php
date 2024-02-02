@@ -38,7 +38,6 @@
         <p><strong>Rental Fee:</strong> <span id="detail-rental-fee"></span></p>
         <p><strong>Description:</strong> <span id="detail-description"></span></p>
         <p><strong>Count:</strong> <span id="detail-count"></span></p>
-        <p><strong>Fee:</strong> <span id="detail-fee"></span></p>
         <img id="detail-image" src="" alt="Equipment Image" style="max-width:100%;height:auto;">
     </div>
 </div>

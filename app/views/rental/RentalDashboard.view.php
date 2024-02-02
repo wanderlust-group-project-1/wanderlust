@@ -38,7 +38,7 @@ require_once('../app/views/components/navbar-rental.php');
             <p class="number"> <?php echo $user->mobile; ?></p>
 
         <div class="">
-            <button type="submit" class="btn"  id="edit-profile">
+            <button type="submit" class="btn mt-4"  id="edit-profile">
                 Edit Profile
             </button>
         </div>
@@ -131,7 +131,7 @@ require_once('../app/views/components/navbar-rental.php');
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
 
-                    <input type="submit" class="btn" name="submit" value="Update">
+                    <input type="submit" class="btn mt-4" name="submit" value="Update">
                 </form>
 
 
@@ -148,39 +148,61 @@ require_once('../app/views/components/navbar-rental.php');
 <div class="add-equipment-modal" id="add-equipment-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="add-equipment-form"  class=""  enctype="multipart/form-data">
+        <form id="add-equipment-form"  class="flex-d "  enctype="multipart/form-data">
             <h2>Add New Equipment</h2>
 
-            <div class="col">
+            <div class="row align-items-start">
+            <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
             <label for="equipment-name">Equipment Name</label>
             <input type="text" id="equipment-name" class="form-control-lg" name="equipment_name" required>
 
+            <!-- <label for="equipment-type">Type</label>
+            <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required> -->
             <label for="equipment-type">Type</label>
-            <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required>
+            <select id="equipment-type" class="form-control-lg" name="equipment_type" required>
+                <option value="Tent">Tent</option>
+                <option value="Cooking">Cooking</option>
+                <option value="Backpack">Backpack</option>
+                <option value="Sleeping">Sleeping</option>
+                <option value="Climbing">Climbing</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Other">Other</option>
 
+
+                
+            </select>
+
+            
+            <label for="description">Description</label>
+            <!-- <input type="text" id="description" class="form-control-lg" name="description" required> -->
+            <textarea id="description" class="form-control-lg" name="description" required></textarea>
+
+            </div>
+            <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
+           
             <label for="cost">Cost</label>
             <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required>
 
             <label for="rental-fee">Rental Fee</label>
             <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
 
-            </div>
-            <div class="col">
-            <label for="description">Description</label>
-            <input type="text" id="description" class="form-control-lg" name="description" required>
+
 
             <label for="count">Count</label>
             <input type="number" id="count" class="form-control-lg" name="count" required>
 
-            <label for="fee">Fee</label>
-            <input type="number" step="0.01" id="fee" class="form-control-lg" name="fee" required>
-
+       
             <label for="equipment-image">Equipment Image</label>
             <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required>
 
+
             </div>
+                    </div>
+            <div class="row">
             <input type="submit" class="btn" value="Add Equipment">
+            </div>
         </form>
     </div>
 </div>

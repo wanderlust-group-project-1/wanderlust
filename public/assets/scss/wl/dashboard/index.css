@@ -29,13 +29,7 @@ p {
   font-size: 2rem;
 }
 
-button,
-input,
-a,
-li,
-td,
-h4,
-textarea {
+li {
   font-size: 2rem;
 }
 
@@ -70,33 +64,6 @@ a {
 ul,
 table {
   list-style: none;
-}
-
-input[type=text],
-input[type=password],
-input[type=number],
-textarea {
-  padding: 1.5rem 1rem;
-  border: none;
-  border-radius: 12px;
-  background-color: #E0E0E0;
-  font-size: 1.5rem;
-  font-family: "Poppins", sans-serif;
-}
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=number]:focus,
-textarea:focus {
-  outline: none;
-}
-input[type=text]::-moz-placeholder, input[type=password]::-moz-placeholder, input[type=number]::-moz-placeholder, textarea::-moz-placeholder {
-  color: #535956;
-}
-input[type=text]::placeholder,
-input[type=password]::placeholder,
-input[type=number]::placeholder,
-textarea::placeholder {
-  color: #535956;
 }
 
 select {
@@ -385,6 +352,7 @@ fieldset {
 }
 .profile-editor form {
   display: flex;
+  flex-direction: column;
   gap: 10px; /* Space between form elements */
 }
 .profile-editor form label {
@@ -529,7 +497,7 @@ fieldset {
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: #F0FFF0;
+  background-color: #fff;
 }
 .dashboard-card .equipment .add-equipment .add-equipment-button {
   background-color: #4C5039;
@@ -561,10 +529,10 @@ fieldset {
   position: relative;
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 500px;
 }
 .add-equipment-modal .modal-content form {
   display: flex;
+  flex-direction: column;
   gap: 10px; /* Space between form elements */
 }
 .add-equipment-modal .modal-content form label {
@@ -599,7 +567,7 @@ fieldset {
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: #F0FFF0;
+  background-color: #fff;
 }
 
 /* Table Container */
@@ -1173,6 +1141,7 @@ fieldset {
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
+  font-size: medium;
   background-image: linear-gradient(to right, #D6F5D9 50%, #157E38 50%);
   background-size: 200% 100%;
   background-position: right bottom;
@@ -1234,9 +1203,6 @@ fieldset {
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-left: calc(var(--bs-gutter-x) * -0.5);
-  margin-right: calc(var(--bs-gutter-x) * -0.5);
-  margin-top: calc(var(--bs-gutter-y) * -1);
 }
 
 .col {
@@ -1250,29 +1216,46 @@ fieldset {
   max-width: 33.333333%;
 }
 
+.col-lg-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.col-lg-5 {
+  flex: 0 0 41.666667%;
+  max-width: 41.666667%;
+}
+
 .col-lg-6 {
   flex: 0 0 50%;
   max-width: 50%;
+  width: 50%;
 }
 
 .col-lg-8 {
   flex: 0 0 66.666667%;
   max-width: 66.666667%;
+  width: 66.666667%;
 }
 
-.col-md-6 {
-  flex: 0 0 50%;
-  max-width: 50%;
-}
-
-.col-md-4 {
-  flex: 0 0 33.333333%;
-  max-width: 33.333333%;
-}
-
-.col-md-3 {
-  flex: 0 0 25%;
-  max-width: 25%;
+@media screen and (max-width: 768px) {
+  .row .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .row .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  .row .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .row .col-md-12 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 table {
@@ -1296,8 +1279,8 @@ table tbody tr:hover {
 table tbody tr:nth-child(odd) {
   background-color: #E0E0E0;
 }
-table tbody tr:nth-child(odd):hover {
-  background-color: #A8C1B0;
+table tbody tr:nth-child(even) {
+  background-color: #D6F5D9;
 }
 table tbody tr td {
   padding: 10px 15px;
@@ -1344,10 +1327,10 @@ table tfoot tr td {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #D6F5D9;
+  background-color: #F0FFF0;
   background-clip: padding-box;
-  border: 1px solid #F0FFF0;
-  border-radius: 0.25rem;
+  border: 2px solid #D6F5D9;
+  border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -1360,15 +1343,15 @@ table tfoot tr td {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #D6F5D9;
+  background-color: #F0FFF0;
   background-clip: padding-box;
-  border: 1px solid #F0FFF0;
-  border-radius: 0.25rem;
+  border: 2px solid #D6F5D9;
+  border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  height: calc(1.5em + 1.5rem + 2px);
+  font-size: 2rem;
+  height: calc(3.5rem + 2px);
   padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  border-radius: 0.3rem;
+  font-size: 1.5rem;
 }
 
 .form-control:focus {
@@ -1398,10 +1381,10 @@ form {
 }
 form input {
   border: none;
-  background: #D6F5D9;
+  background: #F0FFF0;
   outline: none;
   color: #FFFFFF;
-  border: 2px solid #157E38;
+  border: 2px solid #D6F5D9;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1412,20 +1395,27 @@ form input[type=password],
 form input[type=number],
 form textarea {
   border: none;
-  background: #D6F5D9;
+  background: #F0FFF0;
   outline: none;
   color: #000000;
-  border: 2px solid #157E38;
+  border: 2px solid #D6F5D9;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
 }
+form textarea {
+  resize: none;
+  height: 200px;
+}
+form textarea.form-control-lg {
+  height: 150px;
+}
 form select {
   border: none;
-  background: #D6F5D9;
+  background: #F0FFF0;
   outline: none;
   color: #000000;
-  border: 2px solid #157E38;
+  border: 2px solid #D6F5D9;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1457,12 +1447,39 @@ form label {
   text-align: left;
 }
 
+input {
+  border: none;
+  background: #F0FFF0;
+  outline: none;
+  color: #000000;
+  border: 2px solid #D6F5D9;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+}
+
 .justify-content-between {
   justify-content: space-between;
 }
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.align-items-start {
+  align-items: flex-start;
 }
 
 @media (max-width: 576px) {
@@ -1909,6 +1926,44 @@ form label {
   margin-right: 4.5rem !important;
 }
 
+.gap-0 {
+  gap: 0 !important;
+}
+
+.gap-1 {
+  gap: 0.25rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-3 {
+  gap: 1rem !important;
+}
+
+.gap-4 {
+  gap: 1.5rem !important;
+}
+
+.gap-5 {
+  gap: 3rem !important;
+}
+
+.flex-d {
+  display: flex;
+}
+
+.flex-d-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-d-r {
+  display: flex;
+  flex-direction: row;
+}
+
 .col-sm-12, .col-md-6, .col-lg-4 {
   padding-right: 15px;
   padding-left: 15px;
@@ -1963,8 +2018,6 @@ form label {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
 }
 .row .col-md-12 {
   padding-right: 15px;

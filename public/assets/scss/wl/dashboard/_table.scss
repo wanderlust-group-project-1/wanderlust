@@ -28,10 +28,18 @@ table {
             background-color: $shaded-white;
 
             &:hover {
-                background-color: $loader-light-color;
+                // background-color: $loader-light-color;
             }
         }
        
+        &:nth-child(even) {
+            background-color: $color-lightest;
+            &:hover {
+                // background-color: $loader-light-color;
+            }
+        }
+        
+
 
         
         td {

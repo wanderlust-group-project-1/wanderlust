@@ -9,6 +9,7 @@
     border-radius: 12px;
     padding: 12px 20px;
     font-weight: 600;
+    font-size: medium;
   
   
     // Initial background with transparent gradient
@@ -24,6 +25,10 @@
       // weight
     }
   }
+
+
+
+
   
   .btn-danger{
     background: $danger-color;

@@ -5,12 +5,32 @@ require_once('../app/views/components/navbar.php');
 
 ?>
 
-<div class="container">
+
+
+
+<div class="container flex-d-c justify-content-center gap-2">
+
+<div class="row gap-2 justify-content-end">
+    <!-- Cart -->
+    <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart</button>
+ 
+</div>
+
+    <div class="row gap-2">
+        <!-- Change date -->
+        <button id="change-date" class="btn" type="button">Change Date</button>
+        
+    </div>
+
+
 
 <div class="row">
-    <div class="col-12">
-        <div class = "search-container">
+    <div class="col-lg-8 flex-d justify-content-center">
+
+
+        <div class = "search-container col-lg-12">
             <form action="<?= ROOT_DIR ?>/search" method="get">
+            <div class="row gap-2">
                 <input type="text" id="search-input" placeholder="Search.." name="search">
                 <!-- Select Type of result -->
                 <select name="type" id="type">
@@ -19,10 +39,11 @@ require_once('../app/views/components/navbar.php');
                     <option value="items">Items</option>
                 </select>
                 <!-- Select location button  -->
-                <input type="text" class="form-control" id="latitude" name="latitude" hidden/>
-                <input type="text" class="form-control" id="longitude" name="longitude" hidden/>
-                <button id="get-location" > <i class="fa fa-map-marker"></i></button>
-                <button id="search-button" type="submit"><i class="fa fa-search"></i></button>
+                <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
+                <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
+                <button id="get-location" class="btn" > <i class="fa fa-map-marker"></i></button>
+                <button id="search-button"  class="btn" type="submit"><i class="fa fa-search"></i></button>
+            </div>
             </form>
     </div>
 
@@ -37,9 +58,13 @@ require_once('../app/views/components/navbar.php');
 </div>
 
 <div class="modal" id="location-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <input id="pac-input" class="controls" type="text" placeholder="Enter Location" />
+
+    <div class="modal-content ">
+    <span class="close">&times;</span>
+
+    <div class=" col-lg-12 flex-d-c gap-2 ">
+
+        <input id="pac-input" class="controls " type="text" placeholder="Enter Location" />
 
         <div id="map-canvas" class="map-canvas"> </div>
 
@@ -47,10 +72,51 @@ require_once('../app/views/components/navbar.php');
             <input type="text" class="form-control" id="longitude" hidden/> -->
 
         <div class="location-button-container">
-            <button id="confirm-location" class="location-button" type="button">Confirm Location</button>
+            <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
         </div>
+
+    </div>
     </div>
 
+</div>
+
+<div class="modal" id="select-date">
+
+<!-- Start date and End date for rent  -->
+<div class="modal-content">
+    <span class="close">&times;</span>
+    <div class=" col-lg-12 flex-d-c gap-2 ">
+        <h2 class="justify-content-center flex-d"> Select Date for Rent </h2>
+        <div class="row gap-2">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" class="form-control-lg " name="start-date" required>
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date" class="form-control-lg" name="end-date" required>
+        </div>
+        <div class="row gap-2">
+            <button id="confirm-date" class="btn" type="button">Confirm Date</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<!-- Cart Model -->
+<div class="modal" id="cart-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class=" col-lg-12 flex-d-c gap-2 ">
+            <h2 class="justify-content-center flex-d"> Cart </h2>
+            <div class="row gap-2">
+                <div class="col-lg-12" id="cart-items">
+                </div>
+            </div>
+            <div class="row gap-2">
+                <button id="checkout" class="btn" type="button">Checkout</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -63,7 +129,7 @@ require_once('../app/views/components/navbar.php');
     var btn = document.getElementById("get-location");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var locationClose = document.getElementById("location-modal").querySelector(".close");
 
     // When the user clicks the button, open the modal
 
@@ -74,9 +140,9 @@ require_once('../app/views/components/navbar.php');
 
     // When the user clicks on <span> (x), close the modal
 
-    span.onclick = function() {
+    locationClose.addEventListener("click", function() {
         modal.style.display = "none";
-    }
+    });
 
     // When the user clicks anywhere outside of the modal, close it
 
@@ -98,6 +164,62 @@ require_once('../app/views/components/navbar.php');
 
         modal.style.display = "none";
     }
+
+
+
+
+
+        // Get the modal
+        var dateModal = document.getElementById("select-date");
+
+// Get the button that opens the modal
+var dateModalBtn = document.getElementById("change-date");
+
+// Get the <span> element that closes the modal
+var dateClose = document.getElementById("select-date").querySelector(".close");
+
+console.log(dateClose);
+// When the user clicks the button, open the modal
+dateModalBtn.onclick = function() {
+    dateModal.style.display = "block";
+}
+
+// When the user clicks on <span> (x) or anywhere outside of the modal, close it
+dateClose.addEventListener("click", function() {
+    dateModal.style.display = "none";
+});
+
+
+// Cart Modal
+
+var cartModal = document.getElementById("cart-modal");
+
+// Get the button that opens the modal
+var cartModalBtn = document.getElementById("cart");
+
+// Get the <span> element that closes the modal
+
+var cartClose = document.getElementById("cart-modal").querySelector(".close");
+
+// When the user clicks the button, open the modal
+cartModalBtn.onclick = function() {
+    cartModal.style.display = "block";
+}
+
+// When the user clicks on <span> (x) or anywhere outside of the modal, close it
+cartClose.addEventListener("click", function() {
+    cartModal.style.display = "none";
+});
+
+
+// When the user clicks on <span> (x) or anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == cartModal) {
+        cartModal.style.display = "none";
+    }
+}
+
+
 
     </script>
 
@@ -188,7 +310,7 @@ $(document).ready(function() {
         }),
         
         success: function(response) {
-            console.log(response);
+            // console.log(response);
             $('#item-list').html(response);
         }
     });

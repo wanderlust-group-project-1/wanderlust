@@ -71,6 +71,9 @@ $color-lighter:#95ED87;
 $color-lightest:#D6F5D9;
 $color-lightest2:#F0FFF0;
 
+
+$color-white: #F4F4F4;
+
 // text colors
 $gray-text: #3C3F3C; 
 $white-text: #FFFFFF;
@@ -137,13 +140,17 @@ p {
   font-size: $text;
 }
 
-button,
-input,
-a,
-li,
-td,
-h4,
-textarea {
+// button,
+// input,
+// a,
+// li,
+// td,
+// h4,
+// textarea {
+//   font-size: $text;
+// }
+
+li {
   font-size: $text;
 }
 
@@ -180,25 +187,25 @@ table {
   list-style: none;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="number"],
-textarea {
-  padding: 1.5rem 1rem;
-  border: none;
-  border-radius: 12px;
-  background-color: $shaded-white;
-  font-size: $header4;
-  font-family: "Poppins", sans-serif;
+// input[type="text"],
+// input[type="password"],
+// input[type="number"],
+// textarea {
+//   padding: 1.5rem 1rem;
+//   border: none;
+//   border-radius: 12px;
+//   background-color: $shaded-white;
+//   font-size: $header4;
+//   font-family: "Poppins", sans-serif;
 
-  &:focus {
-    outline: none;
-  }
+//   &:focus {
+//     outline: none;
+//   }
 
-  &::placeholder {
-    color: $shaded-grey-text;
-  }
-}
+//   &::placeholder {
+//     color: $shaded-grey-text;
+//   }
+// }
 
 select {
   padding: 1.5rem 1rem;
