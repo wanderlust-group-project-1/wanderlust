@@ -8,11 +8,17 @@ class Cart {
         $request = new JSONRequest();
         $response = new JSONResponse();
 
-        $rent = new CartModel;
+        $cart = new CartModel;
 
-        $data = ['user_id' => UserMiddleware::getUser()['id']];
+        $data = [
+                'customer_id' => UserMiddleware::getUser()['id'],
+                 'start_date' => $request->get('start_date'),
+                 'end_date' => $request->get('end_date'),
+                ];
 
-        $response->data($data)->statusCode(200)->send();
+        $result = $cart->createCart($data);
+
+        $response->data($result)->statusCode(200)->send();
 
 
     }

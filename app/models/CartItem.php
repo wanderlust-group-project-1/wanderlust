@@ -18,12 +18,9 @@ class CartItemModel {
 
     }
 
-    public function removeCartItem(array $data) {
-        $data = array_filter($data, function ($key) {
-            return in_array($key, $this->allowedColumns);
-        }, ARRAY_FILTER_USE_KEY);
+    public function removeCartItem($id, $column) {
 
-        return $this->delete($data);
+        return $this->delete($id, $column);
     }
 
     public function getCartItems(array $data) {

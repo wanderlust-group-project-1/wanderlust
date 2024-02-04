@@ -346,6 +346,27 @@ function setNewDate(start, end) {
 
     // send the start and end date to the server as json data
 
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
+            'Content-Type': 'application/json'
+        },
+        url: '<?= ROOT_DIR ?>/api/cart/create',
+        method: 'POST',
+        data: JSON.stringify({
+            start_date: start,
+            end_date: end
+        }),
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+        
+    });
+
+
     
 
 }
