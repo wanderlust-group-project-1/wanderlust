@@ -69,6 +69,21 @@ class QueryBuilder
         return $this;
     }
 
+    // public function orWhere(string $column, string $value, string $operator = "="): self
+    // value can be null
+    public function orWhere(string $column,  $value, string $operator = "="): self
+    {
+        if (!$this->isWhere) {
+            $this->query .= " WHERE $column $operator ?";
+            $this->isWhere = true;
+        } else {
+            $this->query .= " OR $column $operator ?";
+        }
+        // $this->query .= " WHERE $column $operator ?";
+        $this->data[] = $value;
+        return $this;
+    }
+
     public function join(string $table, string $column1, string $column2, string $operator = "="): self
     {
         $this->query .= " INNER JOIN $table ON $column1 $operator $column2";

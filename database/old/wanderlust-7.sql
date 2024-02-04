@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 02, 2024 at 02:25 PM
+-- Generation Time: Feb 02, 2024 at 01:34 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -20,31 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `wanderlust`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart`
---
-
-CREATE TABLE `cart` (
-  `id` int NOT NULL,
-  `customer_id` int NOT NULL,
-  `start_day` date NOT NULL,
-  `end_day` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart_item`
---
-
-CREATE TABLE `cart_item` (
-  `id` int NOT NULL,
-  `cart_id` int NOT NULL,
-  `item_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -636,21 +611,6 @@ INSERT INTO `verification` (`id`, `user_id`, `token`) VALUES
 --
 
 --
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`);
-
---
--- Indexes for table `cart_item`
---
-ALTER TABLE `cart_item`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cart_id` (`cart_id`),
-  ADD KEY `item_id` (`item_id`);
-
---
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -721,18 +681,6 @@ ALTER TABLE `verification`
 --
 
 --
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `cart_item`
---
-ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
@@ -795,19 +743,6 @@ ALTER TABLE `verification`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `cart`
---
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
-
---
--- Constraints for table `cart_item`
---
-ALTER TABLE `cart_item`
-  ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
-  ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
 
 --
 -- Constraints for table `customers`

@@ -1151,6 +1151,12 @@ fieldset {
   background-position: left bottom;
   color: #157E38;
 }
+.btn:disabled {
+  background: #D6F5D9;
+  color: #157E38;
+  border: 2px solid #157E38;
+  cursor: default;
+}
 
 .btn-danger {
   background: #8F4548;

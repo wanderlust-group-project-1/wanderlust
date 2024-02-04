@@ -24,6 +24,14 @@
       color: $color-primary;
       // weight
     }
+      // button with disabled state (disabled=true)
+
+    &:disabled {
+      background: $color-lightest;
+      color: $color-primary;
+      border: 2px solid $color-primary;
+      cursor: default;
+    }
   }
 
 
@@ -85,6 +93,13 @@
   .btn-full {
     width: 100%;
   }
+
+
+  
+
+
+
+
 
 
   // button end
