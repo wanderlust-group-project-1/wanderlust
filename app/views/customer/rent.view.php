@@ -299,6 +299,7 @@ window.onclick = function(event) {
 
         // console.log(err);
     }
+
 });
 
     }
@@ -363,13 +364,57 @@ function setNewDate(start, end) {
         error: function(err) {
             console.log(err);
         }
-        
+
     });
 
 
     
 
 }
+
+
+// Add to cart
+
+    // Add to Cart Button click event
+    $(document).on('click', '#add-to-cart', function() {
+        console.log("add to cart clicked");
+        var id = $(this).closest('.rent-item-card').attr('data-id');
+        console.log(id);
+
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
+                'Content-Type': 'application/json'
+            },
+            url: '<?= ROOT_DIR ?>/api/cart/addItem',
+            method: 'POST',
+            data: JSON.stringify({
+                equipment_id: id
+            }),
+            success: function(data) {
+                console.log(data);
+                disableButton(id);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+
+        
+
+    });
+
+
+    // after adding to cart the button should change to 'Added' and should be disabled
+
+    // function / use jQuery
+    function disableButton(id) {
+        var button = $(`[data-id=${id}]`).find('#add-to-cart');
+        button.text('Added');
+        button.prop('disabled', true);
+    }
+
+
 
 
 

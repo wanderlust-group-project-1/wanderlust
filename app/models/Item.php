@@ -29,4 +29,26 @@ class ItemModel {
 
         return $this->delete($data);
     }
+
+    public function getAvailableItems(array $data) {
+        $q = new QueryBuilder();
+
+        // $data have equipment_id start_date end_date
+        
+        $q->setTable('item');
+        $q->select('item.*')
+            ->leftJoin('rent', 'item.id', 'rent.item_id')
+            ->where('item.equipment_id', $data['equipment_id'])
+            ->where('rent.start_date', $data['end_date'] , '>')
+            ->orWhere('rent.end_date', $data['start_date'] , '<')
+            ->orWhere('rent.id', null, 'IS');
+
+        // show($q->getQuery());
+        // show ($q->getData());
+        return $this->query($q->getQuery(), $q->getData());
+
+       
+    }
+
+
 }

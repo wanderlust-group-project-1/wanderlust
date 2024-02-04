@@ -22,4 +22,29 @@ class Cart {
 
 
     }
+
+    public function addItem(string $a = '', string $b = '', string $c = ''):void {
+       
+        $request = new JSONRequest();
+        $response = new JSONResponse();
+
+        $cart = new CartModel;
+
+        $data = [
+                'customer_id' => UserMiddleware::getUser()['id'],
+                 'equipment_id' => $request->get('equipment_id'),
+                //  'quantity' => $request->get('quantity'),
+                ];
+
+        $result = $cart->addItemToCart($data);
+
+        $response->data([
+            'message' => 'Item added to cart',
+            'status' => 'success'   
+        ])
+        ->statusCode(200)
+        ->send();
+
+
+        }
 }

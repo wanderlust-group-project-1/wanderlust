@@ -60,7 +60,17 @@ class CartModel {
     public function addItemToCart(array $data){
         
         $cartItem = new CartItemModel;
-        return $cartItem->createCartItem($data);
+
+        $cart = $this->first(['customer_id' => $data['customer_id']]);
+        $data['cart_id'] = $cart->id;
+        $data['start_date'] = $cart->start_date;
+        $data['end_date'] = $cart->end_date;
+
+        $item = new ItemModel;
+        $availableItems = $item->getAvailableItems($data);
+        // show($availableItems);
+
+        return $cartItem->createCartItem(['cart_id' => $cart->id, 'item_id' => $availableItems[0]->id]);
     }
 
     public function removeItemFromCart(array $data){
