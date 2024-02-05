@@ -47,4 +47,22 @@ class Cart {
 
 
         }
+
+        public function count(string $a = '', string $b = '', string $c = ''):void {
+       
+            $request = new JSONRequest();
+            $response = new JSONResponse();
+    
+            $cart = new CartModel;
+    
+            $data = [
+                    'customer_id' => UserMiddleware::getUser()['id'],
+                ];
+    
+            $result = $cart->countItem($data);
+    
+            $response->data($result)->statusCode(200)->send();
+    
+    
+        }
 }
