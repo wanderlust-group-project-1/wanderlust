@@ -1,9 +1,11 @@
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
 <header class="header">
     <!-- <nav class="nav__container"> -->
-    <nav class="nav__container" style="display: flex;align-items: center;justify-content: space-between;padding-left: 5rem; height: 10rem;">
+    <nav class="nav__container" >
         <div class="nav__data">
             <a href="#" class="nav__logo">
-                <img src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
+                <img class="nav__logo-pic" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
             </a>
 
             <div class="nav__toggle" id="nav-toggle">
@@ -27,7 +29,7 @@
                     <ul class="dropdown__menu">
                         <li>
                             <a href="#" class="dropdown__link">
-                                <i class="ri-pie-chart-line"></i> My Booking
+                                My Booking
                             </a>
                         </li>
                     </ul>
@@ -40,38 +42,36 @@
                 <!--=============== DROPDOWN 2 ===============-->
                 <li class="dropdown__item">
                     <div class="nav__link">
-                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        Complains
                     </div>
 
                     <ul class="dropdown__menu">
                         <li>
                             <a href="#" class="dropdown__link">
-                                <i class="ri-user-line"></i> Add Complain
+                                Add Complain
                             </a>
                         </li>
 
                         <li>
                             <a href="#" class="dropdown__link">
-                                <i class="ri-lock-line"></i> My Complains
+                                My Complains
                             </a>
                         </li>
                     </ul>
                 </li>
-            </ul>
-
-            <!-- check role avalable or not -->
-            <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
-                $user = $_SESSION['USER'];   ?>
 
 
-                <!-- profile avatar with dropdown -->
+                <!-- check role avalable or not -->
+                <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
+                    $user = $_SESSION['USER'];   ?>
 
-                <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
-                    <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
-                    <li class="dropdown__item" id="nav-dropdown" >
-                        <!-- <div class="nav__link">
-                            Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div> -->
+
+                    <!-- profile avatar with dropdown -->
+
+                    <li class="dropdown__item" id="nav-dropdown">
+                        <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
+                            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                        </div>
 
                         <ul class="dropdown__menu">
                             <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>" class="dropdown__link">Profile</a></li>
@@ -79,29 +79,31 @@
                             <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">>Logout</a></li>
                         </ul>
                     </li>
-                </div>
 
-            <?php } else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
-                $admin = $_SESSION['USER'];   ?>
+                <?php } else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
+                    $admin = $_SESSION['USER'];   ?>
 
-                <!-- profile avatar with dropdown -->
-                <div class="nav__profile-avatar">
-                    <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                    <!-- profile avatar with dropdown -->
                     <li class="dropdown__item" id="nav-dropdown">
+                        <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
+                            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                        </div>
+
                         <ul class="dropdown__menu">
                             <li><a href="<?= ROOT_DIR ?>/admin/dashboard">Dashboard</a></li>
                             <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li>
                             <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
                         </ul>
                     </li>
-                </div>
 
-            <?php } else {  ?>
+                <?php } else {  ?>
 
- 
-                <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
 
-            <?php } ?>
+                    <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+
+                <?php } ?>
+
+            </ul>
         </div>
     </nav>
 </header>
