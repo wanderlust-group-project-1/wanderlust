@@ -12,7 +12,10 @@ require_once('../app/views/components/navbar.php');
 
 <div class="row gap-2 justify-content-end">
     <!-- Cart -->
-    <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart</button>
+    <!-- <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart</button> -->
+    <!-- with number of item in cart -->
+    <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart <span id="cart-count" class="badge bg-primary">0</span></button>
+
  
 </div>
 
@@ -394,6 +397,7 @@ function setNewDate(start, end) {
             success: function(data) {
                 console.log(data);
                 disableButton(id);
+                getCartCount();
             },
             error: function(err) {
                 console.log(err);
@@ -413,6 +417,27 @@ function setNewDate(start, end) {
         button.text('Added');
         button.prop('disabled', true);
     }
+
+    // get cart count
+
+    function getCartCount() {
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/cart/count',
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+                $('#cart-count').text(data.data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
+
+    
 
 
 
