@@ -108,11 +108,23 @@ $info-color: #567356; // Dark, vibrant green
 // yello warning
 $warning-color: #FFC107;
 
-
-
 $breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
 $breakpoint-md: 768px; // Medium devices (tablets, 768px and up)
 $breakpoint-lg: 992px;
+
+$body-font:"Poppins", sans-serif;
+$normal-font-size: .938rem;
+
+// Responsive typography
+@media screen and (min-width: 1024px){
+  $normal-font-size: 1rem;
+}
+
+$font-regular: 400;
+$font-semi-bold: 600;
+
+$z-tooltip: 10;
+$z-fixed: 100;
 
 html {
   font-size: 62.5%;
@@ -287,4 +299,3 @@ body {
   background-color: $color-lightest;
 
 }
-
