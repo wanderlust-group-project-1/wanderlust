@@ -104,6 +104,22 @@ class CartModel {
     }
 
 
+    public function countItem(array $data) {
+
+        $q = new QueryBuilder();
+
+        $q->setTable('cart');
+        $q->count('cart_item.item_id')
+            ->join('cart_item', 'cart.id', 'cart_item.cart_id')
+            ->where('cart.customer_id', $data['customer_id']);
+
+
+        return $this->query($q->getQuery(),$q->getData())[0]->count;
+
+  
+    }
+
+
 
 
 

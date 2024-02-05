@@ -52,7 +52,7 @@ class QueryBuilder
 
     public function count(string $column = '*')
     {
-        $this->query = "SELECT COUNT($column) FROM $this->table";
+        $this->query = "SELECT COUNT($column) AS count FROM $this->table";
         return $this;
     }
 
