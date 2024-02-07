@@ -42,7 +42,7 @@
                 <!--=============== DROPDOWN 2 ===============-->
                 <li class="dropdown__item">
                     <div class="nav__link">
-                        Complains
+                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                     </div>
 
                     <ul class="dropdown__menu">
