@@ -27,8 +27,10 @@ class CartItemModel {
         $q = new QueryBuilder();
 
         $q->setTable('cart_item');
-        $q->select('cart_item.*, item.name As item_name')
+        $q->select('cart_item.*, equipment.name As e_name, equipment.image As e_image, equipment.fee As e_fee ')
             ->join('item', 'cart_item.item_id', 'item.id')
+            // join equipment table
+            ->join('equipment', 'item.equipment_id', 'equipment.id')
             ->where('cart_item.cart_id', $data['cart_id']);
         
         return $this->query($q->getQuery(),$q->getData());

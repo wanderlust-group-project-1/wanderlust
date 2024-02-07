@@ -109,15 +109,8 @@ require_once('../app/views/components/navbar.php');
 <div class="modal" id="cart-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div class=" col-lg-12 flex-d-c gap-2 ">
-            <h2 class="justify-content-center flex-d"> Cart </h2>
-            <div class="row gap-2">
-                <div class="col-lg-12" id="cart-items">
-                </div>
-            </div>
-            <div class="row gap-2">
-                <button id="checkout" class="btn" type="button">Checkout</button>
-            </div>
+        <div id ="cart-data">
+
         </div>
     </div>
 </div>
@@ -229,6 +222,26 @@ var cartClose = document.getElementById("cart-modal").querySelector(".close");
 
 // When the user clicks the button, open the modal
 cartModalBtn.onclick = function() {
+
+    // get cart items
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/cart/viewCart',
+        method: 'GET',
+        success: function(data) {
+            $('#cart-data').html(data);
+            console.log(data);
+            
+        },
+        error: function(err) {
+            console.log(err);
+        }
+
+    });
+
+
     cartModal.style.display = "block";
 }
 
