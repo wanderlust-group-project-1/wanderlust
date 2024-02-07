@@ -1892,18 +1892,8 @@ input {
   justify-content: space-between;
   align-items: center;
 }
-.nav__logo {
-  display: block;
-  width: 80%;
-  max-width: 500px;
-}
-.nav__logo i {
-  font-weight: initial;
-  font-size: 1.25rem;
-}
 .nav__logo-pic {
-  width: 80%;
-  max-width: 500px;
+  max-width: 200px;
 }
 .nav__toggle {
   position: relative;
@@ -1972,15 +1962,11 @@ input {
 .nav__container {
   max-width: 1120px;
   margin-inline: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 7rem;
 }
 
 .show-menu {
   opacity: 1;
-  top: 3.5rem;
+  top: 4.5rem;
   pointer-events: initial;
 }
 
@@ -2049,13 +2035,11 @@ input {
   }
 }
 @media screen and (min-width: 1118px) {
-  .nav {
-    height: calc(var(--header-height) + 2rem);
-    display: flex;
-    justify-content: space-between;
-  }
   .nav__container {
     margin-inline: auto;
+    height: calc(4.5rem + 2rem);
+    display: flex;
+    justify-content: space-between;
   }
   .nav__toggle {
     display: none;
@@ -2077,8 +2061,8 @@ input {
   .nav__link:hover {
     background-color: transparent;
   }
-  .nav__logo {
-    width: 150%;
+  .nav__logo-pic {
+    max-width: 200px;
   }
   .dropdown__item, .dropdown__subitem {
     position: relative;

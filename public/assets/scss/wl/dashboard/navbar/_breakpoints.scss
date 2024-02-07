@@ -10,12 +10,11 @@
 
 @media screen and (min-width: 1118px){
    .nav{
-      height: calc(var(--header-height) + 2rem);
-      display: flex;
-      justify-content: space-between;
-
       &__container{
          margin-inline: auto;
+         height: calc(#{$header5} + 2rem);
+         display: flex;
+         justify-content: space-between;
       }
       &__toggle{
          display: none;
@@ -36,9 +35,13 @@
             background-color: transparent;
          }
       }
-      &__logo{
-         width: 150%;
+      &__logo-pic{
+         //  width: 80%;
+          max-width: 200px;
       }
+      // &__logo{
+      //    width: 150%;
+      // }
    }
 
    .dropdown{
