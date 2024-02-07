@@ -10,20 +10,20 @@
 
 @media screen and (min-width: 1118px){
    .nav{
-      height: calc(var(--header-height) + 2rem);
-      display: flex;
-      justify-content: space-between;
-
       &__container{
          margin-inline: auto;
+         height: calc(#{$header5} + 2rem);
+         display: flex;
+         justify-content: space-between;
       }
       &__toggle{
          display: none;
       }
       &__list{
-         height: 100%;
+         height: 7rem;
          display: flex;
          column-gap: 3rem;
+         align-items: center;
       }
       &__link{
          height: 100%;
@@ -35,9 +35,13 @@
             background-color: transparent;
          }
       }
-      &__logo{
-         width: 150%;
+      &__logo-pic{
+         //  width: 80%;
+          max-width: 200px;
       }
+      // &__logo{
+      //    width: 150%;
+      // }
    }
 
    .dropdown{

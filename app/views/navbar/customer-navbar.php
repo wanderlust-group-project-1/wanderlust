@@ -1,4 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+<!-- <script src="../../../public/assets/js/navbar.js"></script> -->
 
 <header class="header">
     <!-- <nav class="nav__container"> -->
@@ -16,7 +17,7 @@
 
         <!--=============== NAV MENU ===============-->
         <!-- <div class="nav__menu" id="nav-menu"> -->
-        <div class="nav__menu" id="nav-menu" style="display: flex;align-items: center;justify-content: space-between;padding-right: 5rem;">
+        <div class="nav__menu" id="nav-menu" >
             <ul class="nav__list">
                 <li><a href="#" class="nav__link">Home</a></li>
 
@@ -42,7 +43,7 @@
                 <!--=============== DROPDOWN 2 ===============-->
                 <li class="dropdown__item">
                     <div class="nav__link">
-                        Complains
+                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                     </div>
 
                     <ul class="dropdown__menu">
@@ -108,8 +109,19 @@
     </nav>
 </header>
 
-<!--=============== MAIN JS ===============-->
-<script src="../../../public/assets/js/navbar.js"></script>
-</body>
-
-</html>
+<script>
+    const showMenu = (toggleId, navId) =>{
+    const toggle = document.getElementById(toggleId),
+          nav = document.getElementById(navId)
+ 
+    toggle.addEventListener('click', () =>{
+        // Add show-menu class to nav menu
+        nav.classList.toggle('show-menu')
+ 
+        // Add show-icon to show and hide the menu icon
+        toggle.classList.toggle('show-icon')
+    })
+ }
+ 
+ showMenu('nav-toggle','nav-menu')
+</script>
