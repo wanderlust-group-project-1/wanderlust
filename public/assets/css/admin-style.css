@@ -26,10 +26,11 @@
     height: 100vh;
     background-color: #F0F0F0; /* Off-white background color */
     color: #4C5039; /* Theme color */
-    position: fixed;
+    position:fixed;
     left: 0;
     top: 0;
     padding-top: 20px;
+    transition: margin-left 0.5s;
 }
 
 /* Remove ul disc style */

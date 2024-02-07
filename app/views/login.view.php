@@ -25,7 +25,7 @@ require_once('../app/views/components/navbar-auth.php');
                 <a href="#">Forgot your password?</a>
             </div>
         <!-- <input type="submit" name="submit" value="login"> -->
-        <button id="submit" name="submit" value="login"> login </button>
+        <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>
         <!-- <button  value="login"> login </button> -->
 
 

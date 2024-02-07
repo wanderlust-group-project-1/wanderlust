@@ -14,8 +14,17 @@ function alertmsg(message, type="notice") {
 
 
 class ApiClient {
+
+    headers = { };
+
+
+
     constructor(baseURL) {
         this.baseURL = baseURL;
+    }
+
+    setHeaders(headers) {
+        this.headers = headers;
     }
 
     handleJSONResponse(response) {
@@ -61,6 +70,7 @@ class ApiClient {
             method,
             // entype: 'multipart/form-data',
             body: formData,
+            
         };
 
         // return fetch(this.baseURL + endpoint, options)
@@ -93,6 +103,11 @@ class ApiClient {
         // Append JSON data as a string
         formData.append('json', JSON.stringify(jsonData));
 
+        // Add auth headers for form data
+
+
+
+
         return this.sendFormDataRequest(endpoint, 'POST', formData);
     }
 
@@ -118,4 +133,25 @@ class ApiClient {
     }
 
 // Add more methods for other HTTP methods as needed (PUT, DELETE, etc.)
+}
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

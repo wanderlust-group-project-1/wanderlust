@@ -1,0 +1,54 @@
+<?php 
+
+class ItemModel {
+    use Model;
+
+
+    protected string $table = 'item';
+    protected array $allowedColumns = [
+        'equipment_id',
+        ];
+
+
+    public function createItem(int $id) {
+        return $this->insert(['equipment_id' => $id]);
+    }
+
+    public function createItems(array $data) {
+        $count = $data['count'];
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->createItem($data['equipment_id']);
+        }
+    }
+
+    public function removeItem(array $data) {
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
+
+        return $this->delete($data);
+    }
+
+    public function getAvailableItems(array $data) {
+        $q = new QueryBuilder();
+
+        // $data have equipment_id start_date end_date
+        
+        $q->setTable('item');
+        $q->select('item.*')
+            ->leftJoin('rent', 'item.id', 'rent.item_id')
+            ->where('item.equipment_id', $data['equipment_id'])
+            ->where('rent.start_date', $data['end_date'] , '>')
+            ->orWhere('rent.end_date', $data['start_date'] , '<')
+            ->orWhere('rent.id', null, 'IS');
+
+        // show($q->getQuery());
+        // show ($q->getData());
+        return $this->query($q->getQuery(), $q->getData());
+
+       
+    }
+
+
+}

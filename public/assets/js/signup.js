@@ -40,17 +40,19 @@ var span = document.getElementsByClassName("close")[0];
 // Get all view buttons
 var viewButton = document.getElementById('select-location');
 
+var confirmButton = document.getElementById('confirm-location');
 // Function to handle modal display
 function openModal() {
     modal.style.display = "block";
 }
 
 // // Add click event listener to view buttons
-// viewButton.addEventListener('click', function() {
+viewButton.addEventListener('click', function() {
 //    alertmsg('View button clicked');
 
-//     openModal();
-// });
+    openModal();
+    initialize();
+});
 
 
 
@@ -67,6 +69,13 @@ window.onclick = function(event) {
     }
 }
 
+confirmButton.onclick = function(event) {
+    event.preventDefault();
+    modal.style.display = "none";
+    var lat = document.getElementById('latitude').value;
+    var lng = document.getElementById('longitude').value;
+    console.log(lat + " " + lng);
+}
 
 
 
@@ -266,6 +275,12 @@ function rentalServiceSignup(event){
     var password = form.querySelector('input[name="password"]').value;
 
 
+    var latitude = document.getElementById('latitude').value;
+    var longitude = document.getElementById('longitude').value;
+
+    console.log(latitude + " " + longitude);
+
+
     var verification_document = form.querySelector('input[name="verification_document"]').files[0];
 
 
@@ -314,6 +329,8 @@ function rentalServiceSignup(event){
         mobile: mobile,
         email: email,
         password: password,
+        latitude: latitude,
+        longitude: longitude
         // verification_document: verification_document
     }
 

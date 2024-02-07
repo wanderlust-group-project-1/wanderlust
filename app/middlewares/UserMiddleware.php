@@ -2,6 +2,12 @@
 
 class UserMiddleware {
 
+    static $user = [];
+
+    public static function getUser(): array {
+       return Self::$user;
+    }
+
     static function user($user){
         if (!$user || !(isset($user['role']))) {
             return false;
@@ -18,6 +24,8 @@ class UserMiddleware {
                 ]);
             // echo $customer;
             $user = (object) array_merge((array) $user, (array) $customer);
+            Self::$user = (array) $user;
+
             return $user;
         }
         if ($user['role'] == 'guide') {
@@ -27,6 +35,8 @@ class UserMiddleware {
             ]);
             // show($d);
             $user = (object) array_merge((array) $user, (array) $guide);
+            Self::$user = (array) $user;
+
             return $user;
         }
         if ($user['role'] == 'rentalservice') {
@@ -35,12 +45,16 @@ class UserMiddleware {
                 'user_id'=> $user['id']
                 ]);
             $user = (object) array_merge((array) $user, (array) $rental_service);
+            Self::$user = (array) $user;
+
             return $user;
         }
         if ($user['role'] == 'admin') {
 
 
+            Self::$user = (array) $user;
             return (object)$user;
+
 
         }
     }

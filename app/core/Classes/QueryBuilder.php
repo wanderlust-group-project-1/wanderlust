@@ -9,6 +9,8 @@ class QueryBuilder
     private string $query = "";
     private array $data = [];
 
+    private bool $isWhere = false;
+
     public function table(string $table): self
     {
         $this->table = $table;
@@ -50,13 +52,34 @@ class QueryBuilder
 
     public function count(string $column = '*')
     {
-        $this->query = "SELECT COUNT($column) FROM $this->table";
+        $this->query = "SELECT COUNT($column) AS count FROM $this->table";
         return $this;
     }
 
     public function where(string $column, string $value, string $operator = "="): self
     {
-        $this->query .= " WHERE $column $operator ?";
+        if (!$this->isWhere) {
+            $this->query .= " WHERE $column $operator ?";
+            $this->isWhere = true;
+        } else {
+            $this->query .= " AND $column $operator ?";
+        }
+        // $this->query .= " WHERE $column $operator ?";
+        $this->data[] = $value;
+        return $this;
+    }
+
+    // public function orWhere(string $column, string $value, string $operator = "="): self
+    // value can be null
+    public function orWhere(string $column,  $value, string $operator = "="): self
+    {
+        if (!$this->isWhere) {
+            $this->query .= " WHERE $column $operator ?";
+            $this->isWhere = true;
+        } else {
+            $this->query .= " OR $column $operator ?";
+        }
+        // $this->query .= " WHERE $column $operator ?";
         $this->data[] = $value;
         return $this;
     }

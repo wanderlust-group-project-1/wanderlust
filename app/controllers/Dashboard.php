@@ -23,4 +23,14 @@ class Dashboard
 
         // $this->view('profile');
     }
+
+    public function equipments(string $a = '', string $b = '', string $c = ''): void
+    {
+        $this->view('rental/equipments');
+    }
+
+    public function rents(string $a = '', string $b = '', string $c = ''): void
+    {
+        $this->view('rental/rents');
+    }
 }

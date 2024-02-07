@@ -6,6 +6,21 @@
 @import "./modal";
 @import "./customer";
 
+@import "./button";
+@import "./rowcol";
+@import "./table";
+@import "./card";
+@import "./form";
+
+
+@import "./common/align";
+@import "./common/padding";
+@import "./common/_margin";
+@import "./common/_gap";
+@import "./common/flex";
+
+@import "./navbar/navbar";
+@import "./navbar/breakpoints";
 
 $breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
 $breakpoint-md: 768px; // Medium devices (tablets, 768px and up)
@@ -63,12 +78,7 @@ $breakpoint-lg: 992px;
   text-align: center;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .col {
   flex: 1 1 300px;
@@ -93,8 +103,7 @@ $breakpoint-lg: 992px;
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+
 
   .col-md-12 {
     padding-right: 15px;
@@ -146,6 +155,7 @@ $breakpoint-lg: 992px;
           }
         }
 
+        
         .col-md-3 {
           flex: 0 0 25%;
           max-width: 25%;
@@ -183,3 +193,5 @@ $breakpoint-lg: 992px;
     }
   }
 }
+
+

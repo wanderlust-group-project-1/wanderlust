@@ -2,7 +2,14 @@
 require_once('../app/views/layout/header.php');
 require_once('../app/views/components/navbar-auth.php');
 ?>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAPS_API_KEY  ?>&libraries=places&callback=initialize" async defer></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
 
 <div class="login-container">
 
@@ -91,12 +98,12 @@ require_once('../app/views/components/navbar-auth.php');
 
             <!-- select location from google map -->
 
-            <!-- <div class="location-button-container">
+            <div class="location-button-container"  id="location-button-container">
 
             <input  id="location"  hidden="true"></br>
             <button  id="select-location" class="location-button" type="button" >Get Location</button>
 
-            </div> -->
+            </div>
 
 
             <label for="registration_number">Business Registration Number/NIC</label>
@@ -199,10 +206,13 @@ require_once('../app/views/components/navbar-auth.php');
 
 
         <span class="close">&times;</span>
-        <div id="map">
-            
+        <input id="pac-input" class="controls" type="text" placeholder="Enter Location" />
 
-        </div>
+        <div id="map-canvas" class="map-canvas"> </div>
+
+            <input type="text" class="form-control" id="latitude"  hidden/>
+            <input type="text" class="form-control" id="longitude" hidden/>
+
         <div class="location-button-container">
             <button id="confirm-location" class="location-button" type="button">Confirm Location</button>
         </div>
@@ -215,6 +225,7 @@ require_once('../app/views/components/navbar-auth.php');
 
 </script>
 <script src="<?= ROOT_DIR ?>/assets/js/signup.js"></script>
+<script src="<?= ROOT_DIR ?>/assets/js/map.js"></script>
 
 <?php
 require_once('../app/views/layout/footer.php');

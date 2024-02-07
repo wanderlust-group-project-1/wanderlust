@@ -1,0 +1,517 @@
+/* Define Variables */
+$color-white: #fff;
+$color-black: #000;
+$color-dark-green: #4C5039;
+$color-light-gray: #f2f2f2;
+$color-medium-gray: #ccc;
+$color-dark-gray: #333;
+$color-lighter-gray: rgba(0, 0, 0, 0.2);
+$color-darker-gray: rgba(0, 0, 0, 0.1);
+$color-green: #4CAF50;
+$color-darker-green: #45a049;
+$color-orange: #FF5733;
+$color-yellow: #FFC107;
+$modal-background: rgba(0, 0, 0, 0.4);
+$modal-content-border: 1px solid #888;
+$border-radius-default: 8px;
+$box-shadow-default: 0 4px 8px 0 rgba(0,0,0,0.2);
+$box-shadow-hover: 0 8px 16px 0 rgba(0,0,0,0.2);
+$media-breakpoint: 768px;
+
+
+
+
+
+
+@mixin form-styles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between form elements */
+  
+    label {
+      font-size: 16px;
+      color:  #333;
+      margin-bottom: 5px;
+    }
+  
+    // input[type="text"], input[type="password"], input[type="file"], input[type="number"] {
+    //   padding: 10px;
+    //   border: 1px solid #ccc;
+    //   border-radius: 5px;
+    // }
+  
+    // input[type="submit"] {
+    //   background-color: $color-green;
+    //   color: $color-white;
+    //   border: none;
+    //   cursor: pointer;
+    //   padding: 10px 20px;
+    //   border-radius: 5px;
+    //   transition: background-color 0.3s;
+  
+    //   &:hover {
+    //     background-color: $color-darker-green;
+    //   }
+    // }
+  }
+
+
+/* Mixins */
+@mixin modal-common {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: $modal-background;
+}
+
+@mixin modal-content-common {
+  background-color: $color-white;
+  margin: 5% auto;
+  padding: 20px;
+  border: $modal-content-border;
+  width: 80%;
+  position: relative;
+  border-radius: $border-radius-default;
+  box-shadow: $box-shadow-default;
+}
+
+@mixin dashboard-card-common {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  background-color: $color-white;
+  border-radius: 15px;
+  box-shadow: $box-shadow-default;
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+
+
+    &:hover {
+        box-shadow: $box-shadow-hover;
+    }
+    .user-image{
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 75px;
+            border: 3px solid $color-light;
+            padding: 3px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+/* Modal Box Styles */
+.profile-editor {
+  @include modal-common;
+
+  .modal-content {
+    @include modal-content-common;
+    max-width: 400px;
+    border-radius: $border-radius-default;
+  }
+  .close {
+    color: $color-medium-gray;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      color: $color-black;
+      cursor: pointer;
+    }
+  }
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+  }
+  form {
+    // display: flex;
+    // flex-direction: column;
+    // gap: 10px; /* Space between form elements */
+
+    // label {
+    //     font-size: 16px;
+    //     color: #333;
+    //     margin-bottom: 5px;
+    // }
+
+    // input[type="text"], input[type="password"] {
+    //     padding: 10px;
+    // border: 1px solid #ccc;
+    // border-radius: 5px;
+    // }
+
+    // input[type="submit"] {
+    //     background-color: $color-green;
+    //     color: $color-white;
+    //     border: none;
+    //     cursor: pointer;
+    //     padding: 10px 20px;
+    //     border-radius: 5px;
+    //     transition: background-color 0.3s;
+
+    //     &:hover {
+    //         background-color: $color-darker-green;
+    //     }
+    // }
+    @include form-styles;
+  }
+}
+
+/* Responsive Design for Modals */
+@media screen and (max-width: $media-breakpoint) {
+  .profile-editor .modal-content {
+    margin-top: 15%;
+    width: 100%;
+  }
+}
+
+/* Dashboard Styles */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 50px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background-color: $color-lightest2;
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10%;
+    background-color: $color-lightest2;
+    border-bottom: 1px solid $color-medium-gray;
+  }
+
+  &-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-around;
+    width: 90%;
+    height: auto;
+    background-color: $color-lightest2;
+    gap: 20px;
+
+    .dashboard-card {
+      @include dashboard-card-common;
+    }
+  }
+}
+
+/* Sidebar Styles */
+.sidebar-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 250px;
+  min-width: 250px;
+  height: 100%;
+  padding: 0;
+  background-color: $color-lightest2;
+}
+
+/* Responsive Design for Dashboard and Sidebar */
+@media screen and (max-width: $media-breakpoint) {
+  .sidebar-flow {
+    width: 1px;
+    min-width: 1px;
+  }
+
+  .dashboard {
+    margin-left: 50px;
+    width: 90%;
+  }
+
+  .dashboard-content .dashboard-card {
+    min-width: 90%;
+    margin: 10px auto;
+  }
+}
+
+/* Rent Status Styles */
+.rent-status {
+  background-color: $color-white;
+  border-radius: $border-radius-default;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px $color-darker-gray;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: fit-content;
+}
+
+/* User Styles */
+.user {
+  h2 {
+    font-size: 24px;
+    color: $color-dark-green;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $color-dark-gray;
+    margin: 1px 0;
+  }
+}
+
+/* Edit Profile Button Styles */
+// .edit-prof-button button {
+//   background-color: $color-dark-green;
+//   color: $color-white;
+//   padding: 12px 20px;
+//   border: none;
+//   border-radius: 5px;
+//   cursor: pointer;
+//   margin-top: 10px;
+// }
+
+/* Equipment List Styles */
+.dashboard-card {
+  .equipment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background-color: $color-white;
+
+    .add-equipment {
+      .add-equipment-button {
+        background-color: $color-dark-green;
+        color: $color-white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+    }
+  }
+}
+
+/* Add Equipment Modal */
+.add-equipment-modal {
+  @include modal-common;
+
+  .modal-content {
+    @include modal-content-common;
+    // max-width: 500px;
+
+    form {
+      @include form-styles;
+    }
+
+    // h2 {
+    //   color: $color-dark-gray;
+    //   margin-bottom: 20px;
+    // }
+
+    // label {
+    //   display: block;
+    //   margin-top: 10px;
+    //   color: $color-medium-gray;
+    // }
+
+    // input[type="text"],
+    // input[type="number"],
+    // input[type="file"] {
+    //   width: 100%;
+    //   padding: 10px;
+    //   margin-top: 5px;
+    //   box-sizing: border-box;
+    //   border: 1px solid #ddd;
+    //   border-radius: 4px;
+    // }
+
+    // input[type="submit"] {
+    //   background-color: $color-green;
+    //   color: $color-white;
+    //   border: none;
+    //   cursor: pointer;
+    //   margin-top: 20px;
+    //   padding: 10px 20px;
+    //   width: 100%;
+
+    //   &:hover {
+    //     background-color: $color-darker-green;
+    //   }
+    // }
+
+    .close {
+      color: $color-medium-gray;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+
+      &:hover,
+      &:focus {
+        color: $color-black;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* Responsive adjustments for Add Equipment Modal */
+@media (max-width: $media-breakpoint) {
+  .add-equipment-modal .modal-content {
+    width: 90%;
+  }
+}
+
+/* Equipment List Styles */
+.dashboard-card .equipment-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background-color: $color-white;
+}
+
+/* Table Container */
+.table-container {
+  display: flex;
+  width: 100%;
+  margin: 20px;
+}
+
+/* Data Table Styles */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+
+  // tr:nth-child(even) {
+  //   background-color: $color-lightest2;
+  // }
+}
+
+/* Button Styles */
+.equipment-view-button,
+.add-button {
+  background-color: $color-dark-green;
+  color: $color-white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $color-dark-gray;
+  }
+}
+
+/* Responsive Table Styles */
+@media screen and (max-width: 600px) {
+  .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
+    display: block;
+  }
+
+  .data-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .data-table tr {
+    margin: 0 0 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+
+  .data-table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+
+    &:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      font-weight: bold;
+    }
+  }
+
+  .equipment-view-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Status Styles */
+.status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+
+  &.accepted {
+    background-color: $color-green;
+    color: $color-white;
+  }
+
+  &.rejected {
+    background-color: $color-orange;
+    color: $color-white;
+  }
+
+  &.waiting {
+    background-color: $color-yellow;
+    color: $color-dark-gray;
+  }
+}
+
+/* Additional styles can be converted following the same pattern */
+
+
+
+
