@@ -41,7 +41,9 @@ class ItemModel {
             ->where('item.equipment_id', $data['equipment_id'])
             ->where('rent.start_date', $data['end_date'] , '>')
             ->orWhere('rent.end_date', $data['start_date'] , '<')
-            ->orWhere('rent.id', null, 'IS');
+            ->where('item.equipment_id', $data['equipment_id'])
+            ->orWhere('rent.id', null, 'IS')
+            ->where('item.equipment_id', $data['equipment_id']);
 
         // show($q->getQuery());
         // show ($q->getData());
