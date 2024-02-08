@@ -18,9 +18,9 @@ class CartItemModel {
 
     }
 
-    public function removeCartItem($id, $column) {
+    public function removeCartItem($data) {
 
-        return $this->delete($id, $column);
+        return $this->delete($data['id'], 'id');
     }
 
     public function getCartItems(array $data) {

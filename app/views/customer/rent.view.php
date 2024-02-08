@@ -232,7 +232,7 @@ cartModalBtn.onclick = function() {
         method: 'GET',
         success: function(data) {
             $('#cart-data').html(data);
-            console.log(data);
+            // console.log(data);
             
         },
         error: function(err) {
@@ -243,6 +243,11 @@ cartModalBtn.onclick = function() {
 
 
     cartModal.style.display = "block";
+    console.log("cart modal clicked");
+
+    // cartLoadScript();
+    // wait and load the script
+    setTimeout(cartLoadScript, 1000);
 }
 
 // When the user clicks on <span> (x) or anywhere outside of the modal, close it
@@ -256,6 +261,45 @@ window.onclick = function(event) {
     if (event.target == cartModal) {
         cartModal.style.display = "none";
     }
+}
+
+
+ function cartLoadScript(){
+
+    // cart-item
+    var removeButtons = document.querySelectorAll("#remove-from-cart");
+
+    removeButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var id = button.closest('#cart-item').getAttribute('data-id');
+            console.log(id);
+            removeItem(id);
+        });
+    });
+ }
+
+
+ function removeItem(id) {
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
+            'Content-Type': 'application/json'
+        },
+        url: '<?= ROOT_DIR ?>/api/cart/removeItem',
+        method: 'POST',
+        data: JSON.stringify({
+            id: id
+        }),
+        success: function(data) {
+            // console.log(data);
+            // remove the item from the cart
+            $(`[data-id=${id}]`).remove();
+            getCartCount();
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
 }
 
 
