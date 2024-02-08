@@ -22,13 +22,13 @@ class ItemModel {
         }
     }
 
-    public function removeItem(array $data) {
-        $data = array_filter($data, function ($key) {
-            return in_array($key, $this->allowedColumns);
-        }, ARRAY_FILTER_USE_KEY);
+    // public function removeItem(array $data) {
+    //     $data = array_filter($data, function ($key) {
+    //         return in_array($key, $this->allowedColumns);
+    //     }, ARRAY_FILTER_USE_KEY);
 
-        return $this->delete($data);
-    }
+    //     return $this->delete($data['item_id'], 'id');
+    // }
 
     public function getAvailableItems(array $data) {
         $q = new QueryBuilder();

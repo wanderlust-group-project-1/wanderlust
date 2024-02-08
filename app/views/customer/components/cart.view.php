@@ -5,14 +5,6 @@
         <!-- <div class="col-lg-12    " id="cart-items"> -->
         <div class="col-lg-12   cart-items overflow-scroll " id="cart-items">
 
-        <!-- [0] => stdClass Object
-        (
-            [id] => 1
-            [cart_id] => 12
-            [item_id] => 1
-            [e_name] => Baker Mueller
-            [e_image] => 65bcc674ecbcb.jpg
-        ) -->
 
 
 
@@ -21,7 +13,7 @@
                 echo "<h3>Cart is empty</h3>";
             }
             foreach ($data as $item): ?>
-                <div class="card " data-id="<?= htmlspecialchars($item->item_id) ?>">
+                <div class="card" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
                 <div class="row gap-2">
                     <div class="cart-item-image col-lg-4">
                         <img src="<?=OSURL?>images/equipment/<?php echo htmlspecialchars($item->e_image); ?>" alt="Image" class="img-fluid">

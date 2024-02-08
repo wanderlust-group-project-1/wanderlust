@@ -75,7 +75,8 @@ class CartModel {
 
     public function removeItemFromCart(array $data){
         $cartItem = new CartItemModel;
-        // return $cartItem->removeCartItem($data);
+        
+        
     }
 
     //  delete cart 
