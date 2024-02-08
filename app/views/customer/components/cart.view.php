@@ -32,6 +32,19 @@
 
         </div>
     </div>
+    <div class="row gap-4">
+        <h3>Total: Rs. <span id="total">
+
+        <?php
+        $total = 0;
+        foreach ($data as $item) {
+            $total += $item->e_fee;
+        }
+        echo $total;
+        ?>
+
+        </span></h3>
+    </div>
     <div class="row gap-2">
         <button id="checkout" class="btn" type="button">Checkout</button>
     </div>

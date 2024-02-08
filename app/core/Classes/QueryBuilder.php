@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class QueryBuilder
 {
@@ -103,6 +103,13 @@ class QueryBuilder
     }
 
     // Add other query builder methods...
+
+    public function groupBy(string $column): self
+    {
+        $this->query .= " GROUP BY $column";
+        return $this;
+    }
+
 
 
     public function setTable(string $table): self
