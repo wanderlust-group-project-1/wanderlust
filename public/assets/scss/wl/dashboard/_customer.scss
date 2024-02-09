@@ -130,7 +130,18 @@
 
 
 .cart-items {
-  height: 400px;
+  height: 50vh;
+  min-height: 400px;
+
+  // media queries
+  @media screen and (max-width: 768px) {
+   flex: 1 1 auto !important;
+  }
+}
+
+.checkout-items {
+  height: 60vh;
+  min-height: 400px;
 
   // media queries
   @media screen and (max-width: 768px) {
