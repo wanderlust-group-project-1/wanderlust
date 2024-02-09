@@ -75,7 +75,8 @@ class CartModel {
 
     public function removeItemFromCart(array $data){
         $cartItem = new CartItemModel;
-        // return $cartItem->removeCartItem($data);
+        
+        
     }
 
     //  delete cart 
@@ -84,6 +85,11 @@ class CartModel {
     }
 
     public function getCartItems(array $data) {
+
+        $cart = $this->first($data);
+        $data['cart_id'] = $cart->id;
+   
+
         $cartItem = new CartItemModel;
         return $cartItem->getCartItems($data);
     }

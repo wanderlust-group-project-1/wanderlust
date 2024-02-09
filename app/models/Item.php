@@ -22,13 +22,13 @@ class ItemModel {
         }
     }
 
-    public function removeItem(array $data) {
-        $data = array_filter($data, function ($key) {
-            return in_array($key, $this->allowedColumns);
-        }, ARRAY_FILTER_USE_KEY);
+    // public function removeItem(array $data) {
+    //     $data = array_filter($data, function ($key) {
+    //         return in_array($key, $this->allowedColumns);
+    //     }, ARRAY_FILTER_USE_KEY);
 
-        return $this->delete($data);
-    }
+    //     return $this->delete($data['item_id'], 'id');
+    // }
 
     public function getAvailableItems(array $data) {
         $q = new QueryBuilder();
@@ -41,7 +41,9 @@ class ItemModel {
             ->where('item.equipment_id', $data['equipment_id'])
             ->where('rent.start_date', $data['end_date'] , '>')
             ->orWhere('rent.end_date', $data['start_date'] , '<')
-            ->orWhere('rent.id', null, 'IS');
+            ->where('item.equipment_id', $data['equipment_id'])
+            ->orWhere('rent.id', null, 'IS')
+            ->where('item.equipment_id', $data['equipment_id']);
 
         // show($q->getQuery());
         // show ($q->getData());
