@@ -1526,6 +1526,10 @@ form label {
   text-align: left;
 }
 
+form#customer, form#rental-service, form#guide {
+  display: none;
+}
+
 input {
   border: none;
   background: #F0FFF0;
