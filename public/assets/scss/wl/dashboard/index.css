@@ -8,29 +8,41 @@
 html {
   font-size: 62.5%;
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   scroll-behavior: smooth;
 }
 
-h1,
-h2,
-h3,
-h4,
+h1 {
+  font-size: 3.4rem;
+}
+
+h2 {
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 3.4rem;
+  color: #526534;
+}
+
+h4 {
+  margin-top: 5px;
+  font-family: sans-serif;
+  font-weight: 400;
+  color: #526534;
+  text-align: center;
+}
+
 h5 {
   font-weight: 400;
   white-space: nowrap;
 }
 
-h1 {
-  font-size: 4rem;
-}
-
 p {
-  font-size: 2rem;
+  font-size: 1.56rem;
+  color: #5C5E60;
 }
 
 li {
-  font-size: 2rem;
+  font-size: 1.56rem;
 }
 
 thead,
@@ -58,7 +70,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #3C3F3C;
+  color: #6B6E70;
 }
 
 ul,
@@ -71,7 +83,6 @@ select {
   border: none;
   border-radius: 12px;
   background-color: #E0E0E0;
-  font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
 }
 select:focus {
@@ -126,7 +137,7 @@ hr {
 
 body {
   scroll-behavior: smooth !important;
-  background-color: #D6F5D9;
+  background-color: #EBEFE3;
 }
 
 .loading-screen {
@@ -145,7 +156,7 @@ body {
 
 .normal-button {
   margin: 1rem;
-  background-color: #157E38;
+  background-color: #8D9E6F;
   color: #FFFFFF;
   cursor: pointer;
   border: none;
@@ -160,7 +171,7 @@ body {
 }
 
 .bg-active {
-  background: #157E38;
+  background: #8D9E6F;
   color: white;
 }
 
@@ -221,7 +232,7 @@ fieldset {
 .sidebar {
   width: 250px;
   height: 100vh;
-  background-color: #044E29;
+  background-color: #526534;
   color: #FFFFFF;
   position: fixed;
   left: 0;
@@ -249,17 +260,17 @@ fieldset {
 }
 .nav .nav-item {
   margin-bottom: 15px;
-  background-image: linear-gradient(to right, #D6F5D9 50%, #044E29 50%);
+  background-image: linear-gradient(to right, #EBEFE3 50%, #526534 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: background-position 0.2s ease-out;
 }
 .nav .nav-item:hover {
   background-position: left bottom;
-  color: #157E38;
+  color: #8D9E6F;
 }
 .nav .nav-item.active {
-  background-color: #4C5039;
+  background-color: #B2BDA0;
   color: #fff;
 }
 .nav .nav-item.active .sub-menu {
@@ -307,7 +318,7 @@ fieldset {
   z-index: 1010;
   cursor: pointer;
   font-size: 30px;
-  color: #4C5039;
+  color: #B2BDA0;
 }
 @media screen and (max-width: 768px) {
   .toggle-button {
@@ -386,7 +397,7 @@ fieldset {
   width: 100%;
   height: 100%;
   padding: 0;
-  background-color: #F0FFF0;
+  background-color: #EBEFE3;
 }
 .dashboard-header {
   display: flex;
@@ -395,7 +406,7 @@ fieldset {
   justify-content: space-between;
   width: 100%;
   height: 10%;
-  background-color: #F0FFF0;
+  background-color: #EBEFE3;
   border-bottom: 1px solid #ccc;
 }
 .dashboard-content {
@@ -407,7 +418,7 @@ fieldset {
   justify-content: space-around;
   width: 90%;
   height: auto;
-  background-color: #F0FFF0;
+  background-color: #EBEFE3;
   gap: 20px;
 }
 .dashboard-content .dashboard-card {
@@ -434,7 +445,7 @@ fieldset {
   width: 150px;
   height: 150px;
   border-radius: 75px;
-  border: 3px solid #45BF55;
+  border: 3px solid #B2BDA0;
   padding: 3px;
   margin-bottom: 20px;
 }
@@ -449,7 +460,7 @@ fieldset {
   min-width: 250px;
   height: 100%;
   padding: 0;
-  background-color: #F0FFF0;
+  background-color: #EBEFE3;
 }
 
 /* Responsive Design for Dashboard and Sidebar */
@@ -671,45 +682,53 @@ fieldset {
 
 /* Additional styles can be converted following the same pattern */
 .login-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 90%;
-  border-radius: 10px;
-  background: #ECECEC;
+  height: 100%;
+  background: #B2BDA0;
   -webkit-backdrop-filter: blur(67px);
           backdrop-filter: blur(67px);
+  transition: transform 1s;
 }
 .login-container .login-form {
   margin: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  max-width: 450px;
-  width: 450px;
+  max-width: 600px;
+  width: 550px;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 40px;
-  border-radius: 10px;
+  padding: 60px;
+  border-radius: 5px;
   background-color: #fff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 .login-container .login-form form {
   flex-direction: column;
 }
 .login-container .login-form h2 {
+  font-size: 3.4rem;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 15px;
+  color: #2a4628;
   text-transform: uppercase;
   letter-spacing: 3px;
+}
+.login-container .login-form label-class {
+  font-size: medium;
+  font-weight: 600;
 }
 .login-container .login-form input[type=text],
 .login-container .login-form input[type=password],
 .login-container .login-form select {
+  font-weight: 400;
+  color: #47494b;
   display: block;
-  background-color: #ECECEC;
+  background-color: #e5e5e5;
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -717,18 +736,24 @@ fieldset {
   border-radius: 5px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-.login-container .login-form .message-text,
+.login-container .login-form .message-text {
+  font-size: small;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #5C5E60;
+}
 .login-container .login-form p {
   text-align: center;
   margin-top: 10px;
+  margin-bottom: 15px;
 }
 .login-container .login-form a {
-  color: #333;
+  color: #2a4628;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 .login-container .login-form a:hover {
-  color: #f0f0f0;
+  color: #8D9E6F;
 }
 .login-container .login-form #error-message {
   color: red;
@@ -743,8 +768,8 @@ fieldset {
   align-items: center;
   width: 350px;
   height: 130px;
-  border-radius: 10px;
-  background: #ECECEC;
+  border-radius: 5px;
+  background: #B2BDA0;
   margin: 20px 0;
   text-align: center;
   border: 1px solid #ccc;
@@ -752,18 +777,18 @@ fieldset {
   transition: background-color 0.3s ease;
 }
 .login-container .signup-card:hover {
-  background-color: #f0f0f0;
+  background-color: #8D9E6F;
 }
 .login-container .signup-card .btn-div {
   text-align: center;
 }
 .login-container .signup-card h3 {
-  color: #333;
+  color: #2a4628;
   margin: 0;
   padding: 10px;
 }
 .login-container .signup-card p {
-  color: #333;
+  color: #2a4628;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -816,8 +841,8 @@ fieldset {
 .login-container .file-input-container .location-button,
 .login-container .location-button-container .file-label,
 .login-container .location-button-container .location-button {
-  background-color: #4CAF50;
-  color: #fff;
+  background-color: #8D9E6F;
+  color: #2F3B1C;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -851,7 +876,7 @@ fieldset {
   width: 80%;
   max-width: 800px;
   position: relative;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .location-modal .modal-content .close {
   color: #aaa;
@@ -861,14 +886,14 @@ fieldset {
   cursor: pointer;
 }
 .location-modal .modal-content .close:hover, .location-modal .modal-content .close:focus {
-  color: #333;
+  color: #2a4628;
   text-decoration: none;
   cursor: pointer;
 }
 .location-modal .modal-content .map-canvas {
   width: 100%;
   height: 300px;
-  border-radius: 10px;
+  border-radius: 5px;
   position: fixed;
 }
 
@@ -960,7 +985,7 @@ fieldset {
   width: 80%;
   max-width: 800px;
   position: relative;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 @media screen and (max-width: 768px) {
   .modal-content {
@@ -977,14 +1002,14 @@ fieldset {
   cursor: pointer;
 }
 .modal-content .close:hover, .modal-content .close:focus {
-  color: #333;
+  color: #2a4628;
   text-decoration: none;
   cursor: pointer;
 }
 .modal-content .map-canvas {
   width: 100%;
   height: 300px;
-  border-radius: 10px;
+  border-radius: 5px;
   position: fixed;
 }
 
@@ -1149,27 +1174,29 @@ fieldset {
 .btn {
   cursor: pointer;
   border: none;
-  background: #157E38;
+  background: #2F3B1C;
   outline: none;
-  color: #FFFFFF;
-  border: 2px solid #157E38;
-  border-radius: 12px;
-  padding: 12px 20px;
-  font-weight: 600;
+  color: #EBEFE3;
+  border-radius: 10px;
+  padding: 10px 10px;
+  font-weight: 500;
   font-size: medium;
-  background-image: linear-gradient(to right, #D6F5D9 50%, #157E38 50%);
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #2F3B1C 50%);
   background-size: 200% 100%;
   background-position: right bottom;
-  transition: background-position 0.2s ease-out;
+  transition: background-position 0.3s ease-out;
 }
 .btn:hover {
   background-position: left bottom;
-  color: #157E38;
+  color: #2F3B1C;
 }
 .btn:disabled {
-  background: #D6F5D9;
-  color: #157E38;
-  border: 2px solid #157E38;
+  background: #EBEFE3;
+  color: #8D9E6F;
+  border: 2px solid #8D9E6F;
   cursor: default;
 }
 
@@ -1216,7 +1243,8 @@ fieldset {
 }
 
 .btn-full {
-  width: 100%;
+  width: 50%;
+  position: relative;
 }
 
 .row {
@@ -1285,7 +1313,7 @@ table {
   border-spacing: 0;
 }
 table thead {
-  background-color: #45BF55;
+  background-color: #B2BDA0;
   color: #FFFFFF;
   font-weight: 700;
   text-transform: uppercase;
@@ -1301,7 +1329,7 @@ table tbody tr:nth-child(odd) {
   background-color: #E0E0E0;
 }
 table tbody tr:nth-child(even) {
-  background-color: #D6F5D9;
+  background-color: #EBEFE3;
 }
 table tbody tr td {
   padding: 10px 15px;
@@ -1348,9 +1376,9 @@ table tfoot tr td {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #F0FFF0;
+  background-color: #EBEFE3;
   background-clip: padding-box;
-  border: 2px solid #D6F5D9;
+  border: 2px solid #EBEFE3;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -1364,9 +1392,9 @@ table tfoot tr td {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #F0FFF0;
+  background-color: #EBEFE3;
   background-clip: padding-box;
-  border: 2px solid #D6F5D9;
+  border: 2px solid #EBEFE3;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   font-size: 2rem;
@@ -1377,18 +1405,18 @@ table tfoot tr td {
 
 .form-control:focus {
   color: black-text;
-  background-color: #D6F5D9;
-  border-color: #157E38;
+  background-color: #EBEFE3;
+  border-color: #8D9E6F;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(21, 126, 56, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(141, 158, 111, 0.25);
 }
 
 .input {
   border: none;
-  background: #D6F5D9;
+  background: #EBEFE3;
   outline: none;
-  color: #000000;
-  border: 2px solid #157E38;
+  color: #212016;
+  border: 2px solid #8D9E6F;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1402,10 +1430,10 @@ form {
 }
 form input {
   border: none;
-  background: #F0FFF0;
+  background: #EBEFE3;
   outline: none;
   color: #FFFFFF;
-  border: 2px solid #D6F5D9;
+  border: 2px solid #EBEFE3;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1416,10 +1444,10 @@ form input[type=password],
 form input[type=number],
 form textarea {
   border: none;
-  background: #F0FFF0;
+  background: #EBEFE3;
   outline: none;
-  color: #000000;
-  border: 2px solid #D6F5D9;
+  color: #212016;
+  border: 2px solid #EBEFE3;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1433,10 +1461,10 @@ form textarea.form-control-lg {
 }
 form select {
   border: none;
-  background: #F0FFF0;
+  background: #EBEFE3;
   outline: none;
-  color: #000000;
-  border: 2px solid #D6F5D9;
+  color: #212016;
+  border: 2px solid #EBEFE3;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1447,12 +1475,12 @@ form p {
   margin-top: 10px;
 }
 form a {
-  color: #333;
+  color: #2a4628;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 form a:hover {
-  color: #f0f0f0;
+  color: #8D9E6F;
 }
 form #error-message {
   color: red;
@@ -1470,10 +1498,10 @@ form label {
 
 input {
   border: none;
-  background: #F0FFF0;
+  background: #EBEFE3;
   outline: none;
-  color: #000000;
-  border: 2px solid #D6F5D9;
+  color: #212016;
+  border: 2px solid #EBEFE3;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
