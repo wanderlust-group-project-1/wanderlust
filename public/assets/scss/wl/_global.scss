@@ -5,13 +5,13 @@
 }
 
 
-$header1: 4rem;
+$header1: 3.4rem;
 $header2: 2.5rem;
 $header3: 2.0rem;
 $header4: 1.5rem;
 
-$text: 2.0rem;
-$small-text: 1.5rem;
+$text: 1.56rem;
+$small-text: 1.4rem;
 
 // $bg-color: #4C5039;
 // $bg-color-darker: #1a3842b9;
@@ -61,23 +61,25 @@ $small-text: 1.5rem;
 
 
 
-$color-primary:#157E38;
-$color-dark:#044E29;
-$color-darker:#00241A;
+$color-primary:#8D9E6F;
+$color-dark:#526534;
+$color-darker:#2F3B1C;
 
-$color-light:#45BF55;
-$color-lighter:#95ED87;
+$color-light:#B2BDA0;
+$color-lighter:#EBEFE3;
 
-$color-lightest:#D6F5D9;
-$color-lightest2:#F0FFF0;
+$color-lightest:#EBEFE3;
+$color-lightest2:#EBEFE3;
 
 
-$color-white: #F4F4F4;
+$color-white: #F5F5F5;
 
 // text colors
-$gray-text: #3C3F3C; 
-$white-text: #FFFFFF;
-$black-text: #000000;
+$white-text : #FFFFFF;
+$gray-text: #6B6E70;
+$gray-text-dark : #5C5E60;
+$gray-text-darker : #47494b;
+$black-text: #212016;
 
 
 
@@ -117,27 +119,40 @@ $breakpoint-lg: 992px;
 html {
   font-size: 62.5%;
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   scroll-behavior: smooth;
 
   
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-weight: 400;
-  white-space: nowrap;
 }
 
 h1 {
   font-size: $header1;
 }
 
+h2 {
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: $header1;
+  color: $color-dark;
+}
+
+//h3
+
+h4 {
+  margin-top: 5px;
+  font-family: sans-serif;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: center;
+}
+h5 {
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 p {
   font-size: $text;
+  color: $gray-text-dark;
 }
 
 // button,
@@ -212,7 +227,7 @@ select {
   border: none;
   border-radius: 12px;
   background-color: $shaded-white;
-  font-size: $header4;
+  //font-size: $header4;
   font-family: "Poppins", sans-serif;
 
   &:focus {
