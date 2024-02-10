@@ -3,7 +3,6 @@ require_once('../app/views/layout/header.php');
 require_once('../app/views/components/navbar-auth.php');
 ?>
 
-<link href="/public/assets/scss/_signup.scss">
     <div class="login-container">
         <div class="login-form">
         <!-- <img src="/public/assets/images/login.png" alt="Login Image"> -->
