@@ -15,7 +15,6 @@ class RentModel {
         'total',
         'payment_method',
         'payment_status',
-        'payment_id'
     ];
 
     public function createRent(JSONRequest $request, JSONResponse $response) {

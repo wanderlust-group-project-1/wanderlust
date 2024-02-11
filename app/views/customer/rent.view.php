@@ -28,7 +28,7 @@ require_once('../app/views/components/navbar.php');
 
 
 <div class="row">
-    <div class="col-lg-8 flex-d justify-content-center bg-white" >
+    <div class="col-lg-8 flex-d justify-content-center " >
 
 
         <div class = "search-container col-lg-12">

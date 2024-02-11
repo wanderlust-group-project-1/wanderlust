@@ -4,6 +4,8 @@ class Pay {
     use Controller;
 
 
+
+
     public function cart(string $a = '', string $b = '', string $c = ''):void {
         $request = new JSONRequest();
         $response = new JSONResponse();
@@ -13,7 +15,19 @@ class Pay {
                 'customer_id' => UserMiddleware::getUser()['id'],
             ];
         $data = $cart->getCartItems($data);
-        // show($data);
+        // // show($data);
+
+      
+
         $this->view('customer/checkout', $data);
+
+
+    }
+
+    public function payhereprocess(){
+
+        echo "hi serverside";
+ 
+
     }
 }

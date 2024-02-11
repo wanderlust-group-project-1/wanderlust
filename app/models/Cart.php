@@ -126,6 +126,11 @@ class CartModel {
     }
 
 
+    public function payCart (array $data) {
+       
+    }
+
+
 
 
 
