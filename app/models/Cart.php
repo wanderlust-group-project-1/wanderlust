@@ -136,15 +136,11 @@ class CartModel {
 
     public function payCart (array $data) {
 
-        $q = "
-        INSERT INTO rent (customer_id, start_date, end_date, status, total, payment_method, payment_status)
-        SELECT customer_id, start_date, end_date, 'pending', SUM(equipment.price), 'cash', 'pending' FROM cart
-        JOIN cart_item ON cart.id = cart_item.cart_id
-        JOIN item ON cart_item.item_id = item.id
-        JOIN equipment ON item.equipment_id = equipment.id
-        WHERE cart.customer_id = :customer_id
-        GROUP BY cart.id
-        ";
+        // call stored procedure to pay cart
+
+
+        return $this->query("CALL CompleteRentProcess(:customer_id)", $data)[0];
+
         
         
        

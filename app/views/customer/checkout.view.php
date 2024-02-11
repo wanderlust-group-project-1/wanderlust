@@ -76,7 +76,7 @@ require_once('../app/views/components/navbar.php');
             <div class="row gap-2 ">
                 <!-- <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary btn-full btn-lg">Pay</a> -->
 
-                <button onclick="paymentGateWay();" id="pay" class="btn btn-primary btn-full btn-lg" type="button">Pay</button>
+                <button  id="pay" class="btn btn-primary btn-full btn-lg" type="button">Pay</button>
             </div>
 
         </div>
@@ -89,7 +89,41 @@ require_once('../app/views/components/navbar.php');
 </div>
 
 <script>
-    function paymentGateWay() {
+
+
+    $(document).ready(function () {
+        // Event listener for the button click
+
+        $('#pay').on('click', function () {
+            pay();
+        });
+
+    });
+    
+    
+    function pay(){
+
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
+            
+            },
+            type: "GET",
+
+            url: "<?php echo ROOT_DIR ?>/api/pay/cart",
+
+            success: function (response) {
+                console.log(response);
+                paymentGateWay(response.data)
+            }
+
+        });
+
+    }
+
+
+
+    function paymentGateWay(data) {
         console.log("Payment gateway");
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = () => {
@@ -102,7 +136,7 @@ require_once('../app/views/components/navbar.php');
                     console.log("Payment completed. OrderID:" + orderId);
 
                     window.location.href = "<?php echo ROOT_DIR ?>/pay/complete";
-                    
+
 
                     // Note: validate the payment and show success or failure page to the customer
                 };
@@ -122,15 +156,15 @@ require_once('../app/views/components/navbar.php');
                 // Put the payment variables here
                 var payment = {
                     "sandbox": true,
-                    "merchant_id": '<?php echo $merchant_id; ?>',
+                    "merchant_id": data.merchant_id,
                     "return_url": "http://localhost:8080/pay/complete",
                     "cancel_url": "http://localhost:8080/pay/cancel",
                     "notify_url": "http://localhost:8080/pay/notify",
-                    "order_id": '<?php echo $data['order_id']; ?>',
+                    "order_id": data.orderId,
                     "items": "Door bell wireles",
-                    "amount": '<?php echo $data['amount']; ?>',
+                    "amount": data.amount,
                     "currency": "LKR",
-                    "hash": '<?php echo $hash; ?>',
+                    "hash": data.hash,
                     "first_name": "Saman",
                     "last_name": "Perera",
                     "email": "samanp@gmail.com",
