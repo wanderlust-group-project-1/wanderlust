@@ -79,10 +79,10 @@ form {
     textarea
     {
         border: none;
-        background: $color-lightest2;
+        background: $color-light;
         outline: none;
         color: $black-text;
-        border: 2px solid $color-lightest;
+        border: 2px solid $color-darker;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
@@ -109,10 +109,10 @@ form {
 
     select {
         border: none;
-        background: $color-lightest2;
+        background: $color-light;
         outline: none;
         color: $black-text;
-        border: 2px solid $color-lightest;
+        border: 2px solid $color-darker;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
@@ -173,4 +173,10 @@ input {
     border-radius: 12px;
     padding: 12px 20px;
     font-weight: 600;
+}
+
+input.invert {
+    background: $color-lightest;
+    color: $white-text;
+    border: 2px solid $color-primary;
 }

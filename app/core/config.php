@@ -31,7 +31,13 @@ if ($_ENV) {
     // Object storage url
     define('OSURL', $_ENV['OSURL']);
 
+  
+
     define('GOOGLE_MAPS_API_KEY', $_ENV['GOOGLE_MAPS_API_KEY']);
+
+    define('MERCHANT_ID', $_ENV['MERCHANT_ID'] ?? '1211238');
+    define('MERCHANT_SECRET', $_ENV['MERCHANT_SECRET'] ?? 'b8a2d3f4-1e3e-11ec-8d3d-0242ac130003');
+
 
     define('ROOT_DIR', 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']);
 } else if ($_SERVER['SERVER_NAME'] == 'localhost' && $_SERVER['SERVER_PORT'] == 80) {

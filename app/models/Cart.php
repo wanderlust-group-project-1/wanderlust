@@ -34,10 +34,18 @@ class CartModel {
         // }
 
             // forEach item in cart, remove it
-            $cartItem = new CartItemModel;
-            $cartItem->removeCartItem($cart->id, 'cart_id');
+            // show($cart);
+            // show("s");
+            if ($cart) {
+                $cartItem = new CartItemModel;
+                $cartItem->removeCartItemByCart(['cart_id' => $cart->id]);
 
-            $this->deleteCart($cart->id);
+                $this->deleteCart($cart->id);
+            }
+            // $cartItem = new CartItemModel;
+            // $cartItem->removeCartItem($cart->id, 'cart_id');
+
+            // $this->deleteCart($cart->id);
 
 
 
@@ -123,6 +131,19 @@ class CartModel {
         return $this->query($q->getQuery(),$q->getData())[0]->count;
 
   
+    }
+
+
+    public function payCart (array $data) {
+
+        // call stored procedure to pay cart
+
+
+        return $this->query("CALL CompleteRentProcess(:customer_id)", $data)[0];
+
+        
+        
+       
     }
 
 

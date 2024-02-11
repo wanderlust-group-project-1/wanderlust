@@ -1258,6 +1258,11 @@ fieldset {
   position: relative;
 }
 
+.btn-lg {
+  padding: 15px 20px;
+  font-size: large;
+}
+
 .row {
   --bs-gutter-x: 1.875rem;
   --bs-gutter-y: 0;
@@ -1502,10 +1507,10 @@ form input[type=password],
 form input[type=number],
 form textarea {
   border: none;
-  background: #EBEFE3;
+  background: #B2BDA0;
   outline: none;
   color: #212016;
-  border: 2px solid #EBEFE3;
+  border: 2px solid #2F3B1C;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1519,10 +1524,10 @@ form textarea.form-control-lg {
 }
 form select {
   border: none;
-  background: #EBEFE3;
+  background: #B2BDA0;
   outline: none;
   color: #212016;
-  border: 2px solid #EBEFE3;
+  border: 2px solid #2F3B1C;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1567,6 +1572,12 @@ input {
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
+}
+
+input.invert {
+  background: #EBEFE3;
+  color: #FFFFFF;
+  border: 2px solid #8D9E6F;
 }
 
 .img-fluid {
@@ -2224,4 +2235,8 @@ input {
 .row .col-md-12 .card .row .col-md-3 .card-body .btn-primary:hover {
   background-color: #0069d9;
   border-color: #0062cc;
+}
+
+.bg-white {
+  background-color: #fff;
 }/*# sourceMappingURL=index.css.map */
