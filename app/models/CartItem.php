@@ -23,6 +23,10 @@ class CartItemModel {
         return $this->delete($data['id'], 'id');
     }
 
+    public function removeCartItemByCart($data) {
+        return $this->delete($data['cart_id'], 'cart_id');
+    }
+
     public function getCartItems(array $data) {
         $q = new QueryBuilder();
 

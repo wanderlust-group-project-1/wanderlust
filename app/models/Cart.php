@@ -34,10 +34,18 @@ class CartModel {
         // }
 
             // forEach item in cart, remove it
-            $cartItem = new CartItemModel;
-            $cartItem->removeCartItem($cart->id, 'cart_id');
+            // show($cart);
+            // show("s");
+            if ($cart) {
+                $cartItem = new CartItemModel;
+                $cartItem->removeCartItemByCart(['cart_id' => $cart->id]);
 
-            $this->deleteCart($cart->id);
+                $this->deleteCart($cart->id);
+            }
+            // $cartItem = new CartItemModel;
+            // $cartItem->removeCartItem($cart->id, 'cart_id');
+
+            // $this->deleteCart($cart->id);
 
 
 
@@ -127,6 +135,18 @@ class CartModel {
 
 
     public function payCart (array $data) {
+
+        $q = "
+        INSERT INTO rent (customer_id, start_date, end_date, status, total, payment_method, payment_status)
+        SELECT customer_id, start_date, end_date, 'pending', SUM(equipment.price), 'cash', 'pending' FROM cart
+        JOIN cart_item ON cart.id = cart_item.cart_id
+        JOIN item ON cart_item.item_id = item.id
+        JOIN equipment ON item.equipment_id = equipment.id
+        WHERE cart.customer_id = :customer_id
+        GROUP BY cart.id
+        ";
+        
+        
        
     }
 

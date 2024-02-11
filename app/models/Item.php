@@ -37,7 +37,8 @@ class ItemModel {
         
         $q->setTable('item');
         $q->select('item.*')
-            ->leftJoin('rent', 'item.id', 'rent.item_id')
+            ->leftJoin('rent_item', 'item.id', 'rent_item.item_id')
+            ->leftJoin('rent', 'rent_item.rent_id', 'rent.id')
             ->where('item.equipment_id', $data['equipment_id'])
             ->where('rent.start_date', $data['end_date'] , '>')
             ->orWhere('rent.end_date', $data['start_date'] , '<')
