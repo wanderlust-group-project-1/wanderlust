@@ -28,13 +28,13 @@ require_once('../app/views/components/navbar.php');
 
 
 <div class="row">
-    <div class="col-lg-8 flex-d justify-content-center">
+    <div class="col-lg-8 flex-d justify-content-center bg-white" >
 
 
         <div class = "search-container col-lg-12">
             <form action="<?= ROOT_DIR ?>/search" method="get">
             <div class="row gap-2">
-                <input type="text" id="search-input" placeholder="Search.." name="search">
+                <input type="text" id="search-input"  placeholder="Search.." name="search">
                 <!-- Select Type of result -->
                 <select name="type" id="type">
                     <option value="all">All</option>

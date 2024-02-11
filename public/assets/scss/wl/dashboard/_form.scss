@@ -174,3 +174,9 @@ input {
     padding: 12px 20px;
     font-weight: 600;
 }
+
+input.invert {
+    background: $color-lightest;
+    color: $white-text;
+    border: 2px solid $color-primary;
+}

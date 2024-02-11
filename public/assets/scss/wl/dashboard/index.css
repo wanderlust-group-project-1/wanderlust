@@ -1569,6 +1569,12 @@ input {
   font-weight: 600;
 }
 
+input.invert {
+  background: #EBEFE3;
+  color: #FFFFFF;
+  border: 2px solid #8D9E6F;
+}
+
 .img-fluid {
   max-width: 100%;
   height: auto;
@@ -2224,4 +2230,8 @@ input {
 .row .col-md-12 .card .row .col-md-3 .card-body .btn-primary:hover {
   background-color: #0069d9;
   border-color: #0062cc;
+}
+
+.bg-white {
+  background-color: #fff;
 }/*# sourceMappingURL=index.css.map */
