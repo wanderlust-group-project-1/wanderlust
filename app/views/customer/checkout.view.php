@@ -76,7 +76,7 @@ require_once('../app/views/components/navbar.php');
             <div class="row gap-2 ">
                 <!-- <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary btn-full btn-lg">Pay</a> -->
 
-                <button  id="pay" class="btn btn-primary btn-full btn-lg" type="button">Pay</button>
+                <button id="pay" class="btn btn-primary btn-full btn-lg" type="button">Pay</button>
             </div>
 
         </div>
@@ -89,30 +89,28 @@ require_once('../app/views/components/navbar.php');
 </div>
 
 <script>
-
-
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Event listener for the button click
 
-        $('#pay').on('click', function () {
+        $('#pay').on('click', function() {
             pay();
         });
 
     });
-    
-    
-    function pay(){
+
+
+    function pay() {
 
         $.ajax({
-            headers:{
+            headers: {
                 'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
-            
+
             },
             type: "GET",
 
             url: "<?php echo ROOT_DIR ?>/api/pay/cart",
 
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 paymentGateWay(response.data)
             }
@@ -135,7 +133,30 @@ require_once('../app/views/components/navbar.php');
                 payhere.onCompleted = function onCompleted(orderId) {
                     console.log("Payment completed. OrderID:" + orderId);
 
-                    window.location.href = "<?php echo ROOT_DIR ?>/pay/complete";
+                    // notify
+                    $.ajax({
+                        url: "<?php echo ROOT_DIR ?>/api/pay/notify", // URL to your PHP script that will handle the notification
+                        type: "POST", // Use POST method
+                        headers: {
+                            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                        },
+                        data: {
+                            merchant_id: data.merchant_id,
+                            order_id: data.orderId,
+                            payhere_amount: data.amount,
+                            payhere_currency: "LKR",
+                            status_code: 2,
+                            md5sig: data.hash
+                        }, // Send the data as part of the request
+                        success: function(response) {
+                            console.log("Notification sent. Server responded with: ", response);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error sending notification: ", textStatus, errorThrown);
+                        }
+                    });
+
+                    // window.location.href = "<?php echo ROOT_DIR ?>/pay/complete";
 
 
                     // Note: validate the payment and show success or failure page to the customer
