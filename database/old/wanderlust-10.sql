@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 12, 2024 at 12:57 PM
+-- Generation Time: Feb 11, 2024 at 03:12 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -124,12 +124,6 @@ CREATE DEFINER=`root`@`%` PROCEDURE `PayCartAndGenerateRentItems` (IN `customerI
     JOIN item ON cart_item.item_id = item.id
     WHERE cart.customer_id = customerID;
 
-END$$
-
-CREATE DEFINER=`root`@`%` PROCEDURE `PaymentComplete` (IN `reference_number_input` VARCHAR(255))   BEGIN
-    UPDATE payment
-    SET status = 'completed'
-    WHERE reference_number = reference_number_input;
 END$$
 
 DELIMITER ;
@@ -421,16 +415,10 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (2, '2024-02-11 14:54:52', 'pending', 1206.00, NULL, 'RNT00002'),
 (3, '2024-02-11 14:57:20', 'pending', 1206.00, NULL, 'RNT00003'),
 (4, '2024-02-11 14:58:35', 'pending', 1206.00, NULL, 'RNT00004'),
-(5, '2024-02-11 14:59:19', 'completed', 1206.00, NULL, 'RNT00005'),
+(5, '2024-02-11 14:59:19', 'pending', 1206.00, NULL, 'RNT00005'),
 (6, '2024-02-11 15:01:59', 'pending', 2406.00, NULL, 'RNT00006'),
 (7, '2024-02-11 15:03:32', 'pending', 1206.00, NULL, 'RNT00007'),
-(8, '2024-02-11 15:05:58', 'pending', 1206.00, NULL, 'RNT00008'),
-(9, '2024-02-12 12:19:42', 'pending', 1206.00, NULL, 'RNT00009'),
-(10, '2024-02-12 12:27:14', 'pending', 1206.00, NULL, 'RNT00010'),
-(11, '2024-02-12 12:31:52', 'pending', 1200.00, NULL, 'RNT00011'),
-(12, '2024-02-12 12:48:13', 'pending', 1206.00, NULL, 'RNT00012'),
-(13, '2024-02-12 12:51:24', 'pending', 1206.00, NULL, 'RNT00013'),
-(14, '2024-02-12 12:54:35', 'completed', 1206.00, NULL, 'RNT00014');
+(8, '2024-02-11 15:05:58', 'pending', 1206.00, NULL, 'RNT00008');
 
 -- --------------------------------------------------------
 
@@ -468,13 +456,7 @@ INSERT INTO `rent` (`id`, `customer_id`, `start_date`, `end_date`, `status`, `to
 (13, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00),
 (14, 32, '2024-02-22', '2024-04-30', 'pending', 2406.00, 0.00),
 (15, 32, '2024-02-06', '2024-02-28', 'pending', 1206.00, 0.00),
-(16, 32, '2024-02-12', '2024-02-29', 'pending', 1206.00, 0.00),
-(17, 32, '2024-02-06', '2024-02-29', 'pending', 1206.00, 0.00),
-(18, 32, '2024-02-13', '2024-02-28', 'pending', 1206.00, 0.00),
-(19, 32, '2024-02-13', '2024-02-28', 'pending', 1200.00, 0.00),
-(20, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00),
-(21, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00),
-(22, 32, '2024-02-14', '2024-02-28', 'pending', 1206.00, 0.00);
+(16, 32, '2024-02-12', '2024-02-29', 'pending', 1206.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -599,18 +581,7 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (37, 15, 2),
 (38, 15, 36),
 (40, 16, 36),
-(41, 16, 2),
-(43, 17, 2),
-(44, 17, 36),
-(46, 18, 36),
-(47, 18, 2),
-(49, 19, 36),
-(50, 20, 2),
-(51, 20, 36),
-(53, 21, 36),
-(54, 21, 2),
-(56, 22, 36),
-(57, 22, 2);
+(41, 16, 2);
 
 -- --------------------------------------------------------
 
@@ -636,13 +607,7 @@ INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`) VALUES
 (5, 13, 5),
 (6, 14, 6),
 (7, 15, 7),
-(8, 16, 8),
-(9, 17, 9),
-(10, 18, 10),
-(11, 19, 11),
-(12, 20, 12),
-(13, 21, 13),
-(14, 22, 14);
+(8, 16, 8);
 
 -- --------------------------------------------------------
 
@@ -1006,13 +971,13 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1048,13 +1013,13 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
@@ -1066,13 +1031,13 @@ ALTER TABLE `rental_services`
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tips`

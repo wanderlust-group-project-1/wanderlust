@@ -64,13 +64,35 @@ class Pay {
                     $order_id . 
                     $payhere_amount . 
                     $payhere_currency . 
-                    $status_code . 
                     strtoupper(md5($merchant_secret)) 
                 ) 
             );
                 
             if (($local_md5sig === $md5sig) AND ($status_code == 2) ){
+
+                $payment = new PaymentModel;
+                $data = $payment->completePayment(['reference_number' =>  $order_id ]);
+
+
+                
+                show("Transaction Successful");
+
+                
+
+                
+
+
+                
+
             }
+            else{
+                show("Invalid Transaction");
+            }
+
+            // show($_POST);
+            // show($local_md5sig);
+            // show($md5sig);
+            // show($status_code);
 
     }
 
