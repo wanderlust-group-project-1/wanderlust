@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 12, 2024 at 12:57 PM
+-- Generation Time: Feb 02, 2024 at 02:25 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -21,119 +21,6 @@ SET time_zone = "+00:00";
 -- Database: `wanderlust`
 --
 
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`%` PROCEDURE `CompleteRentProcess` (IN `customerID` INT)   BEGIN
-    -- Variable to hold the last inserted rent ID
-    DECLARE lastRentID INT;
-    DECLARE lastPaymentID INT; 
-    DECLARE reference_number VARCHAR(255);
-    DECLARE total_amount DECIMAL(10, 2);
-
-    -- Insert into rent table and capture the last inserted ID
-    INSERT INTO rent (customer_id, start_date, end_date, status, total, paid_amount)
-    SELECT customer_id, start_date, end_date, 'pending', SUM(equipment.fee), '0.00'
-    FROM cart
-    JOIN cart_item ON cart.id = cart_item.cart_id
-    JOIN item ON cart_item.item_id = item.id
-    JOIN equipment ON item.equipment_id = equipment.id
-    WHERE cart.customer_id = customerID
-    GROUP BY cart.id;
-
-    -- Capture the last inserted ID
-    SET lastRentID = LAST_INSERT_ID();
-
-    -- Insert into rent_item for each item related to the cart
-    INSERT INTO rent_item (rent_id, item_id)
-    SELECT lastRentID, item.id
-    FROM cart
-    JOIN cart_item ON cart.id = cart_item.cart_id
-    JOIN item ON cart_item.item_id = item.id
-    WHERE cart.customer_id = customerID;
-    
--- total amount of the rent
-    SELECT total INTO total_amount
-    FROM rent
-    WHERE id = lastRentID;
-    
-
-
-    -- INSERT INTO payment (amount) 
-    -- SELECT total
-    -- FROM rent
-    -- WHERE id = lastRentID;
-
-    INSERT INTO payment (amount, status)
-    VALUES (total_amount, 'pending');
-
-
-    -- Generate Reference Number
-    -- get the last inserted payment ID
-    SET lastPaymentID = LAST_INSERT_ID();
-    SET reference_number = CONCAT('RNT', LPAD(lastPaymentID, 5, '0'));
-
-    UPDATE payment
-    SET reference_number = reference_number
-    WHERE id = lastPaymentID;
-
-    INSERT INTO rent_pay (rent_id, payment_id) 
-    SELECT lastRentID, lastPaymentID;
-
-
-
-
-    -- Delete cart items associated with the customer's cart
-    DELETE cart_item FROM cart_item
-    JOIN cart ON cart_item.cart_id = cart.id
-    WHERE cart.customer_id = customerID;
-
-
-    -- Delete the cart associated with the customer
-    DELETE FROM cart
-    WHERE customer_id = customerID;
-
-    -- Return the last inserted payment ID
-    SELECT reference_number AS orderID , total_amount AS totalAmount;
-
-END$$
-
-CREATE DEFINER=`root`@`%` PROCEDURE `PayCartAndGenerateRentItems` (IN `customerID` INT)   BEGIN
-    -- Variable to hold the last inserted rent ID
-    DECLARE lastRentID INT;
-
-    -- Insert into rent table and capture the last inserted ID
-    INSERT INTO rent (customer_id, start_date, end_date, status, total, paid_amount)
-    SELECT customer_id, start_date, end_date, 'pending', SUM(equipment.fee), '0.00'
-    FROM cart
-    JOIN cart_item ON cart.id = cart_item.cart_id
-    JOIN item ON cart_item.item_id = item.id
-    JOIN equipment ON item.equipment_id = equipment.id
-    WHERE cart.customer_id = customerID
-    GROUP BY cart.id;
-
-    -- Capture the last inserted ID
-    SET lastRentID = LAST_INSERT_ID();
-
-    -- Insert into rent_item for each item related to the cart
-    INSERT INTO rent_item (rent_id, item_id)
-    SELECT lastRentID, item.id
-    FROM cart
-    JOIN cart_item ON cart.id = cart_item.cart_id
-    JOIN item ON cart_item.item_id = item.id
-    WHERE cart.customer_id = customerID;
-
-END$$
-
-CREATE DEFINER=`root`@`%` PROCEDURE `PaymentComplete` (IN `reference_number_input` VARCHAR(255))   BEGIN
-    UPDATE payment
-    SET status = 'completed'
-    WHERE reference_number = reference_number_input;
-END$$
-
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -143,8 +30,8 @@ DELIMITER ;
 CREATE TABLE `cart` (
   `id` int NOT NULL,
   `customer_id` int NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date DEFAULT NULL
+  `start_day` date NOT NULL,
+  `end_day` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -248,8 +135,7 @@ INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`
 (39, 25, 'Abbot Jimenez', 85.00, 'Ea eiusmod id asper', 'Cooking', 70, 83.00, '65bcc5db96eb1.jpg'),
 (40, 25, 'Abbot Jimenez', 85.00, 'Ea eiusmod id asper', 'Cooking', 70, 83.00, '65bcc5e2c9f3e.jpg'),
 (41, 25, 'Baker Mueller', 69.00, 'Labore quis est veni', 'Footwear', 34, 6.00, '65bcc65dcc3bf.jpg'),
-(42, 25, 'Baker Mueller', 69.00, 'Labore quis est veni', 'Footwear', 34, 6.00, '65bcc674ecbcb.jpg'),
-(43, 25, 'BackPack - 80L', 25000.00, 'Black', 'Backpack', 4, 1200.00, '65c38635992f2.jpg');
+(42, 25, 'Baker Mueller', 69.00, 'Labore quis est veni', 'Footwear', 34, 6.00, '65bcc674ecbcb.jpg');
 
 -- --------------------------------------------------------
 
@@ -371,11 +257,7 @@ INSERT INTO `item` (`id`, `equipment_id`, `status`) VALUES
 (31, 42, NULL),
 (32, 42, NULL),
 (33, 42, NULL),
-(34, 42, NULL),
-(35, 43, 'Available'),
-(36, 43, 'Available'),
-(37, 43, 'Available'),
-(38, 43, 'Available');
+(34, 42, NULL);
 
 -- --------------------------------------------------------
 
@@ -394,43 +276,9 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `latitude`, `longitude`) VALUES
+(1, 3.000000, 34.000000),
 (2, 3.000000, 34.000000),
 (3, 7.807752, 80.315864);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `id` int NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` enum('completed','pending','failed','refunded') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'pending',
-  `amount` decimal(10,2) NOT NULL,
-  `payment_method` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `reference_number` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `reference_number`) VALUES
-(1, '2024-02-11 14:29:28', 'pending', 1206.00, NULL, 'RNT00001'),
-(2, '2024-02-11 14:54:52', 'pending', 1206.00, NULL, 'RNT00002'),
-(3, '2024-02-11 14:57:20', 'pending', 1206.00, NULL, 'RNT00003'),
-(4, '2024-02-11 14:58:35', 'pending', 1206.00, NULL, 'RNT00004'),
-(5, '2024-02-11 14:59:19', 'completed', 1206.00, NULL, 'RNT00005'),
-(6, '2024-02-11 15:01:59', 'pending', 2406.00, NULL, 'RNT00006'),
-(7, '2024-02-11 15:03:32', 'pending', 1206.00, NULL, 'RNT00007'),
-(8, '2024-02-11 15:05:58', 'pending', 1206.00, NULL, 'RNT00008'),
-(9, '2024-02-12 12:19:42', 'pending', 1206.00, NULL, 'RNT00009'),
-(10, '2024-02-12 12:27:14', 'pending', 1206.00, NULL, 'RNT00010'),
-(11, '2024-02-12 12:31:52', 'pending', 1200.00, NULL, 'RNT00011'),
-(12, '2024-02-12 12:48:13', 'pending', 1206.00, NULL, 'RNT00012'),
-(13, '2024-02-12 12:51:24', 'pending', 1206.00, NULL, 'RNT00013'),
-(14, '2024-02-12 12:54:35', 'completed', 1206.00, NULL, 'RNT00014');
 
 -- --------------------------------------------------------
 
@@ -441,40 +289,16 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 CREATE TABLE `rent` (
   `id` int NOT NULL,
   `customer_id` int NOT NULL,
+  `equipment_id` int NOT NULL,
+  `rental_service_id` int NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
-  `paid_amount` decimal(10,2) DEFAULT NULL
+  `payment_method` varchar(255) DEFAULT NULL,
+  `payment_status` varchar(255) DEFAULT NULL,
+  `payment_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `rent`
---
-
-INSERT INTO `rent` (`id`, `customer_id`, `start_date`, `end_date`, `status`, `total`, `paid_amount`) VALUES
-(1, 101, '2024-01-01', '2024-01-15', 'Active', 150.00, 0.00),
-(2, 102, '2024-02-01', '2024-02-10', 'Active', 120.00, 0.00),
-(3, 103, '2024-03-01', '2024-03-20', 'Completed', 200.00, 0.00),
-(4, 104, '2024-04-01', '2024-04-05', 'Cancelled', 50.00, 0.00),
-(5, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00),
-(6, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00),
-(7, 32, '2024-06-11', '2024-07-17', 'pending', 1206.00, 0.00),
-(8, 32, '2024-02-13', '2024-03-26', 'pending', 1200.00, 0.00),
-(9, 32, '2024-02-29', '2024-04-17', 'pending', 1206.00, 0.00),
-(10, 32, '2024-02-07', '2024-04-25', 'pending', 1206.00, 0.00),
-(11, 32, '2024-02-14', '2024-04-29', 'pending', 1206.00, 0.00),
-(12, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00),
-(13, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00),
-(14, 32, '2024-02-22', '2024-04-30', 'pending', 2406.00, 0.00),
-(15, 32, '2024-02-06', '2024-02-28', 'pending', 1206.00, 0.00),
-(16, 32, '2024-02-12', '2024-02-29', 'pending', 1206.00, 0.00),
-(17, 32, '2024-02-06', '2024-02-29', 'pending', 1206.00, 0.00),
-(18, 32, '2024-02-13', '2024-02-28', 'pending', 1206.00, 0.00),
-(19, 32, '2024-02-13', '2024-02-28', 'pending', 1200.00, 0.00),
-(20, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00),
-(21, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00),
-(22, 32, '2024-02-14', '2024-02-28', 'pending', 1206.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -558,95 +382,6 @@ INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rent_item`
---
-
-CREATE TABLE `rent_item` (
-  `id` int NOT NULL,
-  `rent_id` int NOT NULL,
-  `item_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `rent_item`
---
-
-INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
-(1, 5, 1),
-(2, 5, 1),
-(3, 5, 35),
-(4, 5, 35),
-(8, 6, 1),
-(9, 6, 1),
-(10, 6, 35),
-(11, 6, 35),
-(15, 7, 36),
-(16, 7, 2),
-(18, 8, 36),
-(19, 9, 36),
-(20, 9, 2),
-(22, 10, 36),
-(23, 10, 2),
-(25, 11, 36),
-(26, 11, 2),
-(28, 12, 36),
-(29, 12, 2),
-(31, 13, 36),
-(32, 13, 2),
-(34, 14, 36),
-(35, 14, 2),
-(36, 14, 36),
-(37, 15, 2),
-(38, 15, 36),
-(40, 16, 36),
-(41, 16, 2),
-(43, 17, 2),
-(44, 17, 36),
-(46, 18, 36),
-(47, 18, 2),
-(49, 19, 36),
-(50, 20, 2),
-(51, 20, 36),
-(53, 21, 36),
-(54, 21, 2),
-(56, 22, 36),
-(57, 22, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rent_pay`
---
-
-CREATE TABLE `rent_pay` (
-  `id` int NOT NULL,
-  `rent_id` int NOT NULL,
-  `payment_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `rent_pay`
---
-
-INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`) VALUES
-(1, 9, 1),
-(2, 10, 2),
-(3, 11, 3),
-(4, 12, 4),
-(5, 13, 5),
-(6, 14, 6),
-(7, 15, 7),
-(8, 16, 8),
-(9, 17, 9),
-(10, 18, 10),
-(11, 19, 11),
-(12, 20, 12),
-(13, 21, 13),
-(14, 22, 14);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tips`
 --
 
@@ -669,7 +404,8 @@ INSERT INTO `tips` (`id`, `title`, `description`, `author`) VALUES
 (9, 'hello', 'sadfsdfdf', ''),
 (11, 'Going on a hike? Here\'s the must have medical kit', 'First Aid Kit:\r\n\r\nAlways carry a well-equipped first aid kit with items like bandages, antiseptic wipes, pain relievers, tweezers, and any necessary personal medications.\r\n\r\nKnow Basic First Aid:\r\n\r\nLearn basic first aid skills, such as how to treat minor injuries, manage blisters, and recognize signs of heat exhaustion, hypothermia, and altitude sickness.\r\n\r\n<br/>Sun Protection:\r\n\r\nUse sunscreen, wear a wide-brimmed hat, and cover exposed skin to protect against sunburn.\r\n\r\n<br/>Insect Repellent:\r\n\r\nUse insect repellent to prevent insect bites, and check for ticks regularly, especially in wooded areas.\r\n\r\n<br/>Foot Care:\r\n\r\nInvest in quality, moisture-wicking socks and well-fitting hiking boots to prevent blisters. Trim toenails to avoid ingrown nails.\r\n\r\n<br/>Proper Clothing:\r\n\r\nDress in layers, and choose moisture-wicking and breathable clothing to adapt to changing weather conditions. Don\'t forget to pack extra clothing in case of unexpected temperature drops.\r\n\r\n<br/>Stay Hydrated:\r\n\r\nDehydration can be a significant risk, especially in hot weather. Carry an adequate supply of clean water and drink regularly.', 'admin'),
 (13, 'Hello', 'abc adsdasda', 'admin'),
-(15, 'adsadasd', 'abc', 'admin');
+(15, 'adsadasd', 'abc', 'admin'),
+(16, 'iijiljlm', 'nknk', 'admin');
 
 -- --------------------------------------------------------
 
@@ -949,12 +685,6 @@ ALTER TABLE `locations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `rent`
 --
 ALTER TABLE `rent`
@@ -967,18 +697,6 @@ ALTER TABLE `rental_services`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `fk_rental_services_location` (`location_id`);
-
---
--- Indexes for table `rent_item`
---
-ALTER TABLE `rent_item`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `rent_pay`
---
-ALTER TABLE `rent_pay`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tips`
@@ -1006,13 +724,13 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1024,7 +742,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `guides`
@@ -1045,34 +763,16 @@ ALTER TABLE `locations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
 --
 ALTER TABLE `rental_services`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
-
---
--- AUTO_INCREMENT for table `rent_item`
---
-ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
-
---
--- AUTO_INCREMENT for table `rent_pay`
---
-ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tips`

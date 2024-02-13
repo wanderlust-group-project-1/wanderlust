@@ -2,26 +2,27 @@
 .btn {
     cursor: pointer;
     border: none;
-    background: $color-primary;
+    background: $color-darker;
     outline: none;
-    color: $white-text;
-    border: 2px solid $color-primary;
-    border-radius: 12px;
-    padding: 12px 20px;
-    font-weight: 600;
+    color: $color-lightest;
+    border-radius: 10px;
+    padding: 10px 10px;
+    font-weight: 500;
     font-size: medium;
-  
+    font-family: sans-serif;
+    align-self: center;
+    margin-bottom: 8px;
   
     // Initial background with transparent gradient
-    background-image: linear-gradient(to right, $color-lightest  50%, $color-primary 50%);
+    background-image: linear-gradient(to right, $color-light 50%, $color-darker 50%);
     background-size: 200% 100%;
     background-position: right bottom;
-    transition: background-position 0.2s ease-out;
+    transition: background-position 0.3s ease-out;
   
     // Hover effect
     &:hover {
       background-position: left bottom;
-      color: $color-primary;
+      color: $color-darker;
       // weight
     }
       // button with disabled state (disabled=true)
@@ -91,13 +92,27 @@
   
   // full width button
   .btn-full {
-    width: 100%;
+    width: 50%;
+    position:relative;
   }
 
 
-  
+  .btn-lg {
+    padding: 15px 20px;
+    font-size: large;
+  }
 
-
+  .btn-small {
+    background-color: $color-lightest;
+    color: $color-darker;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border-width: .5px;
+    border-style: solid;
+    border-color: $color-darker;
+    font-weight: $font-medium;
+}
 
 
 

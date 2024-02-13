@@ -1,32 +1,32 @@
-// $sidebar-background: #f1f1f1; // Off-white background color
-// $theme-color: #4C5039;        // Theme color
-// $sidebar-width: 250px;
-// $sidebar-top: 65px;
+$sidebar-background: #EBEFE3; // Off-white background color
+$theme-color: #B2BDA0;        // Theme color
+$sidebar-width: 250px;
+$sidebar-top: 65px;
 
-// /* Sidebar styles */
-// .sidebar {
-//     width: $sidebar-width;
-//     height: 100vh;
-//     background-color: $color-dark;
-//     color: $white-text;
-//     position: fixed;
-//     left: 0;
-//     top: $sidebar-top;
-//     padding-top: 20px;
-//     transition: margin-left 0.5s;
-//     z-index: 5;
-//     overflow-y: auto;
-//     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
-//     border-radius: 15px;
+/* Sidebar styles */
+.sidebar {
+    width: $sidebar-width;
+    height: 100vh;
+    background-color: $color-dark;
+    color: $white-text;
+    position: fixed;
+    left: 0;
+    top: $sidebar-top;
+    padding-top: 20px;
+    transition: margin-left 0.5s;
+    z-index: 5;
+    overflow-y: auto;
+    box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
+    border-radius: 15px;
 
-//     @media screen and (max-width: 768px) {
-//         margin-left: -350px; // Hide sidebar initially
+    @media screen and (max-width: 768px) {
+        margin-left: -350px; // Hide sidebar initially
 
-//         &.active {
-//             margin-left: 0; // Show sidebar when active
-//         }
-//     }
-// }
+        &.active {
+            margin-left: 0; // Show sidebar when active
+        }
+    }
+}
 
 // /* Navigation styles */
 // .nav {

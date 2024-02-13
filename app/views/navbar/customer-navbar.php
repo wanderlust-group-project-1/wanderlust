@@ -1,5 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-<!-- <script src="../../../public/assets/js/navbar.js"></script> -->
+
 
 <header class="header">
     <!-- <nav class="nav__container"> -->
@@ -100,7 +100,7 @@
                 <?php } else {  ?>
 
 
-                    <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+                    <div class="btn-small"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
 
                 <?php } ?>
 

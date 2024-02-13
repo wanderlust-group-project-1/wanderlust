@@ -28,13 +28,13 @@ require_once('../app/views/components/navbar.php');
 
 
 <div class="row">
-    <div class="col-lg-8 flex-d justify-content-center">
+    <div class="col-lg-8 flex-d justify-content-center " >
 
 
         <div class = "search-container col-lg-12">
             <form action="<?= ROOT_DIR ?>/search" method="get">
             <div class="row gap-2">
-                <input type="text" id="search-input" placeholder="Search.." name="search">
+                <input type="text" id="search-input"  placeholder="Search.." name="search">
                 <!-- Select Type of result -->
                 <select name="type" id="type">
                     <option value="all">All</option>
@@ -109,15 +109,8 @@ require_once('../app/views/components/navbar.php');
 <div class="modal" id="cart-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div class=" col-lg-12 flex-d-c gap-2 ">
-            <h2 class="justify-content-center flex-d"> Cart </h2>
-            <div class="row gap-2">
-                <div class="col-lg-12" id="cart-items">
-                </div>
-            </div>
-            <div class="row gap-2">
-                <button id="checkout" class="btn" type="button">Checkout</button>
-            </div>
+        <div id ="cart-data">
+
         </div>
     </div>
 </div>
@@ -229,7 +222,32 @@ var cartClose = document.getElementById("cart-modal").querySelector(".close");
 
 // When the user clicks the button, open the modal
 cartModalBtn.onclick = function() {
+
+    // get cart items
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/cart/viewCart',
+        method: 'GET',
+        success: function(data) {
+            $('#cart-data').html(data);
+            // console.log(data);
+            
+        },
+        error: function(err) {
+            console.log(err);
+        }
+
+    });
+
+
     cartModal.style.display = "block";
+    console.log("cart modal clicked");
+
+    // cartLoadScript();
+    // wait and load the script
+    setTimeout(cartLoadScript, 1000);
 }
 
 // When the user clicks on <span> (x) or anywhere outside of the modal, close it
@@ -243,6 +261,45 @@ window.onclick = function(event) {
     if (event.target == cartModal) {
         cartModal.style.display = "none";
     }
+}
+
+
+ function cartLoadScript(){
+
+    // cart-item
+    var removeButtons = document.querySelectorAll("#remove-from-cart");
+
+    removeButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var id = button.closest('#cart-item').getAttribute('data-id');
+            console.log(id);
+            removeItem(id);
+        });
+    });
+ }
+
+
+ function removeItem(id) {
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token'),
+            'Content-Type': 'application/json'
+        },
+        url: '<?= ROOT_DIR ?>/api/cart/removeItem',
+        method: 'POST',
+        data: JSON.stringify({
+            id: id
+        }),
+        success: function(data) {
+            // console.log(data);
+            // remove the item from the cart
+            $(`[data-id=${id}]`).remove();
+            getCartCount();
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
 }
 
 

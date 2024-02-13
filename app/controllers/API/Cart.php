@@ -65,4 +65,28 @@ class Cart {
     
     
         }
+
+        public function removeItem(string $a = '', string $b = '', string $c = ''):void {
+       
+            $request = new JSONRequest();
+            $response = new JSONResponse();
+    
+            $item = new CartItemModel;
+    
+            $data = [
+                    'customer_id' => UserMiddleware::getUser()['id'],
+                     'id' => $request->get('id'),
+                ];
+    
+            $result = $item->removeCartItem($data);
+    
+            $response->data([
+                'message' => 'Item removed from cart',
+                'status' => 'success'   
+            ])
+            ->statusCode(200)
+            ->send();
+    
+  
+            }
 }
