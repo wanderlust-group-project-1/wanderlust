@@ -24,6 +24,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background: $primary-bg;
     backdrop-filter: blur(67px);
     transition: transform 1s;
+    opacity: 7;
 
     .login-form {
         margin: auto;
@@ -45,13 +46,18 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         }
         
         h2 {
-            font-size: $header1;
+            font-size: 3.4rem;
             font-weight: 600;
             text-align:center;
             margin-bottom: 15px;
             color: $font-color;
             text-transform: uppercase;
             letter-spacing: 3px;
+        }
+
+        h3 {
+            font-size: 2.5rem;
+            color: #fff;
         }
 
         label-class {
@@ -63,7 +69,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         input[type="password"],
         select {
             font-weight: 400;
-            color: $gray-text-darker;
+            color: #47494b;
             display: block;
             background-color: #e5e5e5;
             width: 100%;
@@ -97,7 +103,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             font-size: small;
             text-align: center;
             margin-bottom: 15px;
-            color: $gray-text-dark;
+            color: #5C5E60;
         }
         p {
             text-align:center;

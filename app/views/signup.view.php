@@ -16,15 +16,15 @@ require_once('../app/views/components/navbar-auth.php');
     <div class="login-form">
         <div id="select" class="col  ">
             <div class="header">
-                <h1 class="signup-text">
+                <h2>
                     Who are you?
-                </h1>
+                </h2>
             </div>
             <div class="row">
                 <button class="signup-card" onclick="load('customer')">
                     <div class="btn-div">
                         <h3>Customer</h3>
-                        <p>Plan your journey now!</p>
+                        <h4>Plan your journey now!</h4>
                     </div>
                 </button>
             </div>
@@ -32,7 +32,7 @@ require_once('../app/views/components/navbar-auth.php');
                 <button class="signup-card" onclick="load('guide')">
                     <div class="btn-div">
                         <h3>Guide</h3>
-                        <p>Explore the extraordinary now!</p>
+                        <h4>Explore the extraordinary now!</h4>
                     </div>
                 </button>
             </div>
@@ -40,7 +40,7 @@ require_once('../app/views/components/navbar-auth.php');
                 <button class="signup-card" onclick="load('rental-service')">
                     <div class="btn-div">
                         <h3>Rental Service</h3>
-                        <p>Register your business now!</p>
+                        <h4>Register your business now!</h4>
                     </div>
                 </button>
             </div>
