@@ -8,10 +8,11 @@ require_once('../app/views/components/navbar-rental.php');
 
 
 
-<!-- <div class="dashboard">
+<div class="dashboard">
+    <?php require_once('../app/views/rental/layout/sidebar.php');
+    ?>
 
-
-<div class="sidebar-flow"></div> -->
+<div class="sidebar-flow"></div>
 
 
 <div class="dashboard-content"> 

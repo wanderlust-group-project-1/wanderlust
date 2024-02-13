@@ -214,13 +214,13 @@ $media-breakpoint: 768px;
     flex-wrap: wrap;
     align-items:center;
     justify-content: space-around;
-    // width: 90%;
+    width: 90%;
     height: auto;
     background-color: $color-lightest;
     gap: 20px;
-    margin-top: 8rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    // margin-top: 8rem;
+    // margin-left: 2rem;
+    // margin-right: 2rem;
 
     .dashboard-card {
       @include dashboard-card-common;
@@ -234,8 +234,8 @@ $media-breakpoint: 768px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 250px;
-  min-width: 250px;
+  width: 200px;
+  min-width: 200px;
   height: 100%;
   padding: 0;
   background-color: $color-lightest2;
