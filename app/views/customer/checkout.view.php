@@ -18,7 +18,7 @@ require_once('../app/views/components/navbar.php');
 <div class="container flex-d flex-md-c justify-content-center ">
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
-        <div class="card card-normal">
+        <div class="card card-normal ">
 
             <h2 class="justify-content-center flex-d"> Cart </h2>
             <div class="row gap-2 ">
