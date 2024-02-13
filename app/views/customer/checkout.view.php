@@ -7,6 +7,14 @@ require_once('../app/views/components/navbar.php');
 
 <!-- <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script> -->
 
+<?php
+                        $total = 0;
+                        foreach ($items as $item) {
+
+                            $total += $item->e_fee;
+                        }
+                        ?>
+
 <div class="container flex-d flex-md-c justify-content-center ">
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
@@ -57,17 +65,39 @@ require_once('../app/views/components/navbar.php');
 
     <div class=" col-lg-3 col-md-12 flex-d gap-2 ">
         <div class="card card-normal col-md-11 flex-d-c">
-            <h2 class="justify-content-center flex-d"> Checkout </h2>
+
+        <div class="">
+            <h2 class="justify-content-center flex-d"> Order Summary </h2>
+
+
+            <div class="row flex-d-r mt-5 gap-2 justify-content-between">
+        <h3> Total </h3> <h3> <?php echo $total; ?>  </h3>        
+        </div>
+            <div class=" row flex-d-r mt-5 gap-2 justify-content-between">
+            
+
+
+
+
+                        <h3 for="pay-full">Full Payment</h3>
+                        <input class="" type="checkbox" id="pay-full" name="pay-full" value="pay-full">
+                            
+                           
+            </div>
+        </div>
+
 
             <div class="row gap-4">
+
+                        <!-- select pay fully or patial  -->
+                        
+
+
+
                 <h3>Total: Rs. <span id="total">
 
                         <?php
-                        $total = 0;
-                        foreach ($items as $item) {
-
-                            $total += $item->e_fee;
-                        }
+ 
                         echo $total;
                         ?>
 
