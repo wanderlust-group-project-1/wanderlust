@@ -21,11 +21,11 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     align-items: center;
     width: 100%;
     height: 100%;
-    background: $primary-bg;
+    //background: $primary-bg;
     backdrop-filter: blur(67px);
     transition: transform 1s;
-    //opacity: 7;
-    //background-image: url('public/assets/images/background.jpg');
+    opacity: 7;
+    background-image: url('/public/assets/images/background.jpg');
 
     .login-container-col{
         display: flex;
