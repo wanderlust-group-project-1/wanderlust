@@ -146,7 +146,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 30px;
+        width: 350px; // Assuming the original value was intended
         height: 130px;
         border-radius: $border-radius;
         background: $primary-bg;
