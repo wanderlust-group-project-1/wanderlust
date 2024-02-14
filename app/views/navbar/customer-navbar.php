@@ -1,4 +1,5 @@
-<!-- <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/navbar.css"> -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
 
 <header class="header">
     <!-- <nav class="nav__container"> -->
@@ -13,8 +14,54 @@
                 <i class="ri-close-line nav__close"></i>
             </div>
         </div>
+
+        <!--=============== NAV MENU ===============-->
+        <!-- <div class="nav__menu" id="nav-menu"> -->
         <div class="nav__menu" id="nav-menu" >
             <ul class="nav__list">
+                <li><a href="#" class="nav__link">Home</a></li>
+
+                <!--=============== DROPDOWN 1 ===============-->
+                <li class="dropdown__item">
+                    <div class="nav__link">
+                        Dashboard <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                    </div>
+
+                    <ul class="dropdown__menu">
+                        <li>
+                            <a href="#" class="dropdown__link">
+                                My Booking
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav__link">Guides</a></li>
+                <li><a href="#" class="nav__link">Rental Services</a></li>
+                <li><a href="#" class="nav__link">Blogs</a></li>
+                <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
+
+                <!--=============== DROPDOWN 2 ===============-->
+                <li class="dropdown__item">
+                    <div class="nav__link">
+                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                    </div>
+
+                    <ul class="dropdown__menu">
+                        <li>
+                            <a href="#" class="dropdown__link">
+                                Add Complain
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown__link">
+                                My Complains
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
                 <!-- check role avalable or not -->
                 <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
                     $user = $_SESSION['USER'];   ?>
@@ -63,32 +110,18 @@
 </header>
 
 <script>
-    // Get the profile avatar element and the dropdown menu
-    var profileAvatar = document.querySelector('.profile-avatar');
-    var dropdownMenu = document.getElementById('nav-dropdown');
-
-    // Toggle the dropdown menu when clicking on the profile avatar
-    profileAvatar.addEventListener('click', function(event) {
-        // Prevent the default behavior of the anchor tags
-        event.preventDefault();
-
-        // Toggle the display style of the dropdown menu
-        if (dropdownMenu.style.display === 'block') {
-            dropdownMenu.style.display = 'none';
-        } else {
-            dropdownMenu.style.display = 'block';
-        }
-    });
-
-    // Close the dropdown menu if the user clicks outside of it
-    document.addEventListener('click', function(event) {
-        if (!profileAvatar.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.style.display = 'none';
-        }
-    });
-
-    // Prevent event propagation when clicking on dropdown links
-    dropdownMenu.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
+    const showMenu = (toggleId, navId) =>{
+    const toggle = document.getElementById(toggleId),
+          nav = document.getElementById(navId)
+ 
+    toggle.addEventListener('click', () =>{
+        // Add show-menu class to nav menu
+        nav.classList.toggle('show-menu')
+ 
+        // Add show-icon to show and hide the menu icon
+        toggle.classList.toggle('show-icon')
+    })
+ }
+ 
+ showMenu('nav-toggle','nav-menu')
 </script>
