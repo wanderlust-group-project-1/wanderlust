@@ -5,7 +5,6 @@
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/style.css">
 
         <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/admin-style.css"> -->
-        <!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/sidebar.css"> -->
 
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/scss/wl/dashboard/index.css">
 

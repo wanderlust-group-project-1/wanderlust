@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba368508930d9084aeca1468a42a8821",
+    "content-hash": "9188aa4ca82d091edea853a0c3a87e4c",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -222,7 +222,6 @@
             },
             "dist": {
                 "type": "zip",
-
                 "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/80735db690fe4fc5c76dfa7f9b770634285fa820",
                 "reference": "80735db690fe4fc5c76dfa7f9b770634285fa820",
                 "shasum": ""

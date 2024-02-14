@@ -6,6 +6,7 @@
 @import "./login";
 @import "./modal";
 @import "./customer";
+@import "./home";
 
 @import "./button";
 @import "./rowcol";
@@ -22,6 +23,8 @@
 @import "./common/flex";
 @import "./common/height";
 
+@import "./navbar/navbar";
+@import "./navbar/breakpoints";
 
 $breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
 $breakpoint-md: 768px; // Medium devices (tablets, 768px and up)

@@ -9,9 +9,13 @@ $header1: 3.4rem;
 $header2: 2.5rem;
 $header3: 2.0rem;
 $header4: 1.5rem;
+$header5: 4.5rem;
 
+
+$smaller-text: 1.2rem;
 $text: 1.56rem;
 $small-text: 1.4rem;
+$bigger-text: 5rem;
 
 // $bg-color: #4C5039;
 // $bg-color-darker: #1a3842b9;
@@ -68,7 +72,7 @@ $color-darker:#2F3B1C;
 $color-light:#B2BDA0;
 $color-lighter:#EBEFE3;
 
-$color-lightest:#EBEFE3;
+$color-lightest:#F3F3F3;
 $color-lightest2:#EBEFE3;
 
 
@@ -110,11 +114,20 @@ $info-color: #567356; // Dark, vibrant green
 // yello warning
 $warning-color: #FFC107;
 
-
-
 $breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
 $breakpoint-md: 768px; // Medium devices (tablets, 768px and up)
 $breakpoint-lg: 992px;
+
+$body-font:"Poppins", sans-serif;
+$normal-font-size: .938rem;
+
+
+$font-regular: 400;
+$font-medium:500;
+$font-semi-bold: 600;
+
+$z-tooltip: 10;
+$z-fixed: 100;
 
 html {
   font-size: 62.5%;
@@ -180,7 +193,12 @@ p {
 // }
 
 li {
-  font-size: $text;
+  font-size: $smaller-text;
+}
+
+span{
+  font-size: $small-text;
+  font-weight: $font-medium;
 }
 
 thead,
@@ -317,6 +335,7 @@ body {
 
 }
 
+
 .form__radios {
   display: grid;
   gap: 1em;
@@ -347,4 +366,8 @@ td {
 tfoot {
   border-top: 1px solid #b4b4b4;
   font-weight: 600;
+
+.title{
+  font-size: $bigger-text;
+  
 }

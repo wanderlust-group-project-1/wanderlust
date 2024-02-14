@@ -102,11 +102,25 @@
     font-size: large;
   }
 
+
   .btn-signup {
     width: 100%;
     position: relative;
   }
 
+
+
+  .btn-small {
+    background-color: $color-lightest;
+    color: $color-darker;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border-width: .5px;
+    border-style: solid;
+    border-color: $color-darker;
+    font-weight: $font-medium;
+}
 
 
 
