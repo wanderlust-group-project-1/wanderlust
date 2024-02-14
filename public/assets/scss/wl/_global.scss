@@ -149,7 +149,12 @@ h2 {
   color: $color-dark;
 }
 
-//h3
+h3 {
+  font-family: sans-serif;
+  font-weight: 300;
+  font-size: $header2;
+  color: #ffff;
+}
 
 h4 {
   margin-top: 5px;
@@ -158,9 +163,18 @@ h4 {
   color: $color-dark;
   text-align: center;
 }
+
 h5 {
   font-weight: 400;
   white-space: nowrap;
+}
+
+h6 {
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: $header3;
+  color: $gray-text-dark;
+  font-style: italic;
 }
 
 p {
@@ -320,6 +334,38 @@ body {
   background-color: $color-lightest;
 
 }
+
+
+.form__radios {
+  display: grid;
+  gap: 1em;
+}
+
+.form__radio {
+  align-items: center;
+  background-color: #fefdfe;
+  border-radius: 1em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.0625);
+  display: flex;
+  padding: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  inline-size: 100%;
+}
+
+tbody {
+  color: #b4b4b4;
+}
+
+td {
+  padding-block: 0.125em;
+}
+
+tfoot {
+  border-top: 1px solid #b4b4b4;
+  font-weight: 600;
 
 .title{
   font-size: $bigger-text;
