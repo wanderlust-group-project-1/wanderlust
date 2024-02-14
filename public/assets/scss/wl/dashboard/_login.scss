@@ -1,3 +1,351 @@
-login-container {
+$primary-bg: #B2BDA0;
+$secondary-bg: #fff;
+$shadow-color: rgba(0, 0, 0, 0.3);
+$border-radius: 5px;
+$border-color: #ccc;
+$font-color: #2a4628;
+$hover-bg: #8D9E6F;
+$tooltip-bg: #fff;
+$tooltip-color: #BCAB86;
+$button-bg: #8D9E6F;
+$button-color: #2F3B1C;
+$form-field-bg: #EBEFE3;
+$form-field-border: none;
+$form-field-radius: 5px;
+$form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+
+.login-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: $primary-bg;
+    backdrop-filter: blur(67px);
+    transition: transform 1s;
+    //opacity: 7;
+    //background-image: url('public/assets/images/background.jpg');
+
+    .login-container-col{
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .login-form {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 600px;
+        width: 550px;
+        height: fit-content;
+        padding: 60px;
+        border-radius: $border-radius;
+        background-color: $secondary-bg;
+        //box-shadow: 0 5px 10px $shadow-color;
+
+        form {
+            flex-direction: column;
+            // justify-content: center;
+            // align-items: center;
+        }
+        
+        h2 {
+            font-size: 3.4rem;
+            font-weight: 600;
+            text-align:center;
+            margin-bottom: 15px;
+            color: $font-color;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        label-class {
+           font-size: medium;
+           font-weight: 600; 
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            font-weight: 400;
+            color: #47494b;
+            display: block;
+            background-color: #e5e5e5;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: $form-field-border;
+            border-radius: $form-field-radius;
+            box-shadow: $form-field-shadow;
+        }
+
+        // input[type="submit"], 
+        // button[name="submit"] {
+        //     display: block;
+        //     width: 100%;
+        //     padding: 10px;
+        //     border: 1px solid #BCAB86;
+        //     border-radius: $form-field-radius;
+        //     background-color: $button-bg;
+        //     color: $button-color;
+        //     font-size: 16px;
+        //     cursor: pointer;
+        //     transition: background-color 0.3s ease;
+            
+        //     &:hover {
+        //         background-color: $hover-bg;
+        //         color: $font-color;
+        //     }
+        //}
+
+        .message-text {
+            font-size: small;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #5C5E60;
+        }
+        p {
+            text-align:center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: $font-color;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            &:hover {
+                color: $hover-bg;
+            }
+        }
+
+        #error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .main {
+            display:flex;
+            justify-content: center;
+        }
     
+    }
+
+    
+    .signup-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 130px;
+        border-radius: $border-radius;
+        background: $primary-bg;
+        margin: 20px 0;
+        text-align: center;
+        border: 1px solid $border-color;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $hover-bg;
+        }
+
+        .btn-div {
+            text-align: center;
+        }
+
+        h3{
+            color: $font-color;
+            margin: 0;
+            padding: 10px;
+        }
+        
+         p{
+            color: $font-color;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    }
+
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            background-color: $tooltip-bg;
+            color: $tooltip-color;
+            border-radius: 4px;
+            padding: 5px;
+            top: 0%;    
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s;
+            width: 75%;
+            }
+            .tooltip-trigger {
+                background-color: $secondary-bg;
+                color: $tooltip-color;
+                border-radius: 50%;
+                padding: 1px;
+                margin: 1px;
+                font-size: 1.5rem;
+                position: relative;
+                &:hover + .tooltip {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+        
+        .file-input-container,
+        .location-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid $border-color;
+            border-radius: $form-field-radius;
+            padding: 10px;
+            margin-top: 10px;
+        
+            .file-label,
+            .location-button {
+                background-color: $button-bg;
+                color: $button-color;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        
+            .file-input {
+                position: relative;
+                width: 100%;
+                opacity: 0;
+                cursor: pointer;
+            }
+        }
+    }
+
+    /* Map Styles */
+   /* Map Styles */
+   
+.location-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .modal-content {
+        background-color: $secondary-bg;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid $border-color;
+        width: 80%;
+        max-width: 800px;
+        position: relative;
+        border-radius: $border-radius;
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                color: $font-color;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+
+        .map-canvas {
+            width: 100%;
+            height: 300px;
+            border-radius: $border-radius;
+            position: fixed;
+        }
+    }
+}
+
+/* Additional Styles */
+#pac-container,
+.pac-card,
+.pac-controls {
+    // Define specific styles for these elements here.
+    #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+    }
+
+    .pac-container {
+        z-index: 1051 !important;
+    }
+
+    .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: $secondary-bg;
+        font-family: Roboto;
+    }
+
+    .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+    }
+
+    .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    #pac-input {
+        background-color: $secondary-bg;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        max-width: 400px;
+
+        &:focus {
+            border-color: #4d90fe;
+        }
+    }
+
+    #title {
+        color: $secondary-bg;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+    }
+
+    #target {
+        width: 345px;
+    }
 }
