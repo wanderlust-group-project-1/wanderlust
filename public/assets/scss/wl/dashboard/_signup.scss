@@ -14,23 +14,26 @@ $form-field-border: none;
 $form-field-radius: 5px;
 $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 
-.login-container {
+.signup-container {
     position: relative;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 50%;
     height: 100%;
     background: $primary-bg;
     backdrop-filter: blur(67px);
     transition: transform 1s;
+    opacity: 7;
+    margin-top: 5px;
 
-    .login-form {
+    .signup-form {
         margin: auto;
         display: flex;
         justify-content: center;
         flex-direction: column;
-        max-width: 600px;
+        max-width: 800px;
         width: 550px;
         height: fit-content;
         padding: 60px;
@@ -38,14 +41,22 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         background-color: $secondary-bg;
         //box-shadow: 0 5px 10px $shadow-color;
 
+        header {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
         form {
-            flex-direction: column;
+            flex-direction: row;
             // justify-content: center;
             // align-items: center;
         }
         
         h2 {
-            font-size: $header1;
+            font-size: 3.4rem;
             font-weight: 600;
             text-align:center;
             margin-bottom: 15px;
@@ -63,7 +74,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         input[type="password"],
         select {
             font-weight: 400;
-            color: $gray-text-darker;
+            color: #47494b;
             display: block;
             background-color: #e5e5e5;
             width: 100%;
@@ -97,7 +108,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             font-size: small;
             text-align: center;
             margin-bottom: 15px;
-            color: $gray-text-dark;
+            color: #5C5E60;
         }
         p {
             text-align:center;
@@ -121,13 +132,21 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             margin-bottom: 10px;
             font-size: 15px;
         }
+
+        .main {
+            display:flex;
+            justify-content: center;
+            max-width: 100%;
+        }
+    
     }
 
+    
     .signup-card {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 350px;
+        width: 350px; // Assuming the original value was intended
         height: 130px;
         border-radius: $border-radius;
         background: $primary-bg;
