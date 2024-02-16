@@ -34,30 +34,11 @@
                             </a>
                         </li>
                     </ul>
-                </li> -->
-                
-                <li><a href="#" class="nav__link">Guides</a></li>
-                <li><a href="#" class="nav__link">Rental Services</a></li>
-
-                <li class="dropdown__item">
-                    <div class="nav__link">
-                        Blogs <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                    </div>
-
-                    <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                Add Blog
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                My Blogs
-                            </a>
-                        </li>
-                    </ul>
                 </li>
+                <li><a href="#" class="nav__link">Guides</a></li>
+                <li><a href="#" class="nav__link">Rental Services</a></li> -->
+
+                <li><a href="#" class="nav__link">Blogs</a></li>
                 <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
 
                 <!--=============== DROPDOWN 2 ===============-->
@@ -91,11 +72,11 @@
 
                     <li class="dropdown__item" id="nav-dropdown">
                         <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
-                            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                            <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="profile picture">
                         </div>
 
                         <ul class="dropdown__menu">
-                            <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>" class="dropdown__link">Profile</a></li>
+                            <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>" class="dropdown__link">Dashboard</a></li>
                             <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">>Settings</a></li>
                             <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">>Logout</a></li>
                         </ul>
@@ -107,7 +88,7 @@
                     <!-- profile avatar with dropdown -->
                     <li class="dropdown__item" id="nav-dropdown">
                         <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
-                            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                            <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="profile picture">
                         </div>
 
                         <ul class="dropdown__menu">
