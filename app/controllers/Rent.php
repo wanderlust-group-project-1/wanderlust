@@ -39,4 +39,20 @@ Class Rent{
         $this->view('customer/components/items',$data);
     }
 
+    public function shop(string $a = '', string $b = '', string $c = ''):void {
+
+        $rentalserviceId = $a;
+
+        $rent = new RentModel;
+        $data = [
+            'rentalservice_id' => $rentalserviceId,
+        ];
+
+        
+
+
+
+
+    }
+
 }
