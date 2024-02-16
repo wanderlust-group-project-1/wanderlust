@@ -71,3 +71,28 @@ BEGIN
     SELECT reference_number AS orderID , total_amount AS totalAmount;
 
 END
+
+-- Path: test.sql
+
+CREATE PROCEDURE GetAvailableEquipment
+    @RentalServiceID INT,
+    @StartTime DATETIME,
+    @EndTime DATETIME
+AS
+BEGIN
+    SELECT e.EquipmentID, e.Name, 
+    FROM Equipment e
+    JOIN item i ON e.id = i.equipment_id
+    JOIN rent_item ri ON i.id = ri.item_id
+    JOIN rent r ON ri.rent_id = r.id
+    WHERE r.start_date >= @StartTime AND r.end_date <= @EndTime
+    WHERE e.rentalservice_id = @RentalServiceID
+
+
+
+    
+END
+
+-- sample call to the stored procedure
+EXEC GetAvailableEquipment 1, '2021-01-01 00:00:00', '2021-01-01 23:59:59';
+```

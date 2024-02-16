@@ -90,6 +90,7 @@ class EquipmentModel {
         $q->select('equipment.*')->where('equipment.rentalservice_id', $id);
         // show($q->getQuery());
         return $this->query($q->getQuery(), $q->getData());
+
     }
 
     // Additional methods for EquipmentModel if needed
@@ -131,6 +132,14 @@ class EquipmentModel {
 
         $q = new QueryBuilder;
         
+
+    }
+
+
+    function rentalServiceEquipments($data){
+
+        
+
 
     }
 

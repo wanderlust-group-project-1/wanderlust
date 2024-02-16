@@ -33,6 +33,7 @@
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/packages" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Orders</span>
         <span class="menu-title">My Packages</span>
         <i class="menu-arrow"></i>
       </a>
