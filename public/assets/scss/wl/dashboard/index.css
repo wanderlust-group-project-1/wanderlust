@@ -462,7 +462,7 @@ fieldset {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   min-width: 300px;
   margin: 20px;
@@ -1607,7 +1607,7 @@ fieldset {
 .btn {
   cursor: pointer;
   border: none;
-  background: #2F3B1C;
+  background: #526534;
   outline: none;
   color: #F3F3F3;
   border-radius: 10px;
@@ -1617,7 +1617,7 @@ fieldset {
   font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
-  background-image: linear-gradient(to right, #B2BDA0 50%, #2F3B1C 50%);
+  background-image: linear-gradient(to right, #B2BDA0 50%, #526534 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: background-position 0.3s ease-out;
