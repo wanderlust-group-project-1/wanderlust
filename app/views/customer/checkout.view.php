@@ -69,20 +69,61 @@ require_once('../app/views/components/navbar.php');
         <div class="">
             <h2 class="justify-content-center flex-d"> Order Summary </h2>
 
-
+<!-- 
             <div class="row flex-d-r mt-5 gap-2 justify-content-between">
-        <h3> Total </h3> <h3> <?php echo $total; ?>  </h3>        
-        </div>
+        <h5> Total </h5> <h5> <?php echo $total; ?>  </h5> <br />
+        <h5> Discount </h5> <h5> <? echo $total*0.1 ?> </h5>       
+        </div> -->
             <div class=" row flex-d-r mt-5 gap-2 justify-content-between">
             
 
 
 
+                        <div class="card-normal2">
+                            <fieldset>
+                                <!-- <legend>Payment Method</legend> -->
 
-                        <h3 for="pay-full">Full Payment</h3>
-                        <input class="" type="checkbox" id="pay-full" name="pay-full" value="pay-full">
-                            
-                           
+                                <div class="form__radios">
+                                    <div class="form__radio">
+                                      <label for="pay-full"><i class="fa fa-money" aria-hidden="true"></i>Full Payment</label>
+                                      <input checked id="pay-full" name="payment-method" type="radio" />
+                                    </div>
+
+                                    <div class="form__radio">
+                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                      <label for="pay-adv">Advance Payment</label>
+                                      <input id="pay-adv" name="payment-method" type="radio" />
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row flex-d-r mt-5 gap-2 justify-content-between">               
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <td>Item Cost</td>
+                                      <td align="right">Rs.<?php echo $total?></td>
+                                    </tr>
+                                    <tr>
+                                      <td>Discount 10%</td>
+                                      <td align="right">-Rs.<?php echo $total*0.1?></td>
+                                    </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td>Total</td>
+                                      <td align="right"><?php echo ($total+$total*0.1)?></td>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                            </div>
+                            <!-- <h5 for="pay-full">Full Payment</h5>
+                            <input class="" type="checkbox" id="pay-full" name="pay-full" value="pay-full"><br><br>
+                            <h6>You can pay the full amount online. Order details will be sent to your email.</h6>
+                        </div>
+                        <h5 for="pay-adv">pay Advance</h5>
+                        <input class="" type="checkbox" id="pay-adv" name="pay-adv" value="pay-adv"><br><br>
+                        <h6>You can pay only  amount online. Order details will be sent to your email.</h6> -->
             </div>
         </div>
 

@@ -11,40 +11,39 @@ require_once('../app/views/components/navbar-auth.php');
 
 
 
-<div class="login-container">
-
-    <div class="login-form">
-        <div id="select" class="col  ">
+<div class="signup-container">
+    <div class="signup-form">
+        <!-- <div id="select" class="col  "> -->
             <div class="header">
-                <h1 class="signup-text">
-                    Who are you?
-                </h1>
+                <h2>Who are you?</h2>
             </div>
-            <div class="row">
-                <button class="signup-card" onclick="load('customer')">
-                    <div class="btn-div">
-                        <h3>Customer</h3>
-                        <p>Plan your journey now!</p>
-                    </div>
-                </button>
+            <div class="main">
+                <div class="row">
+                    <button class="signup-card" onclick="load('customer')">
+                        <div class="btn-div">
+                            <h3>Customer</h3>
+                            <h4>Plan your journey now!</h4>
+                        </div>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="signup-card" onclick="load('guide')">
+                        <div class="btn-div">
+                            <h3>Guide</h3>
+                            <h4>Explore the extraordinary now!</h4>
+                        </div>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="signup-card" onclick="load('rental-service')">
+                        <div class="btn-div">
+                            <h3>Rental Service</h3>
+                            <h4>Register your business now!</h4>
+                        </div>
+                    </button>
+                </div>
             </div>
-            <div class="row">
-                <button class="signup-card" onclick="load('guide')">
-                    <div class="btn-div">
-                        <h3>Guide</h3>
-                        <p>Explore the extraordinary now!</p>
-                    </div>
-                </button>
-            </div>
-            <div class="row">
-                <button class="signup-card" onclick="load('rental-service')">
-                    <div class="btn-div">
-                        <h3>Rental Service</h3>
-                        <p>Register your business now!</p>
-                    </div>
-                </button>
-            </div>
-        </div>
+        <!-- </div> -->
 
 
         <!-- <form hidden id="customer" action="<?= ROOT_DIR ?>/signup/customer" method="post"> -->
@@ -188,9 +187,7 @@ require_once('../app/views/components/navbar-auth.php');
 
         </form>
 
-        <p>
-            Have an account? <a href="<?= ROOT_DIR ?>/login">Login</a>
-        <p>
+        <h4>Have an account? <a href="<?= ROOT_DIR ?>/login">Login</a></h4>
 
             <!-- <a href="<?= ROOT_DIR ?>/login" title="Login">Login</a>
     <br>
