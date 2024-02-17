@@ -3,16 +3,17 @@ $secondary-bg: #fff;
 $shadow-color: rgba(0, 0, 0, 0.3);
 $border-radius: 5px;
 $border-color: #ccc;
-$font-color: #2a4628;
+$font-color: #526534;
 $hover-bg: #8D9E6F;
 $tooltip-bg: #fff;
 $tooltip-color: #BCAB86;
 $button-bg: #8D9E6F;
-$button-color: #2F3B1C;
+$button-color: #526534;
 $form-field-bg: #EBEFE3;
-$form-field-border: none;
+$form-field-border: 2px solid rgba(255,255,255,.2);
 $form-field-radius: 5px;
 $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+$box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
 .login-container {
     position: relative;
@@ -21,17 +22,30 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     align-items: center;
     width: 100%;
     height: 100%;
-    //background: $primary-bg;
+    background: $form-field-bg;
     backdrop-filter: blur(67px);
     transition: transform 1s;
-    opacity: 7;
-    background-image: url('/public/assets/images/background.jpg');
+    
 
-    .login-container-col{
+    .column {
         display: flex;
-        flex-direction: column;
-        grid-template-columns: 1fr 1fr;
-    }
+        flex-direction: row;
+        justify-content:center;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 100%;
+        border: 1px solid $border-color;
+        //border-radius: 10px;
+        box-shadow: $box-shadow;
+        background: #fff;
+
+
+        .login-image{
+            max-width: 100%;
+            height: auto;
+            margin:auto;
+            border-radius: 10px;
+        }
 
     .login-form {
         margin: auto;
@@ -40,18 +54,12 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         flex-direction: column;
         max-width: 600px;
         width: 550px;
-        height: fit-content;
-        padding: 60px;
-        border-radius: $border-radius;
-        background-color: $secondary-bg;
+        height: 100%;
+        padding: 50px;
+        //border-radius: $border-radius;
+        background-color: #fff;
         //box-shadow: 0 5px 10px $shadow-color;
 
-        form {
-            flex-direction: column;
-            // justify-content: center;
-            // align-items: center;
-        }
-        
         h2 {
             font-size: 3.4rem;
             font-weight: 600;
@@ -62,24 +70,42 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             letter-spacing: 3px;
         }
 
-        label-class {
-           font-size: medium;
-           font-weight: 600; 
+        .login-input {
+            width: 100%;
+            height: 50px;
+            margin: 20px 0 20px 0;
+            position: relative;
         }
+        
 
         input[type="text"],
         input[type="password"],
         select {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
             font-weight: 400;
+            font-size: 15px;
             color: #47494b;
             display: block;
             background-color: #e5e5e5;
             width: 100%;
-            padding: 10px;
+            padding: 20px 45px 20px 20px;
             margin-bottom: 10px;
             border: $form-field-border;
-            border-radius: $form-field-radius;
+            border-radius: 30px;
             box-shadow: $form-field-shadow;
+        }
+
+        i {
+            position: absolute;
+            right: 20px;
+            bottom: 35%;
+            transform: translate(-50%);
+            font-size: 15px;
+            color: #5C5E60;
         }
 
         // input[type="submit"], 
@@ -102,10 +128,19 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         //}
 
         .message-text {
+        
             font-size: small;
-            text-align: center;
-            margin-bottom: 15px;
+            display: flex;
+            //text-align: center;
+            justify-content: space-between;
+            margin: -10px 0px 15px;
             color: #5C5E60;
+
+            label input {
+                accent-color: #5C5E60;
+                margin-right: 5px;
+                margin-left: 5px;
+            }
         }
         p {
             text-align:center;
@@ -115,10 +150,12 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 
         a {
             color: $font-color;
+            //font-style: italic;
             text-decoration: none;
             transition: color 0.3s ease;
             &:hover {
                 color: $hover-bg;
+                text-decoration: underline;
             }
         }
 
@@ -136,6 +173,7 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         }
     
     }
+}
 
     
     .signup-card {

@@ -1025,87 +1025,116 @@ fieldset {
   align-items: center;
   width: 100%;
   height: 100%;
+  background: #EBEFE3;
   -webkit-backdrop-filter: blur(67px);
           backdrop-filter: blur(67px);
   transition: transform 1s;
-  opacity: 7;
-  background-image: url("/public/assets/images/background.jpg");
 }
-.login-container .login-container-col {
+.login-container .column {
   display: flex;
-  flex-direction: column;
-  grid-template-columns: 1fr 1fr;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  box-shadow: 2px 0 5px 2px rgba(0, 0, 0, 0.2);
+  background: #fff;
 }
-.login-container .login-form {
+.login-container .column .login-image {
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  border-radius: 10px;
+}
+.login-container .column .login-form {
   margin: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   max-width: 600px;
   width: 550px;
-  height: -moz-fit-content;
-  height: fit-content;
-  padding: 60px;
-  border-radius: 5px;
+  height: 100%;
+  padding: 50px;
   background-color: #fff;
 }
-.login-container .login-form form {
-  flex-direction: column;
-}
-.login-container .login-form h2 {
+.login-container .column .login-form h2 {
   font-size: 3.4rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 15px;
-  color: #2a4628;
+  color: #526534;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
-.login-container .login-form label-class {
-  font-size: medium;
-  font-weight: 600;
+.login-container .column .login-form .login-input {
+  width: 100%;
+  height: 50px;
+  margin: 20px 0 20px 0;
+  position: relative;
 }
-.login-container .login-form input[type=text],
-.login-container .login-form input[type=password],
-.login-container .login-form select {
+.login-container .column .login-form input[type=text],
+.login-container .column .login-form input[type=password],
+.login-container .column .login-form select {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
   font-weight: 400;
+  font-size: 15px;
   color: #47494b;
   display: block;
   background-color: #e5e5e5;
   width: 100%;
-  padding: 10px;
+  padding: 20px 45px 20px 20px;
   margin-bottom: 10px;
-  border: none;
-  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
-.login-container .login-form .message-text {
-  font-size: small;
-  text-align: center;
-  margin-bottom: 15px;
+.login-container .column .login-form i {
+  position: absolute;
+  right: 20px;
+  bottom: 35%;
+  transform: translate(-50%);
+  font-size: 15px;
   color: #5C5E60;
 }
-.login-container .login-form p {
+.login-container .column .login-form .message-text {
+  font-size: small;
+  display: flex;
+  justify-content: space-between;
+  margin: -10px 0px 15px;
+  color: #5C5E60;
+}
+.login-container .column .login-form .message-text label input {
+  accent-color: #5C5E60;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.login-container .column .login-form p {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 15px;
 }
-.login-container .login-form a {
-  color: #2a4628;
+.login-container .column .login-form a {
+  color: #526534;
   text-decoration: none;
   transition: color 0.3s ease;
 }
-.login-container .login-form a:hover {
+.login-container .column .login-form a:hover {
   color: #8D9E6F;
+  text-decoration: underline;
 }
-.login-container .login-form #error-message {
+.login-container .column .login-form #error-message {
   color: red;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 15px;
 }
-.login-container .login-form .main {
+.login-container .column .login-form .main {
   display: flex;
   justify-content: center;
 }
@@ -1130,12 +1159,12 @@ fieldset {
   text-align: center;
 }
 .login-container .signup-card h3 {
-  color: #2a4628;
+  color: #526534;
   margin: 0;
   padding: 10px;
 }
 .login-container .signup-card p {
-  color: #2a4628;
+  color: #526534;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -1189,7 +1218,7 @@ fieldset {
 .login-container .location-button-container .file-label,
 .login-container .location-button-container .location-button {
   background-color: #8D9E6F;
-  color: #2F3B1C;
+  color: #526534;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -1233,7 +1262,7 @@ fieldset {
   cursor: pointer;
 }
 .location-modal .modal-content .close:hover, .location-modal .modal-content .close:focus {
-  color: #2a4628;
+  color: #526534;
   text-decoration: none;
   cursor: pointer;
 }
@@ -1349,7 +1378,7 @@ fieldset {
   cursor: pointer;
 }
 .modal-content .close:hover, .modal-content .close:focus {
-  color: #2a4628;
+  color: #526534;
   text-decoration: none;
   cursor: pointer;
 }
@@ -1610,7 +1639,7 @@ fieldset {
   background: #526534;
   outline: none;
   color: #F3F3F3;
-  border-radius: 10px;
+  border-radius: 40px;
   padding: 10px 10px;
   font-weight: 500;
   font-size: medium;
@@ -1988,7 +2017,7 @@ form p {
   margin-top: 10px;
 }
 form a {
-  color: #2a4628;
+  color: #526534;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -2003,8 +2032,8 @@ form #error-message {
   font-size: 15px;
 }
 form label {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: small;
+  font-weight: 400;
   margin-bottom: 10px;
   text-align: left;
 }

@@ -1,12 +1,16 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/components/navbar-auth.php');
+//require_once('../app/views/components/navbar-auth.php');
 ?>
 
     <div class="login-container">
         
         <!-- <div class="login-container-col"> -->
             <div class="column">
+                <div class="login-image">
+                    <img src="<?php echo ROOT_DIR?>/assets/images/login.jpg" alt="">
+                </div>
+
                 <div class="login-form">
                 <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
 
@@ -18,20 +22,22 @@ require_once('../app/views/components/navbar-auth.php');
                      <div>  <?= implode('<br>', $errors)?>  </div>
                      <?php endif; ?>
                     
-                    <label class="label-class" for="email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="Email" required>
-                    <label class="label-class" for="password" >Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    
-                    <div class="message-text">
-                     <a href="#">Forgot your password?</a>
+                    <div class="login-input">
+                        <input type="text" name="email" id="email" placeholder="Email" required>
+                        <i class="fa fa-user" aria-hidden="true"></i>
                     </div>
-                     <!-- <input type="submit" name="submit" value="login"> -->
+                    <div class="login-input">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="message-text">
+                        <label><input type="checkbox">Remember Me</label>
+                        <a href="#">Forgot your password?</a>
+                    </div>
+            
                     <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>
-                    <!-- <button  value="login"> login </button> -->
-
-
-                    
+               
                      <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
                     
 
@@ -56,6 +62,3 @@ require_once('../app/views/layout/footer.php');
 
 
 ?>
-
-
-
