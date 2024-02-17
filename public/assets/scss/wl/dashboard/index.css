@@ -724,13 +724,12 @@ fieldset {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   height: 100%;
-  background: #B2BDA0;
+  background: #EBEFE3;
   -webkit-backdrop-filter: blur(67px);
           backdrop-filter: blur(67px);
   transition: transform 1s;
-  opacity: 7;
   margin-top: 5px;
 }
 .signup-container .signup-form {
@@ -761,7 +760,7 @@ fieldset {
   font-weight: 600;
   text-align: center;
   margin-bottom: 15px;
-  color: #2a4628;
+  color: #526534;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
@@ -779,7 +778,7 @@ fieldset {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 5px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
@@ -795,7 +794,7 @@ fieldset {
   margin-bottom: 15px;
 }
 .signup-container .signup-form a {
-  color: #2a4628;
+  color: #526534;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -835,12 +834,12 @@ fieldset {
   text-align: center;
 }
 .signup-container .signup-card h3 {
-  color: #2a4628;
+  color: #526534;
   margin: 0;
   padding: 10px;
 }
 .signup-container .signup-card p {
-  color: #2a4628;
+  color: #526534;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -894,7 +893,7 @@ fieldset {
 .signup-container .location-button-container .file-label,
 .signup-container .location-button-container .location-button {
   background-color: #8D9E6F;
-  color: #2F3B1C;
+  color: #526534;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -938,7 +937,7 @@ fieldset {
   cursor: pointer;
 }
 .location-modal .modal-content .close:hover, .location-modal .modal-content .close:focus {
-  color: #2a4628;
+  color: #526534;
   text-decoration: none;
   cursor: pointer;
 }
