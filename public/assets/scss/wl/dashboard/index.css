@@ -736,7 +736,6 @@ fieldset {
   margin: auto;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   max-width: 800px;
   width: 550px;
   height: -moz-fit-content;
@@ -749,7 +748,6 @@ fieldset {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-top: 10px;
   margin-bottom: 15px;
 }
 .signup-container .signup-form form {
@@ -1022,6 +1020,7 @@ fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   background: #EBEFE3;
@@ -1037,6 +1036,7 @@ fieldset {
   margin: 0 auto;
   max-width: 100%;
   border: 1px solid #ccc;
+  border-radius: 40px;
   box-shadow: 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   background: #fff;
 }
@@ -1044,7 +1044,13 @@ fieldset {
   max-width: 100%;
   height: auto;
   margin: auto;
-  border-radius: 10px;
+  border-radius: 40px;
+}
+.login-container .column .login-image .overlay-logo {
+  position: absolute;
+  left: 28%;
+  top: 40%;
+  transform: translate(-50%, -50%);
 }
 .login-container .column .login-form {
   margin: auto;
@@ -1057,10 +1063,16 @@ fieldset {
   padding: 50px;
   background-color: #fff;
 }
+.login-container .column .login-form .logo-login {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 .login-container .column .login-form h2 {
   font-size: 3.4rem;
   font-weight: 600;
   text-align: center;
+  margin-top: 10px;
   margin-bottom: 15px;
   color: #526534;
   text-transform: uppercase;

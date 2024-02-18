@@ -7,20 +7,25 @@ require_once('../app/views/layout/header.php');
         
         <!-- <div class="login-container-col"> -->
             <div class="column">
+                
                 <div class="login-image">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/login.jpg" alt="">
+                    <img src="<?php echo ROOT_DIR?>/assets/images/login.jpg" alt="login-image" class="login-image">
+                    <img src="<?php echo ROOT_DIR?>/assets/images/logo.png" alt="overlay-logo" class="overlay-logo">
                 </div>
 
                 <div class="login-form">
-                <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
+                    <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
+                    <!-- <div class="logo-login">
+                        
+                    </div> -->
 
                     <h2>login</h2>
-                     <p>Welcome! Please fill email and password to sign in to your account.</p>
+                    <p>Welcome! Please fill email and password to sign in to your account.</p>
 
 
-                     <?php if(isset($errors)): ?>
-                     <div>  <?= implode('<br>', $errors)?>  </div>
-                     <?php endif; ?>
+                    <?php if(isset($errors)): ?>
+                    <div>  <?= implode('<br>', $errors)?>  </div>
+                    <?php endif; ?>
                     
                     <div class="login-input">
                         <input type="text" name="email" id="email" placeholder="Email" required>

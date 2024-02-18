@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/components/navbar-auth.php');
+//require_once('../app/views/components/navbar-auth.php');
 ?>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAPS_API_KEY  ?>&libraries=places&callback=initialize" async defer></script>
@@ -13,7 +13,6 @@ require_once('../app/views/components/navbar-auth.php');
 
 <div class="signup-container">
     <div class="signup-form">
-        <!-- <div id="select" class="col  "> -->
             <div class="header">
                 <h2>Who are you?</h2>
             </div>

@@ -1,94 +1,141 @@
-.signup-container {
+.login-container {
   position: relative;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   background: #EBEFE3;
   backdrop-filter: blur(67px);
   transition: transform 1s;
-  margin-top: 5px;
 }
 
-.signup-container .signup-form {
+.login-container .column {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  box-shadow: 2px 0 5px 2px rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+.login-container .column .login-image {
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  border-radius: 40px;
+}
+
+.login-container .column .login-image .overlay-logo {
+  position: absolute;
+  left: 28%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container .column .login-form {
   margin: auto;
   display: flex;
   justify-content: center;
-  max-width: 800px;
+  flex-direction: column;
+  max-width: 600px;
   width: 550px;
-  height: fit-content;
-  padding: 60px;
-  border-radius: 5px;
+  height: 100%;
+  padding: 50px;
   background-color: #fff;
 }
 
-.signup-container .signup-form header {
+.login-container .column .login-form .logo-login {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: 15px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.signup-container .signup-form form {
-  flex-direction: row;
-}
-
-.signup-container .signup-form h2 {
+.login-container .column .login-form h2 {
   font-size: 3.4rem;
   font-weight: 600;
   text-align: center;
+  margin-top: 10px;
   margin-bottom: 15px;
   color: #526534;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
 
-.signup-container .signup-form label-class {
-  font-size: medium;
-  font-weight: 600;
+.login-container .column .login-form .login-input {
+  width: 100%;
+  height: 50px;
+  margin: 20px 0 20px 0;
+  position: relative;
 }
 
-.signup-container .signup-form input[type="text"],
-.signup-container .signup-form input[type="password"],
-.signup-container .signup-form select {
+.login-container .column .login-form input[type="text"],
+.login-container .column .login-form input[type="password"],
+.login-container .column .login-form select {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
   font-weight: 400;
+  font-size: 15px;
   color: #47494b;
   display: block;
   background-color: #e5e5e5;
   width: 100%;
-  padding: 10px;
+  padding: 20px 45px 20px 20px;
   margin-bottom: 10px;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
+  border-radius: 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.signup-container .signup-form .message-text {
-  font-size: small;
-  text-align: center;
-  margin-bottom: 15px;
+.login-container .column .login-form i {
+  position: absolute;
+  right: 20px;
+  bottom: 35%;
+  transform: translate(-50%);
+  font-size: 15px;
   color: #5C5E60;
 }
 
-.signup-container .signup-form p {
+.login-container .column .login-form .message-text {
+  font-size: small;
+  display: flex;
+  justify-content: space-between;
+  margin: -10px 0px 15px;
+  color: #5C5E60;
+}
+
+.login-container .column .login-form .message-text label input {
+  accent-color: #5C5E60;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.login-container .column .login-form p {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-.signup-container .signup-form a {
+.login-container .column .login-form a {
   color: #526534;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.signup-container .signup-form a:hover {
+.login-container .column .login-form a:hover {
   color: #8D9E6F;
+  text-decoration: underline;
 }
 
-.signup-container .signup-form #error-message {
+.login-container .column .login-form #error-message {
   color: red;
   text-align: center;
   margin-top: 10px;
@@ -96,17 +143,16 @@
   font-size: 15px;
 }
 
-.signup-container .signup-form .main {
+.login-container .column .login-form .main {
   display: flex;
   justify-content: center;
-  max-width: 100%;
 }
 
-.signup-container .signup-card {
+.login-container .signup-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 350px;
+  width: 30px;
   height: 130px;
   border-radius: 5px;
   background: #B2BDA0;
@@ -117,21 +163,21 @@
   transition: background-color 0.3s ease;
 }
 
-.signup-container .signup-card:hover {
+.login-container .signup-card:hover {
   background-color: #8D9E6F;
 }
 
-.signup-container .signup-card .btn-div {
+.login-container .signup-card .btn-div {
   text-align: center;
 }
 
-.signup-container .signup-card h3 {
+.login-container .signup-card h3 {
   color: #526534;
   margin: 0;
   padding: 10px;
 }
 
-.signup-container .signup-card p {
+.login-container .signup-card p {
   color: #526534;
   border: none;
   padding: 10px 20px;
@@ -139,12 +185,12 @@
   transition: background-color 0.3s;
 }
 
-.signup-container .tooltip-container {
+.login-container .tooltip-container {
   position: relative;
   display: inline-block;
 }
 
-.signup-container .tooltip-container .tooltip {
+.login-container .tooltip-container .tooltip {
   visibility: hidden;
   position: absolute;
   background-color: #fff;
@@ -160,7 +206,7 @@
   width: 75%;
 }
 
-.signup-container .tooltip-container .tooltip-trigger {
+.login-container .tooltip-container .tooltip-trigger {
   background-color: #fff;
   color: #BCAB86;
   border-radius: 50%;
@@ -170,13 +216,13 @@
   position: relative;
 }
 
-.signup-container .tooltip-container .tooltip-trigger:hover + .tooltip {
+.login-container .tooltip-container .tooltip-trigger:hover + .tooltip {
   visibility: visible;
   opacity: 1;
 }
 
-.signup-container .file-input-container,
-.signup-container .location-button-container {
+.login-container .file-input-container,
+.login-container .location-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,10 +233,10 @@
   margin-top: 10px;
 }
 
-.signup-container .file-input-container .file-label,
-.signup-container .file-input-container .location-button,
-.signup-container .location-button-container .file-label,
-.signup-container .location-button-container .location-button {
+.login-container .file-input-container .file-label,
+.login-container .file-input-container .location-button,
+.login-container .location-button-container .file-label,
+.login-container .location-button-container .location-button {
   background-color: #8D9E6F;
   color: #526534;
   padding: 10px 20px;
@@ -198,8 +244,8 @@
   cursor: pointer;
 }
 
-.signup-container .file-input-container .file-input,
-.signup-container .location-button-container .file-input {
+.login-container .file-input-container .file-input,
+.login-container .location-button-container .file-input {
   position: relative;
   width: 100%;
   opacity: 0;
