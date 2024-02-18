@@ -30,4 +30,12 @@ class RentalService {
         // show($data["equipment"]);
         $this->view('rental/components/equipment', $data);
     }
+
+
+
+    // Customer
+    public function index(string $a = '', string $b = '', string $c = ''):void {
+        
+        $this->view('customer/rentalservice');
+    }
 }
