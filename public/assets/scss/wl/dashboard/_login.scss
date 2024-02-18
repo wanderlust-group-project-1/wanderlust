@@ -50,7 +50,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
             .overlay-logo {
                 position: absolute;
-                left: 28%;
+                left: 35%;
                 top: 40%;
                 transform: translate(-50%, -50%);
             }
@@ -71,11 +71,6 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
             background-color: #fff;
             //box-shadow: 0 5px 10px $shadow-color;
 
-            .logo-login {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-            }
 
         h2 {
             font-size: 3.4rem;

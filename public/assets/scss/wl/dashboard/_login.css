@@ -33,7 +33,7 @@
 
 .login-container .column .login-image .overlay-logo {
   position: absolute;
-  left: 28%;
+  left: 35%;
   top: 40%;
   transform: translate(-50%, -50%);
 }
@@ -48,12 +48,6 @@
   height: 100%;
   padding: 50px;
   background-color: #fff;
-}
-
-.login-container .column .login-form .logo-login {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
 }
 
 .login-container .column .login-form h2 {

@@ -43,7 +43,7 @@ require_once('../app/views/layout/header.php');
             
                     <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>
                
-                     <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
+                    <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
                     
 
 
