@@ -350,7 +350,7 @@ fieldset {
 .toggle-button {
   display: none;
   position: fixed;
-  top: 0px;
+  top: 10px;
   left: 10px;
   z-index: 1010;
   cursor: pointer;
@@ -462,7 +462,7 @@ fieldset {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   min-width: 300px;
   margin: 20px;
@@ -1607,7 +1607,7 @@ fieldset {
 .btn {
   cursor: pointer;
   border: none;
-  background: #2F3B1C;
+  background: #526534;
   outline: none;
   color: #F3F3F3;
   border-radius: 10px;
@@ -1617,7 +1617,7 @@ fieldset {
   font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
-  background-image: linear-gradient(to right, #B2BDA0 50%, #2F3B1C 50%);
+  background-image: linear-gradient(to right, #B2BDA0 50%, #526534 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: background-position 0.3s ease-out;
@@ -1914,7 +1914,6 @@ table tfoot tr td {
   color: black-text;
   background-color: #EBEFE3;
   background-clip: padding-box;
-  border: 2px solid #F3F3F3;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -1930,7 +1929,6 @@ table tfoot tr td {
   color: black-text;
   background-color: #EBEFE3;
   background-clip: padding-box;
-  border: 2px solid #F3F3F3;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   font-size: 2rem;
@@ -1952,7 +1950,6 @@ table tfoot tr td {
   background: #F3F3F3;
   outline: none;
   color: #212016;
-  border: 2px solid #8D9E6F;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1969,7 +1966,6 @@ form input {
   background: #EBEFE3;
   outline: none;
   color: #FFFFFF;
-  border: 2px solid #F3F3F3;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -1983,7 +1979,6 @@ form textarea {
   background: #B2BDA0;
   outline: none;
   color: #212016;
-  border: 2px solid #2F3B1C;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -2000,7 +1995,6 @@ form select {
   background: #B2BDA0;
   outline: none;
   color: #212016;
-  border: 2px solid #2F3B1C;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -2442,6 +2436,10 @@ input.invert {
   margin-top: 4.5rem !important;
 }
 
+.mt-7 {
+  margin-top: 6rem !important;
+}
+
 .mb-0 {
   margin-bottom: 0 !important;
 }
@@ -2846,6 +2844,7 @@ input.invert {
 .nav__container {
   max-width: 1120px;
   margin-inline: 1.5rem;
+  height: 7rem;
 }
 
 .show-menu {

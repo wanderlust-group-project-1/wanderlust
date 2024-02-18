@@ -9,11 +9,19 @@
                 </div>
             </div>
 
+        <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER'])) {
+            $user = $_SESSION['USER']; ?>
+
             <div class="home_button">
-                <a href="#" class="btn">Add Now</a>
+                <a href="#" class="btn">Add Complains</a>
             </div>
 
-        </div>
+        <?php } else {  ?>
+            <div class="home_button">
+            <a href="<?= ROOT_DIR ?>/login" class="btn">Add Complain</a>
+            </div>
+        <?php } ?>
+    </div>
 
         <div class="home_card">
             <img class="home_img" src="<?= ROOT_DIR ?>/assets/images/Complaint.png" alt="Hero Image">
