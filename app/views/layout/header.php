@@ -1,6 +1,8 @@
 
 <html>
     <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>Wanderlust</title>
         <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/style.css">
 
