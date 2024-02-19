@@ -35,7 +35,41 @@ class RentalService {
 
     // Customer
     public function index(string $a = '', string $b = '', string $c = ''):void {
+
+        // show($a);
+        $rental = new RentalServiceModel;
+        $data = [
+            'rental' => $rental->getRentalService($a)[0],
+        ];
+
+        // show($data);
+
+
+
+        $this->view('customer/rentalservice', $data);
+    }
+
+    public function availableEquipments(string $a = '', string $b = '', string $c = ''):void {
+
+        $equipment = new EquipmentModel;
+
+        // get cart end start time 
+        $cart = new CartModel;
+        $cart = $cart->first(['customer_id' => UserMiddleware::getUser()['id']]);
+        // show($cart);
+        $data = [
+            'start_date' => $cart->start_date,
+            'end_date' => $cart->end_date,
+            'rentalservice_id' => $a,
+        ];
+
+        $data["equipments"] = $equipment->rentalServiceEquipments($data);
+
+        // show($data);
+
+
+
         
-        $this->view('customer/rentalservice');
+        $this->view('customer/components/items',$data);
     }
 }

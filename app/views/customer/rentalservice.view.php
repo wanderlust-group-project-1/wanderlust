@@ -19,18 +19,20 @@ require_once('../app/views/components/navbar.php');
 
 <div class="row">
 
-<div class=" col-lg-12 flex-d-c gap-2">
+<div class="col-lg-12 flex-d-c gap-2">
 
-<div class= "card-normal justify-content-between align-items-center flex-d gap-2">
+<div class="card-normal justify-content-between align-items-center flex-d gap-2">
 
 <!-- Rental Image and name  -->
-<div class="flex-d gap-2  flex-sm-c  ">
+<div class="flex-d gap-2 flex-sm-c">
     <!-- hard coded image -->
-    <img src="<? echo ROOT_DIR?>/assets/images/rental/1.webp" alt="Image" class="img-fluid mh-200px rounded-7">
+    <!-- <?php show($rental); ?> -->
+    <!-- <img src="<? echo ROOT_DIR?>/assets/images/rental/1.webp" alt="Image" class="img-fluid mh-200px rounded-7"> -->
+    <img src="<? echo OSURL?>images/rental_services/<?php echo $rental->image; ?>" alt="Image" class="img-fluid mh-200px rounded-7">
    
-    <div class="flex-d gap-2  align-items-center">
+    <div class="flex-d gap-2 align-items-center">
         <!-- Rental Service name -->
-        <h1 class="rental-name">CAMPOUT Rental</h1>
+        <h1 class="rental-name"> <?php echo $rental->name; ?> </h1>
         <!-- Rental Service description -->
     <!-- Rental Service name -->
 </div>
@@ -228,7 +230,7 @@ $(document).ready(function() {
             'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
         },
         
-        url: '<?= ROOT_DIR ?>/rent/items',
+        url: '<?= ROOT_DIR ?>/rentalService/availableEquipments/<?= $rental->id ?>',
 
         type: 'POST',
         contentType:"application/json; charset=utf-8",

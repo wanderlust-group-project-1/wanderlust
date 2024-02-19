@@ -142,6 +142,13 @@ class RentalServiceModel {
         return $this->query($q->getQuery(),$q->getData());
     }
 
+    // Get rental service for customer
+
+    // public function getRentalServiceforCustomer(int $id): mixed {
+
+
+    // }
+
 
     public function updateStatus(JSONRequest $request, JSONResponse $response){
         $data = $request->getAll();
