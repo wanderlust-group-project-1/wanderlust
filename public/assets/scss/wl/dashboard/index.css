@@ -1322,6 +1322,7 @@ fieldset {
   width: 100%;
   height: 100%;
   overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
@@ -2722,9 +2723,10 @@ input.invert {
 .sticky.sticky--shadow {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
-/* Consolidated example */
-.sticky--no-decoration {
+.sticky.sticky--no-shadow {
   box-shadow: none;
+}
+.sticky.sticky--no-border {
   border-bottom: none;
 }
 .sticky.sticky--no-padding {
@@ -2750,6 +2752,45 @@ input.invert {
 }
 .sticky.sticky--no-box-shadow {
   box-shadow: none;
+}
+.sticky.sticky--no-border {
+  border-bottom: none;
+}
+.sticky.sticky--no-padding {
+  padding: 0;
+}
+.sticky.sticky--no-margin {
+  margin-bottom: 0;
+}
+.sticky.sticky--no-transition {
+  transition: none;
+}
+.sticky.sticky--no-background {
+  background-color: transparent;
+}
+.sticky.sticky--no-z-index {
+  z-index: auto;
+}
+.sticky.sticky--no-top {
+  top: auto;
+}
+.sticky.sticky--no-sticky {
+  position: relative;
+}
+.sticky.sticky--no-box-shadow {
+  box-shadow: none;
+}
+.sticky.sticky--no-border {
+  border-bottom: none;
+}
+.sticky.sticky--no-padding {
+  padding: 0;
+}
+.sticky.sticky--no-margin {
+  margin-bottom: 0;
+}
+.sticky.sticky--no-transition {
+  transition: none;
 }
 
 .header {
