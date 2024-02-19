@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
+require_once('../app/views/navbar/customer-navbar.php');
 ?>
 <?php
 echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';

@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
+require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
@@ -10,7 +10,7 @@ require_once('../app/views/components/navbar.php');
 
 <div class="container flex-d-c justify-content-center gap-2">
 
-<div class="row gap-2 justify-content-end">
+<div class="row gap-2 justify-content-end mt-7">
     <!-- Cart -->
     <!-- <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart</button> -->
     <!-- with number of item in cart -->

@@ -1,9 +1,21 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/navbar/customer-navbar.php');
-?>
+if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'rentalservice') {
+    $user = $_SESSION['USER'];
+    require_once('../app/views/navbar/rental-navbar.php');
 
+}else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'customer') {
+    $user = $_SESSION['USER'];
+    require_once('../app/views/navbar/customer-navbar.php');
+
+}else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'guide') {
+    $user = $_SESSION['USER'];
+    require_once('../app/views/navbar/guide-navbar.php');
+} else {
+    require_once('../app/views/navbar/logout-navbar.php');
+}
+?>
 
 
 <?php require_once('../app/views/sections/hero.php');

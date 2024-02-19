@@ -19,67 +19,15 @@
         <!-- <div class="nav__menu" id="nav-menu"> -->
         <div class="nav__menu" id="nav-menu" >
             <ul class="nav__list">
-                <li><a href="#" class="nav__link">Home</a></li>
+                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Home</a></li>
 
                 <!--=============== DROPDOWN 1 ===============-->
-                <!-- <li class="dropdown__item">
-                    <div class="nav__link">
-                        Dashboard <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                    </div>
-
-                    <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                My Booking
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
                 
-                <li><a href="#" class="nav__link">Guides</a></li>
-                <li><a href="#" class="nav__link">Rental Services</a></li>
-
-                <li class="dropdown__item">
-                    <div class="nav__link">
-                        Blogs <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                    </div>
-
-                    <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                Add Blog
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                My Blogs
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
-
-                <!--=============== DROPDOWN 2 ===============-->
-                <li class="dropdown__item">
-                    <div class="nav__link">
-                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                    </div>
-
-                    <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                Add Complain
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                My Complains
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Guides</a></li>
+                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Rental Services</a></li>
+                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Blogs</a></li>
+                <li><a a href="<?= ROOT_DIR ?>/login" class="nav__link">Tips and Knowhows</a></li>
+                <li><a a href="<?= ROOT_DIR ?>/login" class="nav__link">Complains</a></li>
 
 
                 <!-- check role avalable or not -->
