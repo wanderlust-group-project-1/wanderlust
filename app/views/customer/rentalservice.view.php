@@ -238,8 +238,6 @@ $(document).ready(function() {
         data: JSON.stringify({
             search: '',
             type: 'all',
-            latitude: '',
-            longitude: ''
         }),
         
         success: function(response) {
@@ -267,13 +265,11 @@ $(document).ready(function() {
     function getResults(){
         var search = document.getElementById("search-input").value;
         var type = document.getElementById("type").value;
-        var latitude = document.getElementById("latitude").value;
-        var longitude = document.getElementById("longitude").value;
+
 
         console.log(search);
         console.log(type);
-        console.log(latitude);
-        console.log(longitude);
+
 
         $.ajax({
     headers: {
@@ -285,8 +281,7 @@ $(document).ready(function() {
     data: JSON.stringify({  // Convert the data object to a JSON string
         search: search,
         type: type,
-        latitude: latitude,
-        longitude: longitude
+
     }),
     success: function(data) {
 
