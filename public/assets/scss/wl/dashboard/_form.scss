@@ -168,11 +168,12 @@ input {
     border: none;
     background: $color-lightest2;
     outline: none;
-    color: $black-text;
-    border: 2px solid $color-lightest;
+    color: $gray-text-lighter;
+    border: 1px solid $color-lightest;
     border-radius: 12px;
     padding: 12px 20px;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 input.invert {

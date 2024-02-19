@@ -220,125 +220,65 @@
   cursor: pointer;
 }
 
-/* Map Styles */
-/* Map Styles */
-.location-modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.location-modal .modal-content {
+/*popup styles*/
+.popupForm {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: fit-content;
   background-color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  width: 80%;
-  max-width: 800px;
-  position: relative;
-  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  padding: 20px 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
-.location-modal .modal-content .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.popupForm .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
 }
 
-.location-modal .modal-content .close:hover, .location-modal .modal-content .close:focus {
+.popupForm .close-btn i {
+  background: #e6e6e6;
   color: #526534;
-  text-decoration: none;
-  cursor: pointer;
+  text-align: center;
 }
 
-.location-modal .modal-content .map-canvas {
-  width: 100%;
-  height: 300px;
-  border-radius: 5px;
-  position: fixed;
+.popupForm .form-common {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 600px;
+  width: 550px;
+  height: 100%;
+  padding: 50px;
+  background-color: #ffffff;
 }
 
-/* Additional Styles */
-#pac-container #pac-container,
-.pac-card #pac-container,
-.pac-controls #pac-container {
-  padding-bottom: 12px;
-  margin-right: 12px;
+.popupForm .form-common h2 {
+  position: relative;
+  font-size: 3.4rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #526534;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
-#pac-container .pac-container,
-.pac-card .pac-container,
-.pac-controls .pac-container {
-  z-index: 1051 !important;
+.popupForm .form-common .form-element {
+  margin: 15px 0;
 }
 
-#pac-container .pac-card,
-.pac-card .pac-card,
-.pac-controls .pac-card {
-  margin: 10px 10px 0 0;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
-  font-family: Roboto;
-}
-
-#pac-container .pac-controls,
-.pac-card .pac-controls,
-.pac-controls .pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
-}
-
-#pac-container .pac-controls label,
-.pac-card .pac-controls label,
-.pac-controls .pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-#pac-container #pac-input,
-.pac-card #pac-input,
-.pac-controls #pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  max-width: 400px;
-}
-
-#pac-container #pac-input:focus,
-.pac-card #pac-input:focus,
-.pac-controls #pac-input:focus {
-  border-color: #4d90fe;
-}
-
-#pac-container #title,
-.pac-card #title,
-.pac-controls #title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
-}
-
-#pac-container #target,
-.pac-card #target,
-.pac-controls #target {
-  width: 345px;
+.popupForm .form-common .form-element label {
+  font-size: 14px;
+  color: #ccc;
 }

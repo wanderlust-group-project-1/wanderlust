@@ -80,6 +80,7 @@ $color-white: #F5F5F5;
 
 // text colors
 $white-text : #FFFFFF;
+$gray-text-lighter: #868a8d;
 $gray-text: #6B6E70;
 $gray-text-dark : #5C5E60;
 $gray-text-darker : #47494b;
@@ -167,6 +168,7 @@ h4 {
 h5 {
   font-weight: 400;
   white-space: nowrap;
+  color: $gray-text;
 }
 
 h6 {
@@ -176,6 +178,8 @@ h6 {
   color: $gray-text-dark;
   font-style: italic;
 }
+
+
 
 p {
   font-size: $text;

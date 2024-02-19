@@ -6,6 +6,7 @@ $border-color: #ccc;
 $font-color: #526534;
 $font-gold: #C1A87D;
 $font-gold2: #C2AF7B;
+$font-grey:#6B6E70;
 $hover-bg: #8D9E6F;
 $tooltip-bg: #fff;
 $tooltip-color: #BCAB86;
@@ -191,6 +192,13 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         position: relative;
         display: inline-block;
 
+        .tooltip-content i{
+            position: absolute;
+            left: 40%;
+            bottom: 5%;
+            color: $font-grey;
+        }
+
         .tooltip {
             visibility: hidden;
             position: absolute;
@@ -250,10 +258,167 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         }
     }
 
-    /* Map Styles */
-   /* Map Styles */
+
+/*popup styles*/
+    
+.popupForm {
+    display: flex;
+    position: absolute;
+    //z-index: 1;
+    left: 50%;
+    top: 50%; //-150%
+    width: fit-content;
+    height: fit-content;
+    //overflow: auto;
+    background-color: #fff;
+    transform: translate(-50%, -50%) scale(1); //scale(1.25)
+    padding: 20px 30px;
+    box-shadow: $form-field-shadow;
+    border-radius: 20px;
+    opacity: 1; //0
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+
+        i {
+        background: #fff;
+        color: $gray-text;
+        text-align: center;
+        font-size: large;
+        }
+    }
+
+    .form-common {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 600px;
+        width: 550px;
+        height: 100%;
+        padding: 50px;
+        //border-radius: $border-radius;
+        background-color: #ffffff;
+
+        h2 {
+              position: relative;
+              font-size: 3.4rem;
+              font-weight: 600;
+              text-align:center;
+              margin-top: 10px;
+              margin-bottom: 15px;
+              color: $font-color;
+              text-transform: uppercase;
+              letter-spacing: 3px;
+        }
+
+        .form-element {
+            margin: 15px 0;
+
+            label {
+                font-size: 14px;
+                color: $gray-text;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                margin-top: 5px;
+                display: block;
+                width: 100%;
+                padding: 10px;
+                outline: none;
+                border: $form-field-border;
+                border-radius: $border-radius;
+                background-color: #e5e5e5;
+                box-shadow: $form-field-shadow;
+
+            }
+
+            i {
+                position: absolute;
+                align-items: center;
+                cursor: pointer;
+                right: 14%;
+                bottom: 22.8%;
+                transform: translate(-50%);
+                font-size: 13px;
+                color: #5C5E60;
+            }
+
+            .location-button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                border: 1px solid $border-color;
+                border-radius: $form-field-radius;
+                box-shadow: $form-field-shadow;
+                padding: 10px;
+                margin-top: 10px;
+
+                i {
+                    position: absolute;
+                    bottom: 60.85%;
+                    right: 63%;
+                }
+            
+                .file-label,
+                .location-button {
+                    background-color: #fff;
+                    color: $gray-text;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    border: none;
+                    cursor: pointer;
+
+                    &:hover{
+                        color: $gray-text-lighter;
+                    }
+                }
+            
+                .file-input {
+                    position: relative;
+                    width: 100%;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+            }
+
+            
+        }
+
+        .form-element-btn {
+            display: flex;
+            margin: 10px;
+            justify-content: space-between;
+        }
+
+
+}
+
+}
+
+// .popupForm .active {
+//     top: 50%;
+//     opacity: 1;
+//     transform: translate(-50%, -50%) scale(1);
+//     transition: top 0ms ease-in-out 0ms,
+//                 opacity 200ms ease-in-out 0ms,
+//                 transform 200ms ease-in-out 0ms;
+// }
+
+/* Map Styles */
+/* Map Styles */
    
-.location-modal {
+   .location-modal {
     display: none;
     position: fixed;
     z-index: 1;

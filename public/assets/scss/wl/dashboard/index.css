@@ -41,6 +41,7 @@ h4 {
 h5 {
   font-weight: 400;
   white-space: nowrap;
+  color: #6B6E70;
 }
 
 h6 {
@@ -860,6 +861,12 @@ fieldset {
   position: relative;
   display: inline-block;
 }
+.signup-container .tooltip-container .tooltip-content i {
+  position: absolute;
+  left: 40%;
+  bottom: 5%;
+  color: #6B6E70;
+}
 .signup-container .tooltip-container .tooltip {
   visibility: hidden;
   position: absolute;
@@ -915,6 +922,130 @@ fieldset {
   width: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+/*popup styles*/
+.popupForm {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #fff;
+  transform: translate(-50%, -50%) scale(1);
+  padding: 20px 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  opacity: 1;
+  transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
+}
+.popupForm .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.popupForm .close-btn i {
+  background: #fff;
+  color: #6B6E70;
+  text-align: center;
+  font-size: large;
+}
+.popupForm .form-common {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 600px;
+  width: 550px;
+  height: 100%;
+  padding: 50px;
+  background-color: #ffffff;
+}
+.popupForm .form-common h2 {
+  position: relative;
+  font-size: 3.4rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #526534;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.popupForm .form-common .form-element {
+  margin: 15px 0;
+}
+.popupForm .form-common .form-element label {
+  font-size: 14px;
+  color: #6B6E70;
+}
+.popupForm .form-common .form-element input[type=text],
+.popupForm .form-common .form-element input[type=password] {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  background-color: #e5e5e5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.popupForm .form-common .form-element i {
+  position: absolute;
+  align-items: center;
+  cursor: pointer;
+  right: 14%;
+  bottom: 22.8%;
+  transform: translate(-50%);
+  font-size: 13px;
+  color: #5C5E60;
+}
+.popupForm .form-common .form-element .location-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin-top: 10px;
+}
+.popupForm .form-common .form-element .location-button-container i {
+  position: absolute;
+  bottom: 60.85%;
+  right: 63%;
+}
+.popupForm .form-common .form-element .location-button-container .file-label,
+.popupForm .form-common .form-element .location-button-container .location-button {
+  background-color: #fff;
+  color: #6B6E70;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.popupForm .form-common .form-element .location-button-container .file-label:hover,
+.popupForm .form-common .form-element .location-button-container .location-button:hover {
+  color: #868a8d;
+}
+.popupForm .form-common .form-element .location-button-container .file-input {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.popupForm .form-common .form-element-btn {
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
 }
 
 /* Map Styles */
@@ -1681,6 +1812,29 @@ fieldset {
   cursor: default;
 }
 
+.btn-cancel {
+  background: #e5e5e5;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #6B6E70;
+  border-radius: 40px;
+  padding: 10px 10px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
+  background-image: linear-gradient(to right, rgba(250, 163, 163, 0.866) 50%, #e5e5e5 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.btn-cancel:hover {
+  background-position: left bottom;
+  color: #2F3B1C;
+}
+
 .btn-danger {
   background: #8F4548;
   border: 1px solid #8F4548;
@@ -1728,6 +1882,11 @@ fieldset {
   position: relative;
 }
 
+.btn-medium {
+  width: 30%;
+  position: relative;
+}
+
 .btn-lg {
   padding: 15px 20px;
   font-size: large;
@@ -1736,6 +1895,7 @@ fieldset {
 .btn-signup {
   width: 100%;
   position: relative;
+  padding: 10px;
 }
 
 .btn-small {
@@ -2065,11 +2225,12 @@ input {
   border: none;
   background: #EBEFE3;
   outline: none;
-  color: #212016;
-  border: 2px solid #F3F3F3;
+  color: #868a8d;
+  border: 1px solid #F3F3F3;
   border-radius: 12px;
   padding: 12px 20px;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 15px;
 }
 
 input.invert {
