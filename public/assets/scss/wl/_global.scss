@@ -16,6 +16,7 @@ $smaller-text: 1.2rem;
 $text: 1.56rem;
 $small-text: 1.4rem;
 $bigger-text: 5rem;
+$heading-text: 3.5rem;
 
 // $bg-color: #4C5039;
 // $bg-color-darker: #1a3842b9;
@@ -143,22 +144,21 @@ h1 {
 }
 
 h2 {
-  font-family: sans-serif;
-  font-weight: 400;
+  // font-family: sans-serif;
+  font-weight: $font-regular;
   font-size: $header1;
-  color: $color-dark;
+  color: $color-darker;
 }
 
 h3 {
-  font-family: sans-serif;
-  font-weight: 300;
+  // font-family: sans-serif;
   font-size: $header2;
-  color: #ffff;
+  color: $gray-text-dark;
 }
 
 h4 {
   margin-top: 5px;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   font-weight: 400;
   color: $color-dark;
   text-align: center;

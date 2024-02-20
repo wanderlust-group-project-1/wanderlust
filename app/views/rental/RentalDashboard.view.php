@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/components/navbar-rental.php');
+require_once('../app/views/navbar/rental-navbar.php');
 
 ?>
 

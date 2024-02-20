@@ -89,6 +89,7 @@ $media-breakpoint: 768px;
   min-width: 300px;
   margin: 20px;
   margin-bottom: 1.5rem;
+  margin-top: 4rem;
   padding: 20px;
   background-color: $color-white;
   border-radius: 15px;
@@ -226,6 +227,11 @@ $media-breakpoint: 768px;
       @include dashboard-card-common;
     }
   }
+}
+
+.dashboard-heading{
+  font-size: $heading-text;
+  font-weight: $font-semi-bold;
 }
 
 /* Sidebar Styles */
