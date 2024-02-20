@@ -7,6 +7,10 @@ require_once('../app/views/components/navbar-auth.php');
         
         <!-- <div class="login-container-col"> -->
             <div class="column">
+                <div class="login-image">
+                    <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
+                </div>
+
                 <div class="login-form">
                 <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
 

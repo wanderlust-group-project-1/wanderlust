@@ -20,17 +20,30 @@ $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 68rem;
     //background: $primary-bg;
     backdrop-filter: blur(67px);
     transition: transform 1s;
     opacity: 7;
     background-image: url('/public/assets/images/background.jpg');
 
-    .login-container-col{
+    // .login-container-col{
+    //     display: flex;
+    //     flex-direction: column;
+    //     grid-template-columns: 1fr 1fr;
+    // }
+
+    .column {
         display: flex;
-        flex-direction: column;
-        grid-template-columns: 1fr 1fr;
+        flex-direction: row;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+    }
+    
+
+    .login-image{
+        margin: auto;
+        padding-left: 5rem;
     }
 
     .login-form {

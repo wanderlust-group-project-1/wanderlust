@@ -19,7 +19,7 @@
         <!-- <div class="nav__menu" id="nav-menu"> -->
         <div class="nav__menu" id="nav-menu" >
             <ul class="nav__list">
-                <li><a href="#" class="nav__link">Home</a></li>
+                <li><a href="<?= ROOT_DIR ?>/home" class="nav__link">Home</a></li>
 
                 <!--=============== DROPDOWN 1 ===============-->
                 <!-- <li class="dropdown__item">
