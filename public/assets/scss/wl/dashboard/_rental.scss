@@ -249,9 +249,14 @@ $media-breakpoint: 768px;
   }
 
   .dashboard {
-    margin-left: 50px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 100px;
     width: 90%;
   }
+
+  
+
 
   .dashboard-content .dashboard-card {
     min-width: 90%;
