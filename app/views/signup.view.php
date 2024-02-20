@@ -33,7 +33,7 @@ require_once('../app/views/layout/header.php');
                     <i class="fa fa-compass" aria-hidden="true"></i>
                 </div>
                 <div class="row-btn">
-                    <button class="signup-card" onclick="load('rental-service')">
+                    <button class="signup-card" onclick="signupToggleRental()">
                         <div class="btn-div">
                             <h3>Rental Service</h3>
                             <h4>Register your business now!</h4>
@@ -64,6 +64,7 @@ require_once('../app/views/layout/header.php');
             <div class="close-btn" onclick="signupToggleCustomer()"><i class="fa fa-times" aria-hidden="true"></i></div>
             <form action="" class="flex-d">
                 <h2>Customer Sign Up</h2>
+
                 <?php if (isset($errors)) : ?>
                     <div> <?= implode('<br>', $errors) ?> </div>
                 <?php endif; ?>
@@ -133,7 +134,7 @@ require_once('../app/views/layout/header.php');
         </div>
     </div>
 
-<!-----------------------------------------------RENTAL SERVICE SIGN UP FORM-----------------------------------------------> 
+<!-----------------------------------------------GUIDE SIGN UP FORM-----------------------------------------------> 
 
 <div class="form-container">    
     <div class="popupFormGuide" id="popupForm">
@@ -142,7 +143,7 @@ require_once('../app/views/layout/header.php');
         <div class="close-btn" onclick="signupToggleGuide()"><i class="fa fa-times" aria-hidden="true"></i></div>
         
         <form action="" class="flex-d">
-            <h2>Rental Services Sign Up</h2>
+            <h2>Guide Sign Up</h2>
 
             <?php if (isset($errors)) : ?>
                 <div><?= implode('<br>', $errors) ?></div>
@@ -180,7 +181,7 @@ require_once('../app/views/layout/header.php');
                 <div class="form-element">
                     <label for="address">Location</label>
                     <div class="location-button-container"  id="location-button-container">
-                        <input  id="location"  hidden="true"></br>
+                        <input  class="form-control-lg" id="location"  hidden="true"></br>
                         <button  id="select-location" class="location-button" type="button">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                             Select location in the map
@@ -241,62 +242,108 @@ require_once('../app/views/layout/header.php');
 
 <!-----------------------------------------------------Rental Services ------------------------------------------------------->
 
-        <form hidden id="rental-service"  >
-            <div class="popup" id="popup-1">
-                <div class="content">
-                <div class="close-btn" onclick="togglePopup()">X</div>
-
+<div class="form-container">
+    <div class="popupFormRental" id="popupForm">
+            <div class="form-common">
+            <div class="form-common-content">
+                <div class="close-btn" onclick="signupToggleRental()"><i class="fa fa-times" aria-hidden="true"></i></div>
+                <form action="" class="flex-d">
                     <h2>Rental Services Sign Up</h2>
 
                     <?php if (isset($errors)) : ?>
                         <div><?= implode('<br>', $errors) ?></div>
                     <?php endif; ?>
+                    <div class="row align-items-start">
                     
+                    <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
+                    <div class="form-element">
                     <label for="business_name">Business Name</label>
-                    <input type="text" name="name" id="business_name"> </br>
-                    
+                    <input class="form-control-lg" type="text" name="name" id="business_name"> </br>
+                    </div>
+                    <div class="form-element">
+                    <label for="registration_number">Business Registration Number/NIC</label>
+                    <input class="form-control-lg" type="text" name="regNo" id="registration_number"></br>
+                    </div>
+                    <div class="form-element">
+                    <label for="mobile_number">Mobile Number</label>
+                    <input class="form-control-lg" type="text" name="mobile" id="number"></br>
+                    </div>
+                    <div class="form-element">
+                    <label for="email">Email Address</label>
+                    <input class="form-control-lg" type="text" name="email" id="email"></br>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
+                    <div class="form-element">
                     <label for="address">Address</label>
                     <textarea class="address-text" name="address" id="address" required> </textarea></br>
-                    
+                    </div>
                     <!-- select location from google map -->
                     
+                    <div class="form-element">
+                    <label for="address">Location</label>
                     <div class="location-button-container"  id="location-button-container">
+                        <input  class="form-control-lg" id="location"  hidden="true"></br>
+                        <button  id="select-location" class="location-button" type="button">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            Select location in the map
+                        </button>
+                    </div>
+                </div>
                     
-                    <input  id="location"  hidden="true"></br>
-                    <button  id="select-location" class="location-button" type="button" >Get Location</button>
-                    
+                <div class="tooltip-container" class="hoverable-are">
+                    <div class="toolyp-content">
+                        <h5>Upload verification Documents</h5>
+                        <i class="fas fa-question-circle tooltip-trigger"></i>
+                    </div>
+                        
+                    <div class="tooltip">Documents such as business registration certificate or any other document which can verify your business is legitimate.</div>
+                    <div class="file-input-container">
+                        <div class="form-element">
+                        <label for="verification_document" class="file-label">Choose Verification Document</label>
+                        <input type="file" name="verification_document" id="verification_document" class="file-input">
+                        </div>
+                    </div>
+                </div></br>
+
+                    <div class="form-element">
+                            <label for="password">Password</label>
+                            <input class="form-control-lg" type="password" name="password" id="password" placeholder="Password" required>
+                            <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
+                        <h4>Please use a strong password. Password minimum length should be least 8 characters long containing at least one uppercase letter, one digit, and one symbol.</h4>
+                        </div>
                     </div>
                     
                     
-                    <label for="registration_number">Business Registration Number/NIC</label>
-                    <input type="text" name="regNo" id="registration_number"></br>
-                    
-                    <label for="mobile_number">Mobile Number</label>
-                    <input type="text" name="mobile" id="number"></br>
-                    
-                    <label for="email">Email Address</label>
-                    <input type="text" name="email" id="email"></br>
-                    
-                    
-                    <div class="tooltip-container" class="hoverable-are">
-                        Upload verification Documents
-                        <i class="fas fa-question-circle tooltip-trigger"></i>
-                        <div class="tooltip">Documents such as business registration certificate or any other document which can verify your business is legitimate.</div>
-                        <div class="file-input-container">
-                            <label for="verification_document" class="file-label">Choose Verification Document</label>
-                            <input type="file" name="verification_document" id="verification_document" class="file-input">
-                        </div>
-                    </div></br>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password"></br>
-                    
-                    <!-- <input type="submit" name="submit" value="Signup"> -->
-                    <button id="rental-service-signup" name="submit" value="Sign Up" onclick="rentalServiceSignup(event)" > Sign Up </button>
-                    
-                    <div id="error-message"></div>
-                </div>
+                    <div class="row">
+                        <button class="btn btn-medium" id="customer-signup" name="submit" value="signup">Sign Up</button>
+                        <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
+                        
+                        <script>
+                            let eyeicon = document.getElementById("eyeicon");
+                            let password = document.getElementById("password");
+
+                            eyeicon.onclick = function() {
+                                if(password.type == "password"){
+                                    password.type = "text";
+                                    eyeicon.className = "fa fa-eye";
+                                
+                                }else{
+                                    password.type = "password";
+                                    eyeicon.className =  "fa fa-eye-slash";
+                                }
+                            }
+                        </script>
+                        <div id="error-message"></div>
+                    </div>
+                    </div>
+                </form>
             </div>
-        </form>
+            </div>
+    </div>
+</div>
+
 
         <script>
             function signupToggleCustomer(){
@@ -312,9 +359,9 @@ require_once('../app/views/layout/header.php');
             }
 
             function signupToggleRental(){
-                var element2;
-                element2 = document.querySelector('.popupFormRental');
-                element2.classList.toggle("popupFormRental-active");
+                var element3;
+                element3 = document.querySelector('.popupFormRental');
+                element3.classList.toggle("popupFormRental-active");
             }
         </script>
 

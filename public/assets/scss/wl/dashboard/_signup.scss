@@ -543,6 +543,161 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                 transform 200ms ease-in-out 0ms;
 }
 
+/* Popup form rental */
+
+.popupFormRental {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%; //-150%
+    width: 65%;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: #fff;
+    transform: translate(-50%, -50%) scale(1.2); //scale(1.25)
+    padding: 20px 30px;
+    box-shadow: $form-field-shadow;
+    border-radius: 20px;
+    opacity: 0; //0
+    //background-color: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(10px); 
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+
+                .form-common {
+                    margin: auto;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 100%;
+                    padding: 50px;
+                    border-radius: 20px;
+                    background-color: #ffffff;
+            
+                    .close-btn {
+                        position: absolute;
+                        top: 15px;
+                        right: 15px;
+                        width: 15px;
+                        height: 15px;
+                        cursor: pointer;
+            
+                        i {
+                            background: #fff;
+                            color: $gray-text;
+                            text-align: center;
+                            border-radius: 10px;
+                            color: #ccc;
+                            font-size: 20px;
+                        }
+                    }
+            
+                    h2 {
+                        position: relative;
+                        font-size: 3.4rem;
+                        font-weight: 600;
+                        text-align:center;
+                        margin-top: 10px;
+                        margin-bottom: 15px;
+                        color: $font-color;
+                        text-transform: uppercase;
+                        letter-spacing: 3px;
+                    }
+            
+                    .form-element {
+                        margin: 15px 0;
+            
+                        // input[type="text"],
+                        // input[type="password"] {
+                        //     margin-top: 5px;
+                        //     display: block;
+                        //     width: 100%;
+                        //     padding: 10px;
+                        //     outline: none;
+                        //     border: $form-field-border;
+                        //     border-radius: $border-radius;
+                        //     background-color: #e5e5e5;
+                        //     box-shadow: $form-field-shadow;
+            
+                        // }
+            
+                        i {
+                            position: absolute;
+                            align-items: center;
+                            cursor: pointer;
+                            left: 81.5%;
+                            top: 63.58%;
+                            transform: translate(-50%);
+                            font-size: 13px;
+                            color: #5C5E60;
+                        }
+            
+                        .location-button-container {
+                            //display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            flex-direction: column;
+                            border: 1px solid $border-color;
+                            border-radius: $form-field-radius;
+                            box-shadow: $form-field-shadow;
+                            padding: 10px;
+                            margin-top: 10px;
+            
+                            i {
+                                position: absolute;
+                                bottom: 60.85%;
+                                right: 63%;
+                            }
+                        
+                            .file-label,
+                            .location-button {
+                                background-color: #fff;
+                                color: $gray-text;
+                                padding: 10px 20px;
+                                border-radius: 5px;
+                                border: none;
+                                cursor: pointer;
+            
+                                &:hover{
+                                    color: $gray-text-lighter;
+                                }
+                            }
+                        
+                            .file-input {
+                                position: relative;
+                                width: 100%;
+                                opacity: 0;
+                                cursor: pointer;
+                            }
+                        }
+            
+                        
+                    }
+            
+                    // .form-element-btn {
+                    //     display: flex;
+                    //     margin: 10px;
+                    //     justify-content: space-between;
+                    // }
+            
+    }
+
+}
+
+.popupFormRental-active{
+    display: block;
+    position: fixed;
+    top: 50%;
+    opacity: 1;
+    z-index: 2;
+    transform: translate(-50%, -50%) scale(1.2);
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+}
+
 
 /* Map Styles */
 /* Map Styles */
