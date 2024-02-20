@@ -138,6 +138,10 @@ class EquipmentModel {
 
     function rentalServiceEquipments($data){
 
+        $q = 'CALL GetAvailableEquipmentByRental(:rentalservice_id, :start_date, :end_date)';
+
+        return $this->query($q, $data);
+
         
 
 

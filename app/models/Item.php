@@ -35,20 +35,29 @@ class ItemModel {
 
         // $data have equipment_id start_date end_date
         
-        $q->setTable('item');
-        $q->select('item.*')
-            ->leftJoin('rent_item', 'item.id', 'rent_item.item_id')
-            ->leftJoin('rent', 'rent_item.rent_id', 'rent.id')
-            ->where('item.equipment_id', $data['equipment_id'])
-            ->where('rent.start_date', $data['end_date'] , '>')
-            ->orWhere('rent.end_date', $data['start_date'] , '<')
-            ->where('item.equipment_id', $data['equipment_id'])
-            ->orWhere('rent.id', null, 'IS')
-            ->where('item.equipment_id', $data['equipment_id']);
+        // $q->setTable('item');
+        // $q->select('item.*')
+        //     ->leftJoin('rent_item', 'item.id', 'rent_item.item_id')
+        //     ->leftJoin('rent', 'rent_item.rent_id', 'rent.id')
+        //     ->where('item.equipment_id', $data['equipment_id'])
+        //     ->where('rent.start_date', $data['end_date'] , '>')
+        //     ->orWhere('rent.end_date', $data['start_date'] , '<')
+        //     ->where('item.equipment_id', $data['equipment_id'])
+        //     ->orWhere('rent.id', null, 'IS')
+        //     ->where('item.equipment_id', $data['equipment_id']);
 
         // show($q->getQuery());
         // show ($q->getData());
-        return $this->query($q->getQuery(), $q->getData());
+        // return $this->query($q->getQuery(), $q->getData());
+
+        $q = 'CALL getAvailableItems(:equipment_id, :start_date, :end_date)';
+        $data = [
+            'equipment_id' => $data['equipment_id'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date']
+        ];
+
+        return $this->query($q, $data);
 
        
     }
