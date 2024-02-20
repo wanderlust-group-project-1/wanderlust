@@ -1,7 +1,7 @@
 $sidebar-background: #EBEFE3; // Off-white background color
 $theme-color: #B2BDA0;        // Theme color
 $sidebar-width: 200px;
-$sidebar-top: 65px;
+$sidebar-top: 90px;
 
 /* Sidebar styles */
 .sidebar {
@@ -10,14 +10,14 @@ $sidebar-top: 65px;
     background-color: $color-primary;
     color: $white-text;
     position: fixed;
-    left: 0;
+    left: 0px;
     top: $sidebar-top;
     padding-top: 20px;
     transition: margin-left 0.5s;
     z-index: 5;
     overflow-y: auto;
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
-    // border-radius: 15px;
+    border-radius: 15px;
 
     @media screen and (max-width: 768px) {
         margin-left: -350px; // Hide sidebar initially
