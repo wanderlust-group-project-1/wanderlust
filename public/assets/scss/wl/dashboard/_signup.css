@@ -24,18 +24,19 @@
   background: #fff;
 }
 
-.signup-container .column .signup-image {
+.signup-container .column .signup-image-container .image-logo {
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 40px;
+}
+
+.signup-container .column .signup-image-container .signup-image {
   max-width: 100%;
   height: auto;
   margin: auto;
   border-radius: 40px;
-}
-
-.signup-container .column .signup-image .overlay-logo2 {
-  position: absolute;
-  right: 23%;
-  bottom: 64%;
-  transform: translate(-50%, -50%);
 }
 
 .signup-container .column .signup-form {
@@ -158,6 +159,13 @@
   display: inline-block;
 }
 
+.signup-container .tooltip-container .tooltip-content i {
+  position: absolute;
+  left: 40%;
+  bottom: 5%;
+  color: #6B6E70;
+}
+
 .signup-container .tooltip-container .tooltip {
   visibility: hidden;
   position: absolute;
@@ -220,49 +228,56 @@
   cursor: pointer;
 }
 
-/*popup styles*/
-.popupForm {
-  display: flex;
-  position: absolute;
+/* Popup form customer */
+.popupFormCustomer {
+  display: none;
+  position: fixed;
   left: 50%;
   top: 50%;
-  width: 50%;
+  width: 65%;
   height: fit-content;
+  border-radius: 10px;
   background-color: #fff;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.23);
   padding: 20px 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
+  opacity: 0;
+  backdrop-filter: blur(10px);
+  transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 
-.popupForm .close-btn {
+.popupFormCustomer .form-common {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.popupFormCustomer .form-common .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   width: 15px;
   height: 15px;
   cursor: pointer;
 }
 
-.popupForm .close-btn i {
-  background: #e6e6e6;
-  color: #526534;
+.popupFormCustomer .form-common .close-btn i {
+  background: #fff;
+  color: #6B6E70;
   text-align: center;
+  border-radius: 10px;
+  color: #ccc;
+  font-size: 20px;
 }
 
-.popupForm .form-common {
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  max-width: 600px;
-  width: 550px;
-  height: 100%;
-  padding: 50px;
-  background-color: #ffffff;
-}
-
-.popupForm .form-common h2 {
+.popupFormCustomer .form-common h2 {
   position: relative;
   font-size: 3.4rem;
   font-weight: 600;
@@ -274,11 +289,275 @@
   letter-spacing: 3px;
 }
 
-.popupForm .form-common .form-element {
+.popupFormCustomer .form-common .form-element {
   margin: 15px 0;
 }
 
-.popupForm .form-common .form-element label {
-  font-size: 14px;
+.popupFormCustomer .form-common .form-element i {
+  position: absolute;
+  align-items: center;
+  cursor: pointer;
+  left: 81.5%;
+  top: 63.58%;
+  transform: translate(-50%);
+  font-size: 13px;
+  color: #5C5E60;
+}
+
+.popupFormCustomer-active {
+  display: block;
+  position: fixed;
+  top: 50%;
+  opacity: 1;
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
+}
+
+/* Popup form guide */
+.popupFormGuide {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 65%;
+  height: fit-content;
+  border-radius: 10px;
+  background-color: #fff;
+  transform: translate(-50%, -50%) scale(1.2);
+  padding: 20px 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  opacity: 0;
+  backdrop-filter: blur(10px);
+  transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
+}
+
+.popupFormGuide .form-common {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.popupFormGuide .form-common .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.popupFormGuide .form-common .close-btn i {
+  background: #fff;
+  color: #6B6E70;
+  text-align: center;
+  border-radius: 10px;
   color: #ccc;
+  font-size: 20px;
+}
+
+.popupFormGuide .form-common h2 {
+  position: relative;
+  font-size: 3.4rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #526534;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.popupFormGuide .form-common .form-element {
+  margin: 15px 0;
+}
+
+.popupFormGuide .form-common .form-element i {
+  position: absolute;
+  align-items: center;
+  cursor: pointer;
+  left: 81.5%;
+  top: 63.58%;
+  transform: translate(-50%);
+  font-size: 13px;
+  color: #5C5E60;
+}
+
+.popupFormGuide .form-common .form-element .location-button-container {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.popupFormGuide .form-common .form-element .location-button-container i {
+  position: absolute;
+  bottom: 60.85%;
+  right: 63%;
+}
+
+.popupFormGuide .form-common .form-element .location-button-container .file-label,
+.popupFormGuide .form-common .form-element .location-button-container .location-button {
+  background-color: #fff;
+  color: #6B6E70;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.popupFormGuide .form-common .form-element .location-button-container .file-label:hover,
+.popupFormGuide .form-common .form-element .location-button-container .location-button:hover {
+  color: #868a8d;
+}
+
+.popupFormGuide .form-common .form-element .location-button-container .file-input {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.popupFormGuide-active {
+  display: block;
+  position: fixed;
+  top: 50%;
+  opacity: 1;
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
+}
+
+/* Map Styles */
+/* Map Styles */
+.location-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.location-modal .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.location-modal .modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.location-modal .modal-content .close:hover, .location-modal .modal-content .close:focus {
+  color: #526534;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.location-modal .modal-content .map-canvas {
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  position: fixed;
+}
+
+/* Additional Styles */
+#pac-container #pac-container,
+.pac-card #pac-container,
+.pac-controls #pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+#pac-container .pac-container,
+.pac-card .pac-container,
+.pac-controls .pac-container {
+  z-index: 1051 !important;
+}
+
+#pac-container .pac-card,
+.pac-card .pac-card,
+.pac-controls .pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container .pac-controls,
+.pac-card .pac-controls,
+.pac-controls .pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+#pac-container .pac-controls label,
+.pac-card .pac-controls label,
+.pac-controls .pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-container #pac-input,
+.pac-card #pac-input,
+.pac-controls #pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+#pac-container #pac-input:focus,
+.pac-card #pac-input:focus,
+.pac-controls #pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#pac-container #title,
+.pac-card #title,
+.pac-controls #title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+#pac-container #target,
+.pac-card #target,
+.pac-controls #target {
+  width: 345px;
 }

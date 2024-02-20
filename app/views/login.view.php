@@ -10,7 +10,7 @@ require_once('../app/views/layout/header.php');
                 
                 <div class="login-image">
                     <img src="<?php echo ROOT_DIR?>/assets/images/login.jpg" alt="login-image" class="login-image">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/logo.png" alt="overlay-logo" class="overlay-logo">
+                    <!-- <img src="<?php echo ROOT_DIR?>/assets/images/logo.png" alt="overlay-logo" class="overlay-logo"> -->
                 </div>
 
                 <div class="login-form">

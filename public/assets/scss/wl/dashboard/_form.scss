@@ -29,7 +29,7 @@
     font-size: 2.0rem;
     height: calc(2.0rem + 1.5rem + 2px);
     padding: 0.5rem 1rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     // border-radius: 0.3rem;
 }
 
@@ -52,6 +52,7 @@
     border-radius: 12px;
     padding: 12px 20px;
     font-weight: 600;
+
 }
 
 form {
@@ -79,16 +80,14 @@ form {
     textarea
     {
         border: none;
-        background: $color-light;
+        background: $color-lightest2;
         outline: none;
-        color: $black-text;
+        color: $font-grey;
         // border: 2px solid $color-darker;
         border-radius: 12px;
         padding: 12px 20px;
-        font-weight: 600;
-
-    
-
+        font-weight: 400;
+        margin-top: 10px;
     }
 
     textarea {
@@ -142,10 +141,11 @@ form {
     }
 
     label {
-        font-size: small;
         font-weight: 400;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         text-align: left;
+        font-size: 14px;
+        color: $gray-text;
     }
 
 

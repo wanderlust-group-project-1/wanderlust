@@ -744,17 +744,18 @@ fieldset {
   box-shadow: 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   background: #fff;
 }
-.signup-container .column .signup-image {
+.signup-container .column .signup-image-container .image-logo {
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 40px;
+}
+.signup-container .column .signup-image-container .signup-image {
   max-width: 100%;
   height: auto;
   margin: auto;
   border-radius: 40px;
-}
-.signup-container .column .signup-image .overlay-logo2 {
-  position: absolute;
-  right: 23%;
-  bottom: 64%;
-  transform: translate(-50%, -50%);
 }
 .signup-container .column .signup-form {
   margin: auto;
@@ -924,25 +925,38 @@ fieldset {
   cursor: pointer;
 }
 
-/*popup styles*/
-.popupForm {
-  display: flex;
-  position: absolute;
+/* Popup form customer */
+.popupFormCustomer {
+  display: none;
+  position: fixed;
   left: 50%;
   top: 50%;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 65%;
   height: -moz-fit-content;
   height: fit-content;
+  border-radius: 10px;
   background-color: #fff;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1.23);
   padding: 20px 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
-  opacity: 1;
+  opacity: 0;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
-.popupForm .close-btn {
+.popupFormCustomer .form-common {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+.popupFormCustomer .form-common .close-btn {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -950,24 +964,15 @@ fieldset {
   height: 15px;
   cursor: pointer;
 }
-.popupForm .close-btn i {
+.popupFormCustomer .form-common .close-btn i {
   background: #fff;
   color: #6B6E70;
   text-align: center;
-  font-size: large;
+  border-radius: 10px;
+  color: #ccc;
+  font-size: 20px;
 }
-.popupForm .form-common {
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  max-width: 600px;
-  width: 550px;
-  height: 100%;
-  padding: 50px;
-  background-color: #ffffff;
-}
-.popupForm .form-common h2 {
+.popupFormCustomer .form-common h2 {
   position: relative;
   font-size: 3.4rem;
   font-weight: 600;
@@ -978,37 +983,102 @@ fieldset {
   text-transform: uppercase;
   letter-spacing: 3px;
 }
-.popupForm .form-common .form-element {
+.popupFormCustomer .form-common .form-element {
   margin: 15px 0;
 }
-.popupForm .form-common .form-element label {
-  font-size: 14px;
-  color: #6B6E70;
-}
-.popupForm .form-common .form-element input[type=text],
-.popupForm .form-common .form-element input[type=password] {
-  margin-top: 5px;
-  display: block;
-  width: 100%;
-  padding: 10px;
-  outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  background-color: #e5e5e5;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-.popupForm .form-common .form-element i {
+.popupFormCustomer .form-common .form-element i {
   position: absolute;
   align-items: center;
   cursor: pointer;
-  right: 14%;
-  bottom: 22.8%;
+  left: 81.5%;
+  top: 63.58%;
   transform: translate(-50%);
   font-size: 13px;
   color: #5C5E60;
 }
-.popupForm .form-common .form-element .location-button-container {
+
+.popupFormCustomer-active {
+  display: block;
+  position: fixed;
+  top: 50%;
+  opacity: 1;
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
+}
+
+/* Popup form guide */
+.popupFormGuide {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 65%;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  background-color: #fff;
+  transform: translate(-50%, -50%) scale(1.2);
+  padding: 20px 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  opacity: 0;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
+}
+.popupFormGuide .form-common {
+  margin: auto;
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+.popupFormGuide .form-common .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.popupFormGuide .form-common .close-btn i {
+  background: #fff;
+  color: #6B6E70;
+  text-align: center;
+  border-radius: 10px;
+  color: #ccc;
+  font-size: 20px;
+}
+.popupFormGuide .form-common h2 {
+  position: relative;
+  font-size: 3.4rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #526534;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.popupFormGuide .form-common .form-element {
+  margin: 15px 0;
+}
+.popupFormGuide .form-common .form-element i {
+  position: absolute;
+  align-items: center;
+  cursor: pointer;
+  left: 81.5%;
+  top: 63.58%;
+  transform: translate(-50%);
+  font-size: 13px;
+  color: #5C5E60;
+}
+.popupFormGuide .form-common .form-element .location-button-container {
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -1018,13 +1088,13 @@ fieldset {
   padding: 10px;
   margin-top: 10px;
 }
-.popupForm .form-common .form-element .location-button-container i {
+.popupFormGuide .form-common .form-element .location-button-container i {
   position: absolute;
   bottom: 60.85%;
   right: 63%;
 }
-.popupForm .form-common .form-element .location-button-container .file-label,
-.popupForm .form-common .form-element .location-button-container .location-button {
+.popupFormGuide .form-common .form-element .location-button-container .file-label,
+.popupFormGuide .form-common .form-element .location-button-container .location-button {
   background-color: #fff;
   color: #6B6E70;
   padding: 10px 20px;
@@ -1032,20 +1102,25 @@ fieldset {
   border: none;
   cursor: pointer;
 }
-.popupForm .form-common .form-element .location-button-container .file-label:hover,
-.popupForm .form-common .form-element .location-button-container .location-button:hover {
+.popupFormGuide .form-common .form-element .location-button-container .file-label:hover,
+.popupFormGuide .form-common .form-element .location-button-container .location-button:hover {
   color: #868a8d;
 }
-.popupForm .form-common .form-element .location-button-container .file-input {
+.popupFormGuide .form-common .form-element .location-button-container .file-input {
   position: relative;
   width: 100%;
   opacity: 0;
   cursor: pointer;
 }
-.popupForm .form-common .form-element-btn {
-  display: flex;
-  margin: 10px;
-  justify-content: space-between;
+
+.popupFormGuide-active {
+  display: block;
+  position: fixed;
+  top: 50%;
+  opacity: 1;
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(1.2);
+  transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 
 /* Map Styles */
@@ -1246,7 +1321,7 @@ fieldset {
 .login-container .column .login-form i {
   position: absolute;
   right: 20px;
-  bottom: 35%;
+  bottom: 18%;
   transform: translate(-50%);
   font-size: 15px;
   color: #5C5E60;
@@ -1255,7 +1330,7 @@ fieldset {
   font-size: small;
   display: flex;
   justify-content: space-between;
-  margin: -10px 0px 15px;
+  margin: -1px 1px 15px;
   color: #5C5E60;
 }
 .login-container .column .login-form .message-text label input {
@@ -1883,7 +1958,7 @@ fieldset {
 }
 
 .btn-medium {
-  width: 30%;
+  width: 20%;
   position: relative;
 }
 
@@ -2125,7 +2200,7 @@ card-normal2 {
   font-size: 2rem;
   height: calc(3.5rem + 2px);
   padding: 0.5rem 1rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .form-control:focus {
@@ -2167,12 +2242,13 @@ form input[type=password],
 form input[type=number],
 form textarea {
   border: none;
-  background: #B2BDA0;
+  background: #EBEFE3;
   outline: none;
-  color: #212016;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
-  font-weight: 600;
+  font-weight: 400;
+  margin-top: 10px;
 }
 form textarea {
   resize: none;
@@ -2211,10 +2287,11 @@ form #error-message {
   font-size: 15px;
 }
 form label {
-  font-size: small;
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   text-align: left;
+  font-size: 14px;
+  color: #6B6E70;
 }
 
 form#customer, form#rental-service, form#guide {

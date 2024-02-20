@@ -92,7 +92,7 @@
 .login-container .column .login-form i {
   position: absolute;
   right: 20px;
-  bottom: 35%;
+  bottom: 18%;
   transform: translate(-50%);
   font-size: 15px;
   color: #5C5E60;
@@ -102,7 +102,7 @@
   font-size: small;
   display: flex;
   justify-content: space-between;
-  margin: -10px 0px 15px;
+  margin: -1px 1px 15px;
   color: #5C5E60;
 }
 

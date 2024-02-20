@@ -4,10 +4,10 @@
    
 // }
 
-function load(formId) {
-    var form = document.getElementById(formId + '-form');
-    // Rest of the function logic...
-}
+// function load(formId) {
+//     var form = document.getElementById(formId + '-form');
+//     // Rest of the function logic...
+// }
 
 
 //showpassowrd
@@ -21,6 +21,12 @@ function load(formId) {
 //         password.type = "password";
 //     }
 // }
+function signupToggle(){
+    console.log("gamindu");
+    var element1;
+    element1 = document.querySelector('.popupForm');
+    element1.classList.toggle("popupForm-active");
+}
 
 // Get Url
 var urlFragment = window.location.hash;
@@ -162,11 +168,11 @@ function validateForm(formId) {
 }
 
 // Event listener for form submission
-// document.getElementById('customer').onsubmit = function(event) {
-//     if (!validateForm('customer')) {
-//         event.preventDefault(); // Prevent form submission if validation fails
-//     }
-// };
+document.getElementById('customer').onsubmit = function(event) {
+    if (!validateForm('customer')) {
+        event.preventDefault(); // Prevent form submission if validation fails
+    }
+};
 
 document.getElementById('rental-service').onsubmit = function(event) {
     if (!validateForm('rental-service')) {

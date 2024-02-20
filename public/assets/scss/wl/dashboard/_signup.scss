@@ -7,6 +7,8 @@ $font-color: #526534;
 $font-gold: #C1A87D;
 $font-gold2: #C2AF7B;
 $font-grey:#6B6E70;
+$gray-text: #6B6E70;
+$gray-text-lighter: #868a8d;
 $hover-bg: #8D9E6F;
 $tooltip-bg: #fff;
 $tooltip-color: #BCAB86;
@@ -46,22 +48,26 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         background: #fff;
 
 
-        .signup-image{
-            //position: relative;
-            max-width: 100%;
-            height: auto;
-            margin:auto;
-            border-radius: 40px;
-
-            .overlay-logo2 {
-                position: absolute;
-                right: 23%;
-                bottom: 64%;
-                transform: translate(-50%, -50%);
+        .signup-image-container {
+            .image-logo{
+                justify-content: center;
+                width: 100%; 
+                text-align:center; 
+                position:relative; 
+                top:40px;
             }
-            
-        }
         
+            .signup-image{
+                
+                //position: relative;
+                max-width: 100%;
+                height: auto;
+                margin: auto;
+                border-radius: 40px;
+                //scale: 1;
+
+            }
+        }
 
         .signup-form {
             margin: auto;
@@ -259,54 +265,57 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     }
 
 
-/*popup styles*/
+/* Popup form customer */
     
-.popupForm {
-    display: flex;
-    position: absolute;
-    //z-index: 1;
+.popupFormCustomer {
+    display: none;
+    position: fixed;
     left: 50%;
     top: 50%; //-150%
-    width: fit-content;
+    width: 65%;
     height: fit-content;
-    //overflow: auto;
+    border-radius: 10px;
     background-color: #fff;
-    transform: translate(-50%, -50%) scale(1); //scale(1.25)
+    transform: translate(-50%, -50%) scale(1.23); //scale(1.25)
     padding: 20px 30px;
     box-shadow: $form-field-shadow;
     border-radius: 20px;
-    opacity: 1; //0
+    opacity: 0; //0
+    //background-color: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(10px); 
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms,
                 transform 200ms ease-in-out 0ms;
-
-    .close-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        width: 15px;
-        height: 15px;
-        cursor: pointer;
-
-        i {
-        background: #fff;
-        color: $gray-text;
-        text-align: center;
-        font-size: large;
-        }
-    }
 
     .form-common {
         margin: auto;
         display: flex;
         justify-content: center;
         flex-direction: column;
-        max-width: 600px;
-        width: 550px;
+        width: 100%;
         height: 100%;
         padding: 50px;
-        //border-radius: $border-radius;
+        border-radius: 20px;
         background-color: #ffffff;
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+            
+    
+            i {
+                background: #fff;
+                color: $gray-text;
+                text-align: center;
+                border-radius: 10px;
+                color: #ccc;
+                font-size: 20px;
+            }
+        }
 
         h2 {
               position: relative;
@@ -323,38 +332,154 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         .form-element {
             margin: 15px 0;
 
-            label {
-                font-size: 14px;
-                color: $gray-text;
-            }
+            // input[type="text"],
+            // input[type="password"] {
+            //     margin-top: 5px;
+            //     display: block;
+            //     width: 100%;
+            //     padding: 10px;
+            //     outline: none;
+            //     border: $form-field-border;
+            //     border-radius: $border-radius;
+            //     background-color: #e5e5e5;
+            //     box-shadow: $form-field-shadow;
 
-            input[type="text"],
-            input[type="password"] {
-                margin-top: 5px;
-                display: block;
-                width: 100%;
-                padding: 10px;
-                outline: none;
-                border: $form-field-border;
-                border-radius: $border-radius;
-                background-color: #e5e5e5;
-                box-shadow: $form-field-shadow;
-
-            }
+            // }
 
             i {
                 position: absolute;
                 align-items: center;
                 cursor: pointer;
-                right: 14%;
-                bottom: 22.8%;
+                left: 81.5%;
+                top: 63.58%;
+                transform: translate(-50%);
+                font-size: 13px;
+                color: #5C5E60;
+            }
+
+        }
+
+            
+    }
+
+        // .form-element-btn {
+        //     max-width: 100%;
+        //     display: flex;
+        //     flex-direction: column;
+        //     //margin: 10px;
+        //     justify-content: center;
+        // }
+
+
+}
+
+
+
+.popupFormCustomer-active {
+    display: block;
+    position: fixed;
+    top: 50%;
+    opacity: 1;
+    z-index: 2;
+    transform: translate(-50%, -50%) scale(1.2);
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+}
+
+/* Popup form guide */
+
+.popupFormGuide {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%; //-150%
+    width: 65%;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: #fff;
+    transform: translate(-50%, -50%) scale(1.2); //scale(1.25)
+    padding: 20px 30px;
+    box-shadow: $form-field-shadow;
+    border-radius: 20px;
+    opacity: 0; //0
+    //background-color: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(10px); 
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+
+    .form-common {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 50px;
+        border-radius: 20px;
+        background-color: #ffffff;
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+
+            i {
+                background: #fff;
+                color: $gray-text;
+                text-align: center;
+                border-radius: 10px;
+                color: #ccc;
+                font-size: 20px;
+            }
+        }
+
+        h2 {
+            position: relative;
+            font-size: 3.4rem;
+            font-weight: 600;
+            text-align:center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: $font-color;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .form-element {
+            margin: 15px 0;
+
+            // input[type="text"],
+            // input[type="password"] {
+            //     margin-top: 5px;
+            //     display: block;
+            //     width: 100%;
+            //     padding: 10px;
+            //     outline: none;
+            //     border: $form-field-border;
+            //     border-radius: $border-radius;
+            //     background-color: #e5e5e5;
+            //     box-shadow: $form-field-shadow;
+
+            // }
+
+            i {
+                position: absolute;
+                align-items: center;
+                cursor: pointer;
+                left: 81.5%;
+                top: 63.58%;
                 transform: translate(-50%);
                 font-size: 13px;
                 color: #5C5E60;
             }
 
             .location-button-container {
-                display: flex;
+                //display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
@@ -395,25 +520,29 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
             
         }
 
-        .form-element-btn {
-            display: flex;
-            margin: 10px;
-            justify-content: space-between;
-        }
+        // .form-element-btn {
+        //     display: flex;
+        //     margin: 10px;
+        //     justify-content: space-between;
+        // }
 
+
+    }
 
 }
 
+.popupFormGuide-active {
+    display: block;
+    position: fixed;
+    top: 50%;
+    opacity: 1;
+    z-index: 2;
+    transform: translate(-50%, -50%) scale(1.2);
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
 }
 
-// .popupForm .active {
-//     top: 50%;
-//     opacity: 1;
-//     transform: translate(-50%, -50%) scale(1);
-//     transition: top 0ms ease-in-out 0ms,
-//                 opacity 200ms ease-in-out 0ms,
-//                 transform 200ms ease-in-out 0ms;
-// }
 
 /* Map Styles */
 /* Map Styles */
