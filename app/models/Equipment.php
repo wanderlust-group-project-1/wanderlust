@@ -80,11 +80,13 @@ class EquipmentModel {
 
 
     return $this->update($id,$data);
+    }
 
+    public function deleteEquipment(int $id) {
 
         
-       
 
+        return $this->delete($id);
     }
 
     public function getEquipment(int $id): mixed {

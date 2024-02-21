@@ -23,7 +23,7 @@ foreach ($equipment as $item) {
         </div>
         <div class="col-lg-6">
         <?php if (!empty($item->image)) { ?>
-            <img id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
+            <img class="mw-100" id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
         <?php } ?>
 
         </div>
@@ -48,14 +48,15 @@ foreach ($equipment as $item) {
     <!-- delete modal -->
 
     <div id="delete-equipment-modal" class="delete-equipment-modal modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+        <div class="modal-content ">
+            <span class="close ">&times;</span>
             <h2>Delete Equipment</h2>
             <p>Are you sure you want to delete this equipment?</p>
-            <form id="delete-equipment-form">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($item->id); ?>">
-                <input type="submit" value="Delete">
-            </form>
+            <div class="flex-d gap-2 mt-5">
+            <button id="delete-equipment" class="btn btn-danger">Delete</button>
+            <button id="cancel-delete" class="btn modal-close">Cancel</button>
+            </div>
+  
         </div>
     </div>
 
@@ -263,6 +264,30 @@ foreach ($equipment as $item) {
 
 
             })
+
+
+        $("#delete-equipment").click(function() {
+            var id = <?php echo htmlspecialchars($item->id); ?>;
+            console.log("delete equipment", id);
+            $.ajax({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                },
+                url: '<?= ROOT_DIR ?>/api/equipment/delete/' + id,
+                method: 'POST',
+                success: function(data) {
+                    console.log(data);
+                    alertmsg('Equipment deleted successfully', 'success');
+                    getEquipments();
+                },
+                error: function(data) {
+                    console.log(data);
+                    alertmsg('Equipment could not be deleted', 'error');
+                }
+            })
+        });
+
+
             
 
 
