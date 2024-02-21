@@ -394,7 +394,15 @@ $(document).ready(function() {
 
 </script>
 
+<script>
 
+//  close button click (.close)
+    $(document).on('click', '.close', function() {
+        var modal = $(this).closest('.modal');
+        modal.hide();
+    });
+
+    </script>
 
 
 <?php

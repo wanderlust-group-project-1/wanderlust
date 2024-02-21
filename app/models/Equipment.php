@@ -61,12 +61,30 @@ class EquipmentModel {
         return empty($this->errors);
     }
 
-    public function updateEquipment(array $data) {
-        // Update logic for equipment attributes
-        // Similar to the updateRentalservice method
-        // Make sure to filter $data based on $this->allowedColumns
+    public function updateEquipment(array $data, array $files, int $id) {
 
-        return $this->update($data['id'], $data, 'id');
+
+    //   if image in file
+     if (isset($files['image']) && $files['image']['name'] != '') {
+        $data['image'] = upload($files['image'], 'images/equipment');
+
+    } 
+
+    // show($data);
+    // filter data
+    $data = array_filter($data, function ($key) {
+        return in_array($key, $this->allowedColumns);
+    }, ARRAY_FILTER_USE_KEY);
+
+    // show($data);
+
+
+    return $this->update($id,$data);
+
+
+        
+       
+
     }
 
     public function getEquipment(int $id): mixed {
