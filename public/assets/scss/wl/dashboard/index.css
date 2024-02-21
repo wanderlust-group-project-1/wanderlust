@@ -1923,7 +1923,7 @@ table tfoot tr td {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #EBEFE3;
+  background-color: #B2BDA0;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1938,7 +1938,7 @@ table tfoot tr td {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #EBEFE3;
+  background-color: #B2BDA0;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1985,7 +1985,10 @@ form input[type=text],
 form input[type=email],
 form input[type=password],
 form input[type=number],
-form textarea {
+form input[type=date],
+form input[type=time],
+form input[type=file],
+form select textarea {
   border: none;
   background: #B2BDA0;
   outline: none;

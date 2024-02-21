@@ -148,7 +148,7 @@ require_once('../app/views/navbar/rental-navbar.php');
 <div class="add-equipment-modal" id="add-equipment-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="add-equipment-form"  class="flex-d "  enctype="multipart/form-data">
+        <form id="add-equipment-form"  class="flex-d gap-2"  enctype="multipart/form-data">
             <h2>Add New Equipment</h2>
 
             <div class="row align-items-start">
@@ -185,12 +185,18 @@ require_once('../app/views/navbar/rental-navbar.php');
             <label for="cost">Cost</label>
             <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required>
 
-            <label for="rental-fee">Rental Fee</label>
+
+            <!-- Standard fee -->
+            <label for="standard-fee">Standard Fee</label>
+            <input type="number" step="0.01" id="standard-fee" class="form-control-lg" name="standard_fee" required>
+
+
+            <label for="rental-fee">Rental Fee (per day)</label>
             <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
 
 
 
-            <label for="count">Count</label>
+            <label for="count">Quantity</label>
             <input type="number" id="count" class="form-control-lg" name="count" required>
 
        
@@ -287,11 +293,14 @@ $(document).ready(function() {
             name: $("#equipment-name").val(),
             type: $("#equipment-type").val(),
             cost: parseFloat($("#cost").val()), // Assuming rent fee is the cost
+            standard_fee: parseFloat($("#standard-fee").val()),
             fee: parseFloat($("#rental-fee").val()),
+
             description: $("#description").val(), // Assuming condition is the description
             count: parseInt($("#count").val()),
             
         };
+
 
         var image = $("#equipment-image").prop('files')[0];
         // var filesData = {
