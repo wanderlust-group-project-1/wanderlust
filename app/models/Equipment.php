@@ -84,9 +84,16 @@ class EquipmentModel {
 
     public function deleteEquipment(int $id) {
 
-        
+
 
         return $this->delete($id);
+    }
+
+    public function increaseCount(int $id, int $count) {
+        $q = 'CALL IncreaseEquipmentCount(:id, :count)';
+        return $this->query($q, ['id' => $id, 'count' => $count]);
+
+
     }
 
     public function getEquipment(int $id): mixed {

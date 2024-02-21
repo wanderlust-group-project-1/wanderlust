@@ -23,16 +23,19 @@ foreach ($equipment as $item) {
         </div>
         <div class="col-lg-6">
         <?php if (!empty($item->image)) { ?>
-            <img class="mw-100" id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
+            <img class="mw-100 mw-250px" id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
         <?php } ?>
 
         </div>
         </div>
 
         <div class="edit-button">
-        <button id="edit-equipment-button" class="btn btn-full m-1">Edit</button>
+        <button id="edit-equipment-button" class="btn btn-full m-1">Edit</button>        
+    </div>
 
-        
+    <!-- increase count -->
+    <div class="increase-count-button">
+        <button id="increase-count-button" class="btn btn-full m-1">Increase Count</button>
     </div>
     <div class="delete-button">
         <button id="delete-equipment-button" class="btn btn-danger btn-full m-1">Delete</button>
@@ -43,6 +46,41 @@ foreach ($equipment as $item) {
     </div>
 
     
+
+
+    <!-- increase count modal -->
+
+    <div id="increase-count-modal" class="increase-count-modal modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="increase-count-form" class="flex-d-c gap-2">
+                <h2>Increase Count</h2>
+
+                <!-- Current count -->
+                <!-- <p>Current Count: <?php echo htmlspecialchars($item->count); ?></p> -->
+
+                <div class="flex-d gap-2 justify-content-between ">
+                <label for="count">Current Count</label>
+                <input type="text" id="current-count" name="count" value="<?php echo htmlspecialchars($item->count); ?>" disabled>
+                </div>
+
+                <div class="flex-d gap-2 justify-content-between ">
+                <label for="count">Count</label>
+
+                <input type="number" id="count" name="count" required>
+                </div>
+
+                <!-- Total -->
+                <div class="flex-d gap-2 justify-content-between ">
+                <label for="total">Total</label>
+                <input type="text" id="total" name="total" value="<?php echo htmlspecialchars($item->count); ?>" disabled>
+                </div>
+
+                <button type="submit" id="increase-count" class="btn">Increase Count</button>
+
+            </form>
+        </div>
+    </div>
 
     
     <!-- delete modal -->
@@ -289,6 +327,64 @@ foreach ($equipment as $item) {
 
 
             
+        // increase count modal , jquery
+
+        $("#increase-count-button").click(function() {
+            var modal = document.getElementById("increase-count-modal");
+            modal.style.display = "block";
+        });
+
+        $("#increase-count-form").submit(function(e) {
+            e.preventDefault();
+
+            
+
+
+            var id = <?php echo htmlspecialchars($item->id); ?>;
+            var count = $("#count").val();
+
+            console.log("count", count);
+            console.log(id)
+            $.ajax({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                },
+                url: '<?= ROOT_DIR ?>/api/equipment/increasecount/' + id,
+                method: 'POST',
+                // data: {
+                //     count: count
+                // },
+                    //  send as json
+                contentType: 'application/json', // Indicate that we're sending JSON data
+                data: JSON.stringify({
+                    count: count 
+                }),
+
+                success: function(data) {
+                    console.log(data);
+                    alertmsg('Count increased successfully', 'success');
+                    getEquipments();
+                },
+                error: function(data) {
+                    console.log(data);
+                    alertmsg('Count could not be increased', 'error');
+                }
+            })
+        });
+
+        // calculate total , only accept positive numbers
+
+        $("#count").on("input", function() {
+            var count = $(this).val();
+            if (count < 0 || isNaN(count) || count == ''){
+                $(this).val(0);
+            }
+            // str to int
+            var total = parseInt(count)  + parseInt(<?php echo htmlspecialchars($item->count); ?>);
+            $("#total").val(total);
+        });
+
+
 
 
 

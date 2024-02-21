@@ -60,4 +60,30 @@ class Equipment {
                 ->send();
         }
     }
+
+    public function increasecount(string $a = '', string $b = '', string $c = ''): void {
+        $request = new JSONRequest;
+        $response = new JSONResponse;
+
+        $equipmentModel = new EquipmentModel;
+
+        // show($request->getAll());
+
+        $data = $equipmentModel->increaseCount($a, $request->get('count'));
+
+        if (!$data){
+            $response->success(true)
+                ->message('Equipment count increased successfully')
+                ->statusCode(200)
+                ->send();
+        } else {
+            $response->success(false)
+                ->data(['errors' => $equipmentModel->errors])
+                ->message('Validation failed')
+                ->statusCode(422)
+                ->send();
+        }
+
+
+    }
 }

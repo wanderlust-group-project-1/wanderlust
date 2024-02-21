@@ -2758,6 +2758,10 @@ input.invert {
   width: 25px !important;
 }
 
+.mw-250px {
+  max-width: 250px !important;
+}
+
 .mw-200px {
   max-width: 200px !important;
 }
