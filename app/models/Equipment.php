@@ -13,12 +13,14 @@ class EquipmentModel {
         'count',
         'fee',
         'image',
+        'standard_fee',
     ];
 
     public function createEquipment(JSONRequest $request, JSONResponse $response) {
         $data = $request->getAll();
         $files = $_FILES; // Assuming the files are sent as part of the request
 
+        // show($data);
         if ($this->validateEquipment($data, $files)) {
             // Additional logic for creating equipment
             // For example, uploading documents, registering with a user, etc.
