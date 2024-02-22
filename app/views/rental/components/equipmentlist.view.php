@@ -6,7 +6,7 @@
                 <th>Equipment Name</th>
                 <th>Type</th>
                 <th>Cost</th>
-                <th>Count</th>
+                <th>Quantity</th>
                 <th>Action</th> <!-- Added Action Column -->
             </tr>
         </thead>
@@ -66,36 +66,39 @@
 
             var id = row.getAttribute('data-id');
 
-            $.ajax({
-                headers:{
-                    Authorization: "Bearer " + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + id,
-                method: 'GET',
-                success: function(data) {
-                    console.log(data);
+
+            fetchEquipmentDetails(id);
+
+            // $.ajax({
+            //     headers:{
+            //         Authorization: "Bearer " + getCookie('jwt_auth_token')
+            //     },
+            //     url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + id,
+            //     method: 'GET',
+            //     success: function(data) {
+            //         console.log(data);
                     
-                    //  create a new div element
-                    var newDiv = document.createElement("div")
-                    newDiv.innerHTML = data;
-                    var js = newDiv.querySelector('script').innerHTML;
+            //         //  create a new div element
+            //         var newDiv = document.createElement("div")
+            //         newDiv.innerHTML = data;
+            //         var js = newDiv.querySelector('script').innerHTML;
                     
 
 
 
-                    $('#equipment-modal-content').html(data).promise().done(function() {
-                    console.log('equipment loaded');
-                    viewEquipment();
-                    eval(js);
+            //         $('#equipment-modal-content').html(data).promise().done(function() {
+            //         console.log('equipment loaded');
+            //         viewEquipment();
+            //         eval(js);
 
-                });
-             },
-                error: function(err) {
-                    console.log(err);
-                }
+            //     });
+            //  },
+            //     error: function(err) {
+            //         console.log(err);
+            //     }
 
 
-            });
+            // });
             
             
 
@@ -105,6 +108,34 @@
     });
 
     }
+
+    function fetchEquipmentDetails(equipmentId) {
+    $.ajax({
+        headers: {
+            Authorization: "Bearer " + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + equipmentId,
+        method: 'GET',
+        success: function(data) {
+            console.log(data);
+
+            // Create a new div element
+            var newDiv = document.createElement("div");
+            newDiv.innerHTML = data;
+            var js = newDiv.querySelector('script').innerHTML;
+
+            // Update the modal content and execute the script
+            $('#equipment-modal-content').html(data).promise().done(function() {
+                console.log('equipment loaded');
+                viewEquipment();
+                eval(js);
+            });
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
 
 
 </script>
@@ -136,7 +167,7 @@
     margin: 10% auto; /* 10% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Width in desktop */
+    /* width: 50%; Width in desktop */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     animation: fadeIn 0.5s;
 }
