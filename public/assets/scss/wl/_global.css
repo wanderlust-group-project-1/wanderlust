@@ -38,9 +38,11 @@ h4 {
 }
 
 h5 {
+  margin-top: 5px;
+  font-family: sans-serif;
   font-weight: 400;
-  white-space: nowrap;
-  color: #6B6E70;
+  color: #526534;
+  text-align: justify;
 }
 
 h6 {
@@ -66,7 +68,6 @@ span {
 }
 
 thead,
-label,
 tbody,
 tfoot {
   font-size: 2rem;
@@ -80,8 +81,12 @@ h3 {
   font-size: 2rem;
 }
 
-h5 {
+h4 {
   font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.2rem;
 }
 
 ul {

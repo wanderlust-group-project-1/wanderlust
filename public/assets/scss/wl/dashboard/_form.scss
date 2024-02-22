@@ -63,14 +63,16 @@ form {
     width: 100%;
 
     input {
+
         border: none;
-        background: $color-lightest2;
+        // background: $color-lightest2;
         outline: none;
-        color: $white-text;
+        color: $font-grey;
         // border: 2px solid $color-lightest;
         border-radius: 12px;
         padding: 12px 20px;
-        font-weight: 600;
+        font-weight: 400;
+        max-width: 120%;
     }
 
     input[type="text"],
@@ -79,6 +81,7 @@ form {
     input[type="number"],
     textarea
     {
+        resize: vertical;
         border: none;
         background: $color-lightest2;
         outline: none;
@@ -88,20 +91,24 @@ form {
         padding: 12px 20px;
         font-weight: 400;
         margin-top: 10px;
+        display: block;
+        width: 100%;
     }
 
-    textarea {
-        // unchangeable size
-        resize: none;
-        height: 200px;
+    // textarea {
+    //     // unchangeable size
+    //     resize: none;
+    //     background: $color-lightest2;
+    //     border-radius: 12px;
+       
 
-        &.form-control-lg {
-            height: 150px;
-        }
+    //     &.form-control-lg {
+    //         height: 150px;
+    //     }
         
 
 
-    }
+    // }
 
 
 
@@ -144,7 +151,7 @@ form {
         font-weight: 400;
         margin-bottom: 20px;
         text-align: left;
-        font-size: 14px;
+        font-size: 18px;
         color: $gray-text;
     }
 

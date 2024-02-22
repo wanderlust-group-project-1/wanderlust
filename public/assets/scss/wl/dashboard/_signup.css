@@ -238,7 +238,7 @@
   height: fit-content;
   border-radius: 10px;
   background-color: #fff;
-  transform: translate(-50%, -50%) scale(1.23);
+  transform: translate(-50%, -50%) scale(1.05);
   padding: 20px 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -254,7 +254,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: 20px;
   border-radius: 20px;
   background-color: #ffffff;
 }
@@ -310,7 +310,7 @@
   top: 50%;
   opacity: 1;
   z-index: 2;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.05);
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 
@@ -324,7 +324,7 @@
   height: fit-content;
   border-radius: 10px;
   background-color: #fff;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.05);
   padding: 20px 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -340,7 +340,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: 20px;
   border-radius: 20px;
   background-color: #ffffff;
 }
@@ -379,50 +379,40 @@
   margin: 15px 0;
 }
 
-.popupFormGuide .form-common .form-element i {
-  position: absolute;
-  align-items: center;
-  cursor: pointer;
-  left: 81.5%;
-  top: 63.58%;
-  transform: translate(-50%);
-  font-size: 13px;
-  color: #5C5E60;
-}
-
-.popupFormGuide .form-common .form-element .location-button-container {
+.popupFormGuide .form-common .form-element .slect-location-btn {
   justify-content: center;
-  align-items: center;
+  margin-left: 50%;
+  display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  margin-top: 10px;
 }
 
-.popupFormGuide .form-common .form-element .location-button-container i {
+.popupFormGuide .form-common .form-element .slect-location-btn .location-icon {
+  max-width: fit-content;
+}
+
+.popupFormGuide .form-common .form-element .slect-location-btn .location-icon i {
+  max-width: fit-content;
   position: absolute;
   bottom: 60.85%;
-  right: 63%;
 }
 
-.popupFormGuide .form-common .form-element .location-button-container .file-label,
-.popupFormGuide .form-common .form-element .location-button-container .location-button {
+.popupFormGuide .form-common .form-element .file-label,
+.popupFormGuide .form-common .form-element .location-button {
+  max-width: 100%;
   background-color: #fff;
   color: #6B6E70;
-  padding: 10px 20px;
-  border-radius: 5px;
   border: none;
   cursor: pointer;
+  justify-content: left;
+  font-size: larger;
 }
 
-.popupFormGuide .form-common .form-element .location-button-container .file-label:hover,
-.popupFormGuide .form-common .form-element .location-button-container .location-button:hover {
+.popupFormGuide .form-common .form-element .file-label:hover,
+.popupFormGuide .form-common .form-element .location-button:hover {
   color: #868a8d;
 }
 
-.popupFormGuide .form-common .form-element .location-button-container .file-input {
+.popupFormGuide .form-common .form-element .file-input {
   position: relative;
   width: 100%;
   opacity: 0;
@@ -435,7 +425,7 @@
   top: 50%;
   opacity: 1;
   z-index: 2;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.05);
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 
@@ -449,7 +439,7 @@
   height: fit-content;
   border-radius: 10px;
   background-color: #fff;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.05);
   padding: 20px 30px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -465,7 +455,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: 20px;
   border-radius: 20px;
   background-color: #ffffff;
 }
@@ -504,50 +494,40 @@
   margin: 15px 0;
 }
 
-.popupFormRental .form-common .form-element i {
-  position: absolute;
-  align-items: center;
-  cursor: pointer;
-  left: 81.5%;
-  top: 63.58%;
-  transform: translate(-50%);
-  font-size: 13px;
-  color: #5C5E60;
-}
-
-.popupFormRental .form-common .form-element .location-button-container {
+.popupFormRental .form-common .form-element .slect-location-btn {
   justify-content: center;
-  align-items: center;
+  margin-left: 50%;
+  display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  margin-top: 10px;
 }
 
-.popupFormRental .form-common .form-element .location-button-container i {
+.popupFormRental .form-common .form-element .slect-location-btn .location-icon {
+  max-width: fit-content;
+}
+
+.popupFormRental .form-common .form-element .slect-location-btn .location-icon i {
+  max-width: fit-content;
   position: absolute;
   bottom: 60.85%;
-  right: 63%;
 }
 
-.popupFormRental .form-common .form-element .location-button-container .file-label,
-.popupFormRental .form-common .form-element .location-button-container .location-button {
+.popupFormRental .form-common .form-element .file-label,
+.popupFormRental .form-common .form-element .location-button {
+  max-width: 100%;
   background-color: #fff;
   color: #6B6E70;
-  padding: 10px 20px;
-  border-radius: 5px;
   border: none;
   cursor: pointer;
+  justify-content: left;
+  font-size: larger;
 }
 
-.popupFormRental .form-common .form-element .location-button-container .file-label:hover,
-.popupFormRental .form-common .form-element .location-button-container .location-button:hover {
+.popupFormRental .form-common .form-element .file-label:hover,
+.popupFormRental .form-common .form-element .location-button:hover {
   color: #868a8d;
 }
 
-.popupFormRental .form-common .form-element .location-button-container .file-input {
+.popupFormRental .form-common .form-element .file-input {
   position: relative;
   width: 100%;
   opacity: 0;
@@ -560,7 +540,7 @@
   top: 50%;
   opacity: 1;
   z-index: 2;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.05);
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 

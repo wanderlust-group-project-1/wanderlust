@@ -166,9 +166,15 @@ h4 {
 }
 
 h5 {
+//   font-weight: 400;
+//   white-space: nowrap;
+//   color: $gray-text;
+
+  margin-top: 5px;
+  font-family: sans-serif;
   font-weight: 400;
-  white-space: nowrap;
-  color: $gray-text;
+  color: $color-dark;
+  text-align: justify;
 }
 
 h6 {
@@ -206,7 +212,7 @@ span{
 }
 
 thead,
-label,
+// label,
 tbody,
 tfoot {
   font-size: $header3;
@@ -220,8 +226,12 @@ h3 {
   font-size: $header3;
 }
 
-h5 {
+h4{
   font-size: $header4;
+}
+
+h5 {
+  font-size: $smaller-text;
 }
 
 ul {
