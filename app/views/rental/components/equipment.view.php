@@ -37,6 +37,11 @@ foreach ($equipment as $item) {
     <div class="increase-count-button">
         <button id="increase-count-button" class="btn btn-full m-1">Increase Count</button>
     </div>
+    <!-- Manage Items -->
+    <div class="manage-items-button">
+        <button id="manage-items-button" class="btn btn-full m-1">Manage Items</button>
+    </div>
+
     <div class="delete-button">
         <button id="delete-equipment-button" class="btn btn-danger btn-full m-1">Delete</button>
     </div>
@@ -46,6 +51,17 @@ foreach ($equipment as $item) {
     </div>
 
     
+    <!-- Manage Item Modal -->
+
+    <div id="manage-items-modal" class="manage-items-modal modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Manage Items</h2>
+         <div class="flex-d-c gap-2" id="manage-items-content">
+            
+         </div>
+            </div>
+        </div>
 
 
     <!-- increase count modal -->
@@ -334,7 +350,15 @@ foreach ($equipment as $item) {
             modal.style.display = "block";
         });
 
-        $("#increase-count-form").submit(function(e) {
+        
+
+        // $("#increase-count-form").submit(function(e) {
+            // $("#increase-count").click(function(e) {
+                $(document).on('click', '#increase-count', function(e) {
+                // disable button
+
+                $(this).prop('disabled', true);
+
             e.preventDefault();
 
             
@@ -388,6 +412,28 @@ foreach ($equipment as $item) {
 
 
 
+        // Manage Items Modal
+
+        $("#manage-items-button").click(function() {
+            var modal = document.getElementById("manage-items-modal");
+            modal.style.display = "block";
+            var id = <?php echo htmlspecialchars($item->id); ?>;
+            console.log("id", id);
+            $.ajax({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                },
+                url: '<?= ROOT_DIR ?>/rentalService/getItems/' + id,
+                method: 'GET',
+                success: function(data) {
+                    console.log(data);
+                    $("#manage-items-content").html(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
+        });
 
 
 

@@ -177,6 +177,22 @@ class EquipmentModel {
     }
 
 
+    function getItemsByEquipment($data){
+            
+            // $q = new QueryBuilder;
+            // $q->setTable('item');
+            // $q->select('item.*', 'equipment.name as equipment_name', 'equipment.image as equipment_image');
+            // $q->join('equipment', 'item.equipment_id', 'equipment.id');
+            // $q->where('item.equipment_id', $data['equipment_id']);
+            // // show($q->getQuery());
+            // return $this->query($q->getQuery(), $q->getData());
+
+            $q = 'CALL GetItemsByEquipment(:equipment_id)';
+            return $this->query($q, $data);
+
+    }
+
+
 }
 
 
