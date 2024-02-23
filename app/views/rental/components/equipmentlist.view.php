@@ -110,7 +110,7 @@
         url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + equipmentId,
         method: 'GET',
         success: function(data) {
-            console.log(data);
+            // console.log(data);
 
             // Create a new div element
             var newDiv = document.createElement("div");
@@ -196,18 +196,7 @@
 });
 
 
-// item table actions
 
-$(document).on('click', '#equipment-item', function() {
-    var id = $(this).data('id');
-    
-    console.log(id);
-    // show modal
-    $('#change-item-status-modal').show();
-
-    
-
-});
 
 
 

@@ -22,7 +22,8 @@ show($items);
                     <td><?= $item->upcoming_rent_count ?></td>
                     <!-- Actions -->
                     <td> 
-                        <button id="equipment-item" class="btn btn-primary" data-id="<?= $item->id ?>">Manage</button>
+                        <button id="equipment-item" class="btn btn-primary" data-id="<?= $item->id ?>" data-status="<?= $item->status ?>" data-number="<?= $item->item_number ?>"
+                         >Manage</button>
                     </td>
                          
                 </tr>
@@ -39,6 +40,8 @@ show($items);
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Change Item Status</h2>
+
+        <p>Item Number: <span id="item-number"></span></p>
 
         <div id="item-actions">
             <button id="make-unavailable-t" class="btn btn-danger">Make Unavailable Temporarily</button>

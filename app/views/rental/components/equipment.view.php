@@ -419,6 +419,14 @@ foreach ($equipment as $item) {
             modal.style.display = "block";
             var id = <?php echo htmlspecialchars($item->id); ?>;
             console.log("id", id);
+
+            fetchItems(id);
+
+
+
+        });
+
+    function fetchItems(id) {
             $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -426,15 +434,123 @@ foreach ($equipment as $item) {
                 url: '<?= ROOT_DIR ?>/rentalService/getItems/' + id,
                 method: 'GET',
                 success: function(data) {
-                    console.log(data);
                     $("#manage-items-content").html(data);
                 },
                 error: function(data) {
                     console.log(data);
                 }
-            })
-        });
+            });
+}
 
+
+
+        // item table actions
+
+$(document).on('click', '#equipment-item', function() {
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var number = $(this).data('number');
+
+    
+    console.log(id);
+    console.log(status);
+    // show modal
+
+    $("#item-number").html(number);
+
+
+    // if available
+    if (status == 'available') {
+        // add id to
+        $("#make-unavailable-t").attr('data-id', id);
+        $("#make-unavailable-t").show();
+        $("#make-unavailable-p").attr('data-id', id);
+        $("#make-unavailable-p").show();
+        $("#make-available").hide();
+    } else {
+        $("#make-unavailable-t").hide();
+        $("#make-unavailable-p").attr('data-id', id);
+        $("#make-unavailable-p").show();
+        $("#make-available").attr('data-id', id);
+        $("#make-available").show();
+    }
+
+
+    $('#change-item-status-modal').show();
+
+    
+
+});
+
+//    item status change APIs
+
+// make unavailable temporarily
+$(document).on('click', '#make-unavailable-t', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/item/makeunavailabletemporarily/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Item made unavailable temporarily', 'success');
+
+            fetchItems(data.data.equipment_id);
+
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Item could not be made unavailable temporarily', 'error');
+        }
+    })
+});
+
+// make unavailable permanently
+$(document).on('click', '#make-unavailable-p', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/item/makeunavailablepermanently/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Item made unavailable permanently', 'success');
+            fetchItems(data.data.equipment_id);
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Item could not be made unavailable permanently', 'error');
+        }
+    })
+});
+
+// make available
+$(document).on('click', '#make-available', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/item/makeavailable/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Item made available', 'success');
+            fetchItems(data.data.equipment_id);
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Item could not be made available', 'error');
+        }
+    })
+});
 
 
 
