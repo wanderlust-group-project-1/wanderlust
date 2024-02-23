@@ -86,6 +86,7 @@
             overflow-y: hidden;
             position: relative;
             margin-bottom: 4px;
+            border: 1px solid rgba($color-darker, 0.2);
         }
 
         .progress::before {
@@ -114,6 +115,7 @@
             padding-left: $header4;
             color: $color-darker;
             font-weight: $font-medium;
+            border: 1px solid rgba($color-darker, 0.2);
         }
     }
 }
@@ -131,6 +133,7 @@
         background:$color-lighter;
         border-radius: 10px;
         box-shadow: 4px 4px 16px $color-dark-gray 0.1;
+        border: 1px solid rgba($color-darker, 0.2);
 
         .head {
             display: flex;

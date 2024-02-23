@@ -166,7 +166,6 @@
     <span class="close">&times;</span>
     <div class="profile-info">
       <img src="<?php echo ROOT_DIR ?>/assets/images/7.png" alt="Profile Image" class="profile-image">
-      <?php print_r($user->name) ?>
 
       <form id="guides" action="<?= ROOT_DIR ?>/guide/update" method="post">
           <h2>Update Guides Details</h2>

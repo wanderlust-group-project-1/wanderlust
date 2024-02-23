@@ -404,12 +404,12 @@ fieldset {
 .profile-editor form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Space between form elements */
 }
 .profile-editor form label {
-  font-size: 16px;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 5px;
+  margin-top: 2rem;
 }
 
 /* Responsive Design for Modals */
@@ -590,12 +590,12 @@ fieldset {
 .add-equipment-modal .modal-content form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Space between form elements */
 }
 .add-equipment-modal .modal-content form label {
-  font-size: 16px;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 5px;
+  margin-top: 2rem;
 }
 .add-equipment-modal .modal-content .close {
   color: #ccc;
@@ -1688,6 +1688,7 @@ fieldset {
   overflow-y: hidden;
   position: relative;
   margin-bottom: 4px;
+  border: 1px solid rgba(47, 59, 28, 0.2);
 }
 .info-data .card .progress::before {
   content: "";
@@ -1714,6 +1715,7 @@ fieldset {
   padding-left: 1.75rem;
   color: #2F3B1C;
   font-weight: 500;
+  border: 1px solid rgba(47, 59, 28, 0.2);
 }
 
 .data {
@@ -1729,6 +1731,7 @@ fieldset {
   background: #EBEFE3;
   border-radius: 10px;
   box-shadow: 4px 4px 16px #333 0.1;
+  border: 1px solid rgba(47, 59, 28, 0.2);
 }
 .data .content-data .head {
   display: flex;
@@ -2163,9 +2166,9 @@ form input[type=password],
 form input[type=number],
 form textarea {
   border: none;
-  background: #B2BDA0;
+  background: #EBEFE3;
   outline: none;
-  color: #212016;
+  color: #2F3B1C;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -2207,7 +2210,7 @@ form #error-message {
   font-size: 15px;
 }
 form label {
-  font-size: 20px;
+  font-size: 1.75rem;
   font-weight: 600;
   margin-bottom: 10px;
   text-align: left;
