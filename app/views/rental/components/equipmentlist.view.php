@@ -10,13 +10,13 @@
         <div class=" gap-3 flex-d-c">   
                 <div class="row">
             
-        <div class="col-lg-5">
+        <div class="col-lg-5 col-md-12 mw-300px">
             
         <input type="text" class="form-control-lg" id="equipment-name-filter" placeholder="Search by Equipment Name">
         </div>
         <!-- Select type -->
 
-        <div class="col-lg-5">
+        <div class="col-lg-5  col-md-12  mw-300px">
         <select id="equipment-type-filter" class="form-control-lg">
             <option value="">All Types</option>
             <option value="tent">Tent</option>
