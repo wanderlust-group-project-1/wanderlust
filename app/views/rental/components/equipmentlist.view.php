@@ -2,7 +2,7 @@
 
     <!-- Table filter for each column -->
     <!-- button for show filter -->
-    <button id="show-filter" class="btn">Show Filter</button>
+    <button id="show-filter" class="btn" aria-expanded="false">Show Filter</button>
 
 
 
@@ -35,7 +35,7 @@
 
 <div class="row">
 
-        <button id="hide-filter" class="btn">Hide Filter</button>
+        <button id="hide-filter" class="btn" aria-expanded="true">Hide Filter</button>
 </div>
         </div>
     </div>
