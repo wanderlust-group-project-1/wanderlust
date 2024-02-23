@@ -211,8 +211,8 @@ foreach ($equipment as $item) {
 
 
 
-            <label for="count">Quantity</label>
-            <input type="number" id="count" class="form-control-lg" name="count" required value="<?php echo htmlspecialchars($item->count); ?>">
+            <!-- <label for="count">Quantity</label>
+            <input type="number" id="count" class="form-control-lg" name="count" required value="<?php echo htmlspecialchars($item->count); ?>"> -->
 
        
             <label for="equipment-image">Equipment Image</label>
@@ -277,7 +277,7 @@ foreach ($equipment as $item) {
                 cost: formData.get('cost'),
                 standard_fee: formData.get('standard_fee'),
                 rental_fee: formData.get('rental_fee'),
-                count: formData.get('count'),
+                // count: formData.get('count'),
             };
 
             console.log("json data", jsonData);
@@ -450,6 +450,7 @@ $(document).on('click', '#equipment-item', function() {
     var id = $(this).data('id');
     var status = $(this).data('status');
     var number = $(this).data('number');
+    var count = $(this).data('count');
 
     
     console.log(id);
@@ -466,11 +467,27 @@ $(document).on('click', '#equipment-item', function() {
         $("#make-unavailable-t").show();
         $("#make-unavailable-p").attr('data-id', id);
         $("#make-unavailable-p").show();
+        $("#make-unavailable-p").attr('disabled', false);
+
+        if(count >0){
+            $("#make-unavailable-p").attr('disabled', true);
+            // You can't make this item unavailable permanently because it has upcoming bookings.
+            $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
+            
+        }
         $("#make-available").hide();
     } else {
         $("#make-unavailable-t").hide();
         $("#make-unavailable-p").attr('data-id', id);
         $("#make-unavailable-p").show();
+        $("#make-unavailable-p").attr('disabled', false);
+        console.log(count);
+        if(count >0){
+            $("#make-unavailable-p").attr('disabled', true);
+            // You can't make this item unavailable permanently because it has upcoming bookings.
+            $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
+            
+        }
         $("#make-available").attr('data-id', id);
         $("#make-available").show();
     }

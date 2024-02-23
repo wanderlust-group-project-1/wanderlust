@@ -6,20 +6,38 @@
 
 
 
-    <div class="table-filter">
-        <input type="text" id="equipment-name-filter" placeholder="Search by Equipment Name">
+    <div class="table-filter ">
+        <div class=" gap-3 flex-d-c">   
+                <div class="row">
+            
+        <div class="col-lg-5">
+            
+        <input type="text" class="form-control-lg" id="equipment-name-filter" placeholder="Search by Equipment Name">
+        </div>
         <!-- Select type -->
-        <select id="equipment-type-filter">
+
+        <div class="col-lg-5">
+        <select id="equipment-type-filter" class="form-control-lg">
             <option value="">All Types</option>
-            <option value="1">Type 1</option>
-            <option value="2">Type 2</option>
-            <option value="3">Type 3</option>
+            <option value="tent">Tent</option>
+            <option value="cooking">Cooking</option>
+            <option value="backpack">Backpack</option>
+            <option value="sleeping">Sleeping</option>
+            <option value="clothing">Clothing</option>
+            <option value="footwear">Footwear</option>
+            <option value="other">Other</option>
+        
         </select>
+        </div>
+
+        </div>
 
 
-
+<div class="row">
 
         <button id="hide-filter" class="btn">Hide Filter</button>
+</div>
+        </div>
     </div>
 
     <table class="data-table table-custom" id="equipment-table">

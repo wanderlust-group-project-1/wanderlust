@@ -18,11 +18,11 @@ show($items);
             <?php foreach ($items as $item) : ?>
                 <tr>
                     <td><?= $item->item_number ?></td>
-                    <td><?= $item->status ?></td>
+                    <td><?= ucfirst($item->status) ?></td>
                     <td><?= $item->upcoming_rent_count ?></td>
                     <!-- Actions -->
                     <td> 
-                        <button id="equipment-item" class="btn btn-primary" data-id="<?= $item->id ?>" data-status="<?= $item->status ?>" data-number="<?= $item->item_number ?>"
+                        <button id="equipment-item" class="btn btn-primary" data-id="<?= $item->id ?>" data-status="<?= $item->status ?>" data-number="<?= $item->item_number ?>" data-count = "<?= $item->upcoming_rent_count ?>"
                          >Manage</button>
                     </td>
                          
@@ -45,7 +45,7 @@ show($items);
 
         <div id="item-actions">
             <button id="make-unavailable-t" class="btn btn-danger">Make Unavailable Temporarily</button>
-            <button id="make-unavailable-p" class="btn btn-danger">Make Unavailable Permanently</button>
+            <button id="make-unavailable-p" class="btn btn-danger tooltip"  data-tooltip="This action cannot be undone." >Make Unavailable Permanently</button>
             <button id="make-available" class="btn btn-success">Make Available</button>
 
         </div>
