@@ -14,6 +14,8 @@
     background-clip: border-box;
     border: var(--bs-card-border);
     border-radius: var(--bs-card-border-radius);
+
+
 }
 
 .card-body {
@@ -40,7 +42,7 @@
     flex-grow: inherit;
 }
 
-card-normal2 {
+.card-normal2 {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -52,6 +54,24 @@ card-normal2 {
     padding: 20px;
     background-color: #d2cdcd;
     border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
+
+.card-invert {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: $color-primary;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease-in-out;
     gap: 20px;
     flex-grow: inherit;

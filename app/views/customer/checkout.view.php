@@ -169,6 +169,12 @@ require_once('../app/views/components/navbar.php');
 
     });
 
+    // set timeout 
+
+    setTimeout(() => {
+        console.log(payhere);
+        
+    }, 1000);
 
     function pay() {
 
