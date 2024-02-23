@@ -380,18 +380,18 @@
   margin: 15px 0;
 }
 
-.popupFormGuide .form-common .form-element .slect-location-btn {
+.popupFormGuide .form-common .form-element .slect-location {
   justify-content: center;
   margin-left: 50%;
   display: flex;
   flex-direction: column;
 }
 
-.popupFormGuide .form-common .form-element .slect-location-btn .location-icon {
+.popupFormGuide .form-common .form-element .slect-location .location-icon {
   max-width: fit-content;
 }
 
-.popupFormGuide .form-common .form-element .slect-location-btn .location-icon i {
+.popupFormGuide .form-common .form-element .slect-location .location-icon i {
   max-width: fit-content;
   position: absolute;
   bottom: 60.85%;
@@ -400,8 +400,9 @@
 .popupFormGuide .form-common .form-element .file-label,
 .popupFormGuide .form-common .form-element .location-button {
   max-width: 100%;
-  background-color: #fff;
+  background-color: transparent;
   color: #6B6E70;
+  padding: 10px 5px;
   border: none;
   cursor: pointer;
   justify-content: left;
@@ -497,18 +498,26 @@
   margin: 15px 0;
 }
 
-.popupFormRental .form-common .form-element .slect-location-btn {
+.popupFormRental .form-common .form-element .rental-label {
+  font-weight: 400;
+  text-align: left;
+  font-size: 18px;
+  color: #6B6E70;
+  padding: 10px;
+}
+
+.popupFormRental .form-common .form-element .slect-location {
   justify-content: center;
   margin-left: 50%;
   display: flex;
   flex-direction: column;
 }
 
-.popupFormRental .form-common .form-element .slect-location-btn .location-icon {
+.popupFormRental .form-common .form-element .slect-location .location-icon {
   max-width: fit-content;
 }
 
-.popupFormRental .form-common .form-element .slect-location-btn .location-icon i {
+.popupFormRental .form-common .form-element .slect-location .location-icon i {
   max-width: fit-content;
   position: absolute;
   bottom: 60.85%;
@@ -517,12 +526,15 @@
 .popupFormRental .form-common .form-element .file-label,
 .popupFormRental .form-common .form-element .location-button {
   max-width: 100%;
-  background-color: #fff;
+  background-color: transparent;
   color: #6B6E70;
+  padding: 10px 5px;
   border: none;
   cursor: pointer;
   justify-content: left;
   font-size: larger;
+  font-style: italic;
+  text-decoration: underline;
 }
 
 .popupFormRental .form-common .form-element .file-label:hover,

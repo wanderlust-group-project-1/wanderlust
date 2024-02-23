@@ -89,12 +89,12 @@ require_once('../app/views/layout/header.php');
                 
                         <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                             <div class="form-element">
-                                <label for="number">Mobile Number</label>
-                                <input class="form-control-lg" type="text" name="number" id="number" placeholder="Contact No" required>
+                                <label for="number">Contact</label>
+                                <input class="form-control-lg" type="text" name="number" id="number" placeholder="Contact" required>
                             </div>
 
                             <div class="form-element">
-                                <label for="nic">NIC Number</label>
+                                <label for="nic">NIC</label>
                                 <input class="form-control-lg" type="text" name="nic" id="nic" placeholder="NIC" required>
                             </div>
 
@@ -159,8 +159,8 @@ require_once('../app/views/layout/header.php');
                         </div>
 
                         <div class="form-element">
-                            <label for="mobile_number">Mobile Number</label>
-                            <input class="form-control-lg" type="text" name="mobile" placeholder="Mobile Number" id="number">
+                            <label for="mobile_number">Contact</label>
+                            <input class="form-control-lg" type="text" name="mobile" placeholder="Contact" id="number">
                         </div>
 
                         <div class="form-element">
@@ -180,15 +180,14 @@ require_once('../app/views/layout/header.php');
                         <div class="form-element">
                             <label for="address">Location</label><br>
                             <div class="location-button-container"  id="location-button-container">
-                                <input  class="form-control-lg" id="location" placeholder="Location" hidden="true">
-                                <!-- <div class="select-location-btn">
+                                <div class="select-location-btn">
                                     <div class="select-location-container">
                                         <button  id="select-location" class="location-button" type="button">
                                             <h4>Select location in the map</h4>
                                         </button>
                                     </div>
-                                    <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div>
-                                </div> -->
+                                    <!-- <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div> -->
+                                </div>
                             </div>
                         </div>
 
@@ -259,61 +258,65 @@ require_once('../app/views/layout/header.php');
 
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">    
                         <div class="form-element">
-                            <label for="business_name">Business Name</label>
-                            <input class="form-control-lg" type="text" name="name" id="business_name"> </br>
+                            <label class="rental-label" for="business_name">Business Name</label>
+                            <input class="form-control-lg" type="text" name="name" placeholder="Business Name" id="business_name">
                         </div>
 
                         <div class="form-element">
-                            <label for="registration_number">Business Registration Number/NIC</label>
-                            <input class="form-control-lg" type="text" name="regNo" id="registration_number"></br>
+                            <label class="rental-label" for="registration_number">Business Registration Number / NIC</label>
+                            <input class="form-control-lg" type="text" name="regNo" placeholder="Registration Number" id="registration_number">
                         </div>
 
                         <div class="form-element">
-                            <label for="mobile_number">Mobile Number</label>
-                            <input class="form-control-lg" type="text" name="mobile" id="number"></br>
+                            <label class="rental-label" for="mobile_number">Contact</label>
+                            <input class="form-control-lg" type="text" name="mobile" placeholder="Contact" id="number">
                         </div>
 
                         <div class="form-element">
-                            <label for="email">Email Address</label>
-                            <input class="form-control-lg" type="text" name="email" id="email"></br>
+                            <label class="rental-label" for="email">Email</label>
+                            <input class="form-control-lg" type="text" name="email" placeholder="Email" id="email">
                         </div>
-
-                        <div class="form-element">
-                            <label for="address">Address</label>
-                            <textarea class="address-text" name="address" id="address" required> </textarea></br>
                         </div>
-                    </div>
 
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                         <div class="form-element">
-                            <label for="address">Location</label><br>
+                            <label class="rental-label" for="address">Address</label>
+                            <input class="form-control-lg" type="text" name="address" id="address" placeholder="Address" required>
+                        </div>
+                    
+
+                    
+                        <div class="form-element">
+                            <label class="rental-label" for="address">Location</label><br>
                             <div class="location-button-container"  id="location-button-container">
-                                <input  class="form-control-lg" id="location"  hidden="true"></br>
-                                <!-- <div class="select-location-btn">
+                                <div class="select-location-btn">
                                     <div class="select-location-container">
                                         <button  id="select-location" class="location-button" type="button">
                                             <h4>Select location in the map</h4>
                                         </button>
                                     </div>
-                                    <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div>
-                                </div> -->
+                                    <!-- <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div> -->
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-element">
                             <div class="tooltip-container" class="hoverable-are">
                                 <div class="file-input-container">
-                                    <label for="verification_document" class="file-label">Choose Verification Document</label>
-                                    <input type="file" name="verification_document" id="verification_document" class="file-input">
+                                    <div><label class="rental-label">Business Verification Document</label>
+                                    <label for="verification_document" class="file-label">Brows here</label>
+                                    </div>
+                                    <!-- <input type="file" name="verification_document" placeholder="Verification Document"id="verification_document" class="file-input"> -->
                                     <div class="tooltip">
                                         <h5>Documents such as business registration certificate or any other document which can verify your business is legitimate.</h5>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-element">
-                            <label for="password">Password</label>
+                            <label class="rental-label" for="password">Password</label>
                             <input class="form-control-lg" type="password" name="password" id="password" placeholder="Password" required>
                             <!-- <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i> -->
                         </div>
