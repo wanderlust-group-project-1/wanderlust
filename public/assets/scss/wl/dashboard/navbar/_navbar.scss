@@ -86,6 +86,7 @@
      justify-content: space-between;
      align-items: center;
      transition: background-color 0.3s;
+     font-size: $header4;
  
      &:hover {
        background-color: $color-lighter;
@@ -107,7 +108,7 @@
    }
  
    &__container {
-     max-width: 1500px;
+     max-width: 1600px;
      margin-inline: 1.5rem;
      height: 7rem;
     //  display: flex;

@@ -1,6 +1,6 @@
 /* Define Variables */
 $color-white: #fff;
-$color-black: #000;
+$color-black: #000000;
 $color-dark-green: #4C5039;
 $color-light-gray: #f2f2f2;
 $color-medium-gray: #ccc;
@@ -91,9 +91,10 @@ $media-breakpoint: 768px;
   margin-bottom: 1.5rem;
   margin-top: 4rem;
   padding: 20px;
-  background-color: $color-white;
+  background-color: $color-lighter;
   border-radius: 15px;
-  box-shadow: $box-shadow-default;
+  // box-shadow: $box-shadow-default;
+
   transition: all 0.3s ease-in-out;
   gap: 20px;
   flex-grow: inherit;
@@ -191,11 +192,11 @@ $media-breakpoint: 768px;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: 50px;
+  // margin-top: 50px;
   width: 100%;
   height: 100%;
   padding: 0;
-  background-color: $color-lightest2;
+  background-color: $color-lighter;
 
   &-header {
     display: flex;
@@ -217,13 +218,12 @@ $media-breakpoint: 768px;
     justify-content: space-around;
     width: 90%;
     height: auto;
-    background-color: $color-lightest;
     gap: 20px;
     // margin-top: 8rem;
     // margin-left: 2rem;
     // margin-right: 2rem;
 
-    .dashboard-card {
+    &-card {
       @include dashboard-card-common;
     }
   }
@@ -321,7 +321,12 @@ $media-breakpoint: 768px;
     width: 100%;
     height: auto;
     padding: 0;
-    background-color: $color-white;
+    background-color: $color-lighter;
+    border: 1px solid rgba($color-darker, 0.2);
+    box-shadow: 4px 4px 16px $color-dark-gray 0.1;
+    border-radius: 10px;
+
+
 
     .add-equipment {
       .add-equipment-button {
@@ -416,7 +421,7 @@ $media-breakpoint: 768px;
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: $color-white;
+  background-color: $color-lighter;
 }
 
 /* Table Container */
