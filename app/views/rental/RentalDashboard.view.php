@@ -189,23 +189,33 @@ require_once('../app/views/layout/header.php');
                         <!-- <input type="text" id="description" class="form-control-lg" name="description" required> -->
                         <textarea id="description" class="form-control-lg" name="description" required></textarea>
 
+
                     </div>
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
                         <label for="cost">Cost</label>
                         <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required>
 
-                        <label for="rental-fee">Rental Fee</label>
-                        <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
+                        
 
 
 
-                        <label for="count">Count</label>
-                        <input type="number" id="count" class="form-control-lg" name="count" required>
+
+            <!-- Standard fee -->
+            <label for="standard-fee">Standard Fee</label>
+            <input type="number" step="0.01" id="standard-fee" class="form-control-lg" name="standard_fee" required>
+
+
+            <label for="rental-fee">Rental Fee (per day)</label>
+            <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
+
+                        <label for="count">Quantity</label>
+            <input type="number" id="count" class="form-control-lg" name="count" required>
 
 
                         <label for="equipment-image">Equipment Image</label>
                         <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required>
+
 
 
                     </div>
@@ -285,61 +295,72 @@ require_once('../app/views/layout/header.php');
 
 
 <script>
-    $(document).ready(function() {
-        $("#add-equipment-form").submit(function(e) {
-            e.preventDefault();
 
-            var formData = new FormData();
+$(document).ready(function() {
+    $("#add-equipment-form").submit(function(e) {
+        e.preventDefault();
 
-            // Create JSON object from form fields
-            var jsonData = {
-                name: $("#equipment-name").val(),
-                type: $("#equipment-type").val(),
-                cost: parseFloat($("#cost").val()), // Assuming rent fee is the cost
-                fee: parseFloat($("#rental-fee").val()),
-                description: $("#description").val(), // Assuming condition is the description
-                count: parseInt($("#count").val()),
+        var formData = new FormData();
+        
+        // Create JSON object from form fields
+        var jsonData = {
+            name: $("#equipment-name").val(),
+            type: $("#equipment-type").val(),
+            cost: parseFloat($("#cost").val()), // Assuming rent fee is the cost
+            standard_fee: parseFloat($("#standard-fee").val()),
+            fee: parseFloat($("#rental-fee").val()),
 
-            };
+            description: $("#description").val(), // Assuming condition is the description
+            count: parseInt($("#count").val()),
+            
+        };
 
-            var image = $("#equipment-image").prop('files')[0];
-            // var filesData = {
-            //     image: image
-            // }
-            // Append JSON data to formData
-            formData.append('json', JSON.stringify(jsonData));
-            formData.append('image', image);
 
-            // const api = new ApiClient('api/equipment/addEquipment')
-            // api.uploadImageWithJSON('',image,jsonData)
-            // .then(response => {
-            //     console.log(response);
-            //     if(response.status == 200) {
-            //         alert('Equipment added successfully');
-            //         window.location.reload();
-            //     }
-            // })
-            console.log(jsonData)
-            console.log(formData);
+        var image = $("#equipment-image").prop('files')[0];
+        // var filesData = {
+        //     image: image
+        // }
+        // Append JSON data to formData
+        formData.append('json', JSON.stringify(jsonData));
+        formData.append('image', image);
 
-            $.ajax({
-                //    with authorization
-                headers: {
-                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/api/equipment/addEquipment',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    console.log(response);
-                    if (response.success) {
-                        alertmsg('Equipment added successfully', 'success');
+        // const api = new ApiClient('api/equipment/addEquipment')
+        // api.uploadImageWithJSON('',image,jsonData)
+        // .then(response => {
+        //     console.log(response);
+        //     if(response.status == 200) {
+        //         alert('Equipment added successfully');
+        //         window.location.reload();
+        //     }
+        // })
+        console.log(jsonData)
+        console.log(formData);
 
-                        // close
-                        addEquipmentModal.style.display = "none";
-                    }
+        $.ajax({
+        //    with authorization
+           headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/equipment/addEquipment',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                if(response.success) {
+                    alertmsg('Equipment added successfully', 'success');
+                    
+                    // close
+                    addEquipmentModal.style.display = "none";
+
+                    // refresh equipment list
+                    getEquipments();
+
+                    // clear form
+                    $("#add-equipment-form").trigger('reset');
+                    
+
                 }
             });
 
@@ -391,7 +412,20 @@ require_once('../app/views/layout/header.php');
     getEquipments();
 </script>
 
+<script>
 
+    $(document).on('click', '.close', function() {
+        var modal = $(this).closest('.modal');
+        modal.hide();
+    });
+    // close or modal-close both 
+
+    $(document).on('click', '.modal-close', function() {
+        var modal = $(this).closest('.modal');
+        modal.hide();
+    });
+
+    </script>
 
 
 <?php
