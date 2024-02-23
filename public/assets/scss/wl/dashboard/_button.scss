@@ -111,7 +111,7 @@
 
 
 .btn-small {
-  background-color: $color-lightest;
+  background-color: $color-lighter;
   color: $color-darker;
   padding: 10px 20px;
   border-radius: 5px;
@@ -119,10 +119,21 @@
   border-width: .5px;
   border-style: solid;
   border-color: $color-darker;
-  font-weight: $font-medium;
+  font-weight: $font-semi-bold;
+  align-items: center;
 }
 
-
+.btn-edit {
+  background-color: $color-lighter;
+  color: $color-darker;
+  padding: 6px 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 4px 4px 16px rgba($color-darker, 0.1);
+  font-weight: $font-semi-bold;
+  align-items: center;
+}
 
 
 
