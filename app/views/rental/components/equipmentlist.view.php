@@ -164,9 +164,7 @@
 
     // client side filter (onchange)
 
-    $('#equipment-name-filter').on('input', function() {
-        filterEquipment();
-    });
+    $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
 
     $('#equipment-type-filter').change(function() {
         filterEquipment();
