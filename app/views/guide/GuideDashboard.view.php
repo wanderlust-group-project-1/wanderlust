@@ -32,7 +32,7 @@ require_once('../app/views/layout/header.php');
                     </div>
                 </div>
                 <span class="progress" data-value="12.5%"></span>
-                <span class="label">12.5% : Per Month</span>
+                <span class="label">12 : Per Month</span>
             </div>
             <div class="card">
                 <div class="head">
