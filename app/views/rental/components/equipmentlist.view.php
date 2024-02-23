@@ -153,12 +153,12 @@
 
  $(document).ready(function() {
     $('#show-filter').click(function() {
-        $('.table-filter').show();
+        $('.table-filter').slideDown();
         $('#show-filter').hide();
     });
 
     $('#hide-filter').click(function() {
-        $('.table-filter').hide();
+        $('.table-filter').slideUp();
         $('#show-filter').show();
     });
 
