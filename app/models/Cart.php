@@ -139,7 +139,8 @@ class CartModel {
         // call stored procedure to pay cart
 
 
-        return $this->query("CALL CompleteRentProcess(:customer_id)", $data)[0];
+        // return $this->query("CALL CompleteRentProcess(:customer_id)", $data)[0];
+        return $this->query("CALL ProcessCartToRentOrders(:customer_id)", $data)[0];
 
         
         

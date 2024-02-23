@@ -24,6 +24,7 @@ class EquipmentModel {
         if ($this->validateEquipment($data, $files)) {
             // Additional logic for creating equipment
             // For example, uploading documents, registering with a user, etc.
+            // show($files);
 
             $data['image'] = upload($files['image'], 'images/equipment');
 
