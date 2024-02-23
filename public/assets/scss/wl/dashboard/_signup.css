@@ -172,7 +172,7 @@
   background-color: #fff;
   color: #BCAB86;
   border-radius: 4px;
-  padding: 5px;
+  padding: 10px;
   top: 0%;
   left: 50%;
   transform: translateX(-50%);
@@ -218,6 +218,7 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .signup-container .file-input-container .file-input,
@@ -405,6 +406,8 @@
   cursor: pointer;
   justify-content: left;
   font-size: larger;
+  font-style: italic;
+  text-decoration: underline;
 }
 
 .popupFormGuide .form-common .form-element .file-label:hover,

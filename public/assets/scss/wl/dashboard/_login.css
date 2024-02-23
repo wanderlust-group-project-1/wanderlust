@@ -77,7 +77,7 @@
   border: none;
   outline: none;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   color: #47494b;
   display: block;
   background-color: #e5e5e5;
@@ -120,6 +120,7 @@
 
 .login-container .column .login-form a {
   color: #526534;
+  font-size: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
 }

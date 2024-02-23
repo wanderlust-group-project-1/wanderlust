@@ -212,7 +212,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
             background-color: $tooltip-bg;
             color: $tooltip-color;
             border-radius: 4px;
-            padding: 5px;
+            padding: 10px;
             top: 0%;    
             left: 50%;
             transform: translateX(-50%);
@@ -254,6 +254,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                 padding: 10px 20px;
                 border-radius: 5px;
                 cursor: pointer;
+                text-decoration: underline;
             }
         
             .file-input {
@@ -530,6 +531,8 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                     // display: block;
                     justify-content: left;
                     font-size: larger;
+                    font-style: italic;
+                    text-decoration: underline;
 
                     &:hover{
                         color: $gray-text-lighter;

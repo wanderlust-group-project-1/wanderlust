@@ -90,9 +90,10 @@ form {
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 400;
-        margin-top: 10px;
+        // margin-top: 10px;
         display: block;
         width: 100%;
+
     }
 
     // textarea {
@@ -149,10 +150,10 @@ form {
 
     label {
         font-weight: 400;
-        margin-bottom: 20px;
         text-align: left;
         font-size: 18px;
         color: $gray-text;
+        padding: 10px;
     }
 
 

@@ -8,7 +8,7 @@
   border-radius: 40px;
   padding: 10px 10px;
   font-weight: 500;
-  font-size: medium;
+  font-size: $text;
   font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
@@ -118,7 +118,7 @@
 
 // full width button
 .btn-full {
-  width: 50%;
+  width: 60%;
   position:relative;
 }
 

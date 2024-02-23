@@ -44,6 +44,7 @@ h5 {
   font-weight: 400;
   color: #526534;
   text-align: justify;
+  padding-left: 5px;
 }
 
 h6 {
@@ -55,7 +56,7 @@ h6 {
 }
 
 p {
-  font-size: 1.56rem;
+  font-size: 1.68rem;
   color: #5C5E60;
 }
 
@@ -879,7 +880,7 @@ fieldset {
   background-color: #fff;
   color: #BCAB86;
   border-radius: 4px;
-  padding: 5px;
+  padding: 10px;
   top: 0%;
   left: 50%;
   transform: translateX(-50%);
@@ -921,6 +922,7 @@ fieldset {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: underline;
 }
 .signup-container .file-input-container .file-input,
 .signup-container .location-button-container .file-input {
@@ -1098,6 +1100,8 @@ fieldset {
   cursor: pointer;
   justify-content: left;
   font-size: larger;
+  font-style: italic;
+  text-decoration: underline;
 }
 .popupFormGuide .form-common .form-element .file-label:hover,
 .popupFormGuide .form-common .form-element .location-button:hover {
@@ -1412,7 +1416,7 @@ fieldset {
   border: none;
   outline: none;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   color: #47494b;
   display: block;
   background-color: #e5e5e5;
@@ -1450,6 +1454,7 @@ fieldset {
 }
 .login-container .column .login-form a {
   color: #526534;
+  font-size: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -1972,7 +1977,7 @@ fieldset {
   border-radius: 40px;
   padding: 10px 10px;
   font-weight: 500;
-  font-size: medium;
+  font-size: 1.68rem;
   font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
@@ -2058,7 +2063,7 @@ fieldset {
 }
 
 .btn-full {
-  width: 50%;
+  width: 60%;
   position: relative;
 }
 
@@ -2354,7 +2359,6 @@ form textarea {
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 400;
-  margin-top: 10px;
   display: block;
   width: 100%;
 }
@@ -2389,10 +2393,10 @@ form #error-message {
 }
 form label {
   font-weight: 400;
-  margin-bottom: 20px;
   text-align: left;
   font-size: 18px;
   color: #6B6E70;
+  padding: 10px;
 }
 
 form#customer, form#rental-service, form#guide {

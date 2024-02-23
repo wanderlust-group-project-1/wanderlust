@@ -29,11 +29,11 @@ require_once('../app/views/layout/header.php');
                     
                     <div class="login-input">
                         <input type="text" name="email" id="email" placeholder="Email" required>
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
                     </div>
                     <div class="login-input">
                         <input type="password" name="password" id="password" placeholder="Password" required>
-                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-lock" aria-hidden="true"></i> -->
                     </div>
 
                     <div class="message-text">

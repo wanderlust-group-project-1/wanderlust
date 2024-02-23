@@ -43,6 +43,7 @@ h5 {
   font-weight: 400;
   color: #526534;
   text-align: justify;
+  padding-left: 5px;
 }
 
 h6 {
@@ -54,7 +55,7 @@ h6 {
 }
 
 p {
-  font-size: 1.56rem;
+  font-size: 1.68rem;
   color: #5C5E60;
 }
 
