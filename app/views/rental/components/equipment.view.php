@@ -6,12 +6,12 @@ foreach ($equipment as $item) {
     ?>
     <div class="equipment-details">
         <span class="close-button">&times;</span>
-        <div class="container flex-d-c gap-4 ">
+        <div class="container flex-d-c gap-4 p-md-0 ">
         <h2>Equipment Details</h2>
 
         <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-12">
 
         
         <p><strong>Name:</strong> <?php echo htmlspecialchars($item->name); ?></p>
@@ -21,7 +21,7 @@ foreach ($equipment as $item) {
         <p><strong>Description:</strong> <?php echo htmlspecialchars($item->description); ?></p>
         <p><strong>Count:</strong> <?php echo htmlspecialchars($item->count); ?></p>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-12">
         <?php if (!empty($item->image)) { ?>
             <img class="mw-100 mw-250px" id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
         <?php } ?>
@@ -211,8 +211,8 @@ foreach ($equipment as $item) {
 
 
 
-            <label for="count">Quantity</label>
-            <input type="number" id="count" class="form-control-lg" name="count" required value="<?php echo htmlspecialchars($item->count); ?>">
+            <!-- <label for="count">Quantity</label>
+            <input type="number" id="count" class="form-control-lg" name="count" required value="<?php echo htmlspecialchars($item->count); ?>"> -->
 
        
             <label for="equipment-image">Equipment Image</label>
@@ -277,7 +277,7 @@ foreach ($equipment as $item) {
                 cost: formData.get('cost'),
                 standard_fee: formData.get('standard_fee'),
                 rental_fee: formData.get('rental_fee'),
-                count: formData.get('count'),
+                // count: formData.get('count'),
             };
 
             console.log("json data", jsonData);
@@ -419,6 +419,14 @@ foreach ($equipment as $item) {
             modal.style.display = "block";
             var id = <?php echo htmlspecialchars($item->id); ?>;
             console.log("id", id);
+
+            fetchItems(id);
+
+
+
+        });
+
+    function fetchItems(id) {
             $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -426,15 +434,140 @@ foreach ($equipment as $item) {
                 url: '<?= ROOT_DIR ?>/rentalService/getItems/' + id,
                 method: 'GET',
                 success: function(data) {
-                    console.log(data);
                     $("#manage-items-content").html(data);
                 },
                 error: function(data) {
                     console.log(data);
                 }
-            })
-        });
+            });
+}
 
+
+
+        // item table actions
+
+$(document).on('click', '#equipment-item', function() {
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var number = $(this).data('number');
+    var count = $(this).data('count');
+
+    
+    console.log(id);
+    console.log(status);
+    // show modal
+
+    $("#item-number").html(number);
+
+
+    // if available
+    if (status == 'available') {
+        // add id to
+        $("#make-unavailable-t").attr('data-id', id);
+        $("#make-unavailable-t").show();
+        $("#make-unavailable-p").attr('data-id', id);
+        $("#make-unavailable-p").show();
+        $("#make-unavailable-p").attr('disabled', false);
+
+        if(count >0){
+            $("#make-unavailable-p").attr('disabled', true);
+            // You can't make this item unavailable permanently because it has upcoming bookings.
+            $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
+            
+        }
+        $("#make-available").hide();
+    } else {
+        $("#make-unavailable-t").hide();
+        $("#make-unavailable-p").attr('data-id', id);
+        $("#make-unavailable-p").show();
+        $("#make-unavailable-p").attr('disabled', false);
+        console.log(count);
+        if(count >0){
+            $("#make-unavailable-p").attr('disabled', true);
+            // You can't make this item unavailable permanently because it has upcoming bookings.
+            $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
+            
+        }
+        $("#make-available").attr('data-id', id);
+        $("#make-available").show();
+    }
+
+
+    $('#change-item-status-modal').show();
+
+    
+
+});
+
+//    item status change APIs
+
+// make unavailable temporarily
+$(document).on('click', '#make-unavailable-t', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/item/makeunavailabletemporarily/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Item made unavailable temporarily', 'success');
+
+            fetchItems(data.data.equipment_id);
+
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Item could not be made unavailable temporarily', 'error');
+        }
+    })
+});
+
+// make unavailable permanently
+$(document).on('click', '#make-unavailable-p', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/item/makeunavailablepermanently/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Item made unavailable permanently', 'success');
+            fetchItems(data.data.equipment_id);
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Item could not be made unavailable permanently', 'error');
+        }
+    })
+});
+
+// make available
+$(document).on('click', '#make-available', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/item/makeavailable/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Item made available', 'success');
+            fetchItems(data.data.equipment_id);
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Item could not be made available', 'error');
+        }
+    })
+});
 
 
 

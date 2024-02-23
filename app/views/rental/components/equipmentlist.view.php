@@ -1,6 +1,46 @@
-<div class="table-container">
+<div class="table-container flex-d-c">
 
-    <table class="data-table">
+    <!-- Table filter for each column -->
+    <!-- button for show filter -->
+    <button id="show-filter" class="btn" aria-expanded="false">Show Filter</button>
+
+
+
+    <div class="table-filter ">
+        <div class=" gap-3 flex-d-c">   
+                <div class="row">
+            
+        <div class="col-lg-5">
+            
+        <input type="text" class="form-control-lg" id="equipment-name-filter" placeholder="Search by Equipment Name">
+        </div>
+        <!-- Select type -->
+
+        <div class="col-lg-5">
+        <select id="equipment-type-filter" class="form-control-lg">
+            <option value="">All Types</option>
+            <option value="tent">Tent</option>
+            <option value="cooking">Cooking</option>
+            <option value="backpack">Backpack</option>
+            <option value="sleeping">Sleeping</option>
+            <option value="clothing">Clothing</option>
+            <option value="footwear">Footwear</option>
+            <option value="other">Other</option>
+        
+        </select>
+        </div>
+
+        </div>
+
+
+<div class="row">
+
+        <button id="hide-filter" class="btn" aria-expanded="true">Hide Filter</button>
+</div>
+        </div>
+    </div>
+
+    <table class="data-table table-custom" id="equipment-table">
         <thead>
             <tr>
                 <th>Equipment Name</th>
@@ -69,36 +109,7 @@
 
             fetchEquipmentDetails(id);
 
-            // $.ajax({
-            //     headers:{
-            //         Authorization: "Bearer " + getCookie('jwt_auth_token')
-            //     },
-            //     url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + id,
-            //     method: 'GET',
-            //     success: function(data) {
-            //         console.log(data);
-                    
-            //         //  create a new div element
-            //         var newDiv = document.createElement("div")
-            //         newDiv.innerHTML = data;
-            //         var js = newDiv.querySelector('script').innerHTML;
-                    
 
-
-
-            //         $('#equipment-modal-content').html(data).promise().done(function() {
-            //         console.log('equipment loaded');
-            //         viewEquipment();
-            //         eval(js);
-
-            //     });
-            //  },
-            //     error: function(err) {
-            //         console.log(err);
-            //     }
-
-
-            // });
             
             
 
@@ -117,7 +128,7 @@
         url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + equipmentId,
         method: 'GET',
         success: function(data) {
-            console.log(data);
+            // console.log(data);
 
             // Create a new div element
             var newDiv = document.createElement("div");
@@ -136,6 +147,73 @@
         }
     });
 }
+
+
+// filter equipment
+
+ $(document).ready(function() {
+    $('#show-filter').click(function() {
+        $('.table-filter').slideDown();
+        $('#show-filter').hide();
+    });
+
+    $('#hide-filter').click(function() {
+        $('.table-filter').slideUp();
+        $('#show-filter').show();
+    });
+
+    // client side filter (onchange)
+
+    $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
+
+    $('#equipment-type-filter').change(function() {
+        filterEquipment();
+    });
+
+    $('#equipment-cost-filter-min').on('input', function() {
+        filterEquipment();
+    });
+
+    $('#equipment-cost-filter-max').on('input', function() {
+        filterEquipment();
+    });
+
+
+
+
+    // $('#equipment-filter-button').click(function() {
+        function filterEquipment() {
+        var name = $('#equipment-name-filter').val();
+        var type = $('#equipment-type-filter').val();
+        // var minCost = $('#equipment-cost-filter-min').val();
+        // var maxCost = $('#equipment-cost-filter-max').val();
+
+        // console.log(name, type, minCost, maxCost);
+
+     
+        $('#equipment-table tbody tr').each(function() {
+            var row = $(this);
+            var equipmentName = row.find('td').eq(0).text();
+            var equipmentType = row.find('td').eq(1).text();
+            // var equipmentCost = row.find('td').eq(2).text().replace('Rs', '');
+            var equipmentCount = row.find('td').eq(3).text();
+
+            // console.log(equipmentName, equipmentType, equipmentCost, equipmentCount);
+
+            if (name && equipmentName.toLowerCase().indexOf(name.toLowerCase()) === -1) {
+                row.hide();
+            } else if (type && equipmentType.toLowerCase().indexOf(type.toLowerCase()) === -1) {
+                row.hide();
+            } else {
+                row.show();
+            }
+        });
+    }
+});
+
+
+
+
 
 
 </script>
@@ -235,7 +313,7 @@
 /* Mobile responsive styling */
 @media screen and (max-width: 600px) {
     .view-equipment-modal .modal-content {
-        width: 80%; /* Wider in mobile */
+        width: 95%; /* Wider in mobile */
         margin: 20% auto; /* More margin from the top in mobile */
     }
 }
