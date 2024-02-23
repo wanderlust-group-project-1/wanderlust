@@ -1,6 +1,28 @@
-<div class="table-container">
+<div class="table-container flex-d-c">
 
-    <table class="data-table">
+    <!-- Table filter for each column -->
+    <!-- button for show filter -->
+    <button id="show-filter" class="btn">Show Filter</button>
+
+
+
+    <div class="table-filter">
+        <input type="text" id="equipment-name-filter" placeholder="Search by Equipment Name">
+        <!-- Select type -->
+        <select id="equipment-type-filter">
+            <option value="">All Types</option>
+            <option value="1">Type 1</option>
+            <option value="2">Type 2</option>
+            <option value="3">Type 3</option>
+        </select>
+
+
+
+
+        <button id="hide-filter" class="btn">Hide Filter</button>
+    </div>
+
+    <table class="data-table table-custom" id="equipment-table">
         <thead>
             <tr>
                 <th>Equipment Name</th>
@@ -69,36 +91,7 @@
 
             fetchEquipmentDetails(id);
 
-            // $.ajax({
-            //     headers:{
-            //         Authorization: "Bearer " + getCookie('jwt_auth_token')
-            //     },
-            //     url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + id,
-            //     method: 'GET',
-            //     success: function(data) {
-            //         console.log(data);
-                    
-            //         //  create a new div element
-            //         var newDiv = document.createElement("div")
-            //         newDiv.innerHTML = data;
-            //         var js = newDiv.querySelector('script').innerHTML;
-                    
 
-
-
-            //         $('#equipment-modal-content').html(data).promise().done(function() {
-            //         console.log('equipment loaded');
-            //         viewEquipment();
-            //         eval(js);
-
-            //     });
-            //  },
-            //     error: function(err) {
-            //         console.log(err);
-            //     }
-
-
-            // });
             
             
 
@@ -136,6 +129,86 @@
         }
     });
 }
+
+
+// filter equipment
+
+ $(document).ready(function() {
+    $('#show-filter').click(function() {
+        $('.table-filter').show();
+        $('#show-filter').hide();
+    });
+
+    $('#hide-filter').click(function() {
+        $('.table-filter').hide();
+        $('#show-filter').show();
+    });
+
+    // client side filter (onchange)
+
+    $('#equipment-name-filter').on('input', function() {
+        filterEquipment();
+    });
+
+    $('#equipment-type-filter').change(function() {
+        filterEquipment();
+    });
+
+    $('#equipment-cost-filter-min').on('input', function() {
+        filterEquipment();
+    });
+
+    $('#equipment-cost-filter-max').on('input', function() {
+        filterEquipment();
+    });
+
+
+
+
+    // $('#equipment-filter-button').click(function() {
+        function filterEquipment() {
+        var name = $('#equipment-name-filter').val();
+        var type = $('#equipment-type-filter').val();
+        // var minCost = $('#equipment-cost-filter-min').val();
+        // var maxCost = $('#equipment-cost-filter-max').val();
+
+        // console.log(name, type, minCost, maxCost);
+
+     
+        $('#equipment-table tbody tr').each(function() {
+            var row = $(this);
+            var equipmentName = row.find('td').eq(0).text();
+            var equipmentType = row.find('td').eq(1).text();
+            // var equipmentCost = row.find('td').eq(2).text().replace('Rs', '');
+            var equipmentCount = row.find('td').eq(3).text();
+
+            // console.log(equipmentName, equipmentType, equipmentCost, equipmentCount);
+
+            if (name && equipmentName.toLowerCase().indexOf(name.toLowerCase()) === -1) {
+                row.hide();
+            } else if (type && equipmentType.toLowerCase().indexOf(type.toLowerCase()) === -1) {
+                row.hide();
+            } else {
+                row.show();
+            }
+        });
+    }
+});
+
+
+// item table actions
+
+$(document).on('click', '#equipment-item', function() {
+    var id = $(this).data('id');
+    
+    console.log(id);
+    // show modal
+    $('#change-item-status-modal').show();
+
+    
+
+});
+
 
 
 </script>
@@ -235,7 +308,7 @@
 /* Mobile responsive styling */
 @media screen and (max-width: 600px) {
     .view-equipment-modal .modal-content {
-        width: 80%; /* Wider in mobile */
+        width: 95%; /* Wider in mobile */
         margin: 20% auto; /* More margin from the top in mobile */
     }
 }

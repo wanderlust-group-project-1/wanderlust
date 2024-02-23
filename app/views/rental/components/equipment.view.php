@@ -6,12 +6,12 @@ foreach ($equipment as $item) {
     ?>
     <div class="equipment-details">
         <span class="close-button">&times;</span>
-        <div class="container flex-d-c gap-4 ">
+        <div class="container flex-d-c gap-4 p-md-0 ">
         <h2>Equipment Details</h2>
 
         <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-12">
 
         
         <p><strong>Name:</strong> <?php echo htmlspecialchars($item->name); ?></p>
@@ -21,7 +21,7 @@ foreach ($equipment as $item) {
         <p><strong>Description:</strong> <?php echo htmlspecialchars($item->description); ?></p>
         <p><strong>Count:</strong> <?php echo htmlspecialchars($item->count); ?></p>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-12">
         <?php if (!empty($item->image)) { ?>
             <img class="mw-100 mw-250px" id="detail-image" src="<?php  echo OSURL . "images/equipment/" . htmlspecialchars($item->image); ?>" alt="Equipment Image">
         <?php } ?>
