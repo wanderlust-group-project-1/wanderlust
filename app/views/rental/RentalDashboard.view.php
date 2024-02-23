@@ -339,6 +339,13 @@ $(document).ready(function() {
                     
                     // close
                     addEquipmentModal.style.display = "none";
+
+                    // refresh equipment list
+                    getEquipments();
+
+                    // clear form
+                    $("#add-equipment-form").trigger('reset');
+                    
                 }
             }
         });

@@ -90,7 +90,7 @@ require_once('../app/views/components/navbar.php');
                 orderItemModal.style.display = "block";
                 var orderId = button.closest('.card').getAttribute('data-id');
                 $.ajax({
-                    url: '<?= ROOT_DIR ?>/orders/viewOrder/' + orderId,
+                    url: '<?= ROOT_DIR ?>/myOrders/viewOrder/' + orderId,
                     headers: {
                         'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
                     },
@@ -112,7 +112,7 @@ require_once('../app/views/components/navbar.php');
     $(document).ready(function() {
 
         $.ajax({
-            url: '<?= ROOT_DIR ?>/orders/list',
+            url: '<?= ROOT_DIR ?>/myOrders/list',
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },

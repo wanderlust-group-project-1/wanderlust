@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 23, 2024 at 09:05 AM
+-- Generation Time: Feb 23, 2024 at 03:42 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -170,7 +170,11 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetItemsByEquipment` (IN `equipmentId` INT)
     JOIN 
         equipment ON item.equipment_id = equipment.id
     WHERE 
-        item.equipment_id = equipmentId;
+        item.equipment_id = equipmentId
+    AND 
+    	item.status IN  ('available','unavailable');
+        
+        
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `getRentalsByCustomer` (IN `customer_id_param` INT)   BEGIN
@@ -275,6 +279,126 @@ CREATE DEFINER=`root`@`%` PROCEDURE `PaymentComplete` (IN `reference_number_inpu
     WHERE reference_number = reference_number_input;
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` INT)   BEGIN
+    DECLARE finished INT DEFAULT 0;
+    DECLARE currentRentalServiceID INT;
+    DECLARE totalSum DECIMAL(10, 2) DEFAULT 0.00;
+    DECLARE lastRentID INT;
+    DECLARE lastPaymentID INT;
+    DECLARE reference_number VARCHAR(255);
+    -- Cursor to select distinct rental service IDs from the cart items
+    DECLARE curRentalService CURSOR FOR 
+        SELECT DISTINCT equipment.rentalservice_id
+        FROM cart
+        JOIN cart_item ON cart.id = cart_item.cart_id
+        JOIN item ON cart_item.item_id = item.id
+        JOIN equipment ON item.equipment_id = equipment.id
+        WHERE cart.customer_id = customerID;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+
+    OPEN curRentalService;
+
+    -- Loop through each rental service ID
+    rentalServiceLoop:LOOP
+        FETCH curRentalService INTO currentRentalServiceID;
+        IF finished = 1 THEN 
+            LEAVE rentalServiceLoop;
+        END IF;
+        
+-- Insert a rent order for the current rental service and accumulate the total
+INSERT INTO rent (customer_id, start_date, end_date, status, total, paid_amount)
+SELECT 
+    customer_id, 
+    MIN(start_date) AS start_date, 
+    MAX(end_date) AS end_date, 
+    'pending' AS status, 
+    SUM(equipment.fee) AS total, 
+    0.00 AS paid_amount
+FROM cart
+JOIN cart_item ON cart.id = cart_item.cart_id
+JOIN item ON cart_item.item_id = item.id
+JOIN equipment ON item.equipment_id = equipment.id
+WHERE cart.customer_id = customerID AND equipment.rentalservice_id = currentRentalServiceID
+GROUP BY cart.customer_id, equipment.rentalservice_id;
+
+        SET lastRentID = LAST_INSERT_ID();
+        SET totalSum = totalSum + (SELECT total FROM rent WHERE id = lastRentID);
+
+        -- Insert rent items for the current rent order
+        INSERT INTO rent_item (rent_id, item_id)
+        SELECT lastRentID, item.id
+        FROM cart_item
+        JOIN item ON cart_item.item_id = item.id
+        JOIN equipment ON item.equipment_id = equipment.id
+        WHERE cart_item.cart_id IN (
+            SELECT id FROM cart WHERE customer_id = customerID
+        ) AND equipment.rentalservice_id = currentRentalServiceID;
+        
+    END LOOP;
+
+    CLOSE curRentalService;
+
+    -- Create a single payment entry for the total sum of all rent orders
+    INSERT INTO payment (amount, status) VALUES (totalSum, 'pending');
+    SET lastPaymentID = LAST_INSERT_ID();
+    SET reference_number = CONCAT('RNT', LPAD(lastPaymentID, 5, '0'));
+    
+    -- Update the payment with the generated reference number
+    UPDATE payment SET reference_number = reference_number WHERE id = lastPaymentID;
+
+    -- Clean up cart items and the cart for the customer
+    DELETE FROM cart_item WHERE cart_id IN (SELECT id FROM cart WHERE customer_id = customerID);
+    DELETE FROM cart WHERE customer_id = customerID;
+
+    -- Return the reference number and total amount for confirmation or further processing
+    SELECT reference_number AS orderID, totalSum AS totalAmount;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `ProcessRentOrders` (`customerID` INT)   BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE currentRentalServiceID INT;
+    DECLARE curRentalService CURSOR FOR 
+        SELECT DISTINCT equipment.rentalservice_id
+        FROM cart
+        JOIN cart_item ON cart.id = cart_item.cart_id
+        JOIN item ON cart_item.item_id = item.id
+        JOIN equipment ON item.equipment_id = equipment.id
+        WHERE cart.customer_id = customerID;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN curRentalService;
+
+    read_loop: LOOP
+        FETCH curRentalService INTO currentRentalServiceID;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Insert into rent table and capture the last inserted ID for the current rentalservice_id
+        INSERT INTO rent (customer_id, start_date, end_date, status, total, paid_amount)
+        SELECT customer_id, MIN(start_date), MAX(end_date), 'pending', SUM(equipment.fee), '0.00'
+        FROM cart
+        JOIN cart_item ON cart.id = cart_item.cart_id
+        JOIN item ON cart_item.item_id = item.id
+        JOIN equipment ON item.equipment_id = equipment.id
+        WHERE cart.customer_id = customerID AND equipment.rentalservice_id = currentRentalServiceID;
+
+        -- Capture the last inserted ID for this batch
+        SET @lastRentID = LAST_INSERT_ID();
+
+        -- Insert into rent_item for each item related to the current rentalservice_id
+        INSERT INTO rent_item (rent_id, item_id)
+        SELECT @lastRentID, item.id
+        FROM cart
+        JOIN cart_item ON cart.id = cart_item.cart_id
+        JOIN item ON cart_item.item_id = item.id
+        JOIN equipment ON item.equipment_id = equipment.id
+        WHERE cart.customer_id = customerID AND equipment.rentalservice_id = currentRentalServiceID;
+    END LOOP;
+
+    CLOSE curRentalService;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -295,8 +419,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `start_date`, `end_date`) VALUES
-(43, 25, '2024-02-23', '2024-02-29'),
-(47, 32, '2024-02-14', '2024-02-27');
+(43, 25, '2024-02-23', '2024-02-29');
 
 -- --------------------------------------------------------
 
@@ -318,8 +441,7 @@ INSERT INTO `cart_item` (`id`, `cart_id`, `item_id`) VALUES
 (90, 40, 38),
 (91, 40, 4),
 (92, 40, 38),
-(93, 40, 38),
-(95, 47, 1329);
+(93, 40, 38);
 
 -- --------------------------------------------------------
 
@@ -401,8 +523,8 @@ CREATE TABLE `equipment` (
 --
 
 INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`, `type`, `count`, `fee`, `standard_fee`, `image`) VALUES
-(25, 25, 'Tent - 2 Persons', 3000.00, 'Tent for 2 Persons', 'Tent', 22, 1000.00, 0.00, '65b365fccf6dc.jpg'),
-(33, 25, 'Torch 99', 4000.00, '                                                                                                            Torch            ABC                                                                                                ', 'Tent', 4, 300.00, 10.00, '65d5f3e045b7d.jpg'),
+(25, 25, 'Tent - 2 Persons', 3000.00, 'Tent for 2 Persons', 'Tent', 19, 1000.00, 0.00, '65b365fccf6dc.jpg'),
+(33, 25, 'Torch 99', 4000.00, '                                                                                                            Torch            ABC                                                                                                ', 'Tent', 11, 300.00, 10.00, '65d5f3e045b7d.jpg'),
 (35, 25, 'Hiking Backpack', 14000.00, 'Backpack for hiking', 'Backpack', 14, 1000.00, 0.00, '65b3685fa38ae.jpg'),
 (37, 25, 'Tent', 13000.00, 'Tent for 4 ', 'Rent', 15, 1500.00, 0.00, '65bcb96e5870c.jpg'),
 (38, 25, 'Abbot Jimenez', 85.00, 'Ea eiusmod id asper', 'Cooking', 70, 83.00, 0.00, '65bcc5d7c9299.jpg'),
@@ -416,7 +538,9 @@ INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`
 (49, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 6, 408.00, 363.00, '65d57d8fedb7a.jpg'),
 (50, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 6, 408.00, 363.00, '65d57dc8b4232.jpg'),
 (51, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 6, 408.00, 363.00, '65d57ddf61565.jpg'),
-(52, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 9, 408.00, 363.00, '65d581590b685.jpg');
+(52, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 9, 408.00, 363.00, '65d581590b685.jpg'),
+(53, 56, 'BBQ Grill', 5600.00, 'Large', 'Cooking', 14, 300.00, 500.00, '65d8ae9491e5c.webp'),
+(61, 56, 'Cooking Set', 11000.00, '5', 'Cooking', 11, 500.00, 400.00, '65d8b04792064.webp');
 
 -- --------------------------------------------------------
 
@@ -541,8 +665,8 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (33, 42, NULL, 'available'),
 (34, 42, NULL, 'available'),
 (35, 43, NULL, 'available'),
-(36, 43, NULL, 'available'),
-(37, 43, NULL, 'available'),
+(36, 43, NULL, 'unavailable'),
+(37, 43, NULL, 'removed'),
 (38, 43, NULL, 'available'),
 (1281, 46, 'I000000000', 'available'),
 (1282, 46, 'I000000000', 'available'),
@@ -592,13 +716,13 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (1328, 35, 'I000352302', 'available'),
 (1329, 25, 'I000251527', 'removed'),
 (1330, 25, 'I000259566', 'removed'),
-(1331, 25, 'I000254803', 'unavailable'),
-(1332, 25, 'I000252679', 'available'),
-(1333, 25, 'I000254617', 'available'),
+(1331, 25, 'I000254803', 'available'),
+(1332, 25, 'I000252679', 'unavailable'),
+(1333, 25, 'I000254617', 'removed'),
 (1334, 25, 'I000254975', 'unavailable'),
-(1335, 25, 'I000259610', 'available'),
+(1335, 25, 'I000259610', 'removed'),
 (1336, 25, 'I000257921', 'available'),
-(1337, 25, 'I000254915', 'available'),
+(1337, 25, 'I000254915', 'unavailable'),
 (1338, 25, 'I000257653', 'available'),
 (1339, 25, 'I000254522', 'available'),
 (1340, 25, 'I000252431', 'available'),
@@ -609,11 +733,82 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (1345, 25, 'I000254121', 'available'),
 (1346, 25, 'I000257307', 'available'),
 (1347, 25, 'I000258676', 'available'),
-(1348, 25, 'I000255603', 'available');
+(1348, 25, 'I000255603', 'available'),
+(1349, 25, 'I000253347', 'unavailable'),
+(1350, 25, 'I000259992', 'available'),
+(1351, 25, 'I000252917', 'unavailable'),
+(1352, 25, 'I000251613', 'available'),
+(1353, 25, 'I000253669', 'available'),
+(1354, 25, 'I000257983', 'available'),
+(1355, 25, 'I000259911', 'available'),
+(1356, 25, 'I000256605', 'available'),
+(1357, 33, 'I000337009', 'removed'),
+(1358, 33, 'I000331367', 'unavailable'),
+(1359, 33, 'I000332808', 'unavailable'),
+(1360, 33, 'I000338939', 'removed'),
+(1361, 33, 'I000335379', 'unavailable'),
+(1362, 33, 'I000336535', 'available'),
+(1363, 33, 'I000336536', 'available'),
+(1364, 33, 'I000333076', 'available'),
+(1365, 33, 'I000339998', 'available'),
+(1366, 33, 'I000335347', 'available'),
+(1367, 33, 'I000334741', 'available'),
+(1368, 33, 'I000336665', 'available'),
+(1369, 33, 'I000339861', 'available'),
+(1370, 33, 'I000336176', 'available'),
+(1371, 33, 'I000339296', 'available'),
+(1372, 33, 'I000338955', 'available'),
+(1373, 53, 'I000536707', 'available'),
+(1374, 53, 'I000535441', 'available'),
+(1375, 53, 'I000539347', 'available'),
+(1376, 53, 'I000532192', 'available'),
+(1377, 61, 'I000619218', 'available'),
+(1378, 61, 'I000615497', 'available'),
+(1379, 61, 'I000616237', 'available'),
+(2294, 53, 'I000534927', 'available'),
+(2295, 53, 'I000538545', 'available'),
+(2296, 53, 'I000533343', 'available'),
+(2297, 53, 'I000533787', 'available'),
+(2310, 53, 'I000531268', 'available'),
+(2311, 53, 'I000539029', 'available'),
+(2312, 53, 'I000532004', 'available'),
+(2313, 53, 'I000535119', 'available'),
+(2314, 61, 'I000614347', 'available'),
+(2315, 61, 'I000615804', 'available'),
+(2316, 61, 'I000619058', 'available'),
+(2317, 61, 'I000619514', 'available'),
+(2318, 61, 'I000614886', 'available'),
+(2319, 61, 'I000614236', 'available'),
+(2320, 61, 'I000616301', 'available'),
+(2321, 61, 'I000612358', 'available'),
+(2322, 53, 'I000538947', 'available'),
+(2323, 53, 'I000536049', 'available');
 
 --
 -- Triggers `item`
 --
+DELIMITER $$
+CREATE TRIGGER `UpdateEquipmentCountAfterStatusChange` AFTER UPDATE ON `item` FOR EACH ROW BEGIN
+    -- Declare a variable to hold the count of available items
+    DECLARE availableItemCount INT DEFAULT 0;
+
+    -- Check if the item's status is updated to 'unavailable'
+        IF (NEW.status = 'unavailable' AND OLD.status <> 'unavailable') OR (NEW.status = 'available' AND OLD.status <> 'available') OR (NEW.status = 'removed' AND OLD.status <> 'removed') THEN
+
+        -- Calculate the new count of available items for the equipment
+        SELECT COUNT(*)
+        INTO availableItemCount
+        FROM item
+        WHERE item.equipment_id = OLD.equipment_id AND item.status = 'available';
+
+        -- Update the equipment count with the new value
+        UPDATE equipment
+        SET count = availableItemCount
+        WHERE id = OLD.equipment_id;
+    END IF;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `before_item_insert` BEFORE INSERT ON `item` FOR EACH ROW BEGIN
   DECLARE random4Digit INT;
@@ -643,7 +838,8 @@ CREATE TABLE `locations` (
 
 INSERT INTO `locations` (`id`, `latitude`, `longitude`) VALUES
 (2, 3.000000, 34.000000),
-(3, 7.807752, 80.315864);
+(3, 7.807752, 80.315864),
+(4, 3.000000, 34.000000);
 
 -- --------------------------------------------------------
 
@@ -683,7 +879,20 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (16, '2024-02-14 10:26:43', 'completed', 1206.00, NULL, 'RNT00016'),
 (17, '2024-02-14 10:35:18', 'completed', 1206.00, NULL, 'RNT00017'),
 (18, '2024-02-16 10:27:53', 'completed', 1206.00, NULL, 'RNT00018'),
-(19, '2024-02-22 08:10:30', 'pending', 408.00, NULL, 'RNT00019');
+(19, '2024-02-22 08:10:30', 'pending', 408.00, NULL, 'RNT00019'),
+(20, '2024-02-23 14:30:50', 'pending', 1000.00, NULL, 'RNT00020'),
+(21, '2024-02-23 15:01:35', 'pending', 2100.00, NULL, 'RNT00021'),
+(22, '2024-02-23 15:05:00', 'pending', 2100.00, NULL, 'RNT00022'),
+(23, '2024-02-23 15:07:14', 'pending', 4000.00, NULL, 'RNT00023'),
+(24, '2024-02-23 15:08:38', 'pending', 1000.00, NULL, 'RNT00024'),
+(25, '2024-02-23 15:10:22', 'pending', 800.00, NULL, 'RNT00025'),
+(26, '2024-02-23 15:12:48', 'pending', 2100.00, NULL, 'RNT00026'),
+(27, '2024-02-23 15:16:54', 'pending', 2100.00, NULL, 'RNT00027'),
+(28, '2024-02-23 15:21:21', 'pending', 1000.00, NULL, 'RNT00028'),
+(29, '2024-02-23 15:22:02', 'pending', 0.00, NULL, 'RNT00029'),
+(30, '2024-02-23 15:27:35', 'completed', 300.00, NULL, 'RNT00030'),
+(31, '2024-02-23 15:30:00', 'pending', 1000.00, NULL, 'RNT00031'),
+(32, '2024-02-23 15:34:26', 'completed', 2100.00, NULL, 'RNT00032');
 
 -- --------------------------------------------------------
 
@@ -698,37 +907,56 @@ CREATE TABLE `rent` (
   `end_date` date NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
-  `paid_amount` decimal(10,2) DEFAULT NULL
+  `paid_amount` decimal(10,2) DEFAULT NULL,
+  `update_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `rent`
 --
 
-INSERT INTO `rent` (`id`, `customer_id`, `start_date`, `end_date`, `status`, `total`, `paid_amount`) VALUES
-(5, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00),
-(6, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00),
-(7, 32, '2024-06-11', '2024-07-17', 'pending', 1206.00, 0.00),
-(8, 32, '2024-02-13', '2024-03-26', 'pending', 1200.00, 0.00),
-(9, 32, '2024-02-29', '2024-04-17', 'pending', 1206.00, 0.00),
-(10, 32, '2024-02-07', '2024-04-25', 'pending', 1206.00, 0.00),
-(11, 32, '2024-02-14', '2024-04-29', 'pending', 1206.00, 0.00),
-(12, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00),
-(13, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00),
-(14, 32, '2024-02-22', '2024-04-30', 'pending', 2406.00, 0.00),
-(15, 32, '2024-02-06', '2024-02-28', 'pending', 1206.00, 0.00),
-(16, 32, '2024-02-12', '2024-02-29', 'pending', 1206.00, 0.00),
-(17, 32, '2024-02-06', '2024-02-29', 'pending', 1206.00, 0.00),
-(18, 32, '2024-02-13', '2024-02-28', 'pending', 1206.00, 0.00),
-(19, 32, '2024-02-13', '2024-02-28', 'pending', 1200.00, 0.00),
-(20, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00),
-(21, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00),
-(22, 32, '2024-02-14', '2024-02-28', 'pending', 1206.00, 0.00),
-(23, 32, '2024-02-14', '2024-02-29', 'pending', 1212.00, 0.00),
-(24, 32, '2024-02-14', '2024-02-29', 'pending', 1206.00, 0.00),
-(25, 32, '2024-02-13', '2024-02-29', 'pending', 1206.00, 0.00),
-(26, 32, '2024-02-01', '2025-02-19', 'pending', 1206.00, 0.00),
-(27, 32, '2024-02-21', '2024-02-28', 'pending', 408.00, 0.00);
+INSERT INTO `rent` (`id`, `customer_id`, `start_date`, `end_date`, `status`, `total`, `paid_amount`, `update_at`) VALUES
+(5, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00, '2024-02-23 15:01:21'),
+(6, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00, '2024-02-23 15:01:21'),
+(7, 32, '2024-06-11', '2024-07-17', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(8, 32, '2024-02-13', '2024-03-26', 'pending', 1200.00, 0.00, '2024-02-23 15:01:21'),
+(9, 32, '2024-02-29', '2024-04-17', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(10, 32, '2024-02-07', '2024-04-25', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(11, 32, '2024-02-14', '2024-04-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(12, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(13, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(14, 32, '2024-02-22', '2024-04-30', 'pending', 2406.00, 0.00, '2024-02-23 15:01:21'),
+(15, 32, '2024-02-06', '2024-02-28', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(16, 32, '2024-02-12', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(17, 32, '2024-02-06', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(18, 32, '2024-02-13', '2024-02-28', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(19, 32, '2024-02-13', '2024-02-28', 'pending', 1200.00, 0.00, '2024-02-23 15:01:21'),
+(20, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(21, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(22, 32, '2024-02-14', '2024-02-28', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(23, 32, '2024-02-14', '2024-02-29', 'pending', 1212.00, 0.00, '2024-02-23 15:01:21'),
+(24, 32, '2024-02-14', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(25, 32, '2024-02-13', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(26, 32, '2024-02-01', '2025-02-19', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
+(27, 32, '2024-02-21', '2024-02-28', 'pending', 408.00, 0.00, '2024-02-23 15:01:21'),
+(28, 32, '2024-02-14', '2024-02-27', 'pending', 1000.00, 0.00, '2024-02-23 15:01:21'),
+(29, 32, '2024-02-14', '2024-02-29', 'pending', 800.00, 0.00, '2024-02-23 15:01:35'),
+(30, 32, '2024-02-14', '2024-02-29', 'pending', 1300.00, 0.00, '2024-02-23 15:01:35'),
+(31, 32, '2024-03-18', '2024-03-20', 'pending', 1300.00, 0.00, '2024-02-23 15:05:00'),
+(32, 32, '2024-03-18', '2024-03-20', 'pending', 800.00, 0.00, '2024-02-23 15:05:00'),
+(33, 32, '2024-02-21', '2024-02-29', 'pending', 3700.00, 0.00, '2024-02-23 15:07:14'),
+(34, 32, '2024-02-21', '2024-02-29', 'pending', 300.00, 0.00, '2024-02-23 15:07:14'),
+(35, 32, '2024-02-21', '2024-02-29', 'pending', 1000.00, 0.00, '2024-02-23 15:08:38'),
+(36, 32, '2024-02-20', '2024-02-29', 'pending', 800.00, 0.00, '2024-02-23 15:10:22'),
+(37, 32, '2024-02-11', '2024-02-29', 'pending', 800.00, 0.00, '2024-02-23 15:12:48'),
+(38, 32, '2024-02-11', '2024-02-29', 'pending', 1300.00, 0.00, '2024-02-23 15:12:48'),
+(39, 32, '2024-02-13', '2024-02-28', 'pending', 1300.00, 0.00, '2024-02-23 15:16:54'),
+(40, 32, '2024-02-13', '2024-02-28', 'pending', 800.00, 0.00, '2024-02-23 15:16:54'),
+(41, 32, '2024-02-21', '2024-02-29', 'pending', 1000.00, 0.00, '2024-02-23 15:21:21'),
+(42, 32, '2024-02-14', '2024-02-27', 'pending', 300.00, 0.00, '2024-02-23 15:27:35'),
+(43, 32, '2024-02-14', '2024-02-27', 'pending', 1000.00, 0.00, '2024-02-23 15:30:00'),
+(44, 32, '2024-02-12', '2024-02-28', 'pending', 1300.00, 0.00, '2024-02-23 15:34:25'),
+(45, 32, '2024-02-12', '2024-02-28', 'pending', 800.00, 0.00, '2024-02-23 15:34:26');
 
 -- --------------------------------------------------------
 
@@ -808,7 +1036,8 @@ INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user
 (52, 'nirmal', 'Address is required', '200156273849', '0713458323', 177, 'waiting', '65b8aaeca63b3.pdf', NULL, '1.webp'),
 (53, 'nirmal', 'Address is required', '200156273849', '0713458323', 179, 'waiting', '65b8ab6e2e9b5.pdf', NULL, '1.webp'),
 (54, 'nirmal', 'Address is required', '200156273849', '0713458323', 180, 'waiting', '65b8abac9a310.pdf', 2, '1.webp'),
-(55, 'Cruz Hills', '90826 Torphy Landing', 'NS', '+94716024489', 181, 'waiting', '65b8ac8050edf.pdf', 3, '1.webp');
+(55, 'Cruz Hills', '90826 Torphy Landing', 'NS', '+94716024489', 181, 'waiting', '65b8ac8050edf.pdf', 3, '1.webp'),
+(56, 'nirmal', 'Address is required', '200156273849', '0713458323', 182, 'waiting', '65d8ad691543f.pdf', 4, '1.webp');
 
 -- --------------------------------------------------------
 
@@ -875,7 +1104,38 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (65, 25, 2),
 (67, 26, 3),
 (68, 26, 37),
-(69, 27, 1289);
+(69, 27, 1289),
+(70, 28, 1329),
+(71, 29, 1373),
+(72, 29, 1377),
+(74, 30, 1323),
+(75, 30, 1357),
+(77, 31, 1329),
+(78, 31, 1357),
+(80, 32, 1377),
+(81, 32, 1373),
+(83, 33, 1330),
+(84, 33, 1311),
+(85, 33, 38),
+(86, 34, 1374),
+(87, 35, 1331),
+(88, 36, 1378),
+(89, 36, 1375),
+(91, 37, 1379),
+(92, 37, 1376),
+(94, 38, 1332),
+(95, 38, 1358),
+(97, 39, 1333),
+(98, 39, 1359),
+(100, 40, 2314),
+(101, 40, 2294),
+(103, 41, 1334),
+(104, 42, 1360),
+(105, 43, 1335),
+(106, 44, 1336),
+(107, 44, 1361),
+(109, 45, 2295),
+(110, 45, 2315);
 
 -- --------------------------------------------------------
 
@@ -1112,7 +1372,8 @@ INSERT INTO `users` (`id`, `email`, `password`, `date`, `role`, `is_verified`) V
 (178, 'abc@asdd.com', 'p6vvtpDy+duOUrFTieZLRQ==:90e0d5f869d4959cf8b1119c7f2edad10a8a4763071df3a72be7875837208e9b', '2024-01-30 07:54:21', 'rentalservice', 0),
 (179, 'abc@asdd.com', 'VSRLTYOEX85FsXA4tkP/rA==:fe39c7d406873f029ce251f74252a35a66f7812cd333e1edffa10fb4942ac5f5', '2024-01-30 07:55:22', 'rentalservice', 0),
 (180, 'abc@asdd.com', 'Xqpp06kMTa4vAfUubzukOg==:2664d8a289491dcc04de9dccd643bf93ee0f79f130ef4abdf904d3f91a4c0266', '2024-01-30 07:56:24', 'rentalservice', 0),
-(181, 'nirmalsavinda29@gmail.com', 'keRiLseeT1IY1cCereA2Aw==:4952f318070ef202e0d7e9ab1791da426fce63638a0f8b573c231be1fdb6e3ec', '2024-01-30 07:59:56', 'rentalservice', 0);
+(181, 'nirmalsavinda29@gmail.com', 'keRiLseeT1IY1cCereA2Aw==:4952f318070ef202e0d7e9ab1791da426fce63638a0f8b573c231be1fdb6e3ec', '2024-01-30 07:59:56', 'rentalservice', 0),
+(182, 'rental1@wl.com', 'AKaIN2jKbPXe112x7OPTug==:ff7c4a9e2f20b620b50b98039d5ad9d8b28412ee4d3e55ec1329585c258456dd', '2024-02-23 14:36:17', 'rentalservice', 1);
 
 -- --------------------------------------------------------
 
@@ -1159,7 +1420,8 @@ INSERT INTO `verification` (`id`, `user_id`, `token`) VALUES
 (33, 178, 'd4b507ad4a0b55bbb58e91c0495da9cf6acf63363cf9db80219249f7670cb6d6'),
 (34, 179, '1a24dc19f995a894a9edc9941d33bbddd76abd9396e38071efe7923709f7fd10'),
 (35, 180, '1991dbfb82d03f54acf8aecddb77e5629e4b460554678cde9a995c1b725d8975'),
-(36, 181, 'c6748fabe7b54060ccca007db651292b38209cc6f2474adb52b8539e54b5209a');
+(36, 181, 'c6748fabe7b54060ccca007db651292b38209cc6f2474adb52b8539e54b5209a'),
+(37, 182, '9c3853ac31bab21669937bc823a193be9fdd91a54657d4654d55a7451a5cc1e8');
 
 --
 -- Indexes for dumped tables
@@ -1276,13 +1538,13 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1294,7 +1556,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `guides`
@@ -1306,37 +1568,37 @@ ALTER TABLE `guides`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1349;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2324;
 
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
 --
 ALTER TABLE `rental_services`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
@@ -1354,13 +1616,13 @@ ALTER TABLE `tips`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT for table `verification`
 --
 ALTER TABLE `verification`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables
