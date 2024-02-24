@@ -22,6 +22,28 @@ $form-field-radius: 5px;
 $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
+.signup-container#blur.active {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.zoom-inn {
+    transform: scale(1.1);
+}
+
+// .zoom-inn:hover{
+//     transform: scale(1.1);
+//     background-color: $button-hover-grey;
+
+// }
+
+.zoom-out:hover{
+    transform: scale(1);
+    background-color: $button-hover-grey;
+}
+
 .signup-container {
     position: relative;
     display: flex;
@@ -109,6 +131,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                 height: 10vh;
                 position: relative;
             }
+
         }
         
         p {
@@ -156,12 +179,9 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         border: none;
         box-shadow: $form-field-shadow;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        // transition: background-color 0.3s ease;
+        transition: 0.6s;
 
-        &:hover {
-            background-color: $button-hover-grey;
-            
-        }
 
         .btn-div {
             text-align: left;
@@ -185,6 +205,8 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         }
         
     }
+
+    
 
     i {
         position: absolute;
@@ -266,6 +288,8 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         }
     }
 
+    
+
 
 /* Popup form customer */
     
@@ -273,7 +297,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     display: none;
     position: fixed;
     left: 50%;
-    top: 50%; //-150%
+    top: 50%; 
     width: 65%;
     height: fit-content;
     border-radius: 10px;
@@ -282,8 +306,8 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     padding: 20px 30px;
     box-shadow: $form-field-shadow;
     border-radius: 20px;
-    opacity: 0; //0
-    //background-color: rgba(0, 0, 0, 0.2); 
+    opacity: 0; 
+    visibility: hidden;
     backdrop-filter: blur(10px); 
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms,
@@ -376,14 +400,15 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 
-
 .popupFormCustomer-active {
     display: block;
     position: fixed;
     top: 50%;
+    visibility: visible;
     opacity: 1;
     z-index: 2;
-    transform: translate(-50%, -50%) scale(1.05);
+    // transform: translate(-50%, -50%) scale(1.05);
+    transform: 0.5s;
     transition: top 0ms ease-in-out 0ms,
                 opacity 200ms ease-in-out 0ms,
                 transform 200ms ease-in-out 0ms;
@@ -395,7 +420,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     display: none;
     position: fixed;
     left: 50%;
-    top: 50%; //-150%
+    top: 50%; 
     width: 65%;
     height: fit-content;
     border-radius: 10px;
@@ -404,8 +429,9 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     padding: 20px 30px;
     box-shadow: $form-field-shadow;
     border-radius: 20px;
-    opacity: 0; //0
-    //background-color: rgba(0, 0, 0, 0.2); 
+    opacity: 0;
+    visibility: hidden;
+    // background-color: rgba(0, 0, 0, 0.2); 
     backdrop-filter: blur(10px); 
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms,
@@ -564,9 +590,11 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     display: block;
     position: fixed;
     top: 50%;
+    visibility: visible;
     opacity: 1;
     z-index: 2;
-    transform: translate(-50%, -50%) scale(1.05);
+    // transform: translate(-50%, -50%) scale(1.05);
+    transform: 0.5s;
     transition: top 0ms ease-in-out 0ms,
                 opacity 200ms ease-in-out 0ms,
                 transform 200ms ease-in-out 0ms;

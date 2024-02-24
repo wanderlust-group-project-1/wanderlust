@@ -725,6 +725,24 @@ fieldset {
 }
 
 /* Additional styles can be converted following the same pattern */
+.signup-container#blur.active {
+  filter: blur(20px);
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.zoom-inn {
+  transform: scale(1.1);
+}
+
+.zoom-out:hover {
+  transform: scale(1);
+  background-color: #efefef;
+}
+
 .signup-container {
   position: relative;
   display: flex;
@@ -833,10 +851,7 @@ fieldset {
   border: none;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.signup-container .signup-card:hover {
-  background-color: #efefef;
+  transition: 0.6s;
 }
 .signup-container .signup-card .btn-div {
   text-align: left;
@@ -948,6 +963,7 @@ fieldset {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   opacity: 0;
+  visibility: hidden;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
@@ -1008,9 +1024,10 @@ fieldset {
   display: block;
   position: fixed;
   top: 50%;
+  visibility: visible;
   opacity: 1;
   z-index: 2;
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: 0.5s;
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 
@@ -1030,6 +1047,7 @@ fieldset {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   opacity: 0;
+  visibility: hidden;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
@@ -1119,9 +1137,10 @@ fieldset {
   display: block;
   position: fixed;
   top: 50%;
+  visibility: visible;
   opacity: 1;
   z-index: 2;
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: 0.5s;
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
 

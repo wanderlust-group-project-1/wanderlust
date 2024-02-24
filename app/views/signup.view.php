@@ -8,14 +8,14 @@ require_once('../app/views/layout/header.php');
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-<div class="signup-container">
+<div class="signup-container" id="blur">
     <div class="column">
         <div class="signup-form">
         <h2>Who are you?</h2>
         <p>It's the time to start your journey! Register here.</p>
             <div class="main">
                 <div class="row-btn">
-                    <button class="signup-card" onclick="signupToggleCustomer()" id="customer">
+                    <button class="signup-card zoom-inn zoom-out" onclick="signupToggleCustomer()" id="customer">
                         <div class="btn-div">
                             <h3>Customer</h3>
                             <h4>Plan your journey now!</h4>
@@ -24,7 +24,7 @@ require_once('../app/views/layout/header.php');
                     <i class="fa fa-users" aria-hidden="true"></i>
                 </div>
                 <div class="row-btn">
-                    <button class="signup-card" onclick="signupToggleGuide()">
+                    <button class="signup-card zoom-inn zoom-out" onclick="signupToggleGuide()">
                         <div class="btn-div">
                             <h3>Guide</h3>
                             <h4>Explore the extraordinary now!</h4>
@@ -33,7 +33,7 @@ require_once('../app/views/layout/header.php');
                     <i class="fa fa-compass" aria-hidden="true"></i>
                 </div>
                 <div class="row-btn">
-                    <button class="signup-card" onclick="signupToggleRental()">
+                    <button class="signup-card zoom-inn zoom-out" onclick="signupToggleRental()">
                         <div class="btn-div">
                             <h3>Rental Service</h3>
                             <h4>Register your business now!</h4>
@@ -353,19 +353,25 @@ require_once('../app/views/layout/header.php');
 
 <script>
     function signupToggleCustomer(){
-        var element1;
+        var element1, blur;
         element1 = document.querySelector('.popupFormCustomer');
-        element1.classList.toggle("popupFormCustomer-active");     
+        element1.classList.toggle("popupFormCustomer-active");
+        blur = document.getElementById('blur');
+        blur.classList.toggle("active");     
     } 
     function signupToggleGuide(){
-        var element2;
+        var element2,blur;
         element2 = document.querySelector('.popupFormGuide');
         element2.classList.toggle("popupFormGuide-active");
+        blur = document.getElementById('blur');
+        blur.classList.toggle("active");
     }
     function signupToggleRental(){
-        var element3;
+        var element3, blur;
         element3 = document.querySelector('.popupFormRental');
         element3.classList.toggle("popupFormRental-active");
+        blur = document.getElementById('blur');
+        blur.classList.toggle("active");
     }
 </script>
 
