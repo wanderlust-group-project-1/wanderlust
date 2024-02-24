@@ -84,13 +84,13 @@ form {
     textarea
     {
         border: none;
-        background: $color-light;
+        background: $color-lighter;
         outline: none;
-        color: $black-text;
+        color: $color-darker;
         // border: 2px solid $color-darker;
         border-radius: 12px;
         padding: 12px 20px;
-        font-weight: 600;
+        font-weight: $font-semi-bold;
 
     
 
@@ -147,8 +147,8 @@ form {
     }
 
     label {
-        font-size: 20px;
-        font-weight: 600;
+        font-size: $header4;
+        font-weight: $font-semi-bold;
         margin-bottom: 10px;
         text-align: left;
     }
