@@ -67,7 +67,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
             width: 550px;
             height: 100%;
             padding: 50px;
-            //border-radius: $border-radius;
+            border-radius: 40px;
             background-color: #fff;
             //box-shadow: 0 5px 10px $shadow-color;
 
@@ -407,4 +407,15 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     #target {
         width: 345px;
     }
+}
+
+@media screen and (max-width:880px) {
+    .login-container {
+        padding: 15px 10px;
+    }
+
+    .login-image{
+        padding: 15px 10px;
+    }
+    
 }

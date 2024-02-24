@@ -1367,6 +1367,17 @@ fieldset {
   width: 345px;
 }
 
+@media screen and (max-width: 880px) {
+  .signup-container {
+    padding: 15px 10px;
+  }
+  .signup-form {
+    padding: 10px 10px;
+  }
+  .signup-image {
+    padding: 15px 10px;
+  }
+}
 .login-container {
   position: relative;
   display: flex;
@@ -1413,6 +1424,7 @@ fieldset {
   width: 550px;
   height: 100%;
   padding: 50px;
+  border-radius: 40px;
   background-color: #fff;
 }
 .login-container .column .login-form h2 {
@@ -1708,6 +1720,14 @@ fieldset {
   width: 345px;
 }
 
+@media screen and (max-width: 880px) {
+  .login-container {
+    padding: 15px 10px;
+  }
+  .login-image {
+    padding: 15px 10px;
+  }
+}
 .modal {
   display: none;
   position: fixed;

@@ -691,3 +691,15 @@
 .pac-controls #target {
   width: 345px;
 }
+
+@media screen and (max-width: 880px) {
+  .signup-container {
+    padding: 15px 10px;
+  }
+  .signup-form {
+    padding: 10px 10px;
+  }
+  .signup-image {
+    padding: 15px 10px;
+  }
+}

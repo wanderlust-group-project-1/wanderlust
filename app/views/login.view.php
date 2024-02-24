@@ -5,7 +5,6 @@ require_once('../app/views/components/navbar-auth.php');
 
     <div class="login-container">
         
-        <!-- <div class="login-container-col"> -->
             <div class="column">
                 
                 <div class="login-image">

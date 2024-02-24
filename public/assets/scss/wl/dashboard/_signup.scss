@@ -908,3 +908,18 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         width: 345px;
     }
 }
+
+@media screen and (max-width:880px) {
+    .signup-container {
+        padding: 15px 10px;
+    }
+
+    .signup-form {
+        padding: 10px 10px;
+    }
+
+    .signup-image{
+        padding: 15px 10px;
+    }
+    
+}
