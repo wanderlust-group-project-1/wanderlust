@@ -21,7 +21,7 @@
   align-items: center;
   border-radius: 10px;
   width: 100%;
-  height: 100%;
+  height: 92%;
   background: #EBEFE3;
   backdrop-filter: blur(67px);
   transition: transform 1s;
@@ -157,10 +157,15 @@
   margin-top: auto;
 }
 
-.signup-container i {
+.signup-container .icon {
   position: absolute;
+  width: 50px;
+  padding-left: 10px;
   right: 20px;
-  bottom: 35%;
+  bottom: 40%;
+}
+
+.signup-container .icon i {
   transform: translate(-50%);
   font-size: 15px;
   color: #5C5E60;
@@ -305,17 +310,6 @@
 
 .popupFormCustomer .form-common .form-element {
   margin: 15px 0;
-}
-
-.popupFormCustomer .form-common .form-element i {
-  position: absolute;
-  align-items: center;
-  cursor: pointer;
-  left: 81.5%;
-  top: 63.58%;
-  transform: translate(-50%);
-  font-size: 13px;
-  color: #5C5E60;
 }
 
 .popupFormCustomer-active {

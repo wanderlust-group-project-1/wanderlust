@@ -5,7 +5,7 @@
   align-items: center;
   border-radius: 10px;
   width: 100%;
-  height: 100%;
+  height: 92%;
   background: #EBEFE3;
   backdrop-filter: blur(67px);
   transition: transform 1s;
@@ -68,6 +68,13 @@
   position: relative;
 }
 
+.login-container .column .login-form .login-input i {
+  transform: translate(-50%, -60%);
+  font-size: 13px;
+  color: #5C5E60;
+  cursor: pointer;
+}
+
 .login-container .column .login-form input[type="text"],
 .login-container .column .login-form input[type="password"],
 .login-container .column .login-form select {
@@ -123,6 +130,7 @@
   font-size: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
+  padding: 10px 0;
 }
 
 .login-container .column .login-form a:hover {

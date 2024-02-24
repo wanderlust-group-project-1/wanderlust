@@ -55,6 +55,31 @@
 
 }
 
+.pwd-input {
+    border: none;
+    outline: none;
+    color: $black-text;
+    border-radius: 12px;
+    font-weight: 600;
+
+    .pwd-icon{
+        position: relative;
+        width: fit-content;
+        left: 95%;
+        // bottom: 80%;
+    }
+    
+        i {
+        // position: absolute;
+        transform: translate(-80%, -190%);
+        font-size: 13px;
+        color: #5C5E60;
+        cursor: pointer;
+        bottom: 50%;
+        }
+    
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -155,10 +180,6 @@ form {
         color: $gray-text;
         padding: 10px;
     }
-
-
-
-
 
 
 }

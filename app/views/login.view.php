@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-//require_once('../app/views/components/navbar-auth.php');
+require_once('../app/views/components/navbar-auth.php');
 ?>
 
     <div class="login-container">
@@ -29,11 +29,15 @@ require_once('../app/views/layout/header.php');
                     
                     <div class="login-input">
                         <input type="text" name="email" id="email" placeholder="Email" required>
-                        <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+                        <div class="login-icon">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
                     </div>
                     <div class="login-input">
                         <input type="password" name="password" id="password" placeholder="Password" required>
-                        <!-- <i class="fa fa-lock" aria-hidden="true"></i> -->
+                        <div class="login-icon">
+                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
+                        </div>
                     </div>
 
                     <div class="message-text">
@@ -61,6 +65,19 @@ require_once('../app/views/layout/header.php');
 
     <script src="<?=ROOT_DIR?>/assets/js/login.js"></script>
 
+    <script>
+        let eyeicon = document.getElementById("eyeicon");
+        let password = document.getElementById("password");
+        eyeicon.onclick = function() {
+            if(password.type == "password"){
+                password.type = "text";
+                eyeicon.className = "fa fa-eye";
+            }else{
+                password.type = "password";
+                eyeicon.className =  "fa fa-eye-slash";
+            }
+        }
+    </script>
     
     <?php
 require_once('../app/views/layout/footer.php');

@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-//require_once('../app/views/components/navbar-auth.php');
+require_once('../app/views/components/navbar-auth.php');
 ?>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAPS_API_KEY  ?>&libraries=places&callback=initialize" async defer></script>
@@ -12,7 +12,7 @@ require_once('../app/views/layout/header.php');
     <div class="column">
         <div class="signup-form">
         <h2>Who are you?</h2>
-        <p>It's the time to start your journey! Register here.</p>
+        <p>It's time to start your journey, join us! Register here.</p>
             <div class="main">
                 <div class="row-btn">
                     <button class="signup-card zoom-inn zoom-out" onclick="signupToggleCustomer()" id="customer">
@@ -20,8 +20,10 @@ require_once('../app/views/layout/header.php');
                             <h3>Customer</h3>
                             <h4>Plan your journey now!</h4>
                         </div>
-                    </button>
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                        <div class="icon">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        </div>
+                    </button>       
                 </div>
                 <div class="row-btn">
                     <button class="signup-card zoom-inn zoom-out" onclick="signupToggleGuide()">
@@ -29,8 +31,10 @@ require_once('../app/views/layout/header.php');
                             <h3>Guide</h3>
                             <h4>Explore the extraordinary now!</h4>
                         </div>
+                        <div class="icon">
+                        <i class="fa fa-compass" aria-hidden="true"></i>
+                        </div>
                     </button>
-                    <i class="fa fa-compass" aria-hidden="true"></i>
                 </div>
                 <div class="row-btn">
                     <button class="signup-card zoom-inn zoom-out" onclick="signupToggleRental()">
@@ -38,8 +42,10 @@ require_once('../app/views/layout/header.php');
                             <h3>Rental Service</h3>
                             <h4>Register your business now!</h4>
                         </div>
+                        <div class="icon">
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                        </div>
                     </button>
-                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
                 </div>
             </div>
 
@@ -73,35 +79,39 @@ require_once('../app/views/layout/header.php');
                         <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                             <div class="form-element">
                                 <label class="placeholder" for="name">Name</label>
-                                <input class="form-control-lg" type="text" name="name" id="name" placeholder="Full Name" required>
+                                <input class="form-control-lg" type="text" name="name" id="name" required>
                             </div>
 
                             <div class="form-element">
                                 <label for="address">Address</label>
-                                <input class="form-control-lg" type="text" name="address" id="address" placeholder="Address" required>
+                                <input class="form-control-lg" type="text" name="address" id="address" required>
                             </div>
 
                             <div class="form-element">
                                 <label for="email">Email</label>
-                                <input class="form-control-lg" type="text" name="email" id="email" placeholder="Email" required>
+                                <input class="form-control-lg" type="text" name="email" id="email" required>
                             </div>
                         </div>
                 
                         <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                             <div class="form-element">
                                 <label for="number">Contact</label>
-                                <input class="form-control-lg" type="text" name="number" id="number" placeholder="Contact" required>
+                                <input class="form-control-lg" type="text" name="number" id="number" required>
                             </div>
 
                             <div class="form-element">
                                 <label for="nic">NIC</label>
-                                <input class="form-control-lg" type="text" name="nic" id="nic" placeholder="NIC" required>
+                                <input class="form-control-lg" type="text" name="nic" id="nic" required>
                             </div>
 
                             <div class="form-element">
                                 <label for="password">Password</label>
-                                <input class="form-control-lg" type="password" name="password" id="password" placeholder="Password" required>
-                                <!-- <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i> -->
+                                <div class="pwd-input">
+                                    <input class="form-control-lg" type="password" name="password" id="password" required>
+                                    <div class="pwd-icon">
+                                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -150,29 +160,29 @@ require_once('../app/views/layout/header.php');
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">    
                         <div class="form-element">
                             <label for="business_name">Business Name</label>
-                            <input class="form-control-lg" type="text" name="name" placeholder="Business Name" id="business_name">
+                            <input class="form-control-lg" type="text" name="name" id="business_name">
                         </div>
 
                         <div class="form-element">
                             <label for="registration_number">Business Registration Number / NIC</label>
-                            <input class="form-control-lg" type="text" name="regNo" placeholder="Registration Number" id="registration_number">
+                            <input class="form-control-lg" type="text" name="regNo" id="registration_number">
                         </div>
 
                         <div class="form-element">
                             <label for="mobile_number">Contact</label>
-                            <input class="form-control-lg" type="text" name="mobile" placeholder="Contact" id="number">
+                            <input class="form-control-lg" type="text" name="mobile" id="number">
                         </div>
 
                         <div class="form-element">
                             <label for="email">Email</label>
-                            <input class="form-control-lg" type="text" name="email" placeholder="Email" id="email">
+                            <input class="form-control-lg" type="text" name="email" id="email">
                         </div>
                         </div>
 
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                         <div class="form-element">
                             <label for="address">Address</label>
-                            <input class="form-control-lg" type="text" name="address" id="address" placeholder="Address" required>
+                            <input class="form-control-lg" type="text" name="address" id="address" required>
                         </div>
                     
 
@@ -197,7 +207,6 @@ require_once('../app/views/layout/header.php');
                                     <div><label>Business Verification Document</label>
                                     <label for="verification_document" class="file-label">Brows here</label>
                                     </div>
-                                    <!-- <input type="file" name="verification_document" placeholder="Verification Document"id="verification_document" class="file-input"> -->
                                     <div class="tooltip">
                                         <h5>Documents such as business registration certificate or any other document which can verify your business is legitimate.</h5>
                                     </div>
@@ -208,8 +217,12 @@ require_once('../app/views/layout/header.php');
 
                         <div class="form-element">
                             <label for="password">Password</label>
-                            <input class="form-control-lg" type="password" name="password" id="password" placeholder="Password" required>
-                            <!-- <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i> -->
+                            <div class="pwd-input">
+                                <input class="form-control-lg" type="password" name="password" id="password" required>
+                                <div class="pwd-icon">
+                                    <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -220,23 +233,21 @@ require_once('../app/views/layout/header.php');
                 <script>
                     let eyeicon = document.getElementById("eyeicon");
                     let password = document.getElementById("password");
-
-                    eyeicon.onclick = function() {
-                        if(password.type == "password"){
-                            password.type = "text";
-                            eyeicon.className = "fa fa-eye";
-
-                        }else{
-                            password.type = "password";
-                            eyeicon.className =  "fa fa-eye-slash";
+                        eyeicon.onclick = function() {
+                            if(password.type == "password"){
+                                password.type = "text";
+                                eyeicon.className = "fa fa-eye";
+                            }else{
+                                password.type = "password";
+                                eyeicon.className =  "fa fa-eye-slash";
+                            }
                         }
-                    }
                 </script>
-
                 <div id="error-message"></div>
                 </div>
-                </div>
             </div>
+        </form>
+        </div>
         </div>
     </div>
 </div>
@@ -259,35 +270,35 @@ require_once('../app/views/layout/header.php');
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">    
                         <div class="form-element">
                             <label class="rental-label" for="business_name">Business Name</label>
-                            <input class="form-control-lg" type="text" name="name" placeholder="Business Name" id="business_name">
+                            <input class="form-control-lg" type="text" name="name" id="business_name">
                         </div>
 
                         <div class="form-element">
                             <label class="rental-label" for="registration_number">Business Registration Number / NIC</label>
-                            <input class="form-control-lg" type="text" name="regNo" placeholder="Registration Number" id="registration_number">
+                            <input class="form-control-lg" type="text" name="regNo" id="registration_number">
                         </div>
 
                         <div class="form-element">
                             <label class="rental-label" for="mobile_number">Contact</label>
-                            <input class="form-control-lg" type="text" name="mobile" placeholder="Contact" id="number">
+                            <input class="form-control-lg" type="text" name="mobile" id="number">
                         </div>
 
                         <div class="form-element">
                             <label class="rental-label" for="email">Email</label>
-                            <input class="form-control-lg" type="text" name="email" placeholder="Email" id="email">
+                            <input class="form-control-lg" type="text" name="email" id="email">
                         </div>
                         </div>
 
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                         <div class="form-element">
                             <label class="rental-label" for="address">Address</label>
-                            <input class="form-control-lg" type="text" name="address" id="address" placeholder="Address" required>
+                            <input class="form-control-lg" type="text" name="address" id="address" required>
                         </div>
                     
 
                     
                         <div class="form-element">
-                            <label class="rental-label" for="address">Location</label><br>
+                            <label class="rental-label" for="address">Location</label>
                             <div class="location-button-container"  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
@@ -306,7 +317,6 @@ require_once('../app/views/layout/header.php');
                                     <div><label class="rental-label">Business Verification Document</label>
                                     <label for="verification_document" class="file-label">Brows here</label>
                                     </div>
-                                    <!-- <input type="file" name="verification_document" placeholder="Verification Document"id="verification_document" class="file-input"> -->
                                     <div class="tooltip">
                                         <h5>Documents such as business registration certificate or any other document which can verify your business is legitimate.</h5>
                                     </div>
@@ -317,8 +327,12 @@ require_once('../app/views/layout/header.php');
 
                         <div class="form-element">
                             <label class="rental-label" for="password">Password</label>
-                            <input class="form-control-lg" type="password" name="password" id="password" placeholder="Password" required>
-                            <!-- <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i> -->
+                            <div class="pwd-input">
+                                <input class="form-control-lg" type="password" name="password" id="password" required>
+                                <div class="pwd-icon">
+                                    <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
