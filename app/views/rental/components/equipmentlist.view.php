@@ -136,6 +136,7 @@
             var js = newDiv.querySelector('script').innerHTML;
 
             // Update the modal content and execute the script
+            $('#equipment-modal-content').empty();
             $('#equipment-modal-content').html(data).promise().done(function() {
                 console.log('equipment loaded');
                 viewEquipment();

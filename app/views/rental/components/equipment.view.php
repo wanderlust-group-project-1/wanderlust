@@ -434,6 +434,7 @@ foreach ($equipment as $item) {
                 url: '<?= ROOT_DIR ?>/rentalService/getItems/' + id,
                 method: 'GET',
                 success: function(data) {
+                    $("#manage-items-content").empty();
                     $("#manage-items-content").html(data);
                 },
                 error: function(data) {
@@ -457,6 +458,7 @@ $(document).on('click', '#equipment-item', function() {
     console.log(status);
     // show modal
 
+    $("#item-number").empty();
     $("#item-number").html(number);
 
 
