@@ -9,13 +9,17 @@ class Orders {
 
     public function list(string $a = '', string $b = '', string $c = ''):void {
         $data = [
-            'rental_id' => UserMiddleware::getUser()['id'],
+            'rentalservice_id' => UserMiddleware::getUser()['id'],
+            'status' => $a
         ];
 
-        // $rent = new RentModel;
-        // $orders = $rent->getRentalsByRental($data);
+        $rent = new RentModel;
+        $orders = $rent->getRentalsByRentalService($data);
 
-        // $this->view('rental/components/orderlist', ['orders' => $orders]);
+        $this->view('rental/components/orderlist', ['orders' => $orders]);
+    
+
+
     }
 }
 

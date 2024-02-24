@@ -5,8 +5,8 @@
   background: $color-dark;
   outline: none;
   color: $color-lightest;
-  border-radius: 10px;
-  padding: 10px 10px;
+  border-radius: 5px;
+  padding: 10px 20px;
   font-weight: 500;
   font-size: medium;
   font-family: sans-serif;
@@ -33,6 +33,13 @@
     border: 2px solid $color-primary;
     cursor: default;
   }
+  // button with active state (class contains active)
+
+  &.active {
+    background: $color-primary;
+    color: $color-lightest;
+  }
+  
 }
 
 

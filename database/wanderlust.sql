@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 23, 2024 at 03:42 PM
+-- Generation Time: Feb 24, 2024 at 07:38 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -154,6 +154,54 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetAvailableItems` (IN `equipmentID` INT, I
     GROUP BY i.id;
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID` INT, IN `filterType` VARCHAR(20))   BEGIN
+    -- Define variables for dynamic date filtering
+    DECLARE today DATE;
+    SET today = CURDATE();
+
+    -- Common base of the query
+    SET @baseQuery = "FROM rent 
+                      JOIN rent_pay ON rent.id = rent_pay.rent_id
+                      JOIN payment ON rent_pay.payment_id = payment.id
+                      WHERE rent.rentalservice_id = ? 
+                      AND payment.status = 'completed' ";
+
+    CASE 
+        WHEN filterType = 'ALL' THEN
+            SET @specificFilter = "";
+        
+        WHEN filterType = 'today' THEN
+            SET @specificFilter = "AND rent.start_date = CURDATE()";
+        
+        WHEN filterType = 'upcoming' THEN
+            SET @specificFilter = "AND rent.start_date > CURDATE()";
+        
+        WHEN filterType = 'not rented' THEN
+            SET @specificFilter = "AND rent.start_date < CURDATE() AND rent.status = 'pending'";
+        
+        WHEN filterType = 'Rented' THEN
+            SET @specificFilter = "AND rent.status = 'rented'";
+        
+        WHEN filterType = 'completed' THEN
+            SET @specificFilter = "AND rent.status = 'completed'";
+        
+        WHEN filterType = 'overdued' THEN
+            SET @specificFilter = "AND rent.end_date < CURDATE() AND rent.status = 'rented'";
+        
+        WHEN filterType = 'cancelled' THEN
+            SET @specificFilter = "AND rent.status = 'cancelled'";
+        
+        ELSE
+            SET @specificFilter = "";
+    END CASE;
+
+    SET @SQL = CONCAT("SELECT rent.*, payment.status AS payment_status ", @baseQuery, @specificFilter);
+    PREPARE stmt FROM @SQL;
+    SET @rentalserviceID = rentalserviceID;
+    EXECUTE stmt USING @rentalserviceID;
+    DEALLOCATE PREPARE stmt;
+END$$
+
 CREATE DEFINER=`root`@`%` PROCEDURE `GetItemsByEquipment` (IN `equipmentId` INT)   BEGIN
     SELECT 
         item.*, 
@@ -286,6 +334,10 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` I
     DECLARE lastRentID INT;
     DECLARE lastPaymentID INT;
     DECLARE reference_number VARCHAR(255);
+    DECLARE rentAmount DECIMAL(10, 2);
+
+
+
     -- Cursor to select distinct rental service IDs from the cart items
     DECLARE curRentalService CURSOR FOR 
         SELECT DISTINCT equipment.rentalservice_id
@@ -296,6 +348,8 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` I
         WHERE cart.customer_id = customerID;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
 
+    SET lastPaymentID = 0;
+
     OPEN curRentalService;
 
     -- Loop through each rental service ID
@@ -305,24 +359,30 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` I
             LEAVE rentalServiceLoop;
         END IF;
         
--- Insert a rent order for the current rental service and accumulate the total
-INSERT INTO rent (customer_id, start_date, end_date, status, total, paid_amount)
-SELECT 
-    customer_id, 
-    MIN(start_date) AS start_date, 
-    MAX(end_date) AS end_date, 
-    'pending' AS status, 
-    SUM(equipment.fee) AS total, 
-    0.00 AS paid_amount
-FROM cart
-JOIN cart_item ON cart.id = cart_item.cart_id
-JOIN item ON cart_item.item_id = item.id
-JOIN equipment ON item.equipment_id = equipment.id
-WHERE cart.customer_id = customerID AND equipment.rentalservice_id = currentRentalServiceID
-GROUP BY cart.customer_id, equipment.rentalservice_id;
+    -- Insert a rent order for the current rental service and accumulate the total
+    INSERT INTO rent (customer_id, rentalservice_id, start_date, end_date, status, total, paid_amount)
+    SELECT 
+        customer_id, 
+        equipment.rentalservice_id, 
+        MIN(start_date) AS start_date, 
+        MAX(end_date) AS end_date, 
+        'pending' AS status, 
+        SUM(equipment.fee) * DATEDIFF(MAX(end_date), MIN(start_date)) + SUM(equipment.standard_fee) AS total, -- Add standard fee to the total amount
+        0.00 AS paid_amount
+    FROM cart
+    JOIN cart_item ON cart.id = cart_item.cart_id
+    JOIN item ON cart_item.item_id = item.id
+    JOIN equipment ON item.equipment_id = equipment.id
+    WHERE cart.customer_id = customerID AND equipment.rentalservice_id = currentRentalServiceID
+    GROUP BY cart.customer_id, equipment.rentalservice_id;
 
         SET lastRentID = LAST_INSERT_ID();
-        SET totalSum = totalSum + (SELECT total FROM rent WHERE id = lastRentID);
+
+        INSERT INTO rent_request (rent_id) VALUES (lastRentID);
+
+        SELECT total INTO rentAmount FROM rent WHERE id = lastRentID;
+
+        SET totalSum = totalSum + rentAmount;
 
         -- Insert rent items for the current rent order
         INSERT INTO rent_item (rent_id, item_id)
@@ -333,6 +393,12 @@ GROUP BY cart.customer_id, equipment.rentalservice_id;
         WHERE cart_item.cart_id IN (
             SELECT id FROM cart WHERE customer_id = customerID
         ) AND equipment.rentalservice_id = currentRentalServiceID;
+
+
+         -- Insert into rent_pay for each rent order
+        INSERT INTO rent_pay (rent_id, payment_id, amount)
+        VALUES (lastRentID, lastPaymentID, rentAmount);
+
         
     END LOOP;
 
@@ -345,6 +411,9 @@ GROUP BY cart.customer_id, equipment.rentalservice_id;
     
     -- Update the payment with the generated reference number
     UPDATE payment SET reference_number = reference_number WHERE id = lastPaymentID;
+
+    -- Update rent_pay with the payment_id after creating the payment
+    UPDATE rent_pay SET payment_id = lastPaymentID WHERE payment_id = 0;
 
     -- Clean up cart items and the cart for the customer
     DELETE FROM cart_item WHERE cart_id IN (SELECT id FROM cart WHERE customer_id = customerID);
@@ -539,7 +608,7 @@ INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`
 (50, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 6, 408.00, 363.00, '65d57dc8b4232.jpg'),
 (51, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 6, 408.00, 363.00, '65d57ddf61565.jpg'),
 (52, 25, 'ABC', 606.00, 'Excepturi voluptates tenetur sit incidunt.', 'Clothing', 9, 408.00, 363.00, '65d581590b685.jpg'),
-(53, 56, 'BBQ Grill', 5600.00, 'Large', 'Cooking', 14, 300.00, 500.00, '65d8ae9491e5c.webp'),
+(53, 56, 'BBQ Grill', 5600.00, 'Large            ', 'Tent', 48, 300.00, 500.00, '65d8ae9491e5c.webp'),
 (61, 56, 'Cooking Set', 11000.00, '5', 'Cooking', 11, 500.00, 400.00, '65d8b04792064.webp');
 
 -- --------------------------------------------------------
@@ -573,7 +642,7 @@ INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_
 (6, 'Nirmal Savinda', ' Matugama', '200117901838', '+94716024489', 'male', 106, 'waiting', ''),
 (7, 'Nirmal Savinda', ' Colombo', '200167329831', '+94716024489', 'male', 108, 'waiting', ''),
 (8, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 109, 'waiting', ''),
-(9, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 110, 'waiting', ''),
+(9, 'Nirmal Savinda', '  Colombo', '200167329832', '+94716024489', 'male', 110, 'waiting', ''),
 (10, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 111, 'waiting', ''),
 (11, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 112, 'waiting', ''),
 (12, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 113, 'waiting', ''),
@@ -782,7 +851,41 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (2320, 61, 'I000616301', 'available'),
 (2321, 61, 'I000612358', 'available'),
 (2322, 53, 'I000538947', 'available'),
-(2323, 53, 'I000536049', 'available');
+(2323, 53, 'I000536049', 'available'),
+(2329, 53, 'I000531598', 'available'),
+(2330, 53, 'I000538571', 'available'),
+(2331, 53, 'I000534419', 'available'),
+(2332, 53, 'I000538555', 'available'),
+(2333, 53, 'I000539943', 'available'),
+(2334, 53, 'I000535798', 'available'),
+(2335, 53, 'I000539428', 'available'),
+(2336, 53, 'I000534620', 'available'),
+(2337, 53, 'I000531519', 'available'),
+(2338, 53, 'I000538607', 'available'),
+(2339, 53, 'I000534097', 'available'),
+(2340, 53, 'I000536838', 'available'),
+(2341, 53, 'I000537906', 'available'),
+(2342, 53, 'I000539707', 'available'),
+(2343, 53, 'I000534490', 'available'),
+(2344, 53, 'I000531133', 'available'),
+(2345, 53, 'I000536331', 'available'),
+(2346, 53, 'I000532327', 'available'),
+(2347, 53, 'I000539047', 'available'),
+(2348, 53, 'I000533282', 'available'),
+(2349, 53, 'I000533365', 'available'),
+(2350, 53, 'I000531501', 'available'),
+(2351, 53, 'I000535762', 'available'),
+(2352, 53, 'I000531706', 'available'),
+(2353, 53, 'I000537695', 'available'),
+(2354, 53, 'I000539192', 'available'),
+(2355, 53, 'I000534981', 'available'),
+(2356, 53, 'I000539364', 'available'),
+(2357, 53, 'I000534535', 'available'),
+(2358, 53, 'I000536817', 'available'),
+(2359, 53, 'I000539795', 'available'),
+(2360, 53, 'I000536472', 'available'),
+(2361, 53, 'I000531130', 'available'),
+(2362, 53, 'I000533386', 'available');
 
 --
 -- Triggers `item`
@@ -892,7 +995,14 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (29, '2024-02-23 15:22:02', 'pending', 0.00, NULL, 'RNT00029'),
 (30, '2024-02-23 15:27:35', 'completed', 300.00, NULL, 'RNT00030'),
 (31, '2024-02-23 15:30:00', 'pending', 1000.00, NULL, 'RNT00031'),
-(32, '2024-02-23 15:34:26', 'completed', 2100.00, NULL, 'RNT00032');
+(32, '2024-02-23 15:34:26', 'completed', 2100.00, NULL, 'RNT00032'),
+(33, '2024-02-24 05:50:13', 'pending', 1500.00, NULL, 'RNT00033'),
+(34, '2024-02-24 06:51:46', 'completed', 1500.00, NULL, 'RNT00034'),
+(35, '2024-02-24 07:10:10', 'completed', 27900.00, NULL, 'RNT00035'),
+(36, '2024-02-24 07:13:35', 'completed', 5110.00, NULL, 'RNT00036'),
+(37, '2024-02-24 09:57:53', 'pending', 2610.00, NULL, 'RNT00037'),
+(38, '2024-02-24 10:00:22', 'completed', 2710.00, NULL, 'RNT00038'),
+(39, '2024-02-24 18:37:48', 'completed', 22900.00, NULL, 'RNT00039');
 
 -- --------------------------------------------------------
 
@@ -903,9 +1013,11 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 CREATE TABLE `rent` (
   `id` int NOT NULL,
   `customer_id` int NOT NULL,
+  `rentalservice_id` int NOT NULL DEFAULT '25',
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `status` varchar(255) DEFAULT NULL,
+  `sub_status` varchar(255) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
   `paid_amount` decimal(10,2) DEFAULT NULL,
   `update_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -915,48 +1027,64 @@ CREATE TABLE `rent` (
 -- Dumping data for table `rent`
 --
 
-INSERT INTO `rent` (`id`, `customer_id`, `start_date`, `end_date`, `status`, `total`, `paid_amount`, `update_at`) VALUES
-(5, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00, '2024-02-23 15:01:21'),
-(6, 32, '2024-02-05', '2025-02-27', 'pending', 2412.00, 0.00, '2024-02-23 15:01:21'),
-(7, 32, '2024-06-11', '2024-07-17', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(8, 32, '2024-02-13', '2024-03-26', 'pending', 1200.00, 0.00, '2024-02-23 15:01:21'),
-(9, 32, '2024-02-29', '2024-04-17', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(10, 32, '2024-02-07', '2024-04-25', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(11, 32, '2024-02-14', '2024-04-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(12, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(13, 32, '2024-02-22', '2024-04-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(14, 32, '2024-02-22', '2024-04-30', 'pending', 2406.00, 0.00, '2024-02-23 15:01:21'),
-(15, 32, '2024-02-06', '2024-02-28', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(16, 32, '2024-02-12', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(17, 32, '2024-02-06', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(18, 32, '2024-02-13', '2024-02-28', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(19, 32, '2024-02-13', '2024-02-28', 'pending', 1200.00, 0.00, '2024-02-23 15:01:21'),
-(20, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(21, 32, '2024-02-08', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(22, 32, '2024-02-14', '2024-02-28', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(23, 32, '2024-02-14', '2024-02-29', 'pending', 1212.00, 0.00, '2024-02-23 15:01:21'),
-(24, 32, '2024-02-14', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(25, 32, '2024-02-13', '2024-02-29', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(26, 32, '2024-02-01', '2025-02-19', 'pending', 1206.00, 0.00, '2024-02-23 15:01:21'),
-(27, 32, '2024-02-21', '2024-02-28', 'pending', 408.00, 0.00, '2024-02-23 15:01:21'),
-(28, 32, '2024-02-14', '2024-02-27', 'pending', 1000.00, 0.00, '2024-02-23 15:01:21'),
-(29, 32, '2024-02-14', '2024-02-29', 'pending', 800.00, 0.00, '2024-02-23 15:01:35'),
-(30, 32, '2024-02-14', '2024-02-29', 'pending', 1300.00, 0.00, '2024-02-23 15:01:35'),
-(31, 32, '2024-03-18', '2024-03-20', 'pending', 1300.00, 0.00, '2024-02-23 15:05:00'),
-(32, 32, '2024-03-18', '2024-03-20', 'pending', 800.00, 0.00, '2024-02-23 15:05:00'),
-(33, 32, '2024-02-21', '2024-02-29', 'pending', 3700.00, 0.00, '2024-02-23 15:07:14'),
-(34, 32, '2024-02-21', '2024-02-29', 'pending', 300.00, 0.00, '2024-02-23 15:07:14'),
-(35, 32, '2024-02-21', '2024-02-29', 'pending', 1000.00, 0.00, '2024-02-23 15:08:38'),
-(36, 32, '2024-02-20', '2024-02-29', 'pending', 800.00, 0.00, '2024-02-23 15:10:22'),
-(37, 32, '2024-02-11', '2024-02-29', 'pending', 800.00, 0.00, '2024-02-23 15:12:48'),
-(38, 32, '2024-02-11', '2024-02-29', 'pending', 1300.00, 0.00, '2024-02-23 15:12:48'),
-(39, 32, '2024-02-13', '2024-02-28', 'pending', 1300.00, 0.00, '2024-02-23 15:16:54'),
-(40, 32, '2024-02-13', '2024-02-28', 'pending', 800.00, 0.00, '2024-02-23 15:16:54'),
-(41, 32, '2024-02-21', '2024-02-29', 'pending', 1000.00, 0.00, '2024-02-23 15:21:21'),
-(42, 32, '2024-02-14', '2024-02-27', 'pending', 300.00, 0.00, '2024-02-23 15:27:35'),
-(43, 32, '2024-02-14', '2024-02-27', 'pending', 1000.00, 0.00, '2024-02-23 15:30:00'),
-(44, 32, '2024-02-12', '2024-02-28', 'pending', 1300.00, 0.00, '2024-02-23 15:34:25'),
-(45, 32, '2024-02-12', '2024-02-28', 'pending', 800.00, 0.00, '2024-02-23 15:34:26');
+INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_date`, `status`, `sub_status`, `total`, `paid_amount`, `update_at`) VALUES
+(5, 32, 25, '2024-02-05', '2025-02-27', 'pending', NULL, 2412.00, 0.00, '2024-02-23 15:01:21'),
+(6, 32, 25, '2024-02-05', '2025-02-27', 'pending', NULL, 2412.00, 0.00, '2024-02-23 15:01:21'),
+(7, 32, 25, '2024-06-11', '2024-07-17', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(8, 32, 25, '2024-02-13', '2024-03-26', 'pending', NULL, 1200.00, 0.00, '2024-02-23 15:01:21'),
+(9, 32, 25, '2024-02-29', '2024-04-17', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(10, 32, 25, '2024-02-07', '2024-04-25', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(11, 32, 25, '2024-02-14', '2024-04-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(12, 32, 25, '2024-02-22', '2024-04-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(13, 32, 25, '2024-02-22', '2024-04-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(14, 32, 25, '2024-02-22', '2024-04-30', 'pending', NULL, 2406.00, 0.00, '2024-02-23 15:01:21'),
+(15, 32, 25, '2024-02-06', '2024-02-28', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(16, 32, 25, '2024-02-12', '2024-02-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(17, 32, 25, '2024-02-06', '2024-02-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(18, 32, 25, '2024-02-13', '2024-02-28', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(19, 32, 25, '2024-02-13', '2024-02-28', 'pending', NULL, 1200.00, 0.00, '2024-02-23 15:01:21'),
+(20, 32, 25, '2024-02-08', '2024-02-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(21, 32, 25, '2024-02-08', '2024-02-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(22, 32, 25, '2024-02-14', '2024-02-28', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(23, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 1212.00, 0.00, '2024-02-23 15:01:21'),
+(24, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(25, 32, 25, '2024-02-13', '2024-02-29', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(26, 32, 25, '2024-02-01', '2025-02-19', 'pending', NULL, 1206.00, 0.00, '2024-02-23 15:01:21'),
+(27, 32, 25, '2024-02-21', '2024-02-28', 'pending', NULL, 408.00, 0.00, '2024-02-23 15:01:21'),
+(28, 32, 25, '2024-02-14', '2024-02-27', 'pending', NULL, 1000.00, 0.00, '2024-02-23 15:01:21'),
+(29, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 800.00, 0.00, '2024-02-23 15:01:35'),
+(30, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 1300.00, 0.00, '2024-02-23 15:01:35'),
+(31, 32, 25, '2024-03-18', '2024-03-20', 'pending', NULL, 1300.00, 0.00, '2024-02-23 15:05:00'),
+(32, 32, 25, '2024-03-18', '2024-03-20', 'pending', NULL, 800.00, 0.00, '2024-02-23 15:05:00'),
+(33, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 3700.00, 0.00, '2024-02-23 15:07:14'),
+(34, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 300.00, 0.00, '2024-02-23 15:07:14'),
+(35, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 1000.00, 0.00, '2024-02-23 15:08:38'),
+(36, 32, 25, '2024-02-20', '2024-02-29', 'pending', NULL, 800.00, 0.00, '2024-02-23 15:10:22'),
+(37, 32, 25, '2024-02-11', '2024-02-29', 'pending', NULL, 800.00, 0.00, '2024-02-23 15:12:48'),
+(38, 32, 25, '2024-02-11', '2024-02-29', 'pending', NULL, 1300.00, 0.00, '2024-02-23 15:12:48'),
+(39, 32, 25, '2024-02-13', '2024-02-28', 'pending', NULL, 1300.00, 0.00, '2024-02-23 15:16:54'),
+(40, 32, 25, '2024-02-13', '2024-02-28', 'pending', NULL, 800.00, 0.00, '2024-02-23 15:16:54'),
+(41, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 1000.00, 0.00, '2024-02-23 15:21:21'),
+(42, 32, 25, '2024-02-14', '2024-02-27', 'pending', NULL, 300.00, 0.00, '2024-02-23 15:27:35'),
+(43, 32, 25, '2024-02-14', '2024-02-27', 'pending', NULL, 1000.00, 0.00, '2024-02-23 15:30:00'),
+(44, 32, 25, '2024-02-12', '2024-02-28', 'pending', NULL, 1300.00, 0.00, '2024-02-23 15:34:25'),
+(45, 32, 25, '2024-02-12', '2024-02-28', 'pending', NULL, 800.00, 0.00, '2024-02-23 15:34:26'),
+(46, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 1000.00, 0.00, '2024-02-24 05:50:13'),
+(47, 32, 56, '2024-02-21', '2024-02-29', 'pending', NULL, 500.00, 0.00, '2024-02-24 05:50:13'),
+(48, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 1000.00, 0.00, '2024-02-24 06:40:06'),
+(49, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 1000.00, 0.00, '2024-02-24 06:44:59'),
+(50, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 1000.00, 0.00, '2024-02-24 06:51:46'),
+(51, 32, 56, '2024-02-21', '2024-02-29', 'pending', NULL, 500.00, 0.00, '2024-02-24 06:51:46'),
+(52, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 15000.00, 0.00, '2024-02-24 07:04:44'),
+(53, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 15000.00, 0.00, '2024-02-24 07:10:10'),
+(54, 32, 56, '2024-02-14', '2024-02-29', 'pending', NULL, 12900.00, 0.00, '2024-02-24 07:10:10'),
+(55, 32, 25, '2024-02-27', '2024-02-29', 'pending', NULL, 2610.00, 0.00, '2024-02-24 07:13:35'),
+(56, 32, 56, '2024-02-27', '2024-02-29', 'pending', NULL, 2500.00, 0.00, '2024-02-24 07:13:35'),
+(57, 32, 25, '2024-02-27', '2024-02-29', 'pending', NULL, 2610.00, 0.00, '2024-02-24 09:57:53'),
+(58, 32, 25, '2024-02-20', '2024-02-29', 'pending', NULL, 2710.00, 0.00, '2024-02-24 10:00:22'),
+(59, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 15000.00, 0.00, '2024-02-24 18:36:21'),
+(60, 32, 25, '2024-02-14', '2024-02-29', 'pending', NULL, 15000.00, 0.00, '2024-02-24 18:37:48'),
+(61, 32, 56, '2024-02-14', '2024-02-29', 'pending', NULL, 7900.00, 0.00, '2024-02-24 18:37:48');
 
 -- --------------------------------------------------------
 
@@ -1135,7 +1263,26 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (106, 44, 1336),
 (107, 44, 1361),
 (109, 45, 2295),
-(110, 45, 2315);
+(110, 45, 2315),
+(112, 46, 1337),
+(113, 47, 2316),
+(114, 48, 1338),
+(115, 49, 1338),
+(116, 50, 1338),
+(117, 51, 2317),
+(118, 52, 1339),
+(119, 53, 1339),
+(120, 54, 2296),
+(121, 54, 2318),
+(123, 55, 1340),
+(124, 55, 1362),
+(126, 56, 2319),
+(127, 56, 2297),
+(129, 57, 1341),
+(130, 57, 1363),
+(132, 58, 1364),
+(133, 60, 1342),
+(134, 61, 2320);
 
 -- --------------------------------------------------------
 
@@ -1146,29 +1293,82 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 CREATE TABLE `rent_pay` (
   `id` int NOT NULL,
   `rent_id` int NOT NULL,
-  `payment_id` int NOT NULL
+  `payment_id` int DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `rent_pay`
 --
 
-INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`) VALUES
-(5, 13, 5),
-(6, 14, 6),
-(7, 15, 7),
-(8, 16, 8),
-(9, 17, 9),
-(10, 18, 10),
-(11, 19, 11),
-(12, 20, 12),
-(13, 21, 13),
-(14, 22, 14),
-(15, 23, 15),
-(16, 24, 16),
-(17, 25, 17),
-(18, 26, 18),
-(19, 27, 19);
+INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`, `amount`) VALUES
+(5, 13, 5, NULL),
+(6, 14, 6, NULL),
+(7, 15, 7, NULL),
+(8, 16, 8, NULL),
+(9, 17, 9, NULL),
+(10, 18, 10, NULL),
+(11, 19, 11, NULL),
+(12, 20, 12, NULL),
+(13, 21, 13, NULL),
+(14, 22, 14, NULL),
+(15, 23, 15, NULL),
+(16, 24, 16, NULL),
+(17, 25, 17, NULL),
+(18, 26, 18, NULL),
+(19, 27, 19, NULL),
+(21, 50, 34, 1000.00),
+(22, 51, 34, 500.00),
+(23, 53, 35, 15000.00),
+(24, 54, 35, 12900.00),
+(25, 55, 36, 2610.00),
+(26, 56, 36, 2500.00),
+(27, 57, 37, 2610.00),
+(28, 58, 38, 2710.00),
+(29, 60, 39, 15000.00),
+(30, 61, 39, 7900.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rent_request`
+--
+
+CREATE TABLE `rent_request` (
+  `id` int NOT NULL,
+  `rent_id` int NOT NULL,
+  `customer_req` enum('rented','cancel') DEFAULT NULL,
+  `rentalservice_req` enum('rented','cancel') DEFAULT NULL,
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `rent_request`
+--
+
+INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`, `update_at`) VALUES
+(1, 60, NULL, NULL, '2024-02-24 19:37:40'),
+(2, 61, NULL, NULL, '2024-02-24 18:37:48');
+
+--
+-- Triggers `rent_request`
+--
+DELIMITER $$
+CREATE TRIGGER `RentStatus` AFTER UPDATE ON `rent_request` FOR EACH ROW BEGIN
+    -- Check if both columns have the same value and it's 'rented'
+    IF NEW.customer_req = NEW.rentalservice_req AND NEW.customer_req = 'rented' THEN
+        UPDATE rent
+        SET status = 'rented'
+        WHERE id = NEW.rent_id;
+    -- Additionally, check if both columns have the same value and it's 'cancel'
+    ELSEIF NEW.customer_req = NEW.rentalservice_req AND NEW.customer_req = 'cancel' THEN
+        UPDATE rent
+        SET status = 'cancelled'
+        WHERE id = NEW.rent_id;
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1513,6 +1713,12 @@ ALTER TABLE `rent_pay`
   ADD KEY `payment_id` (`payment_id`);
 
 --
+-- Indexes for table `rent_request`
+--
+ALTER TABLE `rent_request`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tips`
 --
 ALTER TABLE `tips`
@@ -1538,13 +1744,13 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1556,7 +1762,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `guides`
@@ -1568,7 +1774,7 @@ ALTER TABLE `guides`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2324;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2363;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -1580,13 +1786,13 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
@@ -1598,13 +1804,19 @@ ALTER TABLE `rental_services`
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `rent_request`
+--
+ALTER TABLE `rent_request`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tips`
@@ -1688,8 +1900,7 @@ ALTER TABLE `rent_item`
 -- Constraints for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  ADD CONSTRAINT `rent_pay_ibfk_1` FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`),
-  ADD CONSTRAINT `rent_pay_ibfk_2` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`);
+  ADD CONSTRAINT `rent_pay_ibfk_1` FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
