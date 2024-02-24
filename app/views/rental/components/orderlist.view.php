@@ -27,13 +27,12 @@
         ?>
         
         <div class = "row flex-d col-lg-12">
-        <div class="order  card-normal col-lg-12 flex-md-c miw-200px">
+        <div class="order card  card-normal col-lg-12 flex-md-c miw-200px">
             <div class="order-header">
                 <div class="order-id">Order ID: <?= $order->id ?></div>
                 <div class="order-status">Status: <?= $order->status ?></div>
             </div>
             <div class="order-body">
-                <div class="order-rental-service">Rental Service: <?= $order->rentalservice_id ?></div>
                 <div class="order-dates">Dates: <?= $order->start_date ?> - <?= $order->end_date ?></div>
                 <div class="order-total">Total: <?= $order->total ?></div>
                 <div class="order-payment-status">Payment Status: <?= $order->payment_status ?></div>

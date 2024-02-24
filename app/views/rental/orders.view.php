@@ -18,93 +18,35 @@ require_once('../app/views/layout/header.php');
             <li class="divider">/</li>
             <li><a href="#" class="active">Orders</a></li>
         </ul>
-        <div class="info-data mt-5">
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>100</h2>
-                        <p>Rents</p>
-                    </div>
-                </div>
-                <span class="progress" data-value="10%"></span>
-                <span class="label">10 : Per Month</span>
-            </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>Rs.139000</h2>
-                        <p>Total Earning</p>
-                    </div>
-                </div>
-                <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
-            </div>
 
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>35</h2>
-                        <p>Equipment Count</p>
-                    </div>
-                </div>
-                <!-- <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span> -->
-            </div>
 
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>1st March</h2>
-                        <p>Upcoming Booking</p>
-                    </div>
-                </div>
-                <div class="booking-bar .flex-d mt-4 mb-2">
-                    <p>Micheal Julius</p>
-                </div>
-                <!-- <span class="progress" data-value="30%"></span>
-                <span class="label">30%</span> -->
-            </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>21st February</h2>
-                        <p>Recent Booking</p>
-                    </div>
-                </div>
-                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
-                    <p>Julius John</p>
-                </div>
-                <!-- <span class="progress" data-value="80%"></span>
-                <span class="label">80%</span> -->
-            </div>
-        </div>
 
 
         <div class="dashboard-card">
 
             <div class="equipment p-4">
 
-                <div class="row justify-content-between">
+                <div class="row justify-content-between gap-3">
                     <h1 class="title">Orders</h1>
 
                     <!-- Section Switch  Upcoming lented Completed -->
 
-                    <div class="section-switch flex-d gap-3" >
-                        <button class="btn btn-primary active" id="all">Today</button>
+                    <div class="section-switch flex-d  gap-3 flex-wrap" >
+                        <button class="btn btn-primary active" id="today">Today</button>
                         <button class="btn btn-primary " id="upcoming">Upcoming</button>
-
-                        
-                        
-                        
                         <button class="btn btn-primary" id="rented">Rented</button>
                         <button class="btn btn-primary" id="completed">Completed</button>
                         <button class="btn btn-primary" id="cancelled">Cancelled</button>
+                        
                         <button class="btn btn-primary" id="all">All</button>
 
                         <!-- not rented yet -->
                         <button class="btn btn-primary" id="not-rented">Not Rented</button>
 
                     </div>
+
+                  
+                    
 
 
                     
@@ -113,7 +55,7 @@ require_once('../app/views/layout/header.php');
                 </div>
 
 
-                <div class="order-list flex-d row" id="order-list">
+                <div class="order-list  row" id="order-list">
                    
 
 
