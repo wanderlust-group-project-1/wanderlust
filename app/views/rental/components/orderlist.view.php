@@ -27,7 +27,7 @@
         ?>
         
         <div class = "row flex-d col-lg-12">
-        <div class="order card  card-normal col-lg-12 flex-md-c miw-200px">
+        <div class="order card  card-normal col-lg-12 flex-md-c miw-200px" data-id="<?= $order->id ?>">
             <div class="order-header">
                 <div class="order-id">Order ID: <?= $order->id ?></div>
                 <div class="order-status">Status: <?= $order->status ?></div>
@@ -36,6 +36,22 @@
                 <div class="order-dates">Dates: <?= $order->start_date ?> - <?= $order->end_date ?></div>
                 <div class="order-total">Total: <?= $order->total ?></div>
                 <div class="order-payment-status">Payment Status: <?= $order->payment_status ?></div>
+            </div>
+            <div class="order-actions flex-d gap-3">
+                <button class="btn btn-primary" id="view-button">View</button>
+                <!-- if status pending set show  -->
+                <?php if ($order->status == 'pending') { ?>
+                    <div class="flex-d-c">
+                    <button class="btn btn-primary flex-d" id="mark-as-rented">
+                    Mark as Rented
+                    
+
+                </button>
+                    <button class="btn btn-danger" id="cancel-request" hidden>Cancel</button>
+                    </div>
+                <?php } ?>
+
+  
             </div>
         </div>
         </div>

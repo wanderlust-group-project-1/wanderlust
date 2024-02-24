@@ -48,6 +48,9 @@ BEGIN
     GROUP BY cart.customer_id, equipment.rentalservice_id;
 
         SET lastRentID = LAST_INSERT_ID();
+
+        INSERT INTO rent_request (rent_id) VALUES (lastRentID);
+
         SELECT total INTO rentAmount FROM rent WHERE id = lastRentID;
 
         SET totalSum = totalSum + rentAmount;

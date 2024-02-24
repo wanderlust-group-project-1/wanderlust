@@ -103,5 +103,71 @@ require_once('../app/views/layout/header.php');
         });
     });
 
+    $(document).on('click', '#mark-as-rented', function() {
+        var orderId = $(this).closest('.order').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/markAsRentedByRentalservice/' + orderId,
+            type: 'GET',
+            success: function(response) {
+               var id = response.data.order_id;
+               console.log(id);
+
+            //  change button to cancel
+            var button = $(`[data-id=${id}]`).find('#mark-as-rented');
+            
+            button.text('Requested');
+            
+
+
+
+            // add btn-danger class
+            button.removeClass('btn-primary');
+            button.addClass('btn-danger');
+            // disable button
+            button.prop('disabled', true);
+
+            // show cancel button
+            $(`[data-id=${id}]`).find('#cancel-request').show();
+            
+            
+
+
+            }
+        });
+    });
+
+    $(document).on('click', '#cancel-request', function() {
+        var orderId = $(this).closest('.order').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/cancelRentedByRentalservice/' + orderId,
+            type: 'GET',
+            success: function(response) {
+               var id = response.data.order_id;
+               console.log(id);
+
+            //  change button to cancel
+            var button = $(`[data-id=${id}]`).find('#mark-as-rented');
+
+            button.text('Mark as Rented');
+            button.prop('disabled', false);
+            // add btn-danger class
+
+            button.removeClass('btn-danger');
+            button.addClass('btn-primary');
+            // hide cancel button
+            $(`[data-id=${id}]`).find('#cancel-request').hide();
+
+
+            }
+        });
+    });
+
+
 
 </script>

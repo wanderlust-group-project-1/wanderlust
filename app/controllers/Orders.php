@@ -20,10 +20,6 @@ class Orders {
     
 
 
-        // $rent = new RentModel;
-        // $orders = $rent->getRentalsByRental($data);
-
-        // $this->view('rental/components/orderlist', ['orders' => $orders]);
     }
 }
 
