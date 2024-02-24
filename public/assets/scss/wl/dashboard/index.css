@@ -1807,8 +1807,8 @@ fieldset {
   background: #526534;
   outline: none;
   color: #F3F3F3;
-  border-radius: 10px;
-  padding: 10px 10px;
+  border-radius: 5px;
+  padding: 10px 20px;
   font-weight: 500;
   font-size: medium;
   font-family: sans-serif;
@@ -1828,6 +1828,10 @@ fieldset {
   color: #8D9E6F;
   border: 2px solid #8D9E6F;
   cursor: default;
+}
+.btn.active {
+  background: #8D9E6F;
+  color: #F3F3F3;
 }
 
 .btn-danger {
@@ -3208,6 +3212,10 @@ input.invert {
 
 .mw-25px {
   max-width: 25px !important;
+}
+
+.miw-200px {
+  min-width: 200px !important;
 }
 
 .miw-100px {
