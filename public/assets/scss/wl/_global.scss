@@ -7,7 +7,7 @@
 
 $header1: 3.4rem;
 $header2: 2.5rem;
-$header3: 2.0rem;
+$header3: 2.3rem;
 $header4: 1.75rem;
 $header5: 4.5rem;
 
@@ -89,6 +89,8 @@ $gray-text: #6B6E70;
 $gray-text-dark : #5C5E60;
 $gray-text-darker : #47494b;
 $black-text: #212016;
+$font-gold: #C1A87D;
+$font-gold2: #C2AF7B;
 
 
 
@@ -139,60 +141,14 @@ html {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   scroll-behavior: smooth;
-
-  
 }
 
-h1 {
-  font-size: $header1;
-}
-
-h2 {
-  // font-family: sans-serif;
-  font-weight: $font-regular;
-  font-size: $header1;
-  color: $color-black;
-}
-
-h3 {
-  // font-family: sans-serif;
-  font-size: $header2;
-  // color: $gray-text;
-}
-
-h4 {
-  margin-top: 5px;
-  // font-family: sans-serif;
-  font-weight: 400;
-  color: $color-dark;
-  text-align: center;
-}
-
-h5 {
-
-  margin-top: 5px;
-  font-family: sans-serif;
-  font-weight: 400;
-  color: $color-dark;
-  text-align: justify;
-  padding-left: 5px;
-}
-
-h6 {
-  font-family: sans-serif;
-  font-weight: 200;
-  font-size: $header3;
-  color: $gray-text-dark;
-  font-style: italic;
-}
-
-
-
-p {
-  font-size: $text;
-  color: $color-darker;
-}
-
+// h2 {
+//   // font-family: sans-serif;
+//   font-weight: $font-regular;
+//   font-size: $header1;
+//   color: $color-black;
+// }
 // button,
 // input,
 // a,
@@ -219,20 +175,61 @@ tfoot {
   font-size: $header3;
 }
 
+h1 {
+  font-size: $header1;
+  color: $font-gold;
+  font-weight: 500;
+}
+
 h2 {
   font-size: $header2;
+  position: relative;
+  font-size: 3.4rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #526534;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 h3 {
   font-size: $header3;
+  color: $color-darker;
+  font-weight: 100;
+
 }
 
-h4{
+h4 {
   font-size: $header4;
+  margin-top: 5px;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: center;
 }
 
 h5 {
   font-size: $smaller-text;
+  margin-top: 5px;
+  font-family: sans-serif;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: justify;
+  padding-left: 5px;
+}
+
+h6 {
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: $header3;
+  color: $gray-text-dark;
+  font-style: italic;
+}
+
+p {
+  font-size: $text;
+  color: $color-darker;
 }
 
 ul {
