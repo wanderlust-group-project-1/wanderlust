@@ -9,7 +9,8 @@
     font-weight: 400;
     line-height: 1.5;
     color: black-text;
-    background-color: $color-lightest2;
+    // background-color: $color-lightest2;
+    background-color: $color-light;
     background-clip: padding-box;
     // border: 2px solid $color-lightest;
     border-radius: 12px;
@@ -102,9 +103,13 @@ form {
     input[type="email"],
     input[type="password"],
     input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    input[type="file"],
+    select
     textarea
     {
-        resize: vertical;
+      
         border: none;
         background: $color-lightest2;
         outline: none;
@@ -115,24 +120,24 @@ form {
         font-weight: 400;
         // margin-top: 10px;
         display: block;
-        width: 100%;
+        // width: 100%;
 
     }
 
-    // textarea {
-    //     // unchangeable size
-    //     resize: none;
-    //     background: $color-lightest2;
-    //     border-radius: 12px;
+    textarea {
+        // unchangeable size
+        resize: none;
+        background: $color-lightest2;
+        border-radius: 12px;
        
 
-    //     &.form-control-lg {
-    //         height: 150px;
-    //     }
+        &.form-control-lg {
+            height: 150px;
+        }
         
 
 
-    // }
+    }
 
 
 

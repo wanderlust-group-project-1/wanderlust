@@ -8,7 +8,7 @@
 $header1: 3.4rem;
 $header2: 2.5rem;
 $header3: 2.0rem;
-$header4: 1.5rem;
+$header4: 1.75rem;
 $header5: 4.5rem;
 
 
@@ -17,6 +17,7 @@ $text: 1.68rem;
 $small-text: 1.4rem;
 $smaller-text: 1.05rem;
 $bigger-text: 5rem;
+$heading-text: 3.5rem;
 
 // $bg-color: #4C5039;
 // $bg-color-darker: #1a3842b9;
@@ -78,6 +79,8 @@ $color-lightest2:#EBEFE3;
 
 
 $color-white: #F5F5F5;
+$color-black: #000000;
+
 
 // text colors
 $white-text : #FFFFFF;
@@ -145,22 +148,21 @@ h1 {
 }
 
 h2 {
-  font-family: sans-serif;
-  font-weight: 400;
+  // font-family: sans-serif;
+  font-weight: $font-regular;
   font-size: $header1;
-  color: $color-dark;
+  color: $color-black;
 }
 
 h3 {
-  font-family: sans-serif;
-  font-weight: 300;
+  // font-family: sans-serif;
   font-size: $header2;
-  color: #ffff;
+  // color: $gray-text;
 }
 
 h4 {
   margin-top: 5px;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   font-weight: 400;
   color: $color-dark;
   text-align: center;
@@ -188,7 +190,7 @@ h6 {
 
 p {
   font-size: $text;
-  color: $gray-text-dark;
+  color: $color-darker;
 }
 
 // button,

@@ -1,6 +1,6 @@
 /* Define Variables */
 $color-white: #fff;
-$color-black: #000;
+$color-black: #000000;
 $color-dark-green: #4C5039;
 $color-light-gray: #f2f2f2;
 $color-medium-gray: #ccc;
@@ -26,33 +26,15 @@ $media-breakpoint: 768px;
 @mixin form-styles {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between form elements */
+    // gap: 10px; /* Space between form elements */
   
     label {
-      font-size: 16px;
-      color:  #333;
-      margin-bottom: 5px;
+      font-size: $small-text;
+      font-weight: $font-semi-bold;
+      color: $color-dark-gray;
+      margin-top: 2rem;
+      // margin-bottom: 5px;
     }
-  
-    // input[type="text"], input[type="password"], input[type="file"], input[type="number"] {
-    //   padding: 10px;
-    //   border: 1px solid #ccc;
-    //   border-radius: 5px;
-    // }
-  
-    // input[type="submit"] {
-    //   background-color: $color-green;
-    //   color: $color-white;
-    //   border: none;
-    //   cursor: pointer;
-    //   padding: 10px 20px;
-    //   border-radius: 5px;
-    //   transition: background-color 0.3s;
-  
-    //   &:hover {
-    //     background-color: $color-darker-green;
-    //   }
-    // }
   }
 
 
@@ -89,10 +71,12 @@ $media-breakpoint: 768px;
   min-width: 300px;
   margin: 20px;
   margin-bottom: 1.5rem;
+  margin-top: 4rem;
   padding: 20px;
-  background-color: $color-white;
+  background-color: $color-lighter;
   border-radius: 15px;
-  box-shadow: $box-shadow-default;
+  // box-shadow: $box-shadow-default;
+
   transition: all 0.3s ease-in-out;
   gap: 20px;
   flex-grow: inherit;
@@ -190,11 +174,11 @@ $media-breakpoint: 768px;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: 50px;
+  // margin-top: 50px;
   width: 100%;
   height: 100%;
   padding: 0;
-  background-color: $color-lightest2;
+  background-color: $color-lighter;
 
   &-header {
     display: flex;
@@ -216,16 +200,20 @@ $media-breakpoint: 768px;
     justify-content: space-around;
     width: 90%;
     height: auto;
-    background-color: $color-lightest;
     gap: 20px;
     // margin-top: 8rem;
     // margin-left: 2rem;
     // margin-right: 2rem;
 
-    .dashboard-card {
+    &-card {
       @include dashboard-card-common;
     }
   }
+}
+
+.dashboard-heading{
+  font-size: $heading-text;
+  font-weight: $font-semi-bold;
 }
 
 /* Sidebar Styles */
@@ -249,9 +237,14 @@ $media-breakpoint: 768px;
   }
 
   .dashboard {
-    margin-left: 50px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 100px;
     width: 90%;
   }
+
+  
+
 
   .dashboard-content .dashboard-card {
     min-width: 90%;
@@ -310,7 +303,12 @@ $media-breakpoint: 768px;
     width: 100%;
     height: auto;
     padding: 0;
-    background-color: $color-white;
+    background-color: $color-lighter;
+    border: 1px solid rgba($color-darker, 0.2);
+    box-shadow: 4px 4px 16px $color-dark-gray 0.1;
+    border-radius: 10px;
+
+
 
     .add-equipment {
       .add-equipment-button {
@@ -405,7 +403,7 @@ $media-breakpoint: 768px;
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: $color-white;
+  background-color: $color-lighter;
 }
 
 /* Table Container */
