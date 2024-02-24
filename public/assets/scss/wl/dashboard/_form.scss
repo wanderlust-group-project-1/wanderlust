@@ -109,7 +109,7 @@ form {
     select
     textarea
     {
-        resize: vertical;
+      
         border: none;
         background: $color-lightest2;
         outline: none;
@@ -124,20 +124,20 @@ form {
 
     }
 
-    // textarea {
-    //     // unchangeable size
-    //     resize: none;
-    //     background: $color-lightest2;
-    //     border-radius: 12px;
+    textarea {
+        // unchangeable size
+        resize: none;
+        background: $color-lightest2;
+        border-radius: 12px;
        
 
-    //     &.form-control-lg {
-    //         height: 150px;
-    //     }
+        &.form-control-lg {
+            height: 150px;
+        }
         
 
 
-    // }
+    }
 
 
 

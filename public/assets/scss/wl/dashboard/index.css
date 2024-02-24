@@ -2793,7 +2793,6 @@ form input[type=date],
 form input[type=time],
 form input[type=file],
 form select textarea {
-  resize: vertical;
   border: none;
   background: #EBEFE3;
   outline: none;
@@ -2802,6 +2801,14 @@ form select textarea {
   padding: 12px 20px;
   font-weight: 400;
   display: block;
+}
+form textarea {
+  resize: none;
+  background: #EBEFE3;
+  border-radius: 12px;
+}
+form textarea.form-control-lg {
+  height: 150px;
 }
 form select {
   border: none;
