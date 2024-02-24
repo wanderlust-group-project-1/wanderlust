@@ -396,7 +396,15 @@ $(document).ready(function() {
         success: function(response) {
             // console.log(response);
             $('#item-list').html(response);
+        },
+        error: function(err) {
+        //    display change date modal
+        dateModal.style.display = "block";
+        $('#item-list').html('<h2> No items available for rent <br> Please try to change the date </h2>');
+
+
         }
+
     });
 });
 
@@ -420,6 +428,7 @@ function setNewDate(start, end) {
         }),
         success: function(data) {
             console.log(data);
+            getResults();
         },
         error: function(err) {
             console.log(err);
@@ -463,6 +472,13 @@ function setNewDate(start, end) {
 
         
 
+    });
+
+    // close the modal
+
+    $(document).on('click', '.close', function() {
+        var modal = $(this).closest('.modal');
+        modal.css('display', 'none');
     });
 
 

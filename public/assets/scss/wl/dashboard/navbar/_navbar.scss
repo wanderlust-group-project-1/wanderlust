@@ -56,7 +56,7 @@
      opacity: 0;
    }
  
-   @media screen and (max-width: 1118px) {
+   @media screen and (max-width: 1498px) {
      &__menu {
        position: absolute;
        left: 0;
@@ -86,6 +86,7 @@
      justify-content: space-between;
      align-items: center;
      transition: background-color 0.3s;
+     font-size: $header4;
  
      &:hover {
        background-color: $color-lighter;
@@ -107,7 +108,7 @@
    }
  
    &__container {
-     max-width: 1120px;
+     max-width: 1600px;
      margin-inline: 1.5rem;
      height: 7rem;
     //  display: flex;
