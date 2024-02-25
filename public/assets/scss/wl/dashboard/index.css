@@ -725,6 +725,7 @@ fieldset {
   border-bottom: 0;
 }
 .order-details tr td {
+  box-sizing: border-box;
   vertical-align: middle;
 }
 .order-details tr td:last-child {
