@@ -379,6 +379,8 @@ $(document).ready(function() {
             success: function(data) {
                 // console.log(data);
                 // Update the modal content with the fetched data
+                // empty the equipment list and append new data
+                $(".equipment-list").empty();
                 $(".equipment-list").html(data).promise().done(function() {
                     console.log('equipment list updated');
                     viewEquipment();
@@ -403,16 +405,6 @@ $(document).ready(function() {
 
 <script>
 
-    $(document).on('click', '.close', function() {
-        var modal = $(this).closest('.modal');
-        modal.hide();
-    });
-    // close or modal-close both 
-
-    $(document).on('click', '.modal-close', function() {
-        var modal = $(this).closest('.modal');
-        modal.hide();
-    });
 
     </script>
 
