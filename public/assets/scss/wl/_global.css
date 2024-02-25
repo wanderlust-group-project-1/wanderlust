@@ -20,10 +20,19 @@ span {
   font-weight: 500;
 }
 
-thead,
-tbody,
+thead {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+tbody {
+  font-size: 1.75rem;
+  font-weight: 200;
+  padding: 10px;
+}
+
 tfoot {
-  font-size: 2.3rem;
+  font-size: 1.75rem;
 }
 
 h1 {

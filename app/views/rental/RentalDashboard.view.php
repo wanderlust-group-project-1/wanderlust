@@ -87,16 +87,18 @@ require_once('../app/views/layout/header.php');
             <div class="equipment p-4">
 
                 <div class="row justify-content-between">
-                    <h1 class="title">Equipment Details</h1>
+                    <h1 class="title">Equipment Details</h1> 
 
-                    <!-- Add Equipment -->
                     <div class="add-equipment">
-                        <button type="submit" class="btn" id="add-equipment">
-                            Add Equipment
+                        <button type="submit" class="btn-icon" id="add-equipment">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add new
                         </button>
                     </div>
                 </div>
 
+                <!-- Add Equipment -->
+                
 
                 <div class="equipment-list">
 

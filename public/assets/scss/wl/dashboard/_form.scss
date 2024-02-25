@@ -31,6 +31,7 @@
     height: calc(2.0rem + 1.5rem + 2px);
     padding: 0.5rem 1rem;
     font-size: 1.4rem;
+    background-color: $color-lighter;
     // border-radius: 0.3rem;
 }
 
@@ -146,10 +147,14 @@ form {
         border: none;
         background: $color-light;
         outline: none;
-        color: $black-text;
+        color: $gray-text;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
+
+        option {
+            color: $gray-text;
+        }
     }
 
     .message-text,

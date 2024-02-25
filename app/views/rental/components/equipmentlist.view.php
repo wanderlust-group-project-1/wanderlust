@@ -2,41 +2,38 @@
 
     <!-- Table filter for each column -->
     <!-- button for show filter -->
-    <button id="show-filter" class="btn" aria-expanded="false">Show Filter</button>
-
+    <div class="filter-btn">
+        <button id="show-filter" class="btn-icon" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+    </div>
 
 
     <div class="table-filter ">
+        <div class="row">
+            <div class="back-btn">
+                <button id="hide-filter" class="btn-icon" aria-expanded="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            </div>
+        </div>
         <div class=" gap-3 flex-d-c">   
-                <div class="row">
-            
-        <div class="col-lg-5 col-md-12 mw-300px">
-            
-        <input type="text" class="form-control-lg" id="equipment-name-filter" placeholder="Search by Equipment Name">
-        </div>
-        <!-- Select type -->
+            <div class="row">
+                <div class="col-lg-5 col-md-12 mw-300px">
+                    <input type="text" class="form-control-lg" id="equipment-name-filter" placeholder="Search by Equipment Name">
+                </div>
 
-        <div class="col-lg-5  col-md-12  mw-300px">
-        <select id="equipment-type-filter" class="form-control-lg">
-            <option value="">All Types</option>
-            <option value="tent">Tent</option>
-            <option value="cooking">Cooking</option>
-            <option value="backpack">Backpack</option>
-            <option value="sleeping">Sleeping</option>
-            <option value="clothing">Clothing</option>
-            <option value="footwear">Footwear</option>
-            <option value="other">Other</option>
-        
-        </select>
-        </div>
+                <!-- Select type -->
 
-        </div>
-
-
-<div class="row">
-
-        <button id="hide-filter" class="btn" aria-expanded="true">Hide Filter</button>
-</div>
+                <div class="col-lg-5  col-md-12  mw-300px">
+                    <select id="equipment-type-filter" class="form-control-lg">
+                        <option value="">All Types</option>
+                        <option value="tent">Tent</option>
+                        <option value="cooking">Cooking</option>
+                        <option value="backpack">Backpack</option>
+                        <option value="sleeping">Sleeping</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 

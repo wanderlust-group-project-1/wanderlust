@@ -61,7 +61,20 @@
     color: $color-darker;
   }
 }
+ .btn-icon {
+  background-color: transparent;
+  font-size: 18px;
+  color: $gray-text;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
 
+  &:hover{
+    color: $gray-text-darker;
+  }
+ }
 
 
 

@@ -168,11 +168,17 @@ span{
   font-weight: $font-medium;
 }
 
-thead,
-// label,
-tbody,
+thead{
+  font-size: $header4;
+  font-weight: 400;
+}
+tbody{
+  font-size: $header4;
+  font-weight: 200;
+  padding: 10px;
+}
 tfoot {
-  font-size: $header3;
+  font-size: $header4;
 }
 
 h1 {

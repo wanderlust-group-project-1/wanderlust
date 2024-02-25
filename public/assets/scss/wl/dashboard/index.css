@@ -21,10 +21,19 @@ span {
   font-weight: 500;
 }
 
-thead,
-tbody,
+thead {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+tbody {
+  font-size: 1.75rem;
+  font-weight: 200;
+  padding: 10px;
+}
+
 tfoot {
-  font-size: 2.3rem;
+  font-size: 1.75rem;
 }
 
 h1 {
@@ -364,6 +373,24 @@ fieldset {
 
 /* Define Variables */
 /* Mixins */
+.filter-btn {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.back-btn {
+  justify-content: left;
+  right: 100%;
+  transform: translate(-1000%, 95%);
+}
+
+.add-equipment {
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: transparent;
+  justify-content: right;
+}
+
 /* Modal Box Styles */
 .profile-editor {
   display: none;
@@ -566,9 +593,9 @@ fieldset {
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: #EBEFE3;
+  background-color: #fff;
   border: 1px solid rgba(47, 59, 28, 0.2);
-  box-shadow: 4px 4px 16px #333 0.1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 .dashboard-card .equipment .add-equipment .add-equipment-button {
@@ -648,7 +675,7 @@ fieldset {
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: #EBEFE3;
+  background-color: #fff;
 }
 
 /* Table Container */
@@ -2287,6 +2314,21 @@ fieldset {
   color: #2F3B1C;
 }
 
+.btn-icon {
+  background-color: transparent;
+  font-size: 18px;
+  color: #6B6E70;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+}
+.btn-icon:hover {
+  color: #47494b;
+}
+
 .btn-danger {
   background: #8F4548;
   border: 1px solid #8F4548;
@@ -2478,11 +2520,10 @@ fieldset {
   color: #333;
   font-weight: bold;
   text-align: left;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 .table-custom td {
-  padding: 0.75rem;
-  vertical-align: top;
+  padding: 12px;
   border-top: 1px solid #ddd;
 }
 .table-custom tr:nth-child(odd) {
@@ -2753,6 +2794,7 @@ fieldset {
   height: calc(3.5rem + 2px);
   padding: 0.5rem 1rem;
   font-size: 1.4rem;
+  background-color: #EBEFE3;
 }
 
 .form-control:focus {
@@ -2838,10 +2880,13 @@ form select {
   border: none;
   background: #B2BDA0;
   outline: none;
-  color: #212016;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
+}
+form select option {
+  color: #6B6E70;
 }
 form .message-text,
 form p {
@@ -2900,6 +2945,7 @@ input.invert {
 
 .justify-content-between {
   justify-content: space-between;
+  padding: 10px;
 }
 
 .justify-content-center {
