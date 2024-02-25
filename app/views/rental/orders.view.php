@@ -32,6 +32,7 @@ require_once('../app/views/layout/header.php');
                     <!-- Section Switch  Upcoming lented Completed -->
 
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
+                        <button class="btn btn-primary " id="pending">Pending</button>
                         <button class="btn btn-primary active" id="today">Today</button>
                         <button class="btn btn-primary " id="upcoming">Upcoming</button>
                         <button class="btn btn-primary" id="rented">Rented</button>
@@ -103,6 +104,9 @@ require_once('../app/views/layout/header.php');
         });
     });
 
+
+    // Mark as Rented
+
     $(document).on('click', '#mark-as-rented', function() {
         var orderId = $(this).closest('.order').attr('data-id');
         $.ajax({
@@ -130,7 +134,7 @@ require_once('../app/views/layout/header.php');
             button.prop('disabled', true);
 
             // show cancel button
-            $(`[data-id=${id}]`).find('#cancel-request').show();
+            $(`[data-id=${id}]`).find('#cancel-rented').show();
             
             
 
@@ -139,7 +143,7 @@ require_once('../app/views/layout/header.php');
         });
     });
 
-    $(document).on('click', '#cancel-request', function() {
+    $(document).on('click', '#cancel-rented', function() {
         var orderId = $(this).closest('.order').attr('data-id');
         $.ajax({
             headers:{
@@ -161,7 +165,7 @@ require_once('../app/views/layout/header.php');
             button.removeClass('btn-danger');
             button.addClass('btn-primary');
             // hide cancel button
-            $(`[data-id=${id}]`).find('#cancel-request').hide();
+            $(`[data-id=${id}]`).find('#cancel-rented').hide();
 
 
             }
@@ -169,5 +173,103 @@ require_once('../app/views/layout/header.php');
     });
 
 
+    // Open Mark as Returned Modal 
+    $(document).on('click', '#mark-as-returned', function() {
+        var orderId = $(this).closest('.order').attr('data-id');
+        $('#mark-as-returned-modal').attr('data-id', orderId);
+        $('#mark-as-returned-modal').show();
+    });
+
+    // Mark as Returned Confirm
+
+    $(document).on('click', '#mark-as-returned-confirm', function() {
+        var orderId = $('#mark-as-returned-modal').attr('data-id');
+        console.log(orderId);
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/markAsReturnedByRentalservice/' + orderId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                var id = response.data.order_id;
+                // console.log(id);
+                // hide modal
+                $('#mark-as-returned-modal').hide();
+                // change status
+                $(`[data-id=${id}]`).find('.order-status').text('Status: returned');
+                // hide mark as returned button
+                $(`[data-id=${id}]`).find('#mark-as-returned').hide();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+
+    // Pending Orders Accept and Cancel
+
+    $(document).on('click', '#accept-request', function() {
+        var orderId = $(this).closest('.order').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/acceptRequestByRentalservice/' + orderId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response.data);
+                var id = response.data.order_id;
+                // console.log(id);
+                // change status
+                $(`[data-id=${id}]`).find('.order-status').text('Status: accepted');
+                // hide accept and cancel buttons
+                $(`[data-id=${id}]`).find('#accept-request').hide();
+                $(`[data-id=${id}]`).find('#cancel-request').hide();
+                // show mark as rented button
+                
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+    $(document).on('click', '#cancel-request', function() {
+        var orderId = $(this).closest('.order').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/cancelRequestByRentalservice/' + orderId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                var id = response.data.order_id;
+                // console.log(id);
+                // change status
+                $(`[data-id=${id}]`).find('.order-status').text('Status: cancelled');
+                // hide accept and cancel buttons
+                $(`[data-id=${id}]`).find('#accept-request').hide();
+                $(`[data-id=${id}]`).find('#cancel-request').hide();
+                // show mark as rented button
+                
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+
 
 </script>
+
+
+<?php
+require_once('../app/views/layout/footer.php');
+?>

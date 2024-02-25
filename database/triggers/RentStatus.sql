@@ -14,6 +14,25 @@ BEGIN
         UPDATE rent
         SET status = 'cancelled'
         WHERE id = NEW.rent_id;
+
+
+    -- Check if rentalservice_req is 'completed'
+    ELSEIF NEW.rentalservice_req = 'completed' THEN
+        UPDATE rent
+        SET status = 'completed'
+        WHERE id = NEW.rent_id;
+
+
+    ELSEIF NEW.rentalservice_req = 'accepted' THEN
+        UPDATE rent
+        SET status = 'accepted'
+        WHERE id = NEW.rent_id;
+
+    ELSEIF NEW.rentalservice_req = 'cancelled' THEN
+        UPDATE rent
+        SET status = 'cancelled'
+        WHERE id = NEW.rent_id;
+
     END IF;
 END$$
 
