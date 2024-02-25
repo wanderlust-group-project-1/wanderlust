@@ -266,6 +266,34 @@ require_once('../app/views/layout/header.php');
 
 
 
+    // Order View Modal
+
+    $(document).on('click', '#view-button', function() {
+        var orderId = $(this).closest('.order').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/orders/viewOrder/' + orderId,
+            type: 'GET',
+            success: function(response) {
+                $('#order-item-modal').show();
+                $('#order-data').html(response);
+
+                // setTimeout(() => {
+                //     loadCalender();
+                // }, 1000);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+    //  LOad Calendar
+
+
 
 </script>
 
@@ -273,3 +301,5 @@ require_once('../app/views/layout/header.php');
 <?php
 require_once('../app/views/layout/footer.php');
 ?>
+
+

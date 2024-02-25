@@ -88,7 +88,20 @@ class RentModel {
     }
 
 
-    
+    public function getRental(int $id): mixed {
+       
+        $q = 'CALL getRentalDetailsById(:id)';
+        return $this->query($q, ['id' => $id])[0];
+
+
+    }
+
+    public function getItemListbyRentId(int $id): mixed {
+       
+        $q = 'CALL GetItemListbyRentID(:id)';
+        return $this->query($q, ['id' => $id]);
+
+    }
 
 
 

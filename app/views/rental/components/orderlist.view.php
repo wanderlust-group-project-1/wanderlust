@@ -21,7 +21,9 @@
 
 
 //  oreders list 
-  ($orders) ?  : show('No orders found');
+  ($orders) ?  : show('<div class="col-lg-12"><h1>No Orders</h1></div>');
+
+    
 
     foreach ($orders as $order) {
         ?>
@@ -88,7 +90,16 @@
 </div>
 
 
+<!-- View modal -->
 
+<div class="modal" id="order-item-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        
+        <div id="order-data">   </div>
+    </div>
+</div>
 
 
 <style>

@@ -21,6 +21,20 @@ class Orders {
 
 
     }
+
+    public function viewOrder(string $a = '', string $b = '', string $c = ''):void {
+        $rent = new RentModel;
+        $order = $rent->getRental($a);
+        $items = $rent->getItemListbyRentId($a);
+
+
+
+
+
+        // show($order);
+
+        $this->view('rental/components/order', ['order' => $order, 'items' => $items]);
+    }
 }
 
 

@@ -721,6 +721,36 @@ fieldset {
 }
 
 /* Additional styles can be converted following the same pattern */
+.order-details tr:last-child td {
+  border-bottom: 0;
+}
+.order-details tr td {
+  vertical-align: middle;
+}
+.order-details tr td:last-child {
+  text-align: center;
+}
+
+.item-details {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+.item-details th {
+  background-color: #EBEFE3;
+  color: #333;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+}
+.item-details td {
+  padding: 12px;
+  text-align: left;
+}
+.item-details tr:hover {
+  background-color: #EBEFE3;
+}
+
 .signup-container {
   position: relative;
   display: flex;
@@ -1334,7 +1364,7 @@ fieldset {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #EBEFE3;
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #ccc;
