@@ -17,17 +17,22 @@ BEGIN
                       AND payment.status = 'completed' ";
 
     CASE 
+        
         WHEN filterType = 'ALL' THEN
             SET @specificFilter = "";
+
+        WHEN filterType = 'pending' THEN
+            SET @specificFilter = "AND rent.status = 'pending'";
+
         
         WHEN filterType = 'today' THEN
-            SET @specificFilter = "AND rent.start_date = CURDATE()";
+            SET @specificFilter = "AND rent.start_date = CURDATE() AND rent.status = 'accepted'";
         
         WHEN filterType = 'upcoming' THEN
-            SET @specificFilter = "AND rent.start_date > CURDATE()";
+            SET @specificFilter = "AND rent.start_date > CURDATE() AND rent.status = 'accepted'";
         
         WHEN filterType = 'not rented' THEN
-            SET @specificFilter = "AND rent.start_date < CURDATE() AND rent.status = 'pending'";
+            SET @specificFilter = "AND rent.start_date < CURDATE() AND rent.status = 'accepted'";
         
         WHEN filterType = 'Rented' THEN
             SET @specificFilter = "AND rent.status = 'rented'";

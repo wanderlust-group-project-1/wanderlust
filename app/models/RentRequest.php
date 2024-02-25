@@ -20,6 +20,7 @@ class RentRequestModel {
         }, ARRAY_FILTER_USE_KEY);
         
         return $this->update($id,$data,'rent_id');
+        
 
 
 
