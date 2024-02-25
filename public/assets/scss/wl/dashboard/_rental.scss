@@ -516,3 +516,60 @@ $media-breakpoint: 768px;
 
 
 
+
+// Orders
+
+.order-details{
+
+  tr {
+   
+    &:last-child {
+      td {
+        border-bottom: 0; // Remove bottom border for the last row
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      // font-size: $header3;
+
+      
+      &:last-child {
+        text-align: center; // Center-align the action buttons or last cell content
+      }
+    }
+  }
+  
+}
+
+  // table class
+.item-details {
+
+  // table border
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  // table header
+  th {
+    background-color: $color-lighter;
+    color: $color-dark-gray;
+    font-weight: $font-semi-bold;
+    padding: 12px;
+    text-align: left;
+  }
+  // table data
+  td {
+    padding: 12px;
+    text-align: left;
+  }
+  // table row
+  tr {
+    &:hover {
+      background-color: $color-lightest2; // Hover effect for rows
+    }
+  }
+  // table action buttons
+  
+
+
+}
