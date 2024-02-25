@@ -17,8 +17,8 @@
 
     <div class="options flex-d-c">
       <h2 class="name"> <?php echo $user->name; ?></h2>
-      <p class="email"> <?php echo $user->email; ?></p>
-      <p class="number"> <?php echo $user->mobile; ?></p>
+      <!-- <p class="email"> <?php echo $user->email; ?></p> -->
+      <!-- <p class="number"> <?php echo $user->mobile; ?></p> -->
     </div>
 
     <div class="">

@@ -91,6 +91,7 @@ $gray-text-darker : #47494b;
 $black-text: #212016;
 $font-gold: #C1A87D;
 $font-gold2: #C2AF7B;
+$font-grey:#6B6E70;
 
 
 
@@ -164,7 +165,7 @@ li {
 }
 
 span{
-  font-size: $small-text;
+  font-size: $text;
   font-weight: $font-medium;
 }
 
@@ -279,6 +280,7 @@ select {
   background-color: $shaded-white;
   //font-size: $header4;
   font-family: "Poppins", sans-serif;
+  color: $font-grey;
 
   &:focus {
     outline: none;
