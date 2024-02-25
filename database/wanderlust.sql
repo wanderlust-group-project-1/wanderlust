@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Feb 25, 2024 at 07:55 AM
+-- Generation Time: Feb 25, 2024 at 02:53 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -207,6 +207,21 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID
     DEALLOCATE PREPARE stmt;
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `GetItemListbyRentID` (IN `rent_id` INT)   BEGIN
+    SELECT 
+        e.id AS `equipment_id`, 
+        e.name AS `equipment_name`,
+        i.item_number AS `item_number`
+    FROM 
+        rent_item ri
+    INNER JOIN item i ON ri.item_id = i.id
+    INNER JOIN equipment e ON i.equipment_id = e.id
+    WHERE 
+        ri.rent_id = rent_id
+    ORDER BY 
+        e.name;
+END$$
+
 CREATE DEFINER=`root`@`%` PROCEDURE `GetItemsByEquipment` (IN `equipmentId` INT)   BEGIN
     SELECT 
         item.*, 
@@ -228,6 +243,37 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetItemsByEquipment` (IN `equipmentId` INT)
     	item.status IN  ('available','unavailable');
         
         
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetRentalDetailsByID` (IN `rent_id_param` INT)   BEGIN
+    SELECT 
+        r.*,
+        c.name AS `customer_name`, 
+        u.email AS `customer_email`,
+        c.number AS `customer_number`,
+        -- Aggregate equipment names and their counts into a single column
+        GROUP_CONCAT(DISTINCT CONCAT(sub.equipment_name, ' (', sub.equipment_count, ')') ORDER BY sub.equipment_name SEPARATOR ', ') AS `equipment_list`
+    FROM 
+        rent r
+    INNER JOIN customers c ON r.customer_id = c.id
+    INNER JOIN users u ON c.user_id = u.id
+    -- Subquery to calculate equipment counts
+    INNER JOIN (
+        SELECT 
+            ri.rent_id, 
+            e.name AS `equipment_name`, 
+            COUNT(e.id) AS `equipment_count`
+        FROM 
+            rent_item ri
+        INNER JOIN item i ON ri.item_id = i.id
+        INNER JOIN equipment e ON i.equipment_id = e.id
+        GROUP BY 
+            ri.rent_id, e.name
+    ) AS sub ON r.id = sub.rent_id
+    WHERE 
+        r.id = rent_id_param
+    GROUP BY 
+        r.id;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `getRentalsByCustomer` (IN `customer_id_param` INT)   BEGIN
@@ -704,44 +750,44 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
-(1, 42, NULL, 'removed'),
-(2, 42, NULL, 'available'),
-(3, 42, NULL, 'available'),
-(4, 42, NULL, 'available'),
-(5, 42, NULL, 'available'),
-(6, 42, NULL, 'available'),
-(7, 42, NULL, 'available'),
-(8, 42, NULL, 'available'),
-(9, 42, NULL, 'available'),
-(10, 42, NULL, 'available'),
-(11, 42, NULL, 'available'),
-(12, 42, NULL, 'available'),
-(13, 42, NULL, 'available'),
-(14, 42, NULL, 'available'),
-(15, 42, NULL, 'available'),
-(16, 42, NULL, 'available'),
-(17, 42, NULL, 'available'),
-(18, 42, NULL, 'available'),
-(19, 42, NULL, 'available'),
-(20, 42, NULL, 'available'),
-(21, 42, NULL, 'available'),
-(22, 42, NULL, 'available'),
-(23, 42, NULL, 'available'),
-(24, 42, NULL, 'available'),
-(25, 42, NULL, 'available'),
-(26, 42, NULL, 'available'),
-(27, 42, NULL, 'available'),
-(28, 42, NULL, 'available'),
-(29, 42, NULL, 'available'),
-(30, 42, NULL, 'available'),
-(31, 42, NULL, 'available'),
-(32, 42, NULL, 'available'),
-(33, 42, NULL, 'available'),
-(34, 42, NULL, 'available'),
-(35, 43, NULL, 'available'),
-(36, 43, NULL, 'unavailable'),
-(37, 43, NULL, 'removed'),
-(38, 43, NULL, 'available'),
+(1, 42, 'I000258533', 'removed'),
+(2, 42, 'I000258533', 'available'),
+(3, 42, 'I000258533', 'available'),
+(4, 42, 'I000258533', 'available'),
+(5, 42, 'I000258533', 'available'),
+(6, 42, 'I000258533', 'available'),
+(7, 42, 'I000258533', 'available'),
+(8, 42, 'I000258533', 'available'),
+(9, 42, 'I000258533', 'available'),
+(10, 42, 'I000258533', 'available'),
+(11, 42, 'I000258533', 'available'),
+(12, 42, 'I000258533', 'available'),
+(13, 42, 'I000258533', 'available'),
+(14, 42, 'I000258533', 'available'),
+(15, 42, 'I000258533', 'available'),
+(16, 42, 'I000258533', 'available'),
+(17, 42, 'I000258533', 'available'),
+(18, 42, 'I000258533', 'available'),
+(19, 42, 'I000258533', 'available'),
+(20, 42, 'I000258533', 'available'),
+(21, 42, 'I000258533', 'available'),
+(22, 42, 'I000258533', 'available'),
+(23, 42, 'I000258533', 'available'),
+(24, 42, 'I000258533', 'available'),
+(25, 42, 'I000258533', 'available'),
+(26, 42, 'I000258533', 'available'),
+(27, 42, 'I000258533', 'available'),
+(28, 42, 'I000258533', 'available'),
+(29, 42, 'I000258533', 'available'),
+(30, 42, 'I000258533', 'available'),
+(31, 42, 'I000258533', 'available'),
+(32, 42, 'I000258533', 'available'),
+(33, 42, 'I000258533', 'available'),
+(34, 42, 'I000258533', 'available'),
+(35, 43, 'I000258533', 'available'),
+(36, 43, 'I000258533', 'unavailable'),
+(37, 43, 'I000258533', 'removed'),
+(38, 43, 'I000258533', 'available'),
 (1281, 46, 'I000000000', 'available'),
 (1282, 46, 'I000000000', 'available'),
 (1283, 46, 'I000000000', 'available'),
@@ -1008,7 +1054,9 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (37, '2024-02-24 09:57:53', 'pending', 2610.00, NULL, 'RNT00037'),
 (38, '2024-02-24 10:00:22', 'completed', 2710.00, NULL, 'RNT00038'),
 (39, '2024-02-24 18:37:48', 'completed', 22900.00, NULL, 'RNT00039'),
-(40, '2024-02-25 07:31:42', 'completed', 9310.00, NULL, 'RNT00040');
+(40, '2024-02-25 07:31:42', 'completed', 9310.00, NULL, 'RNT00040'),
+(41, '2024-02-25 10:24:39', 'completed', 5310.00, NULL, 'RNT00041'),
+(42, '2024-02-25 10:28:02', 'completed', 1310.00, NULL, 'RNT00042');
 
 -- --------------------------------------------------------
 
@@ -1093,7 +1141,10 @@ INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_
 (60, 32, 25, '2024-02-14', '2024-02-29', 'completed', NULL, 15000.00, 0.00, '2024-02-24 18:37:48', '2024-02-25 06:22:50'),
 (61, 32, 56, '2024-02-14', '2024-02-29', 'pending', NULL, 7900.00, 0.00, '2024-02-24 18:37:48', '2024-02-25 06:22:50'),
 (62, 32, 25, '2024-02-25', '2024-02-29', 'cancelled', NULL, 5210.00, 0.00, '2024-02-25 07:52:01', '2024-02-25 07:31:42'),
-(63, 32, 56, '2024-02-25', '2024-02-29', 'pending', NULL, 4100.00, 0.00, '2024-02-25 07:31:42', '2024-02-25 07:31:42');
+(63, 32, 56, '2024-02-25', '2024-02-29', 'pending', NULL, 4100.00, 0.00, '2024-02-25 07:31:42', '2024-02-25 07:31:42'),
+(64, 32, 25, '2024-02-25', '2024-02-28', 'accepted', NULL, 3910.00, 0.00, '2024-02-25 10:25:23', '2024-02-25 10:24:39'),
+(65, 32, 56, '2024-02-25', '2024-02-28', 'pending', NULL, 1400.00, 0.00, '2024-02-25 10:24:39', '2024-02-25 10:24:39'),
+(66, 32, 25, '2024-02-28', '2024-02-29', 'accepted', NULL, 1310.00, 0.00, '2024-02-25 10:28:56', '2024-02-25 10:28:02');
 
 -- --------------------------------------------------------
 
@@ -1295,7 +1346,12 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (135, 62, 1343),
 (136, 62, 1365),
 (138, 63, 2310),
-(139, 63, 2321);
+(139, 63, 2321),
+(141, 64, 1344),
+(142, 64, 1366),
+(144, 65, 2311),
+(145, 66, 1329),
+(146, 66, 1360);
 
 -- --------------------------------------------------------
 
@@ -1341,7 +1397,10 @@ INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`, `amount`) VALUES
 (29, 60, 39, 15000.00),
 (30, 61, 39, 7900.00),
 (31, 62, 40, 5210.00),
-(32, 63, 40, 4100.00);
+(32, 63, 40, 4100.00),
+(33, 64, 41, 3910.00),
+(34, 65, 41, 1400.00),
+(35, 66, 42, 1310.00);
 
 -- --------------------------------------------------------
 
@@ -1365,7 +1424,10 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 (1, 60, 'rented', 'completed', '2024-02-25 05:45:21'),
 (2, 61, NULL, NULL, '2024-02-24 18:37:48'),
 (3, 62, NULL, 'cancelled', '2024-02-25 07:52:01'),
-(4, 63, NULL, NULL, '2024-02-25 07:31:42');
+(4, 63, NULL, NULL, '2024-02-25 07:31:42'),
+(5, 64, NULL, 'accepted', '2024-02-25 10:25:23'),
+(6, 65, NULL, NULL, '2024-02-25 10:24:39'),
+(7, 66, NULL, 'accepted', '2024-02-25 10:28:56');
 
 --
 -- Triggers `rent_request`
@@ -1780,13 +1842,13 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1822,13 +1884,13 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
@@ -1840,19 +1902,19 @@ ALTER TABLE `rental_services`
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `rent_request`
 --
 ALTER TABLE `rent_request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tips`
