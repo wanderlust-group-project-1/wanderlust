@@ -1,8 +1,8 @@
 .guide-dash-prof {
     display: flex;
-    margin-left: 3rem;
+    // margin-left: 3rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 
     .name{
         font-size: $header2;
@@ -58,8 +58,8 @@
     .card {
         padding: 20px;
         border-radius: 10px;
-        background: $color-lightest2;
-        box-shadow: 4px 4px 16px $color-dark-gray 0.1;
+        background: $color-white;
+        box-shadow: $box-shadow-default;
 
         .head {
             display: flex;
@@ -100,7 +100,7 @@
         }
         .label {
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 500;
         }
 
         .booking-bar{

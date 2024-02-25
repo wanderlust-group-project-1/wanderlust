@@ -1,7 +1,31 @@
-function load(id){
-    document.getElementById(id).style.display = "flex";
-    document.getElementById('select').style.display = "none";
+// function load(id){
+//     document.getElementById(id).style.display = "flex";
+//     document.getElementById('select').style.display = "none";
    
+// }
+
+// function load(formId) {
+//     var form = document.getElementById(formId + '-form');
+//     // Rest of the function logic...
+// }
+
+
+//showpassowrd
+// let eyeicon = document.getElementById("eyeicon");
+// let password = document.getElementById("password");
+
+// eyeicon.onclick = function() {
+//     if(password.type == "password"){
+//         password.type = "text";
+//     }else{
+//         password.type = "password";
+//     }
+// }
+function signupToggle(){
+    console.log("gamindu");
+    var element1;
+    element1 = document.querySelector('.popupForm');
+    element1.classList.toggle("popupForm-active");
 }
 
 // Get Url
@@ -144,11 +168,11 @@ function validateForm(formId) {
 }
 
 // Event listener for form submission
-// document.getElementById('customer').onsubmit = function(event) {
-//     if (!validateForm('customer')) {
-//         event.preventDefault(); // Prevent form submission if validation fails
-//     }
-// };
+document.getElementById('customer').onsubmit = function(event) {
+    if (!validateForm('customer')) {
+        event.preventDefault(); // Prevent form submission if validation fails
+    }
+};
 
 document.getElementById('rental-service').onsubmit = function(event) {
     if (!validateForm('rental-service')) {

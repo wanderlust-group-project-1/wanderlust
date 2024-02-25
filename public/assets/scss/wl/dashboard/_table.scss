@@ -80,12 +80,12 @@
       color: #333;
       font-weight: bold;
       text-align: left;
-      border-bottom: 2px solid #ddd;
+      border-bottom: 1px solid #ddd;
     }
   
     td {
-      padding: .75rem;
-      vertical-align: top;
+      padding: 12px;
+      // vertical-align: top;
       border-top: 1px solid #ddd;
     }
   
@@ -196,7 +196,6 @@
     width: 300px;
     .range-min,
     .range-max {
-      -webkit-appearance: none; // Removes default styling
       width: 100%; // Full width of the parent
       height: 10px; // Slider thickness
       background: transparent;

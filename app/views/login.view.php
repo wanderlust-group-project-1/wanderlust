@@ -5,38 +5,48 @@ require_once('../app/views/components/navbar-auth.php');
 
     <div class="login-container">
         
-        <!-- <div class="login-container-col"> -->
             <div class="column">
+                
                 <div class="login-image">
-                    <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
+                    <img src="<?php echo ROOT_DIR?>/assets/images/login.jpg" alt="login-image" class="login-image">
+                    <!-- <img src="<?php echo ROOT_DIR?>/assets/images/logo.png" alt="overlay-logo" class="overlay-logo"> -->
                 </div>
 
                 <div class="login-form">
-                <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
+                    <form  id="loginForm" action="<?=ROOT_DIR?>/login" method="post">
+                    <!-- <div class="logo-login">
+                        
+                    </div> -->
 
                     <h2>login</h2>
-                     <p>Welcome! Please fill email and password to sign in to your account.</p>
+                    <p>Welcome! Please fill email and password to sign in to your account.</p>
 
 
-                     <?php if(isset($errors)): ?>
-                     <div>  <?= implode('<br>', $errors)?>  </div>
-                     <?php endif; ?>
+                    <?php if(isset($errors)): ?>
+                    <div>  <?= implode('<br>', $errors)?>  </div>
+                    <?php endif; ?>
                     
-                    <label class="label-class" for="email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="Email" required>
-                    <label class="label-class" for="password" >Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    
-                    <div class="message-text">
-                     <a href="#">Forgot your password?</a>
+                    <div class="login-input">
+                        <input type="text" name="email" id="email" placeholder="Email" required>
+                        <div class="login-icon">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
                     </div>
-                     <!-- <input type="submit" name="submit" value="login"> -->
+                    <div class="login-input">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                        <div class="login-icon">
+                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
+                        </div>
+                    </div>
+
+                    <div class="message-text">
+                        <label><input type="checkbox">Remember Me</label>
+                        <a href="#">Forgot your password?</a>
+                    </div>
+            
                     <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>
-                    <!-- <button  value="login"> login </button> -->
-
-
-                    
-                     <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
+               
+                    <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
                     
 
 
@@ -54,12 +64,22 @@ require_once('../app/views/components/navbar-auth.php');
 
     <script src="<?=ROOT_DIR?>/assets/js/login.js"></script>
 
+    <script>
+        let eyeicon = document.getElementById("eyeicon");
+        let password = document.getElementById("password");
+        eyeicon.onclick = function() {
+            if(password.type == "password"){
+                password.type = "text";
+                eyeicon.className = "fa fa-eye";
+            }else{
+                password.type = "password";
+                eyeicon.className =  "fa fa-eye-slash";
+            }
+        }
+    </script>
     
     <?php
 require_once('../app/views/layout/footer.php');
 
 
 ?>
-
-
-

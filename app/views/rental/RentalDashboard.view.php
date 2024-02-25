@@ -25,7 +25,7 @@ require_once('../app/views/layout/header.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>100</h2>
+                        <h3>100</h3>
                         <p>Rents</p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ require_once('../app/views/layout/header.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>Rs.139000</h2>
+                        <h3>Rs.139000</h3>
                         <p>Total Earning</p>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ require_once('../app/views/layout/header.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>35</h2>
+                        <h3>35</h3>
                         <p>Equipment Count</p>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ require_once('../app/views/layout/header.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>1st March</h2>
+                        <h3>1st March</h3>
                         <p>Upcoming Booking</p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ require_once('../app/views/layout/header.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>21st February</h2>
+                        <h3>21st February</h3>
                         <p>Recent Booking</p>
                     </div>
                 </div>
@@ -87,16 +87,18 @@ require_once('../app/views/layout/header.php');
             <div class="equipment p-4">
 
                 <div class="row justify-content-between">
-                    <h1 class="title">Equipments</h1>
+                    <h1 class="title">Equipment Details</h1> 
 
-                    <!-- Add Equipment -->
                     <div class="add-equipment">
-                        <button type="submit" class="btn" id="add-equipment">
-                            Add Equipment
+                        <button type="submit" class="btn-icon" id="add-equipment">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add new
                         </button>
                     </div>
                 </div>
 
+                <!-- Add Equipment -->
+                
 
                 <div class="equipment-list">
 
@@ -118,7 +120,7 @@ require_once('../app/views/layout/header.php');
 
 
                     <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
-                        <h2>Update Rental Service Details</h2>
+                        <h2>Update Profile</h2>
                         <?php if (isset($errors)) : ?>
                             <div> <?= implode('<br>', $errors) ?> </div>
                         <?php endif; ?>
@@ -179,45 +181,32 @@ require_once('../app/views/layout/header.php');
                             <option value="Clothing">Clothing</option>
                             <option value="Footwear">Footwear</option>
                             <option value="Other">Other</option>
-
-
-
                         </select>
 
 
                         <label for="description">Description</label>
                         <!-- <input type="text" id="description" class="form-control-lg" name="description" required> -->
                         <textarea id="description" class="form-control-lg" name="description" required></textarea>
-
-
                     </div>
+
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
                         <label for="cost">Cost</label>
                         <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required>
 
-                        
+                        <!-- Standard fee -->
+                        <label for="standard-fee">Standard Fee</label>
+                        <input type="number" step="0.01" id="standard-fee" class="form-control-lg" name="standard_fee" required>
 
 
-
-
-            <!-- Standard fee -->
-            <label for="standard-fee">Standard Fee</label>
-            <input type="number" step="0.01" id="standard-fee" class="form-control-lg" name="standard_fee" required>
-
-
-            <label for="rental-fee">Rental Fee (per day)</label>
-            <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
+                        <label for="rental-fee">Rental Fee (per day)</label>
+                        <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
 
                         <label for="count">Quantity</label>
-            <input type="number" id="count" class="form-control-lg" name="count" required>
-
+                        <input type="number" id="count" class="form-control-lg" name="count" required>
 
                         <label for="equipment-image">Equipment Image</label>
                         <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required>
-
-
-
                     </div>
                 </div>
                 <div class="row">
@@ -228,8 +217,6 @@ require_once('../app/views/layout/header.php');
     </div>
 
     <!-- Modal Box Add Equipment End -->
-
-
 </div>
 
 

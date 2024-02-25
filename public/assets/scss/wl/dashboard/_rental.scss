@@ -13,10 +13,34 @@ $color-orange: #FF5733;
 $color-yellow: #FFC107;
 $modal-background: rgba(0, 0, 0, 0.4);
 $modal-content-border: 1px solid #888;
-$border-radius-default: 8px;
+$border-radius-default: 20px;
 $box-shadow-default: 0 4px 8px 0 rgba(0,0,0,0.2);
 $box-shadow-hover: 0 8px 16px 0 rgba(0,0,0,0.2);
 $media-breakpoint: 768px;
+
+$primary-bg: #B2BDA0;
+$secondary-bg: #fff;
+$shadow-color: rgba(0, 0, 0, 0.3);
+$border-radius: 5px;
+$border-color: #ccc;
+$font-color: #526534;
+$font-gold: #C1A87D;
+$font-gold2: #C2AF7B;
+$font-grey:#6B6E70;
+$gray-text: #6B6E70;
+$gray-text-lighter: #868a8d;
+$hover-bg: #8D9E6F;
+$tooltip-bg: #fff;
+$tooltip-color: #BCAB86;
+$button-bg: #8D9E6F;
+$button-bg2: #e6e6e6;
+$button-hover-grey: #efefef;
+$button-color: #526534;
+$form-field-bg: #EBEFE3;
+$form-field-border: 2px solid rgba(255,255,255,.2);
+$form-field-radius: 5px;
+$form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+$box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
 
 
@@ -29,11 +53,21 @@ $media-breakpoint: 768px;
     // gap: 10px; /* Space between form elements */
   
     label {
-      font-size: $small-text;
-      font-weight: $font-semi-bold;
-      color: $color-dark-gray;
-      margin-top: 2rem;
-      // margin-bottom: 5px;
+      font-weight: 400;
+      text-align: left;
+      font-size: 18px;
+      color: $gray-text;
+      padding: 10px;
+    }
+
+    select {
+      background-color: $form-field-bg;
+    }
+
+    textarea {
+      background-color: $form-field-bg;
+      resize: vertical;
+      border: none;
     }
   }
 
@@ -96,6 +130,22 @@ $media-breakpoint: 768px;
             margin-bottom: 20px;
         }
     }
+}
+
+.filter-btn{
+  width: fit-content;
+}
+
+.back-btn{
+  justify-content: left;
+  right: 100%;
+  transform: translate(-1000%, 95%);
+}
+
+.add-equipment{
+  width: fit-content;
+  background-color: transparent;
+  justify-content: right;
 }
 
 /* Modal Box Styles */
@@ -176,8 +226,8 @@ $media-breakpoint: 768px;
   justify-content: flex-start;
   // margin-top: 50px;
   width: 100%;
-  height: 100%;
-  padding: 0;
+  height: fit-content;
+  // padding: 10px;
   background-color: $color-lighter;
 
   &-header {
@@ -303,9 +353,9 @@ $media-breakpoint: 768px;
     width: 100%;
     height: auto;
     padding: 0;
-    background-color: $color-lighter;
+    background-color: $color-white;
     border: 1px solid rgba($color-darker, 0.2);
-    box-shadow: 4px 4px 16px $color-dark-gray 0.1;
+    box-shadow: $box-shadow-default;
     border-radius: 10px;
 
 
@@ -379,7 +429,7 @@ $media-breakpoint: 768px;
 
       &:hover,
       &:focus {
-        color: $color-black;
+        color: $font-color;
         cursor: pointer;
       }
     }
@@ -403,7 +453,7 @@ $media-breakpoint: 768px;
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: $color-lighter;
+  background-color: $color-white;
 }
 
 /* Table Container */

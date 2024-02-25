@@ -8,7 +8,7 @@
   border-radius: 5px;
   padding: 10px 20px;
   font-weight: 500;
-  font-size: medium;
+  font-size: $text;
   font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
@@ -42,7 +42,46 @@
   
 }
 
+.btn-cancel {
+  background: #e5e5e5;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: $gray-text;
+  border-radius: 40px;
+  padding: 10px 10px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
 
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, rgba(250, 163, 163, 0.866) 50%, #e5e5e5 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+
+
+  &:hover {
+    background-position: left bottom;
+    color: $color-darker;
+  }
+}
+ .btn-icon {
+  background-color: transparent;
+  font-size: 18px;
+  color: $gray-text;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+
+  &:hover{
+    color: $gray-text-darker;
+  }
+ }
 
 
 
@@ -99,8 +138,13 @@
 
 // full width button
 .btn-full {
-  width: 50%;
+  width: 60%;
   position:relative;
+}
+
+.btn-medium {
+  width: 20%;
+  position: relative;
 }
 
 
@@ -113,6 +157,7 @@
 .btn-signup {
   width: 100%;
   position: relative;
+  padding: 10px;
 }
 
 
