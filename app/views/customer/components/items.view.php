@@ -11,7 +11,7 @@
                     <h5 class="rent-item-name"><?php echo htmlspecialchars($equipment->name); ?></h5>
                     <p class="rent-item-description"><?php echo $equipment->description; ?></p>
                     <div class="rent-item-price">
-                        <h5>Price: Rs. <?php echo htmlspecialchars($equipment->cost); ?></h5>
+                        <h5>Price: Rs. <?php echo htmlspecialchars($equipment->total); ?></h5>
                         <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
                     </div>
                 </div>
@@ -24,7 +24,8 @@
 
 <!-- modal for equipment details -->
 
-<div class="modal" id="equipment-details-modal" style="display: block;">
+<!-- <div class="modal" id="equipment-details-modal" style="display: block;"> -->
+<div class="modal" id="equipment-details-modal">
 <div class="modal-content gap-2">
     <span class="close">&times;</span>
 
