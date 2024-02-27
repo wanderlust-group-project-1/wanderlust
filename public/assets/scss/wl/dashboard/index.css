@@ -575,7 +575,8 @@ fieldset {
 /* User Styles */
 .user h2 {
   font-size: 24px;
-  color: #4C5039;
+  font-style: italic;
+  color: white;
   margin-bottom: 5px;
 }
 .user p {
@@ -2030,6 +2031,120 @@ fieldset {
   .checkout-items {
     flex: 1 1 auto !important;
   }
+}
+
+.user-profile {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+.user-profile h1 {
+  font-size: 35px;
+  font-weight: bolder;
+  color: #526534;
+  margin-bottom: 25px;
+}
+.user-profile h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  margin: 1px 0;
+}
+.user-profile p {
+  font-size: 20px;
+  color: #8D9E6F;
+  margin: 1px 0;
+  text-align: left;
+}
+.user-profile img {
+  margin-bottom: 20px;
+}
+.user-profile details {
+  color: #526534;
+}
+.user-profile details p {
+  font-size: 20px;
+  color: #8D9E6F;
+  margin: 1px 0;
+  text-align: left;
+}
+
+.usage {
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+.usage h1 {
+  font-size: 70px;
+  color: #B2BDA0;
+}
+.usage h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  margin: 1px 0;
+}
+.usage h3 {
+  font-size: 20px;
+  color: #B2BDA0;
+  margin: 1px 0;
+}
+
+.usage-card {
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin-left: 8px;
+  margin-top: 40px;
+  margin-right: 100;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  background-color: #526534;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+.usage-card .btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #526534;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #fff 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.usage-card .btn:hover {
+  background-position: left bottom;
+  color: #526534;
 }
 
 .home_main {
