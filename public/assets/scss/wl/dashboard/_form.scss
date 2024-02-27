@@ -10,7 +10,7 @@
     line-height: 1.5;
     color: black-text;
     // background-color: $color-lightest2;
-    background-color: #fff;
+    background-color: $color-light;
     background-clip: padding-box;
     // border: 2px solid $color-lightest;
     border-radius: 12px;
@@ -31,8 +31,7 @@
     height: calc(2.0rem + 1.5rem + 2px);
     padding: 0.5rem 1rem;
     font-size: 1.4rem;
-    // background-color: $color-lighter;
-    background-color: #fff;
+    background-color: $color-lighter;
     // border-radius: 0.3rem;
 }
 
@@ -93,7 +92,7 @@ form {
         border: none;
         // background: $color-lightest2;
         outline: none;
-        // color: $font-grey;
+        color: $font-grey;
         // border: 2px solid $color-lightest;
         border-radius: 12px;
         padding: 12px 20px;
@@ -113,9 +112,9 @@ form {
     {
       
         border: none;
-        background: #fff;
+        background: $color-lightest2;
         outline: none;
-        // color: $font-grey;
+        color: $font-grey;
         // border: 2px solid $color-darker;
         border-radius: 12px;
         padding: 8px 10px;
@@ -130,9 +129,8 @@ form {
     textarea {
         // unchangeable size
         resize: none;
-        background: #fff;
+        background: $color-lightest2;
         border-radius: 12px;
-        border: none;
        
 
         &.form-control-lg {
@@ -148,8 +146,9 @@ form {
 
     select {
         border: none;
-        background: #fff;
+        background: $color-light;
         outline: none;
+        color: $gray-text;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
@@ -206,6 +205,7 @@ input {
     border: none;
     background: $color-lightest2;
     outline: none;
+    color: $font-grey;
     border: 1px solid $color-lightest;
     border-radius: 12px;
     padding: 12px 20px;
