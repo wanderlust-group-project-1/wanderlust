@@ -22,7 +22,7 @@ require_once('../app/views/layout/header.php');
 
 
 
-        <div class="dashboard-card">
+        <div class="dashboard-card mt-5">
 
             <div class="equipment p-4">
 
@@ -32,8 +32,8 @@ require_once('../app/views/layout/header.php');
                     <!-- Section Switch  Upcoming lented Completed -->
 
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
-                        <button class="btn btn-primary " id="pending">Pending</button>
-                        <button class="btn btn-primary active" id="today">Today</button>
+                        <button class="btn btn-primary active " id="pending">Pending</button>
+                        <button class="btn btn-primary " id="today">Today</button>
                         <button class="btn btn-primary " id="upcoming">Upcoming</button>
                         <button class="btn btn-primary" id="rented">Rented</button>
                         <button class="btn btn-primary" id="completed">Completed</button>
@@ -95,7 +95,7 @@ require_once('../app/views/layout/header.php');
     }
 
     $(document).ready(function() {
-        getOrders('all');
+        getOrders('pending');
 
         $('.section-switch button').click(function() {
             $('.section-switch button').removeClass('active');
@@ -291,7 +291,37 @@ require_once('../app/views/layout/header.php');
     });
 
 
-    //  LOad Calendar
+    //  Returned Report Issue
+
+    $(document).on('click', '#report-return-issue', function() {
+        var orderId = $('#mark-as-returned-modal').attr('data-id');
+        console.log(orderId);
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/orders/reportReturnIssueByRentalservice/' + orderId,
+            type: 'GET',
+            success: function(response) {
+
+                $('#issue-form-data').attr('data-id', orderId);
+
+                $('#report-issue-modal').show();
+                $('#issue-form-data').html(response);
+
+
+
+
+
+              
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
 
 
 
