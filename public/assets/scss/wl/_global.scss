@@ -82,6 +82,10 @@ $color-white: #F5F5F5;
 $color-black: #000000;
 
 
+
+
+
+
 // text colors
 $white-text : #FFFFFF;
 $gray-text-lighter: #868a8d;
@@ -272,23 +276,6 @@ table {
 //   }
 // }
 
-select {
-  padding: 1.5rem 1rem;
-  border: none;
-  border-radius: 12px;
-  background-color: $shaded-white;
-  //font-size: $header4;
-  font-family: "Poppins", sans-serif;
-  color: $font-grey;
-
-  &:focus {
-    outline: none;
-  }
-
-  &::placeholder {
-    color: $shaded-grey-text;
-  }
-}
 
 thead th {
   border-bottom: 1px solid $line-color;

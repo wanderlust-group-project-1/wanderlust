@@ -148,3 +148,133 @@
    flex: 1 1 auto !important;
   }
 }
+
+
+.user-profile {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: fit-content;
+
+   h1 {
+    font-size: 35px;
+    font-weight:bolder;
+    color:$color-dark;
+    margin-bottom: 25px;
+  }
+  h2 {
+    font-size: 30px;
+    color: $color-primary;
+    font-weight: bold;
+    margin: 1px 0;
+  }
+  p {
+    font-size: 20px;
+    color: $color-primary;
+    margin: 1px 0;
+    text-align: left;
+  }
+
+  img{
+    margin-bottom: 20px;
+  }
+
+  details{
+
+    color: $color-dark;
+      p {
+    font-size: 20px;
+    color: $color-primary;
+    margin: 1px 0;
+    text-align:left;
+  }
+
+  }
+}
+
+.usage{
+    display: block;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+
+  h1 {
+    font-size: 70px;
+    color: $color-light;
+    // font-weight: bold;
+   // margin: 1px 0;
+  }
+
+    h2 {
+    font-size: 30px;
+    color: $color-primary;
+    font-weight: bold;
+    margin: 1px 0;
+  }
+
+   h3 {
+    font-size: 20px;
+    color: $color-light;
+    // font-weight: bold;
+    margin: 1px 0;
+  }
+}
+
+.usage-card{
+    display: block;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin-left: 8px;
+    margin-top: 40px;
+    margin-right: 100;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color:$color-dark ;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+
+    .btn {
+  cursor: pointer;
+  border: none;
+  //background: $color-black;
+  outline: none;
+  color: $color-dark;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self:flex-end;
+  margin-bottom: 8px;
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $color-light 50%, $color-white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $color-dark;
+  }
+}
+}

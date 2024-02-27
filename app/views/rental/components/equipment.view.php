@@ -14,12 +14,47 @@ foreach ($equipment as $item) {
         <div class="col-lg-6 col-md-12">
 
         
-        <p><strong>Name:</strong> <?php echo htmlspecialchars($item->name); ?></p>
+        <!-- <p><strong>Name:</strong> <?php echo htmlspecialchars($item->name); ?></p>
         <p><strong>Type:</strong> <?php echo htmlspecialchars($item->type); ?></p>
         <p><strong>Cost:</strong> <?php echo htmlspecialchars($item->cost); ?></p>
         <p><strong>Rental Fee:</strong> <?php echo htmlspecialchars($item->fee); ?></p>
         <p><strong>Description:</strong> <?php echo htmlspecialchars($item->description); ?></p>
-        <p><strong>Count:</strong> <?php echo htmlspecialchars($item->count); ?></p>
+        <p><strong>Count:</strong> <?php echo htmlspecialchars($item->count); ?></p> -->
+
+        <!-- table -->
+
+        <table class="table-details">
+            <tr>
+                <td><strong>Name</strong></td>
+                <td><?php echo htmlspecialchars($item->name); ?></td>
+            </tr>
+            <tr>
+                <td><strong>Type</strong></td>
+                <td><?php echo htmlspecialchars($item->type); ?></td>
+            </tr>
+            <tr>
+                <td><strong>Cost</strong></td>
+                <td><?php echo htmlspecialchars($item->cost); ?></td>
+            </tr>
+            <tr>
+                <td><strong>Rental Fee</strong></td>
+                <td><?php echo htmlspecialchars($item->fee); ?></td>
+            </tr>
+            <tr>
+                <td><strong>Description</strong></td>
+                <td><?php echo htmlspecialchars($item->description); ?></td>
+            </tr>
+            <tr>
+                <td><strong>Quantity</strong></td>
+                <td><?php echo htmlspecialchars($item->count); ?></td>
+            </tr>
+        </table>
+
+
+        
+
+
+
         </div>
         <div class="col-lg-6 col-md-12">
         <?php if (!empty($item->image)) { ?>
@@ -35,7 +70,7 @@ foreach ($equipment as $item) {
 
     <!-- increase count -->
     <div class="increase-count-button">
-        <button id="increase-count-button" class="btn btn-full m-1">Increase Count</button>
+        <button id="increase-count-button" class="btn btn-full m-1">Increase Quantity</button>
     </div>
     <!-- Manage Items -->
     <div class="manage-items-button">
@@ -70,7 +105,7 @@ foreach ($equipment as $item) {
         <div class="modal-content">
             <span class="close">&times;</span>
             <form id="increase-count-form" class="flex-d-c gap-2">
-                <h2>Increase Count</h2>
+                <h2>Increase Quantity</h2>
 
                 <!-- Current count -->
                 <!-- <p>Current Count: <?php echo htmlspecialchars($item->count); ?></p> -->
@@ -92,7 +127,7 @@ foreach ($equipment as $item) {
                 <input type="text" id="total" name="total" value="<?php echo htmlspecialchars($item->count); ?>" disabled>
                 </div>
 
-                <button type="submit" id="increase-count" class="btn">Increase Count</button>
+                <button type="submit" id="increase-count" class="btn">Increase Quantity</button>
 
             </form>
         </div>
@@ -190,9 +225,7 @@ foreach ($equipment as $item) {
             
             <label for="description">Description</label>
             <!-- <input type="text" id="description" class="form-control-lg" name="description" required> -->
-            <textarea id="description" class="form-control-lg" name="description" required>
-            <?php echo htmlspecialchars($item->description); ?>
-            </textarea>
+            <textarea id="description" class="form-control-lg" name="description" required><?php echo htmlspecialchars($item->description); ?></textarea>
 
             </div>
             <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
@@ -434,6 +467,7 @@ foreach ($equipment as $item) {
                 url: '<?= ROOT_DIR ?>/rentalService/getItems/' + id,
                 method: 'GET',
                 success: function(data) {
+                    $("#manage-items-content").empty();
                     $("#manage-items-content").html(data);
                 },
                 error: function(data) {
@@ -457,6 +491,7 @@ $(document).on('click', '#equipment-item', function() {
     console.log(status);
     // show modal
 
+    $("#item-number").empty();
     $("#item-number").html(number);
 
 
