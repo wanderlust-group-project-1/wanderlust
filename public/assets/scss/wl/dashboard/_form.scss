@@ -30,7 +30,8 @@
     font-size: 2.0rem;
     height: calc(2.0rem + 1.5rem + 2px);
     padding: 0.5rem 1rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    background-color: $color-lighter;
     // border-radius: 0.3rem;
 }
 
@@ -53,6 +54,30 @@
     border-radius: 12px;
     padding: 12px 20px;
     font-weight: 600;
+
+}
+
+.pwd-input {
+    border: none;
+    outline: none;
+    color: $black-text;
+    border-radius: 12px;
+    font-weight: 600;
+
+    .pwd-icon{
+        position: relative;
+        width: fit-content;
+        left: 95%;
+    }
+    
+        i {
+        transform: translate(-80%, -190%);
+        font-size: 13px;
+        color: #5C5E60;
+        cursor: pointer;
+        bottom: 50%;
+        }
+    
 }
 
 form {
@@ -63,14 +88,16 @@ form {
     width: 100%;
 
     input {
+
         border: none;
-        background: $color-lightest2;
+        // background: $color-lightest2;
         outline: none;
-        color: $white-text;
+        color: $font-grey;
         // border: 2px solid $color-lightest;
         border-radius: 12px;
         padding: 12px 20px;
-        font-weight: 600;
+        font-weight: 400;
+        max-width: 120%;
     }
 
     input[type="text"],
@@ -83,23 +110,28 @@ form {
     select
     textarea
     {
+      
         border: none;
-        background: $color-light;
+        background: $color-lightest2;
         outline: none;
-        color: $black-text;
+        color: $font-grey;
         // border: 2px solid $color-darker;
         border-radius: 12px;
-        padding: 12px 20px;
-        font-weight: 600;
-
-    
+        padding: 8px 10px;
+        // padding: 12px 20px;
+        font-weight: 400;
+        // margin-top: 10px;
+        display: block;
+        // width: 100%;
 
     }
 
     textarea {
         // unchangeable size
         resize: none;
-        height: 200px;
+        background: $color-lightest2;
+        border-radius: 12px;
+       
 
         &.form-control-lg {
             height: 150px;
@@ -116,11 +148,14 @@ form {
         border: none;
         background: $color-light;
         outline: none;
-        color: $black-text;
-        // border: 2px solid $color-darker;
+        color: $gray-text;
         border-radius: 12px;
         padding: 12px 20px;
         font-weight: 600;
+
+        option {
+            color: $gray-text;
+        }
     }
 
     .message-text,
@@ -147,15 +182,12 @@ form {
     }
 
     label {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 10px;
+        font-weight: 400;
         text-align: left;
+        font-size: 18px;
+        color: $gray-text;
+        padding: 10px;
     }
-
-
-
-
 
 
 }
@@ -173,11 +205,12 @@ input {
     border: none;
     background: $color-lightest2;
     outline: none;
-    color: $black-text;
-    border: 2px solid $color-lightest;
+    color: $font-grey;
+    border: 1px solid $color-lightest;
     border-radius: 12px;
     padding: 12px 20px;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 input.invert {

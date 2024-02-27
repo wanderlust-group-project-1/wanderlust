@@ -24,6 +24,7 @@ class EquipmentModel {
         if ($this->validateEquipment($data, $files)) {
             // Additional logic for creating equipment
             // For example, uploading documents, registering with a user, etc.
+            // show($files);
 
             $data['image'] = upload($files['image'], 'images/equipment');
 
@@ -61,12 +62,39 @@ class EquipmentModel {
         return empty($this->errors);
     }
 
-    public function updateEquipment(array $data) {
-        // Update logic for equipment attributes
-        // Similar to the updateRentalservice method
-        // Make sure to filter $data based on $this->allowedColumns
+    public function updateEquipment(array $data, array $files, int $id) {
 
-        return $this->update($data['id'], $data, 'id');
+
+    //   if image in file
+     if (isset($files['image']) && $files['image']['name'] != '') {
+        $data['image'] = upload($files['image'], 'images/equipment');
+
+    } 
+
+    // show($data);
+    // filter data
+    $data = array_filter($data, function ($key) {
+        return in_array($key, $this->allowedColumns);
+    }, ARRAY_FILTER_USE_KEY);
+
+    // show($data);
+
+
+    return $this->update($id,$data);
+    }
+
+    public function deleteEquipment(int $id) {
+
+
+
+        return $this->delete($id);
+    }
+
+    public function increaseCount(int $id, int $count) {
+        $q = 'CALL IncreaseEquipmentCount(:id, :count)';
+        return $this->query($q, ['id' => $id, 'count' => $count]);
+
+
     }
 
     public function getEquipment(int $id): mixed {
@@ -146,6 +174,22 @@ class EquipmentModel {
 
         
 
+
+    }
+
+
+    function getItemsByEquipment($data){
+            
+            // $q = new QueryBuilder;
+            // $q->setTable('item');
+            // $q->select('item.*', 'equipment.name as equipment_name', 'equipment.image as equipment_image');
+            // $q->join('equipment', 'item.equipment_id', 'equipment.id');
+            // $q->where('item.equipment_id', $data['equipment_id']);
+            // // show($q->getQuery());
+            // return $this->query($q->getQuery(), $q->getData());
+
+            $q = 'CALL GetItemsByEquipment(:equipment_id)';
+            return $this->query($q, $data);
 
     }
 

@@ -79,5 +79,30 @@ class RentModel {
     }
 
 
+    public function getRentalsByRentalService($data) {
+
+        $q = 'CALL GetFilteredPaidOrders(:rentalservice_id,:status)';
+
+        // show ($data);
+        return $this->query($q, $data);
+    }
+
+
+    public function getRental(int $id): mixed {
+       
+        $q = 'CALL getRentalDetailsById(:id)';
+        return $this->query($q, ['id' => $id])[0];
+
+
+    }
+
+    public function getItemListbyRentId(int $id): mixed {
+       
+        $q = 'CALL GetItemListbyRentID(:id)';
+        return $this->query($q, ['id' => $id]);
+
+    }
+
+
 
 }

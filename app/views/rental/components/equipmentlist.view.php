@@ -1,12 +1,49 @@
-<div class="table-container">
+<div class="table-container flex-d-c">
 
-    <table class="data-table">
+    <!-- Table filter for each column -->
+    <!-- button for show filter -->
+    <div class="filter-btn">
+        <button id="show-filter" class="btn-icon" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+    </div>
+
+
+    <div class="table-filter ">
+        <div class="row">
+            <div class="back-btn">
+                <button id="hide-filter" class="btn-icon" aria-expanded="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class=" gap-3 flex-d-c">   
+            <div class="row">
+                <div class="col-lg-5 col-md-12 mw-300px">
+                    <input type="text" class="form-control-lg" id="equipment-name-filter" placeholder="Search by Equipment Name">
+                </div>
+
+                <!-- Select type -->
+
+                <div class="col-lg-5  col-md-12  mw-300px">
+                    <select id="equipment-type-filter" class="form-control-lg">
+                        <option value="">All Types</option>
+                        <option value="tent">Tent</option>
+                        <option value="cooking">Cooking</option>
+                        <option value="backpack">Backpack</option>
+                        <option value="sleeping">Sleeping</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="data-table table-custom" id="equipment-table">
         <thead>
             <tr>
                 <th>Equipment Name</th>
                 <th>Type</th>
                 <th>Cost</th>
-                <th>Count</th>
+                <th>Quantity</th>
                 <th>Action</th> <!-- Added Action Column -->
             </tr>
         </thead>
@@ -66,36 +103,10 @@
 
             var id = row.getAttribute('data-id');
 
-            $.ajax({
-                headers:{
-                    Authorization: "Bearer " + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + id,
-                method: 'GET',
-                success: function(data) {
-                    console.log(data);
-                    
-                    //  create a new div element
-                    var newDiv = document.createElement("div")
-                    newDiv.innerHTML = data;
-                    var js = newDiv.querySelector('script').innerHTML;
-                    
+
+            fetchEquipmentDetails(id);
 
 
-
-                    $('#equipment-modal-content').html(data).promise().done(function() {
-                    console.log('equipment loaded');
-                    viewEquipment();
-                    eval(js);
-
-                });
-             },
-                error: function(err) {
-                    console.log(err);
-                }
-
-
-            });
             
             
 
@@ -105,6 +116,102 @@
     });
 
     }
+
+    function fetchEquipmentDetails(equipmentId) {
+    $.ajax({
+        headers: {
+            Authorization: "Bearer " + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + equipmentId,
+        method: 'GET',
+        success: function(data) {
+            // console.log(data);
+
+            // Create a new div element
+            var newDiv = document.createElement("div");
+            newDiv.innerHTML = data;
+            var js = newDiv.querySelector('script').innerHTML;
+
+            // Update the modal content and execute the script
+            $('#equipment-modal-content').empty();
+            $('#equipment-modal-content').html(data).promise().done(function() {
+                console.log('equipment loaded');
+                viewEquipment();
+                eval(js);
+            });
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+
+// filter equipment
+
+ $(document).ready(function() {
+    $('#show-filter').click(function() {
+        $('.table-filter').slideDown();
+        $('#show-filter').hide();
+    });
+
+    $('#hide-filter').click(function() {
+        $('.table-filter').slideUp();
+        $('#show-filter').show();
+    });
+
+    // client side filter (onchange)
+
+    $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
+
+    $('#equipment-type-filter').change(function() {
+        filterEquipment();
+    });
+
+    $('#equipment-cost-filter-min').on('input', function() {
+        filterEquipment();
+    });
+
+    $('#equipment-cost-filter-max').on('input', function() {
+        filterEquipment();
+    });
+
+
+
+
+    // $('#equipment-filter-button').click(function() {
+        function filterEquipment() {
+        var name = $('#equipment-name-filter').val();
+        var type = $('#equipment-type-filter').val();
+        // var minCost = $('#equipment-cost-filter-min').val();
+        // var maxCost = $('#equipment-cost-filter-max').val();
+
+        // console.log(name, type, minCost, maxCost);
+
+     
+        $('#equipment-table tbody tr').each(function() {
+            var row = $(this);
+            var equipmentName = row.find('td').eq(0).text();
+            var equipmentType = row.find('td').eq(1).text();
+            // var equipmentCost = row.find('td').eq(2).text().replace('Rs', '');
+            var equipmentCount = row.find('td').eq(3).text();
+
+            // console.log(equipmentName, equipmentType, equipmentCost, equipmentCount);
+
+            if (name && equipmentName.toLowerCase().indexOf(name.toLowerCase()) === -1) {
+                row.hide();
+            } else if (type && equipmentType.toLowerCase().indexOf(type.toLowerCase()) === -1) {
+                row.hide();
+            } else {
+                row.show();
+            }
+        });
+    }
+});
+
+
+
+
 
 
 </script>
@@ -136,7 +243,7 @@
     margin: 10% auto; /* 10% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Width in desktop */
+    /* width: 50%; Width in desktop */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     animation: fadeIn 0.5s;
 }
@@ -204,7 +311,7 @@
 /* Mobile responsive styling */
 @media screen and (max-width: 600px) {
     .view-equipment-modal .modal-content {
-        width: 80%; /* Wider in mobile */
+        width: 95%; /* Wider in mobile */
         margin: 20% auto; /* More margin from the top in mobile */
     }
 }

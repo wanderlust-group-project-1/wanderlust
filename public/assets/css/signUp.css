@@ -36,14 +36,14 @@
     color: #6c7058;
 }
 
-.address-text{
-    width: 100%; /* Set width to be the same as the parent form */
-    background-color: #ac9a75 !important; /* Set the background color to blue */
-    height: 2em; /* Set the height to display two lines of text */
-    padding: 10px; /* Optional: Add some padding for spacing inside the textarea */
-    border: 1px solid #ccc; /* Optional: Add a border for styling */
+/* .address-text{
+    width: 100%; Set width to be the same as the parent form
+    background-color: #ac9a75 !important; Set the background color to blue
+    height: 2em; Set the height to display two lines of text
+    padding: 10px; Optional: Add some padding for spacing inside the textarea
+    border: 1px solid #ccc; Optional: Add a border for styling
     resize: vertical; 
-}
+} */
 /* .login-container .login-form p{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style:inherit;

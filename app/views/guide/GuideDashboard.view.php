@@ -1,163 +1,190 @@
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/navbar/rental-navbar.php');
+// require_once('../app/views/navbar/rental-navbar.php');
 
 ?>
 
-<!-- <link rel="stylesheet" type="text/css" href="<?=ROOT_DIR ?>/assets/css/RentalDashboard.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/RentalDashboard.css"> -->
 
 
 
 <div class="dashboard">
-    <?php require_once('../app/views/rental/layout/sidebar.php');
+    <?php require_once('../app/views/guide/layout/guide-sidebar.php');
     ?>
 
-<div class="sidebar-flow"></div>
+    <div class="sidebar-flow"></div>
 
-
-<div class="dashboard-content"> 
-
-<!-- <div class="row"> -->
-<div class="dashboard-card card  justify-content-sm-center "> 
-    <div class="details "> 
-
-    <div class="user-image">
-        <img src="<?php echo ROOT_DIR?>/assets/images/2.png" alt="">
-    </div>
-
-    <!-- <div class="user-details"> -->
-            
-
-            <!-- Add more details as needed -->
-        <!-- </div> -->
-
+    <div class="guide-dash-main">
+        <h1 class="title mb-2">Dashboard</h1>
+        <ul class="breadcrumbs">
+            <li><a href="<?= ROOT_DIR ?>/home">Home</a></li>
+            <li class="divider">/</li>
+            <li><a href="#" class="active">Dashboard</a></li>
+        </ul>
+        <div class="info-data mt-5">
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h2>96</h2>
+                        <p>No of Tours</p>
+                    </div>
+                </div>
+                <span class="progress" data-value="12.5%"></span>
+                <span class="label">12 : Per Month</span>
+            </div>
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h2>Rs.139000</h2>
+                        <p>Income</p>
+                    </div>
+                </div>
+                <span class="progress" data-value="60%"></span>
+                <span class="label">Rs.60 000 : Per Month</span>
+            </div>
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h2>1st March</h2>
+                        <p>Upcoming Booking</p>
+                    </div>
+                </div>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>Micheal Julius</p>
+                </div>
+                <!-- <span class="progress" data-value="30%"></span>
+                <span class="label">30%</span> -->
+            </div>
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h2>21st February</h2>
+                        <p>Recent Booking</p>
+                    </div>
+                </div>
+                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
+                    <p>Julius John</p>
+                </div>
+                <!-- <span class="progress" data-value="80%"></span>
+                <span class="label">80%</span> -->
+            </div>
         </div>
-        <div class="options">
-        <h2>  <?php echo $user->name; ?></h2>
-            <p class="email"> <?php echo $user->email; ?></p>
-            <p class="number"> <?php echo $user->mobile; ?></p>
-
-        <div class="">
-            <button type="submit" class="btn mt-4"  id="edit-profile">
-                Edit Profile
-            </button>
-        </div>
-        </div>
-
-</div>
-
-<!-- User Details Section -->
-<div class="dashboard-card card"> 
-
-    <div class="rent-status">
-            <h2>Bookings </h2>
-            <h1> 15 </h1>
-           
-        </div>
-        <div class="rent-status">
-            <h2>Total Earnings</h2>
-            <h1> RS 135000 </h1>
-
-           
-        </div>
-        <div class="rent-status">
-            <h2>Years of Experience</h2>
-            <h1> 10 </h1>
-
-           
-        </div>
-
-</div>
-
-<!-- </div> -->
-
-
-    <!-- Modal Box Profile Edit -->
-    <div class="profile-editor" id="profile-editor">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-info">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="Profile Image" class="profile-image">
-
-
-                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
-                    <h2>Update Rental Service Details</h2>
-                    <?php if (isset($errors)) : ?>
-                        <div> <?= implode('<br>', $errors) ?> </div>
-                    <?php endif; ?>
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
-
-                    <!-- <label for="email">Email</label>
-    <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
-
-                    <label for="mobile">Mobile No</label>
-                    <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
-
-                    <label for="regNo">Registration Number</label>
-                    <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
-
-                    <!-- <label for="password">Password</label>
-    <input type="password" name="password" id="password" required> -->
-
-                    <input type="submit" class="btn mt-4" name="submit" value="Update">
-                </form>
-
-
-
+        <div class="data">
+            <div class="content-data">
+                <div class="head">
+                    <h3>Monthly Bookings</h3>
+                    <div class="menu">
+                        <ul class="menu-link">
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Save</a></li>
+                            <li><a href="#">Remove</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart">
+                    <div id="chart"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Box Profile Edit End -->
-
-
-
-</script>
-<script>
-    var modal = document.getElementById("profile-editor");
-
-    var span = document.getElementsByClassName("close")[0];
-
-    // Get all view buttons
-    var viewButton = document.getElementById('edit-profile');
-
-    // Function to handle modal display
-    function openModal() {
-        // document.getElementById("modal-content").innerHTML = content;
-        modal.style.display = "block";
-    }
-
-    // Add click event listener to view buttons
-    viewButton.addEventListener('click', function() {
-
-        // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-        // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-        openModal();
-    });
-
-
-    // Close the modal when the close button is clicked
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Close the modal if the user clicks outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-
-
-
 <?php
 require_once('../app/views/layout/footer.php');
 
 ?>
+
+<script>
+    // MENU
+    const allMenu = document.querySelectorAll('main .content-data .head .menu');
+
+    allMenu.forEach(item => {
+        const icon = item.querySelector('.icon');
+        const menuLink = item.querySelector('.menu-link');
+
+        icon.addEventListener('click', function() {
+            menuLink.classList.toggle('show');
+        })
+    })
+
+
+
+    // window.addEventListener('click', function(e) {
+    //     if (e.target !== imgProfile) {
+    //         if (e.target !== dropdownProfile) {
+    //             if (dropdownProfile.classList.contains('show')) {
+    //                 dropdownProfile.classList.remove('show');
+    //             }
+    //         }
+    //     }
+
+        allMenu.forEach(item => {
+            const icon = item.querySelector('.icon');
+            const menuLink = item.querySelector('.menu-link');
+
+            if (e.target !== icon) {
+                if (e.target !== menuLink) {
+                    if (menuLink.classList.contains('show')) {
+                        menuLink.classList.remove('show')
+                    }
+                }
+            }
+        })
+
+
+
+
+
+    // PROGRESSBAR
+    const allProgress = document.querySelectorAll('main .card .progress');
+
+    allProgress.forEach(item => {
+        item.style.setProperty('$value', item.dataset.value)
+    })
+
+
+
+
+
+
+    // APEXCHART
+    var options = {
+        series: [
+        {
+            name: 'You',
+            data:  [5, 12, 15, 10, 8, 14, 11]// Adjusted data values, total less than 100
+        },
+        {
+            name: 'Rank #1',
+            data: [8, 10, 7, 12, 10, 20, 18]// Adjusted data values, total less than 100
+        }
+    ],
+        chart: {
+            height: 300
+            ,
+            type: 'area',
+            fontFamily: 'Poppins, sans-serif',
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'category', // Change type to 'category' for non-datetime values
+            categories: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"] // Use month names instead of date strings
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
+        },
+        colors: ['#B2BDA0', '#2F3B1C'], // Specify the colors you want here
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>

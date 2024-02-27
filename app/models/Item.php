@@ -62,5 +62,22 @@ class ItemModel {
        
     }
 
+    public function makeUnavailableTemporarily(int $id) {
+        $q = 'CALL makeItemUnavailableTemporarily(:id)';
+        return $this->query($q, ['id' => $id])[0];
+    }
+
+    public function makeUnavailablePermanently(int $id) {
+        $q = 'CALL makeItemUnavailablePermanently(:id)';
+        return $this->query($q, ['id' => $id])[0];
+    }
+
+    public function makeAvailable(int $id) {
+        $q = 'CALL makeItemAvailable(:id)';
+        return $this->query($q, ['id' => $id])[0];
+    }
+
+
+
 
 }

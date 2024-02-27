@@ -32,6 +32,20 @@ class RentalService {
     }
 
 
+    public function getItems(string $a = '', string $b = '', string $c = ''):void {
+
+        $equipment = new EquipmentModel();
+
+        $data["items"] = $equipment->getItemsByEquipment(['equipment_id' => $a]);
+        // show($data["items"]);
+        $this->view('rental/components/items', $data);
+        
+
+
+ 
+    }
+
+
 
     // Customer
     public function index(string $a = '', string $b = '', string $c = ''):void {
