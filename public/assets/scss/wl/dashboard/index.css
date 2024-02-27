@@ -38,7 +38,6 @@ tfoot {
 
 h1 {
   font-size: 3.4rem;
-  color: #C1A87D;
   font-weight: 500;
 }
 
@@ -3115,10 +3114,6 @@ form label {
   font-size: 18px;
   color: #6B6E70;
   padding: 10px;
-}
-
-form#customer, form#rental-service, form#guide {
-  display: none;
 }
 
 input {

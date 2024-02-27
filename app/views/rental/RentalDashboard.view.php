@@ -47,7 +47,7 @@ require_once('../app/views/layout/header.php');
                 <div class="head">
                     <div>
                         <h3>35</h3>
-                        <p>Equipment Count</p>
+                        <p>Equipment Quantity</p>
                     </div>
                 </div>
                 <!-- <span class="progress" data-value="60%"></span>

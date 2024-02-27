@@ -68,7 +68,7 @@ require_once('../app/views/components/navbar-auth.php');
         <div class="form-common">
             <div class="form-common-content">
                 <div class="close-btn" onclick="signupToggleCustomer()"><i class="fa fa-times" aria-hidden="true"></i></div>
-                <form action="" class="flex-d">
+                <form action="" class="flex-d" id="customer">
                     <h2>Customer Sign Up</h2>
 
                     <?php if (isset($errors)) : ?>
@@ -149,7 +149,7 @@ require_once('../app/views/components/navbar-auth.php');
         <div class="form-common">
             <div class="form-common-content">
                 <div class="close-btn" onclick="signupToggleGuide()"><i class="fa fa-times" aria-hidden="true"></i></div>
-                <form action="" class="flex-d">
+                <form action="" class="flex-d" id="guide">
                     <h2>Guide Sign Up</h2>
 
                     <?php if (isset($errors)) : ?>
@@ -259,7 +259,7 @@ require_once('../app/views/components/navbar-auth.php');
         <div class="form-common">
             <div class="form-common-content">
                 <div class="close-btn" onclick="signupToggleRental()"><i class="fa fa-times" aria-hidden="true"></i></div>
-                <form action="" class="flex-d">
+                <form action="" class="flex-d" id="rental-service">
                     <h2>Rental Service Sign Up</h2>
 
                     <?php if (isset($errors)) : ?>
