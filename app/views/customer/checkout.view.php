@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
+require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
@@ -15,7 +15,7 @@ require_once('../app/views/components/navbar.php');
                         }
                         ?>
 
-<div class="container flex-d flex-md-c justify-content-center ">
+<div class="container flex-d flex-md-c justify-content-center  mt-5">
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
         <div class="card card-normal ">

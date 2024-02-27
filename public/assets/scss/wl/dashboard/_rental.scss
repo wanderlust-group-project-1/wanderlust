@@ -52,23 +52,23 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     flex-direction: column;
     // gap: 10px; /* Space between form elements */
   
-    label {
-      font-weight: 400;
-      text-align: left;
-      font-size: 18px;
-      color: $gray-text;
-      padding: 10px;
-    }
+    // label {
+    //   font-weight: 400;
+    //   text-align: left;
+    //   font-size: 18px;
+    //   color: $gray-text;
+    //   padding: 10px;
+    // }
 
-    select {
-      background-color: $form-field-bg;
-    }
+    // select {
+    //   background-color: $form-field-bg;
+    // }
 
-    textarea {
-      background-color: $form-field-bg;
-      resize: vertical;
-      border: none;
-    }
+    // textarea {
+    //   background-color: $form-field-bg;
+    //   resize: vertical;
+    //   border: none;
+    // }
   }
 
 
@@ -86,7 +86,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 @mixin modal-content-common {
-  background-color: $color-white;
+  background-color: $color-lighter;
   margin: 5% auto;
   padding: 20px;
   border: $modal-content-border;
@@ -623,4 +623,92 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   
 
 
+}
+
+
+
+$view-equipment-modal-background: rgba(0,0,0,0.4);
+$modal-content-background: #fefefe;
+$close-button-color: #aaa;
+$edit-equipment-button-bg: #4CAF50; // Green
+$delete-equipment-button-bg: #f44336; // Red
+$border-color: #888;
+$box-shadow-color: rgba(0,0,0,0.2);
+
+@keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+.view-equipment-modal {
+    display: none; // Hidden by default
+    position: fixed; // Stay in place
+    z-index: 1000; // Sit on top
+    left: 0;
+    top: 0;
+    width: 100%; // Full width
+    height: 100%; // Full height
+    overflow: auto; // Enable scroll if needed
+    background-color: $view-equipment-modal-background; // Black with opacity
+
+    .modal-content {
+        position: relative;
+        background-color:  $color-lighter;
+        margin: 10% auto; // 10% from the top and centered
+        padding: 20px;
+        border: 1px solid $border-color;
+        // width: 50%; // Width in desktop, commented out to follow the original CSS's intent
+        box-shadow: 0 4px 8px 0 $box-shadow-color;
+        animation: fadeIn 0.5s;
+
+        @media screen and (max-width: 600px) {
+            width: 95%; // Wider in mobile
+            margin: 20% auto; // More margin from the top in mobile
+        }
+    }
+
+    .close-button {
+        color: $close-button-color;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+
+        &:hover, &:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+    .equipment-details img {
+        max-width: 300px;
+        height: auto;
+    }
+}
+
+.edit-equipment-button {
+    background-color: $edit-equipment-button-bg;
+    width:90%;
+    border: none;
+    color: white;
+    height: 30px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: auto;
+}
+
+.delete-equipment-button {
+    background-color: $delete-equipment-button-bg;
+    width:90%;
+    border: none;
+    color: white;
+    height: 30px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
 }
