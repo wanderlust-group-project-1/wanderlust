@@ -8,11 +8,11 @@ require_once('../app/views/navbar/customer-navbar.php');
 <!-- <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script> -->
 
 <?php
-                        $total = 0;
-                        foreach ($items as $item) {
+                        // $total = 0;
+                        // foreach ($items as $item) {
 
-                            $total += $item->e_fee;
-                        }
+                        //     $total += $item->e_fee;
+                        // }
                         ?>
 
 <div class="container flex-d flex-md-c justify-content-center  mt-5">
@@ -42,7 +42,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                                 <div class="cart-item-details col-lg-5">
                                     <h5 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h5>
                                     <div class="cart-item-price">
-                                        <h5>Fee: Rs. <?php echo htmlspecialchars($item->e_fee); ?></h5>
+                                        <h5>Fee: Rs. <?php echo htmlspecialchars($item->total); ?></h5>
                                         <button id="remove-from-cart" class="btn btn-primary">Remove from Cart</button>
                                     </div>
                                 </div>
