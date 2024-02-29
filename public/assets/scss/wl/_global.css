@@ -104,23 +104,6 @@ table {
   list-style: none;
 }
 
-select {
-  padding: 1.5rem 1rem;
-  border: none;
-  border-radius: 12px;
-  background-color: #E0E0E0;
-  font-family: "Poppins", sans-serif;
-  color: #6B6E70;
-}
-
-select:focus {
-  outline: none;
-}
-
-select::placeholder {
-  color: #535956;
-}
-
 thead th {
   border-bottom: 1px solid rgba(41, 74, 56, 0.443);
 }

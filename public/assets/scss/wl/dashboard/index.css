@@ -386,10 +386,8 @@ fieldset {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .profile-editor .modal-content {
-  background-color: #EBEFE3;
   margin: 5% auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
   position: relative;
   border-radius: 20px;
@@ -588,10 +586,8 @@ fieldset {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .add-equipment-modal .modal-content {
-  background-color: #EBEFE3;
   margin: 5% auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
   position: relative;
   border-radius: 20px;
@@ -1592,7 +1588,6 @@ fieldset {
   color: #5C5E60;
 }
 .login-container .column .login-form .message-text {
-  font-size: small;
   display: flex;
   justify-content: space-between;
   margin: -1px 1px 15px;
@@ -1610,10 +1605,8 @@ fieldset {
 }
 .login-container .column .login-form a {
   color: #526534;
-  font-size: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
-  padding: 10px 0;
 }
 .login-container .column .login-form a:hover {
   color: #8D9E6F;
@@ -1855,7 +1848,7 @@ fieldset {
 }
 
 .modal-content {
-  background-color: #EBEFE3;
+  background-color: #fff;
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -2506,6 +2499,51 @@ fieldset {
   color: #47494b;
 }
 
+.btn-text-green {
+  background-color: transparent;
+  font-size: 18px;
+  color: #8D9E6F;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+}
+.btn-text-green:hover {
+  text-decoration: underline;
+}
+
+.btn-text-orange {
+  background-color: transparent;
+  font-size: 18px;
+  color: rgb(249, 143, 29);
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+}
+.btn-text-orange:hover {
+  text-decoration: underline;
+}
+
+.btn-text-red {
+  background-color: transparent;
+  font-size: 18px;
+  color: red;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+}
+.btn-text-red:hover {
+  text-decoration: underline;
+}
+
 .btn-danger {
   background: #8F4548;
   border: 1px solid #8F4548;
@@ -2947,6 +2985,24 @@ fieldset {
   flex-grow: inherit;
 }
 
+.card-normal3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+  border: #6B6E70 3px inherit;
+}
+
 .card-invert {
   display: flex;
   flex-direction: row;
@@ -2973,7 +3029,7 @@ fieldset {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #fff;
+  background-color: #B2BDA0;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2988,7 +3044,7 @@ fieldset {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #fff;
+  background-color: #B2BDA0;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2996,7 +3052,7 @@ fieldset {
   height: calc(3.5rem + 2px);
   padding: 0.5rem 1rem;
   font-size: 1.4rem;
-  background-color: #fff;
+  background-color: #EBEFE3;
 }
 
 .form-control:focus {
@@ -3047,6 +3103,7 @@ form {
 form input {
   border: none;
   outline: none;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 400;
@@ -3061,8 +3118,9 @@ form input[type=time],
 form input[type=file],
 form select textarea {
   border: none;
-  background: #fff;
+  background: #EBEFE3;
   outline: none;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 8px 10px;
   font-weight: 400;
@@ -3070,7 +3128,7 @@ form select textarea {
 }
 form textarea {
   resize: none;
-  background: #fff;
+  background: #EBEFE3;
   border-radius: 12px;
   border: none;
 }
@@ -3079,8 +3137,9 @@ form textarea.form-control-lg {
 }
 form select {
   border: none;
-  background: #fff;
+  background: #B2BDA0;
   outline: none;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -3120,6 +3179,7 @@ input {
   border: none;
   background: #EBEFE3;
   outline: none;
+  color: #6B6E70;
   border: 1px solid #F3F3F3;
   border-radius: 12px;
   padding: 12px 20px;

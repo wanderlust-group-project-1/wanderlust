@@ -41,7 +41,7 @@ require_once('../app/views/components/navbar-auth.php');
 
                     <div class="message-text">
                         <label><input type="checkbox">Remember Me</label>
-                        <a href="#">Forgot your password?</a>
+                        <h4><a href="#">Forgot your password?</a></h4>
                     </div>
             
                     <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>

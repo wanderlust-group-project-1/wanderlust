@@ -68,7 +68,8 @@
     color: $color-darker;
   }
 }
- .btn-icon {
+
+.btn-icon {
   background-color: transparent;
   font-size: 18px;
   color: $gray-text;
@@ -83,7 +84,54 @@
   }
  }
 
+.btn-text-green {
+  background-color: transparent;
+  font-size: 18px;
+  color: $color-primary;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
 
+  &:hover{
+    // color: $gray-text;
+    text-decoration: underline;
+  }
+}
+
+.btn-text-orange {
+  background-color: transparent;
+  font-size: 18px;
+  color: $orange;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+
+  &:hover{
+    // color: $gray-text;
+    text-decoration: underline;
+  }
+}
+
+.btn-text-red {
+  background-color: transparent;
+  font-size: 18px;
+  color: $red;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+
+  &:hover{
+    // color: $gray-text;
+    text-decoration: underline;
+  }
+}
+ 
 
 .btn-danger{
   background: $danger-color;
