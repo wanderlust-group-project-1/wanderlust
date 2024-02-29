@@ -4,8 +4,8 @@
 
 foreach ($equipment as $item) {
     ?>
-    <div class="equipment-details">
-        <span class="close-button">&times;</span>
+    <div class="equipment-details" id="equipment-details" data-id="<?php echo htmlspecialchars($item->id); ?>">
+        <span class="close">&times;</span>
         <div class="container flex-d-c gap-4 p-md-0 ">
         <h2>Equipment Details</h2>
 
@@ -70,15 +70,15 @@ foreach ($equipment as $item) {
 
     <!-- increase count -->
     <div class="increase-count-button">
-        <button id="increase-count-button" class="btn btn-full m-1">Increase Quantity</button>
+        <button id="increase-count-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>" >Increase Quantity</button>
     </div>
     <!-- Manage Items -->
     <div class="manage-items-button">
-        <button id="manage-items-button" class="btn btn-full m-1">Manage Items</button>
+        <button id="manage-items-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Manage Items</button>
     </div>
 
     <div class="delete-button">
-        <button id="delete-equipment-button" class="btn btn-danger btn-full m-1">Delete</button>
+        <button id="delete-equipment-button" class="btn btn-danger btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Delete</button>
     </div>
 
 
@@ -101,7 +101,7 @@ foreach ($equipment as $item) {
 
     <!-- increase count modal -->
 
-    <div id="increase-count-modal" class="increase-count-modal modal">
+    <div id="increase-count-modal" class="increase-count-modal modal" >
         <div class="modal-content">
             <span class="close">&times;</span>
             <form id="increase-count-form" class="flex-d-c gap-2">
@@ -266,349 +266,7 @@ foreach ($equipment as $item) {
 
     <!-- edit modal end -->
 
-    <script>
-        var deleteButtons = document.querySelectorAll("#delete-equipment-button");
-
-        deleteButtons.forEach(function(button) {
-            button.addEventListener("click", function() {
-                var modal = document.getElementById("delete-equipment-modal");
-                console.log("modal");
-                modal.style.display = "block";
-            });
-
-        });
-
-        console.log("delete buttons", deleteButtons);
-    
-
-        var editButtons = document.querySelectorAll("#edit-equipment-button");
-
-        editButtons.forEach(function(button) {
-            button.addEventListener("click", function() {
-                var modal = document.getElementById("edit-equipment-modal");
-                console.log("modal");
-                modal.style.display = "block";
-            });
-
-        });
-
-
-        // update-equipment , use jquery to json , prevent default
-
-        $("#update-equipment-form").submit(function(e) {
-            e.preventDefault();
-
-            var formData = new FormData(this);
-
-            var id = $(this).attr('itemid');
-
-            var jsonData = {
-                id: id,
-                name: formData.get('equipment_name'),
-                type: formData.get('equipment_type'),
-                description: formData.get('description'),
-                cost: formData.get('cost'),
-                standard_fee: formData.get('standard_fee'),
-                rental_fee: formData.get('rental_fee'),
-                // count: formData.get('count'),
-            };
-
-            console.log("json data", jsonData);
-
-            // if image is not empty then append it to formdata
-
-            formData.append('json', JSON.stringify(jsonData));
-
-            if (formData.get('equipment_image') != '') {
-                var image = formData.get('equipment_image');
-
-                formData.append('image', image);
-
-
-            }
-
-            $.ajax({
-                headers: {
-                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-                },
-
-                url: '<?= ROOT_DIR ?>/api/equipment/update/' + id,
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    // console.log(data);
-                    fetchEquipmentDetails(id);
-                    // location.reload();
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-
-            })
-
-
-
-            })
-
-
-        $("#delete-equipment").click(function() {
-            var id = <?php echo htmlspecialchars($item->id); ?>;
-            console.log("delete equipment", id);
-            $.ajax({
-                headers: {
-                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/api/equipment/delete/' + id,
-                method: 'POST',
-                success: function(data) {
-                    console.log(data);
-                    alertmsg('Equipment deleted successfully', 'success');
-                    getEquipments();
-                },
-                error: function(data) {
-                    console.log(data);
-                    alertmsg('Equipment could not be deleted', 'error');
-                }
-            })
-        });
-
-
-            
-        // increase count modal , jquery
-
-        $("#increase-count-button").click(function() {
-            var modal = document.getElementById("increase-count-modal");
-            modal.style.display = "block";
-        });
-
-        
-
-        // $("#increase-count-form").submit(function(e) {
-            // $("#increase-count").click(function(e) {
-                $(document).on('click', '#increase-count', function(e) {
-                // disable button
-
-                $(this).prop('disabled', true);
-
-            e.preventDefault();
-
-            
-
-
-            var id = <?php echo htmlspecialchars($item->id); ?>;
-            var count = $("#count").val();
-
-            console.log("count", count);
-            console.log(id)
-            $.ajax({
-                headers: {
-                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/api/equipment/increasecount/' + id,
-                method: 'POST',
-                // data: {
-                //     count: count
-                // },
-                    //  send as json
-                contentType: 'application/json', // Indicate that we're sending JSON data
-                data: JSON.stringify({
-                    count: count 
-                }),
-
-                success: function(data) {
-                    console.log(data);
-                    alertmsg('Count increased successfully', 'success');
-                    getEquipments();
-                },
-                error: function(data) {
-                    console.log(data);
-                    alertmsg('Count could not be increased', 'error');
-                }
-            })
-        });
-
-        // calculate total , only accept positive numbers
-
-        $("#count").on("input", function() {
-            var count = $(this).val();
-            if (count < 0 || isNaN(count) || count == ''){
-                $(this).val(0);
-            }
-            // str to int
-            var total = parseInt(count)  + parseInt(<?php echo htmlspecialchars($item->count); ?>);
-            $("#total").val(total);
-        });
-
-
-
-
-
-        // Manage Items Modal
-
-        $("#manage-items-button").click(function() {
-            var modal = document.getElementById("manage-items-modal");
-            modal.style.display = "block";
-            var id = <?php echo htmlspecialchars($item->id); ?>;
-            console.log("id", id);
-
-            fetchItems(id);
-
-
-
-        });
-
-    function fetchItems(id) {
-            $.ajax({
-                headers: {
-                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/rentalService/getItems/' + id,
-                method: 'GET',
-                success: function(data) {
-                    $("#manage-items-content").empty();
-                    $("#manage-items-content").html(data);
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
-}
-
-
-
-        // item table actions
-
-$(document).on('click', '#equipment-item', function() {
-    var id = $(this).data('id');
-    var status = $(this).data('status');
-    var number = $(this).data('number');
-    var count = $(this).data('count');
-
-    
-    console.log(id);
-    console.log(status);
-    // show modal
-
-    $("#item-number").empty();
-    $("#item-number").html(number);
-
-
-    // if available
-    if (status == 'available') {
-        // add id to
-        $("#make-unavailable-t").attr('data-id', id);
-        $("#make-unavailable-t").show();
-        $("#make-unavailable-p").attr('data-id', id);
-        $("#make-unavailable-p").show();
-        $("#make-unavailable-p").attr('disabled', false);
-
-        if(count >0){
-            $("#make-unavailable-p").attr('disabled', true);
-            // You can't make this item unavailable permanently because it has upcoming bookings.
-            $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
-            
-        }
-        $("#make-available").hide();
-    } else {
-        $("#make-unavailable-t").hide();
-        $("#make-unavailable-p").attr('data-id', id);
-        $("#make-unavailable-p").show();
-        $("#make-unavailable-p").attr('disabled', false);
-        console.log(count);
-        if(count >0){
-            $("#make-unavailable-p").attr('disabled', true);
-            // You can't make this item unavailable permanently because it has upcoming bookings.
-            $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
-            
-        }
-        $("#make-available").attr('data-id', id);
-        $("#make-available").show();
-    }
-
-
-    $('#change-item-status-modal').show();
-
-    
-
-});
-
-//    item status change APIs
-
-// make unavailable temporarily
-$(document).on('click', '#make-unavailable-t', function() {
-    var id = $(this).data('id');
-    console.log(id);
-    $.ajax({
-        headers: {
-            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-        },
-        url: '<?= ROOT_DIR ?>/api/item/makeunavailabletemporarily/' + id,
-        method: 'POST',
-        success: function(data) {
-            console.log(data);
-            alertmsg('Item made unavailable temporarily', 'success');
-
-            fetchItems(data.data.equipment_id);
-
-        },
-        error: function(data) {
-            console.log(data);
-            alertmsg('Item could not be made unavailable temporarily', 'error');
-        }
-    })
-});
-
-// make unavailable permanently
-$(document).on('click', '#make-unavailable-p', function() {
-    var id = $(this).data('id');
-    console.log(id);
-    $.ajax({
-        headers: {
-            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-        },
-        url: '<?= ROOT_DIR ?>/api/item/makeunavailablepermanently/' + id,
-        method: 'POST',
-        success: function(data) {
-            console.log(data);
-            alertmsg('Item made unavailable permanently', 'success');
-            fetchItems(data.data.equipment_id);
-        },
-        error: function(data) {
-            console.log(data);
-            alertmsg('Item could not be made unavailable permanently', 'error');
-        }
-    })
-});
-
-// make available
-$(document).on('click', '#make-available', function() {
-    var id = $(this).data('id');
-    console.log(id);
-    $.ajax({
-        headers: {
-            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
-        },
-        url: '<?= ROOT_DIR ?>/api/item/makeavailable/' + id,
-        method: 'POST',
-        success: function(data) {
-            console.log(data);
-            alertmsg('Item made available', 'success');
-            fetchItems(data.data.equipment_id);
-        },
-        error: function(data) {
-            console.log(data);
-            alertmsg('Item could not be made available', 'error');
-        }
-    })
-});
-
-
-
-        
-
-        </script>
+  
 
 
 
