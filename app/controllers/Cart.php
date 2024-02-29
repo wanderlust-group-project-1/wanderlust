@@ -19,11 +19,31 @@ class Cart {
 
 
         $cart = new CartModel;
-        $data = [
+        $c = [
                 'customer_id' => UserMiddleware::getUser()['id'],
             ];
-        $data = $cart->getCartItems($data);
+        
+        $data['items'] = $cart->getCartItems($c);
+        $data['cart'] = $cart->first($c);
+
+
+
+
+        foreach ($data['items'] as $equipment) {
+            $equipment->total = $equipment->e_standard_fee + $equipment->e_fee * (strtotime($data['cart']->end_date) - strtotime($data['cart']->start_date)) / (60 * 60 * 24);
+        }
+
         // show($data);
+        // calculate the total of all items
+
+        $data['total'] = 0;
+
+        foreach ($data['items'] as $item) {
+            $data['total'] += $item->total;
+        }
+
+
+    
         $this->view('customer/components/cart', $data); 
     //    echo  "view cart";
 
