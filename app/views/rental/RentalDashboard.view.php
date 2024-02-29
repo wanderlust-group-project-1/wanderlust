@@ -222,6 +222,7 @@ require_once('../app/views/layout/header.php');
 
 
 </script>
+
 <script>
     var modal = document.getElementById("profile-editor");
 
