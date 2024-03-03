@@ -82,9 +82,17 @@
         <span class="close">&times;</span>
         <h2>Mark as Returned</h2>
         <p>Are you sure you want to mark this order as returned?</p>
-        <div class="flex-d gap-3">
+        <div class="flex-d gap-3 mt-3">
             <button class="btn btn-primary" id="mark-as-returned-confirm">Yes</button>
             <button class="btn btn-danger modal-close" id="mark-as-returned-cancel">No</button>
+            <!-- Report Issue -->
+
+            <button class="btn btn-danger" id="report-return-issue">Report Issue</button>
+
+            
+
+
+
         </div>
     </div>
 </div>
@@ -101,6 +109,19 @@
     </div>
 </div>
 
+
+
+<!-- Issue Modals -->
+
+<div id="report-issue-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        <div id="issue-form-data">
+
+        </div>
+    </div>
+</div>
 
 <style>
  

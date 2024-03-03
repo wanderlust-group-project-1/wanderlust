@@ -9,10 +9,10 @@
 
 
             <?php 
-            if (empty($data)) {
+            if (empty($items)) {
                 echo "<h3>Cart is empty</h3>";
             }
-            foreach ($data as $item): ?>
+            foreach ($items as $item): ?>
                 <div class="card" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
                 <div class="row gap-2">
                     <div class="cart-item-image col-lg-4">
@@ -21,7 +21,7 @@
                     <div class="cart-item-details col-lg-5">
                         <h5 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h5>
                         <div class="cart-item-price">
-                            <h5>Fee: Rs. <?php echo htmlspecialchars($item->e_fee); ?></h5>
+                            <h5>Fee: Rs. <?php echo htmlspecialchars($item->total); ?></h5>
                             <button id="remove-from-cart" class="btn btn-primary">Remove from Cart</button>
                         </div>
                     </div>
@@ -36,10 +36,10 @@
         <h3>Total: Rs. <span id="total">
 
         <?php
-        $total = 0;
-        foreach ($data as $item) {
-            $total += $item->e_fee;
-        }
+        // $total = 0;
+        // foreach ($items as $item) {
+        //     $total += $item->e_fee;
+        // }
         echo $total;
         ?>
 

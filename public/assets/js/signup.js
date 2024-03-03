@@ -21,12 +21,6 @@
 //         password.type = "password";
 //     }
 // }
-function signupToggle(){
-    console.log("gamindu");
-    var element1;
-    element1 = document.querySelector('.popupForm');
-    element1.classList.toggle("popupForm-active");
-}
 
 // Get Url
 var urlFragment = window.location.hash;

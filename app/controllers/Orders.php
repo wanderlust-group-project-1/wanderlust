@@ -35,6 +35,18 @@ class Orders {
 
         $this->view('rental/components/order', ['order' => $order, 'items' => $items]);
     }
+
+
+
+    // Complains by rental service
+
+    public function reportReturnIssueByRentalservice(string $a = '', string $b = '', string $c = ''):void {
+        $rent = new RentModel;
+        $order = $rent->getRental($a);
+        $items = $rent->getItemListbyRentId($a);
+
+        $this->view('rental/components/reportReturnIssue', ['order' => $order, 'items' => $items]);
+    }
 }
 
 
