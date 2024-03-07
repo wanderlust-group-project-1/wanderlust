@@ -1,4 +1,27 @@
-.order-header .order-id {
-    font-size: 1.75rem;
-    color: red;
+.order-header {
+
+    .order-id{
+        font-size: 1.75rem;
+        color: $gray-text-darker;
+    }
+
+    .order-status {
+        font-size: 1.75rem;
+        color: $gray-text; 
+        font-weight: 600;
+    }
+}
+
+.order-body {
+    .order-dates {
+        font-size: 1.75rem;
+        color: $gray-text-darker;
+    }
+    
+    .order-total {
+        font-size: 1.8rem;
+        // color: $gray-text-darker;
+        color: $gray-text-darker;
+        font-weight: 600;
+    }
 }

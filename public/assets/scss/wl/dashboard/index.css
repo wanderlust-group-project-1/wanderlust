@@ -2428,6 +2428,26 @@ fieldset {
     transition: all 0.3s ease;
   }
 }
+.order-header .order-id {
+  font-size: 1.75rem;
+  color: #47494b;
+}
+.order-header .order-status {
+  font-size: 1.75rem;
+  color: #6B6E70;
+  font-weight: 600;
+}
+
+.order-body .order-dates {
+  font-size: 1.75rem;
+  color: #47494b;
+}
+.order-body .order-total {
+  font-size: 1.8rem;
+  color: #47494b;
+  font-weight: 600;
+}
+
 .btn {
   cursor: pointer;
   border: none;
