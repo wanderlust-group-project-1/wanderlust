@@ -60,6 +60,25 @@
     flex-grow: inherit;
 }
 
+.card-normal3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 15px;
+    // box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+    border: $gray-text 3px inherit;
+}
+
 
 .card-invert {
     display: flex;

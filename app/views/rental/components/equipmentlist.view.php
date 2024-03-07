@@ -54,7 +54,7 @@
                     <td data-label="Type"><?= htmlspecialchars($equipment->type) ?></td>
                     <td data-label="Cost">Rs<?= htmlspecialchars($equipment->fee) ?></td>
                     <td data-label="Count"><?= htmlspecialchars($equipment->count) ?></td>
-                    <td data-label="Action"><button id="equipment-view-button" class="btn">View</button></td> <!-- View Button for each row -->
+                    <td data-label="Action"><button id="equipment-view-button" class="btn-text-green"><i class="fa fa-list" aria-hidden="true"></i> View</button></td> <!-- View Button for each row -->
                 </tr>
             <?php endforeach; ?>
         </tbody>
