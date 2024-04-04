@@ -56,8 +56,20 @@ class RentModel {
         $q->setTable('equipment');
         $q->select('equipment.*, rental_services.name As rental_service_name')
             ->join('rental_services', 'equipment.rentalservice_id', 'rental_services.id')
+            ->join('locations', 'rental_services.location_id', 'locations.id')
+
             // if   $data['search']
-           ->where('equipment.name', "%{$data['search']}%" , 'LIKE');
+           ->where('equipment.name', "%{$data['search']}%" , 'LIKE')
+
+
+        //    order by location langitude and latitude
+        //$data['latitude'] and $data['longitude']
+        ->append("ORDER BY ABS(locations.latitude - ?) + ABS(locations.longitude - ?) ASC")
+        ->addData([$data['latitude'], $data['longitude']]);
+
+           
+
+            // show($q->getQuery());
 
 
            return $this->query($q->getQuery(),$q->getData());
