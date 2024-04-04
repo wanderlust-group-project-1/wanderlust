@@ -13,9 +13,9 @@
         </div>
 
             <div class="col-lg-6">
-                <h1 class="rental-name"> <?php echo $equipment->name; ?> </h1>
-                <p class="rental-description"> <?php echo $equipment->description; ?> </p>
-                <h5>Price: Rs. <?php echo $equipment->cost; ?></h5>
+                <h1 class="rental-name"> <?php echo htmlspecialchars($equipment->name); ?> </h1>
+                <p class="rental-description"> <?php echo htmlspecialchars($equipment->description); ?> </p>
+                <h5>Price: Rs. <?php echo htmlspecialchars($equipment->cost); ?></h5>
                 <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
             </div>
 
