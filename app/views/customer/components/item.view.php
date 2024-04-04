@@ -8,7 +8,7 @@
 <div class="row flex-d mt-5">
 
         <div class="col-lg-6">
-            <img src="<? echo OSURL?>images/equipment/<?php echo $equipment->image; ?>" alt="Image" class="img-fluid mh-200px rounded-7">
+            <img src="<?php echo htmlspecialchars(OSURL); ?>images/equipment/<?php echo htmlspecialchars($equipment->image); ?>" alt="Image" class="img-fluid mh-200px rounded-7">
             
         </div>
 
