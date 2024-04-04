@@ -59,13 +59,18 @@ class RentModel {
             ->join('locations', 'rental_services.location_id', 'locations.id')
 
             // if   $data['search']
-           ->where('equipment.name', "%{$data['search']}%" , 'LIKE')
+           ->where('equipment.name', "%{$data['search']}%" , 'LIKE');
 
 
         //    order by location langitude and latitude
         //$data['latitude'] and $data['longitude']
-        ->append("ORDER BY ABS(locations.latitude - ?) + ABS(locations.longitude - ?) ASC")
-        ->addData([$data['latitude'], $data['longitude']]);
+        // ->append("ORDER BY ABS(locations.latitude - ?) + ABS(locations.longitude - ?) ASC")
+        // ->addData([$data['latitude'], $data['longitude']]);
+
+        if (isset($data['latitude']) && isset($data['longitude'])) {
+            $q->append("ORDER BY ABS(locations.latitude - ?) + ABS(locations.longitude - ?) ASC")
+                ->addData([$data['latitude'], $data['longitude']]);
+        }
 
            
 
