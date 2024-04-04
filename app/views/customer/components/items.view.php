@@ -2,7 +2,7 @@
     <!-- <?php show($equipments); ?> -->
     <div class="rent-items">
         <?php foreach ($equipments as $equipment): ?>
-            <div class="rent-item-card" data-id="<?= htmlspecialchars($equipment->id) ?>">
+            <div class="rent-item-card" id="rent-item-card" data-id="<?= htmlspecialchars($equipment->id) ?>">
                 <div class="rent-item-image">
                     <!-- Assuming you have a way to generate the image URL from the image name -->
                     <img src="<?=OSURL?>images/equipment/<?php echo htmlspecialchars($equipment->image); ?>" alt="Image" class="card-img">
@@ -24,11 +24,12 @@
 
 <!-- modal for equipment details -->
 
-<!-- <div class="modal" id="equipment-details-modal" style="display: block;"> -->
-<div class="modal" id="equipment-details-modal">
+<div class="modal" id="equipment-details-modal" style="display: block;">
+<!-- <div class="modal" id="equipment-details-modal"> -->
 <div class="modal-content gap-2">
     <span class="close">&times;</span>
 
+    <div id="equipment-details" >
 
     <div class="row mh-100px">
         <div class="col-lg-12 flex-d align-items-center gap-2">
@@ -52,6 +53,11 @@
 
 
     </div>
+
+    </div>
+
+
+
 
 
 

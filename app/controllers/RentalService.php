@@ -81,6 +81,10 @@ class RentalService {
 
         // show($data);
 
+        foreach ($data['equipments'] as $equipment) {
+            $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
+        }
+
 
 
         
