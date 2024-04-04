@@ -2,7 +2,7 @@
     <!-- <?php show($equipments); ?> -->
     <div class="rent-items">
         <?php foreach ($equipments as $equipment): ?>
-            <div class="rent-item-card" id="rent-item-card" data-id="<?= htmlspecialchars($equipment->id) ?>">
+            <div class="rent-item-card" id="rent-item-card" data-id="<?= htmlspecialchars($equipment->id); ?>">
                 <div class="rent-item-image">
                     <!-- Assuming you have a way to generate the image URL from the image name -->
                     <img src="<?=OSURL?>images/equipment/<?php echo htmlspecialchars($equipment->image); ?>" alt="Image" class="card-img">
