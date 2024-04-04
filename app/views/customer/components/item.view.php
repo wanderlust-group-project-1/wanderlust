@@ -1,6 +1,6 @@
 <div class="row mh-100px">
     <div class="col-lg-12 flex-d align-items-center gap-2">
-        <img src="<? echo ROOT_DIR?>/assets/images/rental/1.webp" alt="Image" class="img-fluid mh-50px rounded-7">
+        <img src="<?php echo ROOT_DIR; ?>/assets/images/rental/1.webp" alt="Image" class="img-fluid mh-50px rounded-7">
         <h1 class="rental-name"> ABC Rent </h1>
         <!-- <?php show($equipment) ?> -->
     </div>
