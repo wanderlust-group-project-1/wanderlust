@@ -24,7 +24,7 @@
 
 <!-- modal for equipment details -->
 
-<div class="modal" id="equipment-details-modal" style="display: block;">
+<div class="modal" id="equipment-details-modal" style="display: none;">
 <!-- <div class="modal" id="equipment-details-modal"> -->
 <div class="modal-content gap-2">
     <span class="close">&times;</span>
