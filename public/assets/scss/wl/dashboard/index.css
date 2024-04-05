@@ -426,7 +426,6 @@ fieldset {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
   padding: 0;
   background-color: #EBEFE3;
 }
@@ -1746,6 +1745,10 @@ fieldset {
   font-size: 20px;
   font-weight: 600;
 }
+.data .content-data .head h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
 .data .content-data .head .menu {
   position: relative;
   display: flex;
@@ -2385,10 +2388,6 @@ form label {
   text-align: left;
 }
 
-form#customer, form#rental-service, form#guide {
-  display: none;
-}
-
 input {
   border: none;
   background: #EBEFE3;
@@ -2998,6 +2997,12 @@ input.invert {
 .flex-d-r {
   display: flex;
   flex-direction: row;
+}
+
+.flex-d-r-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 768px) {
