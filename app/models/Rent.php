@@ -95,6 +95,7 @@ class RentModel {
         return $this->query($q, $data);
     }
 
+    
 
     public function getRentalsByRentalService($data) {
 
