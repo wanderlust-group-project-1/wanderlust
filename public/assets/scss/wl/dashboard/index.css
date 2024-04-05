@@ -431,8 +431,7 @@ fieldset {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  height: -moz-fit-content;
-  height: fit-content;
+
   background-color: #EBEFE3;
 }
 .dashboard-header {
@@ -2516,6 +2515,10 @@ fieldset {
   font-size: 20px;
   font-weight: 600;
 }
+.data .content-data .head h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
 .data .content-data .head .menu {
   position: relative;
   display: flex;
@@ -3356,9 +3359,11 @@ form #error-message {
 form label {
   font-weight: 400;
   text-align: left;
+
   font-size: 18px;
   color: #6B6E70;
   padding: 10px;
+
 }
 
 input {
@@ -3972,6 +3977,12 @@ input.invert {
 .flex-d-r {
   display: flex;
   flex-direction: row;
+}
+
+.flex-d-r-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 768px) {

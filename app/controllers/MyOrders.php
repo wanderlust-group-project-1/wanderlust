@@ -23,4 +23,18 @@ class MyOrders {
         $this->view('customer/components/orderlist', ['orders' => $orders]);
     }
 
+    public function viewOrder(string $a = '', string $b = '', string $c = ''):void {
+ 
+        $rent = new RentModel;
+        $order = $rent->getRental($a);
+
+        $this->view('customer/components/order', ['order' => $order]);
+    }
+
 }
+
+
+    
+
+
+?>

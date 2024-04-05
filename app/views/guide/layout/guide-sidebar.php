@@ -22,7 +22,7 @@
     </div>
 
     <div class="">
-      <button type="submit" class="btn-edit mt-4" id="edit-profile">
+      <button type="submit" class="btn-edit mt-4 edit-profile">
         Edit Profile
       </button>
     </div>
@@ -167,7 +167,7 @@
     <div class="profile-info">
       <img src="<?php echo ROOT_DIR ?>/assets/images/7.png" alt="Profile Image" class="profile-image">
 
-      <form id="guides" action="<?= ROOT_DIR ?>/guide/update" method="post">
+      <form id="guide" action="<?= ROOT_DIR ?>/guide/update" method="post">
           <h2>Update Guides Details</h2>
           <?php if (isset($errors)) : ?>
             <div> <?= implode('<br>', $errors) ?> </div>
@@ -219,7 +219,7 @@
   var span = document.getElementsByClassName("close")[0];
 
   // Get all view buttons
-  var viewButton = document.getElementById('edit-profile');
+  var viewButton = document.querySelector('.edit-profile');
 
   // Function to handle modal display
   function openModal() {
@@ -227,6 +227,7 @@
     modal.style.display = "block";
   }
 
+  
   // Add click event listener to view buttons
   viewButton.addEventListener('click', function() {
 
