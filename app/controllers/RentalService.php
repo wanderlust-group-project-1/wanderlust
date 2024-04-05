@@ -54,9 +54,12 @@ class RentalService {
         $rental = new RentalServiceModel;
         $data = [
             'rental' => $rental->getRentalService($a)[0],
+            'stat' => $rental->getRentalServiceStat($a)[0],
         ];
 
+
         // show($data);
+        show($data['stat']);
 
 
 

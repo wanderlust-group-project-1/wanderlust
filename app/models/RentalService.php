@@ -142,6 +142,24 @@ class RentalServiceModel {
         return $this->query($q->getQuery(),$q->getData());
     }
 
+    // Get Renatal Service Stat
+    public function getRentalServiceStat(int $id): mixed {
+        // orders count
+        // total equipments
+
+        $q = new QueryBuilder;
+        $q->setTable('rental_services');
+        //  group by rental service id and count orders
+        $q->select('count(distinct(rent.id)) as orders_count , count(distinct(equipment.id)) as equipments_count')
+            ->join('equipment', 'rental_services.id', 'equipment.rentalservice_id')
+            ->join('rent', 'rental_services.id', 'rent.rentalservice_id')
+            ->where('rental_services.id', $id)
+            ->groupBy('rental_services.id');
+
+        return $this->query($q->getQuery(),$q->getData());
+            
+    }
+
     // Get rental service for customer
 
     // public function getRentalServiceforCustomer(int $id): mixed {

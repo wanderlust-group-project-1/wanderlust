@@ -43,12 +43,14 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     <div class="flex-d gap-2 align-items-center  card-invert">
         <i class="fa fa-shopping-cart"></i>
-        <span>Orders: 10</span>
+        <span>Orders: <?php echo $stat->orders_count; ?></span>
+
+       
     </div>
 
     <div class="flex-d gap-2 align-items-center card-invert">
         <i class="fa fa-cogs"></i>
-        <span>Equipment Types: 10</span>
+        <span>Equipment Types: <?php echo $stat->equipments_count; ?></span>
 
     </div>
 
