@@ -1,8 +1,26 @@
-function load(id){
-    document.getElementById(id).style.display = "flex";
-    document.getElementById('select').style.display = "none";
+// function load(id){
+//     document.getElementById(id).style.display = "flex";
+//     document.getElementById('select').style.display = "none";
    
-}
+// }
+
+// function load(formId) {
+//     var form = document.getElementById(formId + '-form');
+//     // Rest of the function logic...
+// }
+
+
+//showpassowrd
+// let eyeicon = document.getElementById("eyeicon");
+// let password = document.getElementById("password");
+
+// eyeicon.onclick = function() {
+//     if(password.type == "password"){
+//         password.type = "text";
+//     }else{
+//         password.type = "password";
+//     }
+// }
 
 // Get Url
 var urlFragment = window.location.hash;
@@ -144,11 +162,11 @@ function validateForm(formId) {
 }
 
 // Event listener for form submission
-// document.getElementById('customer').onsubmit = function(event) {
-//     if (!validateForm('customer')) {
-//         event.preventDefault(); // Prevent form submission if validation fails
-//     }
-// };
+document.getElementById('customer').onsubmit = function(event) {
+    if (!validateForm('customer')) {
+        event.preventDefault(); // Prevent form submission if validation fails
+    }
+};
 
 document.getElementById('rental-service').onsubmit = function(event) {
     if (!validateForm('rental-service')) {

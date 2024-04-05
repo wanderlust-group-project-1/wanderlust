@@ -9,13 +9,43 @@ class Orders {
 
     public function list(string $a = '', string $b = '', string $c = ''):void {
         $data = [
-            'rental_id' => UserMiddleware::getUser()['id'],
+            'rentalservice_id' => UserMiddleware::getUser()['id'],
+            'status' => $a
         ];
 
-        // $rent = new RentModel;
-        // $orders = $rent->getRentalsByRental($data);
+        $rent = new RentModel;
+        $orders = $rent->getRentalsByRentalService($data);
 
-        // $this->view('rental/components/orderlist', ['orders' => $orders]);
+        $this->view('rental/components/orderlist', ['orders' => $orders]);
+    
+
+
+    }
+
+    public function viewOrder(string $a = '', string $b = '', string $c = ''):void {
+        $rent = new RentModel;
+        $order = $rent->getRental($a);
+        $items = $rent->getItemListbyRentId($a);
+
+
+
+
+
+        // show($order);
+
+        $this->view('rental/components/order', ['order' => $order, 'items' => $items]);
+    }
+
+
+
+    // Complains by rental service
+
+    public function reportReturnIssueByRentalservice(string $a = '', string $b = '', string $c = ''):void {
+        $rent = new RentModel;
+        $order = $rent->getRental($a);
+        $items = $rent->getItemListbyRentId($a);
+
+        $this->view('rental/components/reportReturnIssue', ['order' => $order, 'items' => $items]);
     }
 }
 
