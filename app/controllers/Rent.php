@@ -97,6 +97,32 @@ Class Rent{
         $this->view('customer/components/items',$data);
     }
 
+
+    public function item(string $a = '', string $b = '', string $c = ''):void {
+
+
+        $cart = new CartModel; 
+        $cart = $cart->first(['customer_id' => UserMiddleware::getUser()['id']]);
+
+
+
+
+        $equipment = new EquipmentModel;
+        $data = [
+            // 'equipment' => $equipment->first(['id' => $a]),
+            'equipment' => $equipment->getEquipmentWithRentalService($a)
+        ];
+
+        // foreach ($data['equipment'] as $equipment) {
+        //     $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
+        // }
+
+        $data['equipment']->total = $data['equipment']->standard_fee + $data['equipment']->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
+
+        $this->view('customer/components/item', $data);
+    }
+
+
     public function shop(string $a = '', string $b = '', string $c = ''):void {
 
         $rentalserviceId = $a;

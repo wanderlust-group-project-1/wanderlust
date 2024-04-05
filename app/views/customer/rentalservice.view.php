@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
+require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
@@ -367,10 +367,39 @@ $(document).ready(function() {
 
     
 
+    $(document).on('click', '#rent-item-card', function() {
 
+var id = $(this).attr('data-id');
+console.log(id);
+
+$.ajax({
+    headers: {
+        'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+    },
+    url: '<?= ROOT_DIR ?>/rent/item/' + id,
+    method: 'GET',
+    success: function(data) {
+        console.log(data);
+        $('#equipment-details').html(data);
+        $('#equipment-details-modal').css('display', 'block');
+    },
+    error: function(err) {
+        console.log(err);
+    }
+});
+
+
+
+})
 
 
 
 
     </script>
 
+
+
+<?php
+require_once('../app/views/layout/footer.php');
+
+?>
