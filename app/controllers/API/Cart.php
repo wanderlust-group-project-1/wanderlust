@@ -33,14 +33,16 @@ class Cart {
         $data = [
                 'customer_id' => UserMiddleware::getUser()['id'],
                  'equipment_id' => $request->get('equipment_id'),
-                //  'quantity' => $request->get('quantity'),
+                 'count' => $request->get('count'),
                 ];
 
         $result = $cart->addItemToCart($data);
 
         $response->data([
             'message' => 'Item added to cart',
-            'status' => 'success'   
+            'status' => 'success',
+            'data' => $result
+
         ])
         ->statusCode(200)
         ->send();
