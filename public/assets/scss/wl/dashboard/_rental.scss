@@ -712,3 +712,10 @@ $box-shadow-color: rgba(0,0,0,0.2);
     display: inline-block;
     font-size: 12px;
 }
+
+.order-payment-status {
+  font-family: sans-serif, "poppins";
+  color: $gray-text;
+  font-size: $header4;
+  color: $gray-text-darker;
+}

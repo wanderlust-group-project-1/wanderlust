@@ -826,6 +826,13 @@ fieldset {
   font-size: 12px;
 }
 
+.order-payment-status {
+  font-family: sans-serif, "poppins";
+  color: #6B6E70;
+  font-size: 1.75rem;
+  color: #47494b;
+}
+
 .signup-container#blur.active {
   filter: blur(20px);
   pointer-events: none;
@@ -2581,7 +2588,6 @@ fieldset {
 .order-body .order-total {
   font-size: 1.8rem;
   color: #47494b;
-  font-weight: 600;
 }
 
 .btn {
@@ -2803,11 +2809,13 @@ fieldset {
   color: #8D9E6F;
   border-radius: 10px;
   box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+  transition: color 0.3s ease;
 }
 .btn-selected.active {
   color: #8D9E6F;
   border-radius: 10px;
   box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+  transition: color 1s ease;
 }
 
 .row {
