@@ -1,4 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <?php
 require_once('../app/views/layout/header.php');
