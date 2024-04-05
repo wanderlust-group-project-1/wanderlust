@@ -7,12 +7,15 @@ BEGIN
         c.name AS `customer_name`, 
         u.email AS `customer_email`,
         c.number AS `customer_number`,
+        rs.name AS `rental_service_name`,
+        rs.id AS `rental_service_id`,
         -- Aggregate equipment names and their counts into a single column
         GROUP_CONCAT(DISTINCT CONCAT(sub.equipment_name, ' (', sub.equipment_count, ')') ORDER BY sub.equipment_name SEPARATOR ', ') AS `equipment_list`
     FROM 
         rent r
     INNER JOIN customers c ON r.customer_id = c.id
     INNER JOIN users u ON c.user_id = u.id
+    INNER JOIN rental_services rs ON r.rentalservice_id = rs.id
     -- Subquery to calculate equipment counts
     INNER JOIN (
         SELECT 

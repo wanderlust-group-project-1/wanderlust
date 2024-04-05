@@ -78,7 +78,14 @@ class CartModel {
         $availableItems = $item->getAvailableItems($data);
         // show($availableItems);
 
-        return $cartItem->createCartItem(['cart_id' => $cart->id, 'item_id' => $availableItems[0]->id]);
+        // return $cartItem->createCartItem(['cart_id' => $cart->id, 'item_id' => $availableItems[0]->id]);
+        while ($data['count'] > 0) {
+            $cartItem->createCartItem(['cart_id' => $cart->id, 'item_id' => $availableItems[$data['count'] - 1]->id]);
+            $data['count']--;
+        }
+        
+        return true;
+
     }
 
     public function removeItemFromCart(array $data){

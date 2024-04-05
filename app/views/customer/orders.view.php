@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/components/navbar.php');
+require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
@@ -122,4 +122,29 @@ require_once('../app/views/components/navbar.php');
             }
         });
     });
+
+
+
+    $(document).on('click','.order-view-button', function() {
+        var orderId = $(this).closest('.card').attr('data-id');
+        console.log(orderId);
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/myOrders/viewOrder/' + orderId,
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'GET',
+            success: function(data) {
+                $('#order-data').html(data);
+                $('#order-item-modal').show();
+            }
+        });
+    });
+
+
 </script>
+
+
+
+
+<?php require_once('../app/views/layout/footer.php'); ?>
