@@ -83,8 +83,7 @@ class CartModel {
             $cartItem->createCartItem(['cart_id' => $cart->id, 'item_id' => $availableItems[$data['count'] - 1]->id]);
             $data['count']--;
         }
-        show($data['count']);
-        show("Success ");
+        
         return true;
 
     }
