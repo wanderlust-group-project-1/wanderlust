@@ -1,5 +1,7 @@
 $(document).on('click', '.close', function() {
     var modal = $(this).closest('.modal');
+    console.log("modal-close");
+
 
     modal.hide();
 });
@@ -7,6 +9,8 @@ $(document).on('click', '.close', function() {
 
 $(document).on('click', '.modal-close', function() {
     var modal = $(this).closest('.modal');
+    console.log("modal-close");
+
     modal.hide();
 });
 

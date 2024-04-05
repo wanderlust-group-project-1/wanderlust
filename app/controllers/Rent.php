@@ -48,10 +48,80 @@ Class Rent{
 
         $data['equipments'] = $rent->getItems($request->getAll());
 
+//         show($data['equipments']);
+
+//         Array
+// (
+//     [0] => stdClass Object
+//         (
+//             [id] => 25
+//             [rentalservice_id] => 25
+//             [name] => Tent - 2 Person
+//             [cost] => 3000.00
+//             [description] => Tent for 2 Persons
+//             [type] => Tent
+//             [count] => 31
+//             [fee] => 1000.00
+//             [standard_fee] => 0.00
+//             [image] => 65b365fccf6dc.jpg
+//             [rental_service_name] => ABC Rent
+//         )
+
+//     [1] => stdClass Object
+//         (
+
+            // show($data['cart']);
+
+//             stdClass Object
+// (
+//     [id] => 71
+//     [customer_id] => 32
+//     [start_date] => 2024-02-14
+//     [end_date] => 2024-02-29
+// )
+
+//         )
+
+//  calculate the total fee for each , standard fee + fee * days difference (end_date - start_date)
+        foreach ($data['equipments'] as $equipment) {
+            $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($data['cart']->end_date) - strtotime($data['cart']->start_date)) / (60 * 60 * 24);
+        }
+
+        // show($data['equipments']);
+
+
+
+
         // show($data['equipments']);
 
         $this->view('customer/components/items',$data);
     }
+
+
+    public function item(string $a = '', string $b = '', string $c = ''):void {
+
+
+        $cart = new CartModel; 
+        $cart = $cart->first(['customer_id' => UserMiddleware::getUser()['id']]);
+
+
+
+
+        $equipment = new EquipmentModel;
+        $data = [
+            // 'equipment' => $equipment->first(['id' => $a]),
+            'equipment' => $equipment->getEquipmentWithRentalService($a)
+        ];
+
+        // foreach ($data['equipment'] as $equipment) {
+        //     $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
+        // }
+
+        $data['equipment']->total = $data['equipment']->standard_fee + $data['equipment']->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
+
+        $this->view('customer/components/item', $data);
+    }
+
 
     public function shop(string $a = '', string $b = '', string $c = ''):void {
 

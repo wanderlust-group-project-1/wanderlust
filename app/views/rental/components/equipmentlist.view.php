@@ -65,7 +65,7 @@
 
 <!-- modal for view button -->
 
-<div id="view-equipment-modal" class="view-equipment-modal">
+<div id="view-equipment-modal" class="view-equipment-modal modal">
     <div class="modal-content" id="equipment-modal-content">
         <span class="close-button">&times;</span>
         <h2>Equipment Details</h2>
@@ -83,138 +83,6 @@
 
 
 
-<script>
-    function viewEquipment(){
-        console.log('view equipment');
-
-    var modal = document.getElementById("view-equipment-modal");
-    var closeButton = document.querySelector(".close-button");
-
-    closeButton.addEventListener("click", function() {
-        modal.style.display = "none";
-    });
-
-    var viewButtons = document.querySelectorAll("#equipment-view-button");
-    // console.log("a",viewButtons);
-    viewButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            console.log('view button clicked');
-            var row = button.closest('tr');
-
-            var id = row.getAttribute('data-id');
-
-
-            fetchEquipmentDetails(id);
-
-
-            
-            
-
-
-            modal.style.display = "block";
-        });
-    });
-
-    }
-
-    function fetchEquipmentDetails(equipmentId) {
-    $.ajax({
-        headers: {
-            Authorization: "Bearer " + getCookie('jwt_auth_token')
-        },
-        url: '<?= ROOT_DIR ?>/rentalService/getequipment/' + equipmentId,
-        method: 'GET',
-        success: function(data) {
-            // console.log(data);
-
-            // Create a new div element
-            var newDiv = document.createElement("div");
-            newDiv.innerHTML = data;
-            var js = newDiv.querySelector('script').innerHTML;
-
-            // Update the modal content and execute the script
-            $('#equipment-modal-content').empty();
-            $('#equipment-modal-content').html(data).promise().done(function() {
-                console.log('equipment loaded');
-                viewEquipment();
-                eval(js);
-            });
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
-}
-
-
-// filter equipment
-
- $(document).ready(function() {
-    $('#show-filter').click(function() {
-        $('.table-filter').slideDown();
-        $('#show-filter').hide();
-    });
-
-    $('#hide-filter').click(function() {
-        $('.table-filter').slideUp();
-        $('#show-filter').show();
-    });
-
-    // client side filter (onchange)
-
-    $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
-
-    $('#equipment-type-filter').change(function() {
-        filterEquipment();
-    });
-
-    $('#equipment-cost-filter-min').on('input', function() {
-        filterEquipment();
-    });
-
-    $('#equipment-cost-filter-max').on('input', function() {
-        filterEquipment();
-    });
-
-
-
-
-    // $('#equipment-filter-button').click(function() {
-        function filterEquipment() {
-        var name = $('#equipment-name-filter').val();
-        var type = $('#equipment-type-filter').val();
-        // var minCost = $('#equipment-cost-filter-min').val();
-        // var maxCost = $('#equipment-cost-filter-max').val();
-
-        // console.log(name, type, minCost, maxCost);
-
-     
-        $('#equipment-table tbody tr').each(function() {
-            var row = $(this);
-            var equipmentName = row.find('td').eq(0).text();
-            var equipmentType = row.find('td').eq(1).text();
-            // var equipmentCost = row.find('td').eq(2).text().replace('Rs', '');
-            var equipmentCount = row.find('td').eq(3).text();
-
-            // console.log(equipmentName, equipmentType, equipmentCost, equipmentCount);
-
-            if (name && equipmentName.toLowerCase().indexOf(name.toLowerCase()) === -1) {
-                row.hide();
-            } else if (type && equipmentType.toLowerCase().indexOf(type.toLowerCase()) === -1) {
-                row.hide();
-            } else {
-                row.show();
-            }
-        });
-    }
-});
-
-
-
-
-
-
-</script>
 
 
 

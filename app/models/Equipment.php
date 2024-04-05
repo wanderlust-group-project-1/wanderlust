@@ -148,12 +148,12 @@ class EquipmentModel {
         $q = new QueryBuilder;
         $q->setTable('equipment');
         // Additional logic for joining tables if needed
-        $q->select('equipment.*', 'rentalservice.name as rentalservice_name', 'rentalservice.address as rentalservice_address', 'rentalservice.mobile as rentalservice_mobile', 'rentalservice.regNo as rentalservice_regNo');
-        $q->join('rentalservice', 'equipment.rentalservice_id', 'rentalservice.id');
+        $q->select('equipment.*', 'rentalservice.*');
+        $q->join('rental_services', 'equipment.rentalservice_id', 'rental_services.id');
 
         $q->where('equipment.id', $id);
         // show($q->getQuery());
-        return $this->query($q->getQuery(), $q->getData());
+        return $this->query($q->getQuery(), $q->getData())[0];
     }
 
     // Customer Functions
