@@ -32,17 +32,16 @@ require_once('../app/views/layout/header.php');
                     <!-- Section Switch  Upcoming lented Completed -->
 
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
-                        <button class="btn btn-primary active " id="pending">Pending</button>
-                        <button class="btn btn-primary " id="today">Today</button>
-                        <button class="btn btn-primary " id="upcoming">Upcoming</button>
-                        <button class="btn btn-primary" id="rented">Rented</button>
-                        <button class="btn btn-primary" id="completed">Completed</button>
-                        <button class="btn btn-primary" id="cancelled">Cancelled</button>
+                        <button class="btn-selected" id="pending">Pending</button>
+                        <button class="btn-selected" id="upcoming">Upcoming</button>
+                        <button class="btn-selected" id="rented">Rented</button>
+                        <button class="btn-selected" id="completed">Completed</button>
+                        <button class="btn-selected" id="cancelled">Cancelled</button>
                         
-                        <button class="btn btn-primary" id="all">All</button>
+                        <button class="btn-selected" id="all">All</button>
 
                         <!-- not rented yet -->
-                        <button class="btn btn-primary" id="not-rented">Not Rented</button>
+                        <button class="btn-selected" id="not-rented">Not Rented</button>
 
                     </div>
 

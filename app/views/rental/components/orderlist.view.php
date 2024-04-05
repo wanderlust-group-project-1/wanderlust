@@ -29,7 +29,7 @@
         ?>
         
         <div class = "row flex-d col-lg-12">
-        <div class="order card  card-normal col-lg-12 flex-md-c miw-200px" data-id="<?= $order->id ?>">
+        <div class="order card  card-normal3 col-lg-12 flex-md-c miw-200px" data-id="<?= $order->id ?>">
             <div class="order-header">
                 <div class="order-id">Order ID: <?= $order->id ?></div>
                 <div class="order-status">Status: <?= $order->status ?></div>
@@ -40,7 +40,7 @@
                 <div class="order-payment-status">Payment Status: <?= $order->payment_status ?></div>
             </div>
             <div class="order-actions flex-d gap-3">
-                <button class="btn btn-primary" id="view-button">View</button>
+                <button class="btn-text-green" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
                 <!-- if status pending set show  -->
                 <?php if ($order->status == 'accepted') { ?>
                     <div class="flex-d-c">
@@ -49,15 +49,15 @@
                     
 
                 </button>
-                    <button class="btn btn-danger" id="cancel-rented" hidden>Cancel</button>
+                    <button class="btn-text-red" id="cancel-rented" hidden>Cancel</button>
                     </div>
                 <?php } 
                 elseif ($order->status == 'rented') { ?>
                     <button class="btn btn-primary" id="mark-as-returned">Mark as Returned</button>
                 <?php }
                 elseif ($order->status == 'pending') { ?>
-                    <button class="btn btn-primary" id="accept-request">Accept</button>
-                    <button class="btn btn-danger" id="cancel-request">Cancel</button>  
+                    <button class="btn-text-orange" id="accept-request"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+                    <button class="btn-text-red" id="cancel-request"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>  
                 <?php }
                 ?>
 
