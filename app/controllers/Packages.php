@@ -13,7 +13,6 @@ class Packages
             $this->view('guide/packages');
         }
     }
-<<<<<<< HEAD
 
     public function create(string $a = '', string $b = '', string $c = ''): void
     {
@@ -63,6 +62,5 @@ class Packages
         redirect('packages');
     }
 
-=======
->>>>>>> c9fac3582af613de0b8a6bb9d6ee4f181f14d0fb
+
 }
