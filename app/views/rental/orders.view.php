@@ -32,7 +32,7 @@ require_once('../app/views/layout/header.php');
                     <!-- Section Switch  Upcoming lented Completed -->
 
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
-                        <button class="btn btn-primary active " id="pending">Pending</button>
+                        <button class="btn-selected" id="pending">Pending</button>
                         <button class="btn btn-primary " id="today">Today</button>
                         <button class="btn btn-primary " id="upcoming">Upcoming</button>
                         <button class="btn btn-primary" id="rented">Rented</button>

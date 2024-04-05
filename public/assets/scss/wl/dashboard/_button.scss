@@ -235,6 +235,22 @@
   align-items: center;
 }
 
+.btn-selected {
+  background-color: transparent;
+  font-size: 18px;
+  color: $color-primary;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+
+  &:hover{
+    // color: $gray-text;
+    text-decoration: underline;
+    // background-color: $primary-bg;
+  }
+}
 
 
 // button end
