@@ -60,9 +60,11 @@ require_once('../app/views/layout/footer.php');
                             <span class="details justify-content-start">
                                 Guide Bookings
                             </span>
-                            <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
-                                See More >>
-                            </button>
+                            <a href="<?php echo ROOT_DIR ?>/guide">
+                                <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
+                                    See More >>
+                                </button>
+                            </a>
                         </div>
                         <div class="flex-d">
                             <h1>01</h1>
@@ -75,9 +77,11 @@ require_once('../app/views/layout/footer.php');
                             <span class="details">
                                 Equipment Booking
                             </span>
-                            <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
-                                See More >>
-                            </button>
+                            <a href="<?php echo ROOT_DIR ?>/rent">
+                                <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
+                                    See More >>
+                                </button>
+                            </a>
                         </div>
                         <div class="flex-d">
                             <h1>04</h1>
@@ -86,12 +90,14 @@ require_once('../app/views/layout/footer.php');
 
                     <div class="usage-card flex-d-c">
                         <div class="flex-d-r">
-                            <span class="details">
-                                Blogs uploaded
+                            <span class="details justify-content-start">
+                                Complaints
                             </span>
-                            <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
-                                See More >>
-                            </button>
+                            <a href="<?php echo ROOT_DIR ?>/myBlog">
+                                <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
+                                    See More >>
+                                </button>
+                            </a>
                         </div>
                         <div class="flex-d">
                             <h1>00</h1>
@@ -100,68 +106,68 @@ require_once('../app/views/layout/footer.php');
 
                 </div>
             </div>
-        </div>
 
 
 
-        <div class="flex-d-r">
-            <!-- <div class="flex-d-c"> -->
-            <!-- <div class="usage flex-d-c"> -->
+
+            <div class="flex-d-c">
+                <!-- <div class="flex-d-c"> -->
+                <!-- <div class="usage flex-d-c"> -->
 
 
 
-            <!-- Modal Box -->
-            <div class="profile-editor" id="profile-editor">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="profile-info">
-                        <div class="profile-image-wrapper">
-                            <!-- <div  > -->
-                            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
-                            <div class="profile-image-container">
-                                <input type="file" id="profile-image-upload" accept="image/*" style="display:none">
-                                <!-- <button type="submit" class="btn mt-4" id="edit-profile">
+                <!-- Modal Box -->
+                <div class="profile-editor" id="profile-editor">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="profile-info">
+                            <div class="profile-image-wrapper">
+                                <!-- <div  > -->
+                                <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
+                                <div class="profile-image-container">
+                                    <input type="file" id="profile-image-upload" accept="image/*" style="display:none">
+                                    <!-- <button type="submit" class="btn mt-4" id="edit-profile">
                                         Edit Profile
                                     </button> -->
-                                <button id="change-profile-pic-button" class="btn-edit-profile-pic">Change Profile Picture</button>
+                                    <button id="change-profile-pic-button" class="btn-edit-profile-pic">Change Profile Picture</button>
+                                </div>
+                                <!-- </div> -->
+
+                                <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
+                                    <h2>Update Customer Details</h2>
+                                    <?php if (isset($errors)) : ?>
+                                        <div> <?= implode('<br>', $errors) ?> </div>
+                                    <?php endif; ?>
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+
+                                    <label for="number">Number</label>
+                                    <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
+
+                                    <label for="nic">NIC Number</label>
+                                    <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
+                                    <br />
+                                    <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
+                                </form>
+
+
+
                             </div>
-                            <!-- </div> -->
-
-                            <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
-                                <h2>Update Customer Details</h2>
-                                <?php if (isset($errors)) : ?>
-                                    <div> <?= implode('<br>', $errors) ?> </div>
-                                <?php endif; ?>
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                                <label for="address">Address</label>
-                                <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
-
-                                <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
-
-                                <label for="number">Number</label>
-                                <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
-
-                                <label for="nic">NIC Number</label>
-                                <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
-                                <br />
-                                <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
-                            </form>
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- <div class="flex-d-c"> -->
-        <!-- <div class="usage flex-d-c"> -->
+            <!-- <div class="flex-d-c"> -->
+            <!-- <div class="usage flex-d-c"> -->
 
-        <!-- <div class="user-profile"> -->
-        <!-- 
+            <!-- <div class="user-profile"> -->
+            <!-- 
                 <div class="head">
                     <div>
                         fefefaqew
@@ -172,10 +178,12 @@ require_once('../app/views/layout/footer.php');
 
 
 
-        <!-- <div class="flex-d-r">
+            <!-- <div class="flex-d-r">
             <div class="flex-d-c">
                 <div class="usage-block flex-d-c">
                     <h2> Usage </h2> -->
+
+        </div>
 
 
         <div class="flex-d-r">
@@ -190,86 +198,86 @@ require_once('../app/views/layout/footer.php');
                                 <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="">
                             </div>
 
-
                             <div class="flex-d-r">
                                 <div class="recent-booking-details flex-d">
-                                    <p> Booking Type : Equipment Booking</p>
+                                    <p>Booking Type : Equipment Booking</p>
                                     <p>Name : Glazers Camping</p>
                                     <p>Date : 20/08/2023</p>
-                                    <p>Time : 10:00</p>
+                                    <p>Time : 05:25 PM</p>
                                 </div>
 
                             </div>
                             <div class="flex-d-r">
-                                <button type=" submit" class="button" id="see-more">
-                                    See More >>
-                                </button>
+                                <a href="<?php echo ROOT_DIR ?>/myOrders">
+                                    <button type=" submit" class="button" id="see-more-bookings">
+                                        See More >>
+                                    </button>
+                                </a>
                             </div>
+
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-    </div>
 
 
+        <!-- 
+        <div class="usage flex-d-r">
+            <div class="recent-booking-details">
+                <div span class="justify-content-middle">
+                    <div class="flex-d-c ">
+                        <h2> Booking History </h2>
 
-
-    <div class="flex-d-r">
-        <div class="flex-d-c">
-            <div class="usage flex-d-c">
-                <h2> Booking History </h2>
-
-
-
-
-                <div class="div-6">
-                    <div class="div-wrapper-3">
-                        <table>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Type</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                            </tr>
-
-                            <tr>
-                                <td>Glazers Camping</td>
-                                <td>Upcoming</td>
-                                <td>Equipment</td>
-                                <td>02/12/2023</td>
-                                <td>10.00</td>
-                            </tr>
-
-                            <tr>
-                                <td>Glazers Camping</td>
-                                <td>Upcoming</td>
-                                <td>Equipment</td>
-                                <td>02/12/2023</td>
-                                <td>10.00</td>
-                            </tr>
-
-                            <tr>
-                                <td>Sarath</td>
-                                <td>Done</td>
-                                <td>Guide</td>
-                                <td>01/09/2023</td>
-                                <td>10.00</td>
-                            </tr>
-
-                        </table>
+                        <button type=" submit" class="button" id="see-more">
+                            See More >>
+                        </button>
                     </div>
                 </div>
+
+                <div class="flex-d-c">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+
+                        <tr>
+                            <td>Glazers asdfghjkl;asdfghjklzsxdcfvgbnm,asdfghjkl Camping</td>
+                            <td>Upcoming</td>
+                            <td>Equipment</td>
+                            <td>02/12/2023</td>
+                            <td>10.00</td>
+                        </tr>
+
+                        <tr>
+                            <td>Glazers Camping</td>
+                            <td>Upcoming</td>
+                            <td>Equipment</td>
+                            <td>02/12/2023</td>
+                            <td>10.00</td>
+                        </tr>
+
+                        <tr>
+                            <td>Sarath</td>
+                            <td>Done</td>
+                            <td>Guide</td>
+                            <td>01/09/2023</td>
+                            <td>10.00</td>
+                        </tr>
+
+                    </table>
+                </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+
+
 
 <script>
     var modal = document.getElementById("profile-editor");

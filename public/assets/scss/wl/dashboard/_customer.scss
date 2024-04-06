@@ -410,6 +410,7 @@
     padding-top:30px ;
     padding-left: 50px;
     justify-content: flex-start;
+    padding-bottom: 50px;
   }
 
   .button {
@@ -425,6 +426,7 @@
   font-family: sans-serif;
   align-self:flex-end;
   margin-bottom: 8px;
+  margin-right: 50px;
 
   // Initial background with transparent gradient
   background-image: linear-gradient(to right, $color-light 50%, $color-dark 50%);
@@ -437,4 +439,17 @@
     color: $color-dark;
   }
 }
+}
+
+
+.dashboard-card .equipment-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background-color: $color-white;
 }

@@ -2067,18 +2067,16 @@ fieldset {
   align-items: center;
   min-width: -moz-fit-content;
   min-width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 60px;
+  padding-bottom: 80px;
 }
 .user-profile h1 {
-  font-size: 35px;
+  font-size: 30 px;
   font-weight: bolder;
   color: #526534;
   margin-bottom: 25px;
-}
-.user-profile h2 {
-  font-size: 30px;
-  color: #8D9E6F;
-  font-weight: bold;
-  margin: 1px 0;
 }
 .user-profile p {
   font-size: 20px;
@@ -2088,15 +2086,25 @@ fieldset {
 }
 .user-profile img {
   margin-bottom: 20px;
+  margin-top: 20px;
 }
-.user-profile details {
+.user-profile .user-details {
   color: #526534;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
 }
-.user-profile details p {
+.user-profile .user-details p {
   font-size: 20px;
   color: #8D9E6F;
-  margin: 1px 0;
-  text-align: left;
+  padding-top: 10px;
+}
+.user-profile .user-details h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
 }
 
 .usage {
@@ -2117,33 +2125,34 @@ fieldset {
   flex-grow: inherit;
 }
 .usage h1 {
-  font-size: 70px;
+  font-size: 60px;
   color: #B2BDA0;
+  font-weight: bold;
 }
 .usage h2 {
   font-size: 30px;
   color: #8D9E6F;
   font-weight: bold;
-  margin: 1px 0;
-}
-.usage h3 {
-  font-size: 20px;
-  color: #B2BDA0;
-  margin: 1px 0;
+  padding-top: 30px;
+  padding-left: 50px;
+  justify-content: flex-start;
 }
 
 .usage-card {
-  display: block;
+  display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   min-width: 300px;
-  margin-left: 8px;
-  margin-top: 40px;
-  margin-right: 100;
+  width: 420px;
+  margin: 20px;
   margin-bottom: 1.5rem;
+  margin-top: 4rem;
+  margin-left: 50px;
   padding: 20px;
+  background-color: #EBEFE3;
+  border-radius: 15px;
   background-color: #526534;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -2171,6 +2180,147 @@ fieldset {
 .usage-card .btn:hover {
   background-position: left bottom;
   color: #526534;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  margin-top: 4rem;
+  padding: 20px;
+  background-color: #EBEFE3;
+  border-radius: 15px;
+}
+
+.details {
+  font-size: 20px;
+  color: #B2BDA0;
+  margin: 1px 0;
+  text-align: left;
+  padding-right: 100px;
+}
+
+.usage-block {
+  display: block;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  padding-right: 500px;
+  padding-bottom: 60px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+.usage-block h1 {
+  font-size: 60px;
+  color: #B2BDA0;
+  font-weight: bold;
+}
+.usage-block h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-left: 50px;
+  justify-content: flex-start;
+}
+
+.btn-edit-profile-pic {
+  background-color: #2F3B1C;
+  cursor: pointer;
+  border: 1px;
+  outline: none;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 8px;
+  font-weight: 500;
+  font-size: large;
+  font-family: sans-serif;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #8D9E6F 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.btn-edit-profile-pic:hover {
+  background-position: left bottom;
+  color: #2F3B1C;
+}
+
+.profile-image {
+  width: 500px;
+  margin: 10px;
+}
+
+.recent-booking-details {
+  color: #526534;
+  text-align: left;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+.recent-booking-details p {
+  font-size: 20px;
+  color: #8D9E6F;
+  padding-top: 10px;
+}
+.recent-booking-details h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-left: 50px;
+  justify-content: flex-start;
+  padding-bottom: 50px;
+}
+.recent-booking-details .button {
+  cursor: pointer;
+  border: none;
+  background: #fff;
+  outline: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  margin-right: 50px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #526534 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.recent-booking-details .button:hover {
+  background-position: left bottom;
+  color: #526534;
+}
+
+.dashboard-card .equipment-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background-color: #fff;
 }
 
 .home_main {
@@ -2973,7 +3123,7 @@ fieldset {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #fff;
+  background-color: #B2BDA0;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2988,7 +3138,7 @@ fieldset {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #fff;
+  background-color: #B2BDA0;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2996,7 +3146,7 @@ fieldset {
   height: calc(3.5rem + 2px);
   padding: 0.5rem 1rem;
   font-size: 1.4rem;
-  background-color: #fff;
+  background-color: #EBEFE3;
 }
 
 .form-control:focus {
@@ -3047,6 +3197,7 @@ form {
 form input {
   border: none;
   outline: none;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 400;
@@ -3061,8 +3212,9 @@ form input[type=time],
 form input[type=file],
 form select textarea {
   border: none;
-  background: #fff;
+  background: #EBEFE3;
   outline: none;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 8px 10px;
   font-weight: 400;
@@ -3070,17 +3222,17 @@ form select textarea {
 }
 form textarea {
   resize: none;
-  background: #fff;
+  background: #EBEFE3;
   border-radius: 12px;
-  border: none;
 }
 form textarea.form-control-lg {
   height: 150px;
 }
 form select {
   border: none;
-  background: #fff;
+  background: #B2BDA0;
   outline: none;
+  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -3120,6 +3272,7 @@ input {
   border: none;
   background: #EBEFE3;
   outline: none;
+  color: #6B6E70;
   border: 1px solid #F3F3F3;
   border-radius: 12px;
   padding: 12px 20px;
