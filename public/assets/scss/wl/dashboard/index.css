@@ -431,7 +431,9 @@ fieldset {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-
+  padding: 0;
+  height: -moz-fit-content;
+  height: fit-content;
   background-color: #EBEFE3;
 }
 .dashboard-header {
@@ -2181,21 +2183,6 @@ fieldset {
   color: #526534;
 }
 
-.dashboard {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  min-width: 300px;
-  margin: 20px;
-  margin-bottom: 1.5rem;
-  margin-top: 4rem;
-  padding: 20px;
-  background-color: #EBEFE3;
-  border-radius: 15px;
-}
-
 .details {
   font-size: 20px;
   color: #B2BDA0;
@@ -3359,11 +3346,9 @@ form #error-message {
 form label {
   font-weight: 400;
   text-align: left;
-
   font-size: 18px;
   color: #6B6E70;
   padding: 10px;
-
 }
 
 input {
