@@ -96,6 +96,27 @@
                 <button class="btn-text-green" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
                 <!-- if status pending set show  -->
                 <?php if ($order->status == 'accepted') {
+                    if ($order->rentalservice_req == 'rented') {
+
+                        ?>
+
+<div class="flex-d-c">
+                    <button class="btn btn-primary flex-d btn-danger" id="mark-as-rented" disabled>
+                    Requested
+                    
+
+                </button>
+                    <button class="btn-text-red" id="cancel-rented" >Cancel</button>
+                    </div>
+
+
+<?php
+
+
+                    }else {
+
+                    
+                        
                     
                     ?>
                     <div class="flex-d-c">
@@ -106,7 +127,7 @@
                 </button>
                     <button class="btn-text-red" id="cancel-rented" hidden>Cancel</button>
                     </div>
-                <?php } 
+                <?php } }
                 elseif ($order->status == 'rented') { ?>
                     <button class="btn btn-primary" id="mark-as-returned">Mark as Returned</button>
                 <?php }

@@ -320,6 +320,48 @@ require_once('../app/views/layout/header.php');
         });
     });
 
+    $(document).on('click', '#report-issue-submit', function() {
+        var orderId = $('#issue-form-data').attr('data-id');
+        var data = {
+            order_id: orderId,
+            issues: [],
+            issue_descriptions: [],
+            charges: []
+        };
+
+        $('#issue-form-data .report-item-checkbox').each(function() {
+            if ($(this).is(':checked')) {
+                var id = $(this).closest('tr').attr('data-id');
+                var issueDescription = $(this).closest('tr').find('textarea').val();
+                var charge = $(this).closest('tr').find('input[type="number"]').val();
+
+                data.issues.push(id);
+                data.issue_descriptions.push(issueDescription);
+                data.charges.push(charge);
+            }
+        });
+
+        console.log(data);
+
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/reportReturnIssueByRentalservice',
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                console.log(response);
+                $('#report-issue-modal').hide();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+
 
 
 
