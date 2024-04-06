@@ -13,6 +13,7 @@ BEGIN
     SET @baseQuery = "FROM rent 
                       JOIN rent_pay ON rent.id = rent_pay.rent_id
                       JOIN payment ON rent_pay.payment_id = payment.id
+                      JOIN rent_request ON rent.id = rent_request.rent_id
                       WHERE rent.rentalservice_id = ? 
                       AND payment.status = 'completed' ";
 
@@ -50,7 +51,7 @@ BEGIN
             SET @specificFilter = "";
     END CASE;
 
-    SET @SQL = CONCAT("SELECT rent.*, payment.status AS payment_status ", @baseQuery, @specificFilter);
+    SET @SQL = CONCAT("SELECT rent.*, payment.status AS payment_status, rent_request.customer_req AS customer_req, rent_request.rentalservice_req AS rentalservice_req ", @baseQuery, @specificFilter);
     PREPARE stmt FROM @SQL;
     SET @rentalserviceID = rentalserviceID;
     EXECUTE stmt USING @rentalserviceID;
