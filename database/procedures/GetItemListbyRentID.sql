@@ -5,7 +5,8 @@ BEGIN
     SELECT 
         e.id AS `equipment_id`, 
         e.name AS `equipment_name`,
-        i.item_number AS `item_number`
+        i.item_number AS `item_number`,
+        e.cost AS `equipment_cost`,
     FROM 
         rent_item ri
     INNER JOIN item i ON ri.item_id = i.id

@@ -41,10 +41,17 @@
                     <textarea name="issue_description[]" class="form-control-lg" disabled></textarea>
                 </td>
                 <td>
-                    <input type="text" name="charge[]" class="form-control-lg" disabled>
+                    <!-- <input type="text" name="charge[]" class="form-control-lg" disabled> -->
+                    <!-- Price with constraints min 0, max 1000, step 0.01 -->
+                    <input type="number" name="charge[]" class="form-control-lg" min="0" max="<?php echo $item->equipment_cost ?>" step="0.01" disabled>
+
+
                 </td> 
             </tr>
+            <!-- submit -->
+
         <?php } ?>
+
     </tbody>
 
     <script>
@@ -52,11 +59,13 @@
         // if checkbox is checked, enable the input field
         $('.report-item-checkbox').on('change', function() {
             if($(this).is(':checked')) {
-                $(this).closest('tr').find('input[type="text"]').prop('disabled', false);
+                // $(this).closest('tr').find('input[type="text"]').prop('disabled', false);
+                $(this).closest('tr').find('input[type="number"]').prop('disabled', false);
                 // textarea
                 $(this).closest('tr').find('textarea').prop('disabled', false);
             } else {
-                $(this).closest('tr').find('input[type="text"]').prop('disabled', true);
+                // $(this).closest('tr').find('input[type="text"]').prop('disabled', true);
+                $(this).closest('tr').find('input[type="number"]').prop('disabled', true);
                 // textarea
                 $(this).closest('tr').find('textarea').prop('disabled', true);
             }
@@ -67,3 +76,4 @@
     
 
 </table>
+<button class="btn btn-primary" id="report-issue-submit">Report Issue</button>

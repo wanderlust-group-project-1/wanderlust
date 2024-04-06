@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 05, 2024 at 10:52 AM
+-- Generation Time: Apr 06, 2024 at 02:10 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -163,6 +163,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID
     SET @baseQuery = "FROM rent 
                       JOIN rent_pay ON rent.id = rent_pay.rent_id
                       JOIN payment ON rent_pay.payment_id = payment.id
+                      JOIN rent_request ON rent.id = rent_request.rent_id
                       WHERE rent.rentalservice_id = ? 
                       AND payment.status = 'completed' ";
 
@@ -200,7 +201,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID
             SET @specificFilter = "";
     END CASE;
 
-    SET @SQL = CONCAT("SELECT rent.*, payment.status AS payment_status ", @baseQuery, @specificFilter);
+    SET @SQL = CONCAT("SELECT rent.*, payment.status AS payment_status, rent_request.customer_req AS customer_req, rent_request.rentalservice_req AS rentalservice_req ", @baseQuery, @specificFilter);
     PREPARE stmt FROM @SQL;
     SET @rentalserviceID = rentalserviceID;
     EXECUTE stmt USING @rentalserviceID;
@@ -211,7 +212,8 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetItemListbyRentID` (IN `rent_id` INT)   B
     SELECT 
         e.id AS `equipment_id`, 
         e.name AS `equipment_name`,
-        i.item_number AS `item_number`
+        i.item_number AS `item_number`,
+        e.cost AS `equipment_cost`
     FROM 
         rent_item ri
     INNER JOIN item i ON ri.item_id = i.id
@@ -2227,10 +2229,10 @@ INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_
 (63, 32, 56, '2024-02-25', '2024-02-29', 'completed', NULL, 4100.00, 0.00, '2024-02-27 10:19:40', '2024-02-25 07:31:42'),
 (64, 32, 25, '2024-02-25', '2024-02-28', 'accepted', NULL, 3910.00, 0.00, '2024-02-25 10:25:23', '2024-02-25 10:24:39'),
 (65, 32, 56, '2024-02-25', '2024-02-28', 'accepted', NULL, 1400.00, 0.00, '2024-02-27 04:19:54', '2024-02-25 10:24:39'),
-(66, 32, 25, '2024-02-28', '2024-02-29', 'accepted', NULL, 1310.00, 0.00, '2024-02-25 10:28:56', '2024-02-25 10:28:02'),
+(66, 32, 25, '2024-02-28', '2024-02-29', 'rented', NULL, 1310.00, 0.00, '2024-04-06 11:24:04', '2024-02-25 10:28:02'),
 (67, 32, 56, '2024-02-21', '2024-02-29', 'pending', NULL, 2900.00, 0.00, '2024-02-27 09:16:40', '2024-02-27 09:16:40'),
-(68, 32, 25, '2024-02-21', '2024-02-29', 'pending', NULL, 10410.00, 0.00, '2024-02-27 09:16:40', '2024-02-27 09:16:40'),
-(69, 32, 25, '2024-02-29', '2024-03-01', 'pending', NULL, 1310.00, 0.00, '2024-02-27 09:21:57', '2024-02-27 09:21:57'),
+(68, 32, 25, '2024-02-21', '2024-02-29', 'accepted', NULL, 10410.00, 0.00, '2024-04-06 10:25:38', '2024-02-27 09:16:40'),
+(69, 32, 25, '2024-02-29', '2024-03-01', 'cancelled', NULL, 1310.00, 0.00, '2024-04-06 10:27:17', '2024-02-27 09:21:57'),
 (70, 32, 56, '2024-02-29', '2024-03-01', 'accepted', NULL, 1700.00, 0.00, '2024-02-27 09:23:24', '2024-02-27 09:21:57'),
 (71, 32, 25, '2024-04-11', '2024-04-26', 'pending', NULL, 69027.00, 0.00, '2024-04-05 05:39:54', '2024-04-05 05:39:54'),
 (72, 32, 56, '2024-04-11', '2024-04-26', 'pending', NULL, 142900.00, 0.00, '2024-04-05 05:39:54', '2024-04-05 05:39:54');
@@ -2569,12 +2571,12 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 (2, 61, NULL, NULL, '2024-02-24 18:37:48'),
 (3, 62, NULL, 'cancelled', '2024-02-25 07:52:01'),
 (4, 63, 'rented', 'completed', '2024-02-27 10:19:40'),
-(5, 64, NULL, 'accepted', '2024-02-25 10:25:23'),
+(5, 64, NULL, NULL, '2024-04-06 10:22:37'),
 (6, 65, NULL, 'rented', '2024-02-27 04:59:37'),
-(7, 66, NULL, 'rented', '2024-02-27 10:18:51'),
+(7, 66, 'rented', 'rented', '2024-04-06 11:24:04'),
 (8, 67, NULL, NULL, '2024-02-27 09:16:40'),
-(9, 68, NULL, NULL, '2024-02-27 09:16:40'),
-(10, 69, NULL, NULL, '2024-02-27 09:21:57'),
+(9, 68, NULL, 'rented', '2024-04-06 10:26:01'),
+(10, 69, NULL, 'cancelled', '2024-04-06 10:27:17'),
 (11, 70, NULL, 'accepted', '2024-02-27 09:23:24'),
 (12, 71, NULL, NULL, '2024-04-05 05:39:54'),
 (13, 72, NULL, NULL, '2024-04-05 05:39:54');
