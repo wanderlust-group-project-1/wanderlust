@@ -447,8 +447,9 @@ function setNewDate(start, end) {
     // Add to Cart Button click event
     $(document).on('click', '#add-to-cart', function() {
         console.log("add to cart clicked");
-        var id = $(this).closest('.rent-item-card').attr('data-id');
+        var id = $(this).closest('#rent-item-details').attr('data-id');
         console.log(id);
+        var count = $(this).closest('#rent-item-details').find('#item-count').val() || 1;
 
         $.ajax({
             headers: {
@@ -458,15 +459,17 @@ function setNewDate(start, end) {
             url: '<?= ROOT_DIR ?>/api/cart/addItem',
             method: 'POST',
             data: JSON.stringify({
-                equipment_id: id
+                equipment_id: id,
+                count: count
+
             }),
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 disableButton(id);
                 getCartCount();
             },
             error: function(err) {
-                console.log(err);
+                // console.log(err);
             }
         });
 
@@ -513,9 +516,42 @@ function setNewDate(start, end) {
     
 
 
+    $(document).on('click', '#rent-item-card', function() {
+
+        var id = $(this).attr('data-id');
+        console.log(id);
+
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/rent/item/' + id,
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+                $('#equipment-details').html(data);
+                $('#equipment-details-modal').css('display', 'block');
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+        
+
+
+    })
+  
+
+
 
 
 
 
 
 </script>
+
+
+<?php
+require_once('../app/views/layout/footer.php');
+
+?>

@@ -110,6 +110,26 @@ class QueryBuilder
         return $this;
     }
 
+    public function orderBy(string $column, string $order = "ASC"): self
+    {
+        $this->query .= " ORDER BY $column $order";
+        return $this;
+    }
+
+
+    public function append(string $query): self
+    {
+        $this->query .= " $query";
+        return $this;
+    }
+
+    // data append 
+    public function addData(array $data): self
+    {
+        $this->data = array_merge($this->data, $data);
+        return $this;
+    }
+
 
 
     public function setTable(string $table): self

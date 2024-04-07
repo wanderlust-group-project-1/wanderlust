@@ -86,10 +86,10 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 @mixin modal-content-common {
-  background-color: $color-lighter;
+  // background-color: $color-lighter;
   margin: 5% auto;
   padding: 20px;
-  border: $modal-content-border;
+  // border: $modal-content-border;
   width: 80%;
   position: relative;
   border-radius: $border-radius-default;
@@ -226,8 +226,11 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   justify-content: flex-start;
   // margin-top: 50px;
   width: 100%;
+  // height: 100%;
+  padding: 0;
+
   height: fit-content;
-  // padding: 10px;
+
   background-color: $color-lighter;
 
   &-header {
@@ -711,4 +714,11 @@ $box-shadow-color: rgba(0,0,0,0.2);
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
+}
+
+.order-payment-status {
+  font-family: sans-serif, "poppins";
+  color: $gray-text;
+  font-size: $header4;
+  color: $gray-text-darker;
 }

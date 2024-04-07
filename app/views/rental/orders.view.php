@@ -32,17 +32,16 @@ require_once('../app/views/layout/header.php');
                     <!-- Section Switch  Upcoming lented Completed -->
 
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
-                        <button class="btn btn-primary active " id="pending">Pending</button>
-                        <button class="btn btn-primary " id="today">Today</button>
-                        <button class="btn btn-primary " id="upcoming">Upcoming</button>
-                        <button class="btn btn-primary" id="rented">Rented</button>
-                        <button class="btn btn-primary" id="completed">Completed</button>
-                        <button class="btn btn-primary" id="cancelled">Cancelled</button>
+                        <button class="btn-selected" id="pending">Pending</button>
+                        <button class="btn-selected" id="upcoming">Upcoming</button>
+                        <button class="btn-selected" id="rented">Rented</button>
+                        <button class="btn-selected" id="completed">Completed</button>
+                        <button class="btn-selected" id="cancelled">Cancelled</button>
                         
-                        <button class="btn btn-primary" id="all">All</button>
+                        <button class="btn-selected" id="all">All</button>
 
                         <!-- not rented yet -->
-                        <button class="btn btn-primary" id="not-rented">Not Rented</button>
+                        <button class="btn-selected" id="not-rented">Not Rented</button>
 
                     </div>
 
@@ -321,9 +320,100 @@ require_once('../app/views/layout/header.php');
         });
     });
 
+    $(document).on('click', '#report-issue-submit', function() {
+        var orderId = $('#issue-form-data').attr('data-id');
+        var data = {
+            order_id: orderId,
+            issues: [],
+            issue_descriptions: [],
+            charges: []
+        };
+
+        $('#issue-form-data .report-item-checkbox').each(function() {
+            if ($(this).is(':checked')) {
+                var id = $(this).closest('tr').attr('data-id');
+                var issueDescription = $(this).closest('tr').find('textarea').val();
+                var charge = $(this).closest('tr').find('input[type="number"]').val();
+
+                data.issues.push(id);
+                data.issue_descriptions.push(issueDescription);
+                data.charges.push(charge);
+            }
+        });
+
+        console.log(data);
+
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/reportReturnIssueByRentalservice',
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                console.log(response);
+                $('#report-issue-modal').hide();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
 
 
 
+
+
+
+
+
+    // jQuery for filter order
+
+// Filter order card
+// $('#filter-order-button').click(function() {
+    $(document).on('click', '#filter-order-button', function() {
+    let start_date = $('#start-date').val();
+    let end_date = $('#end-date').val();
+    
+
+    console.log(start_date, end_date, status);
+
+    // Get Orders
+    
+    // from all order-cards
+    let orderCards = $('.order-card-item');
+
+    // loop through all order-cards
+    orderCards.each(function() {
+        let orderCard = $(this);
+        // let orderStartDate = orderCard.find('.order-body .order-dates').text().split(' ')[1];
+        // let orderEndDate = orderCard.find('.order-body .order-dates').text().split(' ')[3];
+        let orderStartDate = orderCard.find('.order-body .order-dates').attr('data-start');
+        let orderEndDate = orderCard.find('.order-body .order-dates').attr('data-end');
+        // convert date to timestamp
+        // let orderStartDate = new Date(orderCard.find('.order-body .order-dates').attr('data-start')).getTime();
+        // let orderEndDate = new Date(orderCard.find('.order-body .order-dates').attr('data-end')).getTime();
+        let orderStatus = orderCard.find('.order-header .order-status').text().split(' ')[1];
+
+        // console.log(orderStartDate, orderEndDate, orderStatus);
+
+
+        // if start date and end date is not empty
+        if (start_date != '' && end_date != '') {
+
+            console.log(orderStartDate, start_date, orderEndDate, end_date);
+            // check if order start date is greater than or equal to start date and order end date is less than or equal to end date
+            if (orderStartDate >= start_date && orderEndDate <= end_date) {
+                // show order-card
+                orderCard.show();
+            } else {
+                // hide order-card
+                orderCard.hide();
+            }
+        }
+    });
+
+});
 
 </script>
 

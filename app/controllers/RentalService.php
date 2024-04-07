@@ -54,9 +54,12 @@ class RentalService {
         $rental = new RentalServiceModel;
         $data = [
             'rental' => $rental->getRentalService($a)[0],
+            'stat' => $rental->getRentalServiceStat($a)[0],
         ];
 
+
         // show($data);
+        show($data['stat']);
 
 
 
@@ -80,6 +83,10 @@ class RentalService {
         $data["equipments"] = $equipment->rentalServiceEquipments($data);
 
         // show($data);
+
+        foreach ($data['equipments'] as $equipment) {
+            $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
+        }
 
 
 

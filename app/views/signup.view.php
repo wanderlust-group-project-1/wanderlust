@@ -121,14 +121,14 @@ require_once('../app/views/components/navbar-auth.php');
                         
                             <script>
                                 let eyeicon = document.getElementById("eyeicon");
-                                let password = document.getElementById("password");
+                                let passwordc = document.getElementById("password");
 
                                 eyeicon.onclick = function() {
-                                    if(password.type == "password"){
-                                        password.type = "text";
+                                    if(passwordc.type == "password"){
+                                        passwordc.type = "text";
                                         eyeicon.className = "fa fa-eye";
                                     }else{
-                                        password.type = "password";
+                                        passwordc.type = "password";
                                         eyeicon.className =  "fa fa-eye-slash";
                                     }
                                 }
@@ -232,13 +232,13 @@ require_once('../app/views/components/navbar-auth.php');
         
                 <script>
                     let eyeicon = document.getElementById("eyeicon");
-                    let password = document.getElementById("password");
+                    let passwordg = document.getElementById("password");
                         eyeicon.onclick = function() {
-                            if(password.type == "password"){
-                                password.type = "text";
+                            if(passwordg.type == "password"){
+                                passwordg.type = "text";
                                 eyeicon.className = "fa fa-eye";
                             }else{
-                                password.type = "password";
+                                passwordg.type = "password";
                                 eyeicon.className =  "fa fa-eye-slash";
                             }
                         }
@@ -342,15 +342,15 @@ require_once('../app/views/components/navbar-auth.php');
         
                 <script>
                     let eyeicon = document.getElementById("eyeicon");
-                    let password = document.getElementById("password");
+                    let passwordr = document.getElementById("password");
 
                     eyeicon.onclick = function() {
-                        if(password.type == "password"){
-                            password.type = "text";
+                        if(passwordr.type == "password"){
+                            passwordr.type = "text";
                             eyeicon.className = "fa fa-eye";
 
                         }else{
-                            password.type = "password";
+                            passwordr.type = "password";
                             eyeicon.className =  "fa fa-eye-slash";
                         }
                     }
