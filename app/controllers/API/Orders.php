@@ -125,5 +125,34 @@ class Orders {
 
     }
 
+    public function submitReturnIssue(string $a = '', string $b = '', string $c = ''):void {
+ 
+        $request = new JSONRequest;
+        $response = new JSONResponse;
+        $data = $request->getAll();
+
+        $values = [
+            'rent_id' => $data['order_id'],
+            'complains' => json_encode([
+                'issues' => $data['issues'],
+                'issue_descriptions' => $data['issue_descriptions'],
+                'charges' => $data['charges']
+            ]),
+            'charge' => array_sum($data['charges'])
+        ];
+
+    
+        $rentreturnissue = new RentReturnIssueModel;
+        $rentreturnissue->createReturnIssue($values);
+
+
+
+
+
+
+        // $rent->updateRentStatus($data);
+
+        // $this->redirect('myOrders/viewOrder/' . $a);
+    }
 
 }
