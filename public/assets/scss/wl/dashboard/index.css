@@ -2065,12 +2065,11 @@ fieldset {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 50%;
+  padding-left: 100px;
+  padding-right: 100px;
   padding-top: 60px;
-  padding-bottom: 80px;
+  padding-bottom: 60px;
 }
 .user-profile h1 {
   font-size: 30 px;
@@ -2079,17 +2078,46 @@ fieldset {
   margin-bottom: 25px;
 }
 .user-profile p {
-  font-size: 20px;
+  font-size: 30px;
   color: #8D9E6F;
-  margin: 1px 0;
-  text-align: left;
+  text-align: center;
 }
 .user-profile img {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  border-radius: 50%;
+  background-size: 100% 100%;
+  border: 8px solid #526534;
+}
+.user-profile .container {
+  position: relative;
+  width: 100%;
+}
+.user-profile .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #526534;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: 0.5s ease;
+}
+.user-profile .container:hover .overlay {
+  width: 100%;
+}
+.user-profile .text {
+  white-space: nowrap;
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  overflow: hidden;
+  font-style: italic;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 .user-profile .user-details {
-  color: #526534;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -2100,11 +2128,16 @@ fieldset {
   font-size: 20px;
   color: #8D9E6F;
   padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 5 point;
 }
 .user-profile .user-details h2 {
   font-size: 30px;
-  color: #8D9E6F;
+  color: #526534;
   font-weight: bold;
+  text-align: left;
+  justify-content: left;
+  flex-direction: row;
 }
 
 .usage {
@@ -2116,7 +2149,6 @@ fieldset {
   min-width: 300px;
   margin: 20px;
   margin-bottom: 1.5rem;
-  padding: 20px;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -2182,11 +2214,10 @@ fieldset {
   color: #526534;
 }
 
-.dashboard {
+.profile {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
   flex-wrap: wrap;
   min-width: 300px;
   margin: 20px;
@@ -2208,13 +2239,16 @@ fieldset {
 .usage-block {
   display: block;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   min-width: 300px;
-  margin: 20px;
+  margin: 10px;
   margin-bottom: 1.5rem;
-  padding-right: 500px;
-  padding-bottom: 60px;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  padding-left: 100px;
+  padding-right: 100px;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -2259,11 +2293,6 @@ fieldset {
   color: #2F3B1C;
 }
 
-.profile-image {
-  width: 500px;
-  margin: 10px;
-}
-
 .recent-booking-details {
   color: #526534;
   text-align: left;
@@ -2271,15 +2300,16 @@ fieldset {
   align-items: left;
   flex-direction: column;
   padding-left: 50px;
+  padding-right: 100px;
   padding-bottom: 50px;
 }
 .recent-booking-details p {
-  font-size: 20px;
+  font-size: 25px;
   color: #8D9E6F;
   padding-top: 10px;
 }
 .recent-booking-details h2 {
-  font-size: 30px;
+  font-size: 20px;
   color: #8D9E6F;
   font-weight: bold;
   padding-top: 30px;
@@ -2311,16 +2341,52 @@ fieldset {
   color: #526534;
 }
 
-.dashboard-card .equipment-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+.usage-details {
+  color: #526534;
+  text-align: left;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+  width: 1580px;
+}
+.usage-details p {
+  font-size: 25px;
+  color: #8D9E6F;
+  padding-top: 10px;
+}
+.usage-details h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-left: 50px;
   justify-content: flex-start;
-  width: 100%;
-  height: auto;
-  padding: 0;
-  background-color: #fff;
+}
+.usage-details .button {
+  cursor: pointer;
+  border: none;
+  background: #fff;
+  outline: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  margin-right: 50px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #526534 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.usage-details .button:hover {
+  background-position: left bottom;
+  color: #526534;
 }
 
 .home_main {
