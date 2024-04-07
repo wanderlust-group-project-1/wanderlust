@@ -321,7 +321,8 @@ require_once('../app/views/layout/header.php');
     });
 
     $(document).on('click', '#report-issue-submit', function() {
-        var orderId = $('#issue-form-data').attr('data-id');
+        // var orderId = $('#issue-form-data').attr('data-id');
+        var orderId = $('#report-issue-table').attr('data-order-id');
         var data = {
             order_id: orderId,
             issues: [],
@@ -347,9 +348,10 @@ require_once('../app/views/layout/header.php');
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/api/orders/reportReturnIssueByRentalservice',
+            url: '<?= ROOT_DIR ?>/api/orders/submitReturnIssue',
             type: 'POST',
-            data: data,
+            data: JSON.stringify(data),
+            contentType: 'application/json',
             success: function(response) {
                 console.log(response);
                 $('#report-issue-modal').hide();
