@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 06, 2024 at 02:10 PM
+-- Generation Time: Apr 07, 2024 at 01:51 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -2155,7 +2155,7 @@ CREATE TABLE `rent` (
   `rentalservice_id` int NOT NULL DEFAULT '25',
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `status` enum('pending','rented','completed','cancelled','accepted') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'pending',
+  `status` enum('pending','rented','completed','cancelled','accepted','return_reported','rent_reported') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'pending',
   `sub_status` varchar(255) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
   `paid_amount` decimal(10,2) DEFAULT NULL,
@@ -2229,7 +2229,7 @@ INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_
 (63, 32, 56, '2024-02-25', '2024-02-29', 'completed', NULL, 4100.00, 0.00, '2024-02-27 10:19:40', '2024-02-25 07:31:42'),
 (64, 32, 25, '2024-02-25', '2024-02-28', 'accepted', NULL, 3910.00, 0.00, '2024-02-25 10:25:23', '2024-02-25 10:24:39'),
 (65, 32, 56, '2024-02-25', '2024-02-28', 'accepted', NULL, 1400.00, 0.00, '2024-02-27 04:19:54', '2024-02-25 10:24:39'),
-(66, 32, 25, '2024-02-28', '2024-02-29', 'rented', NULL, 1310.00, 0.00, '2024-04-06 11:24:04', '2024-02-25 10:28:02'),
+(66, 32, 25, '2024-02-28', '2024-02-29', 'return_reported', NULL, 1310.00, 0.00, '2024-04-07 08:15:12', '2024-02-25 10:28:02'),
 (67, 32, 56, '2024-02-21', '2024-02-29', 'pending', NULL, 2900.00, 0.00, '2024-02-27 09:16:40', '2024-02-27 09:16:40'),
 (68, 32, 25, '2024-02-21', '2024-02-29', 'accepted', NULL, 10410.00, 0.00, '2024-04-06 10:25:38', '2024-02-27 09:16:40'),
 (69, 32, 25, '2024-02-29', '2024-03-01', 'cancelled', NULL, 1310.00, 0.00, '2024-04-06 10:27:17', '2024-02-27 09:21:57'),
@@ -2623,6 +2623,39 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rent_return_issues`
+--
+
+CREATE TABLE `rent_return_issues` (
+  `id` int NOT NULL,
+  `rent_id` int NOT NULL,
+  `complains` json NOT NULL,
+  `charge` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `rent_return_issues`
+--
+
+INSERT INTO `rent_return_issues` (`id`, `rent_id`, `complains`, `charge`) VALUES
+(1, 66, '{\"issues\": [\"25\"], \"charges\": [\"500\"], \"issue_descriptions\": [\"euifdc jfjf \"]}', 500.00),
+(2, 66, '{\"issues\": [\"25\", \"33\"], \"charges\": [\"4500\", \"400\"], \"issue_descriptions\": [\"helloe\", \"abc\"]}', 4900.00);
+
+--
+-- Triggers `rent_return_issues`
+--
+DELIMITER $$
+CREATE TRIGGER `AfterRentReturnIssueInsert` AFTER INSERT ON `rent_return_issues` FOR EACH ROW BEGIN
+    UPDATE rent
+    SET status = 'return_reported'
+    WHERE id = NEW.rent_id;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tips`
 --
 
@@ -2969,6 +3002,12 @@ ALTER TABLE `rent_request`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rent_return_issues`
+--
+ALTER TABLE `rent_return_issues`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tips`
 --
 ALTER TABLE `tips`
@@ -3067,6 +3106,12 @@ ALTER TABLE `rent_pay`
 --
 ALTER TABLE `rent_request`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `rent_return_issues`
+--
+ALTER TABLE `rent_return_issues`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tips`
