@@ -29,6 +29,7 @@
             //   border: 3px solid #56A8CB;
               padding: 3px;
               margin-bottom: 20px;
+
           }
           max-height: 300px;
           overflow: hidden;
@@ -76,7 +77,6 @@
     height: 100%;
     padding: 0;
     // background-color: $color-light-gray;
-
   
     &-header {
       display: flex;
@@ -108,7 +108,6 @@
     .rent-item-card {
         @include rent-item-common;
       }
-
 
     // media queries
 
@@ -156,11 +155,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: fit-content;
-  padding-left: 10px;
-  padding-right: 10px;
+  // min-width: 100%;
+  width : 50%;
+  padding-left: 100px;
+  padding-right: 100px;
   padding-top: 60px;
-  padding-bottom: 80px;
+  padding-bottom: 60px;
 
    h1 {
     font-size: 30 px;
@@ -170,35 +170,82 @@
   }
 
   p {
-    font-size: 20px;
+    font-size: 30px;
     color: $color-primary;
-    margin: 1px 0;
-    text-align: left;
+    // margin: 1px 0;
+    text-align: center;
   }
 
   img{
-    margin-bottom: 20px;
-    margin-top: 20px;
+    // margin-bottom: 20px;
+    // margin-top: 20px;
+    // max-width: 100%;
+    // height: 100%
+    // padding: 10px;
+    border-radius: 50%;
+    background-size: 100% 100%;
+    border: 8px solid $color-dark;
+    // justify-content: center;
   }
+
+  .container {
+  position: relative;
+  width: 100%;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-dark;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.container:hover .overlay {
+  width: 100%;
+}
+
+.text {
+  white-space: nowrap; 
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  overflow: hidden;
+  font-style: italic;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
 
   .user-details{
 
-    color: $color-dark;
+    // color: $color-dark;
     text-align:center;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding-top: 50px;
+
       p {
     font-size: 20px;
     color: $color-primary;
     padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 5 point;
   //  margin: 1px 0;
   }
     h2 {
     font-size: 30px;
-    color: $color-primary;
+    color: $color-dark;
     font-weight: bold;
+    text-align: left;
+    justify-content: left;
+    flex-direction: row;
     // margin: 1px 0;
   }
 
@@ -214,7 +261,7 @@
     min-width: 300px;
     margin: 20px;
     margin-bottom: 1.5rem;
-    padding: 20px;
+    // padding-right: 50px;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -295,20 +342,23 @@
 }
 }
 
-// .dashboard {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-around;
-//   flex-wrap: wrap;
-//   min-width: 300px;
-//   margin: 20px;
-//   margin-bottom: 1.5rem;
-//   margin-top: 4rem;
-//   padding: 20px;
-//   background-color: $color-lighter;
-//   border-radius: 15px;
-// }
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: space-around;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  margin-top: 4rem;
+  padding: 20px;
+  
+  background-color: $color-lighter;
+  border-radius: 15px;
+}
+
 
 .details {
       font-size: 20px;
@@ -319,17 +369,18 @@
 }
 
 .usage-block{
-    display: block;
+   display: block;
     flex-direction: row;
-    align-items:flex-start;
-    // justify-content: ;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     min-width: 300px;
-    margin: 20px;
+    margin: 10px;
     margin-bottom: 1.5rem;
-    // padding: 20px;
-    padding-right: 500px;
-    padding-bottom: 60px;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -383,10 +434,10 @@
   }
 }
 
-.profile-image{
-  width: 500px;
-  margin: 10px;
-}
+// .profile-image{
+//   width: 500px;
+//   margin: 10px;
+// }
 
 .recent-booking-details {
     color: $color-dark;
@@ -395,10 +446,80 @@
     align-items: left;
     flex-direction: column;
     padding-left: 50px;
+    padding-right: 100px;
     padding-bottom: 50px;
     
       p {
+    font-size: 25px;
+    color: $color-primary;
+    padding-top: 10px;
+  //  margin: 1px 0;
+  }
+    h2 {
     font-size: 20px;
+    color: $color-primary;
+    font-weight: bold;
+    padding-top:30px ;
+    padding-left: 50px;
+    justify-content: flex-start;
+    padding-bottom: 50px;
+  }
+
+  .button {
+  cursor: pointer;
+  border: none;
+  background: $color-white;
+  outline: none;
+  color: $color-white;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self:flex-end;
+  margin-bottom: 8px;
+  margin-right: 50px;
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $color-light 50%, $color-dark 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $color-dark;
+  }
+}
+}
+
+
+// .dashboard-card .equipment-list {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   align-items: center;
+//   justify-content: flex-start;
+//   width: 100%;
+//   height: auto;
+//   padding: 0;
+//   background-color: $color-white;
+// }
+
+
+.usage-details {
+    color: $color-dark;
+    text-align:left;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 100px;
+    padding-bottom: 50px;
+    width: 1580px;
+    
+      p {
+    font-size: 25px;
     color: $color-primary;
     padding-top: 10px;
   //  margin: 1px 0;
@@ -425,6 +546,7 @@
   font-family: sans-serif;
   align-self:flex-end;
   margin-bottom: 8px;
+  margin-right: 50px;
 
   // Initial background with transparent gradient
   background-image: linear-gradient(to right, $color-light 50%, $color-dark 50%);
