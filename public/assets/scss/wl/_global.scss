@@ -381,3 +381,11 @@ body {
   font-size: $bigger-text;
   
 }
+
+label {
+  font-size: $header4;
+  margin-top: 5px;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: center; 
+}
