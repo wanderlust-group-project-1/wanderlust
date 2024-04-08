@@ -151,8 +151,9 @@ form {
         outline: none;
         color: $gray-text;
         border-radius: 12px;
-        padding: 12px 20px;
-        font-weight: 600;
+        padding: 8px 10px;
+        font-weight: 400;
+        color: $font-grey;
 
         option {
             color: $gray-text;

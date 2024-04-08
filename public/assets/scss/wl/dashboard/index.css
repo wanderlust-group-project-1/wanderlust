@@ -3350,8 +3350,9 @@ form select {
   outline: none;
   color: #6B6E70;
   border-radius: 12px;
-  padding: 12px 20px;
-  font-weight: 600;
+  padding: 8px 10px;
+  font-weight: 400;
+  color: #6B6E70;
 }
 form select option {
   color: #6B6E70;
@@ -3404,6 +3405,49 @@ input.invert {
 .img-fluid {
   max-width: 100%;
   height: auto;
+}
+
+.emptycart-container {
+  position: relative;
+  padding: 25%;
+}
+.emptycart-container .emptycart {
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.cart-item-name {
+  font-weight: 600;
+  margin: 5px;
+}
+
+.cart-item-description {
+  font-style: italic;
+  margin: 5px;
+}
+
+.cart-item-price {
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.cart-item-price input {
+  max-width: 25%;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-count {
+  justify-content: center;
+}
+.item-count input {
+  max-width: 25%;
 }
 
 .justify-content-between {
