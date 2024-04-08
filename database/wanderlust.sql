@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 07, 2024 at 01:51 PM
+-- Generation Time: Apr 08, 2024 at 02:10 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -2623,29 +2623,31 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rent_return_issues`
+-- Table structure for table `rent_return_complaints`
 --
 
-CREATE TABLE `rent_return_issues` (
+CREATE TABLE `rent_return_complaints` (
   `id` int NOT NULL,
   `rent_id` int NOT NULL,
   `complains` json NOT NULL,
-  `charge` decimal(10,2) NOT NULL
+  `charge` decimal(10,2) NOT NULL,
+  `description` text,
+  `status` enum('pending','resolved','rejected','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `rent_return_issues`
+-- Dumping data for table `rent_return_complaints`
 --
 
-INSERT INTO `rent_return_issues` (`id`, `rent_id`, `complains`, `charge`) VALUES
-(1, 66, '{\"issues\": [\"25\"], \"charges\": [\"500\"], \"issue_descriptions\": [\"euifdc jfjf \"]}', 500.00),
-(2, 66, '{\"issues\": [\"25\", \"33\"], \"charges\": [\"4500\", \"400\"], \"issue_descriptions\": [\"helloe\", \"abc\"]}', 4900.00);
+INSERT INTO `rent_return_complaints` (`id`, `rent_id`, `complains`, `charge`, `description`, `status`) VALUES
+(1, 66, '{\"issues\": [\"25\"], \"charges\": [\"500\"], \"issue_descriptions\": [\"euifdc jfjf \"]}', 500.00, NULL, 'pending'),
+(2, 66, '{\"issues\": [\"25\", \"33\"], \"charges\": [\"4500\", \"400\"], \"issue_descriptions\": [\"helloe\", \"abc\"]}', 4900.00, NULL, 'pending');
 
 --
--- Triggers `rent_return_issues`
+-- Triggers `rent_return_complaints`
 --
 DELIMITER $$
-CREATE TRIGGER `AfterRentReturnIssueInsert` AFTER INSERT ON `rent_return_issues` FOR EACH ROW BEGIN
+CREATE TRIGGER `AfterRentReturnIssueInsert` AFTER INSERT ON `rent_return_complaints` FOR EACH ROW BEGIN
     UPDATE rent
     SET status = 'return_reported'
     WHERE id = NEW.rent_id;
@@ -3002,9 +3004,9 @@ ALTER TABLE `rent_request`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rent_return_issues`
+-- Indexes for table `rent_return_complaints`
 --
-ALTER TABLE `rent_return_issues`
+ALTER TABLE `rent_return_complaints`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3108,9 +3110,9 @@ ALTER TABLE `rent_request`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `rent_return_issues`
+-- AUTO_INCREMENT for table `rent_return_complaints`
 --
-ALTER TABLE `rent_return_issues`
+ALTER TABLE `rent_return_complaints`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
