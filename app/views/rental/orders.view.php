@@ -290,23 +290,23 @@ require_once('../app/views/layout/header.php');
     });
 
 
-    //  Returned Report Issue
+    //  Returned Report Complaint
 
-    $(document).on('click', '#report-return-issue', function() {
+    $(document).on('click', '#report-return-complaint', function() {
         var orderId = $('#mark-as-returned-modal').attr('data-id');
         console.log(orderId);
         $.ajax({
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/orders/reportReturnIssueByRentalservice/' + orderId,
+            url: '<?= ROOT_DIR ?>/orders/reportReturnComplaintByRentalservice/' + orderId,
             type: 'GET',
             success: function(response) {
 
-                $('#issue-form-data').attr('data-id', orderId);
+                $('#complaint-form-data').attr('data-id', orderId);
 
-                $('#report-issue-modal').show();
-                $('#issue-form-data').html(response);
+                $('#report-complaint-modal').show();
+                $('#complaint-form-data').html(response);
 
 
 
@@ -320,24 +320,24 @@ require_once('../app/views/layout/header.php');
         });
     });
 
-    $(document).on('click', '#report-issue-submit', function() {
-        // var orderId = $('#issue-form-data').attr('data-id');
-        var orderId = $('#report-issue-table').attr('data-order-id');
+    $(document).on('click', '#report-complaint-submit', function() {
+        // var orderId = $('#complaint-form-data').attr('data-id');
+        var orderId = $('#report-complaint-table').attr('data-order-id');
         var data = {
             order_id: orderId,
-            issues: [],
-            issue_descriptions: [],
+            complaints: [],
+            complaint_descriptions: [],
             charges: []
         };
 
-        $('#issue-form-data .report-item-checkbox').each(function() {
+        $('#complaint-form-data .report-item-checkbox').each(function() {
             if ($(this).is(':checked')) {
                 var id = $(this).closest('tr').attr('data-id');
-                var issueDescription = $(this).closest('tr').find('textarea').val();
+                var complaintDescription = $(this).closest('tr').find('textarea').val();
                 var charge = $(this).closest('tr').find('input[type="number"]').val();
 
-                data.issues.push(id);
-                data.issue_descriptions.push(issueDescription);
+                data.complaints.push(id);
+                data.complaint_descriptions.push(complaintDescription);
                 data.charges.push(charge);
             }
         });
@@ -348,13 +348,13 @@ require_once('../app/views/layout/header.php');
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/api/orders/submitReturnIssue',
+            url: '<?= ROOT_DIR ?>/api/orders/submitReturnComplaint',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: function(response) {
                 console.log(response);
-                $('#report-issue-modal').hide();
+                $('#report-complaint-modal').hide();
             },
             error: function(err) {
                 console.log(err);

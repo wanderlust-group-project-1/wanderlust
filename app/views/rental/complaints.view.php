@@ -80,7 +80,7 @@ function getComplaints(status) {
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/orders/list/' + status,
+            url: '<?= ROOT_DIR ?>/complaints/returnComplaintsbyRentalService/' + status,
             type: 'GET',
             success: function(response) {
                 // if order-list-content in document remove it
