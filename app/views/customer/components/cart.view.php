@@ -12,7 +12,7 @@
             if (empty($items)) {
                 echo "<div class='emptycart-container'>
                         <div class='row gap-2'>
-                            <div class='emptycart'><h3>Empty Cart</h3></div>
+                            <div class='emptycart'><h1>Empty Cart</h1></div>
                         </div>
                         <hr>
                         <div class='row gap-2'>
@@ -21,8 +21,8 @@
                     </div>";
             }
             foreach ($items as $item): ?>
-                <div class="card" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
-                <div class="row gap-2">
+                <div class="card-grid" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
+                <div class="row gap-5">
                     <div class="cart-item-image col-lg-4">
                         <img src="<?=OSURL?>images/equipment/<?php echo htmlspecialchars($item->e_image); ?>" alt="Image" class="img-fluid">
                     </div>
@@ -35,9 +35,9 @@
                             <h4>Rs. <?php echo htmlspecialchars($item->total); ?></h4>
                             <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="48">
                         </div>
-                            <button id="remove-from-cart" class="btn-icon"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove</button>
-
                     </div>
+                    <button id="remove-from-cart" class="btn-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
                 </div>
                 </div>
             <?php endforeach; ?>

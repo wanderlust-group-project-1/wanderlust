@@ -3229,6 +3229,23 @@ fieldset {
   flex-grow: inherit;
 }
 
+.card-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 10px;
+  margin-bottom: 1.5rem;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0px 2px 0px 0px rgba(64, 64, 64, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+
 .form-control {
   display: block;
   width: 100%;
@@ -3432,7 +3449,7 @@ input.invert {
 .cart-item-price {
   margin: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .cart-item-price input {
   max-width: 25%;
