@@ -33,7 +33,7 @@ require_once('../app/views/admin/layout/sidebar.php');
                         <td><?php echo $service->name; ?></td>
                         <td><?php echo $service->mobile; ?></td>
                         <td><span class="status <?php echo $service->status;  ?>"><?php echo $service->status; ?></span></td>
-                        <td><button class="btn-text-green"> <i class="fa fa-list"> </i> View</button></td>
+                        <td><button class="btn-text-green" id="view-button"> <i class="fa fa-list"> </i> View</button></td>
                     </tr>
                 <?php
                 }
@@ -104,7 +104,7 @@ require_once('../app/views/admin/layout/sidebar.php');
         var span = document.getElementsByClassName("close")[0];
 
         // Get all view buttons
-        var viewButtons = document.querySelectorAll('.view-button');
+        var viewButtons = document.querySelectorAll('#view-button');
 
         // Function to handle modal display
         function openModal(id) {
