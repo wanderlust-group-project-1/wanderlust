@@ -63,5 +63,17 @@ class RentReturnComplaintModel {
         return $this->query($q->getQuery(),$q->getData());
     }
 
+    public function cancelComplaint($id) {
+        $q = new QueryBuilder;
+        $q->setTable('rent_return_complaints');
+
+        $q->update(['status' => 'cancelled'])
+            ->where('id', $id);
+
+        return $this->query($q->getQuery(),$q->getData());
+        
+        
+    }
+
 
 }
