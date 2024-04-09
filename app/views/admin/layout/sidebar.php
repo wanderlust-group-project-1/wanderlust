@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/rentalServices">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/dashboard">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
@@ -73,7 +73,7 @@
     <li class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/tips">
         <i class="ti-shield menu-icon"></i>
-        <span class="menu-title">Tips and Know-hows</span>
+        <span class="menu-title">Tips and Knowhows</span>
       </a>
     </li>
 
@@ -113,3 +113,15 @@
     </li>
   </ul>
 </nav>
+
+<script>
+  function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+  }
+
+  // function toggleSidebar() {
+  //     var sidebar = document.getElementById("sidebar");
+  //     sidebar.classList.toggle("sidebar-offcanvas");
+  // }
+</script>
