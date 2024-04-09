@@ -2182,8 +2182,7 @@ fieldset {
   background-position: left bottom;
   color: #526534;
 }
-
-.details {
+.usage-card .details {
   font-size: 20px;
   color: #B2BDA0;
   margin: 1px 0;

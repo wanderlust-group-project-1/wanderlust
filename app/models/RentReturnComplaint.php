@@ -63,6 +63,16 @@ class RentReturnComplaintModel {
         return $this->query($q->getQuery(),$q->getData());
     }
 
+    public function getComplaint($id) {
+        $q = new QueryBuilder;
+        $q->setTable('rent_return_complaints');
+        $q->select('rent_return_complaints.*,rent.id as rent_id')
+            ->join('rent', 'rent_return_complaints.rent_id', 'rent.id')
+            ->where('rent_return_complaints.id', $id);
+
+        return $this->query($q->getQuery(),$q->getData())[0];
+    }
+
     public function cancelComplaint($id) {
         $q = new QueryBuilder;
         $q->setTable('rent_return_complaints');
@@ -71,7 +81,7 @@ class RentReturnComplaintModel {
             ->where('id', $id);
 
         return $this->query($q->getQuery(),$q->getData());
-        
+
         
     }
 

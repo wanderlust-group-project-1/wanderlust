@@ -5,7 +5,7 @@
 <!-- Filter Complaint -->
 
 <!-- Filter by Date Duration -->
-<div class="filter-complaint">
+<!-- <div class="filter-complaint">
     <div class="filter-complaint-header">
     </div>
     <div class="filter-complaint-body flex-d">
@@ -17,23 +17,15 @@
             <label for="end-date">End Date</label>
             <input type="date" id="end-date" name="end-date">
         </div>
-        <!-- <div class="filter-complaint-cost">
-            <label for="start-cost">Start Cost</label>
-            <input type="number" id="start-cost" name="start-cost">
 
-            <label for="end-cost">End Cost</label>
-            <input type="number" id="end-cost" name="end-cost">
-            
-        </div> -->
 
         <div class="filter-complaint-button">
             <button class="btn btn-primary" id="filter-complaint-button">Filter</button>
         </div>
 
-        <!-- by Cost -->
         
     </div>
-</div>
+</div> -->
 
 
 

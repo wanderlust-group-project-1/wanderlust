@@ -103,6 +103,24 @@ function getComplaints(status) {
     });
 
 
+    // View Complaint
+
+    $(document).on('click', '#view-button', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/complaints/viewComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                $('#complaint-data').html(response);
+                $('#complaint-view-modal').css('display', 'block');
+            }
+        });
+    });
+    
+
 
 
     $(document).on('click', '#cancel-complaint', function() {
