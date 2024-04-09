@@ -433,12 +433,10 @@ fieldset {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-<<<<<<< HEAD
   padding: 0;
-=======
+
   height: -moz-fit-content;
   height: fit-content;
->>>>>>> c9fac3582af613de0b8a6bb9d6ee4f181f14d0fb
   background-color: #EBEFE3;
 }
 .dashboard-header {
@@ -2177,6 +2175,119 @@ fieldset {
   color: #526534;
 }
 
+.usage-card .details {
+  font-size: 20px;
+  color: #B2BDA0;
+  margin: 1px 0;
+  text-align: left;
+  padding-right: 100px;
+}
+
+.usage-block {
+  display: block;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 20px;
+  margin-bottom: 1.5rem;
+  padding-right: 500px;
+  padding-bottom: 60px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+.usage-block h1 {
+  font-size: 60px;
+  color: #B2BDA0;
+  font-weight: bold;
+}
+.usage-block h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-left: 50px;
+  justify-content: flex-start;
+}
+
+.btn-edit-profile-pic {
+  background-color: #2F3B1C;
+  cursor: pointer;
+  border: 1px;
+  outline: none;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 8px;
+  font-weight: 500;
+  font-size: large;
+  font-family: sans-serif;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #8D9E6F 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.btn-edit-profile-pic:hover {
+  background-position: left bottom;
+  color: #2F3B1C;
+}
+
+.profile-image {
+  width: 500px;
+  margin: 10px;
+}
+
+.recent-booking-details {
+  color: #526534;
+  text-align: left;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+.recent-booking-details p {
+  font-size: 20px;
+  color: #8D9E6F;
+  padding-top: 10px;
+}
+.recent-booking-details h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-left: 50px;
+  justify-content: flex-start;
+}
+.recent-booking-details .button {
+  cursor: pointer;
+  border: none;
+  background: #fff;
+  outline: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  font-size: medium;
+  font-family: sans-serif;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  background-image: linear-gradient(to right, #B2BDA0 50%, #526534 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+}
+.recent-booking-details .button:hover {
+  background-position: left bottom;
+  color: #526534;
+}
+
+
 .home_main {
   margin-top: 10rem;
   margin-left: 3rem;
@@ -3119,12 +3230,10 @@ form #error-message {
 form label {
   font-weight: 400;
   text-align: left;
-<<<<<<< HEAD
-=======
+
   font-size: 18px;
   color: #6B6E70;
   padding: 10px;
->>>>>>> c9fac3582af613de0b8a6bb9d6ee4f181f14d0fb
 }
 
 input {
