@@ -284,6 +284,23 @@ require_once('../app/views/navbar/customer-navbar.php');
         xhttp.open("GET", "<?php echo ROOT_DIR ?>/pay/payhereprocess", true);
         xhttp.send();
     }
+
+
+
+
+
+
+
+
+    // check payhere is loaded, and alert if not loaded(undefined)
+    setTimeout(() => {
+        console.log(payhere);
+        if (payhere == undefined) {
+            alertmsg("Payhere not loaded", "error");
+        }
+    }, 1000);
+
+
 </script>
 
 <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
