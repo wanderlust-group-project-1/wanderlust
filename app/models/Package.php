@@ -1,0 +1,126 @@
+<?php
+
+class PackageModel
+{
+    use Model;
+
+    protected string $table = 'package';
+    protected array $allowedColumns = [
+        'guide_id',
+        'price',
+        'max_group_size',
+        'max_distance',
+        'transport_needed',
+        'places'
+    ];
+    public function createPackage(JSONRequest $request, JSONResponse $response){
+        $data = $request->getAll();
+        $data['transport_needed'] = $data['transport_needed'] > 0 ? 1 : 0;
+    
+        if ($this->validatePackageData($data)) {
+            $data['guide_id'] = UserMiddleware::getUser()['id'];
+    
+            $data = array_filter($data, function ($key) {
+                return in_array($key, $this->allowedColumns);
+            }, ARRAY_FILTER_USE_KEY);
+    
+            $id =  $this->insert($data);
+    
+            $response->success(true)
+                ->message('Package created successfully')
+                ->statusCode(201)
+                ->send();
+        } else {
+            // Output data when validation fails
+            $response->success(false)
+            ->data([
+                'errors' => $this->errors,
+                'data' => $data,
+                'keys' => array_keys($data),
+                'allowed_columns' => $this->allowedColumns
+            ])
+                ->message('Validation failed')
+                ->statusCode(422)
+                ->send();
+        }
+    }
+    
+
+    public function updatePackage(int $packageId, array $data)
+    {
+        if ($this->validatePackageData($data)) {
+            return $this->update($packageId, $data, 'id');
+        }
+
+        return false;
+    }
+
+    private function validatePackageData(array $data)
+    {
+        // $requiredFields = ['guide_id', 'price', 'max_group_size', 'max_distance', 'transport_needed', 'places'];
+
+        // foreach ($requiredFields as $field) {
+        //     if (!isset($data[$field]) || empty($data[$field])) {
+        //         // Field is required, but it is missing or empty
+        //         return false;
+        //     }
+        // }
+
+        // // Validate numeric fields
+        // $numericFields = ['guide_id', 'price', 'max_group_size', 'max_distance'];
+
+        // foreach ($numericFields as $field) {
+        //     if (!is_numeric($data[$field])) {
+        //         // Field should be numeric, but it is not
+        //         return false;
+        //     }
+        // }
+
+        // // Additional custom validation can be added here
+
+        // return true;
+        return empty($this->errors);
+    }
+
+    public function getPackage(int $packageId)
+    {
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->select('*')->where('id', $packageId);
+
+        return $this->query($q->getQuery(), $q->getData(), true);
+    }
+
+    public function deletePackage(int $packageId)
+    {
+        return $this->delete($packageId, 'id');
+    }
+
+    public function getPackagesForGuide(int $guideId)
+    {
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->select('*')->where('guide_id', $guideId);
+
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
+    public function getPackagesByGuide(int $guideId): mixed
+    {
+        $q = new QueryBuilder();
+        $q->setTable('package');
+        $q->select('package.*')->where('package.guide_id', $guideId);
+
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
+    public function getPackageByGuide(int $guideId, int $packageId): mixed
+    {
+        $q = new QueryBuilder();
+        $q->setTable('package');
+        $q->select('package.*');
+        $q->where('package.guide_id', $guideId)->where('package.id', $packageId);
+
+        return $this->query($q->getQuery(), $q->getData());
+    }
+}

@@ -187,3 +187,43 @@ require_once('../app/views/layout/footer.php');
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
 </script>
+
+
+
+<!-- Modal Box Package Edit End -->
+
+<!-- <script>
+  var modal = document.getElementById("package-editor");
+
+  var span = document.getElementsByClassName("close")[0];
+
+  // Get all view buttons
+  var viewButton = document.querySelector('.edit-package');
+
+  // Function to handle modal display
+  function openModal() {
+    // document.getElementById("modal-content").innerHTML = content;
+    modal.style.display = "block";
+  }
+
+  // Add click event listener to view buttons
+  viewButton.addEventListener('click', function() {
+
+    // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
+    // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
+    openModal();
+  });
+
+
+  // Close the modal when the close button is clicked
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // Close the modal if the user clicks outside of it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script> -->
