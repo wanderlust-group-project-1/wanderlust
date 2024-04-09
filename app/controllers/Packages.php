@@ -14,23 +14,23 @@ class Packages
         }
     }
 
-    public function create(string $a = '', string $b = '', string $c = ''): void
-    {
-        $guideId = 1;
+    // public function create(string $a = '', string $b = '', string $c = ''): void
+    // {
+    //     $guideId = 1;
 
-        $packageModel = new PackageModel();
-        $data = [
-            'guide_id' => $guideId,
-            'price' => $_POST['price'],
-            'max_group_size' => $_POST['max_group_size'],
-            'max_distance' => $_POST['max_distance'],
-            'transport_needed' => $_POST['transport_needed'],
-            'places' => $_POST['places']
-        ];
+    //     $packageModel = new PackageModel();
+    //     $data = [
+    //         'guide_id' => $guideId,
+    //         'price' => $_POST['price'],
+    //         'max_group_size' => $_POST['max_group_size'],
+    //         'max_distance' => $_POST['max_distance'],
+    //         'transport_needed' => $_POST['transport_needed'],
+    //         'places' => $_POST['places']
+    //     ];
 
-        $packageModel->createPackage($data);
-        redirect('packages');
-    }
+    //     $packageModel->createPackage($data);
+    //     redirect('packages');
+    // }
 
     public function edit(int $packageId): void
     {
