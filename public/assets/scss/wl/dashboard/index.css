@@ -386,8 +386,10 @@ fieldset {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .profile-editor .modal-content {
+  background-color: #EBEFE3;
   margin: 5% auto;
   padding: 20px;
+  border: 1px solid #888;
   width: 80%;
   position: relative;
   border-radius: 20px;
@@ -432,6 +434,7 @@ fieldset {
   justify-content: flex-start;
   width: 100%;
   padding: 0;
+
   height: -moz-fit-content;
   height: fit-content;
   background-color: #EBEFE3;
@@ -587,8 +590,10 @@ fieldset {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .add-equipment-modal .modal-content {
+  background-color: #EBEFE3;
   margin: 5% auto;
   padding: 20px;
+  border: 1px solid #888;
   width: 80%;
   position: relative;
   border-radius: 20px;
@@ -825,13 +830,6 @@ fieldset {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-}
-
-.order-payment-status {
-  font-family: sans-serif, "poppins";
-  color: #6B6E70;
-  font-size: 1.75rem;
-  color: #47494b;
 }
 
 .signup-container#blur.active {
@@ -1596,6 +1594,7 @@ fieldset {
   color: #5C5E60;
 }
 .login-container .column .login-form .message-text {
+  font-size: small;
   display: flex;
   justify-content: space-between;
   margin: -1px 1px 15px;
@@ -1613,8 +1612,10 @@ fieldset {
 }
 .login-container .column .login-form a {
   color: #526534;
+  font-size: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
+  padding: 10px 0;
 }
 .login-container .column .login-form a:hover {
   color: #8D9E6F;
@@ -1856,7 +1857,7 @@ fieldset {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #EBEFE3;
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -2068,16 +2069,18 @@ fieldset {
   align-items: center;
   min-width: -moz-fit-content;
   min-width: fit-content;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 60px;
-  padding-bottom: 80px;
 }
 .user-profile h1 {
-  font-size: 30 px;
+  font-size: 35px;
   font-weight: bolder;
   color: #526534;
   margin-bottom: 25px;
+}
+.user-profile h2 {
+  font-size: 30px;
+  color: #8D9E6F;
+  font-weight: bold;
+  margin: 1px 0;
 }
 .user-profile p {
   font-size: 20px;
@@ -2087,25 +2090,15 @@ fieldset {
 }
 .user-profile img {
   margin-bottom: 20px;
-  margin-top: 20px;
 }
-.user-profile .user-details {
+.user-profile details {
   color: #526534;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 50px;
 }
-.user-profile .user-details p {
+.user-profile details p {
   font-size: 20px;
   color: #8D9E6F;
-  padding-top: 10px;
-}
-.user-profile .user-details h2 {
-  font-size: 30px;
-  color: #8D9E6F;
-  font-weight: bold;
+  margin: 1px 0;
+  text-align: left;
 }
 
 .usage {
@@ -2126,34 +2119,33 @@ fieldset {
   flex-grow: inherit;
 }
 .usage h1 {
-  font-size: 60px;
+  font-size: 70px;
   color: #B2BDA0;
-  font-weight: bold;
 }
 .usage h2 {
   font-size: 30px;
   color: #8D9E6F;
   font-weight: bold;
-  padding-top: 30px;
-  padding-left: 50px;
-  justify-content: flex-start;
+  margin: 1px 0;
+}
+.usage h3 {
+  font-size: 20px;
+  color: #B2BDA0;
+  margin: 1px 0;
 }
 
 .usage-card {
-  display: flex;
+  display: block;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   min-width: 300px;
-  width: 420px;
-  margin: 20px;
+  margin-left: 8px;
+  margin-top: 40px;
+  margin-right: 100;
   margin-bottom: 1.5rem;
-  margin-top: 4rem;
-  margin-left: 50px;
   padding: 20px;
-  background-color: #EBEFE3;
-  border-radius: 15px;
   background-color: #526534;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -2182,6 +2174,7 @@ fieldset {
   background-position: left bottom;
   color: #526534;
 }
+
 .usage-card .details {
   font-size: 20px;
   color: #B2BDA0;
@@ -2293,6 +2286,7 @@ fieldset {
   background-position: left bottom;
   color: #526534;
 }
+
 
 .home_main {
   margin-top: 10rem;
@@ -2560,25 +2554,6 @@ fieldset {
     transition: all 0.3s ease;
   }
 }
-.order-header .order-id {
-  font-size: 1.75rem;
-  color: #47494b;
-}
-.order-header .order-status {
-  font-size: 1.75rem;
-  color: #6B6E70;
-  font-weight: 600;
-}
-
-.order-body .order-dates {
-  font-size: 1.75rem;
-  color: #47494b;
-}
-.order-body .order-total {
-  font-size: 1.8rem;
-  color: #47494b;
-}
-
 .btn {
   cursor: pointer;
   border: none;
@@ -2648,51 +2623,6 @@ fieldset {
 }
 .btn-icon:hover {
   color: #47494b;
-}
-
-.btn-text-green {
-  background-color: transparent;
-  font-size: 18px;
-  color: #8D9E6F;
-  width: -moz-fit-content;
-  width: fit-content;
-  cursor: pointer;
-  border: none;
-  padding: 10px;
-  font-family: "poppins", sans-serif;
-}
-.btn-text-green:hover {
-  text-decoration: underline;
-}
-
-.btn-text-orange {
-  background-color: transparent;
-  font-size: 18px;
-  color: rgb(249, 143, 29);
-  width: -moz-fit-content;
-  width: fit-content;
-  cursor: pointer;
-  border: none;
-  padding: 10px;
-  font-family: "poppins", sans-serif;
-}
-.btn-text-orange:hover {
-  text-decoration: underline;
-}
-
-.btn-text-red {
-  background-color: transparent;
-  font-size: 18px;
-  color: red;
-  width: -moz-fit-content;
-  width: fit-content;
-  cursor: pointer;
-  border: none;
-  padding: 10px;
-  font-family: "poppins", sans-serif;
-}
-.btn-text-red:hover {
-  text-decoration: underline;
 }
 
 .btn-danger {
@@ -2781,30 +2711,6 @@ fieldset {
   box-shadow: 4px 4px 16px rgba(47, 59, 28, 0.1);
   font-weight: 600;
   align-items: center;
-}
-
-.btn-selected {
-  background-color: transparent;
-  font-size: 18px;
-  color: #6B6E70;
-  width: -moz-fit-content;
-  width: fit-content;
-  cursor: pointer;
-  border: none;
-  padding: 10px;
-  font-family: "poppins", sans-serif;
-}
-.btn-selected:hover {
-  color: #8D9E6F;
-  border-radius: 10px;
-  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
-  transition: color 0.3s ease;
-}
-.btn-selected.active {
-  color: #8D9E6F;
-  border-radius: 10px;
-  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
-  transition: color 1s ease;
 }
 
 .row {
@@ -3160,24 +3066,6 @@ fieldset {
   flex-grow: inherit;
 }
 
-.card-normal3 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  min-width: 300px;
-  margin: 20px;
-  margin-bottom: 1.5rem;
-  padding: 20px;
-  background-color: transparent;
-  border-radius: 15px;
-  transition: all 0.3s ease-in-out;
-  gap: 20px;
-  flex-grow: inherit;
-  border: #6B6E70 3px inherit;
-}
-
 .card-invert {
   display: flex;
   flex-direction: row;
@@ -3204,7 +3092,7 @@ fieldset {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #B2BDA0;
+  background-color: #fff;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3219,7 +3107,7 @@ fieldset {
   font-weight: 400;
   line-height: 1.5;
   color: black-text;
-  background-color: #B2BDA0;
+  background-color: #fff;
   background-clip: padding-box;
   border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3227,7 +3115,7 @@ fieldset {
   height: calc(3.5rem + 2px);
   padding: 0.5rem 1rem;
   font-size: 1.4rem;
-  background-color: #EBEFE3;
+  background-color: #fff;
 }
 
 .form-control:focus {
@@ -3278,7 +3166,6 @@ form {
 form input {
   border: none;
   outline: none;
-  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 400;
@@ -3293,9 +3180,8 @@ form input[type=time],
 form input[type=file],
 form select textarea {
   border: none;
-  background: #EBEFE3;
+  background: #fff;
   outline: none;
-  color: #6B6E70;
   border-radius: 12px;
   padding: 8px 10px;
   font-weight: 400;
@@ -3303,7 +3189,7 @@ form select textarea {
 }
 form textarea {
   resize: none;
-  background: #EBEFE3;
+  background: #fff;
   border-radius: 12px;
   border: none;
 }
@@ -3312,9 +3198,8 @@ form textarea.form-control-lg {
 }
 form select {
   border: none;
-  background: #B2BDA0;
+  background: #fff;
   outline: none;
-  color: #6B6E70;
   border-radius: 12px;
   padding: 12px 20px;
   font-weight: 600;
@@ -3345,6 +3230,7 @@ form #error-message {
 form label {
   font-weight: 400;
   text-align: left;
+
   font-size: 18px;
   color: #6B6E70;
   padding: 10px;
@@ -3354,7 +3240,6 @@ input {
   border: none;
   background: #EBEFE3;
   outline: none;
-  color: #6B6E70;
   border: 1px solid #F3F3F3;
   border-radius: 12px;
   padding: 12px 20px;

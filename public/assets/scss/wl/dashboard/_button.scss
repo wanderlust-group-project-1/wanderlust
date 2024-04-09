@@ -151,9 +151,25 @@
 }
 
 .btn-success{
-  background: $info-color;
-  border: 1px solid $info-color;
-  color: $white-text;
+  // background: $info-color;
+  // border: 1px solid $info-color;
+  // color: $white-text;
+  // padding: 5px;
+  // margin: 20px;
+  cursor: pointer;
+  border: none;
+  background: $color-dark;
+  outline: none;
+  color: $color-lightest;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 500;
+  // font-size: $text;
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
+
+
 
   // Initial background with transparent gradient
   background-image: linear-gradient(to right, $white-text  50%, $info-color 50%);
@@ -260,4 +276,5 @@
     transition: color 1s ease;
   }
 }
+
 

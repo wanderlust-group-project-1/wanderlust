@@ -94,6 +94,8 @@ require_once('../app/views/layout/header.php');
 require_once('../app/views/layout/footer.php');
 
 ?>
+<!-- Include the ApexCharts library -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
     // MENU
@@ -105,66 +107,41 @@ require_once('../app/views/layout/footer.php');
 
         icon.addEventListener('click', function() {
             menuLink.classList.toggle('show');
-        })
-    })
-
-
-
-    // window.addEventListener('click', function(e) {
-    //     if (e.target !== imgProfile) {
-    //         if (e.target !== dropdownProfile) {
-    //             if (dropdownProfile.classList.contains('show')) {
-    //                 dropdownProfile.classList.remove('show');
-    //             }
-    //         }
-    //     }
-
-        allMenu.forEach(item => {
-            const icon = item.querySelector('.icon');
-            const menuLink = item.querySelector('.menu-link');
-
-            if (e.target !== icon) {
-                if (e.target !== menuLink) {
-                    if (menuLink.classList.contains('show')) {
-                        menuLink.classList.remove('show')
-                    }
+        });
+        
+        // Close menu when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target !== icon && e.target !== menuLink) {
+                if (menuLink.classList.contains('show')) {
+                    menuLink.classList.remove('show');
                 }
             }
-        })
-
-
-
-
+        });
+    });
 
     // PROGRESSBAR
     const allProgress = document.querySelectorAll('main .card .progress');
 
     allProgress.forEach(item => {
-        item.style.setProperty('$value', item.dataset.value)
-    })
-
-
-
-
-
+        item.style.setProperty('$value', item.dataset.value);
+    });
 
     // APEXCHART
     var options = {
         series: [
-        {
-            name: 'You',
-            data:  [5, 12, 15, 10, 8, 14, 11]// Adjusted data values, total less than 100
-        },
-        {
-            name: 'Rank #1',
-            data: [8, 10, 7, 12, 10, 20, 18]// Adjusted data values, total less than 100
-        }
-    ],
+            {
+                name: 'You',
+                data:  [5, 12, 15, 10, 8, 14, 11] // Adjusted data values, total less than 100
+            },
+            {
+                name: 'Rank #1',
+                data: [8, 10, 7, 12, 10, 20, 18] // Adjusted data values, total less than 100
+            }
+        ],
         chart: {
-            height: 300
-            ,
+            height: 300,
             type: 'area',
-            fontFamily: 'Poppins, sans-serif',
+            fontFamily: 'Poppins, sans-serif'
         },
         dataLabels: {
             enabled: false
@@ -181,7 +158,7 @@ require_once('../app/views/layout/footer.php');
                 format: 'dd/MM/yy HH:mm'
             },
         },
-        colors: ['#B2BDA0', '#2F3B1C'], // Specify the colors you want here
+        colors: ['#B2BDA0', '#2F3B1C'] // Specify the colors you want here
     };
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
