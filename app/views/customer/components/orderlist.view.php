@@ -1,33 +1,10 @@
-<div class="card"  data-id="1">
-                <div class="row gap-2">
 
-                <div class="col-lg-4 col-md-12">
-                    <h3>Order ID: 1</h3>
-                    <h3>Order Date: 2021-08-01</h3>
-                 
-                </div>
-
-                <div class="col-lg-4 col-md-12">
-                    <p> Tent, BBQ Grill, Table, Chair, Cooler</p>
-                    
-                </div>
-
-                <div class="col-lg-3 col-md-12">
-
-                <!-- view button -->
-                <a class="btn btn-primary">View</a>
-                    
-                    </div>
-
-                </div>
-                            
-                        </div>
 
 <?php
 
 foreach ($orders as $order) {
     ?>
-   <div class="card"  data-id="'.$order->id.'">
+   <div class="card"  data-id="<?php echo $order->id; ?>">
                 <div class="row gap-2">
 
                 <div class="col-lg-4 col-md-12">
@@ -44,7 +21,7 @@ foreach ($orders as $order) {
                 <div class="col-lg-3 col-md-12">
 
                 <!-- view button -->
-                <a class="btn btn-primary">View</a>
+                <a class="btn btn-primary order-view-button">View</a>
                     
                     </div>
 
@@ -56,7 +33,12 @@ foreach ($orders as $order) {
 }
 
 
-
-
-
 ?>
+
+<div class="modal" id="order-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        <div id="order-data">   </div>
+
+    </div>

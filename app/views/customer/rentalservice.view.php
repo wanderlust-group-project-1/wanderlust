@@ -43,12 +43,14 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     <div class="flex-d gap-2 align-items-center  card-invert">
         <i class="fa fa-shopping-cart"></i>
-        <span>Orders: 10</span>
+        <span>Orders: <?php echo $stat->orders_count; ?></span>
+
+       
     </div>
 
     <div class="flex-d gap-2 align-items-center card-invert">
         <i class="fa fa-cogs"></i>
-        <span>Equipment Types: 10</span>
+        <span>Equipment Types: <?php echo $stat->equipments_count; ?></span>
 
     </div>
 
@@ -309,8 +311,9 @@ $(document).ready(function() {
     // Add to Cart Button click event
     $(document).on('click', '#add-to-cart', function() {
         console.log("add to cart clicked");
-        var id = $(this).closest('.rent-item-card').attr('data-id');
+        var id = $(this).closest('#rent-item-details').attr('data-id');
         console.log(id);
+        var count = $(this).closest('#rent-item-details').find('#item-count').val() || 1;
 
         $.ajax({
             headers: {
@@ -320,15 +323,17 @@ $(document).ready(function() {
             url: '<?= ROOT_DIR ?>/api/cart/addItem',
             method: 'POST',
             data: JSON.stringify({
-                equipment_id: id
+                equipment_id: id,
+                count: count
+
             }),
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 disableButton(id);
                 getCartCount();
             },
             error: function(err) {
-                console.log(err);
+                // console.log(err);
             }
         });
 

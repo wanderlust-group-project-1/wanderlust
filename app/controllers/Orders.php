@@ -47,6 +47,9 @@ class Orders {
 
         $this->view('rental/components/reportReturnIssue', ['order' => $order, 'items' => $items]);
     }
+
+
+
 }
 
 
