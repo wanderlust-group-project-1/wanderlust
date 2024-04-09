@@ -1,7 +1,7 @@
 <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
-        $user = $_SESSION['USER'];  
+  $user = $_SESSION['USER'];
 }
-        ?>
+?>
 
 <div class="toggle-button" onclick="toggleSidebar()">☰</div>
 
@@ -64,7 +64,7 @@
         </ul>
       </div>
     </li>
-    
+
 
 
     <li class="nav-item">
@@ -117,7 +117,7 @@
         </ul>
       </div>
     </li> -->
-<!-- 
+    <!-- 
     <li class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/blogs">
         <i class="ti-shield menu-icon"></i>
@@ -142,14 +142,13 @@
 </nav>
 
 <script>
-function toggleSidebar() {
+  function toggleSidebar() {
     var sidebar = document.getElementById("sidebar");
     sidebar.classList.toggle("active");
-}
+  }
 
-// function toggleSidebar() {
-//     var sidebar = document.getElementById("sidebar");
-//     sidebar.classList.toggle("sidebar-offcanvas");
-// }
-
+  // function toggleSidebar() {
+  //     var sidebar = document.getElementById("sidebar");
+  //     sidebar.classList.toggle("sidebar-offcanvas");
+  // }
 </script>
