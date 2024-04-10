@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="row gap-2">
-     <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary">Checkout</a>
+     <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary">Go to checkout</a>
 
         <!-- <button id="checkout" class="btn" type="button">Checkout</button> -->
     </div>
