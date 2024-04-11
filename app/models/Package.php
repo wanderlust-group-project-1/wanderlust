@@ -13,19 +13,20 @@ class PackageModel
         'transport_needed',
         'places'
     ];
-    public function createPackage(JSONRequest $request, JSONResponse $response){
+    public function createPackage(JSONRequest $request, JSONResponse $response)
+    {
         $data = $request->getAll();
         $data['transport_needed'] = $data['transport_needed'] > 0 ? 1 : 0;
-    
+
         if ($this->validatePackageData($data)) {
             $data['guide_id'] = UserMiddleware::getUser()['id'];
-    
+
             $data = array_filter($data, function ($key) {
                 return in_array($key, $this->allowedColumns);
             }, ARRAY_FILTER_USE_KEY);
-    
+
             $id =  $this->insert($data);
-    
+
             $response->success(true)
                 ->message('Package created successfully')
                 ->statusCode(201)
@@ -33,27 +34,28 @@ class PackageModel
         } else {
             // Output data when validation fails
             $response->success(false)
-            ->data([
-                'errors' => $this->errors,
-                'data' => $data,
-                'keys' => array_keys($data),
-                'allowed_columns' => $this->allowedColumns
-            ])
+                ->data([
+                    'errors' => $this->errors,
+                    'data' => $data,
+                    'keys' => array_keys($data),
+                    'allowed_columns' => $this->allowedColumns
+                ])
                 ->message('Validation failed')
                 ->statusCode(422)
                 ->send();
         }
     }
-    
 
-    public function updatePackage(int $packageId, array $data)
+
+    public function updatePackage(array $data, int $id)
     {
-        if ($this->validatePackageData($data)) {
-            return $this->update($packageId, $data, 'id');
-        }
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
 
-        return false;
+        return $this->update($id, $data);
     }
+    
 
     private function validatePackageData(array $data)
     {
@@ -118,8 +120,7 @@ class PackageModel
     {
         $q = new QueryBuilder();
         $q->setTable('package');
-        $q->select('package.*');
-        $q->where('package.guide_id', $guideId)->where('package.id', $packageId);
+        $q->select('package.*')->where('package.guide_id', $guideId)->where('package.id', $packageId);
 
         return $this->query($q->getQuery(), $q->getData());
     }

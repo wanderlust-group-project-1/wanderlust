@@ -323,12 +323,18 @@ require_once('../app/views/layout/header.php');
     $(document).on('click', '#report-complaint-submit', function() {
         // var orderId = $('#complaint-form-data').attr('data-id');
         var orderId = $('#report-complaint-table').attr('data-order-id');
+        // var data = {
+        //     order_id: orderId,
+        //     complaints: [],
+        //     complaint_descriptions: [],
+        //     charges: []
+        // };
+
         var data = {
             order_id: orderId,
             complaints: [],
-            complaint_descriptions: [],
-            charges: []
-        };
+            charge: 0.00
+            }
 
         $('#complaint-form-data .report-item-checkbox').each(function() {
             if ($(this).is(':checked')) {
@@ -336,9 +342,21 @@ require_once('../app/views/layout/header.php');
                 var complaintDescription = $(this).closest('tr').find('textarea').val();
                 var charge = $(this).closest('tr').find('input[type="number"]').val();
 
-                data.complaints.push(id);
-                data.complaint_descriptions.push(complaintDescription);
-                data.charges.push(charge);
+                // data.complaints.push(id);
+                // data.complaint_descriptions.push(complaintDescription);
+                // data.charges.push(charge);
+                let complaint = {
+                    equipment_id: id,
+                    complaint_description: complaintDescription,
+                    charge: charge
+                }
+
+                data.complaints.push(complaint);
+                data.charge += parseFloat(charge);
+         
+
+
+
             }
         });
 

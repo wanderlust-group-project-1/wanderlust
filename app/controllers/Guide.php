@@ -40,10 +40,11 @@ class Guide {
         $this->view('guide/packages.list', $data);
     }
     
-    public function getPackage(string $a = '', string $b = '', string $c = ''): void {
+    public function getPackage(string $packageId = '',string $b = '', string $c = ''): void {
+        $guideId = UserMiddleware::getUser()['id'];
         $packageModel = new PackageModel();
-        $data["package"] = $packageModel->getPackageByGuide(UserMiddleware::getUser()['id'], $a);
-        $this->view('guide/packages', $data);
+        $data["package"] = $packageModel->getPackageByGuide($guideId, $packageId);
+        $this->view('guide/package', $data);
     }
 
 }

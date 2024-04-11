@@ -40,7 +40,7 @@ class Orders {
 
     // Complains by rental service
 
-    public function reportReturnIssueByRentalservice(string $a = '', string $b = '', string $c = ''):void {
+    public function reportReturnComplaintByRentalservice(string $a = '', string $b = '', string $c = ''):void {
         $rent = new RentModel;
         $order = $rent->getRental($a);
         $items = $rent->getItemListbyRentId($a);

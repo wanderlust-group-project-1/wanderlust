@@ -1,4 +1,4 @@
-<!-- Report Issue -->
+<!-- Report Complaint -->
 
 <?php
 // show($items)
@@ -10,16 +10,16 @@
 
 ?>
 
-<h2> Report Issue </h2>
+<h2> Report Complaint </h2>
 
-<table class="table" id="report-issue-table" data-order-id="<?= $order->id ?>">
+<table class="table" id="report-complaint-table" data-order-id="<?= $order->id ?>">
     <thead>
         <tr>
             <th>Item_number </th>
             <th>Name</th>
-           <!-- checkbox for issue -->
-            <th>Issue</th>
-            <th>Issue Description</th>
+           <!-- checkbox for complaint -->
+            <th>Complaint</th>
+            <th>Complaint Description</th>
             <th> Charge </th>
             
             
@@ -34,11 +34,11 @@
                 <td><?= $item->item_number ?></td>
                 <td><?= $item->equipment_name ?></td>
                 <td>
-                    <input id="report-item-checkbox" class="report-item-checkbox" type="checkbox" name="issue[]" value="<?= $item->equipment_id ?>">
+                    <input id="report-item-checkbox" class="report-item-checkbox" type="checkbox" name="complaint[]" value="<?= $item->equipment_id ?>">
                 </td>
                 <td>
-                    <!-- <input type="text" name="issue_description[]" class="form-control"> -->
-                    <textarea name="issue_description[]" class="form-control-lg" disabled></textarea>
+                    <!-- <input type="text" name="complaint_description[]" class="form-control"> -->
+                    <textarea name="complaint_description[]" class="form-control-lg" disabled></textarea>
                 </td>
                 <td>
                     <!-- <input type="text" name="charge[]" class="form-control-lg" disabled> -->
@@ -76,4 +76,4 @@
     
 
 </table>
-<button class="btn btn-primary" id="report-issue-submit">Report Issue</button>
+<button class="btn btn-primary" id="report-complaint-submit">Report Complaint</button>

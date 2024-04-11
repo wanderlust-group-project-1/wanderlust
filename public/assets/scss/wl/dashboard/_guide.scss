@@ -214,8 +214,8 @@
 $view-package-modal-background: rgba(0,0,0,0.4);
 $modal-content-background: #fefefe;
 $close-button-color: #aaa;
-$edit-equipment-button-bg: #4CAF50; // Green
-$delete-equipment-button-bg: #f44336; // Red
+$edit-package-button-bg: #4CAF50; // Green
+$delete-package-button-bg: #f44336; // Red
 $border-color: #888;
 $box-shadow-color: rgba(0,0,0,0.2);
 
@@ -278,3 +278,29 @@ $box-shadow-color: rgba(0,0,0,0.2);
 
 }
 
+.edit-package-button {
+    background-color: $edit-package-button-bg;
+    width:90%;
+    border: none;
+    color: white;
+    height: 30px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: auto;
+}
+
+.delete-package-button {
+    background-color: $delete-package-button-bg;
+    width:90%;
+    border: none;
+    color: white;
+    height: 30px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
