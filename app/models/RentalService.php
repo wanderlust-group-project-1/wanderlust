@@ -194,6 +194,17 @@ class RentalServiceModel {
 
     }
 
+    public function rentalStats(int $id): mixed {
+
+        $q = "CALL getRentalStats(:id)";
+
+
+        return $this->query($q,['id' => $id]);
+
+  
+            
+    }
+
     // public function updateRentalService(JSONRequest $request, JSONResponse $response) {
     //     $data = $request->getAll();
 

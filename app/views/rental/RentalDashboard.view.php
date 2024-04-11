@@ -27,28 +27,45 @@ require_once('../app/views/admin/components/navbar.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>100</h3>
+
+
+                    <!-- (
+            [successful_rental_count] => 1
+            [total_earnings] => 15000.00
+            [last_month_rental_count] => 2
+            [current_month_earnings] => 
+            [equipment_count] => 16
+        ) -->
+
+
+                        <!-- <h3>100</h3> -->
+                        <h3><?php echo $stat->successful_rental_count ?></h3>
                         <p>Rents</p>
                     </div>
                 </div>
                 <span class="progress" data-value="10%"></span>
-                <span class="label">10 : Per Month</span>
+                <span class="label">
+                    <?php echo $stat->last_month_rental_count ?> 
+                    : Per Month</span>
             </div>
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>Rs.139000</h3>
+                        <!-- <h3>Rs.139000</h3> -->
+                        <h3>Rs.<?php echo $stat->total_earnings ?></h3>
                         <p>Total Earning</p>
                     </div>
                 </div>
                 <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
+                <!-- <span class="label">Rs.60 000 : Per Month</span> -->
+                <span class="label">Rs.<?php echo $stat->current_month_earnings ?> : Per Month</span>
             </div>
 
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>35</h3>
+                        <!-- <h3>35</h3> -->
+                        <h3><?php echo $stat->equipment_count ?></h3>
                         <p>Equipment Quantity</p>
                     </div>
                 </div>
