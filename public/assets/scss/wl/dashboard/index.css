@@ -829,9 +829,8 @@ fieldset {
 
 .order-payment-status {
   font-family: sans-serif, "poppins";
-  color: #6B6E70;
   font-size: 1.75rem;
-  color: #47494b;
+  color: #47494b;  /* Choose the intended final color */
 }
 
 .signup-container#blur.active {
