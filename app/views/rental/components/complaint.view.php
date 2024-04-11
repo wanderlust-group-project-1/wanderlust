@@ -23,6 +23,29 @@
     ?>
 
     <div class="order-item">
+
+    <div class="row card-normal m-2">
+        <!-- Complain details -->
+
+        <div class="col-lg-5 col-md-12">
+            <table class="order-details">
+                <tr>
+                    <td>Complain ID:</td>
+                    <td><?= $complaint->id ?></td>
+                </tr>
+                <tr>
+                    <td>Complain Date:</td>
+                    <td><?= date('Y-m-d', strtotime($complaint->created_at)) ?></td>
+                </tr>
+                <tr>
+                    <td>Complain Status:</td>
+                    <td><?= $complaint->status ?></td>
+                </tr>
+            </table>
+            
+        </div>
+
+    </div>
        
     <div class="row card-normal m-2">
         <div class="col-lg-5 col-md-12">
@@ -79,11 +102,15 @@
             <tr>
                 <th>Item_number </th>
                 <th>Name</th>
+                <th>Complain</th>
+                <th>Charge</th>
             </tr>
             <?php foreach ($items as $item) : ?>
                 <tr>
                     <td><?= $item->item_number ?></td>
                     <td><?= $item->equipment_name?></td>
+                    <td><?= $item->complaint ? $item->complaint->complaint_description : 'No Complain' ?></td>
+                    <td><?= $item->charge ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
