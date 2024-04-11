@@ -131,16 +131,21 @@ class Orders {
         $response = new JSONResponse;
         $data = $request->getAll();
 
+        // $values = [
+        //     'rent_id' => $data['order_id'],
+        //     'complains' => json_encode([
+        //         'complaints' => $data['complaints'],
+        //         'complaint_descriptions' => $data['complaint_descriptions'],
+        //         'charges' => $data['charges']
+        //     ]),
+        //     'charge' => array_sum($data['charges'])
+        // ];
+
         $values = [
             'rent_id' => $data['order_id'],
-            'complains' => json_encode([
-                'complaints' => $data['complaints'],
-                'complaint_descriptions' => $data['complaint_descriptions'],
-                'charges' => $data['charges']
-            ]),
-            'charge' => array_sum($data['charges'])
+            'complains' => json_encode($data['complaints']),
+            'charge' => $data['charge']
         ];
-
     
         $rentreturncomplaint = new RentReturnComplaintModel;
         $rentreturncomplaint->createReturnComplaint($values);
