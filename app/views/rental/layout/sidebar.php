@@ -7,8 +7,8 @@
 
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  <div class="guide-dash-prof mt-3">
-    <div class="details flex-d-c">
+  <div class="guide-dash-prof  mt-3 justify-content-center">
+    <div class="details flex-d-c justify-content-center">
 
       <div class="user-image">
         <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="">

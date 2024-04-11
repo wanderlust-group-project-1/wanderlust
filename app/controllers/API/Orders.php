@@ -125,7 +125,7 @@ class Orders {
 
     }
 
-    public function submitReturnIssue(string $a = '', string $b = '', string $c = ''):void {
+    public function submitReturnComplaint(string $a = '', string $b = '', string $c = ''):void {
  
         $request = new JSONRequest;
         $response = new JSONResponse;
@@ -134,16 +134,16 @@ class Orders {
         $values = [
             'rent_id' => $data['order_id'],
             'complains' => json_encode([
-                'issues' => $data['issues'],
-                'issue_descriptions' => $data['issue_descriptions'],
+                'complaints' => $data['complaints'],
+                'complaint_descriptions' => $data['complaint_descriptions'],
                 'charges' => $data['charges']
             ]),
             'charge' => array_sum($data['charges'])
         ];
 
     
-        $rentreturnissue = new RentReturnIssueModel;
-        $rentreturnissue->createReturnIssue($values);
+        $rentreturncomplaint = new RentReturnComplaintModel;
+        $rentreturncomplaint->createReturnComplaint($values);
 
 
 

@@ -340,6 +340,14 @@
     color: $color-dark;
   }
 }
+
+.details {
+  font-size: 20px;
+color: $color-light;
+margin: 1px 0;
+  text-align: left;
+  padding-right: 100px;
+}
 }
 
 
@@ -360,13 +368,7 @@
 }
 
 
-.details {
-      font-size: 20px;
-    color: $color-light;
-    margin: 1px 0;
-      text-align: left;
-      padding-right: 100px;
-}
+
 
 .usage-block{
    display: block;
