@@ -60,6 +60,16 @@ require_once('../app/views/layout/header.php');
         </div>
     </div>
 
+    <!-- Modal box to view package details -->
+    <div class="modal" id="view-package-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="package-details">
+                <!-- Package details will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -126,13 +136,13 @@ require_once('../app/views/layout/header.php');
                         addPackageModal.style.display = "none";
                         getPackages();
                         $("#add-package-form").trigger('reset');
-                }
+                    }
 
-                
-            },
-            error: function(errors) {
+
+                },
+                error: function(errors) {
                     console.log(errors);
-            
+
                 }
 
             });
@@ -192,20 +202,24 @@ require_once('../app/views/layout/header.php');
         console.log('view package');
 
         var modal = document.getElementById("view-package-modal");
-        var closeButton = document.querySelector(".close-button");
+        var closeButton = document.querySelector(".close");
 
         closeButton.addEventListener("click", function() {
             modal.style.display = "none";
         });
 
-        var viewButtons = document.querySelectorAll("#edit-package");
+        var viewButtons = document.querySelectorAll("#package-view-button");
+        console.log(viewButtons);
         viewButtons.forEach(function(button) {
+            console.log(button);
             button.addEventListener("click", function() {
-                console.log('view button clicked');
-                var row = button.closest('.data');
-                var packageId = row.getAttribute('data-id');
+                var packageId = button.getAttribute('data-id');
+                console.log(packageId);
+
                 fetchPackageDetails(packageId);
-                
+                modal.style.display = "block";
+
+
                 // var row = button.closest('.tr');
                 // var packageId = button.getAttribute('data-id');
                 // fetchPackageDetails(packageId);
@@ -219,18 +233,17 @@ require_once('../app/views/layout/header.php');
             headers: {
                 Authorization: "Bearer " + getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/package/getPackage/' + packageId,
+            url: '<?= ROOT_DIR ?>/Guide/getPackage/' + packageId,
             method: 'GET',
             success: function(data) {
-                // var newDiv = document.createElement("div");
-                // newDiv.innerHTML = data;
-                // var js = newDiv.querySelector('script').innerHTML;
+                var modalContent = document.querySelector("#view-package-modal .modal-content");
+                modalContent.innerHTML = data;
 
-                $('#package-modal-content').empty();
-                $('#package-modal-content').html(data).promise().done(function() {
-                    console.log('package loaded');
-                    // viewPackage();
-                    // eval(js);
+                var closeButton = document.querySelector("#view-package-modal .close");
+                closeButton.addEventListener("click", function() {
+                    var modal = document.getElementById("view-package-modal");
+                    modal.style.display = "none";
+                    location.reload();
                 });
             },
             error: function(err) {
@@ -239,6 +252,118 @@ require_once('../app/views/layout/header.php');
         });
     }
 
+    document.addEventListener("DOMContentLoaded", function() {
+        viewPackage();
+    });
+</script>
+
+
+<script>
+    // EDIT PACKAGE
+
+    $(document).on('click', '.edit-package-button', function() {
+        var modal = document.getElementById("edit-package-modal");
+        modal.style.display = "block";
+        var packageId = $(this).data('id');
+        console.log(packageId);
+        $('#update-package-form').attr('data-id', packageId);
+    });
+
+    $(document).on('submit', '#update-package-form', function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('packageId');
+        var formData = new FormData(this);
+        console.log(id);
+        console.log(formData);
+        var closeButton = document.querySelector(".close-button");
+
+        closeButton.addEventListener("click", function() {
+            var modal_del = document.getElementById("edit-package-modal");
+            modal_del.style.display = "none";
+        });
+
+        var transportNeeded = $('#transport_needed2').is(':checked') ? 1 : 0;
+
+        var jsonData = {
+            id: id,
+            price: formData.get('price'),
+            max_group_size: formData.get('max_group_size'),
+            max_distance: formData.get('max_distance'),
+            transport_needed: transportNeeded,
+            places: formData.get('places')
+        };
+
+        formData.append('json', JSON.stringify(jsonData));
+        console.log(formData);
+        console.log(jsonData);
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/package/update/' + id,
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                fetchPackageDetails(id);
+                var closeButton = document.querySelector("#view-package-modal .close");
+                closeButton.addEventListener("click", function() {
+                    var modal = document.getElementById("view-package-modal");
+                    modal.style.display = "none";
+                    location.reload();
+                });
+            },
+            error: function(errors) {
+                console.log(errors);
+            }
+        });
+    });
+
+
+    // DELETE PACKAGE
+
+
+    $(document).on('click', '.delete-package-button', function() {
+        var modal = document.getElementById("delete-package-modal");
+        modal.style.display = "block";
+        var packageId = $(this).data('id');
+        $('#delete-package').attr('data-id', packageId);
+    });
+
+
+    $(document).on('click', '#delete-package', function() {
+        var packageId = $(this).data('id');
+        console.log(packageId);
+        console.log('delete package 2');
+
+        $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/package/deletePackage/' + packageId,
+        method: 'POST',
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                alertmsg('Package deleted successfully', 'success');
+            }
+        },
+        error: function(errors) {
+            console.log(errors);
+        },
+        complete: function() {
+            var modal = document.getElementById("delete-package-modal");
+            modal.style.display = "none";
+        }
+    });
+});
+
+    $(document).on('click', '#cancel-delete', function() {
+        var modal = document.getElementById("delete-package-modal");
+        modal.style.display = "none";
+    });
     // function filterPackages(name, type) {
     //     $('.data').each(function() {
     //         var package = $(this);
