@@ -1132,7 +1132,7 @@ fieldset {
   top: 50%;
   visibility: visible;
   opacity: 1;
-  z-index: 2;
+  z-index: 1;
   transform: 0.5s;
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
@@ -1248,7 +1248,7 @@ fieldset {
   top: 50%;
   visibility: visible;
   opacity: 1;
-  z-index: 2;
+  z-index: 1;
   transform: 0.5s;
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
@@ -1369,7 +1369,7 @@ fieldset {
   position: fixed;
   top: 50%;
   opacity: 1;
-  z-index: 2;
+  z-index: 1;
   transform: translate(-50%, -50%) scale(1.05);
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms;
 }
@@ -2710,6 +2710,33 @@ fieldset {
     transition: all 0.3s ease;
   }
 }
+.edit-package-button {
+  background-color: #4CAF50;
+  width: 90%;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: auto;
+}
+
+.delete-package-button {
+  background-color: #f44336;
+  width: 90%;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
 .order-header .order-id {
   font-size: 1.75rem;
   color: #47494b;
@@ -3158,6 +3185,7 @@ fieldset {
   box-shadow: 4px 4px 16px rgba(47, 59, 28, 0.1);
   font-weight: 600;
   align-items: center;
+  cursor: pointer;
 }
 
 .btn-selected {
@@ -5073,4 +5101,3 @@ input.invert {
 .bg-white {
   background-color: #fff;
 }/*# sourceMappingURL=index.css.map */
-
