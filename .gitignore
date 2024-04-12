@@ -4,3 +4,8 @@ database/.env
 public/uploads/
 .pytest_cache
 public/uploads/rental_services/
+
+
+setup.sh
+server.env
+setup.sql
