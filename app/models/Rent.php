@@ -89,7 +89,7 @@ class RentModel {
 
     public function getRentalsByCustomer($data) {
 
-        $q = 'CALL getRentalsByCustomer(:customer_id)';
+        $q = 'CALL getRentalsByCustomer(:customer_id,:status)';
 
         // show ($data);
         return $this->query($q, $data);
