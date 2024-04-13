@@ -20,19 +20,23 @@ BEGIN
 END
 
 
-
 BEGIN
+
 
     DECLARE today DATE;
     SET today = CURDATE();
+    
+     SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+
 
     SET @baseQuery = "SELECT 
                         r.id, 
                         r.start_date AS `start`, 
                         r.end_date AS `end`, 
-                        GROUP_CONCAT(e.name SEPARATOR ', ') AS `equipment_names`,
                         p.status AS `payment_status`,
-                        r.status AS `rent_status`
+                        r.status AS `rent_status`,
+                        GROUP_CONCAT(e.name SEPARATOR ', ') AS `equipment_names`
+                       
                     FROM 
                         rent r
                     INNER JOIN rent_item ri ON r.id = ri.rent_id

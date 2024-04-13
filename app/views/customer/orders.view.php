@@ -142,6 +142,62 @@ require_once('../app/views/navbar/customer-navbar.php');
     });
 
 
+    // Cancel 
+    $(document).on('click','.order-cancel-button', function() {
+    //    Open modal
+        var orderId = $(this).closest('.card').attr('data-id');
+        console.log(orderId);
+        
+        $('#confirm-cancel-modal').show();
+        $('#confirm-cancel').attr('data-id', orderId);
+
+
+    });
+
+    // Confirm Cancel
+    $(document).on('click','#confirm-cancel', function() {
+        var orderId = $(this).attr('data-id');
+        console.log(orderId);
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/myOrders/cancelOrder/' + orderId,
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'GET',
+            success: function(data) {
+                $('#confirm-cancel-modal').hide();
+                loadOrders();
+            }
+        });
+    });
+
+
+    // Mark as Rented Modal 
+    $(document).on('click','.order-rent-button', function() {
+        var orderId = $(this).closest('.card').attr('data-id');
+        console.log(orderId);
+        $('#mark-as-rented-modal').show();
+        $('#mark-as-rented-confirm').attr('data-id', orderId);
+    });
+
+    // Mark as Rented Confirm
+    $(document).on('click','#mark-as-rented-confirm', function() {
+        var orderId = $(this).attr('data-id');
+        console.log(orderId);
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/myOrders/markAsRented/' + orderId,
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'GET',
+            success: function(data) {
+                $('#mark-as-rented-modal').hide();
+                loadOrders();
+            }
+        });
+    });
+    
+
 </script>
 
 
