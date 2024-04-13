@@ -2,6 +2,10 @@
 
 <?php
 
+
+
+
+
 foreach ($orders as $order) {
     ?>
    <div class="card"  data-id="<?php echo $order->id; ?>">
@@ -21,8 +25,15 @@ foreach ($orders as $order) {
                 <div class="col-lg-3 col-md-12">
 
                 <!-- view button -->
-                <a class="btn btn-primary order-view-button">View</a>
-                    
+                <!-- <a class="btn btn-primary order-view-button">View</a> -->
+                <button class="btn-text-green order-view-button" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
+
+                
+                <?php if ($order->payment_status == 'pending') { ?>
+                    <button class="btn btn-primary order-pay-button">Pay</button>
+                <?php } ?>
+
+
                     </div>
 
                 </div>
@@ -35,7 +46,7 @@ foreach ($orders as $order) {
 
 ?>
 
-<div class="modal" id="order-modal">
+<div class="modal" id="order-item-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         
