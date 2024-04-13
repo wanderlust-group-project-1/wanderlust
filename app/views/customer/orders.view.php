@@ -118,6 +118,9 @@ require_once('../app/views/navbar/customer-navbar.php');
             type: 'GET',
             success: function(data) {
                 $('#orders').html(data);
+            },
+            error: function(data) {
+                console.log(data);
             }
         });
 
@@ -137,7 +140,11 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#order-data').html(data);
                 $('#order-item-modal').show();
+            },
+            error: function(data) {
+                console.log(data);
             }
+
         });
     });
 
@@ -167,7 +174,11 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#confirm-cancel-modal').hide();
                 loadOrders();
+            },
+            error: function(data) {
+                console.log(data);
             }
+
         });
     });
 
@@ -193,10 +204,14 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#mark-as-rented-modal').hide();
                 loadOrders();
+            },
+            error: function(data) {
+                console.log(data);
             }
+            
         });
     });
-    
+
 
 </script>
 
