@@ -18,7 +18,7 @@ foreach ($orders as $order) {
                 </div>
 
                 <div class="col-lg-4 col-md-12">
-                    <p> <?php echo $order->equipment_names; ?></p>
+                    <p class="text-overflow-ellipsis "> <?php echo $order->equipment_names; ?></p>
                     
                 </div>
 
