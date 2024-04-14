@@ -128,6 +128,17 @@ class RentalServiceModel {
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
 
+
+    public function uploadImage(array $data, $id){
+        
+
+        $data['image'] = upload($data['image'], 'images/rental_services');
+        $this->update($id, $data, 'id');
+        return $data;
+
+    }
+
+
     public function getRentalService(int $id): mixed {
         $q = new QueryBuilder;
         $q->setTable('rental_services');
