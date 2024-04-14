@@ -5100,4 +5100,10 @@ input.invert {
 
 .bg-white {
   background-color: #fff;
+}
+
+.text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }/*# sourceMappingURL=index.css.map */

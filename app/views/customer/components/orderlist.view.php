@@ -17,12 +17,12 @@ foreach ($orders as $order) {
                  
                 </div>
 
-                <div class="col-lg-4 col-md-12">
-                    <p> <?php echo $order->equipment_names; ?></p>
+                <div class="col-lg-3 col-md-12">
+                    <p class="text-overflow-ellipsis "> <?php echo $order->equipment_names; ?></p>
                     
                 </div>
 
-                <div class="col-lg-3 col-md-12">
+                <div class="col-lg-4 col-md-12">
 
                 <!-- view button -->
                 <!-- <a class="btn btn-primary order-view-button">View</a> -->
@@ -42,6 +42,14 @@ foreach ($orders as $order) {
                 <!-- if rent_status accepted, mark as rented --> 
                 <?php if ($order->rent_status == 'accepted') { ?>
                     <button class="btn btn-primary order-rent-button">Mark as Rented</button>
+                    <!-- Report button -->
+                    <button class="btn btn-primary order-report-button">Report</button>
+                    
+
+                    
+
+                
+                   
                 <?php } ?>
 
 
@@ -95,3 +103,24 @@ foreach ($orders as $order) {
     </div>
 </div>
 
+
+<!-- Report Modal -->
+<!-- Complain Form with title and description -->
+
+<div class="modal" id="report-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="report-order-id">Report for Order ID: </h2>
+        <form id="report-form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" class="form-control-lg" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" class="form-control-lg" required></textarea>
+            </div>
+            <button class="btn btn-primary" id="report-submit">Submit</button>
+        </form>
+    </div>
+</div>

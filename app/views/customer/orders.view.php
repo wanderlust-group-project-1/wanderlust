@@ -109,6 +109,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     });
 
     function loadOrders(status = 'all') {
+        window.currentStatus = status;
         
         $.ajax({
             url: '<?= ROOT_DIR ?>/myOrders/list/' + status,
@@ -196,14 +197,14 @@ require_once('../app/views/navbar/customer-navbar.php');
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
-            url: '<?= ROOT_DIR ?>/myOrders/markAsRented/' + orderId,
+            url: '<?= ROOT_DIR ?>/api/myOrders/markAsRentedByCustomer/' + orderId,
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
             type: 'GET',
             success: function(data) {
                 $('#mark-as-rented-modal').hide();
-                loadOrders();
+                loadOrders(window.currentStatus);
             },
             error: function(data) {
                 console.log(data);
@@ -211,6 +212,48 @@ require_once('../app/views/navbar/customer-navbar.php');
             
         });
     });
+
+    // Report Modal
+    $(document).on('click','.order-report-button', function() {
+        var orderId = $(this).closest('.card').attr('data-id');
+
+        console.log(orderId);
+        $('#report-modal').show();
+        $('#report-submit').attr('data-id', orderId);
+        //  <span id="report-order-id"></span>
+        $('#report-order-id').html("Report for Order ID: " + orderId);
+
+
+    });
+
+    // Report Submit
+    $(document).on('click','#report-submit', function() {
+        var orderId = $(this).attr('data-id');
+        var report = $('#report-text').val();
+        console.log(orderId);
+        console.log(report);
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/api/myOrders/reportOrder/' + orderId,
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'POST',
+            data: {
+                report: report
+            },
+            success: function(data) {
+                $('#report-modal').hide();
+                alertmsg('Report submitted successfully', 'success');
+                loadOrders(window.currentStatus);
+            },
+            error: function(data) {
+                alertmsg('Error submitting report', 'danger');
+                console.log(data);
+            }
+            
+        });
+    });
+
 
 
 </script>
