@@ -266,7 +266,7 @@ fieldset {
   left: 0px;
   padding-top: 20px;
   transition: margin-left 0.5s;
-  z-index: 5;
+  z-index: 1;
   overflow-y: auto;
   box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
 }
@@ -377,7 +377,7 @@ fieldset {
 .profile-editor {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -392,7 +392,7 @@ fieldset {
   position: relative;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 400px;
+  max-width: 600px;
   border-radius: 20px;
 }
 .profile-editor .close {
@@ -406,11 +406,32 @@ fieldset {
   cursor: pointer;
 }
 .profile-editor .profile-image {
-  width: 100px;
-  height: 100px;
+  position: relative;
+  overflow: hidden;
   border-radius: 50%;
   margin: 20px auto;
   display: block;
+}
+.profile-editor .camera-icon i {
+  display: none;
+}
+.profile-editor .profile-image:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.profile-editor .profile-image:hover .camera-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: #fff; */
+  padding: 5px;
+  border-radius: 50%;
+}
+.profile-editor .profile-image:hover .camera-icon i {
+  display: block;
+  font-size: 30px;
+  color: #fff;
 }
 .profile-editor form {
   display: flex;
@@ -578,7 +599,7 @@ fieldset {
 .add-equipment-modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -832,6 +853,12 @@ fieldset {
   color: #6B6E70;
   font-size: 1.75rem;
   color: #47494b;
+}
+
+.image-preview-container .image-preview {
+  width: 400px;
+  height: 400px;
+  margin-top: 10px;
 }
 
 .signup-container#blur.active {
@@ -4462,6 +4489,10 @@ input.invert {
 
 .h-25px {
   height: 25px !important;
+}
+
+.mh-400px {
+  max-height: 400px !important;
 }
 
 .mh-200px {
