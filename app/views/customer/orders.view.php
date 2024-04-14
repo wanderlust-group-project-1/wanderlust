@@ -109,6 +109,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     });
 
     function loadOrders(status = 'all') {
+        window.currentStatus = status;
         
         $.ajax({
             url: '<?= ROOT_DIR ?>/myOrders/list/' + status,
@@ -196,14 +197,14 @@ require_once('../app/views/navbar/customer-navbar.php');
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
-            url: '<?= ROOT_DIR ?>/myOrders/markAsRented/' + orderId,
+            url: '<?= ROOT_DIR ?>/api/myOrders/markAsRentedByCustomer/' + orderId,
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
             type: 'GET',
             success: function(data) {
                 $('#mark-as-rented-modal').hide();
-                loadOrders();
+                loadOrders(window.currentStatus);
             },
             error: function(data) {
                 console.log(data);
