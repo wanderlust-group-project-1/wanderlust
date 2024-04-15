@@ -240,5 +240,12 @@ class RentalServiceModel {
     //             ->send();
     //     }
     // }
+
+    // Chart data
+
+    public function GetMonthlyCompletedRentalCount(int $id): mixed {
+        $q = "CALL GetMonthlyCompletedRentalCount(:id)";
+        return $this->query($q,['id' => $id]);
+    }
     
 }
