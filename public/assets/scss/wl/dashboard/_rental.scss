@@ -761,3 +761,31 @@ $box-shadow-color: rgba(0,0,0,0.2);
 
 }
 
+.equipment-image-preview-container {
+  display: flex;
+  gap: 10px;
+
+  img {
+      max-width: 100%;
+      max-height: 200px;
+      margin-bottom: 10px;
+  }
+
+  .remove-icon {
+      margin-top: 10px;
+      position: fixed;
+      color: 'red'; // Note: Quotation marks are not necessary for CSS color properties
+      // move left a bit
+      transform: translateX(-15px);
+  }
+
+  button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+}
+
