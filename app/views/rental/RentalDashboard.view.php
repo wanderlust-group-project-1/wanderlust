@@ -435,32 +435,37 @@ require_once('../app/views/admin/components/navbar.php');
 
     // filter equipment
 
+
     $(document).ready(function() {
-        $('#show-filter').click(function() {
-            $('.table-filter').slideDown();
-            $('#show-filter').hide();
-        });
+    // $('#show-filter').click(function() {(
+        $(document).on('click', '#show-filter', function() {
+        $('.table-filter').slideDown();
+        $('#show-filter').hide();
+    });
 
-        $('#hide-filter').click(function() {
-            $('.table-filter').slideUp();
-            $('#show-filter').show();
-        });
+    // $('#hide-filter').click(function() {
+        $(document).on('click', '#hide-filter', function() {
+        $('.table-filter').slideUp();
+        $('#show-filter').show();
+    });
 
-        // client side filter (onchange)
 
-        $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
 
-        $('#equipment-type-filter').change(function() {
-            filterEquipment();
-        });
+    $(document).on('input', '#equipment-name-filter', function() {
+        filterEquipment();
+    });
 
-        $('#equipment-cost-filter-min').on('input', function() {
-            filterEquipment();
-        });
+    $(document).on('change', '#equipment-type-filter', function() {
+        filterEquipment();
+    });
 
-        $('#equipment-cost-filter-max').on('input', function() {
-            filterEquipment();
-        });
+    $(document).on('input', '#equipment-cost-filter-min', function() {
+        filterEquipment();
+    });
+
+    $(document).on('input', '#equipment-cost-filter-max', function() {
+        filterEquipment();
+    });
 
 
 

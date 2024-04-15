@@ -861,6 +861,30 @@ fieldset {
   margin-top: 10px;
 }
 
+.equipment-image-preview-container {
+  display: flex;
+  gap: 10px;
+}
+.equipment-image-preview-container img {
+  max-width: 100%;
+  max-height: 200px;
+  margin-bottom: 10px;
+}
+.equipment-image-preview-container .remove-icon {
+  margin-top: 10px;
+  position: fixed;
+  color: "red";
+  transform: translateX(-15px);
+}
+.equipment-image-preview-container button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .signup-container#blur.active {
   filter: blur(20px);
   pointer-events: none;

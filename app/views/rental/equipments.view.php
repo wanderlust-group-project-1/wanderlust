@@ -102,7 +102,7 @@ require_once('../app/views/layout/header.php');
 
     <!-- Modal Box Add Equipment -->
     <!-- Add Equipment Modal -->
-    <div class="add-equipment-modal" id="add-equipment-modal">
+    <div class="add-equipment-modal modal" id="add-equipment-modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <form id="add-equipment-form" class="flex-d " enctype="multipart/form-data">
@@ -151,7 +151,9 @@ require_once('../app/views/layout/header.php');
                         <input type="number" id="count" class="form-control-lg" name="count" required>
 
                         <label for="equipment-image">Equipment Image</label>
-                        <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required>
+                        <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required hidden>
+                        <button type="button" class="btn" id="equipment-image-upload-button">Upload Image</button>
+
                     </div>
                 </div>
                 <div class="row">
@@ -163,6 +165,89 @@ require_once('../app/views/layout/header.php');
 
     <!-- Modal Box Add Equipment End -->
 </div>
+
+<script>
+    // Open image upload modal, use jquery
+    $(document).on('click', '#equipment-image-upload-button', function() {
+        $('#equipment-image-upload').show();
+    });
+
+  
+    
+    </script>
+
+
+<!-- Equipment Image Upload Modal -->
+<div class="modal" id="equipment-image-upload">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Upload Equipment Images</h2>
+        <!-- Equipment image upload form -->
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg" multiple required>
+            <div class="equipment-image-preview-container flex-d mt-2  align-items-center" id="equipment-image-preview"></div>
+            <input type="submit" class="btn mt-4" name="submit" value="Select Images" id="equipment-image-submit">
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+
+    $('#equipment-image').hide();
+    $('#equipment-image-input').change(function() {
+        var files = this.files;
+        var previewContainer = $('#equipment-image-preview');
+        previewContainer.empty(); // Clear existing previews
+
+        Array.from(files).forEach((file, index) => {
+            var imgContainer = $('<div/>', { 'class': 'img-preview-item' });
+            var img = $('<img>', { 'class': 'image-preview' }).appendTo(imgContainer);
+
+
+
+            var removeButton = $('<button/>', {
+                text: '',
+                'class': 'icon remove-icon',
+                click: function() {
+                    // Remove this image preview
+                    imgContainer.remove();
+                    // Optionally, handle file list updates if necessary
+                }
+
+            })
+            var removeIcon = $('<i/>', { 'class': 'fa fa-times'}).appendTo(removeButton);
+            removeButton.appendTo(imgContainer);
+
+
+            previewContainer.append(imgContainer);
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                img.attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+});
+
+// equipment-image-submit
+$(document).on('click', '#equipment-image-submit', function(e) {
+    e.preventDefault();
+    $('#equipment-image-upload').hide();
+    // $('#equipment-image').val($('#equipment-image-input').prop('files'));
+    // equipment-image-input to equipment-image
+    $('#equipment-image').prop('files', $('#equipment-image-input').prop('files'));
+
+
+});
+
+
+</script>
+
+
+
+
 
 
 
@@ -257,6 +342,12 @@ $(document).ready(function() {
         } else {
             alertmsg('Please select an image', 'error');
         }
+        //  if($("#equipment-image-input").prop('files').length > 0) {
+        //     var image = $("#equipment-image-input").prop('files');
+        // } else {
+        //     alertmsg('Please select an image', 'error');
+        // }
+
 
         // var filesData = {
         //     image: image
@@ -427,29 +518,33 @@ $(document).ready(function() {
 // filter equipment
 
  $(document).ready(function() {
-    $('#show-filter').click(function() {
+    // $('#show-filter').click(function() {(
+        $(document).on('click', '#show-filter', function() {
         $('.table-filter').slideDown();
         $('#show-filter').hide();
     });
 
-    $('#hide-filter').click(function() {
+    // $('#hide-filter').click(function() {
+        $(document).on('click', '#hide-filter', function() {
         $('.table-filter').slideUp();
         $('#show-filter').show();
     });
 
-    // client side filter (onchange)
 
-    $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
 
-    $('#equipment-type-filter').change(function() {
+    $(document).on('input', '#equipment-name-filter', function() {
         filterEquipment();
     });
 
-    $('#equipment-cost-filter-min').on('input', function() {
+    $(document).on('change', '#equipment-type-filter', function() {
         filterEquipment();
     });
 
-    $('#equipment-cost-filter-max').on('input', function() {
+    $(document).on('input', '#equipment-cost-filter-min', function() {
+        filterEquipment();
+    });
+
+    $(document).on('input', '#equipment-cost-filter-max', function() {
         filterEquipment();
     });
 
