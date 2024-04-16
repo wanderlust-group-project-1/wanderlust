@@ -87,6 +87,41 @@ require_once('../app/views/admin/components/navbar.php');
                 </div>
             </div>
         </div>
+
+
+        <!-- Report  -->
+
+
+        <div class="info-data mt-5">
+
+            <div class="card">
+
+            <!-- Income report generation -->
+            <!-- Select Duration start and end dates --> 
+
+            <div class="head">
+                <div>
+                    <h2>Income Report</h2>
+                    <p>Generate Income Report</p>
+                </div>
+
+                <form>
+                    <div class="row gap-2">
+                        <input type="date" id="start-date" name="start-date">
+                        <input type="date" id="end-date" name="end-date">
+                        <button class="btn btn-primary" type="submit">Generate</button>
+                    </div>
+                </form>
+                
+
+
+            </div>
+          
+        </div>
+
+
+
+
     </div>
 </div>
 
@@ -111,13 +146,22 @@ require_once('../app/views/layout/footer.php');
             type: 'GET',
             success: function(response) {
                 console.log(response);
-                console.log(response.data.months);
+                console.log(response.data);
+                console.log(response.data.rentalCount);
+                console.log(response.data.itemCount);
 
                 var options = {
                     series: [{
                         name: 'Completed Rentals',
-                        data: response.data.count
-                    }],
+                        data: response.data.rentalCount
+                    },
+                    {
+                        name: 'Items Rented',
+                        data: response.data.itemCount
+                    }
+                
+                
+                ],
                     chart: {
                         height: 300,
                         type: 'area',
@@ -138,7 +182,7 @@ require_once('../app/views/layout/footer.php');
                             format: 'dd/MM/yy HH:mm'
                         },
                     },
-                    colors: ['#B2BDA0']
+                    colors: ['#B2BDA0', '#2F3B1C']
                 };
 
                 var chart = new ApexCharts(document.querySelector("#chart"), options);

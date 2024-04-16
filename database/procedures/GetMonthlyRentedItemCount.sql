@@ -13,7 +13,7 @@ BEGIN
         `rent` r ON ri.rent_id = r.id
     WHERE 
         r.rentalservice_id = service_id
-        AND r.status IN ('rented', 'completed') -- Assuming you want to count items that were rented and those that completed the rental term
+        AND r.status IN ('completed') -- Assuming you want to count items that were rented and those that completed the rental term
     GROUP BY 
         MONTH(r.end_date)
     ORDER BY 
