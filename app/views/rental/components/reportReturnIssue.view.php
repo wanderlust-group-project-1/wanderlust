@@ -12,7 +12,7 @@
 
 <h2> Report Issue </h2>
 
-<table class="table">
+<table class="table" id="report-issue-table" data-order-id="<?= $order->id ?>">
     <thead>
         <tr>
             <th>Item_number </th>
