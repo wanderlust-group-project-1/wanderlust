@@ -2762,7 +2762,7 @@ fieldset {
   display: block;
   margin-top: 24px;
   height: 10px;
-  width: 200%;
+  width: 100%;
   border-radius: 10px;
   background: #f2f2f2;
   overflow-y: hidden;
@@ -2876,6 +2876,18 @@ fieldset {
 }
 
 .view-button {
+  background-color: #526534;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 4px 4px 16px rgba(47, 59, 28, 0.1);
+  font-weight: 600;
+  align-items: center;
+}
+
+.delete-button {
   background-color: #526534;
   color: white;
   padding: 8px 10px;

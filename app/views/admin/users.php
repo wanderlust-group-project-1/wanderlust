@@ -25,7 +25,7 @@ require_once('../app/views/admin/layout/sidebar.php');
                     <td><?php echo $guide->mobile; ?></td>
                     <td><span class="status <?php echo $guide->status; ?>"><?php echo $guide->status; ?></span></td>
                     <td><button class="view-button">View</button></td>
-                </tr>
+                </t r>
             <?php
             }
             ?>
