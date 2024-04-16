@@ -11,7 +11,8 @@ class Statistics {
 
         $rental = new RentalServiceModel;
         $data = [
-            'chart' => $rental->GetMonthlyCompletedRentalCount(UserMiddleware::getUser()['id'])
+            'rentalCount' => $rental->GetMonthlyCompletedRentalCount(UserMiddleware::getUser()['id']),
+            'itemCount' => $rental->GetMonthlyRentedItemCount(UserMiddleware::getUser()['id'])
         ];
 
 
@@ -36,15 +37,21 @@ class Statistics {
         //  to  {months:[],count:[]}} / use all months, if no data for a month, set count to 0 ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
         $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        $count = [0,0,0,0,0,0,0,0,0,0,0,0];
+        $rentalCount = [0,0,0,0,0,0,0,0,0,0,0,0];
+        $itemCount = [0,0,0,0,0,0,0,0,0,0,0,0];
 
-        foreach ($data['chart'] as $key => $value) {
-            $count[$value->Month-1] = $value->Count;
+        foreach ($data['rentalCount'] as $key => $value) {
+            $rentalCount[$value->Month-1] = $value->Count;
+        }
+
+        foreach ($data['itemCount'] as $key => $value) {
+            $itemCount[$value->Month-1] = $value->ItemCount;
         }
 
         $data = [
             'months' => $months,
-            'count' => $count
+            'rentalCount' => $rentalCount,
+            'itemCount' => $itemCount
         ];
       
 

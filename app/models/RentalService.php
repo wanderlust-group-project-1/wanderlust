@@ -247,5 +247,15 @@ class RentalServiceModel {
         $q = "CALL GetMonthlyCompletedRentalCount(:id)";
         return $this->query($q,['id' => $id]);
     }
+
+    public function GetMonthlyRentedItemCount(int $id): mixed {
+        $q = "CALL GetMonthlyRentedItemCount(:id)";
+        return $this->query($q,['id' => $id]);
+    }
+
+    public function GetMonthlyIncome(int $id, string $from, string $to): mixed {
+        $q = "CALL GetMonthlyIncome(:id, :from, :to)";
+        return $this->query($q,['id' => $id, 'from' => $from, 'to' => $to]);
+    }
     
 }
