@@ -1,7 +1,7 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
 
-<header class="header">
+<header class="header ">
     <!-- <nav class="nav__container"> -->
     <nav class="nav__container">
         <div class="nav__data">
