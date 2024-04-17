@@ -104,7 +104,7 @@ require_once('../app/views/admin/components/navbar.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r">
                                           <div>
-                                                <h3>Users</h3>
+                                                <h3>Blogs</h3>
                                           </div>
                                     </div>
 
@@ -167,7 +167,7 @@ require_once('../app/views/admin/components/navbar.php');
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/customers">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/    rentalServices/item">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
@@ -184,11 +184,11 @@ require_once('../app/views/admin/components/navbar.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r">
                                           <div>
-                                                <h3>Statistics</h3>
+                                                <h3>Users </h3>
                                           </div>
                                     </div>
 
-                                    <span class="progress" data-value="14%"></span>
+                                    <span class="user-progress" data-value="14%"></span>
                                     <span class="label">Rental Services</span>
                                     <span class="progress" data-value="26%"></span>
                                     <span class="label">Guides</span>
@@ -197,13 +197,13 @@ require_once('../app/views/admin/components/navbar.php');
 
                               </div>
                               <div class="flex-d-c">
-                                    <div class="flex-d-r justify-content-end">
+                                    <!-- <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/charts">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
-                                    </div>
+                                    </div> -->
                               </div>
                         </div>
                   </div>
@@ -213,7 +213,7 @@ require_once('../app/views/admin/components/navbar.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r">
                                           <div>
-                                                <h3>Blogs</h3>
+                                                <h3>Statistics</h3>
                                           </div>
                                     </div>
 
