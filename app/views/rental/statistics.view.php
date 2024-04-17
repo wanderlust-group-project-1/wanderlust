@@ -99,20 +99,32 @@ require_once('../app/views/admin/components/navbar.php');
             <!-- Income report generation -->
             <!-- Select Duration start and end dates --> 
 
-            <div class="head">
+            <div class="head justify-content-center align-items-center">
                 <div>
                     <h2>Income Report</h2>
-                    <p>Generate Income Report</p>
+                    <!-- <p>Generate Income Report</p> -->
                 </div>
 
-                <form>
-                    <div class="row gap-2">
+                <form class="w-100 justify-content-center align-items-center flex-d ">
+                    <div class="row gap-2 ">
+
+                    <div class="col-lg-4 gap-2 flex-d">
                         <input type="date" id="start-date" name="start-date">
                         <input type="date" id="end-date" name="end-date">
-                        <button class="btn btn-primary" type="submit">Generate</button>
+
                     </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-primary" id="income-report">Generate</button>
+                    </div>
+
+                        
+                    </div>
+                        
+
+                   
+
                 </form>
-                
+
 
 
             </div>
@@ -256,4 +268,43 @@ require_once('../app/views/layout/footer.php');
         // var chart = new ApexCharts(document.querySelector("#chart"), options);
         // chart.render();
     });
+
+
+
+    // Report Generation
+
+    $(document).on('click', '#income-report', function() {
+        // prevent default form submission
+        event.preventDefault();
+        var startDate = $('#start-date').val();
+        var endDate = $('#end-date').val();
+
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/report/rentalIncome',
+            type: 'POST',
+            data:JSON.stringify({
+                from: startDate,
+                to: endDate
+            }),
+            success: function(response) {
+                console.log(response);
+                // open the report in a new tab
+                
+                var url = '<?= ROOT_DIR ?>/reports/' + response.data.report
+                window.open(url, '_blank');
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+
+    });
+
+
+
+
+
 </script>
