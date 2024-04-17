@@ -7,7 +7,7 @@
       </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Users</span>
@@ -19,7 +19,7 @@
           <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
@@ -63,7 +63,7 @@
       </div>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/blogs">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Blogs</span>
@@ -75,7 +75,7 @@
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Tips and Knowhows</span>
       </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices/item" aria-expanded="false" aria-controls="ui-basic">
