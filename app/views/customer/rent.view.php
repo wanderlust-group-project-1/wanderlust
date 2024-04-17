@@ -90,7 +90,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="select-date">
 
 <!-- Start date and End date for rent  -->
-<div class="modal-content">
+<div class="modal-content-mini">
     <span class="close">&times;</span>
     <div class=" col-lg-12 flex-d-c gap-2 ">
         <h2 class="justify-content-center flex-d">Select Date</h2>
