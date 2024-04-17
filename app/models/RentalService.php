@@ -128,6 +128,17 @@ class RentalServiceModel {
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
 
+
+    public function uploadImage(array $data, $id){
+        
+
+        $data['image'] = upload($data['image'], 'images/rental_services');
+        $this->update($id, $data, 'id');
+        return $data;
+
+    }
+
+
     public function getRentalService(int $id): mixed {
         $q = new QueryBuilder;
         $q->setTable('rental_services');
@@ -194,6 +205,17 @@ class RentalServiceModel {
 
     }
 
+    public function rentalStats(int $id): mixed {
+
+        $q = "CALL getRentalStats(:id)";
+
+
+        return $this->query($q,['id' => $id]);
+
+  
+            
+    }
+
     // public function updateRentalService(JSONRequest $request, JSONResponse $response) {
     //     $data = $request->getAll();
 
@@ -218,5 +240,22 @@ class RentalServiceModel {
     //             ->send();
     //     }
     // }
+
+    // Chart data
+
+    public function GetMonthlyCompletedRentalCount(int $id): mixed {
+        $q = "CALL GetMonthlyCompletedRentalCount(:id)";
+        return $this->query($q,['id' => $id]);
+    }
+
+    public function GetMonthlyRentedItemCount(int $id): mixed {
+        $q = "CALL GetMonthlyRentedItemCount(:id)";
+        return $this->query($q,['id' => $id]);
+    }
+
+    public function GetMonthlyIncome(int $id, string $from, string $to): mixed {
+        $q = "CALL GetMonthlyIncome(:id, :from, :to)";
+        return $this->query($q,['id' => $id, 'from' => $from, 'to' => $to]);
+    }
     
 }

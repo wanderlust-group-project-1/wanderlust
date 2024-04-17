@@ -15,7 +15,7 @@ require_once('../app/views/components/navbar-auth.php');
         <p>It's time to start your journey, join us! Register here.</p>
             <div class="main">
                 <div class="row-btn">
-                    <button class="signup-card zoom-inn zoom-out" onclick="signupToggleCustomer()" id="customer">
+                    <button class="signup-card zoom-inn zoom-out" onclick="signupToggleCustomer()" >
                         <div class="btn-div">
                             <h3>Customer</h3>
                             <h4>Plan your journey now!</h4>
@@ -84,7 +84,7 @@ require_once('../app/views/components/navbar-auth.php');
 
                             <div class="form-element">
                                 <label for="address">Address</label>
-                                <input class="form-control-lg" type="text" name="address" id="address" required>
+                                <input class="form-control-lg" type="text" name="address" id="address" required >
                             </div>
 
                             <div class="form-element">
@@ -119,7 +119,7 @@ require_once('../app/views/components/navbar-auth.php');
                             <button class="btn btn-medium" id="customer-signup" name="submit" value="signup">Sign Up</button>
                             <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
                         
-                            <script>
+                            <!-- <script>
                                 let eyeicon = document.getElementById("eyeicon");
                                 let passwordc = document.getElementById("password");
 
@@ -132,7 +132,7 @@ require_once('../app/views/components/navbar-auth.php');
                                         eyeicon.className =  "fa fa-eye-slash";
                                     }
                                 }
-                            </script>
+                            </script> -->
                             <div id="error-message"></div>
                         </div>
                     </div>
@@ -159,13 +159,23 @@ require_once('../app/views/components/navbar-auth.php');
 
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">    
                         <div class="form-element">
-                            <label for="business_name">Business Name</label>
-                            <input class="form-control-lg" type="text" name="name" id="business_name">
+                            <label for="business_name">Name</label>
+                            <input class="form-control-lg" type="text" name="name" id="name">
                         </div>
 
                         <div class="form-element">
-                            <label for="registration_number">Business Registration Number / NIC</label>
-                            <input class="form-control-lg" type="text" name="regNo" id="registration_number">
+                            <label for="registration_number">NIC</label>
+                            <input class="form-control-lg" type="text" name="nic" id="nic">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="gender"> Gender </label>
+                            <select class="form-control-lg" name="gender" id="gender" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select></br>
+
                         </div>
 
                         <div class="form-element">
@@ -204,11 +214,13 @@ require_once('../app/views/components/navbar-auth.php');
                         <div class="form-element">
                             <div class="tooltip-container" class="hoverable-are">
                                 <div class="file-input-container">
-                                    <div><label>Business Verification Document</label>
+                                    <div><label>Upload verification Documents</label>
                                     <label for="verification_document" class="file-label">Brows here</label>
                                     </div>
+                                    <input type="file" name="verification_document" id="verification_document" class="file-input">
+
                                     <div class="tooltip">
-                                        <h5>Documents such as business registration certificate or any other document which can verify your business is legitimate.</h5>
+                                        <h5>Documents such as Tourist Board License or an endorsement letter from Grama Niladhari/local police station to verify your authenticity and credibility.</h5>
                                     </div>
 
                                 </div>
@@ -227,10 +239,10 @@ require_once('../app/views/components/navbar-auth.php');
                     </div>
 
             <div class="row">
-                <button class="btn btn-medium" id="rental-service-signup" name="submit" value="Sign Up" onclick="rentalServiceSignup(event)" > Sign Up </button>
+                <button class="btn btn-medium" id="rental-service-signup" name="submit" value="Sign Up" onclick="guideSignup(event)" > Sign Up </button>
                 <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
         
-                <script>
+                <!-- <script>
                     let eyeicon = document.getElementById("eyeicon");
                     let passwordg = document.getElementById("password");
                         eyeicon.onclick = function() {
@@ -242,7 +254,7 @@ require_once('../app/views/components/navbar-auth.php');
                                 eyeicon.className =  "fa fa-eye-slash";
                             }
                         }
-                </script>
+                </script> -->
                 <div id="error-message"></div>
                 </div>
             </div>
@@ -317,6 +329,8 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label class="rental-label">Business Verification Document</label>
                                     <label for="verification_document" class="file-label">Brows here</label>
                                     </div>
+                                    <input type="file" name="verification_document" id="verification_document" class="file-input">
+
                                     <div class="tooltip">
                                         <h5>Documents such as business registration certificate or any other document which can verify your business is legitimate.</h5>
                                     </div>
@@ -340,7 +354,7 @@ require_once('../app/views/components/navbar-auth.php');
                 <button class="btn btn-medium" id="rental-service-signup" name="submit" value="Sign Up" onclick="rentalServiceSignup(event)" > Sign Up </button>
                 <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
         
-                <script>
+                <!-- <script>
                     let eyeicon = document.getElementById("eyeicon");
                     let passwordr = document.getElementById("password");
 
@@ -354,7 +368,7 @@ require_once('../app/views/components/navbar-auth.php');
                             eyeicon.className =  "fa fa-eye-slash";
                         }
                     }
-                </script>
+                </script> -->
 
                 <div id="error-message"></div>
                 </div>
@@ -363,6 +377,29 @@ require_once('../app/views/components/navbar-auth.php');
         </div>
     </div>
 </div>
+
+
+<!-- Location Modal -->
+<div id="location-modal" class="location-modal">
+    <div class="modal-content">
+
+
+        <span class="close">&times;</span>
+        <input id="pac-input" class="controls" type="text" placeholder="Enter Location" />
+
+        <div id="map-canvas" class="map-canvas"> </div>
+
+            <input type="text" class="form-control" id="latitude"  hidden/>
+            <input type="text" class="form-control" id="longitude" hidden/>
+
+        <div class="location-button-container">
+            <button id="confirm-location" class="location-button" type="button">Confirm Location</button>
+        </div>
+    </div>
+
+
+</div>
+
 
 
 <script>
@@ -387,10 +424,37 @@ require_once('../app/views/components/navbar-auth.php');
         blur = document.getElementById('blur');
         blur.classList.toggle("active");
     }
+
+    // eye icon for password
+    $(document).ready(function(){
+        $(document).on('click', '#eyeicon', function(){
+            // this closest function will find the closest parent element of the current element
+            var password = $(this).closest('.pwd-input').find('input');
+            if(password.attr('type') == 'password'){
+                password.attr('type', 'text');
+                $(this).removeClass('fa-eye-slash');
+                $(this).addClass('fa-eye');
+            }else{
+                password.attr('type', 'password');
+                $(this).removeClass('fa-eye');
+                $(this).addClass('fa-eye-slash');
+            }
+
+        });
+    });
+
+
 </script>
 
 
+<script src="<?= ROOT_DIR ?>/assets/js/signup.js"></script>
+<script src="<?= ROOT_DIR ?>/assets/js/map.js"></script>
 
+<?php
+require_once('../app/views/layout/footer.php');
+
+
+?>
 
         
 

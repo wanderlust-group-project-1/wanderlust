@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 07, 2024 at 01:51 PM
+-- Generation Time: Apr 15, 2024 at 04:28 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -247,6 +247,38 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetItemsByEquipment` (IN `equipmentId` INT)
         
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `GetMonthlyCompletedRentalCount` (IN `service_id` INT)   BEGIN
+    SELECT 
+        MONTH(end_date) AS `Month`, 
+        COUNT(*) AS `Count`
+    FROM 
+        `rent`
+    WHERE 
+       status = 'completed'
+        AND rentalservice_id = service_id
+    GROUP BY 
+        MONTH(end_date)
+    ORDER BY 
+        MONTH(end_date);
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetMonthlyRentedItemCount` (IN `service_id` INT)   BEGIN
+    SELECT 
+        MONTH(r.end_date) AS `Month`, 
+        COUNT(ri.item_id) AS `ItemCount`
+    FROM 
+        `rent_item` ri
+    JOIN 
+        `rent` r ON ri.rent_id = r.id
+    WHERE 
+        r.rentalservice_id = service_id
+        AND r.status IN ('rented', 'completed') -- Assuming you want to count items that were rented and those that completed the rental term
+    GROUP BY 
+        MONTH(r.end_date)
+    ORDER BY 
+        MONTH(r.end_date);
+END$$
+
 CREATE DEFINER=`root`@`%` PROCEDURE `GetRentalDetailsByID` (IN `rent_id_param` INT)   BEGIN
     SELECT 
         r.*,
@@ -281,23 +313,122 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetRentalDetailsByID` (IN `rent_id_param` I
         r.id;
 END$$
 
-CREATE DEFINER=`root`@`%` PROCEDURE `getRentalsByCustomer` (IN `customer_id_param` INT)   BEGIN
+CREATE DEFINER=`root`@`%` PROCEDURE `getRentalsByCustomer` (IN `customer_id_param` INT, IN `filterType` VARCHAR(255))   BEGIN
+
+
+    DECLARE today DATE;
+    SET today = CURDATE();
+    
+     SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+
+
+    SET @baseQuery = "SELECT 
+                        r.id, 
+                        r.start_date AS `start`, 
+                        r.end_date AS `end`, 
+                        p.status AS `payment_status`,
+                        r.status AS `rent_status`,
+                        GROUP_CONCAT(e.name SEPARATOR ', ') AS `equipment_names`
+                       
+                    FROM 
+                        rent r
+                    INNER JOIN rent_item ri ON r.id = ri.rent_id
+                    INNER JOIN item i ON ri.item_id = i.id
+                    INNER JOIN equipment e ON i.equipment_id = e.id
+                    INNER JOIN rent_pay rp ON r.id = rp.rent_id
+                    INNER JOIN payment p ON rp.payment_id = p.id
+                    WHERE 
+                        r.customer_id = ?
+                  ";
+
+    SET @baseQueryEnd = "GROUP BY 
+                        r.id
+                    ORDER BY 
+                        r.start_date;";
+    
+    CASE
+        WHEN filterType = 'ALL' THEN
+            SET @specificFilter = "AND p.status = 'completed'";
+        
+        WHEN filterType = 'pending' THEN
+            SET @specificFilter = "AND r.status = 'pending' AND p.status = 'completed'";
+        
+        WHEN filterType = 'upcoming' THEN
+            SET @specificFilter = "AND r.start_date >=  CURDATE() AND r.status = 'accepted' AND p.status = 'completed'";
+
+        WHEN filterType = 'cancelled' THEN
+            SET @specificFilter = "AND r.status = 'cancelled'";
+
+        WHEN filterType = 'completed' THEN
+            SET @specificFilter = "AND r.status = 'completed'";
+
+        WHEN filterType = 'unpaid' THEN
+            SET @specificFilter = "AND p.status = 'pending'";
+
+        WHEN filterType = 'rented' THEN
+            SET @specificFilter = "AND r.status = 'rented'";
+
+        
+        ELSE
+
+            SET @specificFilter = "";
+    END CASE;
+
+    SET @SQL = CONCAT(@baseQuery, @specificFilter, @baseQueryEnd);
+    PREPARE stmt FROM @SQL;
+    SET @customer_id_param = customer_id_param;
+    EXECUTE stmt USING @customer_id_param;
+    DEALLOCATE PREPARE stmt;
+    
+
+    
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetRentalStats` (IN `service_id` INT)   BEGIN
+    -- Declare variables to hold the results
+    DECLARE v_successful_rental_count INT;
+    DECLARE v_total_earnings DECIMAL(10,2);
+    DECLARE v_last_month_rental_count INT;
+    DECLARE v_current_month_earnings DECIMAL(10,2);
+    DECLARE v_equipment_count INT;
+    
+    -- Calculate Successful Rental Count
+    SELECT COUNT(*) INTO v_successful_rental_count
+    FROM rent
+    WHERE status = 'completed' AND rentalservice_id = service_id;
+
+    -- Calculate Total Earnings
+    SELECT SUM(total) INTO v_total_earnings
+    FROM rent
+    WHERE status = 'completed' AND rentalservice_id = service_id;
+
+    -- Calculate Last Month Rental Count
+    SELECT COUNT(*) INTO v_last_month_rental_count
+    FROM rent
+    WHERE start_date >= DATE_FORMAT(CURRENT_DATE - INTERVAL 1 MONTH, '%Y-%m-01')
+    AND start_date < DATE_FORMAT(CURRENT_DATE, '%Y-%m-01')
+    AND rentalservice_id = service_id;
+
+    -- Calculate Current Month Earnings
+    SELECT SUM(total) INTO v_current_month_earnings
+    FROM rent
+    WHERE status = 'completed'
+    AND start_date >= DATE_FORMAT(CURRENT_DATE - INTERVAL 1 MONTH, '%Y-%m-01')
+    AND start_date < DATE_FORMAT(CURRENT_DATE, '%Y-%m-01')
+    AND rentalservice_id = service_id;
+
+    -- Calculate Equipment Count
+    SELECT COUNT(*) INTO v_equipment_count
+    FROM equipment
+    WHERE rentalservice_id = service_id;
+
+    -- Return all calculated data as a single row
     SELECT 
-        r.id, 
-        r.start_date AS `start`, 
-        r.end_date AS `end`, 
-        GROUP_CONCAT(e.name SEPARATOR ', ') AS `equipment_names`
-    FROM 
-        rent r
-    INNER JOIN rent_item ri ON r.id = ri.rent_id
-    INNER JOIN item i ON ri.item_id = i.id
-    INNER JOIN equipment e ON i.equipment_id = e.id
-    WHERE 
-        r.customer_id = customer_id_param
-    GROUP BY 
-        r.id
-    ORDER BY 
-        r.start_date;
+        v_successful_rental_count AS successful_rental_count,
+        v_total_earnings AS total_earnings,
+        v_last_month_rental_count AS last_month_rental_count,
+        v_current_month_earnings AS current_month_earnings,
+        v_equipment_count AS equipment_count;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `IncreaseEquipmentCount` (IN `equipmentID` INT, IN `itemCount` INT)   BEGIN
@@ -544,8 +675,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `start_date`, `end_date`) VALUES
-(43, 25, '2024-02-23', '2024-02-29'),
-(76, 32, '2024-04-10', '2024-04-17');
+(43, 25, '2024-02-23', '2024-02-29');
 
 -- --------------------------------------------------------
 
@@ -567,11 +697,7 @@ INSERT INTO `cart_item` (`id`, `cart_id`, `item_id`) VALUES
 (90, 40, 38),
 (91, 40, 4),
 (92, 40, 38),
-(93, 40, 38),
-(218, 76, 1378),
-(219, 76, 2314),
-(220, 76, 1379),
-(221, 76, 1378);
+(93, 40, 38);
 
 -- --------------------------------------------------------
 
@@ -627,7 +753,8 @@ INSERT INTO `customers` (`id`, `name`, `address`, `number`, `nic`, `user_id`) VA
 (32, 'Customer ', ' Colombo 5', '+94716024499', '200117293604', 107),
 (33, 'Nirmal', '  Colombo', '0716024489', '200118603720', 153),
 (34, 'Nirmal', '  Colombo', '0716024489', '200118603720', 155),
-(35, 'Nirmal', 'No 255, Neluwa RD\nGorakaduwa', '+94716024489', '200117829352', 167);
+(35, 'Nirmal', 'No 255, Neluwa RD\nGorakaduwa', '+94716024489', '200117829352', 167),
+(36, 'Anderson Runte', '52556 Amara Mill', '+94716024489', '200176539077', 183);
 
 -- --------------------------------------------------------
 
@@ -670,7 +797,10 @@ INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`
 (61, 56, 'Cooking Set', 11000.00, '5', 'Cooking', 11, 500.00, 400.00, '65d8b04792064.webp'),
 (69, 25, 'Clare Ritchie', 74.00, 'Illum dolorem quas.', 'Footwear', 481, 6.00, 225.00, '65e0417c00298.jpg'),
 (70, 25, 'Carlie Shields', 243.00, 'Beatae voluptatem maiores minus vel mollitia repellat quibusdam sint.', 'Cooking', 530, 606.00, 34.00, '65e041b26e300.png'),
-(71, 25, 'Juana Barrows', 294.00, 'Ipsum pariatur dolores aliquam aspernatur doloremque sequi.', 'Cooking', 37, 200.00, 517.00, '65e0665e2b2bf.jpg');
+(71, 25, 'Juana Barrows', 294.00, 'Ipsum pariatur dolores aliquam aspernatur doloremque sequi.', 'Cooking', 37, 200.00, 517.00, '65e0665e2b2bf.jpg'),
+(72, 25, 'Dena Hirthe', 373.00, 'Nesciunt aspernatur aliquam.', 'Climbing', 40, 379.00, 96.00, ''),
+(73, 25, 'Dane Schuster', 31.00, 'Sequi tempora consequatur explicabo maiores magni numquam adipisci.', 'Climbing', 366, 503.00, 655.00, ''),
+(74, 25, 'Evangeline Vandervort', 357.00, 'Dolor eveniet ratione dolore fugiat.', 'Climbing', 6, 315.00, 249.00, '661cf80214b6c.png');
 
 -- --------------------------------------------------------
 
@@ -687,60 +817,62 @@ CREATE TABLE `guides` (
   `gender` enum('male','female','other') NOT NULL,
   `user_id` int DEFAULT NULL,
   `status` enum('waiting','accepted','rejected','') NOT NULL DEFAULT 'waiting',
-  `verification_document` text NOT NULL
+  `verification_document` text NOT NULL,
+  `location_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `guides`
 --
 
-INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_id`, `status`, `verification_document`) VALUES
-(1, 'H W Nirmal Savinda', 'No 255 Neluwa Rd', '2334543', '076024489', 'male', NULL, 'waiting', ''),
-(2, 'H W Nirmal Savinda', 'No 255 Neluwa Rd', '2334543', '076024489', 'male', 32, 'waiting', ''),
-(3, 'H W Nirmal Savinda', 'No 255 Neluwa Rd', '435453636t345', '076024489', 'male', 33, 'waiting', ''),
-(4, 'Sandali Gunawardhana', 'Colombo', '200117901832', '0716024489', 'female', 51, 'waiting', ''),
-(5, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 105, 'waiting', ''),
-(6, 'Nirmal Savinda', ' Matugama', '200117901838', '+94716024489', 'male', 106, 'waiting', ''),
-(7, 'Nirmal Savinda', ' Colombo', '200167329831', '+94716024489', 'male', 108, 'waiting', ''),
-(8, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 109, 'waiting', ''),
-(9, 'Nirmal Savinda', '  Colombo', '200167329832', '+94716024489', 'male', 110, 'waiting', ''),
-(10, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 111, 'waiting', ''),
-(11, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 112, 'waiting', ''),
-(12, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 113, 'waiting', ''),
-(13, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 114, 'waiting', ''),
-(14, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 115, 'waiting', ''),
-(15, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 116, 'waiting', ''),
-(16, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 117, 'waiting', ''),
-(17, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 118, 'waiting', ''),
-(18, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 119, 'waiting', ''),
-(19, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 120, 'waiting', ''),
-(20, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 121, 'waiting', ''),
-(21, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 122, 'waiting', ''),
-(22, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 123, 'waiting', ''),
-(23, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 124, 'waiting', ''),
-(24, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 125, 'waiting', ''),
-(25, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 126, 'waiting', ''),
-(26, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 127, 'waiting', ''),
-(27, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 129, 'waiting', ''),
-(28, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 130, 'waiting', ''),
-(29, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 131, 'waiting', ''),
-(30, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 133, 'waiting', '65684d08461a2.pdf'),
-(31, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 134, 'waiting', '65684d3aaea5f.pdf'),
-(32, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 135, 'waiting', '65684d544415b.pdf'),
-(33, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 136, 'waiting', '65684d7f53def.pdf'),
-(34, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 137, 'waiting', '65685367464ac.pdf'),
-(35, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 154, 'waiting', '656dd2f4b51a2.pdf'),
-(36, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 156, 'waiting', '656dd482d5148.pdf'),
-(37, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 157, 'waiting', '656dd4ad4d5cd.pdf'),
-(38, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 158, 'waiting', '656dd4d3e4042.pdf'),
-(39, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 159, 'waiting', '656dd5371c806.pdf'),
-(40, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 160, 'waiting', '656ed2dd8fadd.pdf'),
-(41, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 161, 'waiting', '656eddbc6e48d.pdf'),
-(42, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 162, 'waiting', '656edf173246c.pdf'),
-(43, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 163, 'waiting', '656edff2b5eda.pdf'),
-(44, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 164, 'waiting', '656ee545b12fc.pdf'),
-(45, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 165, 'waiting', '656ee864db5fe.pdf'),
-(46, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 166, 'waiting', '6571be307d2f4.pdf');
+INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_id`, `status`, `verification_document`, `location_id`) VALUES
+(1, 'H W Nirmal Savinda', 'No 255 Neluwa Rd', '2334543', '076024489', 'male', NULL, 'waiting', '', 0),
+(2, 'H W Nirmal Savinda', 'No 255 Neluwa Rd', '2334543', '076024489', 'male', 32, 'waiting', '', 0),
+(3, 'H W Nirmal Savinda', 'No 255 Neluwa Rd', '435453636t345', '076024489', 'male', 33, 'waiting', '', 0),
+(4, 'Sandali Gunawardhana', 'Colombo', '200117901832', '0716024489', 'female', 51, 'waiting', '', 0),
+(5, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 105, 'waiting', '', 0),
+(6, 'Nirmal Savinda', ' Matugama', '200117901838', '+94716024489', 'male', 106, 'waiting', '', 0),
+(7, 'Nirmal Savinda', ' Colombo', '200167329831', '+94716024489', 'male', 108, 'waiting', '', 0),
+(8, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 109, 'waiting', '', 0),
+(9, 'Nirmal Savinda', '  Colombo', '200167329832', '+94716024489', 'male', 110, 'waiting', '', 0),
+(10, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 111, 'waiting', '', 0),
+(11, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 112, 'waiting', '', 0),
+(12, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 113, 'waiting', '', 0),
+(13, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 114, 'waiting', '', 0),
+(14, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 115, 'waiting', '', 0),
+(15, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 116, 'waiting', '', 0),
+(16, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 117, 'waiting', '', 0),
+(17, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 118, 'waiting', '', 0),
+(18, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 119, 'waiting', '', 0),
+(19, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 120, 'waiting', '', 0),
+(20, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 121, 'waiting', '', 0),
+(21, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 122, 'waiting', '', 0),
+(22, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 123, 'waiting', '', 0),
+(23, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 124, 'waiting', '', 0),
+(24, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 125, 'waiting', '', 0),
+(25, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 126, 'waiting', '', 0),
+(26, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 127, 'waiting', '', 0),
+(27, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 129, 'waiting', '', 0),
+(28, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 130, 'waiting', '', 0),
+(29, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 131, 'waiting', '', 0),
+(30, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 133, 'waiting', '65684d08461a2.pdf', 0),
+(31, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 134, 'waiting', '65684d3aaea5f.pdf', 0),
+(32, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 135, 'waiting', '65684d544415b.pdf', 0),
+(33, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 136, 'waiting', '65684d7f53def.pdf', 0),
+(34, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 137, 'waiting', '65685367464ac.pdf', 0),
+(35, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 154, 'waiting', '656dd2f4b51a2.pdf', 0),
+(36, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 156, 'waiting', '656dd482d5148.pdf', 0),
+(37, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 157, 'waiting', '656dd4ad4d5cd.pdf', 0),
+(38, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 158, 'waiting', '656dd4d3e4042.pdf', 0),
+(39, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 159, 'waiting', '656dd5371c806.pdf', 0),
+(40, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 160, 'waiting', '656ed2dd8fadd.pdf', 0),
+(41, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 161, 'waiting', '656eddbc6e48d.pdf', 0),
+(42, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 162, 'waiting', '656edf173246c.pdf', 0),
+(43, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 163, 'waiting', '656edff2b5eda.pdf', 0),
+(44, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 164, 'waiting', '656ee545b12fc.pdf', 0),
+(45, 'nirmal', 'Address is required', '200156273849', '0713458323', 'male', 165, 'waiting', '656ee864db5fe.pdf', 0),
+(46, 'Nirmal Savinda', '  Colombo', '200167329831', '+94716024489', 'male', 166, 'waiting', '6571be307d2f4.pdf', 0),
+(47, 'HDUFIFISF', 'No 255, Neluwa RD', '098790987654', '+94716024489', 'male', 187, 'waiting', '', 6);
 
 -- --------------------------------------------------------
 
@@ -828,12 +960,12 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (1328, 35, 'I000352302', 'available'),
 (1329, 25, 'I000251527', 'removed'),
 (1330, 25, 'I000259566', 'removed'),
-(1331, 25, 'I000254803', 'available'),
-(1332, 25, 'I000252679', 'unavailable'),
+(1331, 25, 'I000254803', 'removed'),
+(1332, 25, 'I000252679', 'available'),
 (1333, 25, 'I000254617', 'removed'),
 (1334, 25, 'I000254975', 'available'),
 (1335, 25, 'I000259610', 'removed'),
-(1336, 25, 'I000257921', 'unavailable'),
+(1336, 25, 'I000257921', 'available'),
 (1337, 25, 'I000254915', 'unavailable'),
 (1338, 25, 'I000257653', 'available'),
 (1339, 25, 'I000254522', 'available'),
@@ -967,7 +1099,7 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (2398, 25, 'I000257239', 'available'),
 (2399, 25, 'I000252274', 'available'),
 (2400, 25, 'I000254029', 'available'),
-(2401, 25, 'I000258539', 'available'),
+(2401, 25, 'I000258539', 'removed'),
 (2402, 25, 'I000255130', 'available'),
 (2403, 69, 'I000699704', 'available'),
 (2404, 69, 'I000694389', 'available'),
@@ -2018,7 +2150,420 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (3449, 71, 'I000719915', 'available'),
 (3450, 71, 'I000712100', 'available'),
 (3451, 71, 'I000718583', 'available'),
-(3452, 71, 'I000714084', 'available');
+(3452, 71, 'I000714084', 'available'),
+(3453, 72, 'I000721701', 'available'),
+(3454, 72, 'I000723882', 'available'),
+(3455, 72, 'I000727723', 'available'),
+(3456, 72, 'I000722699', 'available'),
+(3457, 72, 'I000724715', 'available'),
+(3458, 72, 'I000725360', 'available'),
+(3459, 72, 'I000729987', 'available'),
+(3460, 72, 'I000728670', 'available'),
+(3461, 72, 'I000725918', 'available'),
+(3462, 72, 'I000722986', 'available'),
+(3463, 72, 'I000725628', 'available'),
+(3464, 72, 'I000722121', 'available'),
+(3465, 72, 'I000723228', 'available'),
+(3466, 72, 'I000728387', 'available'),
+(3467, 72, 'I000727368', 'available'),
+(3468, 72, 'I000726101', 'available'),
+(3469, 72, 'I000726751', 'available'),
+(3470, 72, 'I000724436', 'available'),
+(3471, 72, 'I000721096', 'available'),
+(3472, 72, 'I000721063', 'available'),
+(3473, 72, 'I000724396', 'available'),
+(3474, 72, 'I000726550', 'available'),
+(3475, 72, 'I000726024', 'available'),
+(3476, 72, 'I000724576', 'available'),
+(3477, 72, 'I000721318', 'available'),
+(3478, 72, 'I000724013', 'available'),
+(3479, 72, 'I000724449', 'available'),
+(3480, 72, 'I000728001', 'available'),
+(3481, 72, 'I000726122', 'available'),
+(3482, 72, 'I000722389', 'available'),
+(3483, 72, 'I000723878', 'available'),
+(3484, 72, 'I000729335', 'available'),
+(3485, 72, 'I000721526', 'available'),
+(3486, 72, 'I000723569', 'available'),
+(3487, 72, 'I000722227', 'available'),
+(3488, 72, 'I000724257', 'available'),
+(3489, 72, 'I000722428', 'available'),
+(3490, 72, 'I000729975', 'available'),
+(3491, 72, 'I000728730', 'available'),
+(3492, 72, 'I000728684', 'available'),
+(3493, 73, 'I000737108', 'available'),
+(3494, 73, 'I000733959', 'available'),
+(3495, 73, 'I000739888', 'available'),
+(3496, 73, 'I000732526', 'available'),
+(3497, 73, 'I000732893', 'available'),
+(3498, 73, 'I000733873', 'available'),
+(3499, 73, 'I000735817', 'available'),
+(3500, 73, 'I000732551', 'available'),
+(3501, 73, 'I000733756', 'available'),
+(3502, 73, 'I000736677', 'available'),
+(3503, 73, 'I000731947', 'available'),
+(3504, 73, 'I000732529', 'available'),
+(3505, 73, 'I000736817', 'available'),
+(3506, 73, 'I000736656', 'available'),
+(3507, 73, 'I000739740', 'available'),
+(3508, 73, 'I000732437', 'available'),
+(3509, 73, 'I000732539', 'available'),
+(3510, 73, 'I000736929', 'available'),
+(3511, 73, 'I000734086', 'available'),
+(3512, 73, 'I000735164', 'available'),
+(3513, 73, 'I000735966', 'available'),
+(3514, 73, 'I000737161', 'available'),
+(3515, 73, 'I000739257', 'available'),
+(3516, 73, 'I000732067', 'available'),
+(3517, 73, 'I000734232', 'available'),
+(3518, 73, 'I000736692', 'available'),
+(3519, 73, 'I000736688', 'available'),
+(3520, 73, 'I000737121', 'available'),
+(3521, 73, 'I000732000', 'available'),
+(3522, 73, 'I000738547', 'available'),
+(3523, 73, 'I000733677', 'available'),
+(3524, 73, 'I000731438', 'available'),
+(3525, 73, 'I000737807', 'available'),
+(3526, 73, 'I000732541', 'available'),
+(3527, 73, 'I000738083', 'available'),
+(3528, 73, 'I000739293', 'available'),
+(3529, 73, 'I000736973', 'available'),
+(3530, 73, 'I000736916', 'available'),
+(3531, 73, 'I000731228', 'available'),
+(3532, 73, 'I000738239', 'available'),
+(3533, 73, 'I000734550', 'available'),
+(3534, 73, 'I000737884', 'available'),
+(3535, 73, 'I000733004', 'available'),
+(3536, 73, 'I000737184', 'available'),
+(3537, 73, 'I000736053', 'available'),
+(3538, 73, 'I000737501', 'available'),
+(3539, 73, 'I000731107', 'available'),
+(3540, 73, 'I000733112', 'available'),
+(3541, 73, 'I000736305', 'available'),
+(3542, 73, 'I000734865', 'available'),
+(3543, 73, 'I000734270', 'available'),
+(3544, 73, 'I000733486', 'available');
+INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
+(3545, 73, 'I000733886', 'available'),
+(3546, 73, 'I000732042', 'available'),
+(3547, 73, 'I000735964', 'available'),
+(3548, 73, 'I000738015', 'available'),
+(3549, 73, 'I000734198', 'available'),
+(3550, 73, 'I000739774', 'available'),
+(3551, 73, 'I000737000', 'available'),
+(3552, 73, 'I000734613', 'available'),
+(3553, 73, 'I000738806', 'available'),
+(3554, 73, 'I000732855', 'available'),
+(3555, 73, 'I000736568', 'available'),
+(3556, 73, 'I000732259', 'available'),
+(3557, 73, 'I000734881', 'available'),
+(3558, 73, 'I000734988', 'available'),
+(3559, 73, 'I000737999', 'available'),
+(3560, 73, 'I000732163', 'available'),
+(3561, 73, 'I000739693', 'available'),
+(3562, 73, 'I000734844', 'available'),
+(3563, 73, 'I000737874', 'available'),
+(3564, 73, 'I000732590', 'available'),
+(3565, 73, 'I000737488', 'available'),
+(3566, 73, 'I000735041', 'available'),
+(3567, 73, 'I000735967', 'available'),
+(3568, 73, 'I000737147', 'available'),
+(3569, 73, 'I000734168', 'available'),
+(3570, 73, 'I000731442', 'available'),
+(3571, 73, 'I000731048', 'available'),
+(3572, 73, 'I000739992', 'available'),
+(3573, 73, 'I000735002', 'available'),
+(3574, 73, 'I000737257', 'available'),
+(3575, 73, 'I000735927', 'available'),
+(3576, 73, 'I000736893', 'available'),
+(3577, 73, 'I000737770', 'available'),
+(3578, 73, 'I000737660', 'available'),
+(3579, 73, 'I000738189', 'available'),
+(3580, 73, 'I000737802', 'available'),
+(3581, 73, 'I000735607', 'available'),
+(3582, 73, 'I000734905', 'available'),
+(3583, 73, 'I000738885', 'available'),
+(3584, 73, 'I000731742', 'available'),
+(3585, 73, 'I000732709', 'available'),
+(3586, 73, 'I000731946', 'available'),
+(3587, 73, 'I000736664', 'available'),
+(3588, 73, 'I000735691', 'available'),
+(3589, 73, 'I000735296', 'available'),
+(3590, 73, 'I000737468', 'available'),
+(3591, 73, 'I000738820', 'available'),
+(3592, 73, 'I000733521', 'available'),
+(3593, 73, 'I000738586', 'available'),
+(3594, 73, 'I000731027', 'available'),
+(3595, 73, 'I000731069', 'available'),
+(3596, 73, 'I000735359', 'available'),
+(3597, 73, 'I000731091', 'available'),
+(3598, 73, 'I000737136', 'available'),
+(3599, 73, 'I000733044', 'available'),
+(3600, 73, 'I000731493', 'available'),
+(3601, 73, 'I000738614', 'available'),
+(3602, 73, 'I000739499', 'available'),
+(3603, 73, 'I000732841', 'available'),
+(3604, 73, 'I000733123', 'available'),
+(3605, 73, 'I000731052', 'available'),
+(3606, 73, 'I000738771', 'available'),
+(3607, 73, 'I000732810', 'available'),
+(3608, 73, 'I000734738', 'available'),
+(3609, 73, 'I000739612', 'available'),
+(3610, 73, 'I000733617', 'available'),
+(3611, 73, 'I000733504', 'available'),
+(3612, 73, 'I000735915', 'available'),
+(3613, 73, 'I000737477', 'available'),
+(3614, 73, 'I000732117', 'available'),
+(3615, 73, 'I000737813', 'available'),
+(3616, 73, 'I000732021', 'available'),
+(3617, 73, 'I000737357', 'available'),
+(3618, 73, 'I000733490', 'available'),
+(3619, 73, 'I000737728', 'available'),
+(3620, 73, 'I000731709', 'available'),
+(3621, 73, 'I000736809', 'available'),
+(3622, 73, 'I000734623', 'available'),
+(3623, 73, 'I000732836', 'available'),
+(3624, 73, 'I000732168', 'available'),
+(3625, 73, 'I000735298', 'available'),
+(3626, 73, 'I000733439', 'available'),
+(3627, 73, 'I000737539', 'available'),
+(3628, 73, 'I000732930', 'available'),
+(3629, 73, 'I000739097', 'available'),
+(3630, 73, 'I000731368', 'available'),
+(3631, 73, 'I000735749', 'available'),
+(3632, 73, 'I000731194', 'available'),
+(3633, 73, 'I000735842', 'available'),
+(3634, 73, 'I000738874', 'available'),
+(3635, 73, 'I000732304', 'available'),
+(3636, 73, 'I000737800', 'available'),
+(3637, 73, 'I000739098', 'available'),
+(3638, 73, 'I000736946', 'available'),
+(3639, 73, 'I000733973', 'available'),
+(3640, 73, 'I000732611', 'available'),
+(3641, 73, 'I000738127', 'available'),
+(3642, 73, 'I000733803', 'available'),
+(3643, 73, 'I000736753', 'available'),
+(3644, 73, 'I000737354', 'available'),
+(3645, 73, 'I000735833', 'available'),
+(3646, 73, 'I000737272', 'available'),
+(3647, 73, 'I000737949', 'available'),
+(3648, 73, 'I000733480', 'available'),
+(3649, 73, 'I000738512', 'available'),
+(3650, 73, 'I000737480', 'available'),
+(3651, 73, 'I000737095', 'available'),
+(3652, 73, 'I000736643', 'available'),
+(3653, 73, 'I000732428', 'available'),
+(3654, 73, 'I000738935', 'available'),
+(3655, 73, 'I000736060', 'available'),
+(3656, 73, 'I000731801', 'available'),
+(3657, 73, 'I000739178', 'available'),
+(3658, 73, 'I000734060', 'available'),
+(3659, 73, 'I000732175', 'available'),
+(3660, 73, 'I000738065', 'available'),
+(3661, 73, 'I000736553', 'available'),
+(3662, 73, 'I000735551', 'available'),
+(3663, 73, 'I000734771', 'available'),
+(3664, 73, 'I000733576', 'available'),
+(3665, 73, 'I000732942', 'available'),
+(3666, 73, 'I000738793', 'available'),
+(3667, 73, 'I000731173', 'available'),
+(3668, 73, 'I000738300', 'available'),
+(3669, 73, 'I000736212', 'available'),
+(3670, 73, 'I000732903', 'available'),
+(3671, 73, 'I000731407', 'available'),
+(3672, 73, 'I000733680', 'available'),
+(3673, 73, 'I000737840', 'available'),
+(3674, 73, 'I000739980', 'available'),
+(3675, 73, 'I000735126', 'available'),
+(3676, 73, 'I000733165', 'available'),
+(3677, 73, 'I000737152', 'available'),
+(3678, 73, 'I000732476', 'available'),
+(3679, 73, 'I000735254', 'available'),
+(3680, 73, 'I000737690', 'available'),
+(3681, 73, 'I000732893', 'available'),
+(3682, 73, 'I000738333', 'available'),
+(3683, 73, 'I000738439', 'available'),
+(3684, 73, 'I000737410', 'available'),
+(3685, 73, 'I000736430', 'available'),
+(3686, 73, 'I000733618', 'available'),
+(3687, 73, 'I000734337', 'available'),
+(3688, 73, 'I000733486', 'available'),
+(3689, 73, 'I000733483', 'available'),
+(3690, 73, 'I000736693', 'available'),
+(3691, 73, 'I000734449', 'available'),
+(3692, 73, 'I000739578', 'available'),
+(3693, 73, 'I000735828', 'available'),
+(3694, 73, 'I000735157', 'available'),
+(3695, 73, 'I000733818', 'available'),
+(3696, 73, 'I000737010', 'available'),
+(3697, 73, 'I000737468', 'available'),
+(3698, 73, 'I000731079', 'available'),
+(3699, 73, 'I000736182', 'available'),
+(3700, 73, 'I000737372', 'available'),
+(3701, 73, 'I000736713', 'available'),
+(3702, 73, 'I000736084', 'available'),
+(3703, 73, 'I000738822', 'available'),
+(3704, 73, 'I000738130', 'available'),
+(3705, 73, 'I000731974', 'available'),
+(3706, 73, 'I000737958', 'available'),
+(3707, 73, 'I000731716', 'available'),
+(3708, 73, 'I000734875', 'available'),
+(3709, 73, 'I000733814', 'available'),
+(3710, 73, 'I000734861', 'available'),
+(3711, 73, 'I000732933', 'available'),
+(3712, 73, 'I000731612', 'available'),
+(3713, 73, 'I000737502', 'available'),
+(3714, 73, 'I000739917', 'available'),
+(3715, 73, 'I000732546', 'available'),
+(3716, 73, 'I000737389', 'available'),
+(3717, 73, 'I000738377', 'available'),
+(3718, 73, 'I000731297', 'available'),
+(3719, 73, 'I000736520', 'available'),
+(3720, 73, 'I000733103', 'available'),
+(3721, 73, 'I000737914', 'available'),
+(3722, 73, 'I000738713', 'available'),
+(3723, 73, 'I000733212', 'available'),
+(3724, 73, 'I000738251', 'available'),
+(3725, 73, 'I000735139', 'available'),
+(3726, 73, 'I000734278', 'available'),
+(3727, 73, 'I000736659', 'available'),
+(3728, 73, 'I000731295', 'available'),
+(3729, 73, 'I000738563', 'available'),
+(3730, 73, 'I000735683', 'available'),
+(3731, 73, 'I000737180', 'available'),
+(3732, 73, 'I000733173', 'available'),
+(3733, 73, 'I000733295', 'available'),
+(3734, 73, 'I000731320', 'available'),
+(3735, 73, 'I000733318', 'available'),
+(3736, 73, 'I000734798', 'available'),
+(3737, 73, 'I000731575', 'available'),
+(3738, 73, 'I000733634', 'available'),
+(3739, 73, 'I000738506', 'available'),
+(3740, 73, 'I000736186', 'available'),
+(3741, 73, 'I000733877', 'available'),
+(3742, 73, 'I000737614', 'available'),
+(3743, 73, 'I000735055', 'available'),
+(3744, 73, 'I000738405', 'available'),
+(3745, 73, 'I000734842', 'available'),
+(3746, 73, 'I000731636', 'available'),
+(3747, 73, 'I000734401', 'available'),
+(3748, 73, 'I000734530', 'available'),
+(3749, 73, 'I000734734', 'available'),
+(3750, 73, 'I000733071', 'available'),
+(3751, 73, 'I000735368', 'available'),
+(3752, 73, 'I000735644', 'available'),
+(3753, 73, 'I000733808', 'available'),
+(3754, 73, 'I000732189', 'available'),
+(3755, 73, 'I000731594', 'available'),
+(3756, 73, 'I000739480', 'available'),
+(3757, 73, 'I000732406', 'available'),
+(3758, 73, 'I000738666', 'available'),
+(3759, 73, 'I000736896', 'available'),
+(3760, 73, 'I000736667', 'available'),
+(3761, 73, 'I000734879', 'available'),
+(3762, 73, 'I000734592', 'available'),
+(3763, 73, 'I000735963', 'available'),
+(3764, 73, 'I000733254', 'available'),
+(3765, 73, 'I000737040', 'available'),
+(3766, 73, 'I000734105', 'available'),
+(3767, 73, 'I000738912', 'available'),
+(3768, 73, 'I000735273', 'available'),
+(3769, 73, 'I000739617', 'available'),
+(3770, 73, 'I000733544', 'available'),
+(3771, 73, 'I000736668', 'available'),
+(3772, 73, 'I000733427', 'available'),
+(3773, 73, 'I000738382', 'available'),
+(3774, 73, 'I000731312', 'available'),
+(3775, 73, 'I000732112', 'available'),
+(3776, 73, 'I000734608', 'available'),
+(3777, 73, 'I000734431', 'available'),
+(3778, 73, 'I000735341', 'available'),
+(3779, 73, 'I000731888', 'available'),
+(3780, 73, 'I000734694', 'available'),
+(3781, 73, 'I000737817', 'available'),
+(3782, 73, 'I000731562', 'available'),
+(3783, 73, 'I000733223', 'available'),
+(3784, 73, 'I000739798', 'available'),
+(3785, 73, 'I000737444', 'available'),
+(3786, 73, 'I000737148', 'available'),
+(3787, 73, 'I000734449', 'available'),
+(3788, 73, 'I000735478', 'available'),
+(3789, 73, 'I000738924', 'available'),
+(3790, 73, 'I000731895', 'available'),
+(3791, 73, 'I000733961', 'available'),
+(3792, 73, 'I000733104', 'available'),
+(3793, 73, 'I000733947', 'available'),
+(3794, 73, 'I000735339', 'available'),
+(3795, 73, 'I000731804', 'available'),
+(3796, 73, 'I000732856', 'available'),
+(3797, 73, 'I000735310', 'available'),
+(3798, 73, 'I000732073', 'available'),
+(3799, 73, 'I000738236', 'available'),
+(3800, 73, 'I000736110', 'available'),
+(3801, 73, 'I000734859', 'available'),
+(3802, 73, 'I000738960', 'available'),
+(3803, 73, 'I000733795', 'available'),
+(3804, 73, 'I000738357', 'available'),
+(3805, 73, 'I000736264', 'available'),
+(3806, 73, 'I000732076', 'available'),
+(3807, 73, 'I000738954', 'available'),
+(3808, 73, 'I000736080', 'available'),
+(3809, 73, 'I000732203', 'available'),
+(3810, 73, 'I000734026', 'available'),
+(3811, 73, 'I000731303', 'available'),
+(3812, 73, 'I000739794', 'available'),
+(3813, 73, 'I000732249', 'available'),
+(3814, 73, 'I000737224', 'available'),
+(3815, 73, 'I000733286', 'available'),
+(3816, 73, 'I000735307', 'available'),
+(3817, 73, 'I000736897', 'available'),
+(3818, 73, 'I000735564', 'available'),
+(3819, 73, 'I000736525', 'available'),
+(3820, 73, 'I000739540', 'available'),
+(3821, 73, 'I000738805', 'available'),
+(3822, 73, 'I000738325', 'available'),
+(3823, 73, 'I000735569', 'available'),
+(3824, 73, 'I000737158', 'available'),
+(3825, 73, 'I000733764', 'available'),
+(3826, 73, 'I000735739', 'available'),
+(3827, 73, 'I000736434', 'available'),
+(3828, 73, 'I000736493', 'available'),
+(3829, 73, 'I000731086', 'available'),
+(3830, 73, 'I000731482', 'available'),
+(3831, 73, 'I000738280', 'available'),
+(3832, 73, 'I000737608', 'available'),
+(3833, 73, 'I000731309', 'available'),
+(3834, 73, 'I000739282', 'available'),
+(3835, 73, 'I000731214', 'available'),
+(3836, 73, 'I000735813', 'available'),
+(3837, 73, 'I000738416', 'available'),
+(3838, 73, 'I000737218', 'available'),
+(3839, 73, 'I000731670', 'available'),
+(3840, 73, 'I000731656', 'available'),
+(3841, 73, 'I000736063', 'available'),
+(3842, 73, 'I000734583', 'available'),
+(3843, 73, 'I000734400', 'available'),
+(3844, 73, 'I000734976', 'available'),
+(3845, 73, 'I000734225', 'available'),
+(3846, 73, 'I000737386', 'available'),
+(3847, 73, 'I000731945', 'available'),
+(3848, 73, 'I000739748', 'available'),
+(3849, 73, 'I000734610', 'available'),
+(3850, 73, 'I000737485', 'available'),
+(3851, 73, 'I000735010', 'available'),
+(3852, 73, 'I000738721', 'available'),
+(3853, 73, 'I000732241', 'available'),
+(3854, 73, 'I000733364', 'available'),
+(3855, 73, 'I000736644', 'available'),
+(3856, 73, 'I000734583', 'available'),
+(3857, 73, 'I000733569', 'available'),
+(3858, 73, 'I000737450', 'available'),
+(3859, 74, 'I000745025', 'available'),
+(3860, 74, 'I000746466', 'available'),
+(3861, 74, 'I000748710', 'available'),
+(3862, 74, 'I000743871', 'available'),
+(3863, 74, 'I000746314', 'available'),
+(3864, 74, 'I000747193', 'available');
 
 --
 -- Triggers `item`
@@ -2075,7 +2620,10 @@ CREATE TABLE `locations` (
 INSERT INTO `locations` (`id`, `latitude`, `longitude`) VALUES
 (2, 3.000000, 34.000000),
 (3, 7.807752, 80.315864),
-(4, 3.000000, 34.000000);
+(4, 3.000000, 34.000000),
+(5, 7.590006, 80.057686),
+(6, 7.590006, 80.057686),
+(7, 7.617231, 80.343330);
 
 -- --------------------------------------------------------
 
@@ -2141,7 +2689,13 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (42, '2024-02-25 10:28:02', 'completed', 1310.00, NULL, 'RNT00042'),
 (43, '2024-02-27 09:16:40', 'completed', 13310.00, NULL, 'RNT00043'),
 (44, '2024-02-27 09:21:57', 'completed', 3010.00, NULL, 'RNT00044'),
-(45, '2024-04-05 05:39:54', 'pending', 211927.00, NULL, 'RNT00045');
+(45, '2024-04-05 05:39:54', 'pending', 211927.00, NULL, 'RNT00045'),
+(46, '2024-04-09 04:48:55', 'pending', 19500.00, NULL, 'RNT00046'),
+(47, '2024-04-09 04:52:04', 'completed', 2300.00, NULL, 'RNT00047'),
+(48, '2024-04-13 18:14:23', 'completed', 6450.00, NULL, 'RNT00048'),
+(49, '2024-04-14 10:58:51', 'pending', 27800.00, NULL, 'RNT00049'),
+(50, '2024-04-14 10:58:54', 'pending', 0.00, NULL, 'RNT00050'),
+(51, '2024-04-14 11:01:18', 'completed', 15400.00, NULL, 'RNT00051');
 
 -- --------------------------------------------------------
 
@@ -2230,12 +2784,19 @@ INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_
 (64, 32, 25, '2024-02-25', '2024-02-28', 'accepted', NULL, 3910.00, 0.00, '2024-02-25 10:25:23', '2024-02-25 10:24:39'),
 (65, 32, 56, '2024-02-25', '2024-02-28', 'accepted', NULL, 1400.00, 0.00, '2024-02-27 04:19:54', '2024-02-25 10:24:39'),
 (66, 32, 25, '2024-02-28', '2024-02-29', 'return_reported', NULL, 1310.00, 0.00, '2024-04-07 08:15:12', '2024-02-25 10:28:02'),
-(67, 32, 56, '2024-02-21', '2024-02-29', 'pending', NULL, 2900.00, 0.00, '2024-02-27 09:16:40', '2024-02-27 09:16:40'),
-(68, 32, 25, '2024-02-21', '2024-02-29', 'accepted', NULL, 10410.00, 0.00, '2024-04-06 10:25:38', '2024-02-27 09:16:40'),
+(67, 32, 56, '2024-02-21', '2024-02-29', 'accepted', NULL, 2900.00, 0.00, '2024-04-13 18:16:45', '2024-02-27 09:16:40'),
+(68, 32, 25, '2024-02-21', '2024-02-29', 'completed', NULL, 10410.00, 0.00, '2024-04-15 15:28:16', '2024-02-27 09:16:40'),
 (69, 32, 25, '2024-02-29', '2024-03-01', 'cancelled', NULL, 1310.00, 0.00, '2024-04-06 10:27:17', '2024-02-27 09:21:57'),
 (70, 32, 56, '2024-02-29', '2024-03-01', 'accepted', NULL, 1700.00, 0.00, '2024-02-27 09:23:24', '2024-02-27 09:21:57'),
 (71, 32, 25, '2024-04-11', '2024-04-26', 'pending', NULL, 69027.00, 0.00, '2024-04-05 05:39:54', '2024-04-05 05:39:54'),
-(72, 32, 56, '2024-04-11', '2024-04-26', 'pending', NULL, 142900.00, 0.00, '2024-04-05 05:39:54', '2024-04-05 05:39:54');
+(72, 32, 56, '2024-04-11', '2024-04-26', 'pending', NULL, 142900.00, 0.00, '2024-04-05 05:39:54', '2024-04-05 05:39:54'),
+(73, 32, 56, '2024-04-10', '2024-04-17', 'pending', NULL, 19500.00, 0.00, '2024-04-09 04:48:55', '2024-04-09 04:48:55'),
+(74, 32, 56, '2024-04-22', '2024-04-28', 'rented', NULL, 2300.00, 0.00, '2024-04-14 08:05:24', '2024-04-09 04:52:04'),
+(75, 32, 25, '2024-04-26', '2024-04-30', 'completed', NULL, 6450.00, 0.00, '2024-04-15 15:52:45', '2024-04-13 18:14:23'),
+(76, 32, 56, '2024-04-30', '2024-05-21', 'pending', NULL, 6800.00, 0.00, '2024-04-14 10:58:51', '2024-04-14 10:58:51'),
+(77, 32, 25, '2024-04-30', '2024-05-21', 'pending', NULL, 21000.00, 0.00, '2024-04-14 10:58:51', '2024-04-14 10:58:51'),
+(78, 32, 56, '2024-04-24', '2024-04-30', 'accepted', NULL, 3400.00, 0.00, '2024-04-14 11:02:20', '2024-04-14 11:01:18'),
+(79, 32, 25, '2024-04-24', '2024-04-30', 'completed', NULL, 12000.00, 0.00, '2024-04-15 15:52:49', '2024-04-14 11:01:18');
 
 -- --------------------------------------------------------
 
@@ -2285,7 +2846,7 @@ INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user
 (22, 'NS', ' 255 Ns ', 'b048294873', '0832873293', 71, 'waiting', '', NULL, '1.webp'),
 (23, 'ANDSD dad', 'No 255, Neluwa RD\r\nGorakaduwa', 'b43532423', '076024489', 72, 'accepted', '65435a34072e4.pdf', NULL, '1.webp'),
 (24, 'Nirmal', ' ABC', 'B3243354', '082372434', 73, 'waiting', '65438a19444d3.pdf', NULL, '1.webp'),
-(25, 'ABC Rent', ' Colombo 04', 'B873242343', '076024489', 87, 'waiting', '', 3, '1.webp'),
+(25, 'ABC Rent', ' Colombo 04', 'B873242343', '076024489', 87, 'waiting', '', 3, '661c05a16e2d0.jpg'),
 (26, 'nirmal', 'Address is required', '200156273849', '0713458323', 91, 'waiting', '', NULL, '1.webp'),
 (27, 'nirmal', 'Address is required', '200156273849', '0713458323', 92, 'waiting', '', NULL, '1.webp'),
 (28, 'nirmal', 'Address is required', '200156273849', '0713458323', 93, 'waiting', '', NULL, '1.webp'),
@@ -2316,7 +2877,8 @@ INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user
 (53, 'nirmal', 'Address is required', '200156273849', '0713458323', 179, 'waiting', '65b8ab6e2e9b5.pdf', NULL, '1.webp'),
 (54, 'nirmal', 'Address is required', '200156273849', '0713458323', 180, 'waiting', '65b8abac9a310.pdf', 2, '1.webp'),
 (55, 'Cruz Hills', '90826 Torphy Landing', 'NS', '+94716024489', 181, 'waiting', '65b8ac8050edf.pdf', 3, '1.webp'),
-(56, 'nirmal', 'Address is required', '200156273849', '0713458323', 182, 'waiting', '65d8ad691543f.pdf', 4, '1.webp');
+(56, 'nirmal', 'Address is required', '200156273849', '0713458323', 182, 'waiting', '65d8ad691543f.pdf', 4, '1.webp'),
+(57, 'NS yudufc', 'No 255, Neluwa RD', '200187674509', '+94716024489', 188, 'waiting', '6618f1fe4bdb3.pdf', 7, '1.webp');
 
 -- --------------------------------------------------------
 
@@ -2491,7 +3053,22 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (195, 72, 1376),
 (196, 72, 1375),
 (197, 72, 1374),
-(198, 72, 1373);
+(198, 72, 1373),
+(202, 73, 1378),
+(203, 73, 2314),
+(204, 73, 1379),
+(205, 73, 1378),
+(206, 73, 1378),
+(209, 74, 2340),
+(210, 75, 3415),
+(211, 75, 3415),
+(212, 75, 1358),
+(213, 75, 1358),
+(217, 76, 1373),
+(218, 77, 1329),
+(219, 78, 1378),
+(220, 79, 1323),
+(221, 79, 1323);
 
 -- --------------------------------------------------------
 
@@ -2546,7 +3123,14 @@ INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`, `amount`) VALUES
 (38, 69, 44, 1310.00),
 (39, 70, 44, 1700.00),
 (40, 71, 45, 69027.00),
-(41, 72, 45, 142900.00);
+(41, 72, 45, 142900.00),
+(42, 73, 46, 19500.00),
+(43, 74, 47, 2300.00),
+(44, 75, 48, 6450.00),
+(45, 76, 49, 6800.00),
+(46, 77, 49, 21000.00),
+(47, 78, 51, 3400.00),
+(48, 79, 51, 12000.00);
 
 -- --------------------------------------------------------
 
@@ -2574,12 +3158,19 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 (5, 64, NULL, NULL, '2024-04-06 10:22:37'),
 (6, 65, NULL, 'rented', '2024-02-27 04:59:37'),
 (7, 66, 'rented', 'rented', '2024-04-06 11:24:04'),
-(8, 67, NULL, NULL, '2024-02-27 09:16:40'),
-(9, 68, NULL, 'rented', '2024-04-06 10:26:01'),
+(8, 67, NULL, 'accepted', '2024-04-13 18:16:45'),
+(9, 68, NULL, 'completed', '2024-04-11 08:08:37'),
 (10, 69, NULL, 'cancelled', '2024-04-06 10:27:17'),
 (11, 70, NULL, 'accepted', '2024-02-27 09:23:24'),
 (12, 71, NULL, NULL, '2024-04-05 05:39:54'),
-(13, 72, NULL, NULL, '2024-04-05 05:39:54');
+(13, 72, NULL, NULL, '2024-04-05 05:39:54'),
+(14, 73, NULL, NULL, '2024-04-09 04:48:55'),
+(15, 74, 'rented', 'rented', '2024-04-14 08:05:24'),
+(16, 75, 'rented', 'completed', '2024-04-15 15:52:45'),
+(17, 76, NULL, NULL, '2024-04-14 10:58:51'),
+(18, 77, NULL, NULL, '2024-04-14 10:58:51'),
+(19, 78, 'rented', 'accepted', '2024-04-15 15:52:18'),
+(20, 79, 'rented', 'completed', '2024-04-15 15:52:49');
 
 --
 -- Triggers `rent_request`
@@ -2623,32 +3214,44 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rent_return_issues`
+-- Table structure for table `rent_return_complaints`
 --
 
-CREATE TABLE `rent_return_issues` (
+CREATE TABLE `rent_return_complaints` (
   `id` int NOT NULL,
   `rent_id` int NOT NULL,
   `complains` json NOT NULL,
-  `charge` decimal(10,2) NOT NULL
+  `charge` decimal(10,2) NOT NULL,
+  `description` text,
+  `status` enum('pending','resolved','rejected','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `rent_return_issues`
+-- Dumping data for table `rent_return_complaints`
 --
 
-INSERT INTO `rent_return_issues` (`id`, `rent_id`, `complains`, `charge`) VALUES
-(1, 66, '{\"issues\": [\"25\"], \"charges\": [\"500\"], \"issue_descriptions\": [\"euifdc jfjf \"]}', 500.00),
-(2, 66, '{\"issues\": [\"25\", \"33\"], \"charges\": [\"4500\", \"400\"], \"issue_descriptions\": [\"helloe\", \"abc\"]}', 4900.00);
+INSERT INTO `rent_return_complaints` (`id`, `rent_id`, `complains`, `charge`, `description`, `status`, `created_at`) VALUES
+(3, 68, '[{\"charge\": \"2830\", \"equipment_id\": \"25\", \"complaint_description\": \"Beer - Hyatt\"}, {\"charge\": \"2524\", \"equipment_id\": \"33\", \"complaint_description\": \"Schoen and Sons\"}]', 5354.00, NULL, 'cancelled', '2024-04-11 08:17:39');
 
 --
--- Triggers `rent_return_issues`
+-- Triggers `rent_return_complaints`
 --
 DELIMITER $$
-CREATE TRIGGER `AfterRentReturnIssueInsert` AFTER INSERT ON `rent_return_issues` FOR EACH ROW BEGIN
+CREATE TRIGGER `AfterRentReturnIssueInsert` AFTER INSERT ON `rent_return_complaints` FOR EACH ROW BEGIN
     UPDATE rent
     SET status = 'return_reported'
     WHERE id = NEW.rent_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_complaint_status_update` AFTER UPDATE ON `rent_return_complaints` FOR EACH ROW BEGIN
+    IF NEW.status = 'cancelled' THEN
+        UPDATE rent
+        SET status = 'rented'
+        WHERE id = NEW.rent_id; 
+    END IF;
 END
 $$
 DELIMITER ;
@@ -2856,7 +3459,13 @@ INSERT INTO `users` (`id`, `email`, `password`, `date`, `role`, `is_verified`) V
 (179, 'abc@asdd.com', 'VSRLTYOEX85FsXA4tkP/rA==:fe39c7d406873f029ce251f74252a35a66f7812cd333e1edffa10fb4942ac5f5', '2024-01-30 07:55:22', 'rentalservice', 0),
 (180, 'abc@asdd.com', 'Xqpp06kMTa4vAfUubzukOg==:2664d8a289491dcc04de9dccd643bf93ee0f79f130ef4abdf904d3f91a4c0266', '2024-01-30 07:56:24', 'rentalservice', 0),
 (181, 'nirmalsavinda29@gmail.com', 'keRiLseeT1IY1cCereA2Aw==:4952f318070ef202e0d7e9ab1791da426fce63638a0f8b573c231be1fdb6e3ec', '2024-01-30 07:59:56', 'rentalservice', 0),
-(182, 'rental1@wl.com', 'AKaIN2jKbPXe112x7OPTug==:ff7c4a9e2f20b620b50b98039d5ad9d8b28412ee4d3e55ec1329585c258456dd', '2024-02-23 14:36:17', 'rentalservice', 1);
+(182, 'rental1@wl.com', 'AKaIN2jKbPXe112x7OPTug==:ff7c4a9e2f20b620b50b98039d5ad9d8b28412ee4d3e55ec1329585c258456dd', '2024-02-23 14:36:17', 'rentalservice', 1),
+(183, 'your.email+fakedata69121@gmail.com', '32vt3Hmtv1z9PONMwa2i/w==:9c03fae8dae6bd21c415ce4cbcb38bfa4b053db81ec1f8c1007f5f13e983796e', '2024-04-12 07:56:10', 'customer', 0),
+(184, 'gvhgfhgfn@wl.com', '7eeJQXMYU8e6URwfMtEyXA==:24ae0bcb1a40a7d21ce7fb76695f4f600766efc33beccade9219e8c473bb9fdc', '2024-04-12 08:18:25', 'guide', 0),
+(185, 'gvhgfhgfn@wl.com', 'RiqTc+3KLLghxM/nImpuvw==:fa1f5b0a9e6b24953dd1e42967e4b576b1f71f9e68ac094b1103bb5d65eaac14', '2024-04-12 08:19:25', 'guide', 0),
+(186, 'guide@wl.com', 'aUyRjiSNKF/j0+hyVKdJOQ==:f1ce816abeb1aed405e4b3ea871d8fd39c2221f5a7968a46397973e0a086b002', '2024-04-12 08:25:33', 'guide', 0),
+(187, 'guide@wl.com', 'yf2h2KpUljtl4cuYLUDWoA==:9129b512c68c8c7aa020494b2bbf7c590a9937374952ad705129e26c29042692', '2024-04-12 08:26:47', 'guide', 0),
+(188, 'nirmalsavinda29@gmail.com', 'YwTBygsPyWuKYcxhhH2few==:e26d79a1159f24ff1b9d995681c0d8d92bc163dceb423345e25be1d5237b0145', '2024-04-12 08:33:58', 'rentalservice', 0);
 
 -- --------------------------------------------------------
 
@@ -2904,7 +3513,13 @@ INSERT INTO `verification` (`id`, `user_id`, `token`) VALUES
 (34, 179, '1a24dc19f995a894a9edc9941d33bbddd76abd9396e38071efe7923709f7fd10'),
 (35, 180, '1991dbfb82d03f54acf8aecddb77e5629e4b460554678cde9a995c1b725d8975'),
 (36, 181, 'c6748fabe7b54060ccca007db651292b38209cc6f2474adb52b8539e54b5209a'),
-(37, 182, '9c3853ac31bab21669937bc823a193be9fdd91a54657d4654d55a7451a5cc1e8');
+(37, 182, '9c3853ac31bab21669937bc823a193be9fdd91a54657d4654d55a7451a5cc1e8'),
+(38, 183, '972b68f449d92a7ac191e2c5da80ce07b17cc3cdc6a0a8d724dd4805df47f1d2'),
+(39, 184, '915049bb93289d163f0c45d2117c70c6b812de13d07e4206cc57e3c72908c082'),
+(40, 185, 'e7f8cb3f2d57da1348d4629cff4c3b6d09668f6863bac5c8ddf42b05e71e9b34'),
+(41, 186, '35910b32293477e3e0c88e39a07dcb74e74be3e904068470603ea9c9383a5778'),
+(42, 187, '1efc80fd832b09b6a13def963cb4dfcedee0fb48bad0e6c9c8df74085de27046'),
+(43, 188, '90225ee472fb6633b6d2b2616b63d96ccf0961fa17f21fca772d914166c20d61');
 
 --
 -- Indexes for dumped tables
@@ -3002,9 +3617,9 @@ ALTER TABLE `rent_request`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rent_return_issues`
+-- Indexes for table `rent_return_complaints`
 --
-ALTER TABLE `rent_return_issues`
+ALTER TABLE `rent_return_complaints`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3033,85 +3648,85 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `guides`
 --
 ALTER TABLE `guides`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3453;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3865;
 
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
 --
 ALTER TABLE `rental_services`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `rent_request`
 --
 ALTER TABLE `rent_request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `rent_return_issues`
+-- AUTO_INCREMENT for table `rent_return_complaints`
 --
-ALTER TABLE `rent_return_issues`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `rent_return_complaints`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tips`
@@ -3123,13 +3738,13 @@ ALTER TABLE `tips`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `verification`
 --
 ALTER TABLE `verification`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables

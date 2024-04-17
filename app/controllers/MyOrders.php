@@ -15,6 +15,7 @@ class MyOrders {
     public function list(string $a = '', string $b = '', string $c = ''):void {
         $data = [
             'customer_id' => UserMiddleware::getUser()['id'],
+            'status' => $a
         ];
 
         $rent = new RentModel;
@@ -27,9 +28,14 @@ class MyOrders {
  
         $rent = new RentModel;
         $order = $rent->getRental($a);
+        $items = $rent->getItemListbyRentId($a);
 
-        $this->view('customer/components/order', ['order' => $order]);
+
+        $this->view('customer/components/order', ['order' => $order, 'items' => $items]);
     }
+
+
+
 
 }
 

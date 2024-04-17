@@ -27,28 +27,45 @@ require_once('../app/views/admin/components/navbar.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>100</h3>
+
+
+                    <!-- (
+            [successful_rental_count] => 1
+            [total_earnings] => 15000.00
+            [last_month_rental_count] => 2
+            [current_month_earnings] => 
+            [equipment_count] => 16
+        ) -->
+
+
+                        <!-- <h3>100</h3> -->
+                        <h3><?php echo $stat->successful_rental_count ?></h3>
                         <p>Rents</p>
                     </div>
                 </div>
                 <span class="progress" data-value="10%"></span>
-                <span class="label">10 : Per Month</span>
+                <span class="label">
+                    <?php echo $stat->last_month_rental_count ?> 
+                    : Per Month</span>
             </div>
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>Rs.139000</h3>
+                        <!-- <h3>Rs.139000</h3> -->
+                        <h3>Rs.<?php echo $stat->total_earnings ?></h3>
                         <p>Total Earning</p>
                     </div>
                 </div>
                 <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
+                <!-- <span class="label">Rs.60 000 : Per Month</span> -->
+                <span class="label">Rs.<?php echo $stat->current_month_earnings ?> : Per Month</span>
             </div>
 
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>35</h3>
+                        <!-- <h3>35</h3> -->
+                        <h3><?php echo $stat->equipment_count ?></h3>
                         <p>Equipment Quantity</p>
                     </div>
                 </div>
@@ -113,46 +130,7 @@ require_once('../app/views/admin/components/navbar.php');
         </div>
     </div>
 
-    <!-- Modal Box Profile Edit -->
-    <div class="profile-editor" id="profile-editor">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-info">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="Profile Image" class="profile-image">
 
-
-                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
-                    <h2>Update Profile</h2>
-                    <?php if (isset($errors)) : ?>
-                        <div> <?= implode('<br>', $errors) ?> </div>
-                    <?php endif; ?>
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
-
-                    <!-- <label for="email">Email</label>
-    <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
-
-                    <label for="mobile">Mobile No</label>
-                    <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
-
-                    <label for="regNo">Registration Number</label>
-                    <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
-
-                    <!-- <label for="password">Password</label>
-    <input type="password" name="password" id="password" required> -->
-
-                    <input type="submit" class="btn mt-4" name="submit" value="Update">
-                </form>
-
-
-
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal Box Profile Edit End -->
@@ -225,41 +203,7 @@ require_once('../app/views/admin/components/navbar.php');
 
 </script>
 
-<script>
-    var modal = document.getElementById("profile-editor");
 
-    var span = document.getElementsByClassName("close")[0];
-
-    // Get all view buttons
-    var viewButton = document.getElementById('edit-profile');
-
-    // Function to handle modal display
-    function openModal() {
-        // document.getElementById("modal-content").innerHTML = content;
-        modal.style.display = "block";
-    }
-
-    // Add click event listener to view buttons
-    viewButton.addEventListener('click', function() {
-
-        // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-        // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-        openModal();
-    });
-
-
-    // Close the modal when the close button is clicked
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Close the modal if the user clicks outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
 
 
 <script>
@@ -491,32 +435,37 @@ require_once('../app/views/admin/components/navbar.php');
 
     // filter equipment
 
+
     $(document).ready(function() {
-        $('#show-filter').click(function() {
-            $('.table-filter').slideDown();
-            $('#show-filter').hide();
-        });
+    // $('#show-filter').click(function() {(
+        $(document).on('click', '#show-filter', function() {
+        $('.table-filter').slideDown();
+        $('#show-filter').hide();
+    });
 
-        $('#hide-filter').click(function() {
-            $('.table-filter').slideUp();
-            $('#show-filter').show();
-        });
+    // $('#hide-filter').click(function() {
+        $(document).on('click', '#hide-filter', function() {
+        $('.table-filter').slideUp();
+        $('#show-filter').show();
+    });
 
-        // client side filter (onchange)
 
-        $('#equipment-name-filter').on('input', debounce(filterEquipment, 300));
 
-        $('#equipment-type-filter').change(function() {
-            filterEquipment();
-        });
+    $(document).on('input', '#equipment-name-filter', function() {
+        filterEquipment();
+    });
 
-        $('#equipment-cost-filter-min').on('input', function() {
-            filterEquipment();
-        });
+    $(document).on('change', '#equipment-type-filter', function() {
+        filterEquipment();
+    });
 
-        $('#equipment-cost-filter-max').on('input', function() {
-            filterEquipment();
-        });
+    $(document).on('input', '#equipment-cost-filter-min', function() {
+        filterEquipment();
+    });
+
+    $(document).on('input', '#equipment-cost-filter-max', function() {
+        filterEquipment();
+    });
 
 
 

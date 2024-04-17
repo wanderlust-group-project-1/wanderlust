@@ -11,7 +11,7 @@ class AdminMiddleware {
 
     // filter user with allowed columns
 
-    public static function getUser(): array {
+    public static function getUser(){
 
 
         // return array_filter(Self::$user, function ($key) {
