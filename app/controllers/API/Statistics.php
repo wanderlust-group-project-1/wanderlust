@@ -1,9 +1,10 @@
 <?php
 
-class Statistics {
+class Statistics
+{
     use Controller;
 
-   
+
     public function monthlyCompletedRentalCount(string $a = '', string $b = '', string $c = ''): void
     {
 
@@ -37,15 +38,15 @@ class Statistics {
         //  to  {months:[],count:[]}} / use all months, if no data for a month, set count to 0 ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
         $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        $rentalCount = [0,0,0,0,0,0,0,0,0,0,0,0];
-        $itemCount = [0,0,0,0,0,0,0,0,0,0,0,0];
+        $rentalCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        $itemCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         foreach ($data['rentalCount'] as $key => $value) {
-            $rentalCount[$value->Month-1] = $value->Count;
+            $rentalCount[$value->Month - 1] = $value->Count;
         }
 
         foreach ($data['itemCount'] as $key => $value) {
-            $itemCount[$value->Month-1] = $value->ItemCount;
+            $itemCount[$value->Month - 1] = $value->ItemCount;
         }
 
         $data = [
@@ -53,7 +54,7 @@ class Statistics {
             'rentalCount' => $rentalCount,
             'itemCount' => $itemCount
         ];
-      
+
 
 
 
@@ -61,9 +62,45 @@ class Statistics {
 
         // show($data);
         $response->statusCode(200)->data($data)->send();
-
-
-        
     }
-    
+
+
+
+    public function adminRental(string $a = '', string $b = '', string $c = ''): void
+    {
+
+        $response = new JSONResponse;
+
+        $rental = new RentalServiceModel;
+        $data = [
+            'rentalCount' => $rental->GetAllMonthlyCompletedRentalCount(UserMiddleware::getUser()),
+            'itemCount' => $rental->GetAllMonthlyRentedItemCount(UserMiddleware::getUser()['id'])
+        ];
+
+        $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $rentalCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        $itemCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        foreach ($data['rentalCount'] as $key => $value) {
+            $rentalCount[$value->Month - 1] = $value->Count;
+        }
+
+        foreach ($data['itemCount'] as $key => $value) {
+            $itemCount[$value->Month - 1] = $value->ItemCount;
+        }
+
+        $data = [
+            'months' => $months,
+            'rentalCount' => $rentalCount,
+            'itemCount' => $itemCount
+        ];
+
+
+
+
+
+
+        // show($data);
+        $response->statusCode(200)->data($data)->send();
+    }
 }

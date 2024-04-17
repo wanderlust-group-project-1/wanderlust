@@ -273,3 +273,27 @@
 
 }
 
+
+
+.user-progress {
+            display: block;
+            margin-top: 24px;
+            height: 10px;
+            width: 200%;
+            border-radius: 10px;
+            background: $color-light-gray;
+            overflow-y: hidden;
+            position: relative;
+            margin-bottom: 4px;
+            border: 1px solid rgba($color-darker, 0.2);
+
+        .user-progress::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: $color-primary;
+            width: 12.5%;
+        }
+        }

@@ -135,7 +135,7 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>05</h1>
+                                          <h1>06</h1>
 
                                     </div>
                               </div>
@@ -224,7 +224,7 @@ require_once('../app/views/admin/components/navbar.php');
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/customers">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/charts">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
