@@ -128,7 +128,9 @@ function validateForm(formId) {
     var password = form.querySelector('input[name="password"]');
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+    // var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+    // 10 numbers with 0 beginning
+    var phoneNumberRegex = /^0\d{9}$/;
     var nicRegex = /^[0-9]{9}[vVxX]$/; // 10 digits ending with 'v' or 'x'
 
 
@@ -151,7 +153,7 @@ function validateForm(formId) {
 
     if (!phoneNumberRegex.test(number.value)) {
         errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".');
+       alertmsg('Invalid phone number. ');
         return false;
     }
 
@@ -193,9 +195,12 @@ document.getElementById('guide').onsubmit = function(event) {
 };
 
 
-var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+var passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,20}$/;
+
+// var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+var phoneNumberRegex = /^0\d{9}$/;
+
 var nicRegex = /^[0-9]{9}[vVxX]$|^[0-9]{12}$/; // 10 digits ending with 'v' or 'x'
 
 
@@ -231,13 +236,13 @@ document.getElementById("customer-signup").onclick =  function(event){
     }
     if (!phoneNumberRegex.test(number)) {
         // errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".',"error");
+       alertmsg('Invalid phone number. ',"error");
         return false;
     }
     if (!nicRegex.test(nic)) {
         // errorDiv.innerHTML = 'Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".';
        alertmsg('Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".',"error");
-        // return false;
+        return false;
     }
     if (!passwordRegex.test(password)) {
         // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
@@ -265,7 +270,7 @@ document.getElementById("customer-signup").onclick =  function(event){
             if (response.success) {
                 alertmsg("success", "success");
                 setTimeout(function() {
-                    window.location.href = "/";
+                    // window.location.href = "/";
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
@@ -330,7 +335,7 @@ function rentalServiceSignup(event){
     }
     if (!phoneNumberRegex.test(mobile)) {
         // errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".',"error");
+       alertmsg('Invalid phone number. ',"error");
         return false;
     }
     // if (!nicRegex.test(regNo)) {
@@ -447,7 +452,7 @@ function guideSignup(event){
     }
     if (!phoneNumberRegex.test(mobile)) {
         // errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".',"error");
+       alertmsg('Invalid phone number. ',"error");
         return false;
     }
     if (!nicRegex.test(nic)) {

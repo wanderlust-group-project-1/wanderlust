@@ -62,12 +62,16 @@ document.getElementById("submit").onclick = function(event) {
                     window.location.href = "/";
                 }, 1000);
             } else {
+                console.log(response.message);
                 alertmsg(response.message);
             }
         })
         .catch(error => {
             console.error(error);
-            alertmsg("Something went wrong","error");
+            // alertmsg("Something went wrong","error");
+            
+            // alertmsg(error.message,"error");
+            alertmsg("Wrong Email or Password","error");
         });
 
 
