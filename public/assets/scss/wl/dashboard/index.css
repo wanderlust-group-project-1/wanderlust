@@ -893,6 +893,31 @@ fieldset {
   cursor: pointer;
 }
 
+.date {
+  width: 50%;
+  padding: 5px 2px;
+}
+
+.cart-notification {
+  text-decoration: none;
+  padding: 5px 5px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.cart-notification .badge {
+  font-size: small;
+  font-family: sans-serif, "Poppins";
+  position: absolute;
+  top: -0.5px;
+  right: -0.5px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  background: #C1A87D;
+  color: white;
+}
+
 .signup-container#blur.active {
   filter: blur(20px);
   pointer-events: none;
@@ -2484,6 +2509,10 @@ fieldset {
   color: #526534;
 }
 
+.model-content .selectDate {
+  background-color: red;
+}
+
 .home_main {
   margin-top: 10rem;
   margin-left: 3rem;
@@ -3896,7 +3925,6 @@ form label {
   text-align: left;
   font-size: 18px;
   color: #6B6E70;
-  padding: 10px;
 }
 
 input {
@@ -3979,7 +4007,7 @@ input.invert {
 }
 
 .align-items-center {
-  align-items: center;
+  align-items: center !important;
 }
 
 .align-items-end {

@@ -5,7 +5,13 @@ class Complaints{
 
     public function index(){
         
-        $this->view('rental/complaints');
+        // show (UserMiddleware::getUser());
+        if (UserMiddleware::getUser()['role']=='rentalservice') {
+            $this->view('rental/complaints');
+        }elseif (UserMiddleware::getUser()['role']=='customer') {
+            $this->view('customer/complaints');
+        }
+        
     }
 
     public function returnComplaintsbyRentalService(string $a = '', string $b = '', string $c = ''):void {
