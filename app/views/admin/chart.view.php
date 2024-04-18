@@ -13,15 +13,6 @@ require_once('../app/views/admin/components/navbar.php');
   <div class="sidebar-flow"></div>
 
 
-  <!-- <?php
-        require_once('../app/views/admin/layout/header.php');
-        require_once('../app/views/admin/components/navbar.php');
-
-        require_once('../app/views/admin/layout/sidebar.php');
-        ?> -->
-
-
-
   <div class="guide-dash-main">
 
 
@@ -63,7 +54,7 @@ require_once('../app/views/admin/components/navbar.php');
       </div>
     </div>
 
-    <!-- <div class="table-container">/ -->
+    <!-- -----Rental Service----- -->
     <div class="data">
       <div class="content-data">
         <div class="head">
@@ -77,7 +68,7 @@ require_once('../app/views/admin/components/navbar.php');
           </div>
         </div>
         <div class="chart">
-          <div id="chart"></div>
+          <div id="chart2"></div>
         </div>
       </div>
     </div>
@@ -146,8 +137,8 @@ require_once('../app/views/admin/components/navbar.php');
               colors: ['#B2BDA0', '#2F3B1C']
             };
 
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
+            var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+            chart2.render();
 
 
           }
@@ -212,8 +203,8 @@ require_once('../app/views/admin/components/navbar.php');
           colors: ['#B2BDA0', '#2F3B1C']
         };
 
-        // var chart = new ApexCharts(document.querySelector("#chart"), options);
-        // chart.render();
+        // var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+        // chart2.render();
       });
     </script>
 
@@ -223,9 +214,6 @@ require_once('../app/views/admin/components/navbar.php');
 
     <!-- --------Guide booking-------- -->
 
-
-    <!-- <div class="dashboard">
-      <div class="guide-dash-main"> -->
 
     <div class="data">
       <div class="content-data">
@@ -284,14 +272,13 @@ require_once('../app/views/admin/components/navbar.php');
       // APEXCHART
       var options = {
         series: [{
-            name: 'You',
-            data: [5, 12, 15, 10, 8, 14, 11] // Adjusted data values, total less than 100
-          },
-          {
-            name: 'Rank #1',
-            data: [8, 10, 7, 12, 10, 20, 18] // Adjusted data values, total less than 100
-          }
-        ],
+          //   name: 'You',
+          //   data: [5, 12, 15, 10, 8, 14, 11] // Adjusted data values, total less than 100
+          // },
+          // {
+          name: 'Rank #1',
+          data: [8, 10, 7, 12, 10, 20, 18] // Adjusted data values, total less than 100
+        }],
         chart: {
           height: 300,
           type: 'area',
@@ -312,7 +299,7 @@ require_once('../app/views/admin/components/navbar.php');
             format: 'dd/MM/yy HH:mm'
           },
         },
-        colors: ['#B2BDA0', '#2F3B1C'] // Specify the colors you want here
+        colors: ['#526534'] // Specify the colors you want here
       };
 
       var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
@@ -320,7 +307,7 @@ require_once('../app/views/admin/components/navbar.php');
     </script>
 
 
-
+    <!-- ------complains--------- -->
 
 
     <div class="data">

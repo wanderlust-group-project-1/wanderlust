@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 18, 2024 at 03:24 AM
+-- Generation Time: Apr 15, 2024 at 04:28 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -97,36 +97,6 @@ CREATE DEFINER=`root`@`%` PROCEDURE `CompleteRentProcess` (IN `customerID` INT) 
     -- Return the last inserted payment ID
     SELECT reference_number AS orderID , total_amount AS totalAmount;
 
-END$$
-
-CREATE DEFINER=`root`@`%` PROCEDURE `GetAllMonthlyCompletedRentalCount` ()   BEGIN
-    SELECT 
-        MONTH(end_date) AS `Month`, 
-        COUNT(*) AS `Count`
-    FROM 
-        `rent`
-    WHERE 
-       status = 'completed'
-    GROUP BY 
-        MONTH(end_date)
-    ORDER BY 
-        MONTH(end_date);
-END$$
-
-CREATE DEFINER=`root`@`%` PROCEDURE `GetAllMonthlyRentedItemCount` ()   BEGIN
-    SELECT 
-        MONTH(r.end_date) AS `Month`, 
-        COUNT(ri.item_id) AS `ItemCount`
-    FROM 
-        `rent_item` ri
-    JOIN 
-        `rent` r ON ri.rent_id = r.id
-    WHERE 
-        r.status IN ('rented', 'completed') -- Assuming you want to count items that were rented and those that completed the rental term
-    GROUP BY 
-        MONTH(r.end_date)
-    ORDER BY 
-        MONTH(r.end_date);
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetAvailableEquipment` (IN `RentalServiceID` INT, IN `StartTime` DATETIME, IN `EndTime` DATETIME)   BEGIN
@@ -3787,10 +3757,60 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
+-- Constraints for table `cart_item`
+--
+ALTER TABLE `cart_item`
+  ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
+  ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+
+--
 -- Constraints for table `customers`
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `equipment`
+--
+ALTER TABLE `equipment`
+  ADD CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`rentalservice_id`) REFERENCES `rental_services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `guides`
+--
+ALTER TABLE `guides`
+  ADD CONSTRAINT `guides_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `item`
+--
+ALTER TABLE `item`
+  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rent`
+--
+ALTER TABLE `rent`
+  ADD CONSTRAINT `rent_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
+
+--
+-- Constraints for table `rental_services`
+--
+ALTER TABLE `rental_services`
+  ADD CONSTRAINT `fk_rental_services_location` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
+  ADD CONSTRAINT `rental_services_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `rent_item`
+--
+ALTER TABLE `rent_item`
+  ADD CONSTRAINT `rent_item_ibfk_1` FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
+
+--
+-- Constraints for table `rent_pay`
+--
+ALTER TABLE `rent_pay`
+  ADD CONSTRAINT `rent_pay_ibfk_1` FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

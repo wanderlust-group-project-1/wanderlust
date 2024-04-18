@@ -74,7 +74,7 @@ class Statistics
         $rental = new RentalServiceModel;
         $data = [
             'rentalCount' => $rental->GetAllMonthlyCompletedRentalCount(UserMiddleware::getUser()),
-            'itemCount' => $rental->GetAllMonthlyRentedItemCount(UserMiddleware::getUser()['id'])
+            'itemCount' => $rental->GetAllMonthlyRentedItemCount(UserMiddleware::getUser())
         ];
 
         $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
