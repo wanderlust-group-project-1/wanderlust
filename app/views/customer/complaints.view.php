@@ -16,6 +16,7 @@ require_once('../app/views/navbar/customer-navbar.php');
             </div>
 
             <div class="row gap-2">
+            </div>
                 
 </div>
 </div>
