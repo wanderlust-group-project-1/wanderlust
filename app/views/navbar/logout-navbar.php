@@ -44,8 +44,8 @@
 
                         <ul class="dropdown__menu">
                             <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>" class="dropdown__link">Profile</a></li>
-                            <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">>Settings</a></li>
-                            <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">>Logout</a></li>
+                            <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">Settings</a></li>
+                            <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">Logout</a></li>
                         </ul>
                     </li>
 
