@@ -14,6 +14,7 @@ var profileAvatar = document.querySelector('.profile-avatar');
 var dropdownMenu = document.getElementById('nav-dropdown');
 
 // Toggle the dropdown menu when clicking on the profile avatar
+if (profileAvatar) {
 profileAvatar.addEventListener('click', function(event) {
     // Prevent the default behavior of the anchor tags
     event.preventDefault();
@@ -37,6 +38,8 @@ document.addEventListener('click', function(event) {
 dropdownMenu.addEventListener('click', function(event) {
     event.stopPropagation();
 });
+
+}
 
 
     </script>

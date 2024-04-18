@@ -14,7 +14,21 @@ class Dashboard
             //echo "Welcome";
             $this->view('guide/GuideDashboard');
         } else if ($user->role == 'rentalservice') {
-            $this->view('rental/RentalDashboard');
+
+
+            $rental = new RentalServiceModel;
+            $data = [
+                'stat' => $rental->rentalStats($user->id)[0]
+            ];
+
+            // show($user->id);
+            // show($data);
+
+
+
+
+
+            $this->view('rental/RentalDashboard',$data);
         }
 
         // else {

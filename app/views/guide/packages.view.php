@@ -2,8 +2,9 @@
 require_once('../app/views/layout/header.php');
 ?>
 
+<?php require_once('../app/views/guide/layout/guide-sidebar.php'); ?>
+
 <div class="dashboard">
-    <?php require_once('../app/views/guide/layout/guide-sidebar.php'); ?>
 
     <div class="sidebar-flow"></div>
 
@@ -15,93 +16,214 @@ require_once('../app/views/layout/header.php');
             <li><a href="#" class="active">My Packages</a></li>
         </ul>
 
-        <?php
-        $packages = [
-            ['name' => 'Package 01', 'price' => 'Rs.10 000', 'max_group_size' => '10', 'max_distance' => '20km', 'transport_needed' => 'Yes', 'places' => 'Nuwara Eliya, Ella'],
-            ['name' => 'Package 02', 'price' => 'Rs.20 000', 'max_group_size' => '20', 'max_distance' => '30km', 'transport_needed' => 'No', 'places' => 'Nuwara Eliya, Ella']
-        ];
-        ?>
-
-        <?php foreach ($packages as $package) : ?>
-            <div data-id="<?= htmlspecialchars($package['id']) ?>" class="data">
-                <div class="content-data">
-                    <div class="head">
-                        <h3><?= $package['name'] ?></h3>
-                        <h2><?= $package['price'] ?></h2>
-                    </div>
-
-                    <div class="info-data mt-5">
-                        <?php
-                        $details = [
-                            ['label' => 'Maximum Group Size', 'value' => $package['max_group_size']],
-                            ['label' => 'Max Distance', 'value' => $package['max_distance']],
-                            ['label' => 'Transport Needed', 'value' => $package['transport_needed']],
-                            ['label' => 'Places', 'value' => $package['places']]
-                        ];
-                        ?>
-
-                        <?php foreach ($details as $detail) : ?>
-                            <div class="card">
-                                <div class="head">
-                                    <div>
-                                        <h2><?= $detail['value'] ?></h2>
-                                        <p><?= $detail['label'] ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-
-                    </div>
-                    <div class="card rounded-4">
-                        <button type="submit" class="btn-edit rounded-6 edit-package">
-                            View Package
-                        </button>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
+        <div class="package-details">
+        </div>
 
         <div class="flex-d-r-end">
-            <button type="submit" class="btn mt-4" id="edit-profile">
+            <button type="submit" class="btn mt-4" id="add-package">
                 Add New Package
             </button>
         </div>
     </div>
-</div>
 
-<!-- Modal for Package Details -->
-<div id="view-package-modal" class="view-package-modal">
-    <div class="modal-content" id="package-modal-content">
-        <span class="close-button">&times;</span>
-        <h2>Package Details</h2>
-        <p><strong>Name:</strong> <span id="detail-name"></span></p>
-        <p><strong>Price:</strong> <span id="detail-price"></span></p>
-        <p><strong>Maximum Group Size:</strong> <span id="detail-max-group-size"></span></p>
-        <p><strong>Maximum Distance:</strong> <span id="detail-max-distance"></span></p>
-        <p><strong>Transport Needed:</strong> <span id="detail-transport-needed"></span></p>
-        <p><strong>Places:</strong> <span id="detail-places"></span></p>
+    <!--modal box add package-->
+
+    <div class="modal" id="add-package-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <form id="add-package-form" class="form" method="POST" enctype="multipart/form-data">
+                <h2>Add New Package</h2>
+
+                <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
+
+                    <label for="price">Price</label>
+                    <input type="text" id="price" class="form-control-lg" name="price" required>
+
+                    <label for="max_group_size">Maximum Group Size</label>
+                    <input type="number" id="max_group_size" class="form-control-lg" name="max_group_size" required>
+
+
+                    <label for="max_distance">Maximum Distance</label>
+                    <input type="number" id="max_distance" class="form-control-lg" name="max_distance" required>
+
+                    <label for="transport_needed">Transport Needed</label>
+                    <input type="checkbox" id="transport_needed" class="form-control-lg" name="transport_needed">
+
+                    <label for="places">Places</label>
+                    <textarea type="text" id="places" class="form-control-lg" name="places" required></textarea>
+                </div>
+
+                <div class="row">
+                    <input type="submit" class="btn" value="Add Package">
+                </div>
+            </form>
+        </div>
     </div>
+
+    <!-- Modal box to view package details -->
+    <div class="modal" id="view-package-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="package-details">
+                <!-- Package details will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
 </div>
 
+
+
+<script>
+    // Add new package modal
+    var addPackageModal = document.getElementById("add-package-modal");
+    var addPackageBtn = document.getElementById("add-package");
+    var closeButton = document.querySelector(".close-button");
+
+
+    addPackageBtn.onclick = function() {
+        addPackageModal.style.display = "block";
+    }
+
+    closeButton.onclick = function() {
+        addPackageModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == addPackageModal) {
+            addPackageModal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    // Add new package form submission
+    $(document).ready(function() {
+        $("#add-package-form").trigger('reset');
+        $('#add-package-form').submit(function(e) {
+            e.preventDefault();
+
+            var formData = new FormData();
+            var transportNeeded = $('#transport_needed').is(':checked') ? 1 : 0
+
+            var jsonData = {
+                price: $('#price').val(),
+                max_group_size: $('#max_group_size').val(),
+                max_distance: $('#max_distance').val(),
+                transport_needed: transportNeeded,
+                places: $('#places').val()
+            };
+            console.log(transportNeeded)
+            formData.append('json', JSON.stringify(jsonData));
+
+            console.log(formData);
+            console.log(jsonData);
+
+            $.ajax({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                },
+                url: '<?= ROOT_DIR ?>/api/package/addPackage',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    if (response.success) {
+                        alertmsg('Package added successfully', 'success');
+
+                        addPackageModal.style.display = "none";
+                        getPackages();
+                        $("#add-package-form").trigger('reset');
+                    }
+
+
+                },
+                error: function(errors) {
+                    console.log(errors);
+
+                }
+
+            });
+        });
+    });
+</script>
+
+<script>
+    function getPackage() {
+
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/guide/packages',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            success: function(data) {
+
+            }
+        })
+    }
+</script>
+
+<script>
+    // get equipment list using ajax , get content and append to equipment list div
+
+    function getPackages() {
+        // use Authorization header to get data
+
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/Guide/getPackages',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            success: function(data) {
+                // console.log(data);
+                // Update the modal content with the fetched data
+                // empty the equipment list and append new data
+                $(".package-details").empty();
+                $(".package-details").html(data).promise().done(function() {
+                    console.log('Package list updated');
+                    viewPackage();
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+                // Handle errors here
+            }
+        });
+    }
+    getPackages();
+</script>
 
 <script>
     function viewPackage() {
         console.log('view package');
 
         var modal = document.getElementById("view-package-modal");
-        var closeButton = document.querySelector(".close-button");
+        var closeButton = document.querySelector(".close");
 
         closeButton.addEventListener("click", function() {
             modal.style.display = "none";
         });
 
-        var viewButtons = document.querySelectorAll("#edit-profile");
+        var viewButtons = document.querySelectorAll("#package-view-button");
+        console.log(viewButtons);
         viewButtons.forEach(function(button) {
+            console.log(button);
             button.addEventListener("click", function() {
-                console.log('view button clicked');
                 var packageId = button.getAttribute('data-id');
+                console.log(packageId);
+
                 fetchPackageDetails(packageId);
                 modal.style.display = "block";
+
+
+                // var row = button.closest('.tr');
+                // var packageId = button.getAttribute('data-id');
+                // fetchPackageDetails(packageId);
+                // modal.style.display = "block";
             });
         });
     }
@@ -111,17 +233,17 @@ require_once('../app/views/layout/header.php');
             headers: {
                 Authorization: "Bearer " + getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/package/getPackage/' + packageId,
+            url: '<?= ROOT_DIR ?>/Guide/getPackage/' + packageId,
             method: 'GET',
             success: function(data) {
-                var newDiv = document.createElement("div");
-                newDiv.innerHTML = data;
-                var js = newDiv.querySelector('script').innerHTML;
+                var modalContent = document.querySelector("#view-package-modal .modal-content");
+                modalContent.innerHTML = data;
 
-                $('#package-modal-content').html(data).promise().done(function() {
-                    console.log('package loaded');
-                    viewPackage();
-                    eval(js);
+                var closeButton = document.querySelector("#view-package-modal .close");
+                closeButton.addEventListener("click", function() {
+                    var modal = document.getElementById("view-package-modal");
+                    modal.style.display = "none";
+                    location.reload();
                 });
             },
             error: function(err) {
@@ -130,83 +252,175 @@ require_once('../app/views/layout/header.php');
         });
     }
 
-    $(document).ready(function() {
-        $('.show-filter').click(function() {
-            $('.table-filter').slideDown();
-            $(this).hide();
-        });
-
-        $('.hide-filter').click(function() {
-            $('.table-filter').slideUp();
-            $('.show-filter').show();
-        });
-
-        $('#package-name-filter').on('input', debounce(filterPackages, 300));
-
-        $('#package-price-filter-min').on('input', function() {
-            filterPackages();
-        });
-
-        $('#package-price-filter-max').on('input', function() {
-            filterPackages();
-        });
-
-        function filterPackages() {
-            var name = $('#package-name-filter').val();
-            var minPrice = $('#package-price-filter-min').val();
-            var maxPrice = $('#package-price-filter-max').val();
-
-            $('.package-item').each(function() {
-                var packageItem = $(this);
-                var packageName = packageItem.find('.package-name').text();
-                var packagePrice = parseFloat(packageItem.find('.package-price').text().replace('Rs', '').trim());
-
-                if ((name && packageName.toLowerCase().indexOf(name.toLowerCase()) === -1) || (minPrice && packagePrice < minPrice) || (maxPrice && packagePrice > maxPrice)) {
-                    packageItem.hide();
-                } else {
-                    packageItem.show();
-                }
-            });
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+        viewPackage();
     });
 </script>
 
 
+<script>
+    // EDIT PACKAGE
 
-<!-- Modal Box Package Edit End -->
+    $(document).on('click', '.edit-package-button', function() {
+        var modal = document.getElementById("edit-package-modal");
+        modal.style.display = "block";
+        var packageId = $(this).data('id');
+        console.log(packageId);
+        $('#update-package-form').attr('data-id', packageId);
+    });
 
-<!-- <script>
-  var modal = document.getElementById("package-editor");
+    $(document).on('submit', '#update-package-form', function(e) {
+        e.preventDefault();
 
-  var span = document.getElementsByClassName("close")[0];
+        var id = $(this).attr('packageId');
+        var formData = new FormData(this);
+        console.log(id);
+        console.log(formData);
+        var closeButton = document.querySelector(".close-button");
 
-  // Get all view buttons
-  var viewButton = document.querySelector('.edit-package');
+        closeButton.addEventListener("click", function() {
+            var modal_del = document.getElementById("edit-package-modal");
+            modal_del.style.display = "none";
+        });
 
-  // Function to handle modal display
-  function openModal() {
-    // document.getElementById("modal-content").innerHTML = content;
-    modal.style.display = "block";
-  }
+        var transportNeeded = $('#transport_needed2').is(':checked') ? 1 : 0;
 
-  // Add click event listener to view buttons
-  viewButton.addEventListener('click', function() {
+        var jsonData = {
+            id: id,
+            price: formData.get('price'),
+            max_group_size: formData.get('max_group_size'),
+            max_distance: formData.get('max_distance'),
+            transport_needed: transportNeeded,
+            places: formData.get('places')
+        };
 
-    // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-    // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-    openModal();
-  });
+        formData.append('json', JSON.stringify(jsonData));
+        console.log(formData);
+        console.log(jsonData);
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/package/update/' + id,
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                fetchPackageDetails(id);
+                var closeButton = document.querySelector("#view-package-modal .close");
+                closeButton.addEventListener("click", function() {
+                    var modal = document.getElementById("view-package-modal");
+                    modal.style.display = "none";
+                    location.reload();
+                });
+            },
+            error: function(errors) {
+                console.log(errors);
+            }
+        });
+    });
 
 
-  // Close the modal when the close button is clicked
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
+    // DELETE PACKAGE
 
-  // Close the modal if the user clicks outside of it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-</script> -->
+
+    $(document).on('click', '.delete-package-button', function() {
+        var modal = document.getElementById("delete-package-modal");
+        modal.style.display = "block";
+        var packageId = $(this).data('id');
+        $('#delete-package').attr('data-id', packageId);
+    });
+
+
+    $(document).on('click', '#delete-package', function() {
+        var packageId = $(this).data('id');
+        console.log(packageId);
+        console.log('delete package 2');
+
+        $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/package/deletePackage/' + packageId,
+        method: 'POST',
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                alertmsg('Package deleted successfully', 'success');
+            }
+        },
+        error: function(errors) {
+            console.log(errors);
+        },
+        complete: function() {
+            var modal = document.getElementById("delete-package-modal");
+            modal.style.display = "none";
+        }
+    });
+});
+
+    $(document).on('click', '#cancel-delete', function() {
+        var modal = document.getElementById("delete-package-modal");
+        modal.style.display = "none";
+    });
+    // function filterPackages(name, type) {
+    //     $('.data').each(function() {
+    //         var package = $(this);
+    //         var packageName = package.find('.head h3').text();
+    //         var packageType = package.find('.info-data').text();
+
+    //         if ((name && packageName.toLowerCase().indexOf(name.toLowerCase()) === -1) ||
+    //             (type && packageType.toLowerCase().indexOf(type.toLowerCase()) === -1)) {
+    //             package.hide();
+    //         } else {
+    //             package.show();
+    //         }
+    //     });
+    // }
+
+    // $(document).ready(function() {
+    //     $('.show-filter').click(function() {
+    //         $('.table-filter').slideDown();
+    //         $('show-filter').hide();
+    //     });
+
+    //     $('.hide-filter').click(function() {
+    //         $('.table-filter').slideUp();
+    //         $('.show-filter').show();
+    //     });
+
+    //     $('#package-name-filter').on('input', debounce(filterPackages, 300));
+
+
+
+    //     $('#package-price-filter-min').on('input', function() {
+    //         filterPackages();
+    //     });
+
+    //     $('#package-price-filter-max').on('input', function() {
+    //         filterPackages();
+    //     });
+
+    //     function filterPackages() {
+    //         var name = $('#package-name-filter').val();
+    //         var minPrice = parseFloat($('#package-price-filter-min').val());
+    //         var maxPrice = parseFloat($('#package-price-filter-max').val());
+
+    //         $('.data').each(function() {
+    //             var packageItem = $(this);
+    //             var packageName = packageItem.find('.head h3').text();
+    //             var packagePriceText = packageItem.find('.head h2').text();
+    //             var packagePrice = parseFloat(packagePriceText.replace('Rs.', '').trim());
+
+    //             // Assuming the package name and price should always be present for filtering
+    //             if ((name && packageName.toLowerCase().indexOf(name.toLowerCase()) === -1) ||
+    //                 (minPrice && packagePrice < minPrice) || (maxPrice && packagePrice > maxPrice)) {
+    //                 packageItem.hide();
+    //             } else {
+    //                 packageItem.show();
+    //             }
+    //         });
+    //     }
+    // });
+</script>

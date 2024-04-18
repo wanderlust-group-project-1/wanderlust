@@ -9,6 +9,7 @@
 @import "./home";
 @import "./guide";
 @import "./content";
+@import "./admin";
 
 @import "./button";
 @import "./rowcol";
@@ -209,4 +210,14 @@ $breakpoint-lg: 992px;
 
 .bg-white {
   background-color: #fff;
+}
+
+
+
+// Text overflow ellipsis
+
+.text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

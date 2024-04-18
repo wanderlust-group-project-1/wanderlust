@@ -376,7 +376,7 @@ window.onclick = function(event) {
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAPS_API_KEY  ?>&libraries=places&callback=initialize" async defer></script>
-<script src="<? echo ROOT_DIR ?>/assets/js/map.js"></script>
+<script src="<?php echo ROOT_DIR ?>/assets/js/map.js"></script>
 
 <script>
 
