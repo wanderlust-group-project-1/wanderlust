@@ -63,7 +63,7 @@ class UserModel {
         return false;
     }
 
-    private function hashPassword(string $password): string {
+    public function hashPassword(string $password): string {
         $salt = random_bytes($this->saltLength);
         $hashedPassword = hash_pbkdf2($this->hashAlgorithm, $password, $salt, 10000, 64);
         return base64_encode($salt) . ":" . $hashedPassword;
@@ -108,4 +108,8 @@ class UserModel {
         return true;
         
     }
+
+
+
+    
 }

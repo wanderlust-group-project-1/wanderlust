@@ -168,6 +168,12 @@ body {
   font-size: 5rem;
 }
 
+.password-toggle i {
+  position: absolute;
+  right: 20px;
+  transform: translate(-120px, -25px);
+}
+
 .loading-screen {
   position: absolute;
   top: 0;
