@@ -76,7 +76,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 @mixin modal-common {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -154,7 +154,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
   .modal-content {
     @include modal-content-common;
-    max-width: 400px;
+    max-width: 600px;
     border-radius: $border-radius-default;
   }
   .close {
@@ -170,12 +170,37 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     }
   }
   .profile-image {
-    width: 100px;
-    height: 100px;
+    // width: 200px;
+    // height: 100px;
+    position: relative;
+    overflow: hidden;
     border-radius: 50%;
     margin: 20px auto;
     display: block;
   }
+  .camera-icon i {
+    display: none;
+  }
+  .profile-image:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    .camera-icon {
+                        
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* background-color: #fff; */
+      padding: 5px;
+      border-radius: 50%;
+      
+  }
+  .camera-icon i {
+      display: block;
+      font-size: 30px;
+      color: #fff;
+  }
+}
   form {
     // display: flex;
     // flex-direction: column;
@@ -230,7 +255,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   padding: 0;
 
   height: fit-content;
-
+  // padding: 10px;
   background-color: $color-lighter;
 
   &-header {
@@ -748,3 +773,45 @@ $box-shadow-color: rgba(0,0,0,0.2);
   background: $font-gold;
   color: white;
 }
+
+
+
+.image-preview-container{
+
+  .image-preview {
+    width: 400px;
+    height: 400px;
+    margin-top: 10px;
+    
+  }
+
+}
+
+.equipment-image-preview-container {
+  display: flex;
+  gap: 10px;
+
+  img {
+      max-width: 100%;
+      max-height: 200px;
+      margin-bottom: 10px;
+  }
+
+  .remove-icon {
+      margin-top: 10px;
+      position: fixed;
+      color: 'red'; // Note: Quotation marks are not necessary for CSS color properties
+      // move left a bit
+      transform: translateX(-15px);
+  }
+
+  button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+}
+

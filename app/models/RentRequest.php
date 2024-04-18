@@ -18,6 +18,11 @@ class RentRequestModel {
         $data = array_filter($data, function ($key) {
             return in_array($key, $this->allowedColumns);
         }, ARRAY_FILTER_USE_KEY);
+
+    // show($data);
+    // show($id);
+    // die();
+
         
         return $this->update($id,$data,'rent_id');
         

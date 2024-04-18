@@ -290,23 +290,23 @@ require_once('../app/views/layout/header.php');
     });
 
 
-    //  Returned Report Issue
+    //  Returned Report Complaint
 
-    $(document).on('click', '#report-return-issue', function() {
+    $(document).on('click', '#report-return-complaint', function() {
         var orderId = $('#mark-as-returned-modal').attr('data-id');
         console.log(orderId);
         $.ajax({
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/orders/reportReturnIssueByRentalservice/' + orderId,
+            url: '<?= ROOT_DIR ?>/orders/reportReturnComplaintByRentalservice/' + orderId,
             type: 'GET',
             success: function(response) {
 
-                $('#issue-form-data').attr('data-id', orderId);
+                $('#complaint-form-data').attr('data-id', orderId);
 
-                $('#report-issue-modal').show();
-                $('#issue-form-data').html(response);
+                $('#report-complaint-modal').show();
+                $('#complaint-form-data').html(response);
 
 
 
@@ -320,9 +320,120 @@ require_once('../app/views/layout/header.php');
         });
     });
 
+    $(document).on('click', '#report-complaint-submit', function() {
+        // var orderId = $('#complaint-form-data').attr('data-id');
+        var orderId = $('#report-complaint-table').attr('data-order-id');
+        // var data = {
+        //     order_id: orderId,
+        //     complaints: [],
+        //     complaint_descriptions: [],
+        //     charges: []
+        // };
+
+        var data = {
+            order_id: orderId,
+            complaints: [],
+            charge: 0.00
+            }
+
+        $('#complaint-form-data .report-item-checkbox').each(function() {
+            if ($(this).is(':checked')) {
+                var id = $(this).closest('tr').attr('data-id');
+                var complaintDescription = $(this).closest('tr').find('textarea').val();
+                var charge = $(this).closest('tr').find('input[type="number"]').val();
+
+                // data.complaints.push(id);
+                // data.complaint_descriptions.push(complaintDescription);
+                // data.charges.push(charge);
+                let complaint = {
+                    equipment_id: id,
+                    complaint_description: complaintDescription,
+                    charge: charge
+                }
+
+                data.complaints.push(complaint);
+                data.charge += parseFloat(charge);
+         
 
 
 
+            }
+        });
+
+        console.log(data);
+
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/orders/submitReturnComplaint',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log(response);
+                $('#report-complaint-modal').hide();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+    // jQuery for filter order
+
+// Filter order card
+// $('#filter-order-button').click(function() {
+    $(document).on('click', '#filter-order-button', function() {
+    let start_date = $('#start-date').val();
+    let end_date = $('#end-date').val();
+    
+
+    console.log(start_date, end_date, status);
+
+    // Get Orders
+    
+    // from all order-cards
+    let orderCards = $('.order-card-item');
+
+    // loop through all order-cards
+    orderCards.each(function() {
+        let orderCard = $(this);
+        // let orderStartDate = orderCard.find('.order-body .order-dates').text().split(' ')[1];
+        // let orderEndDate = orderCard.find('.order-body .order-dates').text().split(' ')[3];
+        let orderStartDate = orderCard.find('.order-body .order-dates').attr('data-start');
+        let orderEndDate = orderCard.find('.order-body .order-dates').attr('data-end');
+        // convert date to timestamp
+        // let orderStartDate = new Date(orderCard.find('.order-body .order-dates').attr('data-start')).getTime();
+        // let orderEndDate = new Date(orderCard.find('.order-body .order-dates').attr('data-end')).getTime();
+        let orderStatus = orderCard.find('.order-header .order-status').text().split(' ')[1];
+
+        // console.log(orderStartDate, orderEndDate, orderStatus);
+
+
+        // if start date and end date is not empty
+        if (start_date != '' && end_date != '') {
+
+            console.log(orderStartDate, start_date, orderEndDate, end_date);
+            // check if order start date is greater than or equal to start date and order end date is less than or equal to end date
+            if (orderStartDate >= start_date && orderEndDate <= end_date) {
+                // show order-card
+                orderCard.show();
+            } else {
+                // hide order-card
+                orderCard.hide();
+            }
+        }
+    });
+
+});
 
 </script>
 

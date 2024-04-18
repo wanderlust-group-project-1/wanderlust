@@ -1,57 +1,59 @@
-<div class="nav-container"> 
-<nav class="navbar">
-    <div class="nav-logo">
+<div class="nav-container">
+    <nav class="navbar">
+        <div class="nav-logo">
 
-    <div class="logo">
-        <img src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
-    </div>
-
-</div>
-
-<!-- check role avalable or not -->
-    <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
-        $user = $_SESSION['USER'];   ?>
-
-
-        <!-- profile avatar with dropdown -->
-
-        <div class="profile-avatar">
-            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
-            <div class="dropdown-menu" id="nav-dropdown">
-                <ul>
-                    <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>">Profile</a></li>
-                    <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li>
-                    <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
-                </ul>
+            <div class="logo">
+                <a link href=" <?= ROOT_DIR ?>/">
+                    <img src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
+                </a>
             </div>
+
         </div>
 
+        <!-- check role avalable or not -->
+        <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
+            $user = $_SESSION['USER'];   ?>
 
 
-    <?php } else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
-        $admin = $_SESSION['USER'];   ?>
+            <!-- profile avatar with dropdown -->
 
-        <!-- profile avatar with dropdown -->
-        <div class="profile-avatar">
-            <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
-            <div class="dropdown-menu" id="nav-dropdown">
-                <ul>
-                    <li><a href="<?= ROOT_DIR ?>/admin/dashboard">Dashboard</a></li>
-                    <!-- <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li> -->
-                    <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
-                </ul>
+            <div class="profile-avatar">
+                <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                <div class="dropdown-menu" id="nav-dropdown">
+                    <ul class="dropdown__menu">
+                        <li><a href="<?= ROOT_DIR . ($user->role == 'admin'  ? '/Dashboard' : '/profile') ?>">Profile</a></li>
+                        <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li>
+                        <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-
-
-    <?php } else {  ?>
 
 
 
-        <div class="btn-small"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+        <?php } else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
+            $admin = $_SESSION['USER'];   ?>
 
-    <?php } ?>
-</nav>
+            <!-- profile avatar with dropdown -->
+            <div class="profile-avatar">
+                <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="profile picture">
+                <div class="dropdown-menu" id="nav-dropdown">
+                    <ul>
+                        <li><a href="<?= ROOT_DIR ?>/admin/dashboard">Dashboard</a></li>
+                        <!-- <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li> -->
+                        <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        <?php } else {  ?>
+
+
+
+            <div class="btn-small"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+
+        <?php } ?>
+    </nav>
 
 </div>
 

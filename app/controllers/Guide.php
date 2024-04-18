@@ -34,4 +34,18 @@ class Guide {
         // $this->view('customer/profile');
     }    
 
+    public function getPackages(string $a = '', string $b = '', string $c = ''): void {
+        $packageModel = new PackageModel();
+        $data["packages"] = $packageModel->getPackagesByGuide(UserMiddleware::getUser()['id']);
+        $this->view('guide/packages.list', $data);
+    }
+    
+    public function getPackage(string $packageId = '',string $b = '', string $c = ''): void {
+        $guideId = UserMiddleware::getUser()['id'];
+        $packageModel = new PackageModel();
+        $data["package"] = $packageModel->getPackageByGuide($guideId, $packageId);
+        $this->view('guide/package', $data);
+    }
+
 }
+

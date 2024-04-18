@@ -56,7 +56,7 @@ var modal = document.getElementById("location-modal");
 var span = document.getElementsByClassName("close")[0];
 
 // Get all view buttons
-var viewButton = document.getElementById('select-location');
+// var viewButton = document.getElementById('select-location');
 
 var confirmButton = document.getElementById('confirm-location');
 // Function to handle modal display
@@ -65,13 +65,22 @@ function openModal() {
 }
 
 // // Add click event listener to view buttons
-viewButton.addEventListener('click', function() {
-//    alertmsg('View button clicked');
+// viewButton.addEventListener('click', function() {
+// //    alertmsg('View button clicked');
+//     console.log('View button clicked');
+//     openModal();
+//     initialize();
+// });
 
-    openModal();
-    initialize();
+$(document).ready(function() {
+    $(document).on('click', '#select-location', function() {
+        openModal();
+        initialize();
+        console.log('View button clicked');
+
+    }
+    );
 });
-
 
 
 
@@ -92,6 +101,9 @@ confirmButton.onclick = function(event) {
     modal.style.display = "none";
     var lat = document.getElementById('latitude').value;
     var lng = document.getElementById('longitude').value;
+
+    window.latitude = lat;
+    window.longitude = lng;
     console.log(lat + " " + lng);
 }
 
@@ -196,7 +208,8 @@ document.getElementById("customer-signup").onclick =  function(event){
     var form = document.getElementById("customer");
 
     var name = form.querySelector('input[name="name"]').value;
-    var address = form.querySelector('textarea[name="address"]').value;
+    // var address = form.querySelector('textarea[name="address"]').value;
+    var address = form.querySelector('input[name="address"]').value;
     var email = form.querySelector('input[name="email"]').value;
     var number = form.querySelector('input[id="number"]').value;
     var nic = form.querySelector('input[name="nic"]').value;
@@ -286,7 +299,8 @@ function rentalServiceSignup(event){
     var form = document.getElementById("rental-service");
 
     var businessname = form.querySelector('input[name="name"]').value;
-    var address = form.querySelector('textarea[name="address"]').value;
+    // var address = form.querySelector('textarea[name="address"]').value;
+    var address = form.querySelector('input[name="address"]').value;
     var regNo = form.querySelector('input[name="regNo"]').value;
     var mobile = form.querySelector('input[name="mobile"]').value;
     var email = form.querySelector('input[name="email"]').value;
@@ -404,7 +418,8 @@ function guideSignup(event){
     var form = document.getElementById("guide");
 
     var name = form.querySelector('input[name="name"]').value;
-    var address = form.querySelector('textarea[name="address"]').value;
+    // var address = form.querySelector('textarea[name="address"]').value;
+    var address = form.querySelector('input[name="address"]').value;
     var nic = form.querySelector('input[name="nic"]').value;
     var mobile = form.querySelector('input[name="mobile"]').value;
     var email = form.querySelector('input[name="email"]').value;
@@ -413,6 +428,7 @@ function guideSignup(event){
     var gender = form.querySelector('select[name="gender"]').value;
 
 
+    // var verification_document = form.querySelector('input[name="verification_document"]').files[0];
     var verification_document = form.querySelector('input[name="verification_document"]').files[0];
 
 
@@ -421,6 +437,7 @@ function guideSignup(event){
     if (name === '' || address === '' || nic === '' || mobile === '' || email === '' || password === '') {
         // errorDiv.innerHTML = 'All fields are required.';
        alertmsg('All fields are required.',"error");
+       console.log("name " + name + " address " + address + " nic " + nic + " mobile " + mobile + " email " + email + " password " + password); 
         return false;
     }
     if (!emailRegex.test(email)) {
@@ -463,7 +480,10 @@ function guideSignup(event){
         gender: gender,
         password: password,
 
-        // verification_document: verification_document
+        latitude: window.latitude,
+        longitude: window.longitude,
+
+        verification_document: verification_document
     }
 
     const api = new ApiClient('/api/signup/guide');
