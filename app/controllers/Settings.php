@@ -13,6 +13,9 @@ class Settings {
 
         if(UserMiddleware::getUser()['role'] == 'rentalservice'){
             
+
+            // show(UserMiddleware::getUser());
+
             $this->view('rental/settings');
             // echo "rental service";
         }else{

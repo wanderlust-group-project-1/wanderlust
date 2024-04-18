@@ -4,6 +4,10 @@ class RentalSettingsModel{
     use Model;
 
     protected $table = 'rental_settings';
+    protected $allowedColumns = [
+        'renting_state',
+        'recovery_period',
+    ];
 
 
     public function updateSettings($id,$data){

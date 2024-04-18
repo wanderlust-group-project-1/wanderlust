@@ -28,7 +28,7 @@ class UserModel {
            
 
             $verify = new VerificationModel;
-            $tocken = $verify->generateToken($id);
+            $tocken = $verify->generateToken($id, $data['email']);
 
             // var_dump($id);
             // die();
