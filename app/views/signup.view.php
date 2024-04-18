@@ -202,8 +202,9 @@ require_once('../app/views/components/navbar-auth.php');
                             <div class="location-button-container"  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <button  id="select-location" class="location-button" type="button">
-                                            <h4>Select location in the map</h4>
+                                        <button  id="select-location" class=" btn btn-primary location-button w-100" type="button">
+                                            <!-- Select location in the map -->
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                     <!-- <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div> -->
