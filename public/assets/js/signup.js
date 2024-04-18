@@ -270,7 +270,7 @@ document.getElementById("customer-signup").onclick =  function(event){
             if (response.success) {
                 alertmsg("success", "success");
                 setTimeout(function() {
-                    // window.location.href = "/";
+                    window.location.href = "/";
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
