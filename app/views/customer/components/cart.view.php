@@ -1,5 +1,5 @@
 <div class=" col-lg-12 flex-d-c gap-2 ">
-    <h2 class="justify-content-center flex-d"> Cart </h2>
+    <h2 class="justify-content-center flex-d">Cart</h2>
     <div class="row gap-2 ">
         <!-- scrollable cart items -->
         <!-- <div class="col-lg-12    " id="cart-items"> -->
@@ -10,21 +10,34 @@
 
             <?php 
             if (empty($items)) {
-                echo "<h3>Cart is empty</h3>";
+                echo "<div class='emptycart-container'>
+                        <div class='row gap-2'>
+                            <div class='emptycart'><h1>Empty Cart</h1></div>
+                        </div>
+                        <hr>
+                        <div class='row gap-2'>
+                            <button class='btn-text-green'>Shop now</button>
+                        </div>
+                    </div>";
             }
             foreach ($items as $item): ?>
-                <div class="card" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
-                <div class="row gap-2">
+                <div class="card-grid" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
+                <div class="row gap-5">
                     <div class="cart-item-image col-lg-4">
                         <img src="<?=OSURL?>images/equipment/<?php echo htmlspecialchars($item->e_image); ?>" alt="Image" class="img-fluid">
                     </div>
                     <div class="cart-item-details col-lg-5">
-                        <h5 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h5>
+                        <h4 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h4>
+                        <p class="cart-item-description"><?php echo htmlspecialchars($item->e_description); ?></p>
+                        <!-- <div class="item-count">
+                        </div> -->
                         <div class="cart-item-price">
-                            <h5>Fee: Rs. <?php echo htmlspecialchars($item->total); ?></h5>
-                            <button id="remove-from-cart" class="btn btn-primary">Remove from Cart</button>
+                            <h4>Rs. <?php echo htmlspecialchars($item->total); ?></h4>
+                            <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="48">
                         </div>
                     </div>
+                    <button id="remove-from-cart" class="btn-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
                 </div>
                 </div>
             <?php endforeach; ?>
@@ -32,21 +45,23 @@
 
         </div>
     </div>
-    <div class="row gap-4">
-        <h3>Total: Rs. <span id="total">
+    <div class="row gap-2">
+        <div class="total">
+            <h4>Subtotal: Rs. <span id="total">
 
-        <?php
-        // $total = 0;
-        // foreach ($items as $item) {
-        //     $total += $item->e_fee;
-        // }
-        echo $total;
-        ?>
+            <?php
+            // $total = 0;
+            // foreach ($items as $item) {
+            //     $total += $item->e_fee;
+            // }
+            echo $total;
+            ?>
 
-        </span></h3>
+            </span></h4>
+        </div>
     </div>
     <div class="row gap-2">
-     <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary">Checkout</a>
+     <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary">Go to checkout</a>
 
         <!-- <button id="checkout" class="btn" type="button">Checkout</button> -->
     </div>
