@@ -292,22 +292,26 @@ document.getElementById("customer-signup").onclick =  function(event){
         password: password
     }
 
+    showLoader();
     console.log(user);
 
     const api = new ApiClient('/api/signup/customer');
     api.sendJSONRequest('', 'POST', user)
         .then(response => {
             if (response.success) {
-                alertmsg("success", "success");
+                alertmsg("Verification link has been sent to your email. Please verify your email address.","success");
                 setTimeout(function() {
                     window.location.href = "/";
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
             }
+            hideLoader();
         })
         .catch(error => {
             console.error(error);
+            alertmsg("Error occured. Please try again.","error");
+            hideLoader();
         });
 
     
@@ -403,6 +407,7 @@ function rentalServiceSignup(event){
 
 
     $('#rental-service').find('input, textarea, button, select').prop('disabled', true)
+    showLoader();
 
     const api = new ApiClient('/api/signup/rentalservice');
 
@@ -418,19 +423,21 @@ function rentalServiceSignup(event){
             if (response.success) {
                 alertmsg("success", "success");
                 setTimeout(function() {
-                    // window.location.href = "/";
+                    window.location.href = "/";
                     alertmsg("Email Verification link has been sent to your email. Please verify your email address.","success");
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
             }
             $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
+            hideLoader();
 
         })
         .catch(error => {
             console.error(error);
             alertmsg("Error occured. Please try again.","error");
             $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
+            hideLoader();
 
         });
 
@@ -542,6 +549,7 @@ function guideSignup(event){
         verification_document: verification_document
     }
     $('#guide').find('input, textarea, button, select').prop('disabled', true);
+    showLoader();
 
 
     api.uploadFilesWithJSON('', filesData, user)
@@ -551,7 +559,7 @@ function guideSignup(event){
             if (response.success) {
                 alertmsg("Email Verification link has been sent to your email. Please verify your email address.","success");
                 setTimeout(function() {
-                    // window.location.href = "/";
+                    window.location.href = "/";
                     $('#guide').find('input, textarea, button, select').prop('disabled', false);
                 }, 1000);
             } else {
@@ -559,11 +567,14 @@ function guideSignup(event){
                 $('#guide').find('input, textarea, button, select').prop('disabled', false);
 
             }
+            hideLoader();
         })
         .catch(error => {
             console.error(error);
             alertmsg("Error occured. Please try again.","error");
             $('#guide').find('input, textarea, button, select').prop('disabled', false);
+            hideLoader();
+
         });
         
 
