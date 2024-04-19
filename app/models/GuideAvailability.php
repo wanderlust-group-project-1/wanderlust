@@ -5,31 +5,33 @@ class GuideAvailabilityModel{
     protected string $table = 'guide_availability';
     protected array $allowedColumns = [
         'guide_id',
-        'day',
-        'start_time',
-        'end_time',
+        'date',
+        'availability',
     ];
 
-    public function updateSchedule(array $data, int $id) {
+    public function updateSchedule(array $data): void {
+        $guideId = $data['guide_id'];
+        $date = $data['date'];
+
+        
+
         // Filter the data to include only allowed columns
-        $data = array_filter($data, function ($key) {
-            return in_array($key, $this->allowedColumns);
-        }, ARRAY_FILTER_USE_KEY);
+        // $filteredData = array_filter($data, function ($key) {
+        //     return in_array($key, $this->allowedColumns);
+        // }, ARRAY_FILTER_USE_KEY);
 
         // Update the guide profile for the current user
-        return $this->update($id, $data);
-    }
-
-    public function getSchedule(int $scheduleId) {
+        // $this->update($guideId, $filteredData, 'guide_id');
         $q = new QueryBuilder();
         $q->setTable($this->table);
-        $q->select('*')->where('id', $scheduleId);
-
-        return $this->query($q->getQuery(), $q->getData(), true);
+        $q->update([
+            'availability' => $data['availability']
+        ])->where('guide_id', $guideId)
+            ->where('date', $date);
     }
 
-    public function deleteSchedule(int $scheduleId) {
-        return $this->delete($scheduleId, 'id');
+    public function createSchedule(array $data): void {
+       $this->insert($data);
     }
 
     public function getSchedulesByGuideId(int $guideId, int $scheduleId): mixed {
@@ -40,11 +42,11 @@ class GuideAvailabilityModel{
         return $this->query($q->getQuery(), $q->getData());
     }
 
-    public function getScheduleByGuideId(int $guideId, int $scheduleId): mixed {
+    public function getScheduleByGuideIdandDate(int $guideId, string $day): mixed {
         $q = new QueryBuilder();
         $q->setTable('guide_availability');
         $q->select('guide_availability.*')->where('guide_availability.guide_id', $guideId)
-            ->where('guide_availability.id', $scheduleId);
+            ->where('guide_availability.date', $day);
 
         return $this->query($q->getQuery(), $q->getData());
     }

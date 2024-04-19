@@ -47,5 +47,11 @@ class Guide {
         $this->view('guide/package', $data);
     }
 
+    public function getAvailability(string $a = '', string $b = '', string $c = ''): void {
+        $GuideAvailabilityModel = new GuideAvailabilityModel();
+        $data["availability"] = $GuideAvailabilityModel->getScheduleByGuideIdandDate(UserMiddleware::getUser()['id'], date('Y-m-d'));
+        $this->view('guide/guideavailability', $data);
+    }
+
 }
 
