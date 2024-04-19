@@ -461,9 +461,7 @@ require_once('../app/views/layout/footer.php');
 ?>
 
 
-<div id="loading-overlay">
-    <div class="loader"></div>
-</div>
+
 
 
 

@@ -25,7 +25,6 @@ $(document).on('click', '.modal-close', function() {
 
 
 
-    $(document).ready(function() {
         function showLoader() {
             $('#loading-overlay').css('visibility', 'visible');
         }
@@ -36,4 +35,3 @@ $(document).on('click', '.modal-close', function() {
 
 
 
-    });
