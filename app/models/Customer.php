@@ -133,6 +133,18 @@ class CustomerModel
 
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
+
+
+    public function uploadImage(array $data, int $id): mixed
+    {
+        $data['image'] =  upload($data['image'], 'images/customers');
+        $this->update($id, ['image' => $data['image']]);
+        return $data;
+    }
+
+
+
+
     public function getCustomer(int $id): mixed
     {
         $q = new QueryBuilder;

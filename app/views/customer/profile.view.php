@@ -224,7 +224,7 @@ require_once('../app/views/layout/footer.php');
                 <div class="image-preview-container flex-d-c align-items-center">
                     
                     
-                <img src="<?php echo ROOT_DIR ?>/uploads/images/rental_services/<?php echo $user->image; ?>" alt="" id="image-preview" class="image-preview">
+                <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" alt="" id="image-preview" class="image-preview">
                 </div>
                 <input type="submit" class="btn mt-4" name="submit" value="Upload">
             </form>
@@ -280,23 +280,7 @@ require_once('../app/views/layout/footer.php');
 </script>
 
 
-<script>
-    // Get the button and the file input element by their IDs
-    var changeProfilePicButton = document.getElementById('change-profile-pic-button');
-    var profileImageUpload = document.getElementById('profile-image-upload');
 
-    // Add a click event listener to the button
-    changeProfilePicButton.addEventListener('click', function() {
-        // Trigger click event on the file input when the button is clicked
-        profileImageUpload.click();
-    });
-
-    // Add an event listener to the file input to handle file selection
-    profileImageUpload.addEventListener('change', function() {
-        // Code to handle the selected file (e.g., upload to server, display preview, etc.)
-        // You can add your logic here
-    });
-</script>
 
 
 
@@ -344,14 +328,15 @@ require_once('../app/views/layout/footer.php');
                     headers: {
                       'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
                     },
-                    url:"<?= ROOT_DIR ?>/api/rentalService/uploadImage",
+                    url:"<?= ROOT_DIR ?>/api/customer/uploadImage",
                     type: 'POST',
                     data: formData,
                     success: function(data) {
                         alertmsg('Image uploaded successfully','success');
                         $('#image-upload').css('display', 'none');
+                        console.log(data.data);
 
-                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/rental_services/' + data.image);
+                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/customers/' + data.data.image);
                         // $('#profile-image-input').val('');
                         // $('#image-preview').attr('src', '');
                         // location.reload();
