@@ -135,7 +135,7 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>05</h1>
+                                          <h1>06</h1>
 
                                     </div>
                               </div>
@@ -224,7 +224,7 @@ require_once('../app/views/admin/components/navbar.php');
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/customers">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/charts">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
@@ -234,5 +234,45 @@ require_once('../app/views/admin/components/navbar.php');
                         </div>
                   </div>
             </div>
-      </div>
-</div>
+
+
+
+            <div class="info-data mt-5">
+
+                  <div class="card">
+
+                        <!-- Income report generation -->
+                        <!-- Select Duration start and end dates -->
+
+                        <div class="head justify-content-center align-items-center">
+                              <div>
+                                    <h3>Income Report</h3>
+                                    <!-- <p>Generate Income Report</p> -->
+                              </div>
+
+                              <form class="w-100 justify-content-center align-items-center flex-d ">
+                                    <div class="row gap-2 ">
+
+                                          <div class="col-lg-4 gap-2 flex-d">
+                                                <input type="date" id="start-date" name="start-date">
+                                                <input type="date" id="end-date" name="end-date">
+
+                                          </div>
+                                          <div class="col-lg-4">
+                                                <button class="btn-success" id="income-report">Generate</button>
+                                          </div>
+
+
+                                    </div>
+
+
+
+
+                              </form>
+
+
+
+                        </div>
+
+                  </div>
+            </div>

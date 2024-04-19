@@ -31,7 +31,7 @@ class CartItemModel {
         $q = new QueryBuilder();
 
         $q->setTable('cart_item');
-        $q->select('cart_item.*, equipment.name As e_name, equipment.image As e_image, equipment.fee As e_fee, equipment.standard_fee As e_standard_fee')
+        $q->select('cart_item.*, equipment.name As e_name, equipment.image As e_image, equipment.fee As e_fee, equipment.standard_fee As e_standard_fee, equipment.description As e_description')
             ->join('item', 'cart_item.item_id', 'item.id')
             // join equipment table
             ->join('equipment', 'item.equipment_id', 'equipment.id')
