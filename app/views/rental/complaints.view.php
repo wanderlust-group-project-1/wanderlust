@@ -80,12 +80,12 @@ function getComplaints(status) {
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/orders/list/' + status,
+            url: '<?= ROOT_DIR ?>/complaints/returnComplaintsbyRentalService/' + status,
             type: 'GET',
             success: function(response) {
-                // if order-list-content in document remove it
-                if ($('#order-list-content').length) {
-                    $('#order-list-content').remove();
+                // if complaint-list-content in document remove it
+                if ($('#complaint-list-content').length) {
+                    $('#complaint-list-content').remove();
                 }
                 $('#complaints-list').html(response);
             }
@@ -101,6 +101,68 @@ function getComplaints(status) {
             getComplaints($(this).attr('id'));
         });
     });
+
+
+    // View Complaint
+
+    $(document).on('click', '#view-button', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/complaints/viewComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                $('#complaint-data').html(response);
+                $('#complaint-view-modal').css('display', 'block');
+            }
+        });
+    });
+    
+
+
+
+    $(document).on('click', '#cancel-complaint', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $('#cancel-complaint-confirm').attr('data-id', complaintId);
+        $('#cancel-complaint-modal').css('display', 'block');
+    });
+
+
+
+
+    $(document).on('click', '#cancel-complaint-confirm', function() {
+        var complaintId = $(this).attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/complaints/cancelComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                var id = response.data.complaint_id;
+                $('#complaint-card[data-id="' + id + '"]').remove();
+                $('#cancel-complaint-modal').css('display', 'none');
+
+                getComplaints('pending');
+
+
+
+                
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+
+
+
+
 
 
 </script>

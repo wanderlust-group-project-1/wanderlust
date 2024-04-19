@@ -4,3 +4,10 @@ database/.env
 public/uploads/
 .pytest_cache
 public/uploads/rental_services/
+
+
+setup.sh
+server.env
+setup.sql
+public/assets/scss/wl/dashboard/index.css
+public/assets/scss/wl/dashboard/index.css.map

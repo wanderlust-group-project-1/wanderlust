@@ -2,13 +2,15 @@
 require_once('../app/views/layout/header.php');
 require_once('../app/views/admin/components/navbar.php');
 
-require_once('../app/views/admin/layout/sidebar.php');
+// require_once('../app/views/admin/layout/sidebar.php');
 
 ?>
 
 <div class="dashboard">
     <?php require_once('../app/views/admin/layout/sidebar.php');
     ?>
+
+    <div class="sidebar-flow"></div>
 
     <div class="table-container">
         <table class="data-table">
@@ -29,7 +31,7 @@ require_once('../app/views/admin/layout/sidebar.php');
                         <td><?php echo $guide->name; ?></td>
                         <td><?php echo $guide->mobile; ?></td>
                         <td><span class="status <?php echo $guide->status; ?>"><?php echo $guide->status; ?></span></td>
-                        <td><button class="view-button">View</button></td>
+                        <td><button class="btn-text-green" id="view-button"> <i class="fa fa-list"> </i> View</button></td>
                     </tr>
                 <?php
                 }
@@ -40,7 +42,7 @@ require_once('../app/views/admin/layout/sidebar.php');
 
 
     <!-- Modal  -->
-    <div class="user-modal" id="guides-modal">
+    <div class="modal" id="guides-modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div id="user">
@@ -69,7 +71,7 @@ require_once('../app/views/admin/layout/sidebar.php');
         var span = document.getElementsByClassName("close")[0];
 
         // Get all view buttons
-        var viewButtons = document.querySelectorAll('.view-button');
+        var viewButtons = document.querySelectorAll('#view-button');
 
         // Function to handle modal display
         function openModal(id) {

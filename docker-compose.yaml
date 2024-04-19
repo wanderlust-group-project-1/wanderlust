@@ -17,6 +17,7 @@ services:
       
     ports:
       - 8000:80
+      - 8002:8080
   mysql-server:
     hostname: wl-mysql
     container_name: wl-mysql

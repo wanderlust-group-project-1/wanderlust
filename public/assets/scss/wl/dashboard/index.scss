@@ -17,6 +17,7 @@
 @import "./card";
 @import "./form";
 @import "./images";
+@import "./cart";
 
 
 @import "./common/align";
@@ -209,4 +210,14 @@ $breakpoint-lg: 992px;
 
 .bg-white {
   background-color: #fff;
+}
+
+
+
+// Text overflow ellipsis
+
+.text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

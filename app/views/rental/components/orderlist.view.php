@@ -161,9 +161,9 @@
         <div class="flex-d gap-3 mt-3">
             <button class="btn btn-primary" id="mark-as-returned-confirm">Yes</button>
             <button class="btn btn-danger modal-close" id="mark-as-returned-cancel">No</button>
-            <!-- Report Issue -->
+            <!-- Report Complaint -->
 
-            <button class="btn btn-danger" id="report-return-issue">Report Issue</button>
+            <button class="btn btn-danger" id="report-return-complaint">Report Complaint</button>
 
             
 
@@ -187,13 +187,13 @@
 
 
 
-<!-- Issue Modals -->
+<!-- Complaint Modals -->
 
-<div id="report-issue-modal" class="modal">
+<div id="report-complaint-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         
-        <div id="issue-form-data">
+        <div id="complaint-form-data">
 
         </div>
     </div>
