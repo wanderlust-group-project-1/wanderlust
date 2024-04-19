@@ -37,11 +37,10 @@
       </a>
     </li>
 
-
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/availability" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guideprofile" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
-        <span class="menu-title">Availability</span>
+        <span class="menu-title">My Guide Profile</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
@@ -51,6 +50,7 @@
         </ul>
       </div>
     </li>
+
 
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/packages" aria-expanded="false" aria-controls="ui-basic">
@@ -67,7 +67,21 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/bookings" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guideavailability" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Availability</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="ui-basic">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guidebookings" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Bookings</span>
         <i class="menu-arrow"></i>
