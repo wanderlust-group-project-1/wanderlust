@@ -83,38 +83,57 @@ require_once('../app/views/layout/footer.php');
                     <div class="modal-content">
                         <span class="close">&times;</span>
                         <div class="profile-info">
-                            <div class="profile-image-wrapper">
-
+                            <!-- <div class="profile-image-wrapper"> -->
+                            <!-- 
                                 <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
                                 <div class="profile-image-container">
                                     <input type="file" id="profile-image-upload" accept="image/*" style="display:none">
 
                                     <button id="change-profile-pic-button" class="btn-edit-profile-pic">Change Profile Picture</button>
+                                </div> -->
+
+
+
+                            <div class="profile-image mh-400px">
+
+                                <div class="profile-image-overlay">
+                                    <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" alt="Profile Image" class="profile-image mh-200px" id="profile-image">
+                                    <div class="camera-icon">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                    </div>
                                 </div>
 
-                                <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
-                                    <h2>Update Customer Details</h2>
-                                    <?php if (isset($errors)) : ?>
-                                        <div> <?= implode('<br>', $errors) ?> </div>
-                                    <?php endif; ?>
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
 
-                                    <label for="address">Address</label>
-                                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
 
-                                    <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
-
-                                    <label for="number">Number</label>
-                                    <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
-
-                                    <label for="nic">NIC Number</label>
-                                    <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
-                                    <br />
-                                    <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
-                                </form>
                             </div>
+
+
+
+
+
+                            <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
+                                <h2>Update Customer Details</h2>
+                                <?php if (isset($errors)) : ?>
+                                    <div> <?= implode('<br>', $errors) ?> </div>
+                                <?php endif; ?>
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+
+                                <label for="address">Address</label>
+                                <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+
+                                <label for="email">Email</label>
+                                <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+
+                                <label for="number">Number</label>
+                                <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
+
+                                <label for="nic">NIC Number</label>
+                                <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
+                                <br />
+                                <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
+                            </form>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -185,6 +204,47 @@ require_once('../app/views/layout/footer.php');
     </div>
 </div>
 
+
+
+
+
+    <!-- image Upload modal -->
+
+    <div class="modal" id="image-upload">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Upload Image</h2>
+            <!-- <form action="<?= ROOT_DIR ?>/rentalService/uploadImage" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" id="image" required>
+                <input type="submit" class="btn mt-4" name="submit" value="Upload">
+            </form> -->
+            <!-- With image preview -->
+            <form method="post" enctype="multipart/form-data">
+                <input type="file" name="image" id="profile-image-input" class="form-control-lg"  accept="image/png, image/jpg, image/gif, image/jpeg" required>
+                <div class="image-preview-container flex-d-c align-items-center">
+                    
+                    
+                <img src="<?php echo ROOT_DIR ?>/uploads/images/rental_services/<?php echo $user->image; ?>" alt="" id="image-preview" class="image-preview">
+                </div>
+                <input type="submit" class="btn mt-4" name="submit" value="Upload">
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
     var modal = document.getElementById("profile-editor");
 
@@ -237,3 +297,79 @@ require_once('../app/views/layout/footer.php');
         // You can add your logic here
     });
 </script>
+
+
+
+
+
+<script>
+        $(document).ready(function() {
+            $('.profile-image').click(function() {
+                $('#image-upload').css('display', 'block');
+            });
+        });
+
+        // image preview jquery
+        $(document).ready(function() {
+            $('#profile-image-input').change(function() {
+                var reader = new FileReader();
+
+                // file type validation
+                if (!/image\/\w+/.test(this.files[0].type)) {
+                    alertmsg('File type not supported','error');
+                    // clear file input
+                    console.log('File type not supported');
+                    $('#profile-image-input').val('');
+
+
+                    return;
+                }
+
+
+
+
+                reader.onload = function(e) {
+                    $('#image-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+
+        // upload image  using ajax
+        $(document).ready(function() {
+            $('#image-upload form').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    headers: {
+                      'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+                    },
+                    url:"<?= ROOT_DIR ?>/api/rentalService/uploadImage",
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        alertmsg('Image uploaded successfully','success');
+                        $('#image-upload').css('display', 'none');
+
+                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/rental_services/' + data.image);
+                        // $('#profile-image-input').val('');
+                        // $('#image-preview').attr('src', '');
+                        // location.reload();
+                    },
+                    error: function(data) {
+                        alertmsg('Image upload failed','error');
+                        console.log(data);
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+        });
+
+
+
+
+
+    
+    </script>
