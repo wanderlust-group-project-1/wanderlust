@@ -233,6 +233,8 @@ var phoneNumberRegex = /^0\d{9}$/;
 
 var nicRegex = /^[0-9]{9}[vVxX]$|^[0-9]{12}$/; // 10 digits ending with 'v' or 'x'
 
+//  A/96652
+var businessRegNoRegex = /^[A-Z]{1}\/[0-9]{5}$/;
 
 
 
@@ -372,22 +374,28 @@ function rentalServiceSignup(event){
        alertmsg('Invalid phone number. ',"error");
         return false;
     }
-    // if (!nicRegex.test(regNo)) {
-    //     // errorDiv.innerHTML = 'Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".';
-    //    alertmsg('Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".',"error");
-    //     // return false;
-    // }
+    if (!nicRegex.test(regNo) && !businessRegNoRegex.test(regNo)) {
+        // errorDiv.innerHTML = 'Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".';
+       alertmsg("Enter Valid Business Registration Number or NIC number","error");
+        return false;
+    }
     if (!passwordRegex.test(password)) {
         // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
        alertmsg('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.',"error");
         return false;
     }
     
-    // if (verification_document === undefined) {
-    //     // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
-    //    alertmsg('Verification document is required.',"error");
-    //     return false;
-    // }
+    if (verification_document === undefined) {
+        // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
+       alertmsg('Verification document is required.',"error");
+        return false;
+    }
+
+    // latitude and longitude validation
+    if (latitude === '' || longitude === '') {
+        alertmsg('Please select your location.',"error");
+        return false;
+    }
 
 
 
@@ -509,7 +517,7 @@ function guideSignup(event){
     if (!nicRegex.test(nic)) {
         // errorDiv.innerHTML = 'Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".';
        alertmsg('Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".',"error");
-        // return false;
+        return false;
     }
     if (!passwordRegex.test(password)) {
         // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
@@ -520,6 +528,11 @@ function guideSignup(event){
     if (verification_document === undefined) {
         // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
        alertmsg('Verification document is required.',"error");
+        return false;
+    }
+
+    if (window.latitude === undefined || window.longitude === undefined) {
+        alertmsg('Please select your location.',"error");
         return false;
     }
 
