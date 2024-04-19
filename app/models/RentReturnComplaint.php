@@ -85,5 +85,16 @@ class RentReturnComplaintModel {
         
     }
 
+    public function getComplaintsByCustomerId($id) {
+        $q = new QueryBuilder;
+        $q->setTable('rent_return_complaints');
+        $q->select('rent_return_complaints.*,rent.id as rent_id');
+        $q->join('rent', 'rent_return_complaints.rent_id', 'rent.id');
+        $q->where('rent.customer_id', $id);
+
+        return $this->query($q->getQuery(),$q->getData());
+
+    }
+
 
 }

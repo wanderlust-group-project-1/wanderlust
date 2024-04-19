@@ -16,7 +16,93 @@ require_once('../app/views/navbar/customer-navbar.php');
             </div>
 
             <div class="row gap-2">
+                <div class="col-lg-12 checkout-items overflow-scroll">
+
+                <div class="complaints-list  row" id="complaints-list"></div>
+                </div>
             </div>
                 
+        </div>
+    </div>
 </div>
-</div>
+
+<script>
+
+    function getComplaints(status) {
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/complaints/returnComplaintsbyCustomer/' + status,
+            type: 'GET',
+            success: function(response) {
+                //if complain-list-content in document remove it
+                if ($('#complaint-list-content').length) {
+                    $('#complaint-list-content').remove();
+                }
+                $('#complaints-list').html(response);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        getComplaints('myComplaints');
+        $('.section-switch button').click(function() {
+            $('.section-switch button').removeClass('active');
+            $(this).addClass('active');
+            getComplaints($(this).attr('id'));
+        });
+    });
+    //view complaints
+    $(document).on('click', '#view-button', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization' : 'Bearer' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/complaints/returnComplaintbyCustomer/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                $('#complaint-data').html(response);
+                $('#complaint-view-modal').css('display', 'block');
+            }
+        });
+    });
+
+    $(document).on('click', '#cancel-complaint', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $('#cancel-complaint-confirm').attr('data-id', complaintId);
+        $('#cancel-complaint-modal').css('display', 'block');
+    });
+
+    $(document).on('click', '#cancel-complaint-confirm', function() {
+        var complaintId = $(this).attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/complaints/cancelComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                var id = response.data.complaint_id;
+                $('#complaint-card[data-id="' + id + '"]').remove();
+                $('#cancel-complaint-modal').css('display', 'none');
+
+                getComplaints('myComplaints');
+
+
+
+                
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+    
+</script>
+
+<?php
+require_once('../app/views/layout/footer.php');
+?>

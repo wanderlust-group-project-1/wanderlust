@@ -111,7 +111,7 @@ function getComplaints(status) {
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/complaints/viewComplaint/' + complaintId,
+            url: '<?= ROOT_DIR ?>/complaints/viewRentComplaint/' + complaintId,
             type: 'GET',
             success: function(response) {
                 $('#complaint-data').html(response);
