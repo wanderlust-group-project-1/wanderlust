@@ -227,7 +227,7 @@ confirmDateButton.onclick = function() {
 
     if (startDate <= new Date().toISOString().split('T')[0]) {
         alertmsg("Start date should be greater than today",'error');
-        return;
+        return; 
     }
 
 
@@ -235,6 +235,7 @@ confirmDateButton.onclick = function() {
     setNewDate(startDate, endDate);
 
     dateModal.style.display = "none";
+
 }
 
 
@@ -405,6 +406,7 @@ window.onclick = function(event) {
 // #item-list load with ajax http post request
 
 $(document).ready(function() {
+    getCartCount();
     $.ajax({
         headers: {
             'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -458,6 +460,7 @@ function setNewDate(start, end) {
         success: function(data) {
             console.log(data);
             getResults();
+            getCartCount();
         },
         error: function(err) {
             console.log(err);

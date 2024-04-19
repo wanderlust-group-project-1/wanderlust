@@ -123,6 +123,7 @@ Class Rent{
             // 'equipment' => $equipment->first(['id' => $a]),
             'equipment' => $equipment->getEquipmentWithRentalService($a)
         ];
+        // show($data['equipment']);
 
         // foreach ($data['equipment'] as $equipment) {
         //     $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
