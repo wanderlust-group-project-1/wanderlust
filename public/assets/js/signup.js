@@ -41,12 +41,42 @@ var fileInput = document.getElementById("verification_document");
 var fileLabel = document.querySelector(".file-label");
 
 fileInput.addEventListener("change", function () {
+    console.log(fileInput.files);
     if (fileInput.files.length > 0) {
         fileLabel.textContent = "File Selected: " + fileInput.files[0].name;
     } else {
         fileLabel.textContent = "Choose Verification Document";
     }
 });
+
+
+var fileInput = document.getElementById("verification_document-rental");
+
+var fileLabel = document.querySelector(".file-label-rental");
+
+fileInput.addEventListener("change", function () {
+    console.log(fileInput.files);
+    if (fileInput.files.length > 0) {
+        fileLabel.textContent = "File Selected: " + fileInput.files[0].name;
+    } else {
+        fileLabel.textContent = "Choose Verification Document";
+    }
+}
+);
+
+
+
+
+
+// jquery
+
+// $(document).ready(function() {
+//     $(document).on('change', '#verification_document', function() {
+//         // closet('label').text('File Selected: ' + $(this).val());
+//         $(this).closest('.file-input').find('.file-label').text('File Selected: ' + $(this).val());
+//     });
+// });
+
 
 
 // Location modal
@@ -128,7 +158,9 @@ function validateForm(formId) {
     var password = form.querySelector('input[name="password"]');
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+    // var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+    // 10 numbers with 0 beginning
+    var phoneNumberRegex = /^0\d{9}$/;
     var nicRegex = /^[0-9]{9}[vVxX]$/; // 10 digits ending with 'v' or 'x'
 
 
@@ -151,7 +183,7 @@ function validateForm(formId) {
 
     if (!phoneNumberRegex.test(number.value)) {
         errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".');
+       alertmsg('Invalid phone number. ');
         return false;
     }
 
@@ -193,9 +225,12 @@ document.getElementById('guide').onsubmit = function(event) {
 };
 
 
-var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+var passwordRegex =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,20}$/;
+
+// var phoneNumberRegex = /^(\+\d{1,3})?\d{10,14}$/; // 10-14 digits with or without '+'
+var phoneNumberRegex = /^0\d{9}$/;
+
 var nicRegex = /^[0-9]{9}[vVxX]$|^[0-9]{12}$/; // 10 digits ending with 'v' or 'x'
 
 
@@ -231,13 +266,13 @@ document.getElementById("customer-signup").onclick =  function(event){
     }
     if (!phoneNumberRegex.test(number)) {
         // errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".',"error");
+       alertmsg('Invalid phone number. ',"error");
         return false;
     }
     if (!nicRegex.test(nic)) {
         // errorDiv.innerHTML = 'Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".';
        alertmsg('Invalid NIC number. Please enter a valid NIC number ending with "v" or "x".',"error");
-        // return false;
+        return false;
     }
     if (!passwordRegex.test(password)) {
         // errorDiv.innerHTML = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.';
@@ -257,22 +292,26 @@ document.getElementById("customer-signup").onclick =  function(event){
         password: password
     }
 
+    showLoader();
     console.log(user);
 
     const api = new ApiClient('/api/signup/customer');
     api.sendJSONRequest('', 'POST', user)
         .then(response => {
             if (response.success) {
-                alertmsg("success", "success");
+                alertmsg("Verification link has been sent to your email. Please verify your email address.","success");
                 setTimeout(function() {
                     window.location.href = "/";
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
             }
+            hideLoader();
         })
         .catch(error => {
             console.error(error);
+            alertmsg("Error occured. Please try again.","error");
+            hideLoader();
         });
 
     
@@ -330,7 +369,7 @@ function rentalServiceSignup(event){
     }
     if (!phoneNumberRegex.test(mobile)) {
         // errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".',"error");
+       alertmsg('Invalid phone number. ',"error");
         return false;
     }
     // if (!nicRegex.test(regNo)) {
@@ -366,6 +405,10 @@ function rentalServiceSignup(event){
         // verification_document: verification_document
     }
 
+
+    $('#rental-service').find('input, textarea, button, select').prop('disabled', true)
+    showLoader();
+
     const api = new ApiClient('/api/signup/rentalservice');
 
     // file data with key value pair
@@ -381,13 +424,21 @@ function rentalServiceSignup(event){
                 alertmsg("success", "success");
                 setTimeout(function() {
                     window.location.href = "/";
+                    alertmsg("Email Verification link has been sent to your email. Please verify your email address.","success");
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
             }
+            $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
+            hideLoader();
+
         })
         .catch(error => {
             console.error(error);
+            alertmsg("Error occured. Please try again.","error");
+            $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
+            hideLoader();
+
         });
 
 
@@ -414,6 +465,11 @@ function rentalServiceSignup(event){
 
 function guideSignup(event){
     event.preventDefault();
+
+
+    // disable form
+
+
     // get input fields values inside on "customer" id  form
     var form = document.getElementById("guide");
 
@@ -447,7 +503,7 @@ function guideSignup(event){
     }
     if (!phoneNumberRegex.test(mobile)) {
         // errorDiv.innerHTML = 'Invalid phone number. Please enter a valid phone number';
-       alertmsg('Invalid phone number. Please enter a valid phone number with or without "+".',"error");
+       alertmsg('Invalid phone number. ',"error");
         return false;
     }
     if (!nicRegex.test(nic)) {
@@ -492,22 +548,33 @@ function guideSignup(event){
     var filesData = {
         verification_document: verification_document
     }
+    $('#guide').find('input, textarea, button, select').prop('disabled', true);
+    showLoader();
+
 
     api.uploadFilesWithJSON('', filesData, user)
         .then(response => {
 
             // console.log(response);
             if (response.success) {
-                alertmsg("success", "success");
+                alertmsg("Email Verification link has been sent to your email. Please verify your email address.","success");
                 setTimeout(function() {
                     window.location.href = "/";
+                    $('#guide').find('input, textarea, button, select').prop('disabled', false);
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
+                $('#guide').find('input, textarea, button, select').prop('disabled', false);
+
             }
+            hideLoader();
         })
         .catch(error => {
             console.error(error);
+            alertmsg("Error occured. Please try again.","error");
+            $('#guide').find('input, textarea, button, select').prop('disabled', false);
+            hideLoader();
+
         });
         
 

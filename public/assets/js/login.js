@@ -28,6 +28,7 @@ document.getElementById("submit").onclick = function(event) {
         password: password
     };
     console.log(data);
+    showLoader();
     var xhr = new XMLHttpRequest();
 
     // xhr.open('POST', '/api/login', true);
@@ -57,17 +58,23 @@ document.getElementById("submit").onclick = function(event) {
     api.sendJSONRequest('', 'POST', data)
         .then(response => {
             if (response.success) {
-                alertmsg("success", "success");
+                alertmsg("Login Successful", "success");
                 setTimeout(function() {
                     window.location.href = "/";
                 }, 1000);
             } else {
+                console.log(response.message);
                 alertmsg(response.message);
             }
+            hideLoader();
         })
         .catch(error => {
             console.error(error);
-            alertmsg("Something went wrong","error");
+            // alertmsg("Something went wrong","error");
+            
+            // alertmsg(error.message,"error");
+            alertmsg("Wrong Email or Password","error");
+            hideLoader();
         });
 
 

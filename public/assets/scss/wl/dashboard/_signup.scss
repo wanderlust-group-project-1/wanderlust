@@ -563,14 +563,16 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                 .location-button {
                     max-width: 100%;
                     background-color: transparent;
-                    color: #6B6E70;
+                    // color: #6B6E70;
+                    display: block;
                     padding: 10px 5px;
                     border: none;
                     cursor: pointer;
                     justify-content: left;
                     font-size: larger;
-                    font-style: italic;
-                    text-decoration: underline;
+                    // font-style: italic;
+                    text-align: center;
+                    // text-decoration: underline;
 
                     &:hover{
                         color: $gray-text-lighter;
@@ -584,6 +586,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                     width: 100%;
                     opacity: 0;
                     cursor: pointer;
+                    display: none;
                 }
             }
 
@@ -756,18 +759,21 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                 }
                 
             
+            
                 .file-label,
                 .location-button {
                     max-width: 100%;
                     background-color: transparent;
-                    color: #6B6E70;
+                    // color: #6B6E70;
+                    display: block;
                     padding: 10px 5px;
                     border: none;
                     cursor: pointer;
                     justify-content: left;
                     font-size: larger;
-                    font-style: italic;
-                    text-decoration: underline;
+                    // font-style: italic;
+                    text-align: center;
+                    // text-decoration: underline;
 
                     &:hover{
                         color: $gray-text-lighter;
@@ -781,6 +787,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
                     width: 100%;
                     opacity: 0;
                     cursor: pointer;
+                    display: none;
                 }
             }
 
@@ -835,11 +842,14 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         border-radius: $border-radius;
 
         .close {
+            position: absolute;
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+            right: 10px;
+            top:5px;
 
             &:hover,
             &:focus {
@@ -855,7 +865,12 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
             border-radius: $border-radius;
             position: fixed;
         }
+
+        #latitud, #longitud {
+            display: none;
+        }
     }
+
 }
 
 /* Additional Styles */

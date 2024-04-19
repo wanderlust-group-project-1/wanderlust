@@ -254,7 +254,7 @@ require_once('../app/views/layout/footer.php');
                 return;
             }
             // Minimum 6 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character
-            var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,20}$/;
+            var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,20}$/;
             var password = $('#new-password').val();
 
             // Test the password value against the regex
