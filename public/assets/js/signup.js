@@ -419,6 +419,11 @@ function rentalServiceSignup(event){
 
 function guideSignup(event){
     event.preventDefault();
+
+
+    // disable form
+
+
     // get input fields values inside on "customer" id  form
     var form = document.getElementById("guide");
 
@@ -497,22 +502,29 @@ function guideSignup(event){
     var filesData = {
         verification_document: verification_document
     }
+    $('#guide').find('input, textarea, button, select').prop('disabled', true);
+
 
     api.uploadFilesWithJSON('', filesData, user)
         .then(response => {
 
             // console.log(response);
             if (response.success) {
-                alertmsg("success", "success");
+                alertmsg("Email Verification link has been sent to your email. Please verify your email address.","success");
                 setTimeout(function() {
-                    window.location.href = "/";
+                    // window.location.href = "/";
+                    $('#guide').find('input, textarea, button, select').prop('disabled', false);
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
+                $('#guide').find('input, textarea, button, select').prop('disabled', false);
+
             }
         })
         .catch(error => {
             console.error(error);
+            alertmsg("Error occured. Please try again.","error");
+            $('#guide').find('input, textarea, button, select').prop('disabled', false);
         });
         
 
