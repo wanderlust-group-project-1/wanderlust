@@ -401,6 +401,9 @@ function rentalServiceSignup(event){
         // verification_document: verification_document
     }
 
+
+    $('#rental-service').find('input, textarea, button, select').prop('disabled', true)
+
     const api = new ApiClient('/api/signup/rentalservice');
 
     // file data with key value pair
@@ -415,14 +418,20 @@ function rentalServiceSignup(event){
             if (response.success) {
                 alertmsg("success", "success");
                 setTimeout(function() {
-                    window.location.href = "/";
+                    // window.location.href = "/";
+                    alertmsg("Email Verification link has been sent to your email. Please verify your email address.","success");
                 }, 1000);
             } else {
                 alertmsg(response.message,"error");
             }
+            $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
+
         })
         .catch(error => {
             console.error(error);
+            alertmsg("Error occured. Please try again.","error");
+            $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
+
         });
 
 
