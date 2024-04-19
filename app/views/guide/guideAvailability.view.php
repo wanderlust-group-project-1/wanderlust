@@ -73,7 +73,7 @@ require_once('../app/views/layout/header.php');
             const button = document.createElement("button"); // Create button element
             button.textContent = i; // Set day number as button text
             button.classList.add("cal_day-button"); // Add class to style the button
-            button.addEventListener("click", () => openModal(i)); // Add click event listener to open modal
+            button.addEventListener("click", () => openModalSchedule(i)); // Add click event listener to open modal
             if (currentDate.getDate() === i && currentDate.getMonth() === currentMonth && currentDate.getFullYear() === currentYear) {
                 button.classList.add("cal_current-date"); // Add class to highlight current date
             }
@@ -121,162 +121,87 @@ require_once('../app/views/layout/header.php');
 <div class="modal view-schedule-modal" id="view-schedule-modal" style="display: none;">
     <div class="modal-content">
         <span class="close-button">&times;</span>
-        <form id="schedule-form">
-            <div id="schedule-details">
-                <h2>Schedule Details</h2>
-                <div class="schedule-details">
-                    <table class="table-details">
-                        <tr>
-                            <td><label for="selected-day"><strong>Date:</strong></label></td>
-                            <td><input type="text" id="selected-day" name="selected-day" readonly></td>
-                        </tr>
-                        <tr>
-                            <td><label for="start-time"><strong>Start Time:</strong></label></td>
-                            <td><input type="text" id="start-time" name="start-time"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="end-time"><strong>End Time:</strong></label></td>
-                            <td><input type="text" id="end-time" name="end-time"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="edit-button">
-                    <button type="submit" class="edit-schedule-button btn btn-full m-1">Edit</button>
-                </div>
-                <div class="delete-button">
-                    <button type="button" class="delete-schedule-button btn btn-danger btn-full m-1">Delete</button>
-                </div>
+        <form id="availability-details">
+            <h2>Availability</h2>
+            <div class="schedule-details">
+                <table class="table-details">
+                    <tr>
+                        <td><strong>Date:</strong></td>
+                        <td id="selected-day"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Availability:</strong></td>
+                        <td><input type="checkbox" id="availability"></td>
+                    </tr>
+                </table>
             </div>
+            <input type="submit" class="btn mt-4" name="submit" value="Update">
         </form>
     </div>
 </div>
 
 
 <script>
-    function openModal(day) {
-        // Get the modal element
-        const modal = document.getElementById("view-schedule-modal");
-        // Open the modal
-        modal.style.display = "block";
-        // Update the modal content with the selected day
-        document.getElementById("selected-day").textContent = day;
-        var closeButton = document.querySelector(".close-button");
-
-        closeButton.onclick = function() {
-            addPackageModal.style.display = "none";
-        }
-    }
+    function openModalSchedule(day) {
+    // Get the modal element
+    const modal = document.getElementById("view-schedule-modal");
+    // Open the modal
+    modal.style.display = "block";
+    
+    // Get the current month and year
+    const currentDate = new Date();
+    const currentMonth = currentDate.toLocaleString('en-US', { month: 'long' });
+    const currentYear = currentDate.getFullYear();
+    
+    // Update the modal content with the selected day, current month, and year
+    document.getElementById("selected-day").textContent = `${currentMonth} ${day}, ${currentYear}`;
+}
 </script>
 
-<!-- 
-<script>
-    function viewSchedule() {
-        const scheduleModal = document.getElementById("view-schedule-modal");
-        const scheduleCloseButton = scheduleModal.querySelector(".close-button");
-
-        scheduleCloseButton.onclick = function() {
-            scheduleModal.style.display = "none";
-        };
-
-        const viewScheduleButtons = document.querySelectorAll(".cal_day-button");
-        viewScheduleButtons.forEach(function(button) {
-            button.addEventListener("click", function() {
-                const scheduleId = button.textContent; // Assuming button text is the schedule ID
-                fetchScheduleDetails(scheduleId);
-                scheduleModal.style.display = "block";
-
-                // Hide profile modal if it's open
-                const profileModal = document.getElementById("profile-editor");
-                profileModal.style.display = "none";
-            });
-        });
-    }
-
-
-    function fetchScheduleDetails(scheduleId) {
-        $.ajax({
-            headers: {
-                Authorization: "Bearer " + getCookie('jwt_auth_token')
-            },
-            url: "<?= ROOT_DIR ?>/guide/schedule/" + scheduleId,
-            method: "GET",
-            success: function(data) {
-                const modalContent = document.querySelector("#view-schedule-modal .modal-content");
-                modalContent.innerHTML = data;
-
-                const closeButton = document.querySelector("#view-schedule-modal .close-button");
-                closeButton.addEventListener("click", function() {
-                    const modal = document.getElementById("view-schedule-modal");
-                    modal.style.display = "none";
-                });
-            },
-            error: function(error) {
-                console.error(error);
-            }
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        viewSchedule();
-    });
-</script> -->
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Function to open modal with selected day
-        function openModal(day) {
-            const modal = document.getElementById("view-schedule-modal");
-            modal.style.display = "block";
-            document.getElementById("selected-day").textContent = day;
-        }
-
-        // Function to fetch schedule details
-        function fetchScheduleDetails(scheduleId) {
-            $.ajax({
-                headers: {
-                    Authorization: "Bearer " + getCookie('jwt_auth_token')
-                },
-                url: "<?= ROOT_DIR ?>/guide/getSchedule/" + scheduleId,
-                method: "GET",
-                success: function(data) {
-                    const modalContent = document.querySelector("#view-schedule-modal .modal-content");
-                    modalContent.innerHTML = data;
-
-                    const closeButton = document.querySelector("#view-schedule-modal .close-button");
-                    closeButton.addEventListener("click", function() {
-                        const modal = document.getElementById("view-schedule-modal");
-                        modal.style.display = "none";
-                    });
-                },
-                error: function(error) {
-                    console.error(error);
-                }
-            });
-        }
-
-        // Function to handle click events on schedule buttons
-        function handleScheduleButtonClick() {
-            const viewScheduleButtons = document.querySelectorAll(".cal_day-button");
-            viewScheduleButtons.forEach(function(button) {
-                button.addEventListener("click", function() {
-                    const scheduleId = button.textContent; // Assuming button text is the schedule ID
-                    fetchScheduleDetails(scheduleId);
-                    openModal(scheduleId);
-
-                    // Hide profile modal if it's open
-                    const profileModal = document.getElementById("profile-editor");
-                    if (profileModal) {
-                        profileModal.style.display = "none";
-                    }
-                });
-            });
-        }
-
         // Close modal button functionality
         const closeButton = document.querySelector("#view-schedule-modal .close-button");
         closeButton.addEventListener("click", function() {
             const modal = document.getElementById("view-schedule-modal");
             modal.style.display = "none";
+        });
+
+        var guideAvailabilityForm = document.getElementById("availability-details");
+        guideAvailabilityForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            // var formData = new FormData(this);
+            var available = $('#availability').is(':checked') ? 1 : 0
+
+            var jsonData = {
+                // date: $('#selected-day').text(), 'April 4, 2024 converted yyyy-mm-dd'
+                date: new Date($('#selected-day').text()).toISOString().split('T')[0],
+                availability: available
+            }
+            console.log(jsonData);
+
+            $.ajax({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                },
+                url: "<?= ROOT_DIR ?>/api/guideAvailability/update",
+                method: "POST",
+                data: JSON.stringify(jsonData),
+                contentType: 'application/json',
+                processData: false,
+                success: function(data) {
+                    console.log(data);
+                    if (data.success) {
+                        alert("Availability updated successfully");
+                    } else {
+                        alert("Failed to update availability");
+                    }
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
         });
     });
 </script>
