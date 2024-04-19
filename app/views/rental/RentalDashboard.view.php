@@ -29,13 +29,7 @@ require_once('../app/views/admin/components/navbar.php');
                     <div>
 
 
-                    <!-- (
-            [successful_rental_count] => 1
-            [total_earnings] => 15000.00
-            [last_month_rental_count] => 2
-            [current_month_earnings] => 
-            [equipment_count] => 16
-        ) -->
+  
 
 
                         <!-- <h3>100</h3> -->
@@ -99,51 +93,8 @@ require_once('../app/views/admin/components/navbar.php');
                 <!-- <span class="progress" data-value="80%"></span>
                 <span class="label">80%</span> -->
             </div>
-        </div>div class="info-data mt-5">
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>100</h3>
-                        <p>Rents</p>
-                    </div>
-                </div>
-                <span class="progress" data-value="10%"></span>
-                <span class="label">10 : Per Month</span>
-            </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>Rs.139000</h3>
-                        <p>Total Earning</p>
-                    </div>
-                </div>
-                <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
-            </div>
-
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>35</h3>
-                        <p>Equipment Quantity</p>
-                    </div>
-                </div>
-                <!-- <span 
-
-        <div class="dashboard-card">
-
-            <div class="equipment p-4">
-
-                <div class="row justify-content-between">
-                    <h1 class="title">Equipment Details</h1>
-
-                    <div class="add-equipment">
-                        <button type="submit" class="btn-icon" id="add-equipment">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Add new
-                        </button>
-                    </div>
-                </div>
+        </div>
+         
 
                 <!-- Add Equipment -->
 
