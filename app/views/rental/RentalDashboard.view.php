@@ -23,36 +23,7 @@ require_once('../app/views/admin/components/navbar.php');
             <li class="divider">/</li>
             <li><a href="#" class="active">Dashboard</a></li>
         </ul>
-        <div class="info-data mt-5">
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>100</h3>
-                        <p>Rents</p>
-                    </div>
-                </div>
-                <span class="progress" data-value="10%"></span>
-                <span class="label">10 : Per Month</span>
-            </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>Rs.139000</h3>
-                        <p>Total Earning</p>
-                    </div>
-                </div>
-                <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
-            </div>
-
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>35</h3>
-                        <p>Equipment Quantity</p>
-                    </div>
-                </div>
-                <!-- <span class="progress" data-value="60%"></span>
+        <class="progress" data-value="60%"></span>
                 <span class="label">Rs.60 000 : Per Month</span> -->
             </div>
 
@@ -82,7 +53,36 @@ require_once('../app/views/admin/components/navbar.php');
                 <!-- <span class="progress" data-value="80%"></span>
                 <span class="label">80%</span> -->
             </div>
-        </div>
+        </div>div class="info-data mt-5">
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h3>100</h3>
+                        <p>Rents</p>
+                    </div>
+                </div>
+                <span class="progress" data-value="10%"></span>
+                <span class="label">10 : Per Month</span>
+            </div>
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h3>Rs.139000</h3>
+                        <p>Total Earning</p>
+                    </div>
+                </div>
+                <span class="progress" data-value="60%"></span>
+                <span class="label">Rs.60 000 : Per Month</span>
+            </div>
+
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h3>35</h3>
+                        <p>Equipment Quantity</p>
+                    </div>
+                </div>
+                <!-- <span 
 
         <div class="dashboard-card">
 
