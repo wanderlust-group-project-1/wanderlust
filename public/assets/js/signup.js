@@ -41,12 +41,42 @@ var fileInput = document.getElementById("verification_document");
 var fileLabel = document.querySelector(".file-label");
 
 fileInput.addEventListener("change", function () {
+    console.log(fileInput.files);
     if (fileInput.files.length > 0) {
         fileLabel.textContent = "File Selected: " + fileInput.files[0].name;
     } else {
         fileLabel.textContent = "Choose Verification Document";
     }
 });
+
+
+var fileInput = document.getElementById("verification_document-rental");
+
+var fileLabel = document.querySelector(".file-label-rental");
+
+fileInput.addEventListener("change", function () {
+    console.log(fileInput.files);
+    if (fileInput.files.length > 0) {
+        fileLabel.textContent = "File Selected: " + fileInput.files[0].name;
+    } else {
+        fileLabel.textContent = "Choose Verification Document";
+    }
+}
+);
+
+
+
+
+
+// jquery
+
+// $(document).ready(function() {
+//     $(document).on('change', '#verification_document', function() {
+//         // closet('label').text('File Selected: ' + $(this).val());
+//         $(this).closest('.file-input').find('.file-label').text('File Selected: ' + $(this).val());
+//     });
+// });
+
 
 
 // Location modal

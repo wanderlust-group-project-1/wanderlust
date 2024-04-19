@@ -331,9 +331,9 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document" class="btn btn-primary file-label w-100">Brows here</label>
+                                    <label for="verification_document-rental" class="btn btn-primary file-label  file-label-rental w-100">Upload</label>
                                     </div>
-                                    <input type="file" name="verification_document" id="verification_document" class="file-input">
+                                    <input type="file" name="verification_document" id="verification_document-rental" class="file-input">
 <!-- d -->
 
                                 </div>
