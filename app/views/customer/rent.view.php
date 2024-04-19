@@ -95,10 +95,12 @@ require_once('../app/views/navbar/customer-navbar.php');
     <div class=" col-lg-12 flex-d-c gap-2 ">
         <h2 class="justify-content-center flex-d">Select Date</h2>
         <div class="row gap-2">
+
             <div class="date"><label for="start-date">Start Date</label></div>
-            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required></div>
+            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required value="<?php isset($cart)  && print($cart->start_date); ?>"
+            ></div>
             <div class="date"><label for="end-date">End Date</label></div>
-            <div class="date"><input type="date" id="end-date" class="form-control-lg" name="end-date" required></div>
+            <div class="date"><input type="date" id="end-date" class="form-control-lg" name="end-date" required value="<?php isset($cart)  && print($cart->end_date); ?>"></div>
             <div class="date">
             <h5>Select days you want to rent camping equipment. If you change the date new cart will be created. Items added to the previous cart will be removed.</h5>
         </div>
@@ -209,6 +211,26 @@ confirmDateButton.onclick = function() {
 
     console.log(startDate);
     console.log(endDate);
+
+
+    // validate the date
+    if (startDate == "" || endDate == "") {
+        alertmsg("Please select the date",'error');
+        return;
+    }
+
+    // start date should be less than end date , start date should be greater than tommorow
+    if (startDate > endDate) {
+        alertmsg("Start date should be less than end date",'error');
+        return;
+    }
+
+    if (startDate <= new Date().toISOString().split('T')[0]) {
+        alertmsg("Start date should be greater than today",'error');
+        return;
+    }
+
+
 
     setNewDate(startDate, endDate);
 

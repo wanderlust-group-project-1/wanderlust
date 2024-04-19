@@ -12,7 +12,7 @@ require_once('../app/views/layout/footer.php');
                 <div class="user-profile">
 
                     <div class="container">
-                        <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" class="img">
+                        <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" class="img">
                         <div class="overlay">
                             <div class="text">Hello <?php echo $user->name ?> ! </div>
                         </div>

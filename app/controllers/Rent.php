@@ -5,7 +5,18 @@ Class Rent{
 
 
     public function index(string $a = '', string $b = '', string $c = ''):void {
-        $this->view('customer/rent');
+
+
+
+        $cart = new CartModel;
+        $cart = $cart->first(['customer_id' => UserMiddleware::getUser()['id']]);
+        // show($cart);
+        $data = [];
+        if($cart){
+            $data['cart'] = $cart;
+        }
+
+        $this->view('customer/rent', $data);
     }
 
 
