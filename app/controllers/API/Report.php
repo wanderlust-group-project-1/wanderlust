@@ -1,170 +1,142 @@
-<?php 
+<?php
 
-
-  use Dompdf\Dompdf; 
-
+use Dompdf\Dompdf;
 
 class Report {
     use Controller;
 
-
-   
     public function rentalIncome(string $a = '', string $b = '', string $c = ''): void
     {
-
-      
+        // Prepare request and response objects
         $request = new JSONRequest;
         $response = new JSONResponse;
 
-
-
+        // Prepare data for model query
         $d = [
-          'id' => UserMiddleware::getUser()['id'],
-          'from' => $request->get('from'),
-           'to' => $request->get('to')
+            'id' => UserMiddleware::getUser()['id'],
+            'from' => $request->get('from'),
+            'to' => $request->get('to')
         ];
-        // $d['id'] = UserMiddleware::getUser()['id'];
 
-        // show($d);
-        // die();
-
-
+        // Fetch rental information and income data
         $rental = new RentalServiceModel;
         $data = [
             'info' => $rental->getRentalService($d['id'])[0],
             'income' => $rental->GetMonthlyIncome($d['id'], $d['from'], $d['to'])
-
-
         ];
-        
 
-
-        // generate id for the report
+        // Initialize variables for the PDF generation
         $id = uniqid();
-        $servicefee = 10/100;
+        $serviceFeeRate = 10 / 100;
         $name = $data['info']->name;
         $address = $data['info']->address;
         $companyName = "Wanderlust";
         $reportTitle = "Monthly Income Report for {$name}";
         $reportDate = date("Y-m-d");
-        
-        // HTML content for the PDF
-        $html = <<<HTML
+
+        // Start output buffering
+        ob_start();
+        ?>
+
         <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <title>Income Report</title>
             <style>
-                body { font-family: 'Helvetica', sans-serif; font-size: 14px; }
-                h1, h2 { text-align: center; }
-                table { width: 100%; border-collapse: collapse; }
-                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                th { background-color: #f2f2f2; }
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    margin: 40px;
+                    color: #333;
+                    line-height: 1.6;
+                }
+                h1, h2 {
+                    text-align: center;
+                    color: #026;
+                }
+                table {
+                    width: 100%;
+                    margin-top: 20px;
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 12px 15px;
+                    text-align: left;
+                }
+                th {
+                    background-color: #f8f8f8;
+                    color: #333;
+                }
+                tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+                p {
+                    text-align: center;
+                }
+                .footer {
+                    margin-top: 20px;
+                    text-align: center;
+                    font-size: 0.85em;
+                    color: #666;
+                }
+                .footer a {
+                    color: #333;
+                }
             </style>
         </head>
         <body>
-            <h1>{$companyName}</h1>
-            <h2>{$reportTitle} <br> {$reportDate}</h2>
-            <p><strong>Name:</strong> {$name} <br>
-            <strong>Address:</strong> {$address}</p>
+            <h1><?= $companyName ?></h1>
+            <h2><?= $reportTitle ?><br><?= $reportDate ?></h2>
+            <p><strong>Name:</strong> <?= $name ?><br><strong>Address:</strong> <?= $address ?></p>
             <table>
                 <thead>
                     <tr>
                         <th>Month</th>
-                        <th>Income</th>
+                        <th>Income (Rs.)</th>
                     </tr>
                 </thead>
                 <tbody>
-        HTML;
-        
-        foreach ($data['income'] as $monthlyIncome) {
-            // $html .= "<tr><td>$month</td><td>\$$income</td></tr>";
-            // $html .= "<tr><td>{$monthlyIncome->Month}</td><td>{$monthlyIncome->MonthlyIncome}</td></tr>";
-            // Currency format
-            $html .= "<tr><td>{$monthlyIncome->Month}</td><td>Rs.{$monthlyIncome->MonthlyIncome}</td></tr>";
-    
-        }
-
-        // total income
-        $totalIncome = 0;
-        foreach ($data['income'] as $monthlyIncome) {
-            $totalIncome += $monthlyIncome->MonthlyIncome;
-
-        }
-        // Currency format
-        // $totalIncome = number_format($totalIncome, 2);
-        // $html .= "<tr><td><strong>Total</strong></td><td><strong>Rs.{number_format($totalIncome, 2);}</strong></td></tr>";
-        $html .= "<tr><td><strong>Total</strong></td><td><strong>Rs." . number_format($totalIncome, 2) . "</strong></td></tr>";
-
-
-        // Service Fee
-        // to int
-        
-        $serviceFee = (int)$totalIncome * $servicefee;
-        // $serviceFee = number_format($serviceFee, 2);
-        // $html .= "<tr><td><strong>Service Fee</strong></td><td><strong>Rs.{number_format($serviceFee, 2)}</strong></td></tr>";
-        $html .= "<tr><td><strong>Service Fee</strong></td><td><strong>Rs." . number_format($serviceFee, 2) . "</strong></td></tr>";
-
-        // Net Income
-        $netIncome = (int)$totalIncome - (int)$serviceFee;
-        // $netIncome = number_format($netIncome, 2);
-        // $html .= "<tr><td><strong>Net Income</strong></td><td><strong>Rs.{number_format($netIncome, 2);}</strong></td></tr>";
-        $html .= "<tr><td><strong>Net Income</strong><br>
-            " . $d['from'] . " - " . $d['to'] . "
-        
-        </td><td><strong>Rs." . number_format($netIncome, 2) . "</strong></td></tr>";
-
-
-
-
-        
-        $html .= <<<HTML
+                    <?php foreach ($data['income'] as $monthlyIncome): ?>
+                        <tr>
+                            <td><?= $monthlyIncome->Month ?></td>
+                            <td><?= number_format($monthlyIncome->MonthlyIncome, 2) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <?php
+                    // Calculate totals and service fees
+                    $totalIncome = array_sum(array_column($data['income'], 'MonthlyIncome'));
+                    $serviceFee = $totalIncome * $serviceFeeRate;
+                    $netIncome = $totalIncome - $serviceFee;
+                    ?>
+                    <tr><td><strong>Total</strong></td><td><strong>Rs.<?= number_format($totalIncome, 2) ?></strong></td></tr>
+                    <tr><td><strong>Service Fee</strong></td><td><strong>Rs.<?= number_format($serviceFee, 2) ?></strong></td></tr>
+                    <tr><td><strong>Net Income</strong></td><td><strong>Rs.<?= number_format($netIncome, 2) ?></strong></td></tr>
                 </tbody>
             </table>
-
-            <!-- Issue Date and by  this is generated by the system -->
-            <p> This report was generated by the system on {$reportDate}</p>
-            <!-- verify link -->
-            <p>Verify at: <a href="{$_SERVER['HTTP_HOST']}/reports/income_report_{$id}.pdf">{$_SERVER['HTTP_HOST']}/reports/income_report_{$id}.pdf</a></p>
-
-
-
-           
-
+            <div class="footer">
+                <p>This report was generated by the system on <?= $reportDate ?></p>
+                <p>Verify at: <a href="https://<?= $_SERVER['HTTP_HOST'] ?>/reports/income_report_<?= $id ?>.pdf">https://<?= $_SERVER['HTTP_HOST'] ?>/reports/income_report_<?= $id ?>.pdf</a></p>
+            </div>
         </body>
         </html>
-        HTML;
-        
-        // Create an instance of Dompdf
+
+        <?php
+        $html = ob_get_clean();
+
+        // Create and configure DOMPDF instance
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
-        
-        // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
-        
-        // Render the HTML as PDF
         $dompdf->render();
 
-        // Save the generated PDF to a file on the server
+        // Save and send the PDF file
         $output = $dompdf->output();
         file_put_contents("reports/income_report_{$id}.pdf", $output);
-
-
-      
-
-        
-
-        
-        // Output the generated PDF to Browser
-        // $dompdf->stream("income_report.pdf", array("Attachment" => false));
-        // echo $html;
-
-        $response->data([
-            'report' => "income_report_{$id}.pdf"
-        ])->send();
-        
-        
+        $response->data(['report' => "income_report_{$id}.pdf"])->send();
     }
-    
 }
+
+?>

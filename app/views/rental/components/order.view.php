@@ -1,23 +1,7 @@
 <div id="order-item-content">
 
 <?php
-    // show($order);
-    // show($items);
 
-    // [id] => 13
-    // [customer_id] => 32
-    // [rentalservice_id] => 25
-    // [start_date] => 2024-02-22
-    // [end_date] => 2024-04-29
-    // [status] => pending
-    // [sub_status] => 
-    // [total] => 1206.00
-    // [paid_amount] => 0.00
-    // [update_at] => 2024-02-23 15:01:21
-    // [created_at] => 2024-02-25 06:22:50
-    // [customer_name] => Customer 
-    // [customer_email] => customer@wl.com
-    // [equipment_list] => BackPack - 80L (1), Baker Mueller (1)
 
 
     ?>
@@ -26,10 +10,7 @@
        
     <div class="row card-normal m-2">
         <div class="col-lg-5 col-md-12">
-            
-            <!-- <h3>Order ID: <span id="order-id"><?= $order->id ?></span></h3>
-            <h3>Order Date: <span id="order-date"><?= $order->created_at ?></span></h3>
-            <h3>Order Status: <span id="order-status"><?= $order->status ?></span></h3> -->
+    
 
             <table class="order-details">
                 <tr >
@@ -49,9 +30,7 @@
 
         </div>
         <div class="col-lg-6 col-md-12">
-            <!-- <h3>Customer: <span id="customer-name"><?= $order->customer_name ?></span></h3>
-            <h3>Email: <span id="customer-email"><?= $order->customer_email ?></span></h3> -->
-            <table class="order-details">
+                   <table class="order-details">
                 <tr>
                     <td>Customer:</td>
                     <td><?= $order->customer_name ?></td>
@@ -96,6 +75,13 @@
 
         
 
+    </div>
+
+    <!-- Button to download report -->
+    <div class="row m-2">
+        <div class="col-lg-12 col-md-12 m-4">
+            <button id="download-report" class="btn btn-primary" data-id="<?= $order->id ?>" >Download Report</button>
+        </div>
     </div>
 
 
