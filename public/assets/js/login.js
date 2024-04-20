@@ -59,12 +59,20 @@ document.getElementById("submit").onclick = function(event) {
         .then(response => {
             if (response.success) {
                 alertmsg("Login Successful", "success");
+
+                
                 setTimeout(function() {
-                    window.location.href = "/";
+                    if(response.data.role == "admin"){
+                    window.location.href = "/admin";
+                    }else if(response.data.role == "customer"){
+                        window.location.href = "/";
+                    }else{
+                        window.location.href = "/dashboard";
+                    }
                 }, 1000);
             } else {
                 console.log(response.message);
-                alertmsg(response.message);
+                alertmsg(response.message, "error");
             }
             hideLoader();
         })
@@ -72,8 +80,8 @@ document.getElementById("submit").onclick = function(event) {
             console.error(error);
             // alertmsg("Something went wrong","error");
             
-            // alertmsg(error.message,"error");
-            alertmsg("Wrong Email or Password","error");
+            alertmsg(error.message,"error");
+            // alertmsg("Wrong Email or Password","error");
             hideLoader();
         });
 
