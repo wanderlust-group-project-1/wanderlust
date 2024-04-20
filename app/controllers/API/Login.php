@@ -44,10 +44,10 @@ class Login {
                 return;
             }
             // filter user data get id and email array 
-            $userData = array_filter((array) $userData, function ($key) {
+            $userCookie = array_filter((array) $userData, function ($key) {
                 return in_array($key, ['id', 'email']);
             }, ARRAY_FILTER_USE_KEY);
-            $this->setcookie($userData);
+            $this->setcookie($userCookie);
             $response->success(true)->data($userData)->send();
 
         } else {

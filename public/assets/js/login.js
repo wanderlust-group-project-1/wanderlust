@@ -59,8 +59,16 @@ document.getElementById("submit").onclick = function(event) {
         .then(response => {
             if (response.success) {
                 alertmsg("Login Successful", "success");
+
+                
                 setTimeout(function() {
-                    window.location.href = "/";
+                    if(response.data.role == "admin"){
+                    window.location.href = "/admin";
+                    }else if(response.data.role == "customer"){
+                        window.location.href = "/";
+                    }else{
+                        window.location.href = "/dashboard";
+                    }
                 }, 1000);
             } else {
                 console.log(response.message);
