@@ -23,6 +23,9 @@ require_once('../app/views/admin/components/navbar.php');
             <li class="divider">/</li>
             <li><a href="#" class="active">Dashboard</a></li>
         </ul>
+
+
+        
         <div class="info-data mt-5">
             <div class="card">
                 <div class="head">
