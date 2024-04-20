@@ -45,8 +45,18 @@ class Equipment {
 
         $equipmentModel = new EquipmentModel;
 
-        $data = $equipmentModel->deleteEquipment($a);
+        if($equipmentModel->GetCurrentAcceptedRents($a)){
+            $response->success(false)
+                ->message('Equipment is currently rented out')
+                ->statusCode(422)
+                ->send();
 
+                return;
+        }
+            
+
+        // $data = $equipmentModel->deleteEquipment($a);
+        $data ='';
         if (!$data) {
             $response->success(true)
                 ->message('Equipment deleted successfully')

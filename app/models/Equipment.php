@@ -85,9 +85,16 @@ class EquipmentModel {
 
     public function deleteEquipment(int $id) {
 
+       
 
 
         return $this->delete($id);
+    }
+
+
+    public function GetCurrentAcceptedRents(int $id) {
+        $q = 'CALL GetCurrentAcceptedRents(:id)';
+        return $this->query($q, ['id' => $id]);
     }
 
     public function increaseCount(int $id, int $count) {
