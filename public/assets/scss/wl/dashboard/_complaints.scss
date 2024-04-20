@@ -1,0 +1,27 @@
+.complaint-header {
+    font-weight: 400;
+    font-family: sans-serif, 'Poppins';
+    font-size: $header4 ;
+    color: $gray-text;
+
+    .complaint-status{
+        // background-color: red;
+        font-weight: 600;
+    }
+}
+
+.modal-content {
+    border-radius: 20px;
+    // padding: 20px;
+} 
+
+.order-details {
+    font-weight: 400;
+    font-family: sans-serif, 'Poppins';
+    font-size: $header4 ;
+    color: $gray-text;
+    
+    tbody {
+
+    }
+}

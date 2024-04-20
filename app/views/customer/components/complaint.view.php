@@ -1,8 +1,8 @@
 <div id="order-item-content">
 
 <?php
-    show($order);
-    show($items);
+    // show($order);
+    // show($items);
 
     // [id] => 13
     // [customer_id] => 32
@@ -77,15 +77,12 @@
             <table class="order-details">
                 <tr> 
                     <td>Rental Service:</td>
-                    <td><?= $order->customer_name ?></td>
+                    <td><?= $order->rental_service_name ?></td>
                 </tr>
                 <tr>
-                    <td>Email:</td>
-                    <td><?= $order->customer_email ?></td>
+                    <td>Rental Service ID:</td>
+                    <td><?= $order->rental_service_id ?></td>
                 </tr>
-                <tr>
-                    <td>Mobile:</td>
-                    <td><?= $order->customer_number ?></td>
             </table>
 
         </div>
