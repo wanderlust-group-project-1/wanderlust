@@ -64,7 +64,7 @@ document.getElementById("submit").onclick = function(event) {
                 }, 1000);
             } else {
                 console.log(response.message);
-                alertmsg(response.message);
+                alertmsg(response.message, "error");
             }
             hideLoader();
         })
@@ -72,8 +72,8 @@ document.getElementById("submit").onclick = function(event) {
             console.error(error);
             // alertmsg("Something went wrong","error");
             
-            // alertmsg(error.message,"error");
-            alertmsg("Wrong Email or Password","error");
+            alertmsg(error.message,"error");
+            // alertmsg("Wrong Email or Password","error");
             hideLoader();
         });
 
