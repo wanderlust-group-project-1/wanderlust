@@ -55,8 +55,8 @@ class Equipment {
         }
             
 
-        // $data = $equipmentModel->deleteEquipment($a);
-        $data ='';
+        $data = $equipmentModel->deleteEquipment($a);
+      
         if (!$data) {
             $response->success(true)
                 ->message('Equipment deleted successfully')
