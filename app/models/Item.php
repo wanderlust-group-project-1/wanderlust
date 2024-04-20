@@ -77,6 +77,11 @@ class ItemModel {
         return $this->query($q, ['id' => $id])[0];
     }
 
+    public function makeUnavailableByEquipment(int $id) {
+        $this->update($id, ['status' => 'unavailable'], 'equipment_id');
+    }
+
+
 
 
 

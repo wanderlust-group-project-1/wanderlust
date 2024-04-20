@@ -973,6 +973,41 @@ $(document).on('click', '#make-available', function() {
 });
 
 
+// Disable modal open
+$(document).on('click', '#disable-equipment-button', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $('#disable-equipment-modal').show();
+    $('#disable-equipment').attr('data-id', id);
+});
+
+// Disable 
+$(document).on('click', '#disable-equipment', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/equipment/disableEquipment/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Equipment disabled successfully', 'success');
+            getEquipments();
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Equipment could not be disabled', 'error');
+        }
+    })
+});
+
+
+
+
+
+
 
         
 
