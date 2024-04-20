@@ -110,6 +110,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     function loadOrders(status = 'all') {
         window.currentStatus = status;
+        showLoader();
         
         $.ajax({
             url: '<?= ROOT_DIR ?>/myOrders/list/' + status,
@@ -119,9 +120,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             type: 'GET',
             success: function(data) {
                 $('#orders').html(data);
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error loading orders', 'error');
+                hideLoader();
             }
         });
 
@@ -130,6 +134,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
     $(document).on('click','.order-view-button', function() {
+        showLoader();
         var orderId = $(this).closest('.card').attr('data-id');
         console.log(orderId);
         $.ajax({
@@ -141,9 +146,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#order-data').html(data);
                 $('#order-item-modal').show();
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error loading order details', 'error');
+                hideLoader();
             }
 
         });
@@ -164,6 +172,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Confirm Cancel
     $(document).on('click','#confirm-cancel', function() {
+        showLoader();
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
@@ -175,9 +184,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#confirm-cancel-modal').hide();
                 loadOrders();
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error cancelling order', 'error');
+                hideLoader();
             }
 
         });
@@ -194,6 +206,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Mark as Rented Confirm
     $(document).on('click','#mark-as-rented-confirm', function() {
+        showLoader();
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
@@ -205,9 +218,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#mark-as-rented-modal').hide();
                 loadOrders(window.currentStatus);
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error marking as rented', 'error');
+                hideLoader();
             }
             
         });
@@ -228,6 +244,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Report Submit
     $(document).on('click','#report-submit', function() {
+        showLoader();
         var orderId = $(this).attr('data-id');
         var report = $('#report-text').val();
         console.log(orderId);
@@ -245,10 +262,12 @@ require_once('../app/views/navbar/customer-navbar.php');
                 $('#report-modal').hide();
                 alertmsg('Report submitted successfully', 'success');
                 loadOrders(window.currentStatus);
+                hideLoader();
             },
             error: function(data) {
-                alertmsg('Error submitting report', 'danger');
+                alertmsg('Error submitting report', 'error');
                 console.log(data);
+                hideLoader();
             }
             
         });

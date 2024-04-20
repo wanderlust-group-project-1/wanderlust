@@ -1,6 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 require_once('../app/views/navbar/customer-navbar.php');
+require_once('../app/views/navbar/customer-navbar.php');
 require_once('../app/views/layout/footer.php');
 ?>
 
@@ -305,7 +306,6 @@ require_once('../app/views/layout/footer.php');
                     console.log('File type not supported');
                     $('#profile-image-input').val('');
 
-
                     return;
                 }
 
@@ -314,8 +314,10 @@ require_once('../app/views/layout/footer.php');
 
                 reader.onload = function(e) {
                     $('#image-preview').attr('src', e.target.result);
+
                 }
                 reader.readAsDataURL(this.files[0]);
+
             });
         });
 
@@ -323,6 +325,7 @@ require_once('../app/views/layout/footer.php');
         $(document).ready(function() {
             $('#image-upload form').submit(function(e) {
                 e.preventDefault();
+                showLoader();
                 var formData = new FormData(this);
                 $.ajax({
                     headers: {
@@ -340,10 +343,12 @@ require_once('../app/views/layout/footer.php');
                         // $('#profile-image-input').val('');
                         // $('#image-preview').attr('src', '');
                         // location.reload();
+                        hideLoader();
                     },
                     error: function(data) {
                         alertmsg('Image upload failed','error');
                         console.log(data);
+                        hideLoader();
                     },
                     cache: false,
                     contentType: false,
