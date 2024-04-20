@@ -95,7 +95,7 @@ require_once('../app/views/components/navbar-auth.php');
                 
                         <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                             <div class="form-element">
-                                <label for="number">Contact</label>
+                                <label for="number">Moble Number</label>
                                 <input class="form-control-lg" type="text" name="number" id="number" required>
                             </div>
 
@@ -179,7 +179,7 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="form-element">
-                            <label for="mobile_number">Contact</label>
+                            <label for="mobile_number">Mobile Number</label>
                             <input class="form-control-lg" type="text" name="mobile" id="number">
                         </div>
 
@@ -292,7 +292,7 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="form-element">
-                            <label class="rental-label" for="mobile_number">Contact</label>
+                            <label class="rental-label" for="mobile_number">Mobile Number</label>
                             <input class="form-control-lg" type="text" name="mobile" id="number">
                         </div>
 

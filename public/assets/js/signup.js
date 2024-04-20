@@ -312,7 +312,12 @@ document.getElementById("customer-signup").onclick =  function(event){
         })
         .catch(error => {
             console.error(error);
-            alertmsg("Error occured. Please try again.","error");
+            // alertmsg("Error occured. Please try again.","error");
+            if(error.message){
+                alertmsg(error.message,"error");
+            }else {
+                alertmsg("Error occured. Please try again.","error");
+            }
             hideLoader();
         });
 
@@ -443,7 +448,11 @@ function rentalServiceSignup(event){
         })
         .catch(error => {
             console.error(error);
-            alertmsg("Error occured. Please try again.","error");
+            if(error.message){
+                alertmsg(error.message,"error");
+            }else {
+                alertmsg("Error occured. Please try again.","error");
+            }
             $('#rental-service').find('input, textarea, button, select').prop('disabled', false);
             hideLoader();
 
@@ -584,7 +593,11 @@ function guideSignup(event){
         })
         .catch(error => {
             console.error(error);
-            alertmsg("Error occured. Please try again.","error");
+            if(error.message){
+                alertmsg(error.message,"error");
+            }else {
+                alertmsg("Error occured. Please try again.","error");
+            }
             $('#guide').find('input, textarea, button, select').prop('disabled', false);
             hideLoader();
 
