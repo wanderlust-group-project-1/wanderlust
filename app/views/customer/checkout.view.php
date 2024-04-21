@@ -40,10 +40,10 @@ require_once('../app/views/navbar/customer-navbar.php');
                                     <img src="<?= OSURL ?>images/equipment/<?php echo htmlspecialchars($item->e_image); ?>" alt="Image" class="img-fluid">
                                 </div>
                                 <div class="cart-item-details col-lg-5">
-                                    <h5 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h5>
+                                    <h3 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h3>
                                     <div class="cart-item-price">
-                                        <h5>Fee: Rs. <?php echo htmlspecialchars($item->total); ?></h5>
-                                        <button id="remove-from-cart" class="btn btn-primary">Remove from Cart</button>
+                                        <h4>Fee: Rs. <?php echo htmlspecialchars($item->total); ?></h4>
+                                        <!-- <button id="remove-from-cart" class="btn btn-primary">Remove from Cart</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     <div class=" col-lg-3 col-md-12 flex-d gap-2 ">
         <div class="card card-normal col-md-11 flex-d-c">
 
-        <div class="">
+        <div class="flex-d-c gap-2 justify-content-between">
             <h2 class="justify-content-center flex-d"> Order Summary </h2>
 
 <!-- 
@@ -78,10 +78,9 @@ require_once('../app/views/navbar/customer-navbar.php');
             
 
 
-
+<!-- 
                         <div class="card-normal2">
                             <fieldset>
-                                <!-- <legend>Payment Method</legend> -->
 
                                 <div class="form__radios">
                                     <div class="form__radio">
@@ -117,18 +116,12 @@ require_once('../app/views/navbar/customer-navbar.php');
                                   </tfoot>
                                 </table>
                             </div>
-                            <!-- <h5 for="pay-full">Full Payment</h5>
-                            <input class="" type="checkbox" id="pay-full" name="pay-full" value="pay-full"><br><br>
-                            <h6>You can pay the full amount online. Order details will be sent to your email.</h6>
-                        </div>
-                        <h5 for="pay-adv">pay Advance</h5>
-                        <input class="" type="checkbox" id="pay-adv" name="pay-adv" value="pay-adv"><br><br>
-                        <h6>You can pay only  amount online. Order details will be sent to your email.</h6> -->
-            </div>
+                      </div> -->
         </div>
 
 
-            <div class="row gap-4">
+        <div class="flex-d-c justify-content-end">
+            <div class="row gap-4 ">
 
                         <!-- select pay fully or patial  -->
                         
@@ -150,6 +143,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <button id="pay" class="btn btn-primary btn-full btn-lg" type="button">Pay</button>
             </div>
 
+        </div>
         </div>
 
 
