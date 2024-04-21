@@ -12,41 +12,41 @@ require_once('../app/views/navbar/customer-navbar.php');
 
         <h2 class="justify-content-center flex-d"> Orders </h2>
 
-        <div class="section-switch flex-d  gap-3 flex-wrap" >
+            <div class="section-switch flex-d  gap-3 flex-wrap" >
 
-                        <button class="btn-selected" id="all">All</button>
-                        <button class="btn-selected" id="unpaid">Unpaid</button>
+                            <button class="btn-selected" id="all">All</button>
+                            <button class="btn-selected" id="unpaid">Unpaid</button>
 
-                        <button class="btn-selected" id="pending">Pending</button>
-                        <button class="btn-selected" id="upcoming">Upcoming</button>
-                        <button class="btn-selected" id="rented">Rented</button>
-                        <button class="btn-selected" id="completed">Completed</button>
-                        <button class="btn-selected" id="cancelled">Cancelled</button>
-                        
+                            <button class="btn-selected" id="pending">Pending</button>
+                            <button class="btn-selected" id="upcoming">Upcoming</button>
+                            <button class="btn-selected" id="rented">Rented</button>
+                            <button class="btn-selected" id="completed">Completed</button>
+                            <button class="btn-selected" id="cancelled">Cancelled</button>
 
-                        <!-- not rented yet -->
 
+                            <!-- not rented yet -->
+
+                        </div>
+
+            <div class="row gap-2 ">
+                <!-- scrollable cart items -->
+                <!-- <div class="col-lg-12    " id="cart-items"> -->
+                <div class="col-lg-12 checkout-items overflow-scroll " >
+
+                    <div id="orders">
+    
+    
+    
+    
+    
+    
+    
                     </div>
 
-        <div class="row gap-2 ">
-            <!-- scrollable cart items -->
-            <!-- <div class="col-lg-12    " id="cart-items"> -->
-            <div class="col-lg-12 checkout-items overflow-scroll " >
+                </div>
 
-<div id="orders">
-
-
-
-
-
-
-
-</div>
 
             </div>
-
-
-        </div>
 
            
         </div>

@@ -1,89 +1,42 @@
-<?php
+<?php 
 require_once('../app/views/layout/header.php');
-// require_once('../app/views/navbar/rental-navbar.php');
-
+require_once('../app/views/navbar/customer-navbar.php');
 ?>
 
-<div class="dashboard">
-    <?php require_once('../app/views/rental/layout/sidebar.php');
-    ?>
+<div class="container flex-d flex-md-c justify-content-center mt-5">
+    <div class="cl-lg-12 flex-d-c gap-2 mt-5">
+        <div class="card card-normal">
+            <!-- <button class="btn-text-green">hi</button> -->
+            <h2 class="justufy-content-ceneter flex-d"> Complaints </h2>
 
-    <div class="sidebar-flow"></div>
-
-
-    <div class="guide-dash-main">
-        <h1 class="title mb-2">Complaints</h1>
-        <ul class="breadcrumbs">
-            <li><a href="<?= ROOT_DIR ?>/home">Home</a></li>
-            <li class="divider">/</li>
-            <li><a href="#" class="active">Complaints</a></li>
-        </ul>
-
-
-
-
-        <div class="dashboard-card mt-5">
-
-            <div class="equipment p-4">
-
-                <div class="row justify-content-between gap-3">
-                    <h1 class="title">Complaints</h1>
-
-                    <!-- Section Switch  Upcoming lented Completed -->
-
-                    <div class="section-switch flex-d  gap-3 flex-wrap" >
-                        <button class="btn-selected" id="pending">Pending</button>
-                        <button class="btn-selected" id="accepted">Accepted</button>
-                        <button class="btn-selected" id="rejected">Rejected</button>
-                        <button class="btn-selected" id="resolved">Resolved</button>
-
-
-                        <!-- not rented yet -->
-                        <!-- <button class="btn-selected" id="not-rented">Not Rented</button> -->
-
-                    </div>
-
-                  
-                    
-
-
-                    
-
-                   
-                </div>
-
-
-                <div class="complaints-list  row" id="complaints-list">
-                   
-
-
-
-
-
-                </div>
-
+            <div class="section-switch flex-d gap-3 flex-wrap">
+                <button class="btn-selected">My complaints</button>
+                <button class="btn-selected">Add complaints</button>
+                <button class="btn-selected">Recieved complaints</button>
             </div>
 
+            <div class="row gap-2">
+                <div class="col-lg-12 checkout-items overflow-scroll">
+
+                <div class="complaints-list  row" id="complaints-list"></div>
+                </div>
+            </div>
+                
         </div>
     </div>
-
-
 </div>
-
-
 
 <script>
 
-
-function getComplaints(status) {
+    function getComplaints(status) {
         $.ajax({
             headers:{
-                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+                'Authorization': 'Bearer' + getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/complaints/returnComplaintsbyRentalService/' + status,
+            url: '<?= ROOT_DIR ?>/complaints/returnComplaintsbyCustomer/' + status,
             type: 'GET',
             success: function(response) {
-                // if complaint-list-content in document remove it
+                //if complain-list-content in document remove it
                 if ($('#complaint-list-content').length) {
                     $('#complaint-list-content').remove();
                 }
@@ -92,26 +45,22 @@ function getComplaints(status) {
         });
     }
 
-    $(document).ready(function() {
-        getComplaints('pending');
-
+    $(document).ready(function(){
+        getComplaints('myComplaints');
         $('.section-switch button').click(function() {
             $('.section-switch button').removeClass('active');
             $(this).addClass('active');
             getComplaints($(this).attr('id'));
         });
     });
-
-
-    // View Complaint
-
+    //view complaints
     $(document).on('click', '#view-button', function() {
         var complaintId = $(this).closest('.complaint').attr('data-id');
         $.ajax({
             headers:{
-                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+                'Authorization' : 'Bearer' + getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/complaints/viewRentComplaint/' + complaintId,
+            url: '<?= ROOT_DIR ?>/complaints/returnComplaintbyCustomer/' + complaintId,
             type: 'GET',
             success: function(response) {
                 $('#complaint-data').html(response);
@@ -119,18 +68,12 @@ function getComplaints(status) {
             }
         });
     });
-    
-
-
 
     $(document).on('click', '#cancel-complaint', function() {
         var complaintId = $(this).closest('.complaint').attr('data-id');
         $('#cancel-complaint-confirm').attr('data-id', complaintId);
         $('#cancel-complaint-modal').css('display', 'block');
     });
-
-
-
 
     $(document).on('click', '#cancel-complaint-confirm', function() {
         var complaintId = $(this).attr('data-id');
@@ -146,7 +89,7 @@ function getComplaints(status) {
                 $('#complaint-card[data-id="' + id + '"]').remove();
                 $('#cancel-complaint-modal').css('display', 'none');
 
-                getComplaints('pending');
+                getComplaints('myComplaints');
 
 
 
@@ -157,19 +100,8 @@ function getComplaints(status) {
             }
         });
     });
-
-
-
-
-
-
-
-
+    
 </script>
-
-
-
-
 
 <?php
 require_once('../app/views/layout/footer.php');

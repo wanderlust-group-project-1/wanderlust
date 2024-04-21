@@ -41,7 +41,6 @@
 
                 <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">MyOrders</a></li>
 
-
                 <li class="dropdown__item">
                     <div class="nav__link">
                         Blogs <i class="ri-arrow-down-s-line dropdown__arrow"></i>
@@ -64,9 +63,9 @@
                 <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
 
                 <!--=============== DROPDOWN 2 ===============-->
-                <li class="dropdown__item">
+                <!-- <li class="dropdown__item">
                     <div class="nav__link">
-                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        Complains 
                     </div>
 
                     <ul class="dropdown__menu">
@@ -82,8 +81,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
+                <li><a href="<?php echo ROOT_DIR ?>/complaints" class="nav__link">Complaints</a></li>
 
                 <!-- check role avalable or not -->
                 <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
