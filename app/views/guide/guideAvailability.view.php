@@ -193,9 +193,9 @@ require_once('../app/views/layout/header.php');
                 success: function(data) {
                     console.log(data);
                     if (data.success) {
-                        alert("Availability updated successfully");
+                        alertmsg("Availability updated successfully");
                     } else {
-                        alert("Failed to update availability");
+                        alertmsg("Failed to update availability");
                     }
                 },
                 error: function(error) {
