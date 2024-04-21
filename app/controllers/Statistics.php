@@ -9,7 +9,12 @@ class Statistics
     {
 
 
+        $rental = new RentalServiceModel;
+        $data = [
+            'stat' => $rental->rentalStats(UserMiddleware::getUser()['id'])[0]
+        ];
 
-        $this->view('rental/statistics');
+
+        $this->view('rental/statistics', $data);
     }
 }

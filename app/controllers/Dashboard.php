@@ -7,18 +7,18 @@ class Dashboard
     public function index(string $a = '', string $b = '', string $c = ''): void
     {
 
-        $user = $_SESSION['USER'];
+        $user = UserMiddleware::getUser();
         // echo $user->role;
 
-        if ($user->role == 'guide') {
+        if ($user['role'] == 'guide') {
             //echo "Welcome";
             $this->view('guide/GuideDashboard');
-        } else if ($user->role == 'rentalservice') {
+        } else if ($user['role'] == 'rentalservice') {
 
 
             $rental = new RentalServiceModel;
             $data = [
-                'stat' => $rental->rentalStats($user->id)[0]
+                'stat' => $rental->rentalStats($user['id'])[0]
             ];
 
             // show($user->id);
