@@ -233,39 +233,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
         }
     }
 
-    .tooltip-container {
-        position: relative;
-        display: inline-block;
 
-        .tooltip {
-            visibility: hidden;
-            position: absolute;
-            background-color: $tooltip-bg;
-            color: $tooltip-color;
-            border-radius: 4px;
-            padding: 5px;
-            top: 0%;    
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s;
-            width: 75%;
-            }
-            .tooltip-trigger {
-                background-color: $secondary-bg;
-                color: $tooltip-color;
-                border-radius: 50%;
-                padding: 1px;
-                margin: 1px;
-                font-size: 1.5rem;
-                position: relative;
-                &:hover + .tooltip {
-                    visibility: visible;
-                    opacity: 1;
-                }
-            }
-        }
         
         .file-input-container,
         .location-button-container {
@@ -418,3 +386,39 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     }
     
 }
+
+
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+
+    .tooltip {
+        visibility: hidden;
+        position: absolute;
+        background-color: $tooltip-bg;
+        color: $tooltip-color;
+        border-radius: 4px;
+        padding: 5px;
+        top: 0%;    
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+        width: 75%;
+        }
+        .tooltip-trigger {
+            background-color: $secondary-bg;
+            color: $tooltip-color;
+            border-radius: 50%;
+            padding: 1px;
+            margin: 1px;
+            font-size: 1.5rem;
+            position: relative;
+            &:hover + .tooltip {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }

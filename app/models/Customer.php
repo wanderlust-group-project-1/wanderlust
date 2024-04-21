@@ -74,7 +74,7 @@ class CustomerModel
         } else {
             $response->success(false)
                 ->data(['errors' => $this->errors])
-                ->message('Validation failed')
+                ->message( isset($this->errors['msg']) ? $this->errors['msg'] : 'Validation failed')
                 ->statusCode(422)
                 ->send();
         }
@@ -116,6 +116,25 @@ class CustomerModel
             $this->errors['password'] = "Password must be at least 6 characters";
         }
 
+        // check if email already exists
+        $user = new UserModel;
+        if ($user->first(['email' => $data['email']])) {
+            $this->errors['email'] = "Email already exists";
+            $this->errors['msg'] = "Email already exists";
+        }
+        
+        $customer = new CustomerModel;
+        if($customer->first(['nic' => $data['nic']])){
+            $this->errors['nic'] = "NIC Number already exists";
+            $this->errors['msg'] = "NIC Number already exists";
+        }
+
+        if($customer->first(['number' => $data['number']])){
+            $this->errors['number'] = "Mobile Number already exists";
+            $this->errors['msg'] = "Mobile Number already exists";
+        }
+
+
         return empty($this->errors);
     }
 
@@ -133,6 +152,18 @@ class CustomerModel
 
         return $this->update($_SESSION['USER']->id, $data, 'id');
     }
+
+
+    public function uploadImage(array $data, int $id): mixed
+    {
+        $data['image'] =  upload($data['image'], 'images/customers');
+        $this->update($id, ['image' => $data['image']]);
+        return $data;
+    }
+
+
+
+
     public function getCustomer(int $id): mixed
     {
         $q = new QueryBuilder;

@@ -16,4 +16,9 @@ class Verify{
         }
 
     }
+
+    public function resend(string $a = '', string $b = '', string $c = ''):void {
+
+        echo 'Please Verify your email address';
+    }
 }

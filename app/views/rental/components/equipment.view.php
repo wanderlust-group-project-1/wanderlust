@@ -77,6 +77,12 @@ foreach ($equipment as $item) {
         <button id="manage-items-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Manage Items</button>
     </div>
 
+    <!-- disable -->
+    <div class="disable-button">
+        <button id="disable-equipment-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Disable</button>
+    </div>
+
+
     <div class="delete-button">
         <button id="delete-equipment-button" class="btn btn-danger btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Delete</button>
     </div>
@@ -149,7 +155,25 @@ foreach ($equipment as $item) {
         </div>
     </div>
 
+
+
     <!-- delete modal end -->
+
+
+    <!-- Disable modal -->
+
+    <div id="disable-equipment-modal" class="disable-equipment-modal modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Disable Equipment</h2>
+            <p>Are you sure you want to disable this equipment?</p>
+            <div class="flex-d gap-2 mt-5">
+            <button id="disable-equipment" class="btn btn-danger">Disable</button>
+            <button id="cancel-disable" class="btn modal-close">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
 
     <!-- edit modal -->
 

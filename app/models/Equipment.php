@@ -85,9 +85,16 @@ class EquipmentModel {
 
     public function deleteEquipment(int $id) {
 
+       
 
 
         return $this->delete($id);
+    }
+
+
+    public function GetCurrentAcceptedRents(int $id) {
+        $q = 'CALL GetCurrentAcceptedRents(:id)';
+        return $this->query($q, ['id' => $id]);
     }
 
     public function increaseCount(int $id, int $count) {
@@ -148,11 +155,12 @@ class EquipmentModel {
         $q = new QueryBuilder;
         $q->setTable('equipment');
         // Additional logic for joining tables if needed
-        $q->select('equipment.*', 'rentalservice.*');
+        $q->select('equipment.* , rental_services.name as rentalservice_name, rental_services.image as rentalservice_image');
         $q->join('rental_services', 'equipment.rentalservice_id', 'rental_services.id');
 
         $q->where('equipment.id', $id);
         // show($q->getQuery());
+        // show($this->query($q->getQuery(), $q->getData()));
         return $this->query($q->getQuery(), $q->getData())[0];
     }
 

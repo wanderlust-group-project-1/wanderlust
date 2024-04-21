@@ -9,6 +9,7 @@ require_once('../app/views/admin/components/navbar.php');
 
 
 
+
 <div class="dashboard">
 <?php require_once('../app/views/rental/layout/sidebar.php');
     ?>
@@ -22,31 +23,57 @@ require_once('../app/views/admin/components/navbar.php');
             <li class="divider">/</li>
             <li><a href="#" class="active">Dashboard</a></li>
         </ul>
+
+
+          
         <div class="info-data mt-5">
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>96</h2>
-                        <p>No of Tours</p>
+
+
+  
+
+
+                        <!-- <h3>100</h3> -->
+                        <h3><?php echo $stat->successful_rental_count ?></h3>
+                        <p>Rents</p>
                     </div>
                 </div>
-                <span class="progress" data-value="12.5%"></span>
-                <span class="label">12 : Per Month</span>
+                <span class="progress" data-value="10%"></span>
+                <span class="label">
+                    <?php echo $stat->last_month_rental_count ?> 
+                    : Per Month</span>
             </div>
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>Rs.139000</h2>
-                        <p>Income</p>
+                        <!-- <h3>Rs.139000</h3> -->
+                        <h3>Rs.<?php echo $stat->total_earnings ?></h3>
+                        <p>Total Earning</p>
                     </div>
                 </div>
                 <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
+                <!-- <span class="label">Rs.60 000 : Per Month</span> -->
+                <span class="label">Rs.<?php echo $stat->current_month_earnings ?> : Per Month</span>
             </div>
+
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>1st March</h2>
+                        <!-- <h3>35</h3> -->
+                        <h3><?php echo $stat->equipment_count ?></h3>
+                        <p>Equipment Quantity</p>
+                    </div>
+                </div>
+                <!-- <span class="progress" data-value="60%"></span>
+                <span class="label">Rs.60 000 : Per Month</span> -->
+            </div>
+
+            <div class="card">
+                <div class="head">
+                    <div>
+                        <h3>1st March</h3>
                         <p>Upcoming Booking</p>
                     </div>
                 </div>
@@ -59,7 +86,7 @@ require_once('../app/views/admin/components/navbar.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h2>21st February</h2>
+                        <h3>21st February</h3>
                         <p>Recent Booking</p>
                     </div>
                 </div>
@@ -70,6 +97,10 @@ require_once('../app/views/admin/components/navbar.php');
                 <span class="label">80%</span> -->
             </div>
         </div>
+         
+
+
+
         <div class="data">
             <div class="content-data">
                 <div class="head">

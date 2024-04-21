@@ -290,6 +290,18 @@ require_once('../app/views/layout/header.php');
     });
 
 
+    // Order report download
+
+    $(document).on('click', '#download-report', function() {
+        var orderId = $(this).attr('data-id');
+        window.open('<?= ROOT_DIR ?>/report/orderReportByRental/' + orderId, '_blank');
+    });
+
+
+
+
+
+
     //  Returned Report Complaint
 
     $(document).on('click', '#report-return-complaint', function() {
@@ -391,6 +403,7 @@ require_once('../app/views/layout/header.php');
 
 // Filter order card
 // $('#filter-order-button').click(function() {
+
     $(document).on('click', '#filter-order-button', function() {
     let start_date = $('#start-date').val();
     let end_date = $('#end-date').val();

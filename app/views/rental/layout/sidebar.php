@@ -118,6 +118,16 @@
       </a>
 
     </li>
+    <!-- Settings -->
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/settings" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Settings</span>
+        <i class="menu-arrow"></i>
+      </a>
+
+    </li>
+
   </ul>
 </nav>
 

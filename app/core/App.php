@@ -174,7 +174,11 @@ class APP {
             }
             $user = UserMiddleware::user(AuthMiddleware::run_middleware($this->controller, $this->method));
 
-            $this->controller = verifiedMiddleware::run_middleware($this->controller, $this->method, $user);
+            if ($this->controller != 'Verify'){
+
+                $this->controller = verifiedMiddleware::run_middleware($this->controller, $this->method, $user);
+
+            }
             
             $_SESSION['USER'] = $user;
             // show($user);
