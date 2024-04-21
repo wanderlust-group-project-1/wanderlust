@@ -1,5 +1,9 @@
 <div class=" col-lg-12 flex-d-c gap-2 ">
     <h2 class="justify-content-center flex-d">Cart</h2>
+
+    <div class="row gap-2">
+        <h3> <?php echo htmlspecialchars($cart->start_date); ?> - <?php echo htmlspecialchars($cart->end_date); ?> </h3>
+        </div>
     <div class="row gap-2 ">
         <!-- scrollable cart items -->
         <!-- <div class="col-lg-12    " id="cart-items"> -->
