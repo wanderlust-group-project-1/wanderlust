@@ -10,7 +10,7 @@
     foreach ($complaints as $complaint) {
         ?>
         
-        <div class = "row flex-d col-lg-12 complaint-card-item " id="complaint-card">
+        <div class = "row flex-d col-lg-12 complaint-card-item row-content" id="complaint-card">
         <div class="complaint card  card-normal3 col-lg-12 flex-md-c miw-200px" data-id="<?= $complaint->id ?>">
             <div class="complaint-header">
                 <div class="complaint-id">Complaint ID: <?= $complaint->id ?></div>

@@ -3,16 +3,20 @@
     font-family: sans-serif, 'Poppins';
     font-size: $header4 ;
     color: $gray-text;
+    
+    .complaint-id{
+        display: flex;
+    }
 
     .complaint-status{
-        // background-color: red;
+        display: flex;
         font-weight: 600;
     }
 }
 
 .modal-content {
     border-radius: 20px;
-    // padding: 20px;
+    padding: 10px 20px  10px  10px;
 } 
 
 .order-details {
@@ -21,7 +25,33 @@
     font-size: $header4 ;
     color: $gray-text;
     
-    tbody {
+    // tbody {
 
+    // }
+    .status-view{
+        font-weight: 600;
+        max-width: fit-content;
     }
 }
+
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-primary;
+}
+
+.row-content{
+    padding: 10px;
+}
+
+.table-container{
+
+    padding-top: 10px;
+    // justify-content: center;
+    transform: translate(-25px,0px);
+
+    .table-custom {
+        padding: 20px;
+    }
+}
+

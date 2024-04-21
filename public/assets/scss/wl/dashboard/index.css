@@ -105,10 +105,6 @@ table {
   list-style: none;
 }
 
-thead th {
-  border-bottom: 1px solid rgba(41, 74, 56, 0.443);
-}
-
 .tbody-border-bottom {
   border-bottom: 1px solid rgba(41, 74, 56, 0.443);
 }
@@ -755,7 +751,7 @@ fieldset {
   vertical-align: middle;
 }
 .order-details tr td:last-child {
-  text-align: center;
+  text-align: end;
 }
 
 .item-details {
@@ -3481,43 +3477,49 @@ fieldset {
   }
 }
 .table-custom {
-  background-color: #f9f9f9;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 98%;
   width: 100%;
-  max-width: 100%;
-  margin-bottom: 1rem;
-  font-family: "Poppins", sans-serif; /* or another font that aligns with your design system */
+  margin: 0 auto;
+  position: relative;
+  color: #5C5E60;
+  font-family: sans-serif, "Poppins";
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.table-custom th {
-  background-color: #e8e8e8;
-  color: #333;
-  font-weight: bold;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.table-custom * {
+  position: relative;
 }
-.table-custom td {
-  padding: 12px;
-  border-top: 1px solid #ddd;
+.table-custom td, .table-custom th {
+  padding-left: 10px;
 }
-.table-custom tr:nth-child(odd) {
-  background-color: #f6f6f6;
+.table-custom thead tr {
+  height: 60px;
+  background: #EBEFE3;
+  font-size: 1.75rem;
 }
-.table-custom tr:hover {
-  background-color: #e9e9e9;
+.table-custom tbody tr {
+  height: 48px;
+  border-bottom: 1px solid #EBEFE3;
+  color: #6B6E70;
 }
-.table-custom .btn-view {
-  padding: 0.2rem 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  border-radius: 0.2rem;
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+.table-custom tbody tr:last-child {
+  border: 0;
 }
-.table-custom .btn-view:hover {
-  background-color: #4cae4c;
-  border-color: #409240;
+.table-custom td, .table-custom th {
+  text-align: center;
+}
+.table-custom td.l, .table-custom th.l {
+  text-align: right;
+}
+.table-custom td.c, .table-custom th.c {
+  text-align: center;
+}
+.table-custom td.r, .table-custom th.r {
+  text-align: center;
 }
 
 .table-ui {
@@ -3790,7 +3792,23 @@ fieldset {
   margin-bottom: 1.5rem;
   padding: 15px;
   background-color: #fff;
-  box-shadow: 0px 2px 0px 0px rgba(64, 64, 64, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  gap: 20px;
+  flex-grow: inherit;
+}
+
+.card-grid-last {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+  margin: 10px;
+  margin-bottom: 1.5rem;
+  padding: 15px;
+  background-color: #fff;
   transition: all 0.3s ease-in-out;
   gap: 20px;
   flex-grow: inherit;
@@ -4023,12 +4041,17 @@ input.invert {
   font-size: 1.75rem;
   color: #6B6E70;
 }
+.complaint-header .complaint-id {
+  display: flex;
+}
 .complaint-header .complaint-status {
+  display: flex;
   font-weight: 600;
 }
 
 .modal-content {
   border-radius: 20px;
+  padding: 10px 20px 10px 10px;
 }
 
 .order-details {
@@ -4037,6 +4060,30 @@ input.invert {
   font-size: 1.75rem;
   color: #6B6E70;
 }
+.order-details .status-view {
+  font-weight: 600;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #8D9E6F;
+}
+
+.row-content {
+  padding: 10px;
+}
+
+.table-container {
+  padding-top: 10px;
+  transform: translate(-25px, 0px);
+}
+.table-container .table-custom {
+  padding: 20px;
+}
+
 .justify-content-between {
   justify-content: space-between;
   padding: 10px;
