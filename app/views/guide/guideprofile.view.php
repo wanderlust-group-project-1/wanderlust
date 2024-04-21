@@ -2,12 +2,18 @@
 require_once('../app/views/layout/header.php');
 ?>
 
-<?php require_once('../app/views/guide/layout/guide-sidebar.php'); ?>
+<?php require_once('../app/views/guide/layout/guide-sidebar.php'); 
+
+
+?>
 
 <div class="dashboard">
 
     <div class="sidebar-flow"></div>
 
+    <?php 
+    // show(UserMiddleware::getUser());
+    ?>
     <div class="guide-dash-main flex-d-c">
         <h1 class="title mb-2">My Guide Profile</h1>
         <ul class="breadcrumbs">
