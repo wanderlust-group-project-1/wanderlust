@@ -18,9 +18,9 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="container flex-d flex-md-c justify-content-center  mt-7">
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
-        <div class="card card-normal ">
+        <div class="card card-normal justify-content-center">
 
-            <h2 class="justify-content-center flex-d"> Cart </h2>
+            <h2 class="justify-content-center flex-d "> Cart </h2>
             <div class="row gap-2 ">
                 <!-- scrollable cart items -->
                 <!-- <div class="col-lg-12    " id="cart-items"> -->
