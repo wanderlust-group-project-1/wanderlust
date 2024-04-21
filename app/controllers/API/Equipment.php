@@ -55,8 +55,10 @@ class Equipment {
         }
             
 
-        $data = $equipmentModel->deleteEquipment($a);
-      
+        $item = new ItemModel;
+
+        $data = $item->makeRemovedByEquipment($a);
+
         if (!$data) {
             $response->success(true)
                 ->message('Equipment deleted successfully')

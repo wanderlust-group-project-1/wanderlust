@@ -981,6 +981,7 @@ $(document).on('click', '#disable-equipment-button', function() {
     $('#disable-equipment').attr('data-id', id);
 });
 
+
 // Disable 
 $(document).on('click', '#disable-equipment', function() {
     var id = $(this).data('id');

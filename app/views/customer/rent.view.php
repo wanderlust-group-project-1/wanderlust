@@ -254,6 +254,10 @@ var cartClose = document.getElementById("cart-modal").querySelector(".close");
 cartModalBtn.onclick = function() {
 
     // get cart items
+   getCart()
+}
+
+function getCart(){
     $.ajax({
         headers: {
             'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -325,6 +329,9 @@ window.onclick = function(event) {
             // remove the item from the cart
             $(`[data-id=${id}]`).remove();
             getCartCount();
+            getCart()
+
+            
         },
         error: function(err) {
             console.log(err);

@@ -81,6 +81,12 @@ class ItemModel {
         $this->update($id, ['status' => 'unavailable'], 'equipment_id');
     }
 
+    // remove Item status -> removed
+
+    public function makeRemovedByEquipment(int $id) {
+        $this->update($id, ['status' => 'removed'], 'equipment_id');
+    }
+
 
 
 
