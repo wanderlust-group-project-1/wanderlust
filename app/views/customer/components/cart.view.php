@@ -37,7 +37,7 @@
                         </div> -->
                         <div class="cart-item-price">
                             <h4>Rs. <?php echo htmlspecialchars($item->total); ?></h4>
-                            <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="48">
+                            <!-- <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="48"> -->
                         </div>
                     </div>
                     <button id="remove-from-cart" class="btn-icon"><i class="fa fa-trash" aria-hidden="true"></i></button>
