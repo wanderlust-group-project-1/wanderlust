@@ -102,6 +102,11 @@ class CartModel {
     public function getCartItems(array $data) {
 
         $cart = $this->first($data);
+
+        if (!$cart) {
+            return false;
+        }
+
         $data['cart_id'] = $cart->id;
    
 

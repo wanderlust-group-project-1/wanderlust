@@ -55,6 +55,13 @@ class Cart {
                 'customer_id' => UserMiddleware::getUser()['id'],
             ];
         $data['items'] = $cart->getCartItems($c);
+
+
+        if(!$data['items']){
+            redirect('rent');
+            return;
+        }
+        
         $data['cart'] = $cart->first($c);
 
         $data['amount'] = $this->amount($data['items']);
