@@ -18,9 +18,9 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="container flex-d flex-md-c justify-content-center  mt-7">
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
-        <div class="card card-normal ">
+        <div class="card card-normal justify-content-center">
 
-            <h2 class="justify-content-center flex-d"> Cart </h2>
+            <h2 class="justify-content-center flex-d "> Cart </h2>
             <div class="row gap-2 ">
                 <!-- scrollable cart items -->
                 <!-- <div class="col-lg-12    " id="cart-items"> -->
@@ -156,6 +156,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                     // Payment completed. It can be a successful failure.
                     payhere.onCompleted = function onCompleted(orderId) {
                         console.log("Payment completed. OrderID:" + orderId);
+                        showLoader();
 
                         // notify
                         $.ajax({
@@ -174,9 +175,24 @@ require_once('../app/views/navbar/customer-navbar.php');
                             }, // Send the data as part of the request
                             success: function(response) {
                                 console.log("Notification sent. Server responded with: ", response);
+                                alertmsg("Payment successful", "success");
+
+                                setTimeout(() => {
+                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+                                    
+                                    hideLoader();
+
+                                }, 1000);
+
+
                             },
                             error: function(jqXHR, textStatus, errorThrown) {
                                 console.log("Error sending notification: ", textStatus, errorThrown);
+                                alertmsg("Error occured", "error");
+                                setTimeout(() => {
+                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+                                    hideLoader();
+                                }, 1000);
                             }
                         });
 
@@ -190,12 +206,15 @@ require_once('../app/views/navbar/customer-navbar.php');
                     payhere.onDismissed = function onDismissed() {
                         // Note: Prompt user to pay again or show an error page
                         console.log("Payment dismissed");
+                        alertmsg("Payment dismissed", "error");
+                        
                     };
 
                     // Error occurred
                     payhere.onError = function onError(error) {
                         // Note: show an error page
                         console.log("Error:" + error);
+                        alertmsg("Error occured", "error");
                     };
 
                     // Put the payment variables here
@@ -249,3 +268,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     </script>
 
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+
+    <?php
+    require_once('../app/views/layout/footer.php');
+    ?>

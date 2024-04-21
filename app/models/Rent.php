@@ -122,5 +122,14 @@ class RentModel {
     }
 
 
+    public function getUpcomingRentByCustomer($data) {
+
+        $q = 'CALL GetFirstUpcomingRent(:customer_id)';
+
+        // show ($data);
+        return $this->query($q, $data);
+    }
+
+
 
 }
