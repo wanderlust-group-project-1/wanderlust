@@ -29,7 +29,9 @@ if ($_ENV) {
     define('DBPASS', $_ENV['DB_PASSWORD']);
 
     // Object storage url
-    define('OSURL', $_ENV['OSURL']);
+    // define('OSURL', $_ENV['OSURL']);
+    define('OSURL', '/uploads/');
+
 
   
 

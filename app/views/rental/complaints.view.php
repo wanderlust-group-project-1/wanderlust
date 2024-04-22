@@ -36,6 +36,7 @@ require_once('../app/views/layout/header.php');
                         <button class="btn-selected" id="accepted">Accepted</button>
                         <button class="btn-selected" id="rejected">Rejected</button>
                         <button class="btn-selected" id="resolved">Resolved</button>
+                        <button class="btn-selected" id="cancelled">Cancelled</button>
 
 
                         <!-- not rented yet -->

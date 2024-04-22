@@ -130,6 +130,14 @@ class RentModel {
         return $this->query($q, $data);
     }
 
+    public function getUpcomingRentByRentalService($data) {
+
+        $q = 'CALL GetFirstUpcomingRentByRental(:rentalservice_id)';
+
+        // show ($data);
+        return $this->query($q, $data);
+    }
+
 
 
 }

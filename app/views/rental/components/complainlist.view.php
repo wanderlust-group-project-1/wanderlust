@@ -51,14 +51,16 @@
 
 
 //  oreders list 
-  ($complaints) ?  : print('<div class="col-lg-12"><h1>No Complaints</h1></div>');
+  ($complaints) ?  : print('<div class="col-lg-12 mih-100px flex-d justify-content-center
+   align-items-center text-center"><h2>No Complaints</h2></div>');
 
     
+
 
     foreach ($complaints as $complaint) {
         ?>
         
-        <div class = "row flex-d col-lg-12 complaint-card-item " id="complaint-card">
+        <div class = "row flex-d col-lg-12 complaint-card-item  " id="complaint-card">
         <div class="complaint card  card-normal3 col-lg-12 flex-md-c miw-200px" data-id="<?= $complaint->id ?>">
             <div class="complaint-header">
                 <div class="complaint-id">Complaint ID: <?= $complaint->id ?></div>

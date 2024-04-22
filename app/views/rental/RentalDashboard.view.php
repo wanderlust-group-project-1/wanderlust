@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-require_once('../app/views/admin/components/navbar.php');
+// require_once('../app/views/admin/components/navbar.php');
 // require_once('../app/views/navbar/rental-navbar.php');
 
 ?>
@@ -40,10 +40,17 @@ require_once('../app/views/admin/components/navbar.php');
                         <p>Rents</p>
                     </div>
                 </div>
-                <span class="progress" data-value="10%"></span>
-                <span class="label">
+                <!-- <span class="progress" data-value="10%"></span> -->
+                <!-- <span class="label">
+                    <?php echo $stat->last_month_rental_count ?> 
+                    : Per Month</span> -->
+
+                    <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
+                    <span class="label">
                     <?php echo $stat->last_month_rental_count ?> 
                     : Per Month</span>
+                </div>
+
             </div>
             <div class="card">
                 <div class="head">
@@ -53,9 +60,14 @@ require_once('../app/views/admin/components/navbar.php');
                         <p>Total Earning</p>
                     </div>
                 </div>
-                <span class="progress" data-value="60%"></span>
-                <!-- <span class="label">Rs.60 000 : Per Month</span> -->
+               
+                
+                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
                 <span class="label">Rs.<?php echo $stat->current_month_earnings ?> : Per Month</span>
+
+                </div>
+
+
             </div>
 
             <div class="card">
@@ -73,17 +85,19 @@ require_once('../app/views/admin/components/navbar.php');
             <div class="card">
                 <div class="head">
                     <div>
-                        <h3>1st March</h3>
+                        <!-- <h3>1st March</h3> -->
+                        <!-- <h3><?php echo $rent->start_date ?></h3> -->
+                        <h3> <?php echo (new DateTime($rent->start_date))->format('jS F') ?></h3>
                         <p>Upcoming Booking</p>
                     </div>
                 </div>
                 <div class="booking-bar .flex-d mt-4 mb-2">
-                    <p>Micheal Julius</p>
+                    <p><?php echo $rent->customer_name ?></p>
                 </div>
                 <!-- <span class="progress" data-value="30%"></span>
                 <span class="label">30%</span> -->
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="head">
                     <div>
                         <h3>21st February</h3>
@@ -93,9 +107,8 @@ require_once('../app/views/admin/components/navbar.php');
                 <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
                     <p>Julius John</p>
                 </div>
-                <!-- <span class="progress" data-value="80%"></span>
-                <span class="label">80%</span> -->
-            </div>
+        
+            </div> -->
         </div>
          
 

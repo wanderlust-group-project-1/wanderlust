@@ -5,10 +5,10 @@
 <!-- Filter Order -->
 
 <!-- Filter by Date Duration -->
-<div class="filter-order">
+<div class="filter-order gap-3 m-3">
     <div class="filter-order-header">
     </div>
-    <div class="filter-order-body flex-d">
+    <div class="filter-order-body flex-d gap-3">
         <div class="filter-order-date">
             <label for="start-date">Start Date</label>
             <input type="date" id="start-date" name="start-date">
@@ -74,7 +74,8 @@
 
 
 //  oreders list 
-  ($orders) ?  : show('<div class="col-lg-12"><h1>No Orders</h1></div>');
+  ($orders) ?  :print('<div class="col-lg-12 mih-100px flex-d justify-content-center
+  align-items-center text-center"><h2>No Orders</h2></div>');
 
     
 
