@@ -35,8 +35,10 @@ class MyOrders {
         $order = $rent->getRental($a);
         $items = $rent->getItemListbyRentId($a);
 
+        $complaint = new RentComplaintModel;
+        $complaints = $complaint->getComplaints(['rent_id' => $a]);
 
-        $this->view('customer/components/order', ['order' => $order, 'items' => $items]);
+        $this->view('customer/components/order', ['order' => $order, 'items' => $items, 'complaints' => $complaints]);
     }
 
 

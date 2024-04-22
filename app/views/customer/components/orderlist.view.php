@@ -115,11 +115,11 @@ foreach ($orders as $order) {
         <form id="report-form">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" class="form-control-lg" required>
+                <input type="text" id="report-title" name="title" class="form-control-lg" required>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control-lg" required></textarea>
+                <textarea id="report-description" name="description" class="form-control-lg" required></textarea>
             </div>
             <button class="btn btn-primary" id="report-submit">Submit</button>
         </form>

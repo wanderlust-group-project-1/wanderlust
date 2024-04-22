@@ -244,20 +244,30 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Report Submit
     $(document).on('click','#report-submit', function() {
+        // prevent the submit button
+        event.preventDefault();
         showLoader();
         var orderId = $(this).attr('data-id');
-        var report = $('#report-text').val();
+        // var report = $('#report-text').val();
+        var title = $('#report-title').val();
+        var description = $('#report-description').val();
         console.log(orderId);
-        console.log(report);
+        console.log(title);
+        console.log(description);
         $.ajax({
             url: '<?= ROOT_DIR ?>/api/myOrders/reportOrder/' + orderId,
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
             type: 'POST',
-            data: {
-                report: report
-            },
+            contentType: 'application/json',
+            data: JSON.stringify (
+                {
+                    rent_id: orderId,
+                    title: title,
+                    description: description
+                }
+            ),
             success: function(data) {
                 $('#report-modal').hide();
                 alertmsg('Report submitted successfully', 'success');
