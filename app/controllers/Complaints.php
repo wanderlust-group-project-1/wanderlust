@@ -18,7 +18,7 @@ class Complaints{
     public function returnComplaintsbyRentalService(string $a = '', string $b = '', string $c = ''):void {
     
         $rentreturncomplaint = new RentReturnComplaintModel;
-        $data['complaints'] = $rentreturncomplaint->getComplaintsByRentalId(UserMiddleware::getUser()['id']);
+        $data['complaints'] = $rentreturncomplaint->getComplaintsByRentalId(UserMiddleware::getUser()['id'], $a);
 
         $this->view('rental/components/complainlist', $data);
 

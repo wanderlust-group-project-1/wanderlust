@@ -49,7 +49,7 @@ class RentReturnComplaintModel {
 
     }
 
-    public function getComplaintsByRentalId($rental_id) {
+    public function getComplaintsByRentalId($rental_id, $status='pending') {
         
         $q = new QueryBuilder;
         // join rent table to get rental
@@ -57,7 +57,8 @@ class RentReturnComplaintModel {
         $q->select('rent_return_complaints.*,rent.id as rent_id')
             ->setTable('rent_return_complaints')
             ->join('rent', 'rent_return_complaints.rent_id', 'rent.id')
-            ->where('rent.rentalservice_id', $rental_id);
+            ->where('rent.rentalservice_id', $rental_id)
+            ->where('rent_return_complaints.status', $status);
 
         // echo $q->getQuery();
         return $this->query($q->getQuery(),$q->getData());

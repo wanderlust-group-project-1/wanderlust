@@ -40,10 +40,17 @@ require_once('../app/views/layout/header.php');
                         <p>Rents</p>
                     </div>
                 </div>
-                <span class="progress" data-value="10%"></span>
-                <span class="label">
+                <!-- <span class="progress" data-value="10%"></span> -->
+                <!-- <span class="label">
+                    <?php echo $stat->last_month_rental_count ?> 
+                    : Per Month</span> -->
+
+                    <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
+                    <span class="label">
                     <?php echo $stat->last_month_rental_count ?> 
                     : Per Month</span>
+                </div>
+
             </div>
             <div class="card">
                 <div class="head">
@@ -53,9 +60,14 @@ require_once('../app/views/layout/header.php');
                         <p>Total Earning</p>
                     </div>
                 </div>
-                <span class="progress" data-value="60%"></span>
-                <!-- <span class="label">Rs.60 000 : Per Month</span> -->
+               
+                
+                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
                 <span class="label">Rs.<?php echo $stat->current_month_earnings ?> : Per Month</span>
+
+                </div>
+
+
             </div>
 
             <div class="card">
