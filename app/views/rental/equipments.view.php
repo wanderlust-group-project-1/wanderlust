@@ -151,7 +151,7 @@ require_once('../app/views/layout/header.php');
                         <label for="count">Quantity</label>
                         <input type="number" id="quantity" class="form-control-lg" name="count" required min="0" max="1000">
 
-                        <label for="equipment-image">Equipment Image</label>
+                        <label for="equipment-image1">Equipment Image</label>
                         <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" hidden>
                         <button type="button" class="btn" id="equipment-image-upload-button">Upload Image</button>
 

@@ -52,7 +52,7 @@
 
 //  oreders list 
   ($complaints) ?  : print('<div class="col-lg-12 mih-100px flex-d justify-content-center
-   align-items-center text-center"><h1>No Complaints</h1></div>');
+   align-items-center text-center"><h2>No Complaints</h2></div>');
 
     
 
