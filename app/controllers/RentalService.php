@@ -6,6 +6,7 @@ class RentalService {
 
     public function update(string $a = '', string $b = '', string $c = ''):void {
 
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $rentalservice = new rentalserviceModel();
         $rentalservice->updateRentalservice($_POST);
 
@@ -15,6 +16,7 @@ class RentalService {
 
     public function getEquipments(string $a = '', string $b = '', string $c = ''):void {
 
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $equipment = new EquipmentModel();
 
         $data["equipments"] = $equipment->getEquipmentsbyRentalService(UserMiddleware::getUser()['id']);
@@ -24,6 +26,7 @@ class RentalService {
 
     public function getEquipment(string $a = '', string $b = '', string $c = ''):void {
 
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $equipment = new EquipmentModel();
 
         $data["equipment"] = $equipment->getEquipmentbyRentalService(UserMiddleware::getUser()['id'], $a);
@@ -34,6 +37,7 @@ class RentalService {
 
     public function getItems(string $a = '', string $b = '', string $c = ''):void {
 
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $equipment = new EquipmentModel();
 
         $data["items"] = $equipment->getItemsByEquipment(['equipment_id' => $a]);
@@ -51,6 +55,9 @@ class RentalService {
     public function index(string $a = '', string $b = '', string $c = ''):void {
 
         // show($a);
+
+        AuthorizationMiddleware::authorize(['customer']);
+
         $rental = new RentalServiceModel;
         $data = [
             'rental' => $rental->getRentalService($a)[0],
@@ -68,7 +75,10 @@ class RentalService {
 
     public function availableEquipments(string $a = '', string $b = '', string $c = ''):void {
 
+
+        AuthorizationMiddleware::authorize(['customer']);
         $equipment = new EquipmentModel;
+
 
         // get cart end start time 
         $cart = new CartModel;

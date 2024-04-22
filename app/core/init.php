@@ -30,5 +30,7 @@ require '../app/middlewares/AdminMiddleware.php';
 require '../app/middlewares/VerifiedMiddleware.php';
 require '../app/middlewares/APIMiddleware.php';
 
+require '../app/middlewares/AuthorizationMiddleware.php';
+
 require 'Classes.php';
 

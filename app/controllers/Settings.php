@@ -11,6 +11,8 @@ class Settings {
 
         // show(UserMiddleware::getUser()['role']);
 
+        AuthorizationMiddleware::authorize(['rentalservice']);
+
         if(UserMiddleware::getUser()['role'] == 'rentalservice'){
             
 
