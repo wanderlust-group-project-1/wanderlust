@@ -40,10 +40,11 @@ require_once('../app/views/layout/header.php');
                         <p>Rents</p>
                     </div>
                 </div>
-                <span class="progress" data-value="10%"></span>
-                <span class="label">
+                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
+                    <span class="label">
                     <?php echo $stat->last_month_rental_count ?> 
                     : Per Month</span>
+                </div>
             </div>
             <div class="card">
                 <div class="head">
@@ -53,9 +54,12 @@ require_once('../app/views/layout/header.php');
                         <p>Total Earning</p>
                     </div>
                 </div>
-                <span class="progress" data-value="60%"></span>
                 <!-- <span class="label">Rs.60 000 : Per Month</span> -->
+                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
                 <span class="label">Rs.<?php echo $stat->current_month_earnings ?> : Per Month</span>
+
+                </div>
+
             </div>
 
             <div class="card">
@@ -130,21 +134,21 @@ require_once('../app/views/layout/header.php');
             <!-- Income report generation -->
             <!-- Select Duration start and end dates --> 
 
-            <div class="head justify-content-center align-items-center">
-                <div>
+            <div class="head justify-content-center align-items-center flex-md-c">
+                <div class="col-lg-4 col-md-12 mw-300px">
                     <h2>Income Report</h2>
                     <!-- <p>Generate Income Report</p> -->
                 </div>
 
-                <form class="w-100 justify-content-center align-items-center flex-d ">
-                    <div class="row gap-2 ">
+                <form class="col-lg-7 w-100 justify-content-center align-items-center flex-d ">
+                    <div class="row gap-2 justify-content-between">
 
-                    <div class="col-lg-4 gap-2 flex-d">
+                    <div class="col-lg-4  gap-2 flex-d">
                         <input type="date" id="start-date" name="start-date">
                         <input type="date" id="end-date" name="end-date">
 
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button class="btn btn-primary" id="income-report">Generate</button>
                     </div>
 
@@ -309,6 +313,19 @@ require_once('../app/views/layout/footer.php');
         event.preventDefault();
         var startDate = $('#start-date').val();
         var endDate = $('#end-date').val();
+
+        // validate the input
+        if (startDate == '' || endDate == '') {
+            alertmsg('Please select a date range', 'error');
+            return;
+        }
+
+        // start data < end date
+
+        if (startDate > endDate) {
+            alertmsg('Start date should be less than end date', 'error');
+            return;
+        }
 
         $.ajax({
             headers: {
