@@ -16,9 +16,5 @@ class Complaints{
     $response = new JSONResponse;
     $response->statusCode(200)->data(['complaint_id' => $a])->send();
 
-        
-        
-        
-
     }
 }
