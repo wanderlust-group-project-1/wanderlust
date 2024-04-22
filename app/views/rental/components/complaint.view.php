@@ -24,7 +24,7 @@
 
     <div class="order-item">
 
-    <div class="row card-normal m-2">
+    <div class="row card-grid m-2">
         <!-- Complain details -->
 
         <div class="col-lg-5 col-md-12">
@@ -38,8 +38,8 @@
                     <td><?= date('Y-m-d', strtotime($complaint->created_at)) ?></td>
                 </tr>
                 <tr>
-                    <td>Complain Status:</td>
-                    <td><?= $complaint->status ?></td>
+                    <td class="status-view">Complain Status:</td>
+                    <td class="status-view"><?= $complaint->status ?></td>
                 </tr>
             </table>
             
@@ -47,7 +47,7 @@
 
     </div>
        
-    <div class="row card-normal m-2">
+    <div class="row card-grid m-2">
         <div class="col-lg-5 col-md-12">
             
             <!-- <h3>Order ID: <span id="order-id"><?= $order->id ?></span></h3>
@@ -64,8 +64,8 @@
                     <td><?= date('Y-m-d', strtotime($order->created_at)) ?></td>
                 </tr>
                 <tr>
-                    <td>Order Status:</td>
-                    <td><?= $order->status ?></td>
+                    <td class="status-view">Order Status:</td>
+                    <td class="status-view"><?= $order->status ?></td>
                 </tr>
             </table>
 
@@ -92,28 +92,36 @@
             
     </div>
 
-    <div class="row card-normal m-2">
+    <div class="row card-grid-last m-2">
 
     <!-- item list -->
 
     <div class="col-lg-12 col-md-12">
-        <h3>Equipment List</h3>
-        <table class="item-details">
-            <tr>
-                <th>Item_number </th>
-                <th>Name</th>
-                <th>Complain</th>
-                <th>Charge</th>
-            </tr>
-            <?php foreach ($items as $item) : ?>
-                <tr>
-                    <td><?= $item->item_number ?></td>
-                    <td><?= $item->equipment_name?></td>
-                    <td><?= $item->complaint ? $item->complaint->complaint_description : 'No Complain' ?></td>
-                    <td><?= $item->charge ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+        <div class="table-header">
+            <h3>Equipment List</h3>
+        </div>
+        <div class="table-container">
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Item_number </th>
+                        <th>Name</th>
+                        <th>Complain</th>
+                        <th>Charge</th>
+                    </tr>
+                </thead>
+                <?php foreach ($items as $item) : ?>
+                    <tbody>
+                        <tr>
+                            <td><?= $item->item_number ?></td>
+                            <td><?= $item->equipment_name?></td>
+                            <td><?= $item->complaint ? $item->complaint->complaint_description : 'No Complain' ?></td>
+                            <td><?= $item->charge ?></td>
+                        </tr>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
+        </div>
 
     </div>
    
