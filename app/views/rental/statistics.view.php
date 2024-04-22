@@ -1,7 +1,7 @@
 
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/admin/components/navbar.php');
+// require_once('../app/views/admin/components/navbar.php');
 
 ?>
 
