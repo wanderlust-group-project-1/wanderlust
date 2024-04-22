@@ -35,6 +35,7 @@ class AuthMiddleware  {
             'Customer' => ['index', 'edit', 'update'],
             'Profile' => ['index', 'edit', 'update'],
             'Dashboard' => ['index', 'edit', 'update'],
+            
             // 'Profile' => ['index', 'edit', 'update'],
         ];
         $unauthRequired = [

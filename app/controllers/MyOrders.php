@@ -8,11 +8,14 @@ class MyOrders {
 
         
 
+        AuthorizationMiddleware::authorize(['customer']);
       
         $this->view('customer/orders');
     }
 
     public function list(string $a = '', string $b = '', string $c = ''):void {
+        AuthorizationMiddleware::authorize(['customer']);
+
         $data = [
             'customer_id' => UserMiddleware::getUser()['id'],
             'status' => $a
@@ -26,6 +29,8 @@ class MyOrders {
 
     public function viewOrder(string $a = '', string $b = '', string $c = ''):void {
  
+        AuthorizationMiddleware::authorize(['customer']);
+
         $rent = new RentModel;
         $order = $rent->getRental($a);
         $items = $rent->getItemListbyRentId($a);

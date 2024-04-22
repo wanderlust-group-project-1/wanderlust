@@ -5,6 +5,12 @@ class Profile {
 
     public function index(string $a = '', string $b = '', string $c = ''):void {
 
+        
+        AuthorizationMiddleware::authorize(['customer',]);
+
+
+
+        
         $user = UserMiddleware::getUser();
         // echo $user->role;
         

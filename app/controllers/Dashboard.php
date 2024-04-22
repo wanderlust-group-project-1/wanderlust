@@ -7,6 +7,9 @@ class Dashboard
     public function index(string $a = '', string $b = '', string $c = ''): void
     {
 
+
+        AuthorizationMiddleware::authorize(['guide', 'rentalservice']);
+
         $user = UserMiddleware::getUser();
         // echo $user->role;
 
@@ -40,11 +43,15 @@ class Dashboard
 
     public function equipments(string $a = '', string $b = '', string $c = ''): void
     {
+
+       
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $this->view('rental/equipments');
     }
 
     public function rents(string $a = '', string $b = '', string $c = ''): void
     {
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $this->view('rental/rents');
     }
 }

@@ -8,6 +8,7 @@ class Statistics
     public function index(string $a = '', string $b = '', string $c = ''): void
     {
 
+        AuthorizationMiddleware::authorize(['rentalservice']);
 
         $rental = new RentalServiceModel;
         $data = [

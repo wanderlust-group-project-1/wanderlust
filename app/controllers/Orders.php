@@ -4,10 +4,16 @@ class Orders {
     use Controller;
 
     public function index(string $a = '', string $b = '', string $c = ''):void {
+
+
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $this->view('rental/orders');
     }
 
     public function list(string $a = '', string $b = '', string $c = ''):void {
+
+
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $data = [
             'rentalservice_id' => UserMiddleware::getUser()['id'],
             'status' => $a
@@ -23,6 +29,8 @@ class Orders {
     }
 
     public function viewOrder(string $a = '', string $b = '', string $c = ''):void {
+
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $rent = new RentModel;
         $order = $rent->getRental($a);
         $items = $rent->getItemListbyRentId($a);
@@ -41,6 +49,9 @@ class Orders {
     // Complains by rental service
 
     public function reportReturnComplaintByRentalservice(string $a = '', string $b = '', string $c = ''):void {
+
+
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $rent = new RentModel;
         $order = $rent->getRental($a);
         $items = $rent->getItemListbyRentId($a);
