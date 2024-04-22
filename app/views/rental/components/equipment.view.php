@@ -216,7 +216,7 @@ foreach ($equipment as $item) {
 
     </div> -->
 
-
+<!-- Update Equipment modal -->
     <div class="edit-equipment-modal modal" id="edit-equipment-modal">
     <div class="modal-content">
         <span class="close">&times;</span>

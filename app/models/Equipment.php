@@ -124,7 +124,7 @@ class EquipmentModel {
         $q = new QueryBuilder;
         $q->setTable('equipment');
         // Additional logic for joining tables if needed
-        $q->select('equipment.*')->where('equipment.rentalservice_id', $id);
+        $q->select('equipment.*')->where('equipment.rentalservice_id', $id)->where('equipment.count',  0,'>');
         // show($q->getQuery());
         return $this->query($q->getQuery(), $q->getData());
 

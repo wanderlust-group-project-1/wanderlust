@@ -33,6 +33,11 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+
+                <!-- <div class="col-lg-5 col-md-12 mw-300px">
+                    <checkbox id="equipment-count-filter" class="form-control-lg" placeholder="Search by Count">
+                        <label for="equipment-count-filter">Show Disabled Items</label>
+                </div> -->
             </div>
         </div>
     </div>
