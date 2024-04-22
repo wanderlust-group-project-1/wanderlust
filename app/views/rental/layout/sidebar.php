@@ -173,21 +173,34 @@
                     <?php if (isset($errors)) : ?>
                         <div> <?= implode('<br>', $errors) ?> </div>
                     <?php endif; ?>
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+                    <div class="profile-update-element">
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+                    </div>
+                    <div class="profile-update-element">
+                      <label for="address">Address</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+                    </div>
 
                     <!-- <label for="email">Email</label>
     <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
 
-                    <label for="mobile">Mobile No</label>
-                    <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
-
-                    <label for="regNo">Registration Number</label>
-                    <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
+                    <div class="profile-update-element">
+                      <label for="mobile">Mobile No</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
+                    </div>
+                    <div class="profile-update-element">
+                      <label for="regNo">Registration Number</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
+                    </div>
 
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->

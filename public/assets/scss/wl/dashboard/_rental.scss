@@ -842,3 +842,18 @@ $box-shadow-color: rgba(0,0,0,0.2);
   background: $font-gold;
   color: white;
 }
+
+.profile-update-element{
+  padding: 10px;
+  max-width: fit-content;
+  justify-content: center;
+
+  label {
+    max-width: 100%;
+  }
+}
+
+.table-header{
+  display: flex;
+  justify-content: center;
+}

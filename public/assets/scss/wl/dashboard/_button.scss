@@ -100,6 +100,22 @@
   }
 }
 
+.btn-text-blue {
+  background-color: transparent;
+  font-size: 18px;
+  color: $blue;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+
+  &:hover{
+    // color: $gray-text;
+    text-decoration: underline;
+  }
+}
+
 .btn-text-orange {
   background-color: transparent;
   font-size: 18px;

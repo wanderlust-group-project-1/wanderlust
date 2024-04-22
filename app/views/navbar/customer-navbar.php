@@ -40,7 +40,7 @@
 
                 <li><a href="<?php echo ROOT_DIR ?>/rent" class="nav__link">Rent</a></li>
 
-                <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">MyOrders</a></li>
+                <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">My Orders</a></li>
 
                 <li class="dropdown__item">
                     <div class="nav__link">
