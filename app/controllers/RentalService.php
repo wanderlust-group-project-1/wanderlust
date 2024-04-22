@@ -66,7 +66,7 @@ class RentalService {
 
 
         // show($data);
-        show($data['stat']);
+        // show($data['stat']);
 
 
 

@@ -20,12 +20,15 @@ class Dashboard
 
 
             $rental = new RentalServiceModel;
+            $rent = new RentModel;
+
             $data = [
-                'stat' => $rental->rentalStats($user['id'])[0]
+                'stat' => $rental->rentalStats($user['id'])[0],
+                'rent' => $rent->getUpcomingRentByRentalService(['rentalservice_id' => $user['id']])[0]
             ];
 
             // show($user->id);
-            // show($data);
+            show($data);
 
 
 
