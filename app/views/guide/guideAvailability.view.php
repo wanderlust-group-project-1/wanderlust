@@ -17,7 +17,7 @@ require_once('../app/views/layout/header.php');
         </ul>
 
         <div class="guide-calendar">
-            <div class="cal_header">
+            <div class="cal_header" data-id="">
                 <button class="cal_prev" onclick="prevMonth()">&#10094;</button>
                 <h4 id="month-year">April 2024</h4>
                 <button class="cal_next" onclick="nextMonth()">&#10095;</button>
@@ -48,6 +48,8 @@ require_once('../app/views/layout/header.php');
     let currentMonth = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
 
+    document.querySelector('.cal_header').setAttribute('data-id', currentMonth + ' ' + currentYear);
+
     function displayCalendar() {
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
         const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
@@ -58,6 +60,11 @@ require_once('../app/views/layout/header.php');
         monthYearText.textContent = `${new Intl.DateTimeFormat('en-US', { month: 'long' }).format(firstDayOfMonth)} ${currentYear}`;
 
         calendar.innerHTML = "";
+
+        // set cal_header data-id to current month and year
+        $('.cal_header').attr('data-id', currentYear + '-' + (currentMonth + 1));
+
+        
 
         // Fill in previous month's days
         for (let i = firstDayOfWeek; i > 0; i--) {
@@ -72,6 +79,8 @@ require_once('../app/views/layout/header.php');
         for (let i = 1; i <= numDaysInMonth; i++) {
             const button = document.createElement("button"); // Create button element
             button.textContent = i; // Set day number as button text
+            //add data-id to each button
+            button.setAttribute('data-id', i);
             button.classList.add("cal_day-button"); // Add class to style the button
             button.addEventListener("click", () => openModalSchedule(i)); // Add click event listener to open modal
             if (currentDate.getDate() === i && currentDate.getMonth() === currentMonth && currentDate.getFullYear() === currentYear) {
@@ -89,6 +98,59 @@ require_once('../app/views/layout/header.php');
             div.textContent = nextDate.getDate();
             calendar.appendChild(div);
         }
+
+
+        // mark availabie date with green color
+
+        //  day 14 is available
+
+        //  $('.cal_day-button').each(function(){
+        //     if($(this).text() == 14){
+        //         $(this).addClass('cal_day-available');
+        //     }
+        // });
+        availabilityDays(currentMonth, currentYear);
+
+
+    }
+
+    function availabilityDays(month, year) {
+        var jsonData = {
+            currentMonth: month+1,
+            currentYear: year
+        };
+        console.log(jsonData);
+
+        // Get available days for the current month
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/guideAvailability/getDays',
+            method: 'POST',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+            processData: false,
+            success: function(data) {
+                // Append to a list of available days
+                console.log(data);
+
+                data.data.forEach(function(day) {
+                    // <button data-id="10" class="cal_day-button">10</button>
+                    console.log(day);
+                    // data-id =day
+                    $('.cal_day-button').each(function() {
+                        if ($(this).text() == day.available_day) {
+                            $(this).addClass('cal_day-available');
+                        }
+                    });
+
+                });       
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
     }
 
     function prevMonth() {
@@ -140,22 +202,22 @@ require_once('../app/views/layout/header.php');
     </div>
 </div>
 
-
 <script>
     function openModalSchedule(day) {
-    // Get the modal element
-    const modal = document.getElementById("view-schedule-modal");
-    // Open the modal
-    modal.style.display = "block";
-    
-    // Get the current month and year
-    const currentDate = new Date();
-    const currentMonth = currentDate.toLocaleString('en-US', { month: 'long' });
-    const currentYear = currentDate.getFullYear();
-    
-    // Update the modal content with the selected day, current month, and year
-    document.getElementById("selected-day").textContent = `${currentMonth} ${day}, ${currentYear}`;
-}
+        // Get the modal element
+        const modal = document.getElementById("view-schedule-modal");
+        // Open the modal
+        modal.style.display = "block";
+
+        // Get the current month and year
+        const currentDate = new Date();
+        const currentMonth = currentDate.toLocaleString('en-US', { month: 'long' });
+        const currentYear = currentDate.getFullYear();
+
+        // Update the modal content with the selected day, current month, and year
+        document.getElementById("selected-day").textContent = `${currentMonth} ${day}, ${currentYear}`;
+        console.log(currentMonth, currentYear);
+    }
 </script>
 
 
@@ -194,6 +256,7 @@ require_once('../app/views/layout/header.php');
                     console.log(data);
                     if (data.success) {
                         alertmsg("Availability updated successfully");
+                        // Add CSS color if available
                     } else {
                         alertmsg("Failed to update availability");
                     }

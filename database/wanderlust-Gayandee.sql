@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 21, 2024 at 01:36 PM
+-- Generation Time: Apr 23, 2024 at 10:56 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -236,6 +236,21 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID
     SET @rentalserviceID = rentalserviceID;
     EXECUTE stmt USING @rentalserviceID;
     DEALLOCATE PREPARE stmt;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetGuideIdByPackageId` (IN `p_package_id` INT)   BEGIN
+    SELECT
+        g.id AS guide_id
+    FROM
+        guides g
+    INNER JOIN
+        package p ON g.id = p.guide_id
+    WHERE
+        p.id = p_package_id;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetGuidePackages` (IN `packageID` INT)   BEGIN
+    SELECT * FROM package WHERE package.id = packageID;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetItemListbyRentID` (IN `rent_id` INT)   BEGIN
@@ -724,6 +739,23 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessRentOrders` (`customerID` INT)   BEG
     CLOSE curRentalService;
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `RetrieveAvailableDays` (IN `p_guide_id` INT, IN `p_month` INT, IN `p_year` INT)   BEGIN
+    SELECT DATE_FORMAT(date, '%d') AS available_day
+    FROM guide_availability
+    WHERE guide_id = p_guide_id
+        AND MONTH(date) = p_month
+        AND YEAR(date) = p_year
+        AND availability = 1;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `RetrieveDaysByGuideIdMonthYear` (IN `p_guide_id` INT, IN `p_month` INT, IN `p_year` INT)   BEGIN
+    SELECT DISTINCT DATE_FORMAT(date, '%d') AS booked_day
+    FROM guide_booking
+    WHERE guide_id = p_guide_id
+        AND MONTH(date) = p_month
+        AND YEAR(date) = p_year;
+END$$
+
 CREATE DEFINER=`root`@`%` PROCEDURE `ViewGuideProfile` (IN `guide_id` INT)   BEGIN
     SELECT cp.*, g.name AS guide_name
     FROM guide_profile cp
@@ -968,7 +1000,69 @@ CREATE TABLE `guide_availability` (
 --
 
 INSERT INTO `guide_availability` (`id`, `guide_id`, `availability`, `date`) VALUES
-(1, 9, 1, '2024-04-25');
+(1, 9, 0, '2024-04-25'),
+(2, 9, 0, '2024-04-29'),
+(3, 9, 0, '2024-04-28'),
+(4, 9, 1, '2024-04-16'),
+(5, 9, 1, '2024-03-31'),
+(6, 9, 1, '2024-04-19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guide_booking`
+--
+
+CREATE TABLE `guide_booking` (
+  `id` int NOT NULL,
+  `guide_id` int DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `package_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` date DEFAULT NULL,
+  `no_of_people` int DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `transport_supply` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `guide_booking`
+--
+
+INSERT INTO `guide_booking` (`id`, `guide_id`, `customer_id`, `package_id`, `created_at`, `date`, `no_of_people`, `location`, `transport_supply`) VALUES
+(18, 9, 32, 2, '2024-04-22 12:31:46', '2024-04-25', 5, 'Kandy', 1),
+(23, 9, 32, 2, '2024-04-23 04:22:33', '2024-04-29', 5, 'Kandy', 1),
+(24, 9, 32, 30, '2024-04-23 04:41:22', '2024-04-28', 5, 'Ella', 1);
+
+--
+-- Triggers `guide_booking`
+--
+DELIMITER $$
+CREATE TRIGGER `after_guide_booking_insert` AFTER INSERT ON `guide_booking` FOR EACH ROW BEGIN
+    -- Update availability in guide_availability table to 0
+    UPDATE guide_availability
+    SET availability = 0
+    WHERE guide_id = NEW.guide_id AND date = NEW.date;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `before_guide_booking_insert` BEFORE INSERT ON `guide_booking` FOR EACH ROW BEGIN
+    DECLARE guide_count INT;
+
+    -- Check if the combination of guide_id and date already exists
+    SELECT COUNT(*) INTO guide_count
+    FROM guide_booking
+    WHERE guide_id = NEW.guide_id AND date = NEW.date;
+
+    -- If the count is greater than 0, it means there is already an entry for this guide on the same date
+    IF guide_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Only one booking is allowed per guide on the same date.';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -2763,7 +2857,7 @@ CREATE TABLE `package` (
 
 INSERT INTO `package` (`id`, `guide_id`, `price`, `max_group_size`, `max_distance`, `transport_needed`, `places`) VALUES
 (1, 9, 15000.00, 30, 30, 1, 'Nuwara Eliya, Ella'),
-(2, 9, 10000.00, 10, 20, 1, 'Kandy, Ella, Rathnapura'),
+(2, 9, 12000.00, 10, 20, 1, 'Kandy, Ella, Rathnapura'),
 (3, 23, 5000.00, 10, 20, 1, 'Kandy, Ella'),
 (30, 9, 10000.00, 5, 10, 1, 'Ella, Kandy');
 
@@ -3711,6 +3805,15 @@ ALTER TABLE `guide_availability`
   ADD KEY `guide_id` (`guide_id`);
 
 --
+-- Indexes for table `guide_booking`
+--
+ALTER TABLE `guide_booking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `guide_id` (`guide_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `package_id` (`package_id`);
+
+--
 -- Indexes for table `guide_profile`
 --
 ALTER TABLE `guide_profile`
@@ -3840,7 +3943,13 @@ ALTER TABLE `guides`
 -- AUTO_INCREMENT for table `guide_availability`
 --
 ALTER TABLE `guide_availability`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `guide_booking`
+--
+ALTER TABLE `guide_booking`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -3941,6 +4050,14 @@ ALTER TABLE `customers`
 --
 ALTER TABLE `guide_availability`
   ADD CONSTRAINT `guide_availability_ibfk_1` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`);
+
+--
+-- Constraints for table `guide_booking`
+--
+ALTER TABLE `guide_booking`
+  ADD CONSTRAINT `guide_booking_ibfk_1` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`),
+  ADD CONSTRAINT `guide_booking_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `guide_booking_ibfk_3` FOREIGN KEY (`package_id`) REFERENCES `package` (`id`);
 
 --
 -- Constraints for table `guide_profile`

@@ -25,4 +25,16 @@ class FindGuideModel {
         ];
         return $this->query($q, $data);
     }
+
+    function getGuidePackages($data)
+    {
+        $q = new QueryBuilder();
+        $q = "CALL GetGuidePackages(:package_id)";
+        $data = [
+            'package_id' => $data
+        ];
+        return $this->query($q, $data);
+    }
+
+
 }

@@ -8,8 +8,8 @@
             <p><?= htmlspecialchars($guide->guide_name) ?></p>
             <p><?= htmlspecialchars($guide->languages) ?></p>
             <p><?= htmlspecialchars($guide->places) ?></p>
-            <a href="<?= ROOT_DIR ?>/FindGuide/viewGuide/<?= htmlspecialchars($guide->guide_id) ?>">
-                <button class="btn-edit" id="book-guide-button">Book Guide</button>
+            <a href="<?= ROOT_DIR ?>/FindGuide/viewGuide/<?= htmlspecialchars($guide->guide_id) ?>/<?= htmlspecialchars($guide->package_ids) ?>">
+                <button class="btn-edit" id="book-guide-button">View Guide</button>
             </a>
         </div>
     </div>

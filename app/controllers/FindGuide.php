@@ -28,8 +28,23 @@ class FindGuide{
     public function viewGuide(string $a = '', string $b = '', string $c = ''): void {
         $FindGuideModel = new FindGuideModel;
         $guide = $FindGuideModel->getGuideDetails($a);
-        // show($guide);
-
-        $this->view('customer/OneGuide', ['guide' => $guide]);
+    
+        // Check if $b is not empty before calling getGuidePackages
+        if (!empty($b)) {
+            $packageIds = explode(',', $b); // Split $b into an array of package IDs
+            foreach ($packageIds as $packageId) {
+                $packages[] = $FindGuideModel->getGuidePackages($packageId);
+            }
+        } else {
+            $packages = []; // Initialize empty array if $b is empty
+        }
+    
+        $this->view('customer/OneGuide', ['guide' => $guide, 'packages' => $packages]);
+    }
+    
+    public function viewGuidePackage(string $a = '', string $b = '', string $c = ''): void {
+        $FindGuideModel = new FindGuideModel;
+        $package = $FindGuideModel->getGuidePackages($a);
+        $this->view('customer/bookPackage', ['package' => $package]);
     }
 }
