@@ -19,7 +19,13 @@ class RentalService {
         AuthorizationMiddleware::authorize(['rentalservice']);
         $equipment = new EquipmentModel();
 
-        $data["equipments"] = $equipment->getEquipmentsbyRentalService(UserMiddleware::getUser()['id']);
+        if($a == 'unavailable'){
+            $data["equipments"] = $equipment->getEquipmentsbyRentalService(UserMiddleware::getUser()['id'], 0);
+        } else {
+            $data["equipments"] = $equipment->getEquipmentsbyRentalService(UserMiddleware::getUser()['id']);
+        }
+
+        // $data["equipments"] = $equipment->getEquipmentsbyRentalService(UserMiddleware::getUser()['id']);
         // show($data["equipments"]);
         $this->view('rental/components/equipmentlist', $data);
     }

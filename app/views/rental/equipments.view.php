@@ -34,12 +34,43 @@ require_once('../app/views/layout/header.php');
                 <div class="row justify-content-between">
                     <h1 class="title">Equipment Details</h1> 
 
-                    <div class="add-equipment">
+
+
+
+
+
+                    <div class="section-switch flex-d  gap-3 flex-wrap" >
+                        <button class="btn-selected active" id="available">Available</button>
+                        <button class="btn-selected" id="unavailable">Unavailable</button>
+                     
+                     
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!-- <div class="add-equipment">
+                        <button type="submit" class="btn-icon" id="add-equipment">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add new
+                        </button>
+                    </div> -->
+                </div>
+                <div class="row justify-content-end">
+                <div class="add-equipment mr-5">
                         <button type="submit" class="btn-icon" id="add-equipment">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Add new
                         </button>
                     </div>
+                    
+
                 </div>
 
                 <!-- Add Equipment -->
@@ -457,11 +488,33 @@ $(document).ready(function() {
 <script>
     // get equipment list using ajax , get content and append to equipment list div
 
-    function getEquipments() {
+
+
+    $(document).ready(function() {
+
+            $(document).on('click', '#available', function() {
+            $('#available').addClass('active');
+            $('#unavailable').removeClass('active');
+            getEquipments();
+        });
+
+        $(document).on('click', '#unavailable', function() {
+            $('#unavailable').addClass('active');
+            $('#available').removeClass('active');
+            getEquipments('unavailable');
+        });
+
+    });
+
+
+
+
+    function getEquipments(status = 'available') {
         // use Authorization header to get data
 
+
         $.ajax({
-            url: '<?= ROOT_DIR ?>/rentalService/getequipments',
+            url: '<?= ROOT_DIR ?>/rentalService/getequipments/' + status,
             type: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
