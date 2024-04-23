@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b2bb20bd450a53b873672a98b5f7c15",
+    "content-hash": "3391fa156aed4abe18d3e4c243999433",
     "packages": [
         {
             "name": "dompdf/dompdf",
@@ -259,6 +259,66 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
             },
             "time": "2024-03-31T07:05:07+00:00"
+        },
+        {
+            "name": "notifylk/notify-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/notifylk/notify-php.git",
+                "reference": "d231064001a33ea1365864dba4d67c9b5fbab985"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/notifylk/notify-php/zipball/d231064001a33ea1365864dba4d67c9b5fbab985",
+                "reference": "d231064001a33ea1365864dba4d67c9b5fbab985",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.12",
+                "phpunit/phpunit": "~4.8",
+                "satooshi/php-coveralls": "~1.0",
+                "squizlabs/php_codesniffer": "~2.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NotifyLk\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "NotifyLk\\": "test/"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Swagger and contributors",
+                    "homepage": "https://github.com/swagger-api/swagger-codegen"
+                }
+            ],
+            "homepage": "http://swagger.io",
+            "keywords": [
+                "api",
+                "php",
+                "sdk",
+                "swagger"
+            ],
+            "support": {
+                "source": "https://github.com/notifylk/notify-php/tree/master",
+                "issues": "https://github.com/notifylk/notify-php/issues"
+            },
+            "time": "2024-02-05T08:25:08+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -890,7 +950,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "notifylk/notify-php": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
