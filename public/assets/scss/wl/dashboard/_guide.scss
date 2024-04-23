@@ -5,7 +5,7 @@
   align-items: center;
 
   .name {
-    font-size: $header2;
+    font-size: $header4;
     font-weight: $font-medium;
   }
   .user-image img {
@@ -436,6 +436,14 @@ $box-shadow-color: rgba(0, 0, 0, 0.2);
             border-radius: 1rem;
             font-size: 1.1rem; /* Adjust font size */
         }
+        &_day-available{
+            background-color: $color-dark;
+            color: $color-lightest;  
+        }
+        &_day-booked{
+          background-color: $color-dark;
+          color: $color-lightest;  
+        }
         &_prev-date,
         &_next-date {
             color: rgba($color-primary, 0.5);
@@ -443,7 +451,7 @@ $box-shadow-color: rgba(0, 0, 0, 0.2);
 
         &_current-date {
             background-color: $color-primary;
-            color: $color-lightest;   
+            color: $color-lightest;  
         }
     }
 }

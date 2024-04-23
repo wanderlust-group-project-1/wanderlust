@@ -20,7 +20,7 @@ require_once('../app/views/navbar/customer-navbar.php');
             <label> Transport Supply: </label>
             <input type="checkbox" name="transport_supply" id="transport_supply">
 
-            <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
+            <button id="search-button" class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
 
         </form>
 
@@ -35,19 +35,28 @@ require_once('../app/views/navbar/customer-navbar.php');
 <script>
     document.getElementById('searchForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        
+
+        // Get form input values
+        var date = document.getElementById('date').value;
+        var location = document.getElementById('location').value;
+        var no_of_people = document.getElementById('no_of_people').value;
+        var transport_supply = document.getElementById('transport_supply').checked;
+
+        // Create an object with the form data
         var jsonData = {
-            date: document.getElementById('date').value,
-            location: document.getElementById('location').value,
-            no_of_people: document.getElementById('no_of_people').value,
-            transport_supply: document.getElementById('transport_supply').checked === true ? 1 : 0
+            date: date,
+            location: location,
+            no_of_people: no_of_people,
+            transport_supply: transport_supply ? 1 : 0
         };
+
+        // Save the data to local storage
+        localStorage.setItem('searchData', JSON.stringify(jsonData));
 
         console.log(jsonData);
 
         $.ajax({
-            headers:{
+            headers: {
                 'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
             },
             url: '<?= ROOT_DIR ?>/findGuide/search',
@@ -64,5 +73,4 @@ require_once('../app/views/navbar/customer-navbar.php');
             }
         });
     });
-
 </script>

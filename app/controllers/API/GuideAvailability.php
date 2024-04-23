@@ -34,4 +34,20 @@ class GuideAvailability{
             ->send();
         
     }
+
+    public function getDays(string $a = '', string $b = '', string $c = ''): void {
+        $request  = new JSONRequest;
+        $response = new JSONResponse;
+
+        $data = $request->getAll();
+
+        $GuideAvailabilityModel = new GuideAvailabilityModel;
+        $schedules = $GuideAvailabilityModel->getDaysByMonth(UserMiddleware::getUser()['id'], $data);
+
+        $response->success(true)
+            ->data($schedules)
+            ->message('Schedule fetched successfully')
+            ->statusCode(200)
+            ->send();
+    }  
 }

@@ -50,4 +50,15 @@ class GuideAvailabilityModel{
 
         return $this->query($q->getQuery(), $q->getData());
     }
+
+    public function getDaysByMonth(int $guideId, array $data): mixed {
+        $q = new QueryBuilder();
+        $q = "CALL RetrieveAvailableDays(:guideId, :currentMonth, :currentYear)";
+        $params = [
+            'guideId' => $guideId,
+            'currentMonth' => $data['currentMonth'],
+            'currentYear' => $data['currentYear']
+        ];
+        return $this->query($q, $params);
+    }
 }
