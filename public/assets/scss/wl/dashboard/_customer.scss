@@ -614,3 +614,8 @@ margin: 1px 0;
     }
 }
 
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  background-color: $color-white;
+}
