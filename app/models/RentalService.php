@@ -275,11 +275,21 @@ class RentalServiceModel
         return $this->query($q, ['id' => $id]);
     }
 
+
+    // report 
+
     public function GetMonthlyIncome(int $id, string $from, string $to): mixed
     {
         $q = "CALL GetMonthlyIncome(:id, :from, :to)";
         return $this->query($q, ['id' => $id, 'from' => $from, 'to' => $to]);
     }
+
+    public function GetEquipmentRentalCountByRentalService(array $data): mixed
+    {
+        $q = "CALL GetEquipmentRentalCountByRental(:from, :to, :id)";
+        return $this->query($q, $data);
+    }
+
 
 
     //adminrental stat
@@ -295,6 +305,8 @@ class RentalServiceModel
         $q = "CALL GetAllMonthlyRentedItemCount()";
         return $this->query($q);
     }
+
+
 
     // public function GetAllMonthlyIncome(int $id, string $from, string $to): mixed
     // {
