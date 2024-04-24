@@ -92,7 +92,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/blogs">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/complains">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Complaints</span>
       </a>

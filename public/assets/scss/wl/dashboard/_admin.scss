@@ -297,3 +297,42 @@
             width: 12.5%;
         }
         }
+
+
+
+        .btn-card{
+  // background: $info-color;
+  // border: 1px solid $info-color;
+  // color: $white-text;
+  // padding: 5px;
+  // margin: 20px;
+  cursor: pointer;
+  border: none;
+  background: $color-light;
+  outline: none;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  font-weight: 500;
+  width:250px;
+  font-size: 20px;
+  font-style: bold;
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-left: 20px;
+//   margin-right: 10px;
+
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $white-text  50%, $color-primary  50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $info-color;
+  }
+}

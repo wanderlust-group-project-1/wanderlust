@@ -12,44 +12,53 @@ require_once('../app/views/admin/components/navbar.php');
 
     <div class="sidebar-flow"></div>
 
-    <div class="table-container">
+    <div class="guide-dash-main">
+        <h1 class="title mb-2">Rental Services</h1>
+        <ul class="breadcrumbs">
+            <li><a href="<?= ROOT_DIR ?>/admin/dashboard">Dashboard</a></li>
+            <li class="divider">/</li>
+            <li><a href="#" class="active">Rental Services</a></li>
+        </ul>
 
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Mobile</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="flex-d-r">
+            <!-- <div class="flex-d-c"> -->
 
-                <?php
-                // Assuming rentalServices is an array of data
-                foreach ($rentalServices as $service) {
-                ?>
-                    <tr key="<?php echo $service->id ?>">
-                        <td><?php echo $service->name; ?></td>
-                        <td><?php echo $service->mobile; ?></td>
-                        <td><span class="status <?php echo $service->status;  ?>"><?php echo $service->status; ?></span></td>
-                        <td><button class="btn-text-green" id="view-button"> <i class="fa fa-list"> </i> View</button></td>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
+                </thead>
+                <tbody>
 
-        </table>
+                    <?php
+                    // Assuming rentalServices is an array of data
+                    foreach ($rentalServices as $service) {
+                    ?>
+                        <tr key="<?php echo $service->id ?>">
+                            <td><?php echo $service->name; ?></td>
+                            <td><?php echo $service->mobile; ?></td>
+                            <td><span class="status <?php echo $service->status;  ?>"><?php echo $service->status; ?></span></td>
+                            <td><button class="btn-text-green" id="view-button"> <i class="fa fa-list"> </i> View</button></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+
+            </table>
 
 
-    </div>
-    <!-- Modal  -->
-    <div class="modal" id="rental-services-modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="user">
-                <!-- <div class="profile-info">
+        </div>
+        <!-- Modal  -->
+        <div class="modal" id="rental-services-modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="user">
+                    <!-- <div class="profile-info">
             <img src="<?php echo ROOT_DIR ?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
             <h2 id="profile-name">Sandali </h2>
             <p id="profile-email">sandali@gmail.com</p>
@@ -60,10 +69,10 @@ require_once('../app/views/admin/components/navbar.php');
                 <a href="#" id="link-2">Link 2</a>
             </div>
         </div> -->
+                </div>
             </div>
         </div>
     </div>
-
 
     <script>
         // Get the modal
