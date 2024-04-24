@@ -5,8 +5,8 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
-<div class="container flex-d flex-md-c justify-content-center mt-5">
-    <div class=" col-lg-12 flex-d-c gap-2 mt-5 ">
+<div class="container flex-d flex-md-c justify-content-center mt-5 bg-color-primary">
+    <div class=" col-lg-10 flex-d-c gap-2 mt-5 ">
 
         <div class="card card-normal ">
 
