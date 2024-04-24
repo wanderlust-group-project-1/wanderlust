@@ -6,6 +6,7 @@ class Equipments{
 
     public function index(){
         
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $this->view('rental/equipments');
     }
 }

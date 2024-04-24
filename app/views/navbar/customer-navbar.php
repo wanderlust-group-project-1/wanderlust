@@ -36,11 +36,13 @@
                     </ul>
                 </li> -->
                 
-                <li><a href="#" class="nav__link">Guides</a></li>
+                <li><a href="<?php echo ROOT_DIR ?>/findGuide" class="nav__link">Guides</a></li>
+
+                <li><a href="<?php echo ROOT_DIR ?>/myBookings" class="nav__link">My Bookings</a></li>
+
                 <li><a href="<?php echo ROOT_DIR ?>/rent" class="nav__link">Rent</a></li>
 
-                <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">MyOrders</a></li>
-
+                <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">My Orders</a></li>
 
                 <li class="dropdown__item">
                     <div class="nav__link">
@@ -64,9 +66,9 @@
                 <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
 
                 <!--=============== DROPDOWN 2 ===============-->
-                <li class="dropdown__item">
+                <!-- <li class="dropdown__item">
                     <div class="nav__link">
-                        Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        Complains 
                     </div>
 
                     <ul class="dropdown__menu">
@@ -82,8 +84,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
+                <li><a href="<?php echo ROOT_DIR ?>/complaints" class="nav__link">Complaints</a></li>
 
                 <!-- check role avalable or not -->
                 <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
@@ -99,8 +102,8 @@
 
                         <ul class="dropdown__menu">
                             <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>" class="dropdown__link">Profile</a></li>
-                            <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">>Settings</a></li>
-                            <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">>Logout</a></li>
+                            <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">Settings</a></li>
+                            <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">Logout</a></li>
                         </ul>
                     </li>
 

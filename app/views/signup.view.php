@@ -95,7 +95,7 @@ require_once('../app/views/components/navbar-auth.php');
                 
                         <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
                             <div class="form-element">
-                                <label for="number">Contact</label>
+                                <label for="number">Moble Number</label>
                                 <input class="form-control-lg" type="text" name="number" id="number" required>
                             </div>
 
@@ -179,7 +179,7 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="form-element">
-                            <label for="mobile_number">Contact</label>
+                            <label for="mobile_number">Mobile Number</label>
                             <input class="form-control-lg" type="text" name="mobile" id="number">
                         </div>
 
@@ -202,9 +202,11 @@ require_once('../app/views/components/navbar-auth.php');
                             <div class="location-button-container"  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <button  id="select-location" class="location-button" type="button">
-                                            <h4>Select location in the map</h4>
-                                        </button>
+                                        <label  id="select-location" class=" btn btn-primary location-button w-100" type="button">
+                                       
+                                            <!-- Select location in the map -->
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            </label>
                                     </div>
                                     <!-- <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div> -->
                                 </div>
@@ -212,19 +214,18 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="form-element">
-                            <div class="tooltip-container" class="hoverable-are">
+                            <!-- <div class="tooltip-container" class="hoverable-are"> -->
                                 <div class="file-input-container">
                                     <div><label>Upload verification Documents</label>
-                                    <label for="verification_document" class="file-label">Brows here</label>
+                                    </div>
+                                    <div class="file-upload-button">
+                                    <label for="verification_document" class="btn btn-primary file-label w-100">Brows here</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document" class="file-input">
-
-                                    <div class="tooltip">
-                                        <h5>Documents such as Tourist Board License or an endorsement letter from Grama Niladhari/local police station to verify your authenticity and credibility.</h5>
-                                    </div>
+<!-- d -->
 
                                 </div>
-                            </div>
+                            <!-- </div> -->
                         </div>
 
                         <div class="form-element">
@@ -291,7 +292,7 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="form-element">
-                            <label class="rental-label" for="mobile_number">Contact</label>
+                            <label class="rental-label" for="mobile_number">Mobile Number</label>
                             <input class="form-control-lg" type="text" name="mobile" id="number">
                         </div>
 
@@ -308,15 +309,16 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
                     
 
-                    
                         <div class="form-element">
-                            <label class="rental-label" for="address">Location</label>
+                            <label for="address">Location</label><br>
                             <div class="location-button-container"  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <button  id="select-location" class="location-button" type="button">
-                                            <h4>Select location in the map</h4>
-                                        </button>
+                                        <label  id="select-location" class=" btn btn-primary location-button w-100" type="button">
+                                       
+                                            <!-- Select location in the map -->
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            </label>
                                     </div>
                                     <!-- <div class="location-icon"> <i class="fa fa-map-marker" aria-hidden="true"></i></div> -->
                                 </div>
@@ -324,20 +326,20 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="form-element">
-                            <div class="tooltip-container" class="hoverable-are">
+                            <!-- <div class="tooltip-container" class="hoverable-are"> -->
                                 <div class="file-input-container">
-                                    <div><label class="rental-label">Business Verification Document</label>
-                                    <label for="verification_document" class="file-label">Brows here</label>
+                                    <div><label>Upload verification Documents</label>
                                     </div>
-                                    <input type="file" name="verification_document" id="verification_document" class="file-input">
-
-                                    <div class="tooltip">
-                                        <h5>Documents such as business registration certificate or any other document which can verify your business is legitimate.</h5>
+                                    <div class="file-upload-button">
+                                    <label for="verification_document-rental" class="btn btn-primary file-label  file-label-rental w-100">Upload</label>
                                     </div>
+                                    <input type="file" name="verification_document" id="verification_document-rental" class="file-input">
+<!-- d -->
 
                                 </div>
-                            </div>
+                            <!-- </div> -->
                         </div>
+
 
                         <div class="form-element">
                             <label class="rental-label" for="password">Password</label>
@@ -380,20 +382,22 @@ require_once('../app/views/components/navbar-auth.php');
 
 
 <!-- Location Modal -->
-<div id="location-modal" class="location-modal">
-    <div class="modal-content">
+<div id="location-modal" class="location-modal modal">
+
+    <div class="modal-content flex-d-c gap-2 pt-5">
+    <span class="close">&times;</span>
 
 
-        <span class="close">&times;</span>
-        <input id="pac-input" class="controls" type="text" placeholder="Enter Location" />
+
+        <input id="pac-input" class="controls form-control-lg" type="text" placeholder="Enter Location" />
 
         <div id="map-canvas" class="map-canvas"> </div>
 
-            <input type="text" class="form-control" id="latitude"  hidden/>
-            <input type="text" class="form-control" id="longitude" hidden/>
+            <input type="text" class="" id="latitude"  hidden/>
+            <input type="text" class="" id="longitude" hidden/>
 
-        <div class="location-button-container">
-            <button id="confirm-location" class="location-button" type="button">Confirm Location</button>
+        <div class="location-button-container flex-d justify-content-center">
+            <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
         </div>
     </div>
 
@@ -456,7 +460,9 @@ require_once('../app/views/layout/footer.php');
 
 ?>
 
-        
+
+
+
 
 
 

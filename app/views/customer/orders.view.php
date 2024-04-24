@@ -12,41 +12,41 @@ require_once('../app/views/navbar/customer-navbar.php');
 
         <h2 class="justify-content-center flex-d"> Orders </h2>
 
-        <div class="section-switch flex-d  gap-3 flex-wrap" >
+            <div class="section-switch flex-d  gap-3 flex-wrap" >
 
-                        <button class="btn-selected" id="all">All</button>
-                        <button class="btn-selected" id="unpaid">Unpaid</button>
+                            <button class="btn-selected" id="all">All</button>
+                            <button class="btn-selected" id="unpaid">Unpaid</button>
 
-                        <button class="btn-selected" id="pending">Pending</button>
-                        <button class="btn-selected" id="upcoming">Upcoming</button>
-                        <button class="btn-selected" id="rented">Rented</button>
-                        <button class="btn-selected" id="completed">Completed</button>
-                        <button class="btn-selected" id="cancelled">Cancelled</button>
-                        
+                            <button class="btn-selected" id="pending">Pending</button>
+                            <button class="btn-selected" id="upcoming">Upcoming</button>
+                            <button class="btn-selected" id="rented">Rented</button>
+                            <button class="btn-selected" id="completed">Completed</button>
+                            <button class="btn-selected" id="cancelled">Cancelled</button>
 
-                        <!-- not rented yet -->
 
+                            <!-- not rented yet -->
+
+                        </div>
+
+            <div class="row gap-2 ">
+                <!-- scrollable cart items -->
+                <!-- <div class="col-lg-12    " id="cart-items"> -->
+                <div class="col-lg-12 checkout-items overflow-scroll " >
+
+                    <div id="orders">
+    
+    
+    
+    
+    
+    
+    
                     </div>
 
-        <div class="row gap-2 ">
-            <!-- scrollable cart items -->
-            <!-- <div class="col-lg-12    " id="cart-items"> -->
-            <div class="col-lg-12 checkout-items overflow-scroll " >
+                </div>
 
-<div id="orders">
-
-
-
-
-
-
-
-</div>
 
             </div>
-
-
-        </div>
 
            
         </div>
@@ -110,6 +110,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     function loadOrders(status = 'all') {
         window.currentStatus = status;
+        showLoader();
         
         $.ajax({
             url: '<?= ROOT_DIR ?>/myOrders/list/' + status,
@@ -119,9 +120,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             type: 'GET',
             success: function(data) {
                 $('#orders').html(data);
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error loading orders', 'error');
+                hideLoader();
             }
         });
 
@@ -130,6 +134,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
     $(document).on('click','.order-view-button', function() {
+        showLoader();
         var orderId = $(this).closest('.card').attr('data-id');
         console.log(orderId);
         $.ajax({
@@ -141,9 +146,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#order-data').html(data);
                 $('#order-item-modal').show();
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error loading order details', 'error');
+                hideLoader();
             }
 
         });
@@ -164,6 +172,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Confirm Cancel
     $(document).on('click','#confirm-cancel', function() {
+        showLoader();
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
@@ -175,9 +184,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#confirm-cancel-modal').hide();
                 loadOrders();
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error cancelling order', 'error');
+                hideLoader();
             }
 
         });
@@ -194,6 +206,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Mark as Rented Confirm
     $(document).on('click','#mark-as-rented-confirm', function() {
+        showLoader();
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
@@ -205,9 +218,12 @@ require_once('../app/views/navbar/customer-navbar.php');
             success: function(data) {
                 $('#mark-as-rented-modal').hide();
                 loadOrders(window.currentStatus);
+                hideLoader();
             },
             error: function(data) {
                 console.log(data);
+                alertmsg('Error marking as rented', 'error');
+                hideLoader();
             }
             
         });
@@ -228,27 +244,40 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     // Report Submit
     $(document).on('click','#report-submit', function() {
+        // prevent the submit button
+        event.preventDefault();
+        showLoader();
         var orderId = $(this).attr('data-id');
-        var report = $('#report-text').val();
+        // var report = $('#report-text').val();
+        var title = $('#report-title').val();
+        var description = $('#report-description').val();
         console.log(orderId);
-        console.log(report);
+        console.log(title);
+        console.log(description);
         $.ajax({
             url: '<?= ROOT_DIR ?>/api/myOrders/reportOrder/' + orderId,
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
             type: 'POST',
-            data: {
-                report: report
-            },
+            contentType: 'application/json',
+            data: JSON.stringify (
+                {
+                    rent_id: orderId,
+                    title: title,
+                    description: description
+                }
+            ),
             success: function(data) {
                 $('#report-modal').hide();
                 alertmsg('Report submitted successfully', 'success');
                 loadOrders(window.currentStatus);
+                hideLoader();
             },
             error: function(data) {
-                alertmsg('Error submitting report', 'danger');
+                alertmsg('Error submitting report', 'error');
                 console.log(data);
+                hideLoader();
             }
             
         });

@@ -97,3 +97,37 @@
     flex-grow: inherit;
 }
 
+.card-grid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 10px;
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    background-color: #fff;
+    border-bottom:1px solid $color-lighter-gray;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}  
+
+.card-grid-last{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 10px;
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+} 
+
+

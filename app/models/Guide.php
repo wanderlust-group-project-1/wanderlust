@@ -61,7 +61,7 @@ class GuideModel
         } else {
             $response->success(false)
                 ->data(['errors' => $this->errors])
-                ->message('Validation failed')
+                ->message(isset($this->errors['msg']) ? $this->errors['msg'] : 'Invalid data')
                 ->statusCode(422)
                 ->send();
         }
@@ -106,6 +106,26 @@ class GuideModel
         } else if (strlen($data['password']) < 6) {
             $this->errors['password'] = "Password must be at least 6 characters";
         }
+
+
+           // Verify if email already exists
+           $user = new UserModel;
+           if ($user->first(['email' => $data['email']])) {
+               $this->errors['email'] = "Email already exists";
+               $this->errors['msg'] = "Email already exists";
+           }
+           
+           $guide = new GuideModel;
+           if($guide->first(['nic' => $data['nic']])){
+               $this->errors['nic'] = "NIC Number already exists";
+               $this->errors['msg'] = "NIC Number already exists";
+           }
+   
+           if($guide->first(['mobile' => $data['mobile']])){
+               $this->errors['mobile'] = "Mobile Number already exists";
+               $this->errors['msg'] = "Mobile Number already exists";
+           }
+
 
         return empty($this->errors);
     }

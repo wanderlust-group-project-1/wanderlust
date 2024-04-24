@@ -5,11 +5,25 @@ Class Rent{
 
 
     public function index(string $a = '', string $b = '', string $c = ''):void {
-        $this->view('customer/rent');
+
+
+        AuthorizationMiddleware::authorize(['customer']);
+
+        $cart = new CartModel;
+        $cart = $cart->first(['customer_id' => UserMiddleware::getUser()['id']]);
+        // show($cart);
+        $data = [];
+        if($cart){
+            $data['cart'] = $cart;
+        }
+
+        $this->view('customer/rent', $data);
     }
 
 
     public function search(string $a = '', string $b = '', string $c = ''):void {
+
+        
 
         $request = new JSONRequest();
         $response = new JSONResponse();
@@ -21,6 +35,10 @@ Class Rent{
     }
 
     public function items(string $a = '', string $b = '', string $c = ''):void {
+
+
+
+        AuthorizationMiddleware::authorize(['customer']);
 
         $request = new JSONRequest();
         
@@ -50,37 +68,8 @@ Class Rent{
 
 //         show($data['equipments']);
 
-//         Array
-// (
-//     [0] => stdClass Object
-//         (
-//             [id] => 25
-//             [rentalservice_id] => 25
-//             [name] => Tent - 2 Person
-//             [cost] => 3000.00
-//             [description] => Tent for 2 Persons
-//             [type] => Tent
-//             [count] => 31
-//             [fee] => 1000.00
-//             [standard_fee] => 0.00
-//             [image] => 65b365fccf6dc.jpg
-//             [rental_service_name] => ABC Rent
-//         )
 
-//     [1] => stdClass Object
-//         (
 
-            // show($data['cart']);
-
-//             stdClass Object
-// (
-//     [id] => 71
-//     [customer_id] => 32
-//     [start_date] => 2024-02-14
-//     [end_date] => 2024-02-29
-// )
-
-//         )
 
 //  calculate the total fee for each , standard fee + fee * days difference (end_date - start_date)
         foreach ($data['equipments'] as $equipment) {
@@ -101,6 +90,9 @@ Class Rent{
     public function item(string $a = '', string $b = '', string $c = ''):void {
 
 
+        AuthorizationMiddleware::authorize(['customer']);
+
+
         $cart = new CartModel; 
         $cart = $cart->first(['customer_id' => UserMiddleware::getUser()['id']]);
 
@@ -112,6 +104,7 @@ Class Rent{
             // 'equipment' => $equipment->first(['id' => $a]),
             'equipment' => $equipment->getEquipmentWithRentalService($a)
         ];
+        // show($data['equipment']);
 
         // foreach ($data['equipment'] as $equipment) {
         //     $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);

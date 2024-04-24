@@ -22,51 +22,29 @@ require_once('../app/views/layout/header.php');
             <li><a href="#" class="active">Dashboard</a></li>
         </ul>
         <div class="info-data mt-5">
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>96</h2>
-                        <p>No of Tours</p>
-                    </div>
+            <div class="guide-card-new">
+                <span class="label">No of Tours</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>30</p>
                 </div>
-                <span class="progress" data-value="12.5%"></span>
-                <span class="label">12 : Per Month</span>
             </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>Rs.139000</h2>
-                        <p>Income</p>
-                    </div>
+            <div class="guide-card-new">
+                <span class="label">Income</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>Rs.139000</p>
                 </div>
-                <span class="progress" data-value="60%"></span>
-                <span class="label">Rs.60 000 : Per Month</span>
             </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>1st March</h2>
-                        <p>Upcoming Booking</p>
-                    </div>
-                </div>
+            <div class="guide-card-new">
+                <span class="label">Upcoming Booking</span>
                 <div class="booking-bar .flex-d mt-4 mb-2">
                     <p>Micheal Julius</p>
                 </div>
-                <!-- <span class="progress" data-value="30%"></span>
-                <span class="label">30%</span> -->
             </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h2>21st February</h2>
-                        <p>Recent Booking</p>
-                    </div>
+            <div class="guide-card-new">
+                <span class="label">Recent Booking</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>Micheal Julius</p>
                 </div>
-                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
-                    <p>Julius John</p>
-                </div>
-                <!-- <span class="progress" data-value="80%"></span>
-                <span class="label">80%</span> -->
             </div>
         </div>
 
@@ -74,7 +52,7 @@ require_once('../app/views/layout/header.php');
             <div class="data">
                 <div class="content-data">
                     <div class="head">
-                        <h3>Monthly Bookings</h3>
+                        <h3 class="Guide-topics">Monthly Bookings</h3>
                         <div class="menu">
                             <ul class="menu-link">
                                 <li><a href="#">Edit</a></li>
@@ -121,7 +99,7 @@ require_once('../app/views/layout/header.php');
         });
 
         // PROGRESSBAR
-        const allProgress = document.querySelectorAll('main .card .progress');
+        const allProgress = document.querySelectorAll('main .guide-card-new .progress');
 
         allProgress.forEach(item => {
             item.style.setProperty('$value', item.dataset.value);

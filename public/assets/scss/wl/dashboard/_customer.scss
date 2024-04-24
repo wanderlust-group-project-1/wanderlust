@@ -377,7 +377,7 @@ margin: 1px 0;
     justify-content: space-between;
     flex-wrap: wrap;
     min-width: 300px;
-    margin: 10px;
+    margin: 20px;
     margin-bottom: 1.5rem;
     padding-top: 50px;
     padding-bottom: 100px;
@@ -562,3 +562,55 @@ margin: 1px 0;
   }
 }
 }
+
+// .model-content {
+//   .selectDate{
+//     background-color: red;
+//   }
+// }
+
+.order-list {
+  justify-content: center;
+  display: flex;
+  padding: 15px 0 0 0;
+  // max-width: 500px;
+
+    .order-header {
+      padding: 5px;
+
+      .order-id{
+        display: flex;
+        // justify-content: center;
+        font-weight: 400;
+        font-family: sans-serif, 'Poppins';
+        font-size: $header4 ;
+        color: $gray-text;
+      }
+    
+      .order-date{
+        display: flex;
+        // justify-content: center;
+        font-weight: 400;
+        font-family: sans-serif, 'Poppins';
+        font-size: $header4 ;
+        color: $gray-text;
+      }
+    }
+
+    .text-overflow-ellipsis{
+      display: flex;
+      justify-content: left;
+      font-style: italic;
+      font-weight: 400;
+      font-family: sans-serif, 'Poppins';
+      font-size: $header4 ;
+      color: $gray-text;
+      // background-color: red($color: #000000);
+    }
+
+    .order-button-container {
+      display: flex;
+      justify-content: left;
+    }
+}
+

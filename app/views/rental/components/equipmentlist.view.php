@@ -33,6 +33,11 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+
+                <!-- <div class="col-lg-5 col-md-12 mw-300px">
+                    <checkbox id="equipment-count-filter" class="form-control-lg" placeholder="Search by Count">
+                        <label for="equipment-count-filter">Show Disabled Items</label>
+                </div> -->
             </div>
         </div>
     </div>
@@ -52,7 +57,7 @@
                 <tr data-id="<?= htmlspecialchars($equipment->id) ?>">
                     <td data-label="Equipment Name"><?= htmlspecialchars($equipment->name) ?></td>
                     <td data-label="Type"><?= htmlspecialchars($equipment->type) ?></td>
-                    <td data-label="Cost">Rs<?= htmlspecialchars($equipment->fee) ?></td>
+                    <td data-label="Cost">Rs<?= htmlspecialchars($equipment->cost) ?></td>
                     <td data-label="Count"><?= htmlspecialchars($equipment->count) ?></td>
                     <td data-label="Action"><button id="equipment-view-button" class="btn-text-green"><i class="fa fa-list" aria-hidden="true"></i> View</button></td> <!-- View Button for each row -->
                 </tr>

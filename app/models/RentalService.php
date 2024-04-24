@@ -67,7 +67,7 @@ class RentalServiceModel
         } else {
             $response->success(false)
                 ->data(['errors' => $this->errors])
-                ->message('Validation failed')
+                ->message(isset($this->errors['msg']) ? $this->errors['msg'] : 'Validation failed')
                 ->statusCode(422)
                 ->send();
         }
@@ -110,6 +110,25 @@ class RentalServiceModel
             $this->errors['password'] = "Password is required";
         } else if (strlen($data['password']) < 6) {
             $this->errors['password'] = "Password must be at least 6 characters";
+        }
+
+
+        // Verify if email already exists
+        $user = new UserModel;
+        if ($user->first(['email' => $data['email']])) {
+            $this->errors['email'] = "Email already exists";
+            $this->errors['msg'] = "Email already exists";
+        }
+        
+        $rental = new RentalServiceModel;
+        if($rental->first(['regNo' => $data['regNo']])){
+            $this->errors['regNo'] = "Registration Number already exists";
+            $this->errors['msg'] = "Registration Number already exists";
+        }
+
+        if($rental->first(['mobile' => $data['mobile']])){
+            $this->errors['mobile'] = "Mobile Number already exists";
+            $this->errors['msg'] = "Mobile Number already exists";
         }
 
         return empty($this->errors);
@@ -256,11 +275,21 @@ class RentalServiceModel
         return $this->query($q, ['id' => $id]);
     }
 
+
+    // report 
+
     public function GetMonthlyIncome(int $id, string $from, string $to): mixed
     {
         $q = "CALL GetMonthlyIncome(:id, :from, :to)";
         return $this->query($q, ['id' => $id, 'from' => $from, 'to' => $to]);
     }
+
+    public function GetEquipmentRentalCountByRentalService(array $data): mixed
+    {
+        $q = "CALL GetEquipmentRentalCountByRental(:from, :to, :id)";
+        return $this->query($q, $data);
+    }
+
 
 
     //adminrental stat
@@ -276,6 +305,8 @@ class RentalServiceModel
         $q = "CALL GetAllMonthlyRentedItemCount()";
         return $this->query($q);
     }
+
+
 
     // public function GetAllMonthlyIncome(int $id, string $from, string $to): mixed
     // {

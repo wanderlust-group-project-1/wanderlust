@@ -3,8 +3,11 @@
 class verifiedMiddleware{
     static function run_middleware($controller, $method, $user){
         
+
         if ($user && $user->is_verified == 0) {
-          redirect('verify');
+          redirect('verify/resend');
+          // show($user);
+          die();
         }
         return $controller;
     }

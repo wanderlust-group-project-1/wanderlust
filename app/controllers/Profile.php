@@ -5,14 +5,28 @@ class Profile {
 
     public function index(string $a = '', string $b = '', string $c = ''):void {
 
-        $user = $_SESSION['USER'];
-        // echo $user->role;
+        
+        AuthorizationMiddleware::authorize(['customer',]);
 
-        if ($user->role == 'customer') {
-            $this->view('customer/profile');
-        } else if ($user->role == 'guide') {
+
+
+        
+        $user = UserMiddleware::getUser();
+        // echo $user->role;
+        
+
+        if ($user['role']== 'customer') {
+
+        $rent = new RentModel;
+        $data = [ 
+            'rental' => $rent->getUpcomingRentByCustomer(['customer_id' => $user['id']])[0],
+        ];
+
+
+            $this->view('customer/profile', $data);
+        } else if ($user['role'] == 'guide') {
             $this->view('guide/profile');
-        } else if ($user->role == 'rentalservice') {
+        } else if ($user['role'] == 'rentalservice') {
             $this->view('rental-service/profile');
         } 
         

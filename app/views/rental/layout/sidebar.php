@@ -30,14 +30,15 @@
 
   <ul class="nav">
 
-    <li class="nav-item">
+    <li data-id="dashboard" class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/dashboard">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li data-id="equipments" class="nav-item">
+
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/equipments" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Equipments</span>
@@ -46,7 +47,7 @@
       
     </li>
 
-    <li class="nav-item">
+    <li data-id="orders" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/orders" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Orders</span>
@@ -57,7 +58,7 @@
 
 
 
-    <li class="nav-item">
+    <li data-id="complaints" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/complaints" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Complaints</span>
@@ -110,7 +111,7 @@
       </a>
     </li> -->
 
-    <li class="nav-item">
+    <li data-id="statistics" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="statistics" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Statistics</span>
@@ -118,6 +119,16 @@
       </a>
 
     </li>
+    <!-- Settings -->
+    <li data-id="settings" class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/settings" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Settings</span>
+        <i class="menu-arrow"></i>
+      </a>
+
+    </li>
+
   </ul>
 </nav>
 
@@ -163,21 +174,34 @@
                     <?php if (isset($errors)) : ?>
                         <div> <?= implode('<br>', $errors) ?> </div>
                     <?php endif; ?>
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+                    <div class="profile-update-element">
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+                    </div>
+                    <div class="profile-update-element">
+                      <label for="address">Address</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+                    </div>
 
                     <!-- <label for="email">Email</label>
     <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
 
-                    <label for="mobile">Mobile No</label>
-                    <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
-
-                    <label for="regNo">Registration Number</label>
-                    <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
+                    <div class="profile-update-element">
+                      <label for="mobile">Mobile No</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
+                    </div>
+                    <div class="profile-update-element">
+                      <label for="regNo">Registration Number</label>
+                    </div>
+                    <div class="profile-update-element">
+                      <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
+                    </div>
 
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
@@ -340,4 +364,28 @@
             modal.style.display = "none";
         }
     }
+</script>
+
+
+<script>
+  // sidebar selected nav item
+
+  // get current url and split it
+
+  $(document).ready(function() {
+    var url = window.location.href;
+    var urlSplit = url.split('/');
+    var page = urlSplit[urlSplit.length - 1];
+    console.log(page);
+    var navItems = document.querySelectorAll('.nav-item');
+
+    navItems.forEach(function(item) {
+      if (item.getAttribute('data-id') == page) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+
+
 </script>

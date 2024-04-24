@@ -1,10 +1,15 @@
 <div id="rent-item-details" data-id="<?= htmlspecialchars($equipment->id);?>">
-<div class="row mh-100px">
+<div class="row mh-100px justify-content-start">
+
+<a href="<?php echo ROOT_DIR; ?>/rentalService/<?php echo htmlspecialchars($equipment->rentalservice_id); ?>" class="rental-link">
     <div class="col-lg-12 flex-d align-items-center gap-2" >
-        <img src="<?php echo ROOT_DIR; ?>/assets/images/rental/1.webp" alt="Image" class="img-fluid mh-50px rounded-7">
-        <h1 class="rental-name"> ABC Rent </h1>
+
+        <img src="<?php echo ROOT_DIR; ?>/uploads/images/rental_services/<?php echo htmlspecialchars($equipment->rentalservice_image); ?>" alt="Image" class="img-fluid mh-50px rounded-7">
+        <h1 class="rental-name"> <?php echo htmlspecialchars($equipment->rentalservice_name); ?> </h1>
+       
         <!-- <?php show($equipment) ?> -->
     </div>
+    </a>
 </div>
 <div class="row flex-d mt-5">
 
@@ -27,6 +32,8 @@
                 <h5>Price: Rs. <?php echo htmlspecialchars($equipment->cost); ?></h5>
 
                 <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+                <!-- <button  class="btn btn-primary">Add to Cart</button> -->
+
             </div>
 
 

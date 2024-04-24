@@ -21,6 +21,9 @@
     [equipment_list] => BackPack - 80L (1), Baker Mueller (1)
 ) -->
 
+<!-- <?php
+show ($complaints);
+?> -->
 
 <div class="order-item">
        
@@ -69,39 +72,61 @@
             
     </div>
 
+<!-- complaint list -->
+<?php if(!empty($complaints)){?>
+
+
     <div class="row card-normal m-2">
-
-    <!-- item list -->
-
     <div class="col-lg-12 col-md-12">
-        <h3>Equipment List</h3>
+        <h3>Complaints List</h3>
         <table class="item-details">
-            <tr>
-                <th>Item_number </th>
-                <th>Name</th>
-            </tr>
-            <?php foreach ($items as $item) : ?>
+            <thead>
                 <tr>
-                    <td><?= $item->item_number ?></td>
-                    <td><?= $item->equipment_name?></td>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
                 </tr>
-            <?php endforeach; ?>
+            </thead>
+            <tbody>
+                <?php foreach ($complaints as $complaint) : ?>
+                <tr>
+                    <td><?= $complaint->title ?></td>
+                    <td><?= $complaint->description ?></td>
+                    <td><?= $complaint->status ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
-
-    </div>
-   
-        
-
-
-
-        
-
     </div>
 
-
-
-
     </div>
+    <?php } ?>
+
+
+  <!-- item list -->
+    
+    <div class="row card-normal m-2">
+        <div class="col-lg-12 col-md-12">
+            <h3>Equipment List</h3>
+            <table class="item-details">
+                <tr>
+                    <th>Item_number </th>
+                    <th>Name</th>
+                </tr>
+                <?php foreach ($items as $item) : ?>
+                    <tr>
+                        <td><?= $item->item_number ?></td>
+                        <td><?= $item->equipment_name?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>             
+        </div>
+    </div>
+
+
+
+
+</div>
         
 
 

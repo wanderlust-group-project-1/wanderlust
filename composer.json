@@ -5,7 +5,9 @@
     "require": {
         "firebase/php-jwt": "^6.8",
         "vlucas/phpdotenv": "^5.6",
-        "phpmailer/phpmailer": "^6.9"
+        "phpmailer/phpmailer": "^6.9",
+        "dompdf/dompdf": "^2.0",
+        "notifylk/notify-php": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -20,5 +22,11 @@
     ],
     "license": "MIT",
     "minimum-stability": "stable", 
-    "prefer-stable": true 
+    "prefer-stable": true,
+    "repositories": {
+        "notifylk": {
+            "type": "vcs",
+            "url": "https://github.com/notifylk/notify-php.git"
+        }
+    }
 }

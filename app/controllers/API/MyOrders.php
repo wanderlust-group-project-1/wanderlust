@@ -37,4 +37,17 @@ class MyOrders {
         $response->statusCode(200)->data(['rent_id' => $a])->send();
 
     }
+
+    public function reportOrder(string $a = '', string $b = '', string $c = ''):void {
+        $request = new JSONRequest();
+        $response = new JSONResponse();
+
+        $data = $request->getAll();
+// show($data);
+// die();
+        $report = new RentComplaintModel;
+        $report->createComplaint($data);
+
+        $response->statusCode(200)->message('Complaint added successfully')->send();
+    }
 }

@@ -23,3 +23,15 @@ $(document).on('click', '.modal-close', function() {
 //     }
 // });
 
+
+
+        function showLoader() {
+            $('#loading-overlay').css('visibility', 'visible');
+        }
+
+        function hideLoader() {
+            $('#loading-overlay').css('visibility', 'hidden');
+        }
+
+
+

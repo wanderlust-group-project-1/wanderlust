@@ -34,12 +34,43 @@ require_once('../app/views/layout/header.php');
                 <div class="row justify-content-between">
                     <h1 class="title">Equipment Details</h1> 
 
-                    <div class="add-equipment">
+
+
+
+
+
+                    <div class="section-switch flex-d  gap-3 flex-wrap" >
+                        <button class="btn-selected active" id="available">Available</button>
+                        <button class="btn-selected" id="unavailable">Unavailable</button>
+                     
+                     
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!-- <div class="add-equipment">
+                        <button type="submit" class="btn-icon" id="add-equipment">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add new
+                        </button>
+                    </div> -->
+                </div>
+                <div class="row justify-content-end">
+                <div class="add-equipment mr-5">
                         <button type="submit" class="btn-icon" id="add-equipment">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Add new
                         </button>
                     </div>
+                    
+
                 </div>
 
                 <!-- Add Equipment -->
@@ -137,21 +168,22 @@ require_once('../app/views/layout/header.php');
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
                         <label for="cost">Cost</label>
-                        <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required>
+                        <input type="number" step="0.01" id="cost" class="form-control-lg" name="cost" required min="0" max="200000">
 
                         <!-- Standard fee -->
                         <label for="standard-fee">Standard Fee</label>
-                        <input type="number" step="0.01" id="standard-fee" class="form-control-lg" name="standard_fee" required>
+                        <input type="number" step="0.01" id="standard-fee" class="form-control-lg" name="standard_fee" required min="0" max="20000">
 
 
                         <label for="rental-fee">Rental Fee (per day)</label>
-                        <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required>
+                        <!-- add max value -->
+                        <input type="number" step="0.01" id="rental-fee" class="form-control-lg" name="rental_fee" required min="0" max="10000">
 
                         <label for="count">Quantity</label>
-                        <input type="number" id="count" class="form-control-lg" name="count" required>
+                        <input type="number" id="quantity" class="form-control-lg" name="count" required min="0" max="1000">
 
-                        <label for="equipment-image">Equipment Image</label>
-                        <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" required hidden>
+                        <label for="equipment-image1">Equipment Image</label>
+                        <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" hidden>
                         <button type="button" class="btn" id="equipment-image-upload-button">Upload Image</button>
 
                     </div>
@@ -329,9 +361,52 @@ $(document).ready(function() {
             fee: parseFloat($("#rental-fee").val()),
 
             description: $("#description").val(), // Assuming condition is the description
-            count: parseInt($("#count").val()),
+            count: parseInt($("#quantity").val()),
             
         };
+
+        console.log(jsonData);
+
+        // validate form fields
+
+        if (jsonData.name == '' || jsonData.type == '' || jsonData.cost == '' || jsonData.standard_fee == '' || jsonData.fee == '' || jsonData.description == '' || jsonData.count == '') {
+            alertmsg('Please fill all fields', 'error');
+            return;
+        }
+
+        // name contain only letters and numbers and  - () _ . , and length is 3
+        nameRegex  = /^[a-zA-Z0-9-()_., ]{3,}$/;
+        if (!nameRegex.test(jsonData.name)) {
+            alertmsg('Name should contain only letters, numbers, -()_,. and length should be atleast 3', 'error');
+            return;
+        }
+
+        // cost between 0 and 200000
+        if (jsonData.cost < 0 || jsonData.cost > 200000) {
+            alertmsg('Cost should be between 0 and 200000', 'error');
+            return;
+        }
+
+        // standard fee between 0 and 20000
+        if (jsonData.standard_fee < 0 || jsonData.standard_fee > 20000) {
+            alertmsg('Standard fee should be between 0 and 20000', 'error');
+            return;
+        }
+
+        // rental fee between 0 and 10000
+        if (jsonData.fee < 0 || jsonData.fee > 10000) {
+            alertmsg('Rental fee should be between 0 and 10000', 'error');
+            return;
+        }
+
+        // count 
+        if (jsonData.count < 0 || jsonData.count > 1000) {
+            alertmsg('Count should be between 0 and 1000', 'error');
+            return;
+        }
+         
+
+        
 
 
         // var image = $("#equipment-image").prop('files')[0];
@@ -341,6 +416,7 @@ $(document).ready(function() {
             var image = $("#equipment-image").prop('files')[0];
         } else {
             alertmsg('Please select an image', 'error');
+            return;
         }
         //  if($("#equipment-image-input").prop('files').length > 0) {
         //     var image = $("#equipment-image-input").prop('files');
@@ -412,11 +488,33 @@ $(document).ready(function() {
 <script>
     // get equipment list using ajax , get content and append to equipment list div
 
-    function getEquipments() {
+
+
+    $(document).ready(function() {
+
+            $(document).on('click', '#available', function() {
+            $('#available').addClass('active');
+            $('#unavailable').removeClass('active');
+            getEquipments();
+        });
+
+        $(document).on('click', '#unavailable', function() {
+            $('#unavailable').addClass('active');
+            $('#available').removeClass('active');
+            getEquipments('unavailable');
+        });
+
+    });
+
+
+
+
+    function getEquipments(status = 'available') {
         // use Authorization header to get data
 
+
         $.ajax({
-            url: '<?= ROOT_DIR ?>/rentalService/getequipments',
+            url: '<?= ROOT_DIR ?>/rentalService/getequipments/' + status,
             type: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -657,6 +755,48 @@ $(document).ready(function() {
                 // count: formData.get('count'),
             };
 
+
+            // validate form fields
+
+            if (jsonData.name == '' || jsonData.type == '' || jsonData.cost == '' || jsonData.standard_fee == '' || jsonData.rental_fee == '' || jsonData.description == '') {
+                alertmsg('Please fill all fields', 'error');
+                return;
+            }
+
+            // name contain only letters and numbers and  - () _ . , and length is 3
+            nameRegex  = /^[a-zA-Z0-9-()_., ]{3,}$/;
+            if (!nameRegex.test(jsonData.name)) {
+                alertmsg('Name should contain only letters, numbers, -()_,. and length should be atleast 3', 'error');
+                return;
+            }
+
+            // cost between 0 and 200000
+            if (jsonData.cost < 0 || jsonData.cost > 200000) {
+                alertmsg('Cost should be between 0 and 200000', 'error');
+                return;
+            }
+
+            // standard fee between 0 and 20000
+            if (jsonData.standard_fee < 0 || jsonData.standard_fee > 20000) {
+                alertmsg('Standard fee should be between 0 and 20000', 'error');
+                return;
+            }
+
+
+            // rental fee between 0 and 10000
+
+            if (jsonData.rental_fee < 0 || jsonData.rental_fee > 10000) {
+                alertmsg('Rental fee should be between 0 and 10000', 'error');
+                return;
+            }
+
+            //  count between 0 and 1000
+
+         
+
+
+
+
             console.log("json data", jsonData);
 
             // if image is not empty then append it to formdata
@@ -684,10 +824,12 @@ $(document).ready(function() {
                 success: function(data) {
                     // console.log(data);
                     fetchEquipmentDetails(id);
+                    alertmsg('Equipment updated successfully', 'success');
                     // location.reload();
                 },
                 error: function(data) {
                     console.log(data);
+                    alertmsg('Equipment could not be updated', 'error');
                 }
 
             })
@@ -712,15 +854,19 @@ $(document).ready(function() {
                     'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
                 },
                 url: '<?= ROOT_DIR ?>/api/equipment/delete/' + id,
-                method: 'POST',
-                success: function(data) {
-                    console.log(data);
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
                     alertmsg('Equipment deleted successfully', 'success');
                     getEquipments();
                 },
-                error: function(data) {
-                    console.log(data);
-                    alertmsg('Equipment could not be deleted', 'error');
+                error: function(err) {
+                    console.log(err);
+                    // alertmsg('Equipment could not be deleted', 'error');
+                    alertmsg(err.responseJSON.message, 'error');
+
+                    // close modal
+                    $("#delete-equipment-modal").hide();
                 }
             })
         });
@@ -967,6 +1113,42 @@ $(document).on('click', '#make-available', function() {
         }
     })
 });
+
+
+// Disable modal open
+$(document).on('click', '#disable-equipment-button', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $('#disable-equipment-modal').show();
+    $('#disable-equipment').attr('data-id', id);
+});
+
+
+// Disable 
+$(document).on('click', '#disable-equipment', function() {
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+        },
+        url: '<?= ROOT_DIR ?>/api/equipment/disableEquipment/' + id,
+        method: 'POST',
+        success: function(data) {
+            console.log(data);
+            alertmsg('Equipment disabled successfully', 'success');
+            getEquipments();
+        },
+        error: function(data) {
+            console.log(data);
+            alertmsg('Equipment could not be disabled', 'error');
+        }
+    })
+});
+
+
+
+
 
 
 

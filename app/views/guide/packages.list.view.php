@@ -6,8 +6,8 @@ foreach ($packages as $package) :
     <div data-id="<?= htmlspecialchars($package->id) ?>" class="data">
         <div class="content-data">
             <div class="head">
-                <h3>Package <?= $loopIndex + 1 ?></h3>
-                <h2><?= htmlspecialchars($package->price) ?></h2>
+                <h3 class="guide-topics">Package <?= $loopIndex + 1 ?></h3>
+                <h3 class="guide-topics"><?= htmlspecialchars($package->price) ?></h3>
             </div>
 
             <div class="info-data mt-5">
@@ -21,18 +21,16 @@ foreach ($packages as $package) :
                 ?>
 
                 <?php foreach ($details as $detail) : ?>
-                    <div class="card">
-                        <div class="head">
-                            <div>
-                                <h2><?= htmlspecialchars($detail['value']) ?></h2>
-                                <p><?= htmlspecialchars($detail['label']) ?></p>
-                            </div>
+                    <div class="guide-card-new">
+                        <span class="label"><?= htmlspecialchars($detail['label']) ?></span>
+                        <div class="booking-bar .flex-d mt-4 mb-2">
+                            <p><?= htmlspecialchars($detail['value']) ?></p>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
 
-            <button type="button" class="btn-edit rounded-6 edit-package" id="package-view-button" data-id="<?= htmlspecialchars($package->id) ?>">
+            <button type="button" class="btn-primary-lg rounded-6 edit-package mt-4" id="package-view-button" data-id="<?= htmlspecialchars($package->id) ?>">
                 View Package
             </button>
 

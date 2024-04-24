@@ -45,7 +45,19 @@ class Equipment {
 
         $equipmentModel = new EquipmentModel;
 
-        $data = $equipmentModel->deleteEquipment($a);
+        if($equipmentModel->GetCurrentAcceptedRents($a)){
+            $response->success(false)
+                ->message('Equipment is currently rented out')
+                ->statusCode(422)
+                ->send();
+
+                return;
+        }
+            
+
+        $item = new ItemModel;
+
+        $data = $item->makeRemovedByEquipment($a);
 
         if (!$data) {
             $response->success(true)
@@ -85,5 +97,27 @@ class Equipment {
         }
 
 
+    }
+
+    public function disableEquipment(string $a = '', string $b = '', string $c = ''): void {
+        $request = new JSONRequest;
+        $response = new JSONResponse;
+
+       $item = new ItemModel;
+
+        $data = $item->makeUnavailableByEquipment($a);
+
+        if (!$data){
+            $response->success(true)
+                ->message('Equipment disabled successfully')
+                ->statusCode(200)
+                ->send();
+        } else {
+            $response->success(false)
+                ->data(['errors' => $item->errors])
+                ->message('Failed to disable equipment')
+                ->statusCode(422)
+                ->send();
+        }
     }
 }

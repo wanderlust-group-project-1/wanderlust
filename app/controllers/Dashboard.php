@@ -7,23 +7,28 @@ class Dashboard
     public function index(string $a = '', string $b = '', string $c = ''): void
     {
 
-        $user = $_SESSION['USER'];
+
+        AuthorizationMiddleware::authorize(['guide', 'rentalservice']);
+
+        $user = UserMiddleware::getUser();
         // echo $user->role;
 
-        if ($user->role == 'guide') {
+        if ($user['role'] == 'guide') {
             //echo "Welcome";
             $this->view('guide/GuideDashboard');
-        } else if ($user->role == 'rentalservice') {
+        } else if ($user['role'] == 'rentalservice') {
 
 
             $rental = new RentalServiceModel;
+            $rent = new RentModel;
+
             $data = [
-                'stat' => $rental->rentalStats($user->id)[0]
+                'stat' => $rental->rentalStats($user['id'])[0],
+                'rent' => $rent->getUpcomingRentByRentalService(['rentalservice_id' => $user['id']])[0]
             ];
 
             // show($user->id);
-            // show($data);
-
+ 
 
 
 
@@ -40,11 +45,15 @@ class Dashboard
 
     public function equipments(string $a = '', string $b = '', string $c = ''): void
     {
+
+       
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $this->view('rental/equipments');
     }
 
     public function rents(string $a = '', string $b = '', string $c = ''): void
     {
+        AuthorizationMiddleware::authorize(['rentalservice']);
         $this->view('rental/rents');
     }
 }

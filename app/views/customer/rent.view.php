@@ -14,8 +14,12 @@ require_once('../app/views/navbar/customer-navbar.php');
     <!-- Cart -->
     <!-- <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart</button> -->
     <!-- with number of item in cart -->
-    <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart <span id="cart-count" class="badge bg-primary">0</span></button>
-
+    <div class="cart-notification">
+        <button id="cart" class="btn-icon " type="button"> 
+            <span><i class="fa fa-shopping-cart"></i></span>
+            <span id="cart-count" class="badge">0</span>
+        </button>
+    </div>
  
 </div>
 
@@ -44,8 +48,8 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <!-- Select location button  -->
                 <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
                 <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
-                <button id="get-location" class="btn" > <i class="fa fa-map-marker"></i></button>
-                <button id="search-button"  class="btn" type="submit"><i class="fa fa-search"></i></button>
+                <button id="get-location" class="btn-icon" > <i class="fa fa-map-marker"></i></button>
+                <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
             </div>
             </form>
     </div>
@@ -86,18 +90,23 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="select-date">
 
 <!-- Start date and End date for rent  -->
-<div class="modal-content">
+<div class="modal-content-mini">
     <span class="close">&times;</span>
     <div class=" col-lg-12 flex-d-c gap-2 ">
-        <h2 class="justify-content-center flex-d"> Select Date for Rent </h2>
+        <h2 class="justify-content-center flex-d">Select Date</h2>
         <div class="row gap-2">
-            <label for="start-date">Start Date</label>
-            <input type="date" id="start-date" class="form-control-lg " name="start-date" required>
-            <label for="end-date">End Date</label>
-            <input type="date" id="end-date" class="form-control-lg" name="end-date" required>
+
+            <div class="date"><label for="start-date">Start Date</label></div>
+            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required value="<?php isset($cart)  && print($cart->start_date); ?>"
+            ></div>
+            <div class="date"><label for="end-date">End Date</label></div>
+            <div class="date"><input type="date" id="end-date" class="form-control-lg" name="end-date" required value="<?php isset($cart)  && print($cart->end_date); ?>"></div>
+            <div class="date">
+            <h5>Select days you want to rent camping equipment. If you change the date new cart will be created. Items added to the previous cart will be removed.</h5>
         </div>
+        </div>  
         <div class="row gap-2">
-            <button id="confirm-date" class="btn" type="button">Confirm Date</button>
+            <div class="date"><button id="confirm-date" class="btn" type="button">Confirm Date</button></div>
         </div>
     </div>
 </div>
@@ -203,9 +212,30 @@ confirmDateButton.onclick = function() {
     console.log(startDate);
     console.log(endDate);
 
+
+    // validate the date
+    if (startDate == "" || endDate == "") {
+        alertmsg("Please select the date",'error');
+        return;
+    }
+
+    // start date should be less than end date , start date should be greater than tommorow
+    if (startDate > endDate) {
+        alertmsg("Start date should be less than end date",'error');
+        return;
+    }
+
+    if (startDate <= new Date().toISOString().split('T')[0]) {
+        alertmsg("Start date should be greater than today",'error');
+        return; 
+    }
+
+
+
     setNewDate(startDate, endDate);
 
     dateModal.style.display = "none";
+
 }
 
 
@@ -224,6 +254,10 @@ var cartClose = document.getElementById("cart-modal").querySelector(".close");
 cartModalBtn.onclick = function() {
 
     // get cart items
+   getCart()
+}
+
+function getCart(){
     $.ajax({
         headers: {
             'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -295,6 +329,9 @@ window.onclick = function(event) {
             // remove the item from the cart
             $(`[data-id=${id}]`).remove();
             getCartCount();
+            getCart()
+
+            
         },
         error: function(err) {
             console.log(err);
@@ -376,6 +413,7 @@ window.onclick = function(event) {
 // #item-list load with ajax http post request
 
 $(document).ready(function() {
+    getCartCount();
     $.ajax({
         headers: {
             'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
@@ -429,6 +467,7 @@ function setNewDate(start, end) {
         success: function(data) {
             console.log(data);
             getResults();
+            getCartCount();
         },
         error: function(err) {
             console.log(err);
