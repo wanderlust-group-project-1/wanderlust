@@ -30,14 +30,15 @@
 
   <ul class="nav">
 
-    <li class="nav-item">
+    <li data-id="dashboard" class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/dashboard">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li data-id="equipments" class="nav-item">
+
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/equipments" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Equipments</span>
@@ -46,7 +47,7 @@
       
     </li>
 
-    <li class="nav-item">
+    <li data-id="orders" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/orders" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Orders</span>
@@ -57,7 +58,7 @@
 
 
 
-    <li class="nav-item">
+    <li data-id="complaints" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/complaints" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Complaints</span>
@@ -110,7 +111,7 @@
       </a>
     </li> -->
 
-    <li class="nav-item">
+    <li data-id="statistics" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="statistics" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Statistics</span>
@@ -119,7 +120,7 @@
 
     </li>
     <!-- Settings -->
-    <li class="nav-item">
+    <li data-id="settings" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/settings" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Settings</span>
@@ -350,4 +351,28 @@
             modal.style.display = "none";
         }
     }
+</script>
+
+
+<script>
+  // sidebar selected nav item
+
+  // get current url and split it
+
+  $(document).ready(function() {
+    var url = window.location.href;
+    var urlSplit = url.split('/');
+    var page = urlSplit[urlSplit.length - 1];
+    console.log(page);
+    var navItems = document.querySelectorAll('.nav-item');
+
+    navItems.forEach(function(item) {
+      if (item.getAttribute('data-id') == page) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+
+
 </script>
