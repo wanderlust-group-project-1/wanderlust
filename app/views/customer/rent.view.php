@@ -23,47 +23,49 @@ require_once('../app/views/navbar/customer-navbar.php');
  
 </div>
 
-<div class="col-lg-12 flex-d justify-content-center w-c p-4">
-    <div class="card-normal py-6 px-0">
-    <div class="row">
-        <div class="col-lg-8 flex-d justify-content-center">
-    
-    
-            <div class = "search-container col-lg-12">
+<div class="customer-header w-100">
+<div class="col-lg-6 flex-d justify-content-center w-c p-4">
+    <div class="card-normal mw-100 pl-10 w-100">
+        <div class="row">
+            <div class="col-lg-8 flex-d justify-content-center">
+                <div class = "search-container col-lg-12">
                 <form action="<?= ROOT_DIR ?>/search" method="get">
-                <div class="row gap-2">
-                    <input type="text" id="search-input"  placeholder="Search.." name="search">
-                    <!-- Select Type of result -->
-                    <select name="type" id="type">
-                        <option value="all">All</option>
-                        <option value="shops">Shops</option>
-                        <option value="items">Items</option>
-                    </select>
-                    <!-- Select location button  -->
-                    <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
-                    <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
-                    <button id="get-location" class="btn-icon" > <i class="fa fa-map-marker"></i></button>
-                    <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
-                </div>
+                    <div class="row gap-2 w-100">
+                        <input type="text" id="search-input"  placeholder="Search item by name.." name="search">
+                        <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
+                        <!-- Select Type of result -->
+                        <select name="type" id="type">
+                            <option value="all">All</option>
+                            <option value="shops">Shops</option>
+                            <option value="items">Items</option>
+                        </select>
+                        <!-- Select location button  -->
+                        <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
+                        <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
+                        <button id="get-location" class="btn-icon" > <i class="fa fa-map-marker"></i></button>
+                        
+                    </div>
                 </form>
+                </div>
+            </div>
         </div>
-    
     </div>
 </div>
-<div class="row gap-2">
-        <!-- Change date -->
-        <div>
-            <p>Change the duration here</p>
+
+<div class="col-lg-6 flex-d justify-content-center w-c p-4">
+    <div class="card-normal mw-100 pl-10 w-100">
+        <div class="row gap-2">
+            <!-- Change date -->
+            <div>
+                 <p class="date-change-phase">Change the duration here</p>
+            </div>
+            <div>
+            <button id="change-date" class="btn-text-green" type="button">Change Date</button>
+            </div>
         </div>
-        <div>
-        <button id="change-date" class="btn-text-green" type="button">Change Date</button>
-        </div>
-        
     </div>
-
 </div>
 </div>
-
 
 
 <div class="row" id="search-result"> 
@@ -77,10 +79,11 @@ require_once('../app/views/navbar/customer-navbar.php');
     <div class="modal-content ">
     <span class="close">&times;</span>
 
-    <div class=" col-lg-12 flex-d-c gap-2 ">
+    <div class=" col-lg-12 flex-d-c gap-2 location-container">
 
-        <input id="pac-input" class="controls " type="text" placeholder="Enter Location" />
-
+    <div class="location-form-element">    
+    <input id="pac-input" class="controls " type="text" placeholder="Enter Location" />
+    </div>
         <div id="map-canvas" class="map-canvas"> </div>
 
             <!-- <input type="text" class="form-control" id="latitude"  hidden/>
@@ -89,7 +92,6 @@ require_once('../app/views/navbar/customer-navbar.php');
         <div class="location-button-container">
             <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
         </div>
-
     </div>
     </div>
 
@@ -105,12 +107,11 @@ require_once('../app/views/navbar/customer-navbar.php');
         <div class="row gap-2">
 
             <div class="date"><label for="start-date">Start Date</label></div>
-            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required value="<?php isset($cart)  && print($cart->start_date); ?>"
-            ></div>
+            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required value="<?php isset($cart)  && print($cart->start_date); ?>"></div>
             <div class="date"><label for="end-date">End Date</label></div>
             <div class="date"><input type="date" id="end-date" class="form-control-lg" name="end-date" required value="<?php isset($cart)  && print($cart->end_date); ?>"></div>
             <div class="date">
-            <h5>Select days you want to rent camping equipment. If you change the date new cart will be created. Items added to the previous cart will be removed.</h5>
+            <div class="date-para"><h5>Select days you want to rent camping equipment. If you change the date new cart will be created. Items added to the previous cart will be removed.</h5></div>
         </div>
         </div>  
         <div class="row gap-2">
