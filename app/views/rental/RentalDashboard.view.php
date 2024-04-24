@@ -82,33 +82,27 @@ require_once('../app/views/layout/header.php');
                 <span class="label">Rs.60 000 : Per Month</span> -->
             </div>
 
+
+        <?php if($rent && $rent[0]) : ?>
             <div class="card">
+
                 <div class="head">
                     <div>
-                        <!-- <h3>1st March</h3> -->
-                        <!-- <h3><?php echo $rent->start_date ?></h3> -->
-                        <h3> <?php echo (new DateTime($rent->start_date))->format('jS F') ?></h3>
+
+                       
+                        <h3> <?php echo (new DateTime($rent[0]->start_date))->format('jS F') ?></h3>
                         <p>Upcoming Booking</p>
                     </div>
+
+
                 </div>
                 <div class="booking-bar .flex-d mt-4 mb-2">
-                    <p><?php echo $rent->customer_name ?></p>
+                    <p><?php echo $rent[0]->customer_name ?></p>
                 </div>
-                <!-- <span class="progress" data-value="30%"></span>
-                <span class="label">30%</span> -->
+             
             </div>
-            <!-- <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>21st February</h3>
-                        <p>Recent Booking</p>
-                    </div>
-                </div>
-                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
-                    <p>Julius John</p>
-                </div>
-        
-            </div> -->
+            <?php endif; ?>
+          
         </div>
          
 
