@@ -7,9 +7,14 @@ function initialize() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
 
+	$('#latitude').val(7.873053999999999);
+	$('#longitude').val(80.77179699999999);
+
     console.log(document.getElementById('map-canvas'));
 
 	var map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
+	var geocoder = new google.maps.Geocoder();
+
 
 	// Create the search box and link it to the UI element.
 	var input = document.getElementById('pac-input');
@@ -22,16 +27,57 @@ function initialize() {
 		map: map
 	});
 
+
+
+	function updatePosition(latlng) {
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+            if (status === 'OK') {
+                if (results[0]) {
+                    var foundCountry = false;
+                    results[0].address_components.forEach(function(component) {
+                        if (component.types.includes('country')) {
+                            console.log('Country:', component.long_name);
+                            foundCountry = component.long_name === 'Sri Lanka'; // Check for a specific country
+                            $('#country').val(component.long_name); // Update country input field
+                        }
+                    });
+                    if (!foundCountry) {
+                        alertmsg('Location is outside of Sri Lanka. Please select a location within Sri Lanka.','error');
+						// reset the marker to the previous location
+						marker.setPosition(new google.maps.LatLng(7.873053999999999,80.77179699999999));
+						map.panTo(new google.maps.LatLng(7.873053999999999,80.77179699999999));
+						console.log("change back");
+
+						return;
+                    }
+                }
+            } else {
+                console.log('Geocoder failed due to: ' + status);
+            }
+        });
+		console.log(latlng.lat());
+        $('#latitude').val(latlng.lat());
+        $('#longitude').val(latlng.lng());
+    }
+
+
+
+
+
+
 	// Bias the SearchBox results towards current map's viewport.
 	map.addListener('bounds_changed', function() {
 		searchBox.setBounds(map.getBounds());
 	});
 
 	google.maps.event.addListener(marker, 'dragend', function (event) {
-		var poiLat = this.getPosition().lat();
-		var poiLon = this.getPosition().lng();
-		$('#latitude').val(poiLat);
-		$('#longitude').val(poiLon);
+		// var poiLat = this.getPosition().lat();
+		// var poiLon = this.getPosition().lng();
+		// $('#latitude').val(poiLat);
+		// $('#longitude').val(poiLon);
+		updatePosition(this.getPosition());
+		console.log("dragend");
+
 	});
 
 	var markers = [];

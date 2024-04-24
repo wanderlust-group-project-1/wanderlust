@@ -139,6 +139,7 @@ class Orders {
 
 
 
+        $response->statusCode(200)->data(['order_id' => $a])->send();
 
 
         // $rent->updateRentStatus($data);

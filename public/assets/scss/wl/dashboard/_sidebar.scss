@@ -47,13 +47,18 @@ $sidebar-top: 60px;
             color: $color-primary;
         }
 
+        &.active{
+            background-position: left bottom;
+            color: $color-primary;
+        }
+
         &.active {
             background-color: $theme-color;
-            color: #fff;
+            // color: #fff;
 
-            .sub-menu {
-                display: block;
-            }
+            // .sub-menu {
+            //     display: block;
+            // }
 
             .menu-arrow {
                 transform: rotate(90deg);
