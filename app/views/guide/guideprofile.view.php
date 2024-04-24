@@ -42,7 +42,7 @@ require_once('../app/views/layout/header.php');
         </div>
 
         <div class="guide-availability" id="guide-availability">
-            <button class="btn-primary" id="edit-guide-profile-button">Edit Guide Profile</button>
+            <button class="btn-primary-small" id="edit-guide-profile-button">Edit Guide Profile</button>
         </div>
 
         <div class="info-data mt-5 ml-5 mr-5">
