@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 23, 2024 at 10:56 AM
+-- Generation Time: Apr 24, 2024 at 05:34 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -1030,13 +1030,21 @@ CREATE TABLE `guide_booking` (
 --
 
 INSERT INTO `guide_booking` (`id`, `guide_id`, `customer_id`, `package_id`, `created_at`, `date`, `no_of_people`, `location`, `transport_supply`) VALUES
-(18, 9, 32, 2, '2024-04-22 12:31:46', '2024-04-25', 5, 'Kandy', 1),
-(23, 9, 32, 2, '2024-04-23 04:22:33', '2024-04-29', 5, 'Kandy', 1),
-(24, 9, 32, 30, '2024-04-23 04:41:22', '2024-04-28', 5, 'Ella', 1);
+(28, 9, 32, 1, '2024-04-23 15:14:11', '2024-04-25', 5, 'Ella', 1),
+(31, 9, 32, 30, '2024-04-24 05:32:24', '2024-04-28', 5, 'Ella', 1);
 
 --
 -- Triggers `guide_booking`
 --
+DELIMITER $$
+CREATE TRIGGER `after_guide_booking_delete` AFTER DELETE ON `guide_booking` FOR EACH ROW BEGIN
+    UPDATE guide_availability
+    SET availability = 1
+    WHERE guide_id = OLD.guide_id
+    AND date = OLD.date;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `after_guide_booking_insert` AFTER INSERT ON `guide_booking` FOR EACH ROW BEGIN
     -- Update availability in guide_availability table to 0
@@ -3949,7 +3957,7 @@ ALTER TABLE `guide_availability`
 -- AUTO_INCREMENT for table `guide_booking`
 --
 ALTER TABLE `guide_booking`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `item`

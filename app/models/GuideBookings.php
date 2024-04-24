@@ -72,5 +72,16 @@ class GuideBookingsModel{
         // show($q);
         return $this->query($q->getQuery(), $q->getData())[0];
     }
+
+    public function deleteBooking(int $guideId, string $date): mixed {
+      
+        //return $this->delete(['guide_id' => $guideId, 'date' => $date]);
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->delete()->where('guide_id', $guideId)->where('date', $date);
+        return $this->query($q->getQuery(), $q->getData());
+
+        
+    }
     
 }

@@ -15,25 +15,40 @@ require_once('../app/views/layout/header.php');
             <li class="divider">/</li>
             <li><a href="#" class="active">Availability</a></li>
         </ul>
+        <div class="guide-profile-content mt-5 tiny-topic">
+            <p>Update your Availability</p>
 
-        <div class="guide-calendar">
-            <div class="cal_header" data-id="">
-                <button class="cal_prev" onclick="prevMonth()">&#10094;</button>
-                <h4 id="month-year">April 2024</h4>
-                <button class="cal_next" onclick="nextMonth()">&#10095;</button>
-            </div>
-            <div class="cal_weekdays">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-            </div>
-            <div class="cal_days" id="days">
+        <div class="calendarandlegend">
+            <div class="guide-calendar">
+                <div class="cal_header" data-id="">
+                    <button class="cal_prev" onclick="prevMonth()">&#10094;</button>
+                    <h4 id="month-year">April 2024</h4>
+                    <button class="cal_next" onclick="nextMonth()">&#10095;</button>
+                </div>
+                <div class="cal_weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="cal_days" id="days">
 
+                </div>
             </div>
+            <!-- <div class="info-data mt-5">
+                <div class="guide-card-new legend">
+                    <span class="label">Legend</span>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                        <p>Available Days</p>
+                    </div>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                        <p>Today</p>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </div>
 </div>

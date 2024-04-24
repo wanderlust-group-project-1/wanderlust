@@ -69,6 +69,44 @@
   }
 }
 
+.btn-primary-small{
+  background: $color-primary;
+  border: 1px solid $color-primary;
+  color: $white-text;
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: $font-semi-bold;
+
+  // Initial background with transparent gradient
+  background-image: linear-gradient(to right, $color-dark 50%, $color-primary 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.3s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+    color: $color-lightest;
+  }
+}
+
+.btn-primary-lg{
+  background: $color-primary;
+  border: 1px solid $color-primary;
+  color: $white-text;
+  padding: 1rem;
+  // margin: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: $font-semi-bold;
+  width: 100%;
+
+  &:hover {
+    background-position: left bottom;
+    color: $color-lightest;
+  }
+}
 .btn-icon {
   background-color: transparent;
   font-size: 18px;
@@ -294,4 +332,25 @@
   }
 }
 
+.btn-text-black {
+  background-color: transparent;
+  font-size: 1.5rem;
+  color: $color-black;
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-family: "poppins", sans-serif;
+
+  &:hover{
+    // color: $gray-text;
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .btn-text-black{
+    font-size: 1.25rem;
+  }
+}
 
