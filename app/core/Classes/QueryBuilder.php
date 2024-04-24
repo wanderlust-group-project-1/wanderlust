@@ -48,6 +48,12 @@ class QueryBuilder
         return $this;
     }
 
+    public function delete(): self
+    {
+        $this->query = "DELETE FROM $this->table";
+        return $this;
+    }
+
 
 
     public function count(string $column = '*')

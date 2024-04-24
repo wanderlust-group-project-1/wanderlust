@@ -38,7 +38,7 @@
                 
                 <li><a href="<?php echo ROOT_DIR ?>/findGuide" class="nav__link">Guides</a></li>
 
-                <li><a href="<?php echo ROOT_DIR ?>/myBookings" class="nav__link">myBookings</a></li>
+                <li><a href="<?php echo ROOT_DIR ?>/myBookings" class="nav__link">My Bookings</a></li>
 
                 <li><a href="<?php echo ROOT_DIR ?>/rent" class="nav__link">Rent</a></li>
 

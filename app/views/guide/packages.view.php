@@ -16,6 +16,9 @@ require_once('../app/views/layout/header.php');
             <li><a href="#" class="active">My Packages</a></li>
         </ul>
 
+        <div class="guide-profile-content mt-5 tiny-topic">
+            <p>Add up your packages according to your preferences</p>
+
         <div class="package-details">
         </div>
 
@@ -243,7 +246,6 @@ require_once('../app/views/layout/header.php');
                 closeButton.addEventListener("click", function() {
                     var modal = document.getElementById("view-package-modal");
                     modal.style.display = "none";
-                    location.reload();
                 });
             },
             error: function(err) {
@@ -336,7 +338,6 @@ require_once('../app/views/layout/header.php');
     $(document).on('click', '#delete-package', function() {
         var packageId = $(this).data('id');
         console.log(packageId);
-        console.log('delete package 2');
 
         $.ajax({
         headers: {

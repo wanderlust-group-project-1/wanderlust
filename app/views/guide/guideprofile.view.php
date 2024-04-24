@@ -23,7 +23,9 @@ require_once('../app/views/layout/header.php');
         </ul>
 
         <div class="guide-availability" id="guide-availability">
-            <a href="<?= ROOT_DIR ?>/guideavailability"><i class="fas fa-calendar"></i></a>
+            <a class="btn-text-black" href="<?= ROOT_DIR ?>/guideavailability"><i class="fas fa-calendar" aria-hidden="true"></i> Availability</i></a>
+            <!-- <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>   -->
+
         </div>
 
         <div class="guide-profile" id="guide-profile">
@@ -40,11 +42,11 @@ require_once('../app/views/layout/header.php');
         </div>
 
         <div class="guide-availability" id="guide-availability">
-            <button class="btn-edit" id="edit-guide-profile-button">Edit Guide Profile</button>
+            <button class="btn-primary" id="edit-guide-profile-button">Edit Guide Profile</button>
         </div>
 
         <div class="info-data mt-5 ml-5 mr-5">
-            <div class="card">
+            <div class="guide-card-new">
                 <span class="label">Languages</span>
 
                 <?php
@@ -57,7 +59,7 @@ require_once('../app/views/layout/header.php');
                     </div>
                 <?php endforeach; ?>
             </div>
-            <div class="card">
+            <div class="guide-card-new">
                 <span class="label">Certifications</span>
 
                 <?php
@@ -70,10 +72,7 @@ require_once('../app/views/layout/header.php');
                     </div>
                 <?php endforeach; ?>
             </div>
-        </div>
-
-        <div class="info-data mt-5 ml-5 mr-5">
-            <div class="card">
+            <div class="guide-card-new">
                 <span class="label">Booking History</span>
 
                 <div class="booking-bar .flex-d mt-4 mb-2">

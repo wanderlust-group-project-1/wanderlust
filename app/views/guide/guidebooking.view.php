@@ -9,29 +9,67 @@ require_once('../app/views/layout/header.php');
     <div class="sidebar-flow"></div>
 
     <div class="guide-dash-main flex-d-c">
-        <h1 class="title mb-2">My Booking</h1>
+        <h1 class="title mb-2">Bookings</h1>
         <ul class="breadcrumbs">
             <li><a href="<?= ROOT_DIR ?>/home">Home</a></li>
             <li class="divider">/</li>
-            <li><a href="#" class="active">My Booking</a></li>
+            <li><a href="#" class="active">Bookings</a></li>
         </ul>
-        <div class="guide-calendar">
-            <div class="cal_header" data-id="">
-                <button class="cal_prev" onclick="prevMonth()">&#10094;</button>
-                <h4 id="month-year">April 2024</h4>
-                <button class="cal_next" onclick="nextMonth()">&#10095;</button>
-            </div>
-            <div class="cal_weekdays">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-            </div>
-            <div class="cal_days" id="days">
+        <div class="guide-profile-content mt-5 tiny-topic">
+            <p>View your Recent and Upcoming Bookings</p>
+        <div class="calendarandbooking">
 
+            <div class="guide-calendar">
+                <div class="cal_header" data-id="">
+                    <button class="cal_prev" onclick="prevMonth()">&#10094;</button>
+                    <h4 id="month-year">April 2024</h4>
+                    <button class="cal_next" onclick="nextMonth()">&#10095;</button>
+                </div>
+                <div class="cal_weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="cal_days" id="days">
+
+                </div>
+            </div>
+            <!-- <div class="info-data mt-5">
+                <div class="guide-card-new legend">
+                    <span class="label">Legend</span>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                        <p>Booked Days</p>
+                    </div>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                        <p>Today</p>
+                    </div>
+                </div>
+            </div> -->
+            <div class="info-data mt-5">
+                <div class="guide-card-new booking-history">
+                    <span class="label">Recent Bookings</span>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                        <p>2024-04-25 - Kandy</p>
+                    </div>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>2024-04-25 - Kandy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="info-data mt-5">
+                <div class="guide-card-new booking-history">
+                    <span class="label">Upcoming Bookings</span>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                        <p>2024-04-25 - Kandy</p>
+                    </div>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>2024-04-25 - Kandy</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -136,9 +174,15 @@ require_once('../app/views/layout/header.php');
                             $button.click(function() {
                                 // Call the openModalSchedule function with the day as parameter
                                 openModalSchedule($button.text());
+
+                                // Call deleteBooking function only for the clicked button
+                                deleteBooking($button.text());
                             });
+
+                            console.log($button.text()); // This line seems unnecessary now, you can remove it
                         }
                     });
+
 
                 });
             },
@@ -175,41 +219,46 @@ require_once('../app/views/layout/header.php');
 
 <script>
     function openModalSchedule(bookedDay) {
+        $(document).on('click', '.delete-package-button', function() {
+            var modal = document.getElementById("delete-booking-modal");
+            modal.style.display = "block";
+        });
+
         const modal = document.getElementById("view-booking-modal");
         modal.style.display = "block";
 
         // Make AJAX request to fetch booking details for the selected day
         $.ajax({
-                headers: {
-                    Authorization: "Bearer " + getCookie('jwt_auth_token')
-                },
-                url: '<?= ROOT_DIR ?>/api/guideBookings/getBookingDetailsByDate/' + currentYear+ '-' + (currentMonth+1) + '-' + bookedDay,
-                method: 'POST',
-                contentType: 'application/json',
-                success: function(data) {
-                    // var modalContent = document.querySelector('#booking-details-container .modal-content');
-                    // modalContent.innerHTML = data;
-                    populateBookingDetails(data.data);
-                    var closeBtn = document.querySelector('#view-booking-modal .close-button');
-                    closeBtn.addEventListener('click', function() {
-                        modal.style.display = "none";
-                        console.log("Modal closed");
-                    });
-                },
-                error: function(err) {
-                    console.log(err);
-                    }
-            });
-        }
+            headers: {
+                Authorization: "Bearer " + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/guideBookings/getBookingDetailsByDate/' + currentYear + '-' + (currentMonth + 1) + '-' + bookedDay,
+            method: 'POST',
+            contentType: 'application/json',
+            success: function(data) {
+                // var modalContent = document.querySelector('#booking-details-container .modal-content');
+                // modalContent.innerHTML = data;
+                populateBookingDetails(data.data);
+                var closeBtn = document.querySelector('#view-booking-modal .close-button');
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = "none";
+                    console.log("Modal closed");
+                });
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
 
 
-        function populateBookingDetails(bookingDetails) {
-            // Access modal content container
-            const modalContent = document.getElementById("booking-details-container");
-            modalContent.innerHTML = ""; // Clear previous content
+    function populateBookingDetails(bookingDetails) {
+        // Access modal content container
+        const modalContent = document.getElementById("booking-details-container");
+        modalContent.innerHTML = ""; // Clear previous content
 
-            // Create HTML to display booking details
-            const tableHTML = `
+        // Create HTML to display booking details
+        const tableHTML = `
                 <h2>Booking Details</h2>
                 <div class="booking-details">
                     <table class="table-details">
@@ -233,9 +282,9 @@ require_once('../app/views/layout/header.php');
                 </div>
             `;
 
-            // Insert HTML into modal content container
-            modalContent.innerHTML = tableHTML;
-        }
+        // Insert HTML into modal content container
+        modalContent.innerHTML = tableHTML;
+    }
 </script>
 
 <!-- Modal box to view booking details -->
@@ -248,3 +297,67 @@ require_once('../app/views/layout/header.php');
         <input type="submit" class="delete-package-button btn btn-danger btn-full m-1" name="submit" value="Cancel Booking">
     </div>
 </div>
+
+<div id="delete-booking-modal" class="delete-booking-modal modal">
+    <div class="modal-content ">
+        <span class="close ">&times;</span>
+        <h2>Delete Booking</h2>
+        <p>Are you sure you want to cancel this booking?</p>
+        <div class="flex-d gap-2 mt-5">
+            <button id="delete-booking" class="btn btn-danger">Confirm</button>
+            <button id="cancel-delete" class="btn modal-close">Cancel</button>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .delete-booking-modal {
+        display: none;
+        position: fixed;
+        z-index: 200;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Unified background color */
+        /* padding-top: 60px; */
+    }
+</style>
+
+<script>
+    function deleteBooking(bookedDay) {
+        console.log('delete booking');
+        $(document).on('click', '#delete-booking', function() {
+            // Make AJAX request to delete the booking
+            $.ajax({
+                headers: {
+                    'Authorization': "Bearer " + getCookie('jwt_auth_token')
+                },
+                url: '<?= ROOT_DIR ?>/api/guideBookings/deleteBooking/' + currentYear + '-' + (currentMonth + 1) + '-' + bookedDay,
+                method: 'POST',
+                contentType: 'application/json',
+                success: function(data) {
+                    console.log(data);
+                    modal.style.display = "none";
+                    alertmsg("Booking deleted successfully");
+                    location.reload();
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                complete: function() {
+                    var modal = document.getElementById("delete-booking-modal");
+                    modal.style.display = "none";
+                }
+            });
+        });
+
+        $(document).on('click', '#cancel-delete', function() {
+            var modal = document.getElementById("delete-booking-modal");
+            modal.style.display = "none";
+        });
+    }
+</script>

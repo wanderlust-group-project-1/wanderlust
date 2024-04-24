@@ -59,4 +59,18 @@ class GuideBookings{
     
     }
 
+    public function deleteBooking($date): void {
+        $response = new JSONResponse;
+
+        $GuideBookingsModel = new GuideBookingsModel;
+
+        $GuideBookingsModel->deleteBooking(UserMiddleware::getUser()['id'],$date);
+
+        $response->success(true)
+            ->message('Booking deleted successfully')
+            ->statusCode(200)
+            ->send();
+
+    }
+
 }
