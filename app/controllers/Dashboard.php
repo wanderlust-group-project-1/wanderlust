@@ -28,8 +28,7 @@ class Dashboard
             ];
 
             // show($user->id);
-            show($data);
-
+ 
 
 
 

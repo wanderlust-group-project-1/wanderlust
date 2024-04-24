@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 22, 2024 at 01:53 PM
+-- Generation Time: Apr 23, 2024 at 05:11 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -173,6 +173,23 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetCurrentAcceptedRents` (IN `equipmentID` 
         r.end_date > CURRENT_DATE()
     ORDER BY 
         r.start_date ASC;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetEquipmentRentalCountByRental` (IN `start_date` DATE, IN `end_date` DATE, IN `rentalservice_id` INT)   BEGIN
+    SELECT 
+        e.name AS equipment_name,
+        e.id AS equipment_id,
+        COUNT(r.id) AS rental_count
+    FROM rent r
+    JOIN rent_item ri ON r.id = ri.rent_id
+    JOIN item i ON ri.item_id = i.id
+    JOIN equipment e ON i.equipment_id = e.id
+    WHERE r.rentalservice_id = rentalservice_id 
+      AND r.start_date >= start_date
+      AND r.end_date <= end_date
+      AND r.status IN ('rented', 'completed') -- Assumes these statuses mean the equipment was in use
+    GROUP BY e.id, e.name
+    ORDER BY rental_count DESC;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID` INT, IN `filterType` VARCHAR(20))   BEGIN
@@ -4011,7 +4028,7 @@ INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user
 (22, 'NS', ' 255 Ns ', 'b048294873', '0832873293', 71, 'waiting', '', NULL, '1.webp'),
 (23, 'ANDSD dad', 'No 255, Neluwa RD\r\nGorakaduwa', 'b43532423', '076024489', 72, 'accepted', '65435a34072e4.pdf', NULL, '1.webp'),
 (24, 'Nirmal', ' ABC', 'B3243354', '082372434', 73, 'waiting', '65438a19444d3.pdf', NULL, '1.webp'),
-(25, 'ACC Rent ', ' Colombo 04', 'B873242343', '076024489', 87, 'waiting', '', 3, '661df1d72bc83.png'),
+(25, 'ACC Rent ', ' Colombo 04', 'B873242343', '076024489', 87, 'waiting', '', 3, '66272570cbdde.jpg'),
 (26, 'nirmal', 'Address is required', '200156273849', '0713458323', 91, 'waiting', '', NULL, '1.webp'),
 (27, 'nirmal', 'Address is required', '200156273849', '0713458323', 92, 'waiting', '', NULL, '1.webp'),
 (28, 'nirmal', 'Address is required', '200156273849', '0713458323', 93, 'waiting', '', NULL, '1.webp'),

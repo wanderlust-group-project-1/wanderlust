@@ -73,22 +73,29 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
                 <div class="flex-d-c align-items-end">
-                    <div class="row gap-4 ">
+                    <div class="row flex-d-c gap-4 ">
 
                         <!-- select pay fully or patial  -->
 
 
+<table class="payment-table">
+    
 
+                        <!-- <h4> Total: Rs. <?php echo $total; ?> </h4>
+                        <h4> Booking Fee: Rs. <?php echo $total * 0.2 ?> </h4> -->
+                     
+                        <tr>
+                            <td> Total: </td>
+                            <td> Rs. <?php echo $total; ?> </td>
+                        </tr>
+                        <tr>
+                            <td> Booking Fee: </td>
+                            <td> Rs. <?php echo $total * 0.2 ?> </td>
+                        </tr>
+                      
 
-                        <h3>Total: Rs. 
+</table>
 
-                                <?php
-
-                                echo $total;
-                                ?>
-
-                          
-                        </h3>
                     </div>
                     <div class="row gap-2 ">
                         <!-- <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary btn-full btn-lg">Pay</a> -->
@@ -179,7 +186,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
                                 setTimeout(() => {
                                     window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
-                                    
+
                                     hideLoader();
 
                                 }, 1000);
@@ -207,7 +214,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                         // Note: Prompt user to pay again or show an error page
                         console.log("Payment dismissed");
                         alertmsg("Payment dismissed", "error");
-                        
+
                     };
 
                     // Error occurred
