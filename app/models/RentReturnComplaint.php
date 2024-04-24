@@ -1,7 +1,8 @@
 <?php
 
 
-class RentReturnComplaintModel {
+class RentReturnComplaintModel
+{
     use Model;
 
 
@@ -20,7 +21,7 @@ class RentReturnComplaintModel {
     //     complaint_descriptions: [],
     //     charges: []
     // };
-    
+
 
 
     protected string $table = 'rent_return_complaints';
@@ -31,26 +32,18 @@ class RentReturnComplaintModel {
         'charge'
     ];
 
-    public function createReturnComplaint($data) {
+    public function createReturnComplaint($data)
+    {
         $data = array_filter($data, function ($key) {
             return in_array($key, $this->allowedColumns);
         }, ARRAY_FILTER_USE_KEY);
 
         $this->insert($data);
-
-
-    
-       
-
-
-
-
-
-
     }
 
-    public function getComplaintsByRentalId($rental_id) {
-        
+    public function getComplaintsByRentalId($rental_id)
+    {
+
         $q = new QueryBuilder;
         // join rent table to get rental
         $q->setTable('rent_return_complaints');
@@ -60,30 +53,45 @@ class RentReturnComplaintModel {
             ->where('rent.rentalservice_id', $rental_id);
 
         // echo $q->getQuery();
-        return $this->query($q->getQuery(),$q->getData());
+        return $this->query($q->getQuery(), $q->getData());
     }
 
-    public function getComplaint($id) {
+    public function getComplaint($id)
+    {
         $q = new QueryBuilder;
         $q->setTable('rent_return_complaints');
         $q->select('rent_return_complaints.*,rent.id as rent_id')
             ->join('rent', 'rent_return_complaints.rent_id', 'rent.id')
             ->where('rent_return_complaints.id', $id);
 
-        return $this->query($q->getQuery(),$q->getData())[0];
+        return $this->query($q->getQuery(), $q->getData())[0];
     }
 
-    public function cancelComplaint($id) {
+    public function cancelComplaint($id)
+    {
         $q = new QueryBuilder;
         $q->setTable('rent_return_complaints');
 
         $q->update(['status' => 'cancelled'])
             ->where('id', $id);
 
-        return $this->query($q->getQuery(),$q->getData());
-
-        
+        return $this->query($q->getQuery(), $q->getData());
     }
 
 
+    public function getAdminRentalComplaints($status = "pending")
+    { {
+
+            $q = new QueryBuilder;
+            // join rent table to get rental
+            $q->setTable('rent_return_complaints');
+            $q->select('rent_return_complaints.*,rent.id as rent_id')
+                ->setTable('rent_return_complaints')
+                ->join('rent', 'rent_return_complaints.rent_id', 'rent.id')
+                ->where('rent_return_complaints.status', $status);
+
+            // echo $q->getQuery();
+            return $this->query($q->getQuery(), $q->getData());
+        }
+    }
 }

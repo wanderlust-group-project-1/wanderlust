@@ -3057,6 +3057,33 @@ fieldset {
   width: 12.5%;
 }
 
+.btn-card {
+  cursor: pointer;
+  border: none;
+  background: #B2BDA0;
+  outline: none;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  font-weight: 500;
+  width: 250px;
+  font-size: 20px;
+  font-style: bold;
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-left: 20px;
+  background-image: linear-gradient(to right, #FFFFFF 50%, #8D9E6F 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.2s ease-out;
+}
+.btn-card:hover {
+  background-position: left bottom;
+  color: #567356;
+}
+
 .btn {
   cursor: pointer;
   border: none;
@@ -3874,7 +3901,7 @@ input.invert {
 }
 
 .align-items-center {
-  align-items: center;
+  align-items: center !important;
 }
 
 .align-items-end {
