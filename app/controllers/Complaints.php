@@ -67,11 +67,6 @@ class Complaints{
 
         $this->view('customer/components/complaintlist', $data);
 
-      
-
-        
-
-
     }
     
     public function returnComplaintbyCustomer(string $a = '', string $b = '', string $c = ''):void {
@@ -107,5 +102,15 @@ class Complaints{
 
         $this->view('customer/components/complaint', ['complaint' => $complaint, 'order' => $order, 'items' => $items]);
     }
+
+    public function rentCompaints(string $a = '', string $b = '', string $c = ''):void {
+        $rentcomplaint = new RentComplaintModel;
+        $data = ['customer_id' => UserMiddleware::getUser()['id']];
+        $data['complaints'] = $rentcomplaint->getComplaintsByCustomer($data);
+        show ($data['complaints']);
+
+        $this->view('customer/components/customercomplaintlist', $data);
+    }
+
 
 }
