@@ -28,7 +28,7 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>14</h1>
+                                          <h1>15</h1>
 
                                     </div>
                               </div>
@@ -54,7 +54,7 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>26</h1>
+                                          <h1>27</h1>
 
                                     </div>
                               </div>
@@ -167,7 +167,7 @@ require_once('../app/views/admin/components/navbar.php');
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/    rentalServices/item">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/rentalServices/item">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
@@ -188,39 +188,6 @@ require_once('../app/views/admin/components/navbar.php');
                                           </div>
                                     </div>
 
-                                    <span class="user-progress" data-value="14%"></span>
-                                    <span class="label">Rental Services</span>
-                                    <span class="progress" data-value="26%"></span>
-                                    <span class="label">Guides</span>
-                                    <span class="progress" data-value="32%"></span>
-                                    <span class="label">Customers</span>
-
-                              </div>
-                              <div class="flex-d-c">
-                                    <!-- <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/charts">
-                                                <button type=" submit" class="btn-success" id="see-more">
-                                                      See More >>
-                                                </button>
-                                          </a>
-                                    </div> -->
-                              </div>
-                        </div>
-                  </div>
-
-                  <div class="card">
-                        <div class="head">
-                              <div class="flex-d-c">
-                                    <div class="flex-d-r">
-                                          <div>
-                                                <h3>Statistics</h3>
-                                          </div>
-                                    </div>
-
-                                    <div class="flex-d-r">
-                                          <h1>13</h1>
-
-                                    </div>
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
@@ -232,8 +199,126 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
                               </div>
                         </div>
+
+                        <div class="flex-d-c">
+
+
+                              fwfw
+                        </div>
+
+
+                  </div>
+
+
+
+
+
+
+
+
+                  <div class="table-container mb-5 ">
+                        <canvas id="myPieChart" style="width:50%;max-width:300px"></canvas>
+                  </div>
+
+                  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+                  <script>
+                        var labels1 = ["Rental Services", "Guides", "Customers"];
+                        var data = [15, 27, 32];
+                        var backgroundColors = ["#8D9E6F", "#526534", "#8D9E6F"];
+
+                        var ctx = document.getElementById("myPieChart").getContext('2d');
+                        var myPieChart = new Chart(ctx, {
+                              type: 'pie',
+                              data: {
+                                    labels: labels1,
+                                    datasets: [{
+                                          backgroundColor: backgroundColors,
+                                          data: data
+                                    }]
+                              },
+                              options: {
+                                    legend: {
+                                          display: true,
+                                          position: 'right',
+                                          labels: {
+                                                fontSize: 14,
+                                                fontColor: '#333',
+                                                boxWidth: 3,
+                                                padding: 20
+                                          }
+                                    }
+                              }
+                        });
+                  </script>
+
+
+
+                  <div class="card">
+                        <div class="head">
+                              <div class="flex-d-c">
+                                    <div class="flex-d-r">
+                                          <div>
+                                                <h3>Statistics</h3>
+                                          </div>
+                                    </div>
+
+                                    <!-- <div class="flex-d-r">
+                                          <h1>13</h1>
+
+                                    </div> -->
+                              </div>
+                              <div class="flex-d-c">
+                                    <div class="flex-d-r justify-content-end">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/charts">
+                                                <button type=" submit" class="btn-success" id="see-more">
+                                                      See More >>
+                                                </button>
+                                          </a>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="flex-d-c">
+                              <!-- <div class="flex-d-c"> -->
+                              <!-- <div class="content-data">
+                                          <div class="head"> -->
+                              <p>Equipment Rentals</p>
+                              <!-- </div> -->
+
+                              <div class="table-container mb-5 ">
+                                    <canvas id="myChart" style="width:50%;max-width:300px"></canvas>
+                              </div>
+
+                              <script>
+                                    var xValues = ["Jan", "Feb", "Mar", "Apr"];
+                                    var yValues = [0, 8, 0, 9];
+                                    var barColors = ["#8D9E6F", "#526534", "#8D9E6F", "#526534"];
+
+                                    new Chart("myChart", {
+                                          type: "bar",
+                                          data: {
+                                                labels: xValues,
+                                                datasets: [{
+                                                      backgroundColor: barColors,
+                                                      data: yValues
+                                                }]
+                                          },
+                                          options: {
+                                                legend: {
+                                                      display: true
+                                                },
+
+                                          }
+                                    });
+                              </script>
+                        </div>
+                        <!-- </div>
+
+            </div> -->
+
                   </div>
             </div>
+
+
 
 
 
