@@ -376,7 +376,8 @@ window.onclick = function(event) {
 
     function getResults(){
         var search = document.getElementById("search-input").value;
-        var type = document.getElementById("type").value;
+        // var type = document.getElementById("type").value;
+        var type = 'all';
         var latitude = document.getElementById("latitude").value;
         var longitude = document.getElementById("longitude").value;
 
