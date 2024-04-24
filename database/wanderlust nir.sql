@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 23, 2024 at 05:11 AM
+-- Generation Time: Apr 24, 2024 at 08:49 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -97,6 +97,36 @@ CREATE DEFINER=`root`@`%` PROCEDURE `CompleteRentProcess` (IN `customerID` INT) 
     -- Return the last inserted payment ID
     SELECT reference_number AS orderID , total_amount AS totalAmount;
 
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetAllMonthlyCompletedRentalCount` ()   BEGIN
+    SELECT 
+        MONTH(end_date) AS `Month`, 
+        COUNT(*) AS `Count`
+    FROM 
+        `rent`
+    WHERE 
+       status = 'completed'
+    GROUP BY 
+        MONTH(end_date)
+    ORDER BY 
+        MONTH(end_date);
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetAllMonthlyRentedItemCount` ()   BEGIN
+    SELECT 
+        MONTH(r.end_date) AS `Month`, 
+        COUNT(ri.item_id) AS `ItemCount`
+    FROM 
+        `rent_item` ri
+    JOIN 
+        `rent` r ON ri.rent_id = r.id
+    WHERE 
+        r.status IN ('rented', 'completed') -- Assuming you want to count items that were rented and those that completed the rental term
+    GROUP BY 
+        MONTH(r.end_date)
+    ORDER BY 
+        MONTH(r.end_date);
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetAvailableEquipment` (IN `RentalServiceID` INT, IN `StartTime` DATETIME, IN `EndTime` DATETIME)   BEGIN
@@ -618,6 +648,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` I
     DECLARE finished INT DEFAULT 0;
     DECLARE currentRentalServiceID INT;
     DECLARE totalSum DECIMAL(10, 2) DEFAULT 0.00;
+    DECLARE bookingFee DECIMAL(10, 2) DEFAULT 0.00;
     DECLARE lastRentID INT;
     DECLARE lastPaymentID INT;
     DECLARE reference_number VARCHAR(255);
@@ -691,8 +722,10 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` I
 
     CLOSE curRentalService;
 
+
+    SET bookingFee = totalSum * 0.20; -- 20% booking fee
     -- Create a single payment entry for the total sum of all rent orders
-    INSERT INTO payment (amount, status) VALUES (totalSum, 'pending');
+    INSERT INTO payment (amount, status) VALUES (bookingFee, 'pending');
     SET lastPaymentID = LAST_INSERT_ID();
     SET reference_number = CONCAT('RNT', LPAD(lastPaymentID, 5, '0'));
     
@@ -707,7 +740,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessCartToRentOrders` (IN `customerID` I
     DELETE FROM cart WHERE customer_id = customerID;
 
     -- Return the reference number and total amount for confirmation or further processing
-    SELECT reference_number AS orderID, totalSum AS totalAmount;
+    SELECT reference_number AS orderID, bookingFee AS totalAmount;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `ProcessRentOrders` (`customerID` INT)   BEGIN
@@ -776,7 +809,7 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `customer_id`, `start_date`, `end_date`) VALUES
 (43, 25, '2024-02-23', '2024-02-29'),
-(95, 32, '2024-04-23', '2024-04-30');
+(97, 32, '2024-04-25', '2024-04-30');
 
 -- --------------------------------------------------------
 
@@ -798,8 +831,7 @@ INSERT INTO `cart_item` (`id`, `cart_id`, `item_id`) VALUES
 (90, 40, 38),
 (91, 40, 4),
 (92, 40, 38),
-(93, 40, 38),
-(253, 95, 2317);
+(93, 40, 38);
 
 -- --------------------------------------------------------
 
@@ -996,7 +1028,8 @@ INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_
 (49, 'Terence Shields', '60304 Hills Forges', '200976880974', '0983237761', 'other', 203, 'waiting', '', 9),
 (50, 'Gardner Feest', '18723 Buckridge Orchard', '200976880974', '0983237761', 'other', 206, 'waiting', '6621e963a0a7c.pdf', 10),
 (51, 'Webster King', '53994 Dayna Estate', '200976880974', '0983237761', 'female', 207, 'waiting', '6621ea01ed5a8.pdf', 11),
-(52, 'Wendy Waelchi', '15847 Kilback Cove', '200976880972', '0983237767', 'male', 215, 'waiting', '66237b795c7f4.pdf', 15);
+(52, 'Wendy Waelchi', '15847 Kilback Cove', '200976880972', '0983237767', 'male', 215, 'waiting', '66237b795c7f4.pdf', 15),
+(53, 'Thomas Baumbach', '27789 Price Shores', '200976810974', '0983237765', 'other', 216, 'waiting', '66289d3cef06f.pdf', 16);
 
 -- --------------------------------------------------------
 
@@ -3789,7 +3822,8 @@ INSERT INTO `locations` (`id`, `latitude`, `longitude`) VALUES
 (12, 7.622675, 80.288399),
 (13, 7.633565, 80.398262),
 (14, 7.688006, 80.227974),
-(15, 7.742440, 80.310371);
+(15, 7.742440, 80.310371),
+(16, 8.155908, 77.871406);
 
 -- --------------------------------------------------------
 
@@ -3869,7 +3903,8 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (56, '2024-04-21 06:33:06', 'pending', 7400.00, NULL, 'RNT00056'),
 (57, '2024-04-21 06:58:12', 'completed', 4400.00, NULL, 'RNT00057'),
 (58, '2024-04-21 07:00:21', 'completed', 6500.00, NULL, 'RNT00058'),
-(59, '2024-04-21 07:03:05', 'completed', 3900.00, NULL, 'RNT00059');
+(59, '2024-04-21 07:03:05', 'completed', 3900.00, NULL, 'RNT00059'),
+(60, '2024-04-24 03:24:30', 'completed', 780.00, NULL, 'RNT00060');
 
 -- --------------------------------------------------------
 
@@ -3971,14 +4006,15 @@ INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_
 (77, 32, 25, '2024-04-30', '2024-05-21', 'pending', NULL, 21000.00, 0.00, '2024-04-14 10:58:51', '2024-04-14 10:58:51'),
 (78, 32, 56, '2024-04-24', '2024-04-30', 'accepted', NULL, 3400.00, 0.00, '2024-04-14 11:02:20', '2024-04-14 11:01:18'),
 (79, 32, 25, '2024-04-24', '2024-04-30', 'completed', NULL, 12000.00, 0.00, '2024-04-15 15:52:49', '2024-04-14 11:01:18'),
-(80, 32, 25, '2024-04-26', '2024-05-01', 'accepted', NULL, 5255.00, 0.00, '2024-04-20 13:07:44', '2024-04-20 13:01:12'),
+(80, 32, 25, '2024-04-26', '2024-05-01', 'return_reported', NULL, 5255.00, 0.00, '2024-04-24 06:18:32', '2024-04-20 13:01:12'),
 (81, 32, 56, '2024-04-25', '2024-04-30', 'pending', NULL, 2900.00, 0.00, '2024-04-21 04:29:17', '2024-04-21 04:29:17'),
 (82, 32, 25, '2024-04-25', '2024-04-30', 'pending', NULL, 5000.00, 0.00, '2024-04-21 05:48:16', '2024-04-21 05:48:16'),
 (83, 32, 56, '2024-04-30', '2024-06-04', 'pending', NULL, 28900.00, 0.00, '2024-04-21 06:30:33', '2024-04-21 06:30:33'),
 (84, 32, 56, '2024-10-22', '2024-11-05', 'pending', NULL, 7400.00, 0.00, '2024-04-21 06:33:06', '2024-04-21 06:33:06'),
 (85, 32, 56, '2024-04-22', '2024-04-30', 'pending', NULL, 4400.00, 0.00, '2024-04-21 06:58:12', '2024-04-21 06:58:12'),
 (86, 32, 56, '2024-04-23', '2024-04-30', 'pending', NULL, 6500.00, 0.00, '2024-04-21 07:00:21', '2024-04-21 07:00:21'),
-(87, 32, 56, '2024-04-23', '2024-04-30', 'pending', NULL, 3900.00, 0.00, '2024-04-21 07:03:05', '2024-04-21 07:03:05');
+(87, 32, 56, '2024-04-23', '2024-04-30', 'pending', NULL, 3900.00, 0.00, '2024-04-21 07:03:05', '2024-04-21 07:03:05'),
+(88, 32, 56, '2024-04-23', '2024-04-30', 'pending', NULL, 3900.00, 0.00, '2024-04-24 03:24:29', '2024-04-24 03:24:29');
 
 -- --------------------------------------------------------
 
@@ -4285,7 +4321,8 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (231, 85, 2314),
 (232, 86, 2315),
 (233, 86, 2341),
-(235, 87, 2316);
+(235, 87, 2316),
+(236, 88, 2317);
 
 -- --------------------------------------------------------
 
@@ -4355,7 +4392,8 @@ INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`, `amount`) VALUES
 (53, 84, 56, 7400.00),
 (54, 85, 57, 4400.00),
 (55, 86, 58, 6500.00),
-(56, 87, 59, 3900.00);
+(56, 87, 59, 3900.00),
+(57, 88, 60, 3900.00);
 
 -- --------------------------------------------------------
 
@@ -4380,7 +4418,7 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 (2, 61, NULL, NULL, '2024-02-24 18:37:48'),
 (3, 62, NULL, 'cancelled', '2024-02-25 07:52:01'),
 (4, 63, 'rented', 'completed', '2024-02-27 10:19:40'),
-(5, 64, NULL, NULL, '2024-04-06 10:22:37'),
+(5, 64, NULL, 'rented', '2024-04-24 06:16:43'),
 (6, 65, NULL, 'rented', '2024-02-27 04:59:37'),
 (7, 66, 'rented', 'rented', '2024-04-06 11:24:04'),
 (8, 67, NULL, 'accepted', '2024-04-13 18:16:45'),
@@ -4396,14 +4434,15 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 (18, 77, NULL, NULL, '2024-04-14 10:58:51'),
 (19, 78, 'rented', 'accepted', '2024-04-15 15:52:18'),
 (20, 79, 'rented', 'completed', '2024-04-15 15:52:49'),
-(21, 80, NULL, NULL, '2024-04-22 04:17:29'),
+(21, 80, 'rented', 'rented', '2024-04-24 06:17:44'),
 (22, 81, NULL, NULL, '2024-04-21 04:29:17'),
 (23, 82, NULL, NULL, '2024-04-21 05:48:16'),
 (24, 83, NULL, NULL, '2024-04-21 06:30:33'),
 (25, 84, NULL, NULL, '2024-04-21 06:33:06'),
 (26, 85, NULL, NULL, '2024-04-21 06:58:12'),
 (27, 86, NULL, NULL, '2024-04-21 07:00:21'),
-(28, 87, NULL, NULL, '2024-04-21 07:03:05');
+(28, 87, NULL, NULL, '2024-04-21 07:03:05'),
+(29, 88, NULL, NULL, '2024-04-24 03:24:29');
 
 --
 -- Triggers `rent_request`
@@ -4465,7 +4504,8 @@ CREATE TABLE `rent_return_complaints` (
 --
 
 INSERT INTO `rent_return_complaints` (`id`, `rent_id`, `complains`, `charge`, `description`, `status`, `created_at`) VALUES
-(3, 68, '[{\"charge\": \"2830\", \"equipment_id\": \"25\", \"complaint_description\": \"Beer - Hyatt\"}, {\"charge\": \"2524\", \"equipment_id\": \"33\", \"complaint_description\": \"Schoen and Sons\"}]', 5354.00, NULL, 'cancelled', '2024-04-11 08:17:39');
+(3, 68, '[{\"charge\": \"2830\", \"equipment_id\": \"25\", \"complaint_description\": \"Beer - Hyatt\"}, {\"charge\": \"2524\", \"equipment_id\": \"33\", \"complaint_description\": \"Schoen and Sons\"}]', 5354.00, NULL, 'cancelled', '2024-04-11 08:17:39'),
+(4, 80, '[{\"charge\": \"4000\", \"equipment_id\": \"69\", \"complaint_description\": \"Damaged\"}, {\"charge\": \"2000\", \"equipment_id\": \"35\", \"complaint_description\": \"Damaged\"}]', 6000.00, NULL, 'pending', '2024-04-24 06:18:32');
 
 --
 -- Triggers `rent_return_complaints`
@@ -4725,7 +4765,8 @@ INSERT INTO `users` (`id`, `email`, `password`, `date`, `role`, `is_verified`) V
 (212, 'your.emkedata59201@gmail.com', 'gU9/EquRizZpK4A6VIA6Sw==:fa5af7cca7974e49430644553f95daa26b63454fdd6abe67a95f63c0ec50924e', '2024-04-19 08:56:40', 'rentalservice', 0),
 (213, 'your.ekedata98367@gmail.com', 'S1iU5yewZ3KfAJKuPl92Lw==:726b1a3af80f110ea4d1dc03dccdb7fb1ec51ce59ec76d558c58110971e12195', '2024-04-19 08:58:25', 'rentalservice', 0),
 (214, 'custome@wl.com', 'ueLy+IVCjW0mYv8R/hQJGg==:aeef2cce9cedda04d6016acfa22383dde2b72162ed2375528c80459306f42995', '2024-04-20 07:07:45', 'customer', 0),
-(215, 'rental3@wl.com', 's7lAGbhdUKrzeJLQykS7Wg==:6eedd6664b75a11a715fe5ac14387e4946c2dbbdc5808a22e7d0393c9f9182dd', '2024-04-20 08:23:15', 'guide', 0);
+(215, 'rental3@wl.com', 's7lAGbhdUKrzeJLQykS7Wg==:6eedd6664b75a11a715fe5ac14387e4946c2dbbdc5808a22e7d0393c9f9182dd', '2024-04-20 08:23:15', 'guide', 0),
+(216, 'yourdata20768@gmail.com', 'FSnTsC1tHZMSEkh9kNYXzw==:765d1e1298975d7f0cb02de70c9fccdf1c6b2fe082dc393cb636353953d2b940', '2024-04-24 05:48:38', 'guide', 0);
 
 -- --------------------------------------------------------
 
@@ -4814,7 +4855,8 @@ INSERT INTO `verification` (`id`, `user_id`, `token`, `email`) VALUES
 (76, 212, '74d388152c33a663ab29e8540d01f84e2fb9fab358b44a51b10dee7a578d360a', 'your.emkedata59201@gmail.com'),
 (77, 213, '516b51eb4497e7242c311613831a4f4ecb047bf3e95557e00e7bc557fce3a697', 'your.ekedata98367@gmail.com'),
 (78, 214, 'a6cd25d7daefc34788926ee12b87737d5998426ed0f233658a2f6dfec177a39d', 'custome@wl.com'),
-(79, 215, '2e014b3fc71f736644010a2f5a142b381241ab8ab74d17265700c9aefce83f2b', 'rental3@wl.com');
+(79, 215, '2e014b3fc71f736644010a2f5a142b381241ab8ab74d17265700c9aefce83f2b', 'rental3@wl.com'),
+(80, 216, 'bb0f07496cb6b69a29abceac5e270e4f824d0bfa8884f04b24a5ccf7e40a64b4', 'yourdata20768@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -4943,7 +4985,7 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
@@ -4967,7 +5009,7 @@ ALTER TABLE `equipment`
 -- AUTO_INCREMENT for table `guides`
 --
 ALTER TABLE `guides`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -4979,19 +5021,19 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
@@ -5003,25 +5045,25 @@ ALTER TABLE `rental_services`
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `rent_request`
 --
 ALTER TABLE `rent_request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `rent_return_complaints`
 --
 ALTER TABLE `rent_return_complaints`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tips`
@@ -5033,13 +5075,13 @@ ALTER TABLE `tips`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `verification`
 --
 ALTER TABLE `verification`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Constraints for dumped tables
