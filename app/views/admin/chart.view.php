@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/admin/components/navbar.php');
+// require_once('../app/views/admin/components/navbar.php');
 
 // require_once('../app/views/admin/layout/sidebar.php');
 
@@ -34,8 +34,29 @@ require_once('../app/views/admin/components/navbar.php');
           </div>
 
           <script>
+            var guides = <?php if ($guides && $guides[0] && $guides[0]->count > 0) : ?>
+            <?php echo $guides[0]->count; ?>
+            <?php else : ?>
+              0
+            <?php endif; ?>
+
+
+            var customers = <?php if ($customers && $customers[0] && $customers[0]->count > 0) : ?>
+            <?php echo $customers[0]->count; ?>
+            <?php else : ?>
+              0
+            <?php endif; ?>
+
+            var rentals = <?php if ($rentalServices && $rentalServices[0] && $rentalServices[0]->count > 0) : ?>
+            <?php echo $rentalServices[0]->count; ?>
+            <?php else : ?>
+              0
+            <?php endif; ?>
+
+
+
             var xValues = ["Rental Services", "Guides", "Customers"];
-            var yValues = [15, 27, 32];
+            var yValues = [rentals, guides, customers];
             var barColors = ["#8D9E6F", "#526534", "#8D9E6F"];
 
             new Chart("myChart", {
