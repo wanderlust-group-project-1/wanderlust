@@ -216,7 +216,7 @@ require_once('../app/views/layout/header.php');
         <h2>Upload Equipment Images</h2>
         <!-- Equipment image upload form -->
         <form method="post" enctype="multipart/form-data">
-            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg" multiple required>
+            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg , image/webp" required>
             <div class="equipment-image-preview-container flex-d mt-2  align-items-center" id="equipment-image-preview"></div>
             <input type="submit" class="btn mt-4" name="submit" value="Select Images" id="equipment-image-submit">
         </form>
@@ -236,6 +236,15 @@ $(document).ready(function() {
             var imgContainer = $('<div/>', { 'class': 'img-preview-item' });
             var img = $('<img>', { 'class': 'image-preview' }).appendTo(imgContainer);
 
+            // validate file type
+            var fileType = file['type'];
+            var validImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+            if (!validImageTypes.includes(fileType)) {
+                alertmsg('Invalid file type. Please select an image file' , 'error');
+                // clear 
+                $('#equipment-image-input').val('');
+                return;
+            }
 
 
             var removeButton = $('<button/>', {

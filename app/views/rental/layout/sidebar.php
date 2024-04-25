@@ -228,7 +228,7 @@
             </form> -->
             <!-- With image preview -->
             <form method="post" enctype="multipart/form-data">
-                <input type="file" name="image" id="profile-image-input" class="form-control-lg"  accept="image/png, image/jpg, image/gif, image/jpeg" required>
+                <input type="file" name="image" id="profile-image-input" class="form-control-lg"  accept="image/png, image/jpg, image/gif, image/jpeg , image/webp" required>
                 <div class="image-preview-container flex-d-c align-items-center">
                     
                     
