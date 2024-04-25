@@ -181,8 +181,9 @@ span{
 }
 
 thead{
+  height:60px;
+  background: $color-lighter;
   font-size: $header4;
-  font-weight: 400;
 }
 tbody{
   font-size: $header4;
@@ -196,6 +197,7 @@ tfoot {
 h1 {
   font-size: $header1;
   font-weight: 500;
+  color: $gray-text-darker;
 }
 
 h2 {
@@ -228,7 +230,7 @@ h4 {
 h5 {
   font-size: $smaller-text;
   margin-top: 5px;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   font-weight: 400;
   color: $color-dark;
   text-align: justify;
@@ -236,7 +238,7 @@ h5 {
 }
 
 h6 {
-  font-family: sans-serif;
+  // font-family: sans-serif;
   font-weight: 200;
   font-size: $header3;
   color: $gray-text-dark;

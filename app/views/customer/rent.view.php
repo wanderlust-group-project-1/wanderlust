@@ -8,7 +8,11 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
 
-<div class="container flex-d-c justify-content-center gap-2 bg-color-primary">
+<div class="container flex-d-c justify-content-center gap-2">
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+</div>
+
 
 <div class="row gap-2 justify-content-end mt-7">
     <!-- Cart -->

@@ -27,7 +27,7 @@ show ($complaints);
 
 <div class="order-item">
        
-    <div class="row card-normal m-2">
+    <div class="row card-grid m-2">
         <div class="col-lg-5 col-md-12">
             
          
@@ -72,62 +72,66 @@ show ($complaints);
             
     </div>
 
-<!-- complaint list -->
-<?php if(!empty($complaints)){?>
-
-
-    <div class="row card-normal m-2">
-    <div class="col-lg-12 col-md-12">
-        <h3>Complaints List</h3>
-        <table class="item-details">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($complaints as $complaint) : ?>
-                <tr>
-                    <td><?= $complaint->title ?></td>
-                    <td><?= $complaint->description ?></td>
-                    <td><?= $complaint->status ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
-    </div>
-    <?php } ?>
-
-
-  <!-- item list -->
+    <!-- complaint list -->
+    <?php if(!empty($complaints)){?>
+    
     
     <div class="row card-normal m-2">
         <div class="col-lg-12 col-md-12">
-            <h3>Equipment List</h3>
-            <table class="item-details">
-                <tr>
-                    <th>Item_number </th>
-                    <th>Name</th>
-                </tr>
-                <?php foreach ($items as $item) : ?>
+            <div class="table-header">
+                <h3>Complaints List</h3>
+            </div>
+            <div class="table-container flex-d-c">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($complaints as $complaint) : ?>
+                        <tr>
+                            <td><?= $complaint->title ?></td>
+                            <td><?= $complaint->description ?></td>
+                            <td><?= $complaint->status ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+     </div>
+    <?php } ?>
+                    
+                    
+      <!-- item list -->
+                    
+    <div class="row card-grid-last m-2">
+        <div class="col-lg-12 col-md-12">
+            <div class="table-header">
+                <h3>Equipment List</h3>
+            </div>
+            <div class="table-container flex-d-c">    
+                <table class="table-custom">
+                    <thead>
                     <tr>
-                        <td><?= $item->item_number ?></td>
-                        <td><?= $item->equipment_name?></td>
+                        <th>Item_number </th>
+                        <th>Name</th>
                     </tr>
-                <?php endforeach; ?>
-            </table>             
+                    </thead>
+                    <tbody>
+                    <?php foreach ($items as $item) : ?>
+                        <tr>
+                            <td><?= $item->item_number ?></td>
+                            <td><?= $item->equipment_name?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>            
         </div>
     </div>
-
-
-
-
 </div>
-        
-
-
 </div>

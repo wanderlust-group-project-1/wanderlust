@@ -5,10 +5,14 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
-<div class="container flex-d flex-md-c justify-content-center mt-5 bg-color-primary">
-    <div class=" col-lg-10 flex-d-c gap-2 mt-5 ">
+<div class="container flex-d flex-md-c justify-content-center mt-5">
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
+    <div class=" col-lg-12 flex-d-c gap-2 mt-5 ">
 
-        <div class="card card-normal ">
+
+        <div class="card card-normal-glass ">
 
         <h2 class="justify-content-center flex-d"> Orders </h2>
 
@@ -454,6 +458,67 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
 </script>
+
+<!-- Order Item Modal -->
+<div class="modal" id="order-item-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        <div id="order-data">   </div>
+
+    </div>
+</div>
+
+
+<!-- Confirm cancel modal -->
+
+<div class="modal" id="confirm-cancel-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Are you sure you want to cancel this order?</p>
+        <div class="flex-d gap-3 mt-3">
+        <button class="btn btn-primary" id="confirm-cancel">Yes</button>
+        <button class="btn btn-danger modal-close" id="cancel-cancel">No</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Mark As Rented modal -->
+
+<div class="modal" id="mark-as-rented-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Mark as Rented</h2>
+        <p>Are you sure you want to mark this order as rented?</p>
+        <div class="flex-d gap-3 mt-3">
+        <button class="btn-text-green" id="mark-as-rented-confirm">Yes</button>
+        <button class="btn-text-red" id="mark-as-rented-cancel">No</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Report Modal -->
+<!-- Complain Form with title and description -->
+
+<div class="modal" id="report-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="report-order-id">Report for Order ID: </h2>
+        <form id="report-form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="report-title" name="title" class="form-control-lg" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="report-description" name="description" class="form-control-lg" required></textarea>
+            </div>
+            <button class="btn btn-primary" id="report-submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
