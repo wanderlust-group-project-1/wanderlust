@@ -90,7 +90,9 @@
             </div>
             <div class="order-body">
                 <div class="order-dates" data-start="<?= $order->start_date ?>" data-end="<?= $order->end_date ?>" >Dates: <?= $order->start_date ?> - <?= $order->end_date ?></div>
-                <div class="order-total">Total: <?= $order->total ?></div>
+                <!-- <div class="order-total">Total: <?= $order->total ?></div> -->
+                                <div class="order-total">Paid Amount: <?= $order->paid_amount ?></div>
+
                 <div class="order-payment-status">Payment Status: <?= $order->payment_status ?></div>
             </div>
             <div class="order-actions flex-d gap-3">

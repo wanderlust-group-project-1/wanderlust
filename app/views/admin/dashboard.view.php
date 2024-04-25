@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/admin/components/navbar.php');
+// require_once('../app/views/admin/components/navbar.php');
 ?>
 
 <div class="dashboard">
@@ -28,7 +28,15 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>15</h1>
+                                          <h1>
+                                                <?php if ($rentalServices && $rentalServices[0] && $rentalServices[0]->count > 0) : ?>
+                                                      <?php echo $rentalServices[0]->count; ?>
+                                                <?php else : ?>
+                                                      0
+                                                <?php endif; ?>
+
+
+                                          </h1>
 
                                     </div>
                               </div>
@@ -54,7 +62,13 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>27</h1>
+                                          <h1>
+                                                <?php if ($guides && $guides[0] && $guides[0]->count > 0) : ?>
+                                                      <?php echo $guides[0]->count; ?>
+                                                <?php else : ?>
+                                                      0
+                                                <?php endif; ?>
+                                          </h1>
 
                                     </div>
                               </div>
@@ -80,7 +94,14 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>32</h1>
+                                          <h1>
+                                                <?php if ($customers && $customers[0] && $customers[0]->count > 0) : ?>
+                                                      <?php echo $customers[0]->count; ?>
+                                                <?php else : ?>
+                                                      0
+                                                <?php endif; ?>
+
+                                          </h1>
 
                                     </div>
                               </div>
@@ -104,18 +125,24 @@ require_once('../app/views/admin/components/navbar.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r">
                                           <div>
-                                                <h3>Blogs</h3>
+                                                <h3>Orders</h3>
                                           </div>
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>66</h1>
+                                          <h1>
+                                                <?php if ($orders && $orders[0] && $orders[0]->count > 0) : ?>
+                                                      <?php echo $orders[0]->count; ?>
+                                                <?php else : ?>
+                                                      0
+                                                <?php endif; ?>
+                                          </h1>
 
                                     </div>
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/users">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/charts">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
@@ -135,13 +162,19 @@ require_once('../app/views/admin/components/navbar.php');
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>06</h1>
+                                          <h1>
+                                                <?php if ($rentComplaints && $rentComplaints[0] && $rentComplaints[0]->count > 0) : ?>
+                                                      <?php echo $rentComplaints[0]->count; ?>
+                                                <?php else : ?>
+                                                      0
+                                                <?php endif; ?>
+                                          </h1>
 
                                     </div>
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/customers">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/complains">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
@@ -156,18 +189,24 @@ require_once('../app/views/admin/components/navbar.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r">
                                           <div>
-                                                <h3>Items</h3>
+                                                <h3>Tips & Knowhows</h3>
                                           </div>
                                     </div>
 
                                     <div class="flex-d-r">
-                                          <h1>135</h1>
+                                          <h1>
+                                                <?php if ($tips && $tips[0] && $tips[0]->count > 0) : ?>
+                                                      <?php echo $tips[0]->count; ?>
+                                                <?php else : ?>
+                                                      0
+                                                <?php endif; ?>
+                                          </h1>
 
                                     </div>
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/rentalServices/item">
+                                          <a href="<?php echo ROOT_DIR ?>/admin/tips">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
@@ -190,66 +229,87 @@ require_once('../app/views/admin/components/navbar.php');
 
                               </div>
                               <div class="flex-d-c">
-                                    <div class="flex-d-r justify-content-end">
+                                    <!-- <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/charts">
                                                 <button type=" submit" class="btn-success" id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
-                                    </div>
+                                    </div> -->
                               </div>
                         </div>
 
-                        <div class="flex-d-c">
+                        <!-- <div class="flex-d-c"> -->
 
 
-                              fwfw
+                        <div class="table-container mb-5 ">
+                              <canvas id="myPieChart" style="width:50%;max-width:300px"></canvas>
                         </div>
 
+                        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+                        <script>
+                              var guides = <?php if ($guides && $guides[0] && $guides[0]->count > 0) : ?>
+                              <?php echo $guides[0]->count; ?>
+                              <?php else : ?>
+                                    0
+                              <?php endif; ?>
 
-                  </div>
+
+                              var customers = <?php if ($customers && $customers[0] && $customers[0]->count > 0) : ?>
+                              <?php echo $customers[0]->count; ?>
+                              <?php else : ?>
+                                    0
+                              <?php endif; ?>
+
+                              var rentals = <?php if ($rentalServices && $rentalServices[0] && $rentalServices[0]->count > 0) : ?>
+                              <?php echo $rentalServices[0]->count; ?>
+                              <?php else : ?>
+                                    0
+                              <?php endif; ?>
 
 
+                              var labels1 = ["Rental Services", "Guides", "Customers"];
+                              var data = [rentals, guides, customers];
+                              var backgroundColors = ["#8D9E6F", "#526534", "#8D9E6F"];
 
-
-
-
-
-
-                  <div class="table-container mb-5 ">
-                        <canvas id="myPieChart" style="width:50%;max-width:300px"></canvas>
-                  </div>
-
-                  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-                  <script>
-                        var labels1 = ["Rental Services", "Guides", "Customers"];
-                        var data = [15, 27, 32];
-                        var backgroundColors = ["#8D9E6F", "#526534", "#8D9E6F"];
-
-                        var ctx = document.getElementById("myPieChart").getContext('2d');
-                        var myPieChart = new Chart(ctx, {
-                              type: 'pie',
-                              data: {
-                                    labels: labels1,
-                                    datasets: [{
-                                          backgroundColor: backgroundColors,
-                                          data: data
-                                    }]
-                              },
-                              options: {
-                                    legend: {
-                                          display: true,
-                                          position: 'right',
-                                          labels: {
-                                                fontSize: 14,
-                                                fontColor: '#333',
-                                                boxWidth: 3,
-                                                padding: 20
+                              var ctx = document.getElementById("myPieChart").getContext('2d');
+                              var myPieChart = new Chart(ctx, {
+                                    type: 'pie',
+                                    data: {
+                                          labels: labels1,
+                                          datasets: [{
+                                                backgroundColor: backgroundColors,
+                                                data: data
+                                          }]
+                                    },
+                                    options: {
+                                          legend: {
+                                                display: true,
+                                                position: 'top',
+                                                labels: {
+                                                      fontSize: 14,
+                                                      fontColor: '#333',
+                                                      boxWidth: 9,
+                                                      margin: 1,
+                                                      padding: 10,
+                                                }
                                           }
                                     }
-                              }
-                        });
-                  </script>
+                              });
+                        </script>
+
+
+
+                        <!-- </div> -->
+
+
+                  </div>
+
+
+
+
+
+
 
 
 
@@ -290,7 +350,7 @@ require_once('../app/views/admin/components/navbar.php');
 
                               <script>
                                     var xValues = ["Jan", "Feb", "Mar", "Apr"];
-                                    var yValues = [0, 8, 0, 9];
+                                    var yValues = [0, 8, 1, 9];
                                     var barColors = ["#8D9E6F", "#526534", "#8D9E6F", "#526534"];
 
                                     new Chart("myChart", {
@@ -304,7 +364,36 @@ require_once('../app/views/admin/components/navbar.php');
                                           },
                                           options: {
                                                 legend: {
-                                                      display: true
+                                                      display: false,
+                                                },
+
+                                          }
+                                    });
+                              </script>
+
+
+                              <p>Guide Booking</p>
+                              <div class="table-container mb-5 ">
+                                    <canvas id="myChart3" style="width:50%;max-width:300px"></canvas>
+                              </div>
+
+                              <script>
+                                    var xValues = ["Jan", "Feb", "Mar", "Apr"];
+                                    var yValues = [1, 6, 5, 10];
+                                    var barColors = ["#8D9E6F", "#526534", "#8D9E6F", "#526534"];
+
+                                    new Chart("myChart3", {
+                                          type: "bar",
+                                          data: {
+                                                labels: xValues,
+                                                datasets: [{
+                                                      backgroundColor: barColors,
+                                                      data: yValues
+                                                }]
+                                          },
+                                          options: {
+                                                legend: {
+                                                      display: false,
                                                 },
 
                                           }

@@ -35,6 +35,14 @@ class AuthMiddleware  {
             'Customer' => ['index', 'edit', 'update'],
             'Profile' => ['index', 'edit', 'update'],
             'Dashboard' => ['index', 'edit', 'update'],
+            'Complaints' => 'ALL',
+            'Equipments' => 'ALL',
+            'Orders' => 'ALL',
+            'Statistics' => 'ALL',
+            'Settings' => 'ALL',
+            
+
+
             
             // 'Profile' => ['index', 'edit', 'update'],
         ];
@@ -45,8 +53,8 @@ class AuthMiddleware  {
 
         $currentController = ucfirst($controller);
 
-        if (isset($authRequired[$currentController]) &&
-            in_array($method, $authRequired[$currentController])) {
+        if (isset($authRequired[$currentController]) && ($authRequired[$currentController] == 'ALL' || in_array($method, $authRequired[$currentController]))) {
+            // in_array($method, $authRequired[$currentController])) {
             Self::is_authenticated();
         }
         if (isset($unauthRequired[$currentController]) && ($unauthRequired[$currentController] == 'ALL' || in_array($method, $unauthRequired[$currentController]))) {

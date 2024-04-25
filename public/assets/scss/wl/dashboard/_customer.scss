@@ -8,7 +8,7 @@
     height: 550px;
     margin: 20px;
     padding: 20px;
-    background-color: $color-white;
+    background-color: $color-lighter;
     border-radius: 15px;
     box-shadow: $box-shadow-default;
     transition: all 0.3s ease-in-out;
@@ -38,18 +38,19 @@
 
     .rent-item-details {
         z-index: 10;
+        max-width: 800px;
 
         .rent-item-name {
             font-size: 2.5rem;
             font-weight: 600;
-            color: $color-dark-gray;
+            color: $color-primary;
             margin-bottom: 10px;
+            text-align: center;
         }
         .rent-item-description {
             font-size: 1.5rem;
             font-weight: 400;
-            color: $color-dark-gray;
-            margin-bottom: 10px;
+            color: $gray-text;
             // limit to one line
             overflow: hidden;
             text-overflow: ellipsis;
@@ -57,11 +58,26 @@
 
         
         }
-        .rent-item-price h5{
-            font-size: 2rem;
-            font-weight: 600;
-            color: $color-dark-gray;
-            margin-bottom: 10px;
+        .rent-item-price {
+          justify-content: center;
+          display: flex;
+          flex-direction: row;
+        
+          h5{
+              font-size: 2rem;
+              font-weight: 600;
+              color: $gray-text-dark;
+              margin-bottom: 10px;
+              align-items: center;
+          }
+
+          .cost-text {
+            padding: 5px;
+
+            .cost{
+              font-style: italic;
+            }
+          }
         }
     }
 }
@@ -582,7 +598,7 @@ margin: 1px 0;
         display: flex;
         // justify-content: center;
         font-weight: 400;
-        font-family: sans-serif, 'Poppins';
+        // font-family: sans-serif, 'Poppins';
         font-size: $header4 ;
         color: $gray-text;
       }
@@ -591,7 +607,7 @@ margin: 1px 0;
         display: flex;
         // justify-content: center;
         font-weight: 400;
-        font-family: sans-serif, 'Poppins';
+        // font-family: sans-serif, 'Poppins';
         font-size: $header4 ;
         color: $gray-text;
       }
@@ -602,9 +618,10 @@ margin: 1px 0;
       justify-content: left;
       font-style: italic;
       font-weight: 400;
-      font-family: sans-serif, 'Poppins';
+      // font-family: sans-serif, 'Poppins';
       font-size: $header4 ;
       color: $gray-text;
+      padding-right: 10px;
       // background-color: red($color: #000000);
     }
 
@@ -623,3 +640,82 @@ margin: 1px 0;
   display: flex;
   flex-direction: column;
 }
+.customer-bg-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: fixed; /* Changed 'absolute' to 'fixed' for better compatibility */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Ensure the background stays behind other content */
+}
+
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  background-color: $color-white;
+}
+
+.date-change-phase{
+  font-style: italic;
+}
+
+.date-para {
+  justify-content: center;
+}
+
+.customer-header {
+  // background-color: $color-dark;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  // padding: 0 30rem 0 30rem;
+  max-width: 100%;
+}
+
+.location-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  transform: translate(10px, 20px);
+
+  
+}
+
+.location-form-element {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-family: sans-serif, 'Poppins';
+    font-size: $header4 ;
+    color: $gray-text;
+    background-color: $color-lighter;
+  }
+
+}
+
+.location-button-container {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0 0 0;
+}
+
+

@@ -5,7 +5,7 @@
     <div class="col-lg-12 flex-d align-items-center gap-2" >
 
         <img src="<?php echo ROOT_DIR; ?>/uploads/images/rental_services/<?php echo htmlspecialchars($equipment->rentalservice_image); ?>" alt="Image" class="img-fluid mh-50px rounded-7">
-        <h1 class="rental-name"> <?php echo htmlspecialchars($equipment->rentalservice_name); ?> </h1>
+        <h3 class="rental-name"> <?php echo htmlspecialchars($equipment->rentalservice_name); ?> </h3>
        
         <!-- <?php show($equipment) ?> -->
     </div>

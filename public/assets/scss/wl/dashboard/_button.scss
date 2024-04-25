@@ -9,7 +9,7 @@
   padding: 10px 20px;
   font-weight: 500;
   font-size: $text;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
 
@@ -115,7 +115,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     color: $gray-text-darker;
@@ -130,7 +130,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     // color: $gray-text;
@@ -146,7 +146,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     // color: $gray-text;
@@ -162,7 +162,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     // color: $gray-text;
@@ -178,7 +178,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     // color: $gray-text;
@@ -189,11 +189,17 @@
 
 .btn-danger{
   background: $danger-color;
-  border: 1px solid $danger-color;
-  color: $white-text;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-family: sans-serif;
+  align-self: center;
+  margin-bottom: 8px;
 
   // Initial background with transparent gradient
-  background-image: linear-gradient(to right, $danger-lightest-color  50%, $danger-color 50%);
+  background-image: linear-gradient(to right, white  50%, $danger-color 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: background-position 0.2s ease-out;
@@ -219,7 +225,7 @@
   padding: 10px 20px;
   font-weight: 500;
   // font-size: $text;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
 
@@ -314,7 +320,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     color : $color-primary;
@@ -340,7 +346,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     // color: $gray-text;

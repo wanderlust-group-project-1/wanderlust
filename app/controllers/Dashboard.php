@@ -24,7 +24,7 @@ class Dashboard
 
             $data = [
                 'stat' => $rental->rentalStats($user['id'])[0],
-                'rent' => $rent->getUpcomingRentByRentalService(['rentalservice_id' => $user['id']])[0]
+                'rent' => $rent->getUpcomingRentByRentalService(['rentalservice_id' => $user['id']])
             ];
 
             // show($user->id);
