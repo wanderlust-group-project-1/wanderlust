@@ -8,7 +8,7 @@
     height: 550px;
     margin: 20px;
     padding: 20px;
-    background-color: $color-white;
+    background-color: $color-lighter;
     border-radius: 15px;
     box-shadow: $box-shadow-default;
     transition: all 0.3s ease-in-out;
@@ -598,7 +598,7 @@ margin: 1px 0;
         display: flex;
         // justify-content: center;
         font-weight: 400;
-        font-family: sans-serif, 'Poppins';
+        // font-family: sans-serif, 'Poppins';
         font-size: $header4 ;
         color: $gray-text;
       }
@@ -607,7 +607,7 @@ margin: 1px 0;
         display: flex;
         // justify-content: center;
         font-weight: 400;
-        font-family: sans-serif, 'Poppins';
+        // font-family: sans-serif, 'Poppins';
         font-size: $header4 ;
         color: $gray-text;
       }
@@ -618,9 +618,10 @@ margin: 1px 0;
       justify-content: left;
       font-style: italic;
       font-weight: 400;
-      font-family: sans-serif, 'Poppins';
+      // font-family: sans-serif, 'Poppins';
       font-size: $header4 ;
       color: $gray-text;
+      padding-right: 10px;
       // background-color: red($color: #000000);
     }
 
@@ -628,6 +629,19 @@ margin: 1px 0;
       display: flex;
       justify-content: left;
     }
+}
+
+.customer-bg-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: fixed; /* Changed 'absolute' to 'fixed' for better compatibility */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Ensure the background stays behind other content */
 }
 
 

@@ -6,22 +6,25 @@ require_once('../app/views/navbar/customer-navbar.php');
 ?>
 
 <div class="container flex-d-c justify-content-center gap-2">
+    <div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
 
 
 
-<div class="row gap-2 justify-content-end sticky">
+<!-- <div class="row gap-2 justify-content-end sticky">
 
     <button id="cart" class="btn " type="button"> <i class="fa fa-shopping-cart"></i> Cart <span id="cart-count" class="badge bg-primary">0</span></button>
 
  
-</div>
+</div> -->
 
 
 <div class="row">
 
 <div class="col-lg-12 flex-d-c gap-2">
 
-<div class="card-normal justify-content-between align-items-center flex-d gap-2">
+<div class="card-normal-glass justify-content-between align-items-center flex-d gap-2 mt-9 h-220px">
 
 <!-- Rental Image and name  -->
 <div class="flex-d gap-2 flex-sm-c">
@@ -30,9 +33,11 @@ require_once('../app/views/navbar/customer-navbar.php');
     <!-- <img src="<? echo ROOT_DIR?>/assets/images/rental/1.webp" alt="Image" class="img-fluid mh-200px rounded-7"> -->
     <img src="<? echo OSURL?>images/rental_services/<?php echo $rental->image; ?>" alt="Image" class="img-fluid mh-200px rounded-7">
    
-    <div class="flex-d gap-2 align-items-center">
+    <div class="flex-d-c gap-2 align-items-start justify-content-start">
         <!-- Rental Service name -->
-        <h1 class="rental-name"> <?php echo $rental->name; ?> </h1>
+        <!-- <?php show($rental); ?> -->
+        <h1 class="rental-name px-5 mt-6 mb-0"> <?php echo $rental->name; ?> </h1>
+        <h4 class="mt-0 ml-5"><?php echo $rental->email?> | <?php echo $rental->mobile; ?></h4>
         <!-- Rental Service description -->
     <!-- Rental Service name -->
 </div>
@@ -84,7 +89,7 @@ require_once('../app/views/navbar/customer-navbar.php');
             <option value="items">Items</option>
         </select>
         <!-- Select location button  -->
-        <button id="search-button"  class="btn btn-lg" type="submit"><i class="fa fa-search "></i></button>
+        <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search "></i></button>
     </div>
     </form>
 </div>
