@@ -1,6 +1,6 @@
 <?php
 require_once('../app/views/layout/header.php');
-require_once('../app/views/admin/components/navbar.php');
+// require_once('../app/views/admin/components/navbar.php');
 
 // require_once('../app/views/admin/layout/sidebar.php');
 
@@ -19,7 +19,7 @@ require_once('../app/views/admin/components/navbar.php');
             <li><a href="#" class="active">Items</a></li>
         </ul>
 
-
+        sqw
         <div class="table-container">
             <table class="data-table">
                 <thead>
@@ -35,7 +35,8 @@ require_once('../app/views/admin/components/navbar.php');
                     <?php
                     // Assuming rentalServices is an array of data
 
-                    foreach ($items as $item) {
+                    show($items);
+                    foreach ($item as $item) {
                     ?>
                         <tr key="<?php echo $item->equipment_id ?>">
                             <td><?php echo $item->type; ?></td>
@@ -75,7 +76,7 @@ require_once('../app/views/admin/components/navbar.php');
         </div>
 
         <!-- Modal -->
-        <div class="modal" id="item-details-modal">
+        <!-- <div class="modal" id="item-details-modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="item-info">
@@ -85,7 +86,7 @@ require_once('../app/views/admin/components/navbar.php');
                     <p id="item-price">Price: $10.00</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <script>
             // Get the modal

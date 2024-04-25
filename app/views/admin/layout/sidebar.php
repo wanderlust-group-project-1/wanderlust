@@ -1,5 +1,19 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
+
+
+    <div class="nav__data">
+      <a href="/home" class="nav__logo">
+        <img class="nav__logo-pic p-3 mb-5" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
+      </a>
+
+      <div class="nav__toggle" id="nav-toggle">
+        <i class="ri-menu-line nav__burger"></i>
+        <i class="ri-close-line nav__close"></i>
+      </div>
+    </div>
+
+
     <li class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/dashboard">
         <i class="ti-shield menu-icon"></i>
@@ -77,10 +91,12 @@
       </a>
     </li> -->
 
+
+
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices/item" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/tips" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
-        <span class="menu-title">Items</span>
+        <span class="menu-title">Tips & Knowhows</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">

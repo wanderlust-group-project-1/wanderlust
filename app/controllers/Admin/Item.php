@@ -11,7 +11,7 @@ class Items
         $data['items'] = $item->findAll();
         //show($data);
 
-        $this->view('admin/item', $data);
+        $this->view('admin/rentalServices', $data);
     }
 
     public function item(string $a = '', string $b = '', string $c = ''): void
