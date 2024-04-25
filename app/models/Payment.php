@@ -19,4 +19,12 @@ class PaymentModel {
         return $this->query('CALL PaymentComplete(:reference_number)',$data);
 
     }
+
+    public function fullPayRent(array $data) {
+        
+        $q = 'CALL CreatePaymentForRent(:rent_id)';
+        return $this->query($q, $data);
+    }
+
+
 }

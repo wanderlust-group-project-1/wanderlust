@@ -67,6 +67,7 @@ BEGIN
         ) AND equipment.rentalservice_id = currentRentalServiceID;
 
 
+        SET rentAmount = rentAmount * 0.20; -- 20% booking fee
          -- Insert into rent_pay for each rent order
         INSERT INTO rent_pay (rent_id, payment_id, amount)
         VALUES (lastRentID, lastPaymentID, rentAmount);
