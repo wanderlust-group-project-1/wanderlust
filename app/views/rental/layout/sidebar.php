@@ -305,7 +305,7 @@
                         alertmsg('Image uploaded successfully','success');
                         $('#image-upload').css('display', 'none');
 
-                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/rental_services/' + data.image);
+                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/rental_services/' + data.data.image);
                         // $('#profile-image-input').val('');
                         // $('#image-preview').attr('src', '');
                         // location.reload();

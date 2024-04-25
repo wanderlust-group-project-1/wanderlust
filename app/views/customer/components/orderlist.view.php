@@ -3,7 +3,8 @@
 <?php
 
 
-
+($orders) ?  :print('<div class="col-lg-12 mih-100px flex-d justify-content-center
+align-items-center text-center"><h2>No Orders</h2></div>');
 
 
 foreach ($orders as $order) {
