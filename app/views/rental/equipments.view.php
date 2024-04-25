@@ -812,8 +812,21 @@ $(document).ready(function() {
 
             formData.append('json', JSON.stringify(jsonData));
 
+
+
+
+
+
             if (formData.get('equipment_image') != '') {
                 var image = formData.get('equipment_image');
+
+                // validate file type
+                var fileType = image['type'];
+                var validImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+                if (!validImageTypes.includes(fileType)) {
+                    alertmsg('Invalid file type. Please select an image file' , 'error');
+                    return;
+                }
 
                 formData.append('image', image);
 
