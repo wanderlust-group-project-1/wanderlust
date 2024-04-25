@@ -3,7 +3,8 @@
 <?php
 
 
-
+($orders) ?  :print('<div class="col-lg-12 mih-100px flex-d justify-content-center
+align-items-center text-center"><h2>No Orders</h2></div>');
 
 
 foreach ($orders as $order) {
@@ -31,7 +32,8 @@ foreach ($orders as $order) {
 
                 
                 <?php if ($order->payment_status == 'pending') { ?>
-                    <button class="btn-text-blue order-pay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
+                    <button data-id="<?php echo $order->reference_number; ?>"
+                     class="btn-text-blue order-pay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
                 <?php } ?>
 
                 <?php if ($order->rent_status == 'rented') { ?>

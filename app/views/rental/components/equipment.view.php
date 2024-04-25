@@ -273,7 +273,7 @@ foreach ($equipment as $item) {
 
        
             <label for="equipment-image">Equipment Image</label>
-            <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" >
+            <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" accept="image/*">
 
 
             </div>

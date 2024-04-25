@@ -228,7 +228,7 @@
             </form> -->
             <!-- With image preview -->
             <form method="post" enctype="multipart/form-data">
-                <input type="file" name="image" id="profile-image-input" class="form-control-lg"  accept="image/png, image/jpg, image/gif, image/jpeg" required>
+                <input type="file" name="image" id="profile-image-input" class="form-control-lg"  accept="image/png, image/jpg, image/gif, image/jpeg , image/webp" required>
                 <div class="image-preview-container flex-d-c align-items-center">
                     
                     
@@ -305,7 +305,7 @@
                         alertmsg('Image uploaded successfully','success');
                         $('#image-upload').css('display', 'none');
 
-                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/rental_services/' + data.image);
+                        $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/rental_services/' + data.data.image);
                         // $('#profile-image-input').val('');
                         // $('#image-preview').attr('src', '');
                         // location.reload();
