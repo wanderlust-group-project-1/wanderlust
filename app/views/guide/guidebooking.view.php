@@ -259,7 +259,7 @@ require_once('../app/views/layout/header.php');
 
         // Create HTML to display booking details
         const tableHTML = `
-                <h2>Booking Details</h2>
+                <h2 class="guide-h2-title">Booking Details</h2>
                 <div class="booking-details">
                     <table class="table-details">
                         <tr>
@@ -301,7 +301,7 @@ require_once('../app/views/layout/header.php');
 <div id="delete-booking-modal" class="delete-booking-modal modal">
     <div class="modal-content ">
         <span class="close ">&times;</span>
-        <h2>Delete Booking</h2>
+        <h2 class="guide-h2-title">Delete Booking</h2>
         <p>Are you sure you want to cancel this booking?</p>
         <div class="flex-d gap-2 mt-5">
             <button id="delete-booking" class="btn btn-danger">Confirm</button>

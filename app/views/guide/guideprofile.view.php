@@ -92,7 +92,7 @@ require_once('../app/views/layout/header.php');
         <span class="close">&times;</span>
         <div class="profile-info">
             <form id="guide-profile-form" action="<?= ROOT_DIR ?>/guideprofile/update" method="post">
-                <h2>Edit Guide Profile</h2>
+                <h2 class="guide-h2-title">Edit Guide Profile</h2>
                 <div id="profile-errors"></div> <!-- Display errors here -->
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="30" rows="100" class="form-control form-control-lg" required><?= htmlspecialchars($guideProfile[0]->description) ?></textarea>

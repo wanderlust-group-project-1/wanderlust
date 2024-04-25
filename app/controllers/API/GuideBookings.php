@@ -14,20 +14,43 @@ class GuideBookings{
         $GuideBookingsModel = new GuideBookingsModel;
         $booking = $GuideBookingsModel->createBooking($data);
 
-        if ($booking) {
-            $response->success(true)
-                ->message('Booking created successfully')
-                ->statusCode(200)
-                ->send();
-            exit();
-        } else {
-            $response->success(false)
-                ->data(['errors' => $GuideBookingsModel->errors])
-                ->message('Validation failed')
-                ->statusCode(422)
-                ->send();
-        }
+        
+        $merchant_id = MERCHANT_ID;
+        $merchant_secret = MERCHANT_SECRET;
+
+        $hash = strtoupper(
+            md5(
+                $merchant_id . 
+                $booking[0]->bookingID .
+                // number_format($order->totalAmount, 2, '.', '') .
+                $booking[0]->amount .
+                'LKR' .  
+                strtoupper(md5($merchant_secret))
+            ) 
+        );
+        
+        $data['hash'] = $hash;
+        $data['merchant_id'] = $merchant_id;
+        $data['orderId'] = $booking[0]->bookingID;
+        $data['amount'] = $booking[0]->amount;
+
+        $response->success(true)->data($data)->statusCode(200)->send();
+
+        // if ($booking) {
+        //     $response->success(true)
+        //         ->message('Booking created successfully')
+        //         ->statusCode(200)
+        //         ->send();
+        //     exit();
+        // } else {
+        //     $response->success(false)
+        //         ->data(['errors' => $GuideBookingsModel->errors])
+        //         ->message('Validation failed')
+        //         ->statusCode(422)
+        //         ->send();
+        // }
     }
+
     public function getDays(string $a = '', string $b = '', string $c = ''): void {
         $request  = new JSONRequest;
         $response = new JSONResponse;

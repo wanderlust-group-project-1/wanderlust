@@ -1,7 +1,7 @@
-<div class="book-package-details" id="book-package-details-<?php echo htmlspecialchars($package[0]->id);?>">
+<div class="payment-details" id="payment-details-<?php echo htmlspecialchars($package[0]->id); ?>">
     <span class="close">&times;</span>
     <div class="container flex-d-c gap-4 p-md-0 ">
-        <h2>Package Details</h2>
+        <h2>Booking Details</h2>
 
         <div class="row">
 
@@ -27,14 +27,20 @@
                         <td><strong>Places:</strong></td>
                         <td><?php echo htmlspecialchars($package[0]->places); ?></td>
                     </tr>
+
+                    <tr>
+                        <td><strong>Price:</strong></td>
+                        <td><?php echo htmlspecialchars($package[0]->price); ?></td>
+                    </tr>
                 </table>
 
             </div>
 
         </div>
 
-        <div class="edit-button">
-            <button id=book-guide-package class="book-guide-package btn btn-full m-1" data-id="<?php echo htmlspecialchars($package[0]->id); ?>">Book</button>
+        <div class="flex-d-center gap-2 mt-5">
+            <button id="book-pre-pay" class="btn" data-id="<?php echo htmlspecialchars($package[0]->id); ?>">Pay</button>
         </div>
+
     </div>
 </div>
