@@ -527,6 +527,9 @@ function setNewDate(start, end) {
             success: function(data) {
                 // console.log(data);
                 disableButton(id);
+                $('#equipment-details-modal').css('display', 'none');
+                alertmsg("Item added to cart",'success');
+
                 getCartCount();
             },
             error: function(err) {
