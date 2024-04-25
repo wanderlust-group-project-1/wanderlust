@@ -32,6 +32,18 @@
 
             return $this->query($q->getQuery(), $q->getData());
         }
+
+        public function getRentComplaint($id) {
+            $q = new QueryBuilder;
+            $q->setTable('rent_complaint');
+            $q->select('rent_complaint.complaint_no as complaint_no, rent.id as rent_id, rent.customer_id as customer_id, rent.paid_amount as paid_amount, rent.total as total_amount, rental_services.name as rental_name, rental_services.mobile as rental_mobile,
+            rent_complaint.title as title, rent_complaint.description as description')
+            ->join('rent','rent_complaint.rent_id', 'rent.id')
+            ->join('rental_services', 'rent.rentalservice_id','rental_services.id')
+            ->where('rent_complaint.complaint_no', $id);
+
+            return $this->query($q->getQuery(), $q->getData());
+        }
     
     }
 

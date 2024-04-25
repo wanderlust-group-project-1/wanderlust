@@ -13,7 +13,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <h2 class="justufy-content-ceneter flex-d"> Complaints </h2>
 
                 <div class="section-switch flex-d gap-3 flex-wrap">
-                    <button class="btn-selected" id="rentCompaints">My complaints</button>
+                    <button class="btn-selected" id="rentComplaints">My complaints</button>
                 <button class="btn-selected" id="returnComplaintsbyCustomer">Recieved complaints</button>
                 </div>
 
@@ -106,6 +106,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     
 </script>
 
+<!-- View modal -->
 <div class="modal" id="complaint-view-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -119,3 +120,21 @@ require_once('../app/views/navbar/customer-navbar.php');
 <?php
 require_once('../app/views/layout/footer.php');
 ?>
+
+<!-- mycom-view-button -->
+<script>
+$(document).on('click', '#mycom-view-button', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization' : 'Bearer' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/complaints/rentComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                $('#complaint-data').html(response);
+                $('#complaint-view-modal').css('display', 'block');
+            }
+        });
+    });
+</script>
