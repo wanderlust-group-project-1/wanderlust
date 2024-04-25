@@ -4,7 +4,7 @@ foreach ($data["package"] as $package) {
     <div class="package-details" id="package-details-<?php echo htmlspecialchars($package->id); ?>" data-id="<?php echo htmlspecialchars($package->id); ?>">
         <span class="close">&times;</span>
         <div class="container flex-d-c gap-4 p-md-0 ">
-            <h2>Package Details</h2>
+            <h2 class="guide-h2-title">Package Details</h2>
 
             <div class="row">
 
@@ -54,7 +54,7 @@ foreach ($data["package"] as $package) {
     <div class="modal-content">
         <span class="close-button">&times;</span>
         <form id="update-package-form" packageId="<?php echo htmlspecialchars($package->id);?>" class="form" method="POST" enctype="multipart/form-data">
-            <h2>Update Package</h2>
+            <h2 class="guide-h2-title">Update Package</h2>
 
             <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
@@ -86,7 +86,7 @@ foreach ($data["package"] as $package) {
 <div id="delete-package-modal" class="delete-package-modal modal">
     <div class="modal-content ">
         <span class="close ">&times;</span>
-        <h2>Delete Package</h2>
+        <h2 class="guide-h2-title">Delete Package</h2>
         <p>Are you sure you want to delete this package?</p>
         <div class="flex-d gap-2 mt-5">
             <button id="delete-package" class="btn btn-danger">Delete</button>

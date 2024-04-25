@@ -11,7 +11,7 @@ class GuideAvailabilityModel{
 
     public function updateSchedule(array $data): void {
         $guideId = $data['guide_id'];
-        $date = $data['date'];
+        $date = $data['date']+1;
 
         
 

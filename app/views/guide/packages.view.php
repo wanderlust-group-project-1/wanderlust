@@ -35,7 +35,7 @@ require_once('../app/views/layout/header.php');
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <form id="add-package-form" class="form" method="POST" enctype="multipart/form-data">
-                <h2>Add New Package</h2>
+                <h2 class="guide-h2-title">Add New Package</h2>
 
                 <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 

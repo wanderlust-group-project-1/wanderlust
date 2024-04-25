@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 24, 2024 at 05:34 AM
+-- Generation Time: Apr 25, 2024 at 01:00 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -97,6 +97,34 @@ CREATE DEFINER=`root`@`%` PROCEDURE `CompleteRentProcess` (IN `customerID` INT) 
     -- Return the last inserted payment ID
     SELECT reference_number AS orderID , total_amount AS totalAmount;
 
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `CreatePaymentForGuide` (IN `package_id` INT)   BEGIN
+    DECLARE lastPaymentID INT;
+    DECLARE packagePrice DECIMAL(10, 2);
+    DECLARE reference_number VARCHAR(20);
+    DECLARE paymentID INT;
+
+    -- Inserting a new payment with status 'completed'
+    -- INSERT INTO payment (status) VALUES ('pending');
+
+    -- Retrieve price from package table
+    SELECT price INTO packagePrice FROM package WHERE package.id = package_id;
+    
+    -- Inserting into booking_pay table
+    INSERT INTO payment (amount, status) VALUES (packagePrice, 'pending');
+
+	SET lastPaymentID = LAST_INSERT_ID();
+
+    -- Generating reference number
+    SET reference_number = CONCAT('GD', LPAD(lastPaymentID, 5, '0'));
+	UPDATE payment SET reference_number = reference_number where id=lastPaymentID;
+
+    -- Retrieve the newly inserted payment ID
+    SET paymentID = lastPaymentID;
+    
+    -- Return reference number and payment ID
+    SELECT reference_number AS bookingID, paymentID AS payment_id, packagePrice AS amount;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetAllMonthlyCompletedRentalCount` ()   BEGIN
@@ -240,7 +268,7 @@ END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetGuideIdByPackageId` (IN `p_package_id` INT)   BEGIN
     SELECT
-        g.id AS guide_id
+        g.id AS guide_id, p.price AS totalAmount
     FROM
         guides g
     INNER JOIN
@@ -783,7 +811,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `start_date`, `end_date`) VALUES
-(43, 25, '2024-02-23', '2024-02-29');
+(43, 25, '2024-02-23', '2024-02-29'),
+(82, 32, '2024-04-27', '2024-04-28');
 
 -- --------------------------------------------------------
 
@@ -1003,9 +1032,28 @@ INSERT INTO `guide_availability` (`id`, `guide_id`, `availability`, `date`) VALU
 (1, 9, 0, '2024-04-25'),
 (2, 9, 0, '2024-04-29'),
 (3, 9, 0, '2024-04-28'),
-(4, 9, 1, '2024-04-16'),
+(4, 9, 0, '2024-04-16'),
 (5, 9, 1, '2024-03-31'),
-(6, 9, 1, '2024-04-19');
+(6, 9, 0, '2024-04-19'),
+(7, 9, 1, '2024-04-24'),
+(8, 9, 1, '2024-04-08'),
+(9, 9, 1, '2024-04-10'),
+(10, 9, 1, '2024-04-07'),
+(11, 9, 1, '2024-04-15'),
+(12, 9, 0, '2024-04-26'),
+(13, 9, 0, '2024-05-22'),
+(14, 9, 0, '2024-05-17'),
+(15, 9, 0, '2024-05-31'),
+(16, 9, 0, '2024-05-11'),
+(17, 9, 1, '2024-04-20'),
+(18, 9, 1, '2024-06-06'),
+(19, 9, 1, '2024-05-27'),
+(20, 9, 1, '2024-05-19'),
+(21, 9, 0, '2024-05-15'),
+(22, 9, 0, '2024-05-29'),
+(23, 9, 1, '2024-06-19'),
+(24, 9, 1, '2024-06-07'),
+(25, 9, 1, '2024-06-14');
 
 -- --------------------------------------------------------
 
@@ -1022,16 +1070,26 @@ CREATE TABLE `guide_booking` (
   `date` date DEFAULT NULL,
   `no_of_people` int DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
-  `transport_supply` tinyint(1) DEFAULT NULL
+  `transport_supply` tinyint(1) DEFAULT NULL,
+  `payment_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `guide_booking`
 --
 
-INSERT INTO `guide_booking` (`id`, `guide_id`, `customer_id`, `package_id`, `created_at`, `date`, `no_of_people`, `location`, `transport_supply`) VALUES
-(28, 9, 32, 1, '2024-04-23 15:14:11', '2024-04-25', 5, 'Ella', 1),
-(31, 9, 32, 30, '2024-04-24 05:32:24', '2024-04-28', 5, 'Ella', 1);
+INSERT INTO `guide_booking` (`id`, `guide_id`, `customer_id`, `package_id`, `created_at`, `date`, `no_of_people`, `location`, `transport_supply`, `payment_id`) VALUES
+(28, 9, 32, 1, '2024-04-23 15:14:11', '2024-04-25', 5, 'Ella', 1, NULL),
+(31, 9, 32, 30, '2024-04-24 05:32:24', '2024-04-28', 5, 'Ella', 1, NULL),
+(34, 9, 32, 1, '2024-04-24 10:16:16', '2024-04-16', 5, 'Ella', 1, NULL),
+(35, 9, 32, 2, '2024-04-24 12:14:32', '2024-04-19', 5, 'Kandy', 1, NULL),
+(36, 9, 32, 30, '2024-04-25 07:47:32', '2024-05-29', 5, 'Kandy', 1, NULL),
+(37, 9, 32, 30, '2024-04-25 11:10:39', '2024-04-26', 5, 'Ella', 1, 53),
+(38, 9, 32, 2, '2024-04-25 11:34:46', '2024-05-22', 6, 'Ella', 1, 54),
+(39, 9, 32, 2, '2024-04-25 12:45:36', '2024-05-31', 7, 'Ella', 1, 55),
+(40, 9, 32, 2, '2024-04-25 12:49:17', '2024-05-15', 7, 'Ella', 1, 57),
+(41, 9, 32, 30, '2024-04-25 12:51:58', '2024-05-17', 5, 'Ella', 1, 58),
+(42, 9, 32, 2, '2024-04-25 12:54:31', '2024-05-11', 6, 'Ella', 1, 59);
 
 --
 -- Triggers `guide_booking`
@@ -2939,7 +2997,15 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (48, '2024-04-13 18:14:23', 'completed', 6450.00, NULL, 'RNT00048'),
 (49, '2024-04-14 10:58:51', 'pending', 27800.00, NULL, 'RNT00049'),
 (50, '2024-04-14 10:58:54', 'pending', 0.00, NULL, 'RNT00050'),
-(51, '2024-04-14 11:01:18', 'completed', 15400.00, NULL, 'RNT00051');
+(51, '2024-04-14 11:01:18', 'completed', 15400.00, NULL, 'RNT00051'),
+(52, '2024-04-25 11:31:35', 'pending', 10000.00, NULL, 'GD00052'),
+(53, '2024-04-25 11:32:26', 'pending', 10000.00, NULL, 'GD00053'),
+(54, '2024-04-25 11:34:46', 'pending', 12000.00, NULL, 'GD00054'),
+(55, '2024-04-25 12:45:36', 'pending', 12000.00, NULL, 'GD00055'),
+(56, '2024-04-25 12:48:09', 'pending', 12000.00, NULL, 'GD00056'),
+(57, '2024-04-25 12:49:17', 'pending', 12000.00, NULL, 'GD00057'),
+(58, '2024-04-25 12:51:58', 'pending', 10000.00, NULL, 'GD00058'),
+(59, '2024-04-25 12:54:31', 'completed', 12000.00, NULL, 'GD00059');
 
 -- --------------------------------------------------------
 
@@ -3921,7 +3987,7 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
@@ -3951,13 +4017,13 @@ ALTER TABLE `guides`
 -- AUTO_INCREMENT for table `guide_availability`
 --
 ALTER TABLE `guide_availability`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `guide_booking`
 --
 ALTER TABLE `guide_booking`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -3981,7 +4047,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `rent`

@@ -13,6 +13,7 @@ class GuideBookingsModel{
         'no_of_people',
         'location',
         'transport_supply',
+        'payment_id'
     ];
     public function getBooking(int $bookingId, int $guideId, int $customerId) {
         $q = new QueryBuilder();
@@ -21,14 +22,21 @@ class GuideBookingsModel{
         return $this->query($q->getQuery(), $q->getData());
     }   
 
-    public function createBooking(array $data): bool {
+
+    public function createBooking(array $data): mixed {
+        $q = "CALL CreatePaymentForGuide(:package_id)";
+        $params1 = [
+            'package_id' => $data['package_id']
+        ];
+        $payment = $this->query($q, $params1, true);
+
         $q = "CALL GetGuideIdByPackageId(:package_id)";
-        $params = [
+        $params2 = [
             'package_id' => $data['package_id']
         ];
     
         // Execute the stored procedure to get the guide_id
-        $guide = $this->query($q, $params, true);
+        $guide = $this->query($q, $params2, true);
     
         // Check if guide data is retrieved successfully
         if ($guide) {
@@ -41,11 +49,13 @@ class GuideBookingsModel{
                 'date' => $data['date'],
                 'no_of_people' => $data['no_of_people'],
                 'location' => $data['location'],
-                'transport_supply' => $data['transport_supply']
+                'transport_supply' => $data['transport_supply'],
+                'payment_id' => $payment[0]->payment_id
             ];
     
             // Insert the final data into the database
-            return $this->insert($finaldata);
+            $this->insert($finaldata);
+            return $payment;
         } else {
             // Handle error if guide data is not retrieved
             // For example, return false or throw an exception

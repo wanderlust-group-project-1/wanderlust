@@ -631,6 +631,15 @@ margin: 1px 0;
     }
 }
 
+.Customer-guide-view{
+  display: flex;
+  flex-direction: column;
+}
+
+.package-list-selector{
+  display: flex;
+  flex-direction: column;
+}
 .customer-bg-image {
   background-size: cover;
   background-position: center;
@@ -708,4 +717,5 @@ margin: 1px 0;
   justify-content: center;
   padding: 15px 0 0 0;
 }
+
 
