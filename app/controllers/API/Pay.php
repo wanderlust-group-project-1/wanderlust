@@ -107,7 +107,7 @@ class Pay {
         $payment = new PaymentModel;
         $data['rent'] = $rent->first(['id' => $a]);
 
-        $data['payment'] = $payment->fullPayRent(['rent_id' => $a])[0];
+        $data['payment'] = $payment ->fullPayRent(['rent_id' => $a])[0];
 
         $merchant_id = MERCHANT_ID;
         $merchant_secret = MERCHANT_SECRET;
