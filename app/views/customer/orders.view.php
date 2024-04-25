@@ -342,6 +342,37 @@ require_once('../app/views/navbar/customer-navbar.php');
     });
 
 
+    // Pay button for unpaid
+    $(document).on('click','.order-pay-button', function() {
+        var referenceNo = $(this).closest('button').attr('data-id');
+        console.log(referenceNo);
+        showLoader();
+        // open pay modal
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/api/pay/unpaid',
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'POST',
+            data: JSON.stringify({
+                reference_number: referenceNo
+            }),
+            contentType: 'application/json',
+            success: function(data) {
+                paymentGateWay(data.data);
+              
+            },
+            error: function(data) {
+                console.log(data);
+                alertmsg('Error loading payment details', 'error');
+                hideLoader();
+            }
+
+        });
+
+    });
+
+
 
     function paymentGateWay(data) {
             console.log("Payment gateway");
