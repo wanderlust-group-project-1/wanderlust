@@ -81,7 +81,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class = "search-container col-lg-12">
     <form action="<?= ROOT_DIR ?>/search" method="get">
     <div class="row gap-2">
-        <input type="text" id="search-input"  placeholder="Search.." name="search">
+        <input type="text" id="search-input"  placeholder="Search item by name.." name="search">
         <!-- Select Type of result -->
         <select name="type" id="type">
             <option value="all">All</option>

@@ -34,8 +34,8 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
 <div class="col-lg-6 flex-d justify-content-center w-100 p-1 ">
-    <div class="card-normal mw-100 pl-10 w-100">
-        <div class="col gap-2">
+    <div class="card-normal mw-50 pl-10 w-100 mb-0">
+        <div class="col gap-2 bg-transparent">
             <!-- Change date -->
             <div>
                  <p class="date-change-phase" id="date-change-phase" ><? echo isset($cart) ? "Selected Date: " . $cart->start_date . " - " . $cart->end_date : "Select Date"; ?></p>
@@ -51,13 +51,13 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
 <div class="col-lg-6 flex-d justify-content-center w-100 p-1">
-    <div class="card-normal mw-100 pl-10 w-100">
+    <div class="card-normal-transparent mw-75 pl-10 w-100">
         <div class="row">
             <div class="col-lg-8 flex-d justify-content-center">
                 <div class = "search-container col-lg-12">
                 <form action="<?= ROOT_DIR ?>/search" method="get">
                     <div class="row gap-2 w-100">
-                        <input type="text" id="search-input" class="form-control-lg"  placeholder="Search item by name.." name="search">
+                        <input type="text" id="search-input" class="form-control-lg mw-75"  placeholder="Search item by name.." name="search">
            
                         <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
                         <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
