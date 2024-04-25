@@ -67,14 +67,14 @@
 
 <!-- View modal -->
 
-<div class="modal" id="complaint-view-modal">
+<!-- <div class="modal" id="complaint-view-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         
         
         <div id="complaint-data">   </div>
     </div>
-</div>
+</div> -->
 
 
 
