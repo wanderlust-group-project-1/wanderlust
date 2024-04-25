@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 25, 2024 at 08:30 AM
+-- Generation Time: Apr 25, 2024 at 08:59 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -4211,6 +4211,55 @@ INSERT INTO `rental_settings` (`id`, `rentalservice_id`, `renting_state`, `recov
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rent_complaint`
+--
+
+CREATE TABLE `rent_complaint` (
+  `id` int NOT NULL,
+  `complaint_no` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'CC000001',
+  `rent_id` int DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('pending','cancelled','resolved') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `rent_complaint`
+--
+
+INSERT INTO `rent_complaint` (`id`, `complaint_no`, `rent_id`, `title`, `description`, `created_at`, `status`) VALUES
+(1, 'CC000001', 78, 'iugv', 'viugyrbk', '2024-04-23 06:15:41', NULL),
+(2, 'CC000001', 78, 'skjhjbisygd', 'vdskjjbs', '2024-04-23 06:16:56', 'pending'),
+(3, 'CC000003', 65, 'kjbaekr', 'lkjbk dflnfdl kjbdf', '2024-04-23 09:54:10', 'pending');
+
+--
+-- Triggers `rent_complaint`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_complaint_no` BEFORE INSERT ON `rent_complaint` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE padded_id VARCHAR(6);
+    DECLARE new_complaint_no VARCHAR(12);
+
+    -- Get the next available ID
+    SELECT IFNULL(MAX(id) + 1, 1) INTO next_id FROM rent_complaint;
+
+    -- Pad the ID with zeros to ensure it's six digits long
+    SET padded_id = LPAD(next_id, 6, '0');
+
+    -- Combine 'CC' with the padded ID
+    SET new_complaint_no = CONCAT('CC', padded_id);
+
+    -- Set the new complaint_no value for the new row
+    SET NEW.complaint_no = new_complaint_no;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rent_item`
 --
 
@@ -5063,6 +5112,12 @@ ALTER TABLE `rental_services`
   ADD KEY `fk_rental_services_location` (`location_id`);
 
 --
+-- Indexes for table `rent_complaint`
+--
+ALTER TABLE `rent_complaint`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `rent_item`
 --
 ALTER TABLE `rent_item`
@@ -5170,6 +5225,12 @@ ALTER TABLE `rent`
 --
 ALTER TABLE `rental_services`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT for table `rent_complaint`
+--
+ALTER TABLE `rent_complaint`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rent_item`
