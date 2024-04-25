@@ -41,6 +41,14 @@ class MyOrders {
         $this->view('customer/components/order', ['order' => $order, 'items' => $items, 'complaints' => $complaints]);
     }
 
+    public function fullPay(string $a = '', string $b = '', string $c = ''):void {
+        AuthorizationMiddleware::authorize(['customer']);
+
+        $rent = new RentModel;
+        $data['rent'] = $rent->first(['id' => $a]);
+
+        $this->view('customer/components/fullpay', $data);
+    }
 
 
 

@@ -11,6 +11,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     </div>
     <div class=" col-lg-12 flex-d-c gap-2 mt-5 ">
 
+
         <div class="card card-normal-glass ">
 
         <h2 class="justify-content-center flex-d"> Orders </h2>
@@ -286,6 +287,174 @@ require_once('../app/views/navbar/customer-navbar.php');
         });
     });
 
+    // full pay button
+    $(document).on('click','.order-fullpay-button', function() {
+        var orderId = $(this).closest('.card').attr('data-id');
+        console.log(orderId);
+        showLoader();
+        // open pay modal
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/myOrders/fullpay/' + orderId,
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+
+            type: 'GET',
+            success: function(data) {
+                $('#pay-data').html(data);
+                $('#pay-modal').show();
+                hideLoader();
+            },
+            error: function(data) {
+                console.log(data);
+                alertmsg('Error loading payment details', 'error');
+                hideLoader();
+            }
+
+        });
+
+    });
+
+    // full pay confirm
+    $(document).on('click','#full-pay-confirm', function() {
+        showLoader();
+        var orderId = $(this).attr('data-id');
+        console.log(orderId);
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/api/pay/fullPay/' + orderId,
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                paymentGateWay(data.data);
+                hideLoader();
+                
+            },
+            error: function(data) {
+                console.log(data);
+                alertmsg('Error making payment', 'error');
+                hideLoader();
+            }
+
+        });
+    });
+
+
+
+    function paymentGateWay(data) {
+            console.log("Payment gateway");
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = () => {
+                console.log(xhttp.readyState);
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    // alert(xhttp.responseText);
+
+                    // Payment completed. It can be a successful failure.
+                    payhere.onCompleted = function onCompleted(orderId) {
+                        console.log("Payment completed. OrderID:" + orderId);
+                        showLoader();
+
+                        // notify
+                        $.ajax({
+                            url: "<?php echo ROOT_DIR ?>/api/pay/notify", // URL to your PHP script that will handle the notification
+                            type: "POST", // Use POST method
+                            headers: {
+                                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                            },
+                            data: {
+                                merchant_id: data.merchant_id,
+                                order_id: data.orderId,
+                                payhere_amount: data.amount,
+                                payhere_currency: "LKR",
+                                status_code: 2,
+                                md5sig: data.hash
+                            }, // Send the data as part of the request
+                            success: function(response) {
+                                console.log("Notification sent. Server responded with: ", response);
+                                alertmsg("Payment successful", "success");
+
+                                setTimeout(() => {
+                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+
+                                    hideLoader();
+
+                                }, 1000);
+
+
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error sending notification: ", textStatus, errorThrown);
+                                alertmsg("Error occured", "error");
+                                setTimeout(() => {
+                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+                                    hideLoader();
+                                }, 1000);
+                            }
+                        });
+
+                        // window.location.href = "<?php echo ROOT_DIR ?>/pay/complete";
+
+
+                        // Note: validate the payment and show success or failure page to the customer
+                    };
+
+                    // Payment window closed
+                    payhere.onDismissed = function onDismissed() {
+                        // Note: Prompt user to pay again or show an error page
+                        console.log("Payment dismissed");
+                        alertmsg("Payment dismissed", "error");
+
+                    };
+
+                    // Error occurred
+                    payhere.onError = function onError(error) {
+                        // Note: show an error page
+                        console.log("Error:" + error);
+                        alertmsg("Error occured", "error");
+                    };
+
+                    // Put the payment variables here
+                    var payment = {
+                        "sandbox": true,
+                        "merchant_id": data.merchant_id,
+                        "return_url": "http://localhost:8080/pay/complete",
+                        "cancel_url": "http://localhost:8080/pay/cancel",
+                        "notify_url": "http://localhost:8080/pay/notify",
+                        "order_id": data.orderId,
+                        "items": "Door bell wireles",
+                        "amount": data.amount,
+                        "currency": "LKR",
+                        "hash": data.hash,
+                        "first_name": "Saman",
+                        "last_name": "Perera",
+                        "email": "samanp@gmail.com",
+                        "phone": "0771234567",
+                        "address": "No.1, Galle Road",
+                        "city": "Colombo",
+                        "country": "Sri Lanka",
+                        "delivery_address": "No. 46, Galle road, Kalutara South",
+                        "delivery_city": "Kalutara",
+                        "delivery_country": "Sri Lanka",
+                        "custom_1": "",
+                        "custom_2": ""
+                    };
+
+                    console.log(payment);
+                    payhere.startPayment(payment);
+                }
+            }
+            xhttp.open("GET", "<?php echo ROOT_DIR ?>/pay/payhereprocess", true);
+            xhttp.send();
+        }
+
+
+
+
+
+
+
 
 
 </script>
@@ -351,6 +520,8 @@ require_once('../app/views/navbar/customer-navbar.php');
     </div>
 </div>
 
+
+<script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 
 
 

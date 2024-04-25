@@ -1,52 +1,12 @@
 <div id="complaint-list-content" class=" col-lg-12">
 
 
-    <!-- Filter Complaint -->
-
-    <!-- Filter by Date Duration -->
-    <!-- <div class="filter-complaint">
-    <div class="filter-complaint-header">
-    </div>
-    <div class="filter-complaint-body flex-d">
-        <div class="filter-complaint-date">
-            <label for="start-date">Start Date</label>
-            <input type="date" id="start-date" name="start-date">
-        </div>
-        <div class="filter-complaint-date">
-            <label for="end-date">End Date</label>
-            <input type="date" id="end-date" name="end-date">
-        </div>
-
-
-        <div class="filter-complaint-button">
-            <button class="btn btn-primary" id="filter-complaint-button">Filter</button>
-        </div>
-
-        
-    </div>
-</div> -->
 
 
 
 
 
     <?php
-
-    // show($complaints);
-
-    // [0] => stdClass Object
-    // (
-    //     [id] => 13
-    //     [customer_id] => 32
-    //     [rentalservice_id] => 25
-    //     [start_date] => 2024-02-22
-    //     [end_date] => 2024-04-29
-    //     [status] => pending
-    //     [total] => 1206.00
-    //     [paid_amount] => 0.00
-    //     [update_at] => 2024-02-23 15:01:21
-    //     [payment_status] => completed
-    // )
 
 
     //  oreders list 
@@ -72,11 +32,6 @@
                     <button class="btn-text-green" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
                     <!-- if status pending set show  -->
                     <?php if ($complaint->status == 'pending') {
-
-
-
-
-
                     ?>
                         <div class="flex-d-c">
                             <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-check" aria-hidden="true"></i> Resolve</button>

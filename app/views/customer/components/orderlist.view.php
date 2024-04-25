@@ -34,6 +34,10 @@ foreach ($orders as $order) {
                     <button class="btn-text-blue order-pay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
                 <?php } ?>
 
+                <?php if ($order->rent_status == 'rented') { ?>
+                    <button class="btn-text-blue order-fullpay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
+                <?php } ?>
+
                 <!-- if rent_status accepted, mark as rented --> 
                 <?php if ($order->rent_status == 'accepted') { ?>
                     <button class="btn-text-green order-rent-button"><i class="fa fa-check-square" aria-hidden="true"></i> Mark as Rented</button>
@@ -65,3 +69,4 @@ foreach ($orders as $order) {
 
 
 ?>
+

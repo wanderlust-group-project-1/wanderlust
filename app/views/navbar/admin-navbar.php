@@ -6,7 +6,7 @@
     <nav class="nav__container">
         <div class="nav__data">
             <a href="#" class="nav__logo">
-                <img class="nav__logo-pic" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
+                <img class="nav__logo-pic ml-5" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
             </a>
 
             <div class="nav__toggle" id="nav-toggle">
@@ -19,7 +19,7 @@
         <!-- <div class="nav__menu" id="nav-menu"> -->
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
-                <li><a href="#" class="nav__link">Home</a></li>
+                <!-- <li><a href="#" class="nav__link">Home</a></li> -->
 
                 <!--=============== DROPDOWN 1 ===============-->
                 <!-- <li class="dropdown__item">
@@ -38,11 +38,11 @@
                 <li><a href="#" class="nav__link">Guides</a></li>
                 <li><a href="#" class="nav__link">Rental Services</a></li> -->
 
-                <li><a href="#" class="nav__link">Blogs</a></li>
-                <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
+                <li><a href="/admin/dashboard" class="nav__link mr-5"><i class="fas fa-window-maximize"></i>Dashboard</a></li>
+                <!-- <li><a href="#" class="nav__link">Tips and Knowhows</a></li> -->
 
                 <!--=============== DROPDOWN 2 ===============-->
-                <li class="dropdown__item">
+                <!-- <li class="dropdown__item">
                     <div class="nav__link">
                         Complains <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                     </div>
@@ -54,7 +54,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
 
                 <!-- check role avalable or not -->
@@ -64,7 +64,7 @@
 
                     <!-- profile avatar with dropdown -->
 
-                    <li class="dropdown__item" id="nav-dropdown">
+                    <!-- <li class="dropdown__item" id="nav-dropdown">
                         <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
                             <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="profile picture">
                         </div>
@@ -75,13 +75,13 @@
                                 <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">>Logout</a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
 
                 <?php } else if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER']->role == 'admin') {
                     $admin = $_SESSION['USER'];   ?>
 
                     <!-- profile avatar with dropdown -->
-                    <li class="dropdown__item" id="nav-dropdown">
+                    <!-- <li class="dropdown__item" id="nav-dropdown">
                         <div class="nav__profile-avatar" style="display: flex; align-items: center; padding-left: 3rem">
                             <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="profile picture">
                         </div>
@@ -91,7 +91,7 @@
                             <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li>
                             <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
                 <?php } else {  ?>
 

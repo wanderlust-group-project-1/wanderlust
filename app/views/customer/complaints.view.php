@@ -13,10 +13,10 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <h2 class="justufy-content-ceneter flex-d"> Complaints </h2>
 
                 <div class="section-switch flex-d gap-3 flex-wrap">
-                    <button class="btn-selected">My complaints</button>
-                    <button class="btn-selected">Add complaints</button>
-                    <button class="btn-selected">Recieved complaints</button>
+                    <button class="btn-selected" id="rentCompaints">My complaints</button>
+                <button class="btn-selected" id="returnComplaintsbyCustomer">Recieved complaints</button>
                 </div>
+
 
                 <div class="row gap-2">
                     <div class="col-lg-12 checkout-items overflow-scroll">
@@ -36,7 +36,7 @@ require_once('../app/views/navbar/customer-navbar.php');
             headers:{
                 'Authorization': 'Bearer' + getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/complaints/returnComplaintsbyCustomer/' + status,
+            url: '<?= ROOT_DIR ?>/complaints/' + status,
             type: 'GET',
             success: function(response) {
                 //if complain-list-content in document remove it
@@ -49,7 +49,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     }
 
     $(document).ready(function(){
-        getComplaints('myComplaints');
+        getComplaints('returnComplaintsbyCustomer');
         $('.section-switch button').click(function() {
             $('.section-switch button').removeClass('active');
             $(this).addClass('active');
