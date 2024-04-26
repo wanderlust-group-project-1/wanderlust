@@ -104,7 +104,7 @@ require_once('../app/views/layout/footer.php');
                 url: '<?= ROOT_DIR ?>/api/settings/renting',
                 type: 'POST',
                 data: JSON.stringify({
-                    renting_status: $('#disable-renting').text() == 'Enable' ? 0 : 1,
+                    renting_status: $('#disable-renting').text() == 'Enable' ? 1 : 0,
                 }),
                 success: function(response) {
                     console.log(response);
@@ -115,6 +115,9 @@ require_once('../app/views/layout/footer.php');
                     } else {
                         $('#disable-renting').text('Enable');
                     }
+
+                    // Enabled or Disabled
+                    $('#renting-status').text($('#disable-renting').text() == 'Enable' ? 'Disabled' : 'Enabled');
 
                     alertmsg('Renting state updated successfully', 'success')
 
@@ -152,6 +155,7 @@ require_once('../app/views/layout/footer.php');
                 success: function(response) {
                     console.log(response);
                     $('#duration-save').attr('disabled', 'disabled');
+                 
                     alertmsg('Duration updated successfully', 'success')
                 },
                 error: function(error) {
@@ -370,7 +374,10 @@ require_once('../app/views/layout/footer.php');
                     <h3 for="disable-renting">Disable further renting</h3>
                 </div>
                 <div class="mw-100px">
-                    <button class="btn btn-primary" id="disable-renting">Enable</button>
+                   <h4 id="renting-status"> <?php ($settings->renting_status) ?  print("Enabled") : print("Disabled") ?> </h4>
+                </div>
+                <div class="mw-100px">
+                    <button class="btn btn-primary" id="disable-renting"> <?php ($settings->renting_status) ?  print("Disable") : print("Enable") ?> </button>
                 </div>
             </div>
             <!-- Duration between two rentals -->

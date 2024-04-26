@@ -24,7 +24,6 @@ class ForgotPassword {
             echo '<meta http-equiv="refresh" content="5;url=' . ROOT_DIR . '/forgotPassword">';
             
         }
-        $this->view('resetpassword', ['token' => $token->token]);
 
     }
 }
