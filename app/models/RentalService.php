@@ -119,14 +119,14 @@ class RentalServiceModel
             $this->errors['email'] = "Email already exists";
             $this->errors['msg'] = "Email already exists";
         }
-        
+
         $rental = new RentalServiceModel;
-        if($rental->first(['regNo' => $data['regNo']])){
+        if ($rental->first(['regNo' => $data['regNo']])) {
             $this->errors['regNo'] = "Registration Number already exists";
             $this->errors['msg'] = "Registration Number already exists";
         }
 
-        if($rental->first(['mobile' => $data['mobile']])){
+        if ($rental->first(['mobile' => $data['mobile']])) {
             $this->errors['mobile'] = "Mobile Number already exists";
             $this->errors['msg'] = "Mobile Number already exists";
         }
@@ -284,6 +284,13 @@ class RentalServiceModel
         return $this->query($q, ['id' => $id, 'from' => $from, 'to' => $to]);
     }
 
+    public function GetAllMonthlyIncome(string $from, string $to): mixed
+    {
+        $q = "CALL GetAllMonthlyIncome(:from, :to)";
+        return $this->query($q, ['from' => $from, 'to' => $to]);
+    }
+
+
     public function GetEquipmentRentalCountByRentalService(array $data): mixed
     {
         $q = "CALL GetEquipmentRentalCountByRental(:from, :to, :id)";
@@ -295,7 +302,7 @@ class RentalServiceModel
     //adminrental stat
 
     public function GetAllMonthlyCompletedRentalCount(): mixed
-    {
+    {   
         $q = "CALL GetAllMonthlyCompletedRentalCount()";
         return $this->query($q);
     }
