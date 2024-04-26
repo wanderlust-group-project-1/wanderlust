@@ -1,44 +1,43 @@
 <?php
 require_once('../app/views/layout/header.php');
 require_once('../app/views/navbar/customer-navbar.php');
-require_once('../app/views/navbar/customer-navbar.php');
 require_once('../app/views/layout/footer.php');
 ?>
 
 
 <div class="profile">
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+</div>
     <div class="dashboard-content">
 
 
 
-        <div class="flex-d-r mt-7 ">
-        <div class="flex-d-c col-lg-4 miw-300px">
-            <div class="usage flex-d-r">
-                <div class="user-profile">
+        <div class="flex-d-r mt-9 mw-100 ml-6">
+        <div class="flex-d-c col-lg-2 mw-50 mh-75 ml-6">
+            <div class="card-normal-glass flex-d-r ">
+                <div class="user-profile px-6 py-6">
 
                     <div class="container">
-                        <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" class="img-fluid h-200px" alt="Profile Image">
-                        <div class="overlay">
-                            <div class="text">Hello <?php echo $user->name ?> ! </div>
-                        </div>
-
+                        <!-- <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" class="img-fluid h-200px" alt="Profile Image"> -->
+                        <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img-fluid h-200px rounded-7">
                     </div>
-                    <div class="user-details">
-                        <h2> <?php echo $user->name ?> </h2>
+                    <div class="user-details py-6">
+                        <h1 class="mb-5"> Hello <?php echo $user->name ?>!</h1>
                         <div class="details flex-d">
-                            <p><i class="fas fa-phone"></i> <?php echo $user->number ?></p>
+                            <h4><i class="fas fa-phone"></i> <?php echo $user->number ?></h4>
                         </div>
                         <div class="details flex-d">
-                            <p><i class="fa fa-location-arrow"></i><?php echo $user->address ?></p>
+                            <h4><i class="fa fa-location-arrow"></i> <?php echo $user->address ?></h4>
                         </div>
                         <div class="details flex-d">
-                            <p><i class="fas fa-envelope"></i> <?php echo $user->email ?></p>
+                            <h4><i class="fas fa-envelope"></i> <?php echo $user->email ?></h4>
                         </div>
                         <div class="details flex-d">
-                            <p><i class="fas fa-id-card"></i> <?php echo $user->nic ?></p>
+                            <h4><i class="fas fa-id-card"></i> <?php echo $user->nic ?></h4>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="justify-items-center">
                         <button type="submit" class="btn mt-4" id="edit-profile">
                             Edit Profile
                         </button>
@@ -47,56 +46,39 @@ require_once('../app/views/layout/footer.php');
             </div>
         </div>
 
-            <div class="flex-d-c col-lg-7 ">
-                <div class="usage-block flex-d-c">
-                    <h2> Recent Booking </h2>
+            <div class="card-normal flex-d-c col-lg-8 justify-content-center ">
+                
+                    <h1>Recent Booking</h1>
 
-                    <div class=" flex-d-r">
-                        <div class="img-2">
+                    <div class=" flex-d-r gap-5">
+                        <div class="img-fluid h-200px rounded-7">
                             <img src="<?php echo ROOT_DIR ?>/uploads/images/equipment/<?php echo $rental->equipment_image; ?>" alt="Equipment Image" class="img-fluid h-200px">
                         </div>
 
-
-
-
-
-
                         <div class="flex-d-r">
-                            <div class="recent-booking-details flex-d">
+                            <div class="flex-d">
                                 <div class="flex-d-c">
-                                    <h3> <?php echo ucfirst($rental->rental_service_name) ?> </h3>
-                                    <p> <?php echo $rental->rental_service_address ?> </p>
-                                    <p> <?php echo $rental->rental_service_mobile ?> </p>
+                                    <h3 class="ml-3"> <?php echo ucfirst($rental->rental_service_name) ?> </h3>
+                                    <p class="ml-3"> <?php echo $rental->rental_service_address ?> </p>
+                                    <p class="ml-3"> <?php echo $rental->rental_service_mobile ?> </p>
+                                    <div class="d-flex align-items-end flex-column">
+                                    <a href="<?php echo ROOT_DIR ?>/myOrders">
+                                        <button type="submit" class="btn-text-blue" id="see-more-bookings">
+                                             View booking history
+                                        </button>
+                                    </a>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <!-- <div class="flex-d-r"> -->
-                        <div class="d-flex align-items-end flex-column">
-                            <a href="<?php echo ROOT_DIR ?>/myOrders">
-                                <button type=" submit" class="btn mt-4  " id="see-more-bookings">
-                                    See More >>
-                                </button>
-                            </a>
-                        </div>
-                        <!-- </div> -->
-
+                       </div>
                     </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-
-
-        <div class="flex-d-r">
-            <div class="usage flex-d-c">
+                
+                <div class="flex-d-r mh-25">
+            <div class="flex-d-c mw-100">
                 <div class="flex-d-c">
-                    <div class="usage-details">
+                    <div class="mw-100">
                         <h2> Usage </h2>
-                        <div class="flex-d-R">
+                        <div class="flex-d-R mw-50 gap-0">
                             <div class="usage-card flex-d-c">
                                 <div class="flex">
                                     <span class="details justify-content-start">
@@ -151,7 +133,16 @@ require_once('../app/views/layout/footer.php');
                 </div>
             </div>
         </div>
-    </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+           </div>
 </div>
 
 
