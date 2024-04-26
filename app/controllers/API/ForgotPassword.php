@@ -23,7 +23,7 @@ class ForgotPassword {
                 'token' => $token
             ]);
 
-            $link = ROOT_DIR . 'forgotPassword/reset/' . $token;
+            $link = ROOT_DIR . '/forgotPassword/reset/' . $token;
 
             $emailSender = new EmailSender();
             $emailSender->sendEmail($data['email'], 'Reset Password', 'Click the link below to reset your password: <a href="' . $link . '">Reset Password</a>');
@@ -39,6 +39,37 @@ class ForgotPassword {
                 ->send();
         }
        
+    }
+
+    public function change(): void
+    {
+        $request = new JSONRequest;
+        $response = new JSONResponse;
+
+        $data = $request->getAll();
+        // show($data);
+
+        $reset = new ResetTokensModel;
+        $token = $reset->first(['token' => $data['token']]);
+
+        if($token){
+            $user = new UserModel;
+            $userData = $user->first(['id' => $token->user_id]);
+
+            $user->update($userData->id,['password' => $user->hashPassword($data['password'])]);
+
+            $reset->delete($token->id);
+
+            $response->success(true)
+                ->message('Password reset successfully')
+                ->statusCode(200)
+                ->send();
+        } else {
+            $response->success(false)
+                ->message('Invalid token')
+                ->statusCode(404)
+                ->send();
+        }
     }
 }
 

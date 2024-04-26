@@ -15,6 +15,7 @@ class ForgotPassword {
         $reset = new ResetTokensModel;
         $token = $reset->first(['token' => $token]);
 
+
         if($token){
             $this->view('resetpassword', ['token' => $token->token]);
         } else {
@@ -23,6 +24,8 @@ class ForgotPassword {
             echo '<meta http-equiv="refresh" content="5;url=' . ROOT_DIR . '/forgotPassword">';
             
         }
+        $this->view('resetpassword', ['token' => $token->token]);
+
     }
 }
 
