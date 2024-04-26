@@ -18,8 +18,9 @@ require_once('../app/views/components/navbar-auth.php');
                         
                     </div> -->
 
-                    <h2>login</h2>
-                    <p>Welcome! Please fill email and password to sign in to your account.</p>
+                    <h2>Verify Email</h2>
+                    <p>Enter your email to verify your account.</p>
+               
 
 
                     <?php if(isset($errors)): ?>
@@ -32,21 +33,12 @@ require_once('../app/views/components/navbar-auth.php');
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="login-input">
-                        <input type="password" name="password" id="password" placeholder="Password" required>
-                        <div class="login-icon">
-                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon"></i>
-                        </div>
-                    </div>
+        
 
-                    <div class="message-text">
-                        <!-- <label><input type="checkbox">Remember Me</label> -->
-                        <h4><a href="forgotPassword">Forgot your password?</a></h4>
-                    </div>
             
-                    <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>
+                    <button class="btn btn-full" id="submit" name="submit" value="verify"> Verify Email </button>
                
-                    <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
+                    <h4> <a href="<?=ROOT_DIR?>/login">Back to Login</a></h4>
                     
 
 
@@ -62,24 +54,48 @@ require_once('../app/views/components/navbar-auth.php');
     </div>
 
 
-    <script src="<?=ROOT_DIR?>/assets/js/login.js"></script>
+    <!-- <script src="<?=ROOT_DIR?>/assets/js/login.js"></script> -->
 
-    <script>
-        let eyeicon = document.getElementById("eyeicon");
-        let password = document.getElementById("password");
-        eyeicon.onclick = function() {
-            if(password.type == "password"){
-                password.type = "text";
-                eyeicon.className = "fa fa-eye";
-            }else{
-                password.type = "password";
-                eyeicon.className =  "fa fa-eye-slash";
-            }
-        }
-    </script>
+
+
     
     <?php
 require_once('../app/views/layout/footer.php');
 
 
 ?>
+
+<script>
+    // Verify Email
+
+    $('#submit').click(function(e) {
+        e.preventDefault();
+        showLoader();
+        var email = $('#email').val();
+        var data = {
+            email: email
+        };
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/api/forgotPassword/email',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log(response);
+                if (response.success) {
+                    alertmsg(response.message, 'success');
+                    
+                    // window.location.href = '<?= ROOT_DIR ?>/login';
+                    hideLoader();
+                } else {
+                    alertmsg(response.message, 'error');
+                    hideLoader();
+                }
+            },
+            error: function(response) {
+                console.log(response);
+                alertmsg(response.responseJSON.message, 'error');
+            }
+        });
+    });
+</script>

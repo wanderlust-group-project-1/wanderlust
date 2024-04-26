@@ -16,9 +16,13 @@ class Settings {
         if(UserMiddleware::getUser()['role'] == 'rentalservice'){
             
 
+            $settings = new RentalSettingsModel;
+            $data['settings'] = $settings->first(['rentalservice_id' => UserMiddleware::getUser()['id']]);
+            // $data
+
             // show(UserMiddleware::getUser());
 
-            $this->view('rental/settings');
+            $this->view('rental/settings',$data);
             // echo "rental service";
         }else{
             $this->view('customer/settings');
