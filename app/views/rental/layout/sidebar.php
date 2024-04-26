@@ -129,8 +129,22 @@
 
     </li>
 
+
+    <li data-id="logout" class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/logout" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Logout</span>
+        <i class="menu-arrow"></i>
+      </a>
+
+    </li>
+
+
+
   </ul>
+
 </nav>
+
 
 <script>
   function toggleSidebar() {
