@@ -64,28 +64,34 @@ foreach ($equipment as $item) {
         </div>
         </div>
 
+        <div class="row flex-d">
         <div class="edit-button">
-        <button id="edit-equipment-button" class="btn btn-full m-1">Edit</button>        
+        <button id="edit-equipment-button" class="btn-text-orange m-1"><i class="fas fa-edit"></i>Edit</button>        
     </div>
 
     <!-- increase count -->
     <div class="increase-count-button">
-        <button id="increase-count-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>" >Increase Quantity</button>
+        <button id="increase-count-button" class="btn-text-green  m-1" data-id="<?php echo htmlspecialchars($item->id); ?>" ><i class="fa fa-plus" aria-hidden="true"></i> Increase Quantity</button>
     </div>
     <!-- Manage Items -->
     <div class="manage-items-button">
-        <button id="manage-items-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Manage Items</button>
+        <button id="manage-items-button" class="btn-text-orange m-1" data-id="<?php echo htmlspecialchars($item->id); ?>"><i class="fa fa-tasks" aria-hidden="true"></i>Manage Items</button>
     </div>
+
+        </div>
+
+        <div class="row flex-d">
 
     <!-- disable -->
     <div class="disable-button">
-        <button id="disable-equipment-button" class="btn btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Disable</button>
+        <button id="disable-equipment-button" class="btn-text-red m-1" data-id="<?php echo htmlspecialchars($item->id); ?>"><i class="fa fa-ban" aria-hidden="true"></i>Disable</button>
     </div>
 
 
     <div class="delete-button">
-        <button id="delete-equipment-button" class="btn btn-danger btn-full m-1" data-id="<?php echo htmlspecialchars($item->id); ?>">Delete</button>
+        <button id="delete-equipment-button" class="btn-text-red m-1" data-id="<?php echo htmlspecialchars($item->id); ?>"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
     </div>
+        </div>
 
 
         </div>
@@ -110,19 +116,19 @@ foreach ($equipment as $item) {
     <div id="increase-count-modal" class="increase-count-modal modal" >
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form id="increase-count-form" class="flex-d-c gap-2">
+            <form id="increase-count-form" class="flex-d-c gap-2 justify-content-center text-center">
                 <h2>Increase Quantity</h2>
 
                 <!-- Current count -->
                 <!-- <p>Current Count: <?php echo htmlspecialchars($item->count); ?></p> -->
 
                 <div class="flex-d gap-2 justify-content-between ">
-                <label for="count">Current Count</label>
+                <label for="count">Current Quantity</label>
                 <input type="text" id="current-count" name="count" value="<?php echo htmlspecialchars($item->count); ?>" disabled>
                 </div>
 
                 <div class="flex-d gap-2 justify-content-between ">
-                <label for="count">Count</label>
+                <label for="count">Quantity</label>
 
                 <input type="number" id="count" name="count" required>
                 </div>
@@ -132,9 +138,9 @@ foreach ($equipment as $item) {
                 <label for="total">Total</label>
                 <input type="text" id="total" name="total" value="<?php echo htmlspecialchars($item->count); ?>" disabled>
                 </div>
-
-                <button type="submit" id="increase-count" class="btn">Increase Quantity</button>
-
+                <div class="flex-d gap-2 justify-content-center">
+                <button type="submit" id="increase-count" class="btn-text-green border"><i class="fa fa-plus" aria-hidden="true"></i> Increase Quantity</button>
+                </div>
             </form>
         </div>
     </div>
@@ -145,11 +151,14 @@ foreach ($equipment as $item) {
     <div id="delete-equipment-modal" class="delete-equipment-modal modal">
         <div class="modal-content ">
             <span class="close ">&times;</span>
+            <div class="flex-d-c gap-2 justify-content-center text-center">
+
             <h2>Delete Equipment</h2>
             <p>Are you sure you want to delete this equipment?</p>
             <div class="flex-d gap-2 mt-5">
-            <button id="delete-equipment" class="btn btn-danger">Delete</button>
-            <button id="cancel-delete" class="btn modal-close">Cancel</button>
+            <button id="delete-equipment" class="btn-text-red border">Delete</button>
+            <button id="cancel-delete" class="btn-text-green border  modal-close">Cancel</button>
+            </div>
             </div>
   
         </div>
@@ -165,11 +174,13 @@ foreach ($equipment as $item) {
     <div id="disable-equipment-modal" class="disable-equipment-modal modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <div class="flex-d-c gap-2 justify-content-center text-center">
             <h2>Disable Equipment</h2>
             <p>Are you sure you want to disable this equipment?</p>
             <div class="flex-d gap-2 mt-5">
-            <button id="disable-equipment" class="btn btn-danger">Disable</button>
-            <button id="cancel-disable" class="btn modal-close">Cancel</button>
+            <button id="disable-equipment" class="btn-text-red border">Disable</button>
+            <button id="cancel-disable" class="btn-text-green border modal-close">Cancel</button>
+            </div>
             </div>
         </div>
     </div>
@@ -220,7 +231,7 @@ foreach ($equipment as $item) {
     <div class="edit-equipment-modal modal" id="edit-equipment-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="update-equipment-form" itemid="<?php echo htmlspecialchars($item->id); ?>"  class="flex-d gap-2"  enctype="multipart/form-data">
+        <form id="update-equipment-form" class="flex-d-c text-center" itemid="<?php echo htmlspecialchars($item->id); ?>"  class="flex-d gap-2"  enctype="multipart/form-data">
             <h2>Update Equipment</h2>
 
             <div class="row align-items-start">
@@ -279,7 +290,7 @@ foreach ($equipment as $item) {
             </div>
                     </div>
             <div class="row">
-            <input id="update-equipment" type="submit" class="btn" value="Update Equipment">
+            <input id="update-equipment" type="submit" class="btn-text-green border" value="Update Equipment">
             </div>
         </form>
     </div>
@@ -304,7 +315,7 @@ foreach ($equipment as $item) {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: rgba(0, 0, 0, 0.4); /* Unified background color */
     /* padding-top: 60px; */
 }
@@ -317,7 +328,7 @@ foreach ($equipment as $item) {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: rgba(0, 0, 0, 0.4); /* Unified background color */
     /* padding-top: 60px; */
 }

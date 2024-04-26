@@ -2,14 +2,14 @@
 
     <!-- Table filter for each column -->
     <!-- button for show filter -->
-    <div class="filter-btn">
-        <button id="show-filter" class="btn-icon" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+    <div class="filter-btn mb-3">
+        <button id="show-filter" class="btn-text-green border" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
     </div>
 
 
     <div class="table-filter ">
-        <div class="row">
-            <div class="back-btn">
+        <div class="row ">
+            <div class="back-btn mb-3">
                 <button id="hide-filter" class="btn-icon" aria-expanded="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
             </div>
         </div>

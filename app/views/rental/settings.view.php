@@ -33,7 +33,7 @@ require_once('../app/views/layout/header.php');
                     </div>
 
                     <div class="card-body mw-100px">
-                        <button class="btn btn-primary" id="renting-settings">Edit</button>
+                        <button class="btn-text-green border" id="renting-settings">Edit</button>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@ require_once('../app/views/layout/header.php');
                     </div>
 
                     <div class="card-body mw-100px">
-                        <button class="btn btn-primary" id="account-settings">Edit</button>
+                        <button class="btn-text-green border" id="account-settings">Edit</button>
                     </div>
                 </div>
 
@@ -155,7 +155,7 @@ require_once('../app/views/layout/footer.php');
                 success: function(response) {
                     console.log(response);
                     $('#duration-save').attr('disabled', 'disabled');
-                 
+
                     alertmsg('Duration updated successfully', 'success')
                 },
                 error: function(error) {
@@ -362,35 +362,39 @@ require_once('../app/views/layout/footer.php');
         <div class="modal-header">
             <span class="close">&times;</span>
 
-            <h3>Renting Settings</h3>
+
         </div>
-        <!-- Disable further renting -->
-        <!-- Duration between two rentals -->
+        <div class="text-center mt-3 ">
 
-        <div class="modal-body">
-            <!-- Button and change  -->
-            <div class="row  justify-content-between">
-                <div class="col-lg-6">
-                    <h3 for="disable-renting">Disable further renting</h3>
-                </div>
-                <div class="mw-100px">
-                   <h4 id="renting-status"> <?php ($settings->renting_status) ?  print("Enabled") : print("Disabled") ?> </h4>
-                </div>
-                <div class="mw-100px">
-                    <button class="btn btn-primary" id="disable-renting"> <?php ($settings->renting_status) ?  print("Disable") : print("Enable") ?> </button>
-                </div>
-            </div>
+            <h2>Renting Settings</h2>
+            <!-- Disable further renting -->
             <!-- Duration between two rentals -->
-            <div class="row  justify-content-between">
-                <div class="col-lg-6">
-                    <h3 for="disable-renting">Duration between two rentals</h3>
-                </div>
-                <div class="mw-200px">
-                    <input type="number" id="duration" name="duration" value="1" min="1" max="15">
-                </div>
-                <button class="btn btn-primary" id="duration-save" disabled>Save</button>
-            </div>
 
+            <div class="modal-body">
+                <!-- Button and change  -->
+                <div class="row  justify-content-between">
+                    <div class="col-lg-6">
+                        <h3 class="text-left" for="disable-renting">Disable further renting</h3>
+                    </div>
+                    <div class="mw-100px">
+                        <h4 id="renting-status"> <?php ($settings->renting_status) ?  print("Enabled") : print("Disabled") ?> </h4>
+                    </div>
+                    <div class="mw-100px">
+                        <button class="btn-text-red border" id="disable-renting"> <?php ($settings->renting_status) ?  print("Disable") : print("Enable") ?> </button>
+                    </div>
+                </div>
+                <!-- Duration between two rentals -->
+                <div class="row  justify-content-between">
+                    <div class="col-lg-6">
+                        <h3 class="text-left" for="disable-renting">Duration between two rentals</h3>
+                    </div>
+                    <div class="mw-200px">
+                        <input type="number" id="duration" name="duration" value="1" min="1" max="15">
+                    </div>
+                    <button class="btn-text-green border" id="duration-save" disabled>Save</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -404,127 +408,143 @@ require_once('../app/views/layout/footer.php');
         <div class="modal-header">
             <span class="close">&times;</span>
 
-            <h3>Account Settings</h3>
-        </div>
-
-        <!-- Change Email -->
-
-        <div class="modal-body">
-            <!-- Button and change  -->
-            <div class="row  justify-content-between">
-                <div class="col-lg-5">
-                    <h3 for="change-email">Change Email</h3>
-                </div>
-                <div class="mw-200px">
-                    <input type="email" value="<?php echo UserMiddleware::getUser()['email'] ?>" disabled>
-
-                </div>
-                <button class="btn btn-primary" id="email-change">Change</button>
+          
             </div>
-            <!-- Change Password -->
-            <div class="row  justify-content-between">
-                <div class="col-lg-5">
-                    <h3 for="change-password">Change Password</h3>
+            <div class="text-center mt-3 ">
+
+<h2>Account Settings</h2>
+
+            <!-- Change Email -->
+
+            <div class="modal-body">
+                <!-- Button and change  -->
+                <div class="row text-left  justify-content-between">
+                    <div class="col-lg-5">
+                        <h3 for="change-email">Change Email</h3>
+                    </div>
+                    <div class="mw-300px">
+                        <h4><?php echo UserMiddleware::getUser()['email'] ?> <h4>
+
+                    </div>
+                    <button class="btn-text-green border" id="email-change">Change</button>
                 </div>
-                
-                <button class="btn btn-primary" id="password-change">Change</button>
+                <!-- Change Password -->
+                <div class="row  text-left justify-content-between">
+                    <div class="col-lg-5">
+                        <h3 for="change-password">Change Password</h3>
+                    </div>
+
+                    <button class="btn-text-green border" id="password-change">Change</button>
 
 
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
 
 
 
 
-<!-- Email change modal -->
+    <!-- Email change modal -->
 
-<div class="modal" id="email-change-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
+    <div class="modal" id="email-change-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class=" close">&times;</span>
 
-            <h3> Enter New Email</h3>
-        </div>
-
-        <!-- Change Email -->
-
-        <div class="modal-body">
-            <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2">
-
-                <div class="mw-200px">
-                    <input type="email" id="email" name="email" value="">
-
-                </div>
-                <button class="btn btn-primary" id="email-change-submit">Change</button>
+              
             </div>
-            <div  id="email-msg"></div>
-        </div>
-    </div>
-</div>
+            <div class=" mt-3 ">
+            <h2  class="text-center"> Enter New Email</h2>
 
+            <!-- Change Email -->
 
+            <div class="modal-body">
+                <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2">
 
-<!-- Password change modal -->
+                    <div class="mw-200px">
+                        <input type="email" id="email" name="email" value="">
 
-<div class="modal" id="password-change-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-
-            <h3>Change Password</h3>
-        </div>
-
-
-        <div class="modal-body">
-            
-            <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2 flex-md-c">
-                <div class="col-lg-6 col-md-12">
-                    <h3 for="change-password">Old Password</h3>
-                </div>
-                <div class="col-lg-5 col-md-12 ">
+                    </div>
                     <div>
-                    <input type="password" id="old-password" name="old-password" value="">
-                    <div class="password-toggle">
-                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon-old"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2 flex-md-c">
-                <div class="col-lg-6 col-md-12">
-                    <h3 for="change-password">New Password</h3>
-                </div>
-                <div class="col-lg-5 col-md-12">
-                    <input type="password" id="new-password" name="new-password" value="">
-                    <div class="password-toggle">
-                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon-new"></i>
-                        </div>
-                </div>
-            </div>
-            <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2 flex-md-c">
-                <div class="col-lg-6 col-md-12">
-                    <h3 for="change-password">Confirm Password</h3>
-                </div>
-                <div class="col-lg-5 col-md-12">
-                    <input type="password" id="confirm-password" name="confirm-password" value="">
-                    <div class="password-toggle">
-                        <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon-confirm"></i>
-                        </div>
+                    <button class="btn-text-green border" id="email-change-submit">Change</button>
+                    <button class="btn-text-red border modal-close">Cancel</button>
                     </div>
                 </div>
+                <div id="email-msg"></div>
             </div>
-            <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2">
-                <button class="btn btn-primary" id="password-change-submit">Change</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Password change modal -->
+
+    <div class="modal" id="password-change-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+
+            </div>
+
+            <div class="text-center mt-3 ">
+
+<h2>Change Password</h2>
+
+
+            <div class="modal-body text-left">
+
+                <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2 flex-md-c">
+                    <div class="col-lg-6 col-md-12">
+                        <h3 for="change-password">Old Password</h3>
+                    </div>
+                    <div class="col-lg-5 col-md-12 ">
+                        <div class="row flex-d w-100">
+                            <input class="w-90" type="password" id="old-password" name="old-password" value="">
+                            <div class="password-toggle ml-2 ">
+                                <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon-old"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2 flex-md-c">
+                    <div class="col-lg-6 col-md-12">
+                        <h3 for="change-password">New Password</h3>
+                    </div>
+                    <div class="col-lg-5 col-md-12">
+                    <div class="row flex-d w-100">
+
+                        <input  class="w-90" type="password" id="new-password" name="new-password" value="">
+                        <div class="password-toggle ml-2">
+                            <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon-new"></i>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 flex-d justify-content-between align-items-center gap-2 flex-md-c">
+                    <div class="col-lg-6 col-md-12">
+                        <h3 for="change-password">Confirm Password</h3>
+                    </div>
+                    <div class="col-lg-5 col-md-12">
+                    <div class="row flex-d w-100">
+
+                        <input  class="w-90" type="password" id="confirm-password" name="confirm-password" value="">
+                        <div class="password-toggle ml-2">
+                            <i class="fa fa-eye-slash" aria-hidden="true" id="eyeicon-confirm"></i>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-12 flex-d justify-content-end mt-4 align-items-center gap-2">
+                <button class="btn-text-green border" id="password-change-submit">Change</button>
+                <button class="btn-text-red border modal-close">Cancel</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-       

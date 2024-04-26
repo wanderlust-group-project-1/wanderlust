@@ -129,8 +129,22 @@
 
     </li>
 
+
+    <li data-id="logout" class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/logout" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Logout</span>
+        <i class="menu-arrow"></i>
+      </a>
+
+    </li>
+
+
+
   </ul>
+
 </nav>
+
 
 <script>
   function toggleSidebar() {
@@ -169,7 +183,7 @@
               
 
 
-                <form id="rentalservice" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
+                <form id="rentalservice" class="text-center" action="<?= ROOT_DIR ?>/rentalService/update" method="post">
                     <h2>Update Profile</h2>
                     <?php if (isset($errors)) : ?>
                         <div> <?= implode('<br>', $errors) ?> </div>
@@ -206,7 +220,10 @@
                     <!-- <label for="password">Password</label>
     <input type="password" name="password" id="password" required> -->
 
-                    <input type="submit" class="btn mt-4" name="submit" value="Update">
+    <div class="flex-d align-items-center justify-content-center">
+                    <!-- <input type="submit" class="btn-text-green border mt-4" name="submit" value="Update"> -->
+                    <button type="submit" class="btn-text-green border mt-4" name="submit" > <i class="fas fa-edit"></i>Update</button>
+    </div>
                 </form>
 
 
@@ -234,7 +251,12 @@
                     
                 <img src="<?php echo ROOT_DIR ?>/uploads/images/rental_services/<?php echo $user->image; ?>" alt="" id="image-preview" class="image-preview">
                 </div>
-                <input type="submit" class="btn mt-4" name="submit" value="Upload">
+                <div class="flex-d align-items-center justify-content-center">
+
+                <!-- <input type="submit" class="btn-text-green border mt-4" name="submit" value="Upload">  -->
+                <button type="submit" class="btn-text-green border mt-4" name="submit" > <i class="fa fa-upload"></i>Upload</button>
+
+                </div>
             </form>
 
 

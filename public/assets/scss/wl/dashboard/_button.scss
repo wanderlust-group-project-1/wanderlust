@@ -132,9 +132,40 @@
   padding: 10px;
   // font-family: "poppins", sans-serif;
 
+  & i {
+    margin-right: 5px;
+  }
+
+  // btn-text-green with border
+  &.border {
+    border: 1px solid $color-primary;
+    border-radius: 10px;
+    min-width: 100px;
+
+    &:hover {
+      border: 1px solid $color-primary;
+      text-decoration: none;
+      // shadow
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+      
+    }
+  }
+
+
   &:hover{
     // color: $gray-text;
     text-decoration: underline;
+  }
+
+  // disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      color: $color-primary;
+      box-shadow: none;
+    }
   }
 }
 
@@ -147,6 +178,22 @@
   border: none;
   padding: 10px;
   // font-family: "poppins", sans-serif;
+  & i {
+    margin-right: 5px;
+  }
+
+  &.border {
+    border: 1px solid $blue;
+    border-radius: 10px;
+    min-width: 100px;
+
+
+    &:hover {
+      border: 1px solid $blue;
+      text-decoration: none;
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
 
   &:hover{
     // color: $gray-text;
@@ -164,6 +211,23 @@
   padding: 10px;
   // font-family: "poppins", sans-serif;
 
+  & i {
+    margin-right: 5px;
+  }
+
+  &.border {
+    border: 1px solid $orange;
+    border-radius: 10px;
+    min-width: 100px;
+
+
+    &:hover {
+      border: 1px solid $orange;
+      text-decoration: none;
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
   &:hover{
     // color: $gray-text;
     text-decoration: underline;
@@ -180,11 +244,38 @@
   padding: 10px;
   // font-family: "poppins", sans-serif;
 
+  & i {
+    margin-right: 5px;
+  }
+
+  &.border {
+    border: 1px solid $red;
+    border-radius: 10px;
+    min-width: 100px;
+
+
+    &:hover {
+      border: 1px solid $red;
+      text-decoration: none;
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    }
+  } 
+
+  // disabled state
+
+
   &:hover{
     // color: $gray-text;
     text-decoration: underline;
   }
 }
+
+// .btn-b-green {
+//   // use text color for border
+//   border: 1px solid $color-primary;
+//   border-radius: 10px;
+  
+// }
  
 
 .btn-danger{
