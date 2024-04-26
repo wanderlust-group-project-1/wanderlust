@@ -24,7 +24,7 @@ require_once('../app/views/layout/header.php');
         </ul>
 
 
-        <div class="info-data mt-5 felx">
+        <div class="info-data mt-5">
 
             <div class="flex-d-r">
                 <div class="card">
