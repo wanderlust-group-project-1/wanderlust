@@ -392,9 +392,11 @@ body {
 
 .password-toggle i{
 
-  position: absolute;
-  right: 20px;
-  transform: translate(-120px,-25px);
+  // position: absolute;
+  // right: 20px;
+  // transform: translate(-120px,-25px);
+  font-size: large;
+  color: $color-primary;
 
 }
 

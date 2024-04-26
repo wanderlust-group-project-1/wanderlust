@@ -199,7 +199,7 @@ require_once('../app/views/components/navbar-auth.php');
                     
                         <div class="form-element">
                             <label for="address">Location</label><br>
-                            <div class="location-button-container"  id="location-button-container">
+                            <div class=""  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
                                         <label  id="select-location" class=" btn btn-primary location-button w-100" type="button">
@@ -311,7 +311,7 @@ require_once('../app/views/components/navbar-auth.php');
 
                         <div class="form-element">
                             <label for="address">Location</label><br>
-                            <div class="location-button-container"  id="location-button-container">
+                            <div class=""  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
                                         <label  id="select-location" class=" btn btn-primary location-button w-100" type="button">
@@ -396,7 +396,7 @@ require_once('../app/views/components/navbar-auth.php');
             <input type="text" class="" id="latitude"  hidden/>
             <input type="text" class="" id="longitude" hidden/>
 
-        <div class="location-button-container flex-d justify-content-center">
+        <div class="flex-d justify-content-center">
             <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
         </div>
     </div>
