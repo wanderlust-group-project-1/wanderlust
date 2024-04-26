@@ -156,6 +156,17 @@
     // color: $gray-text;
     text-decoration: underline;
   }
+
+  // disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      color: $color-primary;
+      box-shadow: none;
+    }
+  }
 }
 
 .btn-text-blue {

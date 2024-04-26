@@ -1,5 +1,5 @@
-<div class="order-pay-content">
-    <h2>Pay</h2>
+<div class="order-pay-content ">
+    <h2 class="text-center">Pay</h2>
     
     <table class="payment-table w-100">
          <tr>
@@ -26,9 +26,11 @@
 
     </table>
 
-    <div class="payment">
-        <button class="btn btn-primary"   id="full-pay-confirm" data-id="<?= $rent->id ?>"
+    <div class="payment m-4 flex-d align-items-center justify-content-center gap-2">
+        <button class="btn-text-green border"   id="full-pay-confirm" data-id="<?= $rent->id ?>"
         >Pay Now</button>
+
+        <button class="btn-text-red border modal-close" >Cancel</button>
     </div>
 
 </div>

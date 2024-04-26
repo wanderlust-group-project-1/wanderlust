@@ -31,7 +31,7 @@
 
                 <h5>Price: Rs. <?php echo htmlspecialchars($equipment->cost); ?></h5>
 
-                <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+                <button id="add-to-cart" class="btn-text-green border">Add to Cart</button>
                 <!-- <button  class="btn btn-primary">Add to Cart</button> -->
 
             </div>

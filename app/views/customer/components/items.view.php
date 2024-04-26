@@ -24,7 +24,7 @@
                     <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                     </div> -->
-                    <button  class="btn btn-primary">View</button>
+                    <button  class="btn-text-green border">View</button>
                 </div>
             </div>
             </div>

@@ -391,7 +391,7 @@ require_once('../app/views/layout/footer.php');
                     <div class="mw-200px">
                         <input type="number" id="duration" name="duration" value="1" min="1" max="15">
                     </div>
-                    <button class="btn btn-primary" id="duration-save" disabled>Save</button>
+                    <button class="btn-text-green border" id="duration-save" disabled>Save</button>
                 </div>
 
             </div>
