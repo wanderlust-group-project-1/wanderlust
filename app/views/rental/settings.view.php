@@ -104,7 +104,7 @@ require_once('../app/views/layout/footer.php');
                 url: '<?= ROOT_DIR ?>/api/settings/renting',
                 type: 'POST',
                 data: JSON.stringify({
-                    renting_state: $('#disable-renting').text() == 'Enable' ? 0 : 1,
+                    renting_status: $('#disable-renting').text() == 'Enable' ? 0 : 1,
                 }),
                 success: function(response) {
                     console.log(response);
