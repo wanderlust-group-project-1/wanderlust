@@ -21,7 +21,7 @@ class Guideprofile {
         $data['guide_id'] = UserMiddleware::getUser()['id'];
 
         $guideProfileModel = new GuideprofileModel;
-        $guideProfileModel->updateGuideProfile($data);
+        $data = $guideProfileModel->updateGuideProfile($data);
 
         $response
             ->data($data)

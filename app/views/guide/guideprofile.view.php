@@ -199,6 +199,7 @@ require_once('../app/views/layout/header.php');
                         data: JSON.stringify(jsonData),
                         success: function(data) {
                             console.log(data);
+                            location.reload(); // Reload the page after successful submission
                         },
                         error: function(xhr, status, error) {
                             console.error(xhr.responseText);

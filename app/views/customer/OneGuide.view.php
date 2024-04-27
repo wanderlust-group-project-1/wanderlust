@@ -90,16 +90,9 @@ require_once('../app/views/navbar/customer-navbar.php');
                 </div>
             </div>
 
-            <div class="info-data mt-5 ml-5 mr-5">
-                <div class="guide-card-new">
-                    <span class="label">Booking History</span>
+            <div class="guide-profile-content">
+                <div class="booking-list" id="booking-list">
 
-                    <div class="booking-bar .flex-d mt-4 mb-2">
-                        <p>23rd March : Micheal Julius</p>
-                    </div>
-                    <div class="booking-bar .flex-d mt-4 mb-2">
-                        <p>23rd March : Micheal Julius</p>
-                    </div>
                 </div>
             </div>
 
@@ -117,6 +110,67 @@ require_once('../app/views/navbar/customer-navbar.php');
 </div> -->
 
 
+<script>
+    function bookingList(packageId) {
+        console.log('booking list');
+        $.ajax({
+            headers: {
+                Authorization: "Bearer " + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/guideBookings/getGuideAllBookings/'+ packageId,
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                bookingHTML(data.data);
+            }
+
+        });
+    }
+
+    function bookingHTML(bookingDetails) {
+        const modalContent = document.getElementById("booking-list");
+        modalContent.innerHTML = ""; // Clear previous content
+
+        const currentDate = new Date();
+
+        const recentBookings = [];
+        const upcomingBookings = [];
+
+        // Divide bookings into recent and upcoming based on date
+        bookingDetails.forEach(booking => {
+            const bookingDate = new Date(booking.date);
+            if (bookingDate > currentDate) {
+                upcomingBookings.push(booking);
+            } else {
+                recentBookings.push(booking);
+            }
+        });
+
+        // Function to generate HTML for booking details
+        function generateBookingHTML(bookings) {
+            return bookings.map(booking => `
+            <div class="booking-bar .flex-d mt-4 mb-2">
+                <p>${booking.date} : ${booking.location}</p>
+            </div>
+        `).join('');
+        }
+
+        const tableHTML = `
+        <div class="info-data mt-5 ml-5 mr-5 guide-profile-content">
+            <div class="guide-card-new booking-history">
+                <span class="label">Recent Bookings</span>
+                ${generateBookingHTML(recentBookings)}
+            </div>
+            <div class="guide-card-new booking-history">
+                <span class="label">Upcoming Bookings</span>
+                ${generateBookingHTML(upcomingBookings)}
+            </div>  
+        </div>`;
+        modalContent.innerHTML = tableHTML;
+    }
+    console.log(<?php echo $package[0]->id ?>);
+    bookingList(<?= $package[0]->id ?>);
+</script>
 
 <script>
     function viewBookingPayment() {
@@ -293,7 +347,7 @@ require_once('../app/views/navbar/customer-navbar.php');
         }
     });
 
-// Payment gateway
+    // Payment gateway
     function paymentGateWay(data) {
         console.log("Payment gateway");
         var xhttp = new XMLHttpRequest();

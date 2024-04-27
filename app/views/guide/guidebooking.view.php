@@ -458,3 +458,31 @@ require_once('../app/views/layout/header.php');
                 });
             }
         </script>
+
+        <script>
+            const currentMonthName = currentDate.toLocaleString('en-US', {
+                month: 'long'
+            });
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var currentMonthIndex = months.indexOf(currentMonthName);
+
+            $(document).on('click', '.cal_next', function() {
+                currentMonthIndex++;
+                if (currentMonthIndex >= 12) {
+                    currentMonthIndex = 0; // Reset to January if it goes beyond December
+                    currentYear++;
+                }
+                console.log(currentMonthIndex);
+            });
+
+            $(document).on('click', '.cal_prev', function() {
+                currentMonthIndex--;
+                if (currentMonthIndex < 0) {
+                    currentMonthIndex = 11; // Reset to December if it goes beyond January
+                    currentYear--;
+                }
+            });
+
+            
+
+        </script>

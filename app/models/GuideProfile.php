@@ -12,7 +12,7 @@ class GuideprofileModel {
         'certifications',
     ];
 
-    public function updateGuideProfile(array $data): void {
+    public function updateGuideProfile(array $data) {
         $userId = UserMiddleware::getUser()['id'];
         $q = new QueryBuilder();
         $q->setTable($this->table);
@@ -22,6 +22,7 @@ class GuideprofileModel {
                 'certifications' => $data['certifications'],
             ]
         )->where('guide_id', $userId);
+        return $this->query($q->getQuery(), $q->getData());
     }
 
     public function getGuideProfileByUserId(int $userId) {
