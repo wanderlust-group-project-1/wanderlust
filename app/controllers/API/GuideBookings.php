@@ -102,13 +102,29 @@ class GuideBookings
     {
         $response = new JSONResponse;
 
-        $GuideBookingsModel = new GuideBookingsModel;
+        $GuideBookingsModel = new GuideBookingsModel();
         $bookings = $GuideBookingsModel->getAllBookings(UserMiddleware::getUser()['id']);
         $response->success(true)
             ->data($bookings)
             ->message('Bookings fetched successfully')
             ->statusCode(200)
             ->send();
+    }
+
+    public function getGuideAllBookings(int $packageId): void{
+        $response = new JSONResponse;
+        $GuideBookingsModel = new GuideBookingsModel();
+        $guide = $GuideBookingsModel->getGuideIdByPackageId($packageId);
+        $bookings = $GuideBookingsModel->getGuideAllBookings($guide[0]->guide_id);
+        // show($bookings);
+
+        $response->success(true)
+            ->data($bookings)
+            ->message('Bookings fetched successfully')
+            ->statusCode(200)
+            ->send();
+
+        
     }
     public function deleteBooking($date): void
     {

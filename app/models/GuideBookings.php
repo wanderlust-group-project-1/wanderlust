@@ -99,6 +99,21 @@ class GuideBookingsModel{
         return $this->query($q->getQuery(), $q->getData());
     }
 
+    public function getGuideIdByPackageId(int $packageId): mixed {
+        $q = "CALL GetGuideIdByPackageId(:package_id)";
+        $params = [
+            'package_id' => $packageId
+        ];
+        return $this->query($q, $params, true);
+    }
+
+    public function getGuideAllBookings(int $guideId): mixed {
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->select('guide_booking.*')->where('guide_id', $guideId);
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
     public function deleteBooking(int $guideId, string $date): mixed {
       
         //return $this->delete(['guide_id' => $guideId, 'date' => $date]);
