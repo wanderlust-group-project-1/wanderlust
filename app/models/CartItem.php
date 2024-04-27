@@ -39,4 +39,20 @@ class CartItemModel {
         
         return $this->query($q->getQuery(),$q->getData());
     }
+
+    public function removeItemsByEquipmentId(array $data) {
+        $q = new QueryBuilder();
+
+        $q->setTable('cart_item');
+        $q->delete('cart_item')
+            ->join('item','cart_item.item_id','item.id')
+            ->join('cart','cart_item.cart_id','cart.id')
+            ->where('item.equipment_id', $data['equipment_id'])
+            ->where('cart.customer_id', $data['customer_id']);
+        // show($data);
+        // show($q->getQuery());
+        return $this->query($q->getQuery(), $q->getData());
+
+    }
+
 }
