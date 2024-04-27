@@ -78,6 +78,8 @@
                 color: $color-dark;
                 padding-top: 30px;
             }
+
+ 
             .user-progress {
             display: block;
             margin-top: 24px;
@@ -107,6 +109,7 @@
             font-size: 14px;
             font-weight: 500;
         }
+        
 
         .booking-bar{
             display: flex;
@@ -336,3 +339,45 @@
     color: $info-color;
   }
 }
+
+
+
+.tips-header{
+    display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-gap: 20px;
+
+    display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+               padding: 20px;
+        border-radius: 10px;
+        background: $color-white;
+        box-shadow: $box-shadow-default;
+
+
+    // border-spacing: 1; 
+    // border-collapse: collapse; 
+    // background: $color-white;
+    // border-radius:10px;
+    // overflow:hidden;
+    // max-width:98%; 
+    // width:100%;
+    // margin:0 auto;
+    // position:relative;
+    // color: $gray-text-dark;
+    // font-family: sans-serif, 'Poppins';
+    // box-shadow: $box-shadow-default;
+      
+    position:relative;
+ padding-left:10px; 
+      height:600px;
+      background: $color-lighter;
+    //   font-size: $header4;
+	  	&.l 					{ text-align:left}
+	  	&.c 					{ text-align:center }
+	  	&.r 					{ text-align:right }
+	  
+  }
+  

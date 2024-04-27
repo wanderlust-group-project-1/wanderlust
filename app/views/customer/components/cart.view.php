@@ -51,7 +51,7 @@
     </div>
     <div class="row gap-2">
         <div class="total">
-            <h4>Subtotal: Rs. <span id="total">
+            <h4>Total: Rs. <span id="total">
 
             <?php
             // $total = 0;
@@ -65,8 +65,10 @@
         </div>
     </div>
     <div class="row gap-2">
-     <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary">Go to checkout</a>
-
+   <?php  if (!empty($items)) { ?>
+      
+     <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn-text-green border">Go to checkout</a>
+<?php } ?>
         <!-- <button id="checkout" class="btn" type="button">Checkout</button> -->
     </div>
 </div>

@@ -137,6 +137,43 @@ class Pay {
 
     }
 
+    public function unpaid(string $a = '', string $b = '', string $c = ''):void {
+        AuthorizationMiddleware::authorize(['customer']);
+
+        $request = new JSONRequest();
+        $response = new JSONResponse();
+
+        $payment = new PaymentModel;
+
+        $data['payments'] = $payment->first($request->getAll());
+
+        $merchant_id = MERCHANT_ID;
+        $merchant_secret = MERCHANT_SECRET;
+
+        $hash = strtoupper(
+            md5(
+                $merchant_id . 
+                $data['payments']->reference_number . 
+                // number_format($order->totalAmount, 2, '.', '') .
+                $data['payments']->amount .
+                'LKR' .  
+                strtoupper(md5($merchant_secret))
+            ) 
+        );
+
+        $data['hash'] = $hash;
+        $data['merchant_id'] = $merchant_id;
+        $data['orderId'] = $data['payments']->reference_number;
+        $data['amount'] = $data['payments']->amount;
+
+        $response->data($data)->statusCode(200)->send();
+
+
+       
+
+
+    }
+
 }
 
 

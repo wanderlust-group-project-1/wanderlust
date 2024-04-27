@@ -34,7 +34,7 @@
                     <?php if ($complaint->status == 'pending') {
                     ?>
                         <div class="flex-d-c">
-                            <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-check" aria-hidden="true"></i> Resolve</button>
+                            <button class="btn-text-red" id="resolve-complaint"><i class="fa fa-check" aria-hidden="true"></i> Resolve</button>
 
 
                             <!-- <button class="btn-text-red" id="cancel-rented" hidden>Cancel</button> -->
@@ -101,6 +101,18 @@
         <div class="flex-d gap-3 mt-3">
             <button class="btn btn-primary" id="cancel-complaint-confirm">Yes</button>
             <button class="btn btn-danger modal-close" id="cancel-complaint-cancel">No</button>
+        </div>
+    </div>
+</div>
+
+<div id="resolve-complaint-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Resolve Complaint</h2>
+        <p>Are you sure you want to resolve this complaint?</p>
+        <div class="flex-d gap-3 mt-3">
+            <button class="btn btn-primary" id="resolve-complaint-confirm">Yes</button>
+            <button class="btn btn-danger modal-close" id="resolve-complaint-cancel">No</button>
         </div>
     </div>
 </div>

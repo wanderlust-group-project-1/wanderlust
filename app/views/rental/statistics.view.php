@@ -73,32 +73,8 @@ require_once('../app/views/layout/header.php');
                 <span class="label">Rs.60 000 : Per Month</span> -->
             </div>
 
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>1st March</h3>
-                        <p>Upcoming Booking</p>
-                    </div>
-                </div>
-                <div class="booking-bar .flex-d mt-4 mb-2">
-                    <p>Micheal Julius</p>
-                </div>
-                <!-- <span class="progress" data-value="30%"></span>
-                <span class="label">30%</span> -->
-            </div>
-            <div class="card">
-                <div class="head">
-                    <div>
-                        <h3>21st February</h3>
-                        <p>Recent Booking</p>
-                    </div>
-                </div>
-                <div class="booking-bar .flex-d mt-4 mb-2 ml-2">
-                    <p>Julius John</p>
-                </div>
-                <!-- <span class="progress" data-value="80%"></span>
-                <span class="label">80%</span> -->
-            </div>
+
+
         </div>
 
 
@@ -135,7 +111,7 @@ require_once('../app/views/layout/header.php');
 
                 <div class="head justify-content-center align-items-center flex-md-c">
                     <div class="col-lg-4 col-md-12 mw-300px">
-                        <h2>Income Report</h2>
+                        <h3>Income Report</h3>
                         <!-- <p>Generate Income Report</p> -->
                     </div>
 
@@ -148,7 +124,7 @@ require_once('../app/views/layout/header.php');
 
                             </div>
                             <div class="col-lg-3">
-                                <button class="btn btn-primary" id="income-report">Generate</button>
+                                <button class="btn-text-green border" id="income-report">Generate</button>
                             </div>
 
 
@@ -179,7 +155,7 @@ require_once('../app/views/layout/header.php');
 
                 <div class="head justify-content-center align-items-center flex-md-c">
                     <div class="col-lg-4 col-md-12 mw-300px">
-                        <h2>Equipment Report</h2>
+                        <h3>Equipment Report</h3>
                         <!-- <p>Generate Equipment Report</p> -->
                     </div>
 
@@ -192,7 +168,7 @@ require_once('../app/views/layout/header.php');
 
                             </div>
                             <div class="col-lg-3">
-                                <button class="btn btn-primary" id="equipment-report">Generate</button>
+                                <button class="btn-text-green border" id="equipment-report">Generate</button>
                             </div>
 
 
@@ -448,9 +424,5 @@ require_once('../app/views/layout/header.php');
                 }
             });
 
-        }
-        );
-
-
-
+        });
     </script>

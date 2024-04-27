@@ -12,16 +12,17 @@ class GuideprofileModel {
         'certifications',
     ];
 
-    public function updateGuideProfile(array $data): void {
-        $userId = $_SESSION['USER']->id;
-
-        // Filter the data to include only allowed columns
-        $filteredData = array_filter($data, function ($key) {
-            return in_array($key, $this->allowedColumns);
-        }, ARRAY_FILTER_USE_KEY);
-
-        // Update the guide profile for the current user
-        $this->update($userId, $filteredData, 'guide_id');
+    public function updateGuideProfile(array $data) {
+        $userId = UserMiddleware::getUser()['id'];
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->update([
+                'description' => $data['description'],
+                'languages' => $data['languages'],
+                'certifications' => $data['certifications'],
+            ]
+        )->where('guide_id', $userId);
+        return $this->query($q->getQuery(), $q->getData());
     }
 
     public function getGuideProfileByUserId(int $userId) {

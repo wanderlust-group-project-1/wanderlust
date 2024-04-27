@@ -420,7 +420,7 @@ require_once('../app/views/layout/header.php');
 
                         <div class="head justify-content-center align-items-center">
                               <div>
-                                    <h3>Income Report</h3>
+                                    <h3>Rental Services Income Report</h3>
                                     <!-- <p>Generate Income Report</p> -->
                               </div>
 
@@ -450,3 +450,93 @@ require_once('../app/views/layout/header.php');
 
                   </div>
             </div>
+            <div class="info-data mt-5">
+                  <div class="card">
+
+                        <!-- Income report generation -->
+                        <!-- Select Duration start and end dates -->
+
+                        <div class="head justify-content-center align-items-center">
+                              <div class="mr-6">
+                                    <h3>Guides Income Report</h3>
+                                    <!-- <p>Generate Income Report</p> -->
+                              </div>
+
+                              <form class="w-100 justify-content-center align-items-center flex-d ">
+                                    <div class="row gap-2 ml-6">
+
+                                          <div class="col-lg-4 gap-2 flex-d">
+                                                <input type="date" id="start-date" name="start-date">
+                                                <input type="date" id="end-date" name="end-date">
+
+                                          </div>
+                                          <div class="col-lg-4">
+                                                <button class="btn-success" id="income-report">Generate</button>
+                                          </div>
+
+
+                                    </div>
+
+
+
+
+                              </form>
+
+
+
+                        </div>
+
+                  </div>
+            </div>
+
+
+            <script>
+                  $(document).on('click', '#income-report', function() {
+                        // prevent default form submission
+                        event.preventDefault();
+                        // var startDate = $('#start-date').val();
+                        // var endDate = $('#end-date').val();
+
+                        var startDate = $(this).closest('form').find('#start-date').val();
+                        var endDate = $(this).closest('form').find('#end-date').val();
+
+                        // validate the input
+                        if (startDate == '' || endDate == '') {
+                              alertmsg('Please select a date range', 'error');
+                              return;
+                        }
+
+                        // start data < end date
+
+                        if (startDate > endDate) {
+                              alertmsg('Start date should be less than end date', 'error');
+                              return;
+                        }
+
+                        $.ajax({
+                              headers: {
+                                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                              },
+                              url: '<?= ROOT_DIR ?>/api/report/allRentalIncome',
+                              type: 'POST',
+                              data: JSON.stringify({
+                                    from: startDate,
+                                    to: endDate
+                              }),
+                              success: function(response) {
+                                    console.log(response);
+                                    // open the report in a new tab
+
+                                    var url = '<?= ROOT_DIR ?>/reports/' + response.data.report
+                                    window.open(url, '_blank');
+                              },
+                              error: function(err) {
+                                    console.log(err);
+                              }
+                        });
+
+                  });
+            </script>
+
+            <!-- </div>
+</div> -->

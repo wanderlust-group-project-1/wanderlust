@@ -143,6 +143,12 @@ class GuideModel
           
     }
 
+    public function GetMonthlyIncome(int $id, string $from, string $to): mixed
+    {
+        $q = "CALL GetGuideMonthlyIncome(:id, :from, :to)";
+        return $this->query($q, ['id' => $id, 'from' => $from, 'to' => $to]);
+    }
+
     public function updateStatus(JSONRequest $request, JSONResponse $response)
     {
         $data = $request->getAll();

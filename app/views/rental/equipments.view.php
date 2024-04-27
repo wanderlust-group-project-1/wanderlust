@@ -64,7 +64,7 @@ require_once('../app/views/layout/header.php');
                 </div>
                 <div class="row justify-content-end">
                 <div class="add-equipment mr-5">
-                        <button type="submit" class="btn-icon" id="add-equipment">
+                        <button type="submit" class="btn-text-green border" id="add-equipment">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Add new
                         </button>
@@ -136,8 +136,8 @@ require_once('../app/views/layout/header.php');
     <div class="add-equipment-modal modal" id="add-equipment-modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form id="add-equipment-form" class="flex-d " enctype="multipart/form-data">
-                <h2>Add New Equipment</h2>
+            <form id="add-equipment-form flex-d-c  text-center" class="flex-d " enctype="multipart/form-data">
+                <h2 class="text-center">Add New Equipment</h2>
 
                 <div class="row align-items-start">
                     <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
@@ -184,12 +184,12 @@ require_once('../app/views/layout/header.php');
 
                         <label for="equipment-image1">Equipment Image</label>
                         <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" hidden>
-                        <button type="button" class="btn" id="equipment-image-upload-button">Upload Image</button>
+                        <button type="button" class="btn-text-green border" id="equipment-image-upload-button">Upload Image</button>
 
                     </div>
                 </div>
                 <div class="row">
-                    <input type="submit" class="btn" value="Add Equipment">
+                    <input id="add-equipment-form-submit" type="submit" class="btn-text-green border" value="Add Equipment">
                 </div>
             </form>
         </div>
@@ -213,13 +213,17 @@ require_once('../app/views/layout/header.php');
 <div class="modal" id="equipment-image-upload">
     <div class="modal-content">
         <span class="close">&times;</span>
+        <div class="flex-d-c text-center">
+            
         <h2>Upload Equipment Images</h2>
         <!-- Equipment image upload form -->
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg" multiple required>
+        <form method="post" class="flex-d-c text-center justify-content-center align-items-center" enctype="multipart/form-data">
+            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg , image/webp" required>
             <div class="equipment-image-preview-container flex-d mt-2  align-items-center" id="equipment-image-preview"></div>
-            <input type="submit" class="btn mt-4" name="submit" value="Select Images" id="equipment-image-submit">
+            <input type="submit" class="btn-text-green border mt-4" name="submit" value="Select Images" id="equipment-image-submit">
         </form>
+
+        </div>
     </div>
 </div>
 
@@ -236,6 +240,15 @@ $(document).ready(function() {
             var imgContainer = $('<div/>', { 'class': 'img-preview-item' });
             var img = $('<img>', { 'class': 'image-preview' }).appendTo(imgContainer);
 
+            // validate file type
+            var fileType = file['type'];
+            var validImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+            if (!validImageTypes.includes(fileType)) {
+                alertmsg('Invalid file type. Please select an image file' , 'error');
+                // clear 
+                $('#equipment-image-input').val('');
+                return;
+            }
 
 
             var removeButton = $('<button/>', {
@@ -347,7 +360,9 @@ $(document).on('click', '#equipment-image-submit', function(e) {
 
 $(document).ready(function() {
     $("#add-equipment-form").trigger('reset');
-    $("#add-equipment-form").submit(function(e) {
+    // $("#add-equipment-form").submit(function(e) {
+        // $(document).on('submit', '#add-equipment-form', function(e) {
+            $('#add-equipment-form-submit').click(function(e) {
         e.preventDefault();
 
         var formData = new FormData();
@@ -459,6 +474,8 @@ $(document).ready(function() {
                 if(response.success) {
                     alertmsg('Equipment added successfully', 'success');
                     
+                    $("#add-equipment-form").trigger('reset');
+
                     // close
                     addEquipmentModal.style.display = "none";
 
@@ -466,7 +483,6 @@ $(document).ready(function() {
                     getEquipments();
 
                     // clear form
-                    $("#add-equipment-form").trigger('reset');
                     
 
                 }
@@ -803,8 +819,21 @@ $(document).ready(function() {
 
             formData.append('json', JSON.stringify(jsonData));
 
+
+
+
+
+
             if (formData.get('equipment_image') != '') {
                 var image = formData.get('equipment_image');
+
+                // validate file type
+                var fileType = image['type'];
+                var validImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+                if (!validImageTypes.includes(fileType)) {
+                    alertmsg('Invalid file type. Please select an image file' , 'error');
+                    return;
+                }
 
                 formData.append('image', image);
 
@@ -1015,7 +1044,8 @@ $(document).on('click', '#equipment-item', function() {
         $("#make-unavailable-p").attr('disabled', false);
 
         if(count >0){
-            $("#make-unavailable-p").attr('disabled', true);
+            // $("#make-unavailable-p").attr('disabled', true);
+            $("#make-unavailable-p").hide();
             // You can't make this item unavailable permanently because it has upcoming bookings.
             $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
             
@@ -1028,7 +1058,8 @@ $(document).on('click', '#equipment-item', function() {
         $("#make-unavailable-p").attr('disabled', false);
         console.log(count);
         if(count >0){
-            $("#make-unavailable-p").attr('disabled', true);
+            // $("#make-unavailable-p").attr('disabled', true);
+            $("#make-unavailable-p").hide();
             // You can't make this item unavailable permanently because it has upcoming bookings.
             $("#make-unavailable-p").attr('data-tooltip', 'You can\'t make this item unavailable temporarily because it has upcoming bookings.');
             

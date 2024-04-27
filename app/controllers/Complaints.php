@@ -11,6 +11,9 @@ class Complaints{
         }elseif (UserMiddleware::getUser()['role']=='customer') {
             $this->view('customer/complaints');
         }
+        elseif(UserMiddleware::getUser()['role']=='guide'){
+            $this->view('guide/complaints');
+        }
         
     }
 

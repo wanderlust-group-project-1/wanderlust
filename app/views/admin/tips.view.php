@@ -10,9 +10,13 @@ require_once('../app/views/layout/header.php');
     <?php require_once('../app/views/admin/layout/sidebar.php');
     ?>
 
+
+
     <div class="sidebar-flow"></div>
     <!-- Add button -->
     <!-- <div class="tips-page"> -->
+
+
     <div class="guide-dash-main">
         <h1 class="title mb-2">Tips & Knowhows</h1>
         <ul class="breadcrumbs">
@@ -24,24 +28,36 @@ require_once('../app/views/layout/header.php');
 
         <div class="table-container">
             <div>
-                <button class="add-button">Add</button>
+                <button class="btn ml-2">Add</button>
 
+                <!-- 
+                <div class="info-data mt-5">
+                    <div class="card"> -->
+                <!-- <div class="head"> -->
 
-
-
-                <table class="data-table">
+                <table class="data-table table-custom my-0 px-0 mt-3">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Action</th>
+                            <th class="pl-2 pr-2">
+                                Title
+                            </th>
+                            <th class=" pl-5 pr-6">
+                                Description
+                            </th>
+                            <th class="pl-6 text-align-end pr-6">
+                                Action
+                            </th>
+
+
                         </tr>
                     </thead>
+
+
                     <tbody>
                         <?php foreach ($tips as $tip) : ?>
                             <tr>
                                 <td><?php echo $tip->title; ?></td>
-                                <td><?php echo $tip->description; ?></td>
+                                <td class="ll"><?php echo $tip->description; ?></td>
                                 <td><button key="<?php echo $tip->id; ?>" class="view-button">Update</button></td>
                             </tr>
                         <?php endforeach; ?>

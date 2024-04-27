@@ -67,9 +67,11 @@
 
                 <?php } else {  ?>
 
+<div class="flex-d gap-2">
+                    <div class="btn-text-green border text-center"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+                    <div class="btn-text-green border text-center"><a href="<?= ROOT_DIR ?>/signup">Sign Up</a></div>
 
-                    <div class="btn-small"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
-
+</div>
                 <?php } ?>
 
             </ul>

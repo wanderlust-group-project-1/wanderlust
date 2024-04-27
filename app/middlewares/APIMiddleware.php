@@ -31,7 +31,8 @@ class AuthAPIMiddleware {
         ];
         $unauthRequired = [
             'Login' => ['index'],
-            'Signup' => 'ALL'
+            'Signup' => 'ALL',
+            'ForgotPassword' => 'ALL',
         ];
 
         $currentController = ucfirst($controller);

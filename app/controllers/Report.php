@@ -24,7 +24,7 @@ class Report
 
         ob_start();
         $companyName = "Wanderlust";
-        $reportTitle = "Order Report";
+        $reportTitle = "Order Description";
         $reportDate = date("Y-m-d");
 
 

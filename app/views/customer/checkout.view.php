@@ -103,7 +103,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                     <div class="row gap-2 ">
                         <!-- <a href= <?php echo ROOT_DIR . "/cart/checkout" ?> class="btn btn-primary btn-full btn-lg">Pay</a> -->
 
-                        <button id="pay" class="btn btn-primary btn-full btn-lg" type="button">Pay</button>
+                        <button id="pay" class="btn-text-green border mt-4" type="button">Pay</button>
                     </div>
 
                 </div>

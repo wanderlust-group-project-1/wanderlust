@@ -342,6 +342,39 @@ require_once('../app/views/navbar/customer-navbar.php');
     });
 
 
+    // Pay button for unpaid
+    $(document).on('click','.order-pay-button', function() {
+        var referenceNo = $(this).closest('button').attr('data-id');
+        console.log(referenceNo);
+        showLoader();
+        // open pay modal
+        $.ajax({
+            url: '<?= ROOT_DIR ?>/api/pay/unpaid',
+            headers: {
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            type: 'POST',
+            data: JSON.stringify({
+                reference_number: referenceNo
+            }),
+            contentType: 'application/json',
+            success: function(data) {
+                paymentGateWay(data.data);
+                hideLoader();
+
+              
+            },
+            error: function(data) {
+                console.log(data);
+                alertmsg('Error loading payment details', 'error');
+                hideLoader();
+            }
+
+        });
+
+    });
+
+
 
     function paymentGateWay(data) {
             console.log("Payment gateway");
@@ -405,6 +438,8 @@ require_once('../app/views/navbar/customer-navbar.php');
                         // Note: Prompt user to pay again or show an error page
                         console.log("Payment dismissed");
                         alertmsg("Payment dismissed", "error");
+                        hideLoader();
+
 
                     };
 
@@ -413,6 +448,8 @@ require_once('../app/views/navbar/customer-navbar.php');
                         // Note: show an error page
                         console.log("Error:" + error);
                         alertmsg("Error occured", "error");
+                        hideLoader();
+
                     };
 
                     // Put the payment variables here
@@ -475,10 +512,13 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="confirm-cancel-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
+        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3">
+        <h2 class="text-center">Cancel Order</h2>
         <p>Are you sure you want to cancel this order?</p>
         <div class="flex-d gap-3 mt-3">
-        <button class="btn btn-primary" id="confirm-cancel">Yes</button>
-        <button class="btn btn-danger modal-close" id="cancel-cancel">No</button>
+        <button class="btn-text-green border" id="confirm-cancel">Yes</button>
+        <button class="btn-text-red border modal-close" id="cancel-cancel">No</button>
+        </div>
         </div>
     </div>
 </div>
@@ -489,11 +529,14 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="mark-as-rented-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Mark as Rented</h2>
+        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3">
+
+        <h2 class="text-center">Mark as Rented</h2>
         <p>Are you sure you want to mark this order as rented?</p>
         <div class="flex-d gap-3 mt-3">
-        <button class="btn-text-green" id="mark-as-rented-confirm">Yes</button>
-        <button class="btn-text-red" id="mark-as-rented-cancel">No</button>
+        <button class="btn-text-green border" id="mark-as-rented-confirm">Yes</button>
+        <button class="btn-text-red border modal-close" id="mark-as-rented-cancel">No</button>
+        </div>
         </div>
     </div>
 </div>
@@ -515,11 +558,21 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <label for="description">Description</label>
                 <textarea id="report-description" name="description" class="form-control-lg" required></textarea>
             </div>
-            <button class="btn btn-primary" id="report-submit">Submit</button>
+            <button class="btn-text-green border" id="report-submit">Submit</button>
         </form>
     </div>
 </div>
 
+
+
+<!-- Pay modal -->
+
+<div class="modal" id="pay-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="pay-data"></div>
+    </div>
+</div>
 
 <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 
