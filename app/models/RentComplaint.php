@@ -60,5 +60,6 @@ class RentComplaintModel
         return $this->query($q->getQuery(), $q->getData());
     }
 
+ 
 
 }
