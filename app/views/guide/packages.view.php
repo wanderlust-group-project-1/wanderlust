@@ -33,7 +33,7 @@ require_once('../app/views/layout/header.php');
 
     <div class="modal" id="add-package-modal" style="display: none;">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <span class="modal-close close">&times;</span>
             <form id="add-package-form" class="form" method="POST" enctype="multipart/form-data">
                 <h2 class="guide-h2-title">Add New Package</h2>
 
@@ -66,7 +66,7 @@ require_once('../app/views/layout/header.php');
     <!-- Modal box to view package details -->
     <div class="modal" id="view-package-modal" style="display: none;">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <span class="modal-close close">&times;</span>
             <div id="package-details">
                 <!-- Package details will be loaded here dynamically -->
             </div>
@@ -425,3 +425,5 @@ require_once('../app/views/layout/header.php');
     //     }
     // });
 </script>
+
+<?php require_once('../app/views/layout/footer.php'); ?>

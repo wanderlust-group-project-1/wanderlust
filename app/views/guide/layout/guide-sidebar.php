@@ -158,7 +158,7 @@
     </li> -->
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="charts" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guidestatistics" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Statistics</span>
         <i class="menu-arrow"></i>

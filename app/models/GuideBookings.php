@@ -83,6 +83,22 @@ class GuideBookingsModel{
         return $this->query($q->getQuery(), $q->getData())[0];
     }
 
+    public function getCustomerDetailsByBookingID(int $bookingId): mixed {
+        $q = new QueryBuilder();
+        $q->setTable('customers');
+        $q->select('customers.*')->join('guide_booking', 'customers.id', 'guide_booking.customer_id')->where('guide_booking.id', $bookingId);
+        return $this->query($q->getQuery(), $q->getData())[0];
+    }
+
+    public function getAllBookings(int $userId): mixed {
+
+        $userId = $_SESSION['USER']->id;
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->select('guide_booking.*')->where('guide_id', $userId);
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
     public function deleteBooking(int $guideId, string $date): mixed {
       
         //return $this->delete(['guide_id' => $guideId, 'date' => $date]);
@@ -94,4 +110,10 @@ class GuideBookingsModel{
         
     }
     
+    public function completeBooking(int $guideId, string $date): mixed {
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->update(['status' => 'completed'])->where('guide_id', $guideId)->where('date', $date);
+        return $this->query($q->getQuery(), $q->getData());
+    }
 }

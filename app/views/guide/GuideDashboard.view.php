@@ -142,3 +142,12 @@ require_once('../app/views/layout/header.php');
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     </script>
+
+
+
+
+
+<?php
+require_once('../app/views/layout/footer.php');
+
+?>
