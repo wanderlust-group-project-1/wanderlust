@@ -177,7 +177,6 @@ require_once('../app/views/layout/header.php');
 
 
 
-
     $(document).on('click', '#cancel-complaint-confirm', function() {
         var complaintId = $(this).attr('data-id');
         $.ajax({
@@ -197,6 +196,37 @@ require_once('../app/views/layout/header.php');
 
 
 
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
+
+
+
+
+    $(document).on('click', '#resolve-complaint', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $('#resolve-complaint-confirm').attr('data-id', complaintId);
+        $('#resolve-complaint-modal').css('display', 'block');
+    });
+
+    $(document).on('click', '#resolve-complaint-confirm', function() {
+        var complaintId = $(this).attr('data-id');
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/complaints/resolveComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                var id = response.data.complaint_id;
+                $('#complaint-card[data-id="' + id + '"]').remove();
+                $('#cancel-complaint-modal').css('display', 'none');
+                getComplaints('pending');
             },
             error: function(err) {
                 console.log(err);

@@ -22,7 +22,7 @@ require_once('../app/views/layout/header.php');
 
 
         <div class="table-container">
-            <table class="data-table">
+            <table class="data-table table-custom">
                 <thead>
                     <tr>
                         <th>Name</th>
