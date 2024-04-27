@@ -136,14 +136,18 @@
     margin-right: 5px;
   }
 
+  &.center {
+    align-self: center;
+  }
+
   // btn-text-green with border
   &.border {
-    border: 1px solid $color-primary;
+    border: 2px solid $color-primary;
     border-radius: 10px;
     min-width: 100px;
 
     &:hover {
-      border: 1px solid $color-primary;
+      border: 2px solid $color-primary;
       text-decoration: none;
       // shadow
       box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
@@ -183,13 +187,13 @@
   }
 
   &.border {
-    border: 1px solid $blue;
+    border: 2px solid $blue;
     border-radius: 10px;
     min-width: 100px;
 
 
     &:hover {
-      border: 1px solid $blue;
+      border: 2px solid $blue;
       text-decoration: none;
       box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
     }
@@ -216,13 +220,13 @@
   }
 
   &.border {
-    border: 1px solid $orange;
+    border: 2px solid $orange;
     border-radius: 10px;
     min-width: 100px;
 
 
     &:hover {
-      border: 1px solid $orange;
+      border: 2px solid $orange;
       text-decoration: none;
       box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
     }
@@ -249,13 +253,13 @@
   }
 
   &.border {
-    border: 1px solid $red;
+    border: 2px solid $red;
     border-radius: 10px;
     min-width: 100px;
 
 
     &:hover {
-      border: 1px solid $red;
+      border: 2px solid $red;
       text-decoration: none;
       box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
     }

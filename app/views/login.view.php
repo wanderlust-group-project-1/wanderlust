@@ -44,8 +44,9 @@ require_once('../app/views/components/navbar-auth.php');
                         <h4><a href="forgotPassword">Forgot your password?</a></h4>
                     </div>
             
-                    <button class="btn btn-full" id="submit" name="submit" value="login"> login </button>
-               
+                    <!-- <button class="btn btn-full" id="submit" name="submit" value="login"> login </button> -->
+                    <button class="btn-text-green border center miw-200px" id="submit" name="submit" value="login"> Login </button>
+
                     <h4>Don't have an account? <a href="<?=ROOT_DIR?>/signup">Signup</a></h4>
                     
 

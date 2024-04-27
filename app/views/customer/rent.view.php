@@ -100,7 +100,7 @@ require_once('../app/views/navbar/customer-navbar.php');
             <input type="text" class="form-control" id="longitude" hidden/> -->
 
         <div class="location-button-container">
-            <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
+            <button id="confirm-location" class="location-button btn-text-green border center" type="button">Confirm Location</button>
         </div>
     </div>
     </div>
@@ -604,6 +604,17 @@ function setNewDate(start, end) {
 
 
     })
+
+    // item count change price
+
+    $(document).on('change', '#item-count', function() {
+        var count = $(this).val();
+        console.log(count);
+        var fee = $('#item-fee').attr('data-fee');
+        console.log(fee);
+        var total = count * fee;
+        $('#item-fee').text("Rs. " + total);
+    });
   
 
 

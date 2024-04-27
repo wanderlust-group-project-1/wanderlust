@@ -360,6 +360,8 @@ require_once('../app/views/navbar/customer-navbar.php');
             contentType: 'application/json',
             success: function(data) {
                 paymentGateWay(data.data);
+                hideLoader();
+
               
             },
             error: function(data) {

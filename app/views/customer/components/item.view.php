@@ -29,7 +29,7 @@
                 
 
 
-                <h5>Price: Rs. <?php echo htmlspecialchars($equipment->cost); ?></h5>
+                <h3 id="item-fee"   data-fee="<?php echo htmlspecialchars($equipment->total); ?>">Rs. <?php echo htmlspecialchars($equipment->total); ?></h3>
 
                 <button id="add-to-cart" class="btn-text-green border">Add to Cart</button>
                 <!-- <button  class="btn btn-primary">Add to Cart</button> -->
