@@ -34,6 +34,7 @@ require_once('../app/views/layout/header.php');
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
                         <button class="btn-selected" id="pending">Pending</button>
                         <button class="btn-selected" id="upcoming">Upcoming</button>
+                        <button class="btn-selected" id="today">Today</button> 
                         <button class="btn-selected" id="rented">Rented</button>
                         <button class="btn-selected" id="completed">Completed</button>
                         <button class="btn-selected" id="cancelled">Cancelled</button>
@@ -77,6 +78,7 @@ require_once('../app/views/layout/header.php');
 
     // Get Orders
     function getOrders(status) {
+        window.orderStatus = status;
         $.ajax({
             headers:{
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
@@ -120,20 +122,30 @@ require_once('../app/views/layout/header.php');
 
             //  change button to cancel
             var button = $(`[data-id=${id}]`).find('#mark-as-rented');
+
+            button.hide();
+
+            $(`[data-id=${id}]`).find('.order-status').text('Status: rented');
             
-            button.text('Requested');
+            // getOrders(window.orderStatus);
+            setTimeout(() => {
+                getOrders(window.orderStatus);
+            }, 1000);
+
+            
+            // button.text('Requested');
             
 
 
 
             // add btn-danger class
-            button.removeClass('btn-primary');
-            button.addClass('btn-danger');
-            // disable button
-            button.prop('disabled', true);
+            // button.removeClass('btn-primary');
+            // button.addClass('btn-danger');
+            // // disable button
+            // button.prop('disabled', true);
 
             // show cancel button
-            $(`[data-id=${id}]`).find('#cancel-rented').show();
+            // $(`[data-id=${id}]`).find('#cancel-rented').show();
             
             
 
@@ -200,6 +212,10 @@ require_once('../app/views/layout/header.php');
                 $(`[data-id=${id}]`).find('.order-status').text('Status: returned');
                 // hide mark as returned button
                 $(`[data-id=${id}]`).find('#mark-as-returned').hide();
+
+                setTimeout(() => {
+                    getOrders(window.orderStatus);
+                }, 1000);
             },
             error: function(err) {
                 console.log(err);

@@ -15,6 +15,14 @@ $(document).on('click', '.modal-close', function() {
 });
 
 
+
+$(document).on('click', '.modal', function(event) {
+    console.log("click outside");
+    if ($(event.target).is('.modal')) {
+        $(event.target).hide();
+    }
+});
+
 // close when click outside of modal
 // $(document).on('click', function(event) {
 //     console.log("click outside");

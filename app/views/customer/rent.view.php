@@ -125,7 +125,7 @@ require_once('../app/views/navbar/customer-navbar.php');
         </div>
         </div>  
         <div class="row gap-2">
-            <div class="date"><button id="confirm-date" class="btn" type="button">Confirm Date</button></div>
+            <div class="date"><button id="confirm-date" class="btn-text-green border center" type="button">Confirm Date</button></div>
         </div>
     </div>
 </div>

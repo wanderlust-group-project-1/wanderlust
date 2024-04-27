@@ -123,11 +123,10 @@
                     
                     ?>
                     <div class="flex-d-c">
-                    <!-- <button class="btn btn-primary flex-d" id="mark-as-rented">
-                    Mark as Rented
+                    <button class="btn-text-green " id="mark-as-rented"><i class="fa fa-check" aria-hidden="true"></i>Mark as Rented
                     
 
-                </button> -->
+                </button>
                     <button class="btn-text-red" id="cancel-rented" hidden>Cancel</button>
                     </div>
                 <?php } }
