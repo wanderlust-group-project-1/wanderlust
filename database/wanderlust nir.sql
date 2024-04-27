@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 27, 2024 at 08:06 AM
+-- Generation Time: Apr 27, 2024 at 10:13 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -977,7 +977,11 @@ INSERT INTO `cart_item` (`id`, `cart_id`, `item_id`) VALUES
 (91, 40, 4),
 (92, 40, 38),
 (93, 40, 38),
-(269, 108, 1311);
+(283, 108, 5697),
+(284, 108, 5696),
+(285, 108, 5695),
+(286, 108, 5694),
+(287, 108, 5693);
 
 -- --------------------------------------------------------
 
@@ -5787,16 +5791,17 @@ CREATE TABLE `rent_return_complaints` (
   `charge` decimal(10,2) NOT NULL,
   `description` text,
   `status` enum('pending','resolved','rejected','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `complaint_no` varchar(12) NOT NULL DEFAULT 'RC000001'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `rent_return_complaints`
 --
 
-INSERT INTO `rent_return_complaints` (`id`, `rent_id`, `complains`, `charge`, `description`, `status`, `created_at`) VALUES
-(3, 68, '[{\"charge\": \"2830\", \"equipment_id\": \"25\", \"complaint_description\": \"Beer - Hyatt\"}, {\"charge\": \"2524\", \"equipment_id\": \"33\", \"complaint_description\": \"Schoen and Sons\"}]', 5354.00, NULL, 'cancelled', '2024-04-11 08:17:39'),
-(4, 80, '[{\"charge\": \"4000\", \"equipment_id\": \"69\", \"complaint_description\": \"Damaged\"}, {\"charge\": \"2000\", \"equipment_id\": \"35\", \"complaint_description\": \"Damaged\"}]', 6000.00, NULL, 'pending', '2024-04-24 06:18:32');
+INSERT INTO `rent_return_complaints` (`id`, `rent_id`, `complains`, `charge`, `description`, `status`, `created_at`, `complaint_no`) VALUES
+(3, 68, '[{\"charge\": \"2830\", \"equipment_id\": \"25\", \"complaint_description\": \"Beer - Hyatt\"}, {\"charge\": \"2524\", \"equipment_id\": \"33\", \"complaint_description\": \"Schoen and Sons\"}]', 5354.00, NULL, 'cancelled', '2024-04-11 08:17:39', 'RC000001'),
+(4, 80, '[{\"charge\": \"4000\", \"equipment_id\": \"69\", \"complaint_description\": \"Damaged\"}, {\"charge\": \"2000\", \"equipment_id\": \"35\", \"complaint_description\": \"Damaged\"}]', 6000.00, NULL, 'pending', '2024-04-24 06:18:32', 'RC000001');
 
 --
 -- Triggers `rent_return_complaints`
@@ -5816,6 +5821,19 @@ CREATE TRIGGER `after_complaint_status_update` AFTER UPDATE ON `rent_return_comp
         SET status = 'rented'
         WHERE id = NEW.rent_id; 
     END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `complaint_no` BEFORE INSERT ON `rent_return_complaints` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+
+    -- Get the next complaint ID
+    SELECT IFNULL(MAX(SUBSTRING(id, 3) + 1), 1) INTO next_id
+    FROM rent_return_complaints;
+
+    -- Generate the complaint number
+    SET NEW.complaint_no = CONCAT('RC', LPAD(next_id, 5, '0'));
 END
 $$
 DELIMITER ;
@@ -6362,7 +6380,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=270;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT for table `customers`
