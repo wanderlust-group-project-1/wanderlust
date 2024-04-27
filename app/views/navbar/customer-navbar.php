@@ -5,7 +5,7 @@
     <!-- <nav class="nav__container"> -->
     <nav class="nav__container" >
         <div class="nav__data">
-            <a href="#" class="nav__logo">
+            <a href="<?php echo ROOT_DIR ?>" class="nav__logo">
                 <img class="nav__logo-pic" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
             </a>
 
@@ -19,7 +19,7 @@
         <!-- <div class="nav__menu" id="nav-menu"> -->
         <div class="nav__menu" id="nav-menu" >
             <ul class="nav__list">
-                <li><a href="#" class="nav__link">Home</a></li>
+                <li><a href="<?php echo ROOT_DIR ?>" class="nav__link">Home</a></li>
 
                 <!--=============== DROPDOWN 1 ===============-->
                 <!-- <li class="dropdown__item">
@@ -44,7 +44,7 @@
 
                 <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">My Orders</a></li>
 
-                <li class="dropdown__item">
+                <!-- <li class="dropdown__item">
                     <div class="nav__link">
                         Blogs <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                     </div>
@@ -62,8 +62,8 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li><a href="#" class="nav__link">Tips and Knowhows</a></li>
+                </li> -->
+                <!-- <li><a href="#" class="nav__link">Tips and Knowhows</a></li> -->
 
                 <!--=============== DROPDOWN 2 ===============-->
                 <!-- <li class="dropdown__item">
@@ -102,7 +102,7 @@
 
                         <ul class="dropdown__menu">
                             <li><a href="<?= ROOT_DIR . ($user->role == 'guide' || $user->role == 'rentalservice' ? '/Dashboard' : '/profile') ?>" class="dropdown__link">Profile</a></li>
-                            <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">Settings</a></li>
+                            <!-- <li><a href="<?= ROOT_DIR ?>/settings" class="dropdown__link">Settings</a></li> -->
                             <li><a href="<?= ROOT_DIR ?>/logout" class="dropdown__link">Logout</a></li>
                         </ul>
                     </li>
@@ -118,7 +118,7 @@
 
                         <ul class="dropdown__menu">
                             <li><a href="<?= ROOT_DIR ?>/admin/dashboard">Dashboard</a></li>
-                            <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li>
+                            <!-- <li><a href="<?= ROOT_DIR ?>/settings">Settings</a></li> -->
                             <li><a href="<?= ROOT_DIR ?>/logout">Logout</a></li>
                         </ul>
                     </li>

@@ -116,7 +116,7 @@ require_once('../app/views/components/navbar-auth.php');
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-medium" id="customer-signup" name="submit" value="signup">Sign Up</button>
+                            <button class="btn-text-green border center miw-200px" id="customer-signup" name="submit" value="signup">Sign Up</button>
                             <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
                         
                             <!-- <script>
@@ -202,7 +202,7 @@ require_once('../app/views/components/navbar-auth.php');
                             <div class=""  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <label  id="select-location" class=" btn btn-primary location-button w-100" type="button">
+                                        <label  id="select-location" class=" btn-text-green border center miw-200px location-button w-100" type="button">
                                        
                                             <!-- Select location in the map -->
                                             <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -219,7 +219,7 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document" class="btn btn-primary file-label w-100">Brows here</label>
+                                    <label for="verification_document" class="btn-text-green border center miw-200px file-label w-100">Brows here</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document" class="file-input">
 <!-- d -->
@@ -240,7 +240,7 @@ require_once('../app/views/components/navbar-auth.php');
                     </div>
 
             <div class="row">
-                <button class="btn btn-medium" id="rental-service-signup" name="submit" value="Sign Up" onclick="guideSignup(event)" > Sign Up </button>
+                <button class="btn-text-green border center miw-200px" id="rental-service-signup" name="submit" value="Sign Up" onclick="guideSignup(event)" > Sign Up </button>
                 <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
         
                 <!-- <script>
@@ -314,7 +314,7 @@ require_once('../app/views/components/navbar-auth.php');
                             <div class=""  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <label  id="select-location" class=" btn btn-primary location-button w-100" type="button">
+                                        <label  id="select-location" class=" btn-text-green border center location-button w-100" type="button">
                                        
                                             <!-- Select location in the map -->
                                             <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -331,7 +331,7 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document-rental" class="btn btn-primary file-label  file-label-rental w-100">Upload</label>
+                                    <label for="verification_document-rental" class="btn-text-green border center file-label  file-label-rental w-100">Upload</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document-rental" class="file-input">
 <!-- d -->
@@ -353,7 +353,7 @@ require_once('../app/views/components/navbar-auth.php');
                     </div>
 
             <div class="row">
-                <button class="btn btn-medium" id="rental-service-signup" name="submit" value="Sign Up" onclick="rentalServiceSignup(event)" > Sign Up </button>
+                <button class="btn-text-green border center miw-200px" id="rental-service-signup" name="submit" value="Sign Up" onclick="rentalServiceSignup(event)" > Sign Up </button>
                 <!-- <button class="btn-cancel btn-medium" id="customer-signup-cancel" name="submit" value="cancel">Cancel</button> -->
         
                 <!-- <script>
@@ -388,7 +388,7 @@ require_once('../app/views/components/navbar-auth.php');
     <span class="close">&times;</span>
 
 
-
+<div class="flex-d-c gap-3 mt-4">
         <input id="pac-input" class="controls form-control-lg" type="text" placeholder="Enter Location" />
 
         <div id="map-canvas" class="map-canvas"> </div>
@@ -397,7 +397,9 @@ require_once('../app/views/components/navbar-auth.php');
             <input type="text" class="" id="longitude" hidden/>
 
         <div class="flex-d justify-content-center">
-            <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
+            <button id="confirm-location" class="location-button btn-text-green border center" type="button">Confirm Location</button>
+        </div>
+
         </div>
     </div>
 

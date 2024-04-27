@@ -42,7 +42,7 @@ require_once('../app/views/components/navbar-auth.php');
 
                    
             
-                    <button class="btn btn-full" id="submit" name="submit" value="login"> Reset </button>
+                    <button class="btn-text-green border center" id="submit" name="submit" value="login"> Reset </button>
                
                     <h4><a href="<?=ROOT_DIR?>/login">Back to Login</a></h4>
                     

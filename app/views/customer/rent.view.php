@@ -100,7 +100,7 @@ require_once('../app/views/navbar/customer-navbar.php');
             <input type="text" class="form-control" id="longitude" hidden/> -->
 
         <div class="location-button-container">
-            <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
+            <button id="confirm-location" class="location-button btn-text-green border center" type="button">Confirm Location</button>
         </div>
     </div>
     </div>
