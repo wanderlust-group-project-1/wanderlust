@@ -126,6 +126,23 @@ class GuideBookings
 
         
     }
+
+    public function getAllMyBookings(): void
+    {
+        $response = new JSONResponse;
+
+        $GuideBookingsModel = new GuideBookingsModel();
+        $bookingDetails = $GuideBookingsModel->getAllMyBookings(UserMiddleware::getUser()['id']);
+        $guideDetails = $GuideBookingsModel->getGuideDetailsByBookingID($bookingDetails[0]->id);
+        $response->success(true)
+                ->data([
+                    'bookingDetails' => $bookingDetails,
+                    'guideDetails' => $guideDetails
+                ])
+                ->message('Booking details fetched successfully')
+                ->statusCode(200)
+                ->send();
+    }
     public function deleteBooking($date): void
     {
         $response = new JSONResponse;

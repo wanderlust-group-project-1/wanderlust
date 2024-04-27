@@ -90,12 +90,28 @@ class GuideBookingsModel{
         return $this->query($q->getQuery(), $q->getData())[0];
     }
 
+    public function getGuideDetailsByBookingID(int $bookingId): mixed {
+        $q = new QueryBuilder();
+        $q->setTable('guides');
+        $q->select('guides.*')->join('guide_booking', 'guides.id', 'guide_booking.guide_id')->where('guide_booking.id', $bookingId);
+        return $this->query($q->getQuery(), $q->getData())[0];
+    }
+
     public function getAllBookings(int $userId): mixed {
 
         $userId = $_SESSION['USER']->id;
         $q = new QueryBuilder();
         $q->setTable($this->table);
         $q->select('guide_booking.*')->where('guide_id', $userId);
+        return $this->query($q->getQuery(), $q->getData());
+    }
+
+    public function getAllMyBookings(int $userId): mixed {
+
+        $userId = $_SESSION['USER']->id;
+        $q = new QueryBuilder();
+        $q->setTable($this->table);
+        $q->select('guide_booking.*')->where('customer_id', $userId);
         return $this->query($q->getQuery(), $q->getData());
     }
 
