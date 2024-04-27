@@ -25,7 +25,7 @@
             position: relative;
               width: 100%;
             //   height: 150px;
-              border-radius: 5px;
+              border-radius: 20px;
             //   border: 3px solid #56A8CB;
               padding: 3px;
               margin-bottom: 20px;
@@ -173,24 +173,21 @@
   align-items: center;
   // min-width: 100%;
   width : 50%;
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  
 
-   h1 {
-    font-size: 30 px;
-    font-weight:bolder;
-    color:$color-dark;
-    margin-bottom: 25px;
-  }
+  //  h1 {
+  //   font-size: 30 px;
+  //   font-weight:bolder;
+  //   color:$color-dark;
+  //   margin-bottom: 25px;
+  // }
 
-  p {
-    font-size: 30px;
-    color: $color-primary;
-    // margin: 1px 0;
-    text-align: center;
-  }
+  // p {
+  //   font-size: 30px;
+  //   color: $color-primary;
+  //   // margin: 1px 0;
+  //   text-align: center;
+  // }
 
   img{
     // margin-bottom: 20px;
@@ -204,10 +201,10 @@
     // justify-content: center;
   }
 
-  .container {
-  position: relative;
-  width: 100%;
-}
+  // .container {
+  // position: relative;
+  // width: 100%;
+  // }
 .overlay {
   position: absolute;
   bottom: 0;
@@ -359,29 +356,28 @@
 
 .details {
   font-size: 20px;
-color: $color-light;
-margin: 1px 0;
+  color: $gray-text;
+  margin: 1px 0;
   text-align: left;
   padding-right: 100px;
 }
 }
 
 
-.profile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  // justify-content: space-around;
-  flex-wrap: wrap;
-  min-width: 300px;
-  margin: 20px;
-  margin-bottom: 1.5rem;
-  margin-top: 4rem;
-  padding: 20px;
-  
-  background-color: $color-lighter;
-  border-radius: 15px;
-}
+// .profile {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   // justify-content: space-around;
+//   flex-wrap: wrap;
+//   min-width: 300px;
+//   margin: 20px;
+//   margin-bottom: 1.5rem;
+//   margin-top: 4rem;
+//   padding: 20px;
+//   background: transparent;
+//   border-radius: 15px;
+// }
 
 
 
@@ -718,4 +714,75 @@ margin: 1px 0;
   padding: 15px 0 0 0;
 }
 
+
+.profile {
+  // background-color: red;
+  position: relative;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  
+    // .profile-content {
+    //   // transform: translate(50%,50%);
+
+    // }
+
+  .profile-details{
+    // background-color: aqua;
+    transform: translate(0,5%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    // border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+
+    .profile-details-colum{
+      // display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-picture{
+      width: 200px; /* Adjust the width and height as needed */
+      height: 200px;
+      border-radius: 50%; /* Make it circular */
+      overflow: hidden;
+
+      .img {
+        width: 100%; /* Make the image fill the circular container */
+        height: 100%;
+        object-fit: cover; /* Ensure the image covers the entire container */
+      }
+    }
+
+    
+  }
+
+  .usage-card{
+    font-size: medium !important;
+    min-width: 250px !important;
+    max-width: 290px !important;
+    min-height: fit-content;
+
+      .equipment-booking{
+        justify-content: center !important;
+        align-items: center !important;
+      }
+  }
+
+  .profile-image {
+    // width: 200px;
+    // height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+  }
+}
 

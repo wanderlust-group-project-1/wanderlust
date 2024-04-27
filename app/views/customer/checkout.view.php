@@ -15,10 +15,13 @@ require_once('../app/views/navbar/customer-navbar.php');
 // }
 ?>
 
-<div class="container flex-d flex-md-c justify-content-center  mt-7">
+<div class="container flex-d flex-md-c justify-content-center  mt-9 ml-8 p-6">
+    <div class="customer-bg-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
-        <div class="card card-normal justify-content-center">
+        <div class="card card-normal-glass justify-content-center">
 
             <h2 class="justify-content-center flex-d "> Cart </h2>
             <div class="row gap-2 ">
@@ -36,8 +39,8 @@ require_once('../app/views/navbar/customer-navbar.php');
                     foreach ($items as $item) : ?>
                         <div class="card" id='cart-item' data-id="<?= htmlspecialchars($item->id) ?>">
                             <div class="row gap-2">
-                                <div class="cart-item-image col-lg-4">
-                                    <img src="<?= OSURL ?>images/equipment/<?php echo htmlspecialchars($item->e_image); ?>" alt="Image" class="img-fluid">
+                                <div class="cart-item-image col-lg-4 mb-6">
+                                    <img src="<?= OSURL ?>images/equipment/<?php echo htmlspecialchars($item->e_image); ?>" alt="Image" class="img-fluid rounded-8">
                                 </div>
                                 <div class="cart-item-details col-lg-5">
                                     <h3 class="cart-item-name"><?php echo htmlspecialchars($item->e_name); ?></h3>
@@ -64,7 +67,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     </div>
 
     <div class=" col-lg-3 col-md-12 flex-d gap-2 ">
-        <div class="card card-normal col-md-11 flex-d-c">
+        <div class="card card-normal-glass col-md-11 flex-d-c">
 
             <div class="flex-d-c gap-2 justify-content-between h-100">
                 <h2 class="justify-content-center flex-d"> Checkout </h2>

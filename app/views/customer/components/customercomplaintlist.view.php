@@ -11,7 +11,7 @@
         ?>
         
         <div class = "row flex-d col-lg-12 complaint-card-item row-content" id="complaint-card">
-        <div class="complaint card  card-normal3 col-lg-12 flex-md-c miw-200px" data-id="<?= $complaint->id ?>">
+        <div class="complaint card  card-normal3 col-lg-12 flex-md-c miw-200px" data-id="<?= $complaint->complaint_no ?>">
             <div class="complaint-header">
                 <div class="complaint-id">Complaint ID: <?= $complaint->complaint_no ?></div>
                 <div class="complaint-status">Status: <?= $complaint->status ?></div>
@@ -22,7 +22,7 @@
             </div>
 
             <div class="complaint-actions flex-d gap-3">
-                <button class="btn-text-green" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
+                <button class="btn-text-green" id="mycom-view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
                 <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>  
                 <!-- if status pending set show  -->
                 <!-- <?php if ($complaint->status == 'myComplaints') {
@@ -61,20 +61,6 @@
 ?>
 
 
-</div>
-
-
-
-
-<!-- View modal -->
-
-<div class="modal" id="complaint-view-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        
-        
-        <div id="complaint-data">   </div>
-    </div>
 </div>
 
 

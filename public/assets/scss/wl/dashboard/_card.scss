@@ -79,6 +79,23 @@
     border: $gray-text 3px inherit;
 }
 
+.card-normal-transparent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
 .card-normal-glass {
 
     display: flex;
