@@ -28,7 +28,7 @@ class Cart {
 
 
 
-            if($data['items']){
+            // if($data['items']){
                
             
         foreach ($data['items'] as $equipment) {
@@ -44,7 +44,7 @@ class Cart {
             $data['total'] += $item->total;
         }
 
-    }
+    // }
 
     
         $this->view('customer/components/cart', $data); 
