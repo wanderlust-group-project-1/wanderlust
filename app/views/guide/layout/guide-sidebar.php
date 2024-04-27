@@ -22,7 +22,7 @@
     </div>
 
     <div class="">
-      <button type="submit" class="btn-edit mt-4 edit-profile">
+      <button type="submit" class="btn-edit mt-2 edit-profile">
         Edit Profile
       </button>
     </div>
@@ -170,8 +170,22 @@
         </ul>
       </div>
     </li>
+
+    <div class="guide-dash-prof">
+      <div class="">
+        <a href="<?php echo ROOT_DIR ?>/logout"> <button type="submit" class="btn-edit edit-profile">
+          Logout
+        </button>
+        <a href="<?php echo ROOT_DIR ?>/settings">
+          <i class="fas fa-cog" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
   </ul>
 </nav>
+
+
+
 
 
 <!-- Modal Box Profile Edit -->
@@ -182,30 +196,30 @@
       <img src="<?php echo ROOT_DIR ?>/assets/images/7.png" alt="Profile Image" class="profile-image">
 
       <form id="guide" action="<?= ROOT_DIR ?>/guide/update" method="post">
-          <h2>Update Guides Details</h2>
-          <?php if (isset($errors)) : ?>
-            <div> <?= implode('<br>', $errors) ?> </div>
-          <?php endif; ?>
+        <h2>Update Guides Details</h2>
+        <?php if (isset($errors)) : ?>
+          <div> <?= implode('<br>', $errors) ?> </div>
+        <?php endif; ?>
 
-          <label for="name">Name</label>
-          <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
 
-          <label for="address">Address</label>
-          <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
 
-          <label for="email">Email</label>
-          <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
 
-          <label for="nic">NIC</label>
-          <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
+        <label for="nic">NIC</label>
+        <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
 
-          <label for="mobile">Mobile No</label>
-          <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
+        <label for="mobile">Mobile No</label>
+        <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
 
-          <label for="gender">Gender</label>
-          <input type="text" name="gender" id="gender" value="<?= $user->gender ?>" required>
+        <label for="gender">Gender</label>
+        <input type="text" name="gender" id="gender" value="<?= $user->gender ?>" required>
 
-          <input type="submit" class="btn mt-4" name="submit" value="Update">
+        <input type="submit" class="btn mt-4" name="submit" value="Update">
       </form>
 
 
@@ -241,7 +255,7 @@
     modal.style.display = "block";
   }
 
-  
+
   // Add click event listener to view buttons
   viewButton.addEventListener('click', function() {
 
