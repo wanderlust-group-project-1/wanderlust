@@ -41,7 +41,7 @@ require_once('../app/views/layout/header.php');
                         <button class="btn-selected" id="all">All</button>
 
                         <!-- not rented yet -->
-                        <button class="btn-selected" id="not-rented">Not Rented</button>
+                        <!-- <button class="btn-selected" id="not-rented">Not Rented</button> -->
 
                     </div>
 

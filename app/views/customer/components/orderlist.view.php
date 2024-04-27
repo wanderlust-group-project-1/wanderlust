@@ -3,7 +3,8 @@
 <?php
 
 
-
+($orders) ?  :print('<div class="col-lg-12 mih-100px flex-d justify-content-center
+align-items-center text-center"><h2>No Orders</h2></div>');
 
 
 foreach ($orders as $order) {
@@ -31,7 +32,12 @@ foreach ($orders as $order) {
 
                 
                 <?php if ($order->payment_status == 'pending') { ?>
-                    <button class="btn-text-blue order-pay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
+                    <button data-id="<?php echo $order->reference_number; ?>"
+                     class="btn-text-blue order-pay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
+                <?php } ?>
+
+                <?php if ($order->rent_status == 'rented') { ?>
+                    <button class="btn-text-blue order-fullpay-button"><i class="fa fa-credit-card" aria-hidden="true"></i> Pay</button>
                 <?php } ?>
 
                 <!-- if rent_status accepted, mark as rented --> 
@@ -65,63 +71,4 @@ foreach ($orders as $order) {
 
 
 ?>
-<!-- Order Item Modal -->
-<div class="modal" id="order-item-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        
-        <div id="order-data">   </div>
 
-    </div>
-</div>
-
-
-<!-- Confirm cancel modal -->
-
-<div class="modal" id="confirm-cancel-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Are you sure you want to cancel this order?</p>
-        <div class="flex-d gap-3 mt-3">
-        <button class="btn btn-primary" id="confirm-cancel">Yes</button>
-        <button class="btn btn-danger modal-close" id="cancel-cancel">No</button>
-        </div>
-    </div>
-</div>
-
-
-<!-- Mark As Rented modal -->
-
-<div class="modal" id="mark-as-rented-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Mark as Rented</h2>
-        <p>Are you sure you want to mark this order as rented?</p>
-        <div class="flex-d gap-3 mt-3">
-        <button class="btn btn-primary" id="mark-as-rented-confirm">Yes</button>
-        <button class="btn-text-red" id="mark-as-rented-cancel">No</button>
-        </div>
-    </div>
-</div>
-
-
-<!-- Report Modal -->
-<!-- Complain Form with title and description -->
-
-<div class="modal" id="report-modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="report-order-id">Report for Order ID: </h2>
-        <form id="report-form">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id="report-title" name="title" class="form-control-lg" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="report-description" name="description" class="form-control-lg" required></textarea>
-            </div>
-            <button class="btn btn-primary" id="report-submit">Submit</button>
-        </form>
-    </div>
-</div>

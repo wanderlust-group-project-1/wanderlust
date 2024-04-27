@@ -610,6 +610,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
     td {
       vertical-align: middle;
+      font-weight: 300;
       // font-size: $header3;
 
       
@@ -742,7 +743,7 @@ $box-shadow-color: rgba(0,0,0,0.2);
 }
 
 .order-payment-status {
-  font-family: sans-serif, "poppins";
+  // font-family: sans-serif, "poppins";
   color: $gray-text;
   font-size: $header4;
   color: $gray-text-darker;
@@ -764,7 +765,7 @@ $box-shadow-color: rgba(0,0,0,0.2);
 
 .cart-notification .badge {
   font-size:small;
-  font-family: sans-serif, "Poppins";
+  // font-family: sans-serif, "Poppins";
   position: absolute;
   top: -0.5px;
   right: -0.5px;
@@ -833,7 +834,7 @@ $box-shadow-color: rgba(0,0,0,0.2);
 
 .cart-notification .badge {
   font-size:small;
-  font-family: sans-serif, "Poppins";
+  // font-family: sans-serif, "Poppins";
   position: absolute;
   top: -0.5px;
   right: -0.5px;

@@ -5,7 +5,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 <div class="container flex-d-c justify-content-center gap-2">
-    <div class="row gap-2 justify-content-end mt-7">
+    <div class="row gap-2 mt-7">
 
         <form id="searchForm" class="searchForm form">
             <label> Date: </label>

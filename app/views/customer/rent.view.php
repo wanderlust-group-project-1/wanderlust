@@ -9,6 +9,10 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
 <div class="container flex-d-c justify-content-center gap-2">
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+</div>
+
 
 <div class="row gap-2 justify-content-end mt-7">
     <!-- Cart -->
@@ -23,39 +27,55 @@ require_once('../app/views/navbar/customer-navbar.php');
  
 </div>
 
-    <div class="row gap-2">
-        <!-- Change date -->
-        <button id="change-date" class="btn" type="button">Change Date</button>
-        
-    </div>
+<div class="customer-header w-100 flex-d-c justify-content-center align-items-center">
+    
 
 
 
-<div class="row">
-    <div class="col-lg-8 flex-d justify-content-center " >
 
-
-        <div class = "search-container col-lg-12">
-            <form action="<?= ROOT_DIR ?>/search" method="get">
-            <div class="row gap-2">
-                <input type="text" id="search-input"  placeholder="Search.." name="search">
-                <!-- Select Type of result -->
-                <select name="type" id="type">
-                    <option value="all">All</option>
-                    <option value="shops">Shops</option>
-                    <option value="items">Items</option>
-                </select>
-                <!-- Select location button  -->
-                <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
-                <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
-                <button id="get-location" class="btn-icon" > <i class="fa fa-map-marker"></i></button>
-                <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
+<div class="col-lg-6 flex-d justify-content-center w-100 p-1 ">
+    <div class="card-normal mw-100 pl-10 w-100">
+        <div class="col gap-2">
+            <!-- Change date -->
+            <div>
+                 <p class="date-change-phase" id="date-change-phase" ><? echo isset($cart) ? "Selected Date: " . $cart->start_date . " - " . $cart->end_date : "Select Date"; ?></p>
             </div>
-            </form>
+            <div>
+            <button id="change-date" class="btn-text-green" type="button"><i class="fa fa-calendar"></i> Change Date</button>
+            </div>
+        </div>
     </div>
-
 </div>
 
+
+
+
+<div class="col-lg-6 flex-d justify-content-center w-100 p-1">
+    <div class="card-normal mw-100 pl-10 w-100">
+        <div class="row">
+            <div class="col-lg-8 flex-d justify-content-center">
+                <div class = "search-container col-lg-12">
+                <form action="<?= ROOT_DIR ?>/search" method="get">
+                    <div class="row gap-2 w-100">
+                        <input type="text" id="search-input" class="form-control-lg"  placeholder="Search item by name.." name="search">
+           
+                        <input type="text" class="form-control no-display" id="latitude" name="latitude" hidden/>
+                        <input type="text" class="form-control no-display" id="longitude" name="longitude" hidden/>
+                        <button id="get-location" class="btn-icon" > <i class="fa fa-map-marker"></i></button>
+                        <button id="search-button"  class="btn-icon" type="submit"><i class="fa fa-search"></i></button>
+
+                        
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
 
 
 <div class="row" id="search-result"> 
@@ -69,19 +89,19 @@ require_once('../app/views/navbar/customer-navbar.php');
     <div class="modal-content ">
     <span class="close">&times;</span>
 
-    <div class=" col-lg-12 flex-d-c gap-2 ">
+    <div class=" col-lg-12 flex-d-c gap-2 location-container">
 
-        <input id="pac-input" class="controls " type="text" placeholder="Enter Location" />
-
+    <div class="location-form-element">    
+    <input id="pac-input" class="controls " type="text" placeholder="Enter Location" />
+    </div>
         <div id="map-canvas" class="map-canvas"> </div>
 
             <!-- <input type="text" class="form-control" id="latitude"  hidden/>
             <input type="text" class="form-control" id="longitude" hidden/> -->
 
         <div class="location-button-container">
-            <button id="confirm-location" class="location-button btn" type="button">Confirm Location</button>
+            <button id="confirm-location" class="location-button btn-text-green border center" type="button">Confirm Location</button>
         </div>
-
     </div>
     </div>
 
@@ -97,12 +117,11 @@ require_once('../app/views/navbar/customer-navbar.php');
         <div class="row gap-2">
 
             <div class="date"><label for="start-date">Start Date</label></div>
-            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required value="<?php isset($cart)  && print($cart->start_date); ?>"
-            ></div>
+            <div class="date"><input type="date" id="start-date" class="form-control-lg " name="start-date" required value="<?php isset($cart)  && print($cart->start_date); ?>"></div>
             <div class="date"><label for="end-date">End Date</label></div>
             <div class="date"><input type="date" id="end-date" class="form-control-lg" name="end-date" required value="<?php isset($cart)  && print($cart->end_date); ?>"></div>
             <div class="date">
-            <h5>Select days you want to rent camping equipment. If you change the date new cart will be created. Items added to the previous cart will be removed.</h5>
+            <div class="date-para"><h5>Select days you want to rent camping equipment. If you change the date new cart will be created. Items added to the previous cart will be removed.</h5></div>
         </div>
         </div>  
         <div class="row gap-2">
@@ -361,7 +380,8 @@ window.onclick = function(event) {
 
     function getResults(){
         var search = document.getElementById("search-input").value;
-        var type = document.getElementById("type").value;
+        // var type = document.getElementById("type").value;
+        var type = 'all';
         var latitude = document.getElementById("latitude").value;
         var longitude = document.getElementById("longitude").value;
 
@@ -475,6 +495,8 @@ function setNewDate(start, end) {
 
     });
 
+    $('#date-change-phase').text("Selected Date: " + start + " - " + end);
+
 
     
 
@@ -505,6 +527,9 @@ function setNewDate(start, end) {
             success: function(data) {
                 // console.log(data);
                 disableButton(id);
+                $('#equipment-details-modal').css('display', 'none');
+                alertmsg("Item added to cart",'success');
+
                 getCartCount();
             },
             error: function(err) {
@@ -528,9 +553,9 @@ function setNewDate(start, end) {
 
     // function / use jQuery
     function disableButton(id) {
-        var button = $(`[data-id=${id}]`).find('#add-to-cart');
-        button.text('Added');
-        button.prop('disabled', true);
+        // var button = $(`[data-id=${id}]`).find('#add-to-cart');
+        // button.text('Added');
+        // button.prop('disabled', true);
     }
 
     // get cart count
@@ -579,6 +604,17 @@ function setNewDate(start, end) {
 
 
     })
+
+    // item count change price
+
+    $(document).on('change', '#item-count', function() {
+        var count = $(this).val();
+        console.log(count);
+        var fee = $('#item-fee').attr('data-fee');
+        console.log(fee);
+        var total = count * fee;
+        $('#item-fee').text("Rs. " + total);
+    });
   
 
 

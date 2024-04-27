@@ -79,6 +79,30 @@
     border: $gray-text 3px inherit;
 }
 
+.card-normal-glass {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: $color-lighter;
+    // background: linear-gradient(135deg, rgba(208, 51, 51, 0), rgba(255, 255, 255, 0));
+    // background: linear-gradient(to right, $color-light, $color-lightest);
+
+    backdrop-filter: blur(50px);
+
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
 
 .card-invert {
     display: flex;

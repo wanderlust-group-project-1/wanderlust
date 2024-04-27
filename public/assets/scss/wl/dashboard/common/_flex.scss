@@ -20,6 +20,11 @@
 
 }
 
+.flex-d-center{
+    display: flex;
+    justify-content: center;
+
+}
 
 @media screen and (max-width: $breakpoint-md) {
     .flex-md-c {

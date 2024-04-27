@@ -506,7 +506,10 @@ $box-shadow-color: rgba(0, 0, 0, 0.2);
   .guide-dash-main .calendarandbooking {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    .booking-list{
+      max-width: 500px;
+    }
 
     .info-data {
       .legend {
@@ -517,4 +520,43 @@ $box-shadow-color: rgba(0, 0, 0, 0.2);
       }
     }
   }
+}
+
+
+.searchForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem;
+  border: 1px solid rgba($border-color, 0.2);
+  border-radius: 1rem;
+  width: 50rem;
+  padding: 3rem;
+  background-color: $color-light;
+}
+
+.guide-h2-title{
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: $color-black;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid rgba($border-color, 0.2);
+  
+}
+
+.guide-form-lable{
+  font-size: $small-text ;
+}
+
+.guide-form-fields{
+  display: flex;
+  flex-direction: row;
+}
+
+.fas.fa-cog {
+  font-size: 2rem; /* Adjust the size as needed */
+  cursor: pointer;
+  padding-left: 1rem;
+  color: $color-white;
 }

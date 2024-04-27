@@ -38,11 +38,18 @@ class RentalServiceModel
 
 
             $location = new LocationModel;
+            // $rentalSettings = new RentalSettingsModel;
             // show($data);
             $data["location_id"] =  $location->createLocation(
                 $data['latitude'],
                 $data['longitude']
             );
+
+            // $rentalSettings->insert([
+            //     'rentalservice_id' => $data['user_id'],
+            //     'renting_state' => 1,
+            //     'recovery_period' => 1,
+            // ]);
 
             if ($data['user_id']) {
                 $data['verification_document'] = upload($files['verification_document'], 'rental_services');

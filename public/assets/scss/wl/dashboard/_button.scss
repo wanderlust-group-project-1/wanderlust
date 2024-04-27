@@ -9,7 +9,7 @@
   padding: 10px 20px;
   font-weight: 500;
   font-size: $text;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
 
@@ -115,7 +115,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     color: $gray-text-darker;
@@ -130,11 +130,46 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
+
+  & i {
+    margin-right: 5px;
+  }
+
+  &.center {
+    align-self: center;
+  }
+
+  // btn-text-green with border
+  &.border {
+    border: 2px solid $color-primary;
+    border-radius: 10px;
+    min-width: 100px;
+
+    &:hover {
+      border: 2px solid $color-primary;
+      text-decoration: none;
+      // shadow
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+      
+    }
+  }
+
 
   &:hover{
     // color: $gray-text;
     text-decoration: underline;
+  }
+
+  // disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      color: $color-primary;
+      box-shadow: none;
+    }
   }
 }
 
@@ -146,7 +181,23 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
+  & i {
+    margin-right: 5px;
+  }
+
+  &.border {
+    border: 2px solid $blue;
+    border-radius: 10px;
+    min-width: 100px;
+
+
+    &:hover {
+      border: 2px solid $blue;
+      text-decoration: none;
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
 
   &:hover{
     // color: $gray-text;
@@ -162,7 +213,24 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
+
+  & i {
+    margin-right: 5px;
+  }
+
+  &.border {
+    border: 2px solid $orange;
+    border-radius: 10px;
+    min-width: 100px;
+
+
+    &:hover {
+      border: 2px solid $orange;
+      text-decoration: none;
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
 
   &:hover{
     // color: $gray-text;
@@ -178,13 +246,40 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
+
+  & i {
+    margin-right: 5px;
+  }
+
+  &.border {
+    border: 2px solid $red;
+    border-radius: 10px;
+    min-width: 100px;
+
+
+    &:hover {
+      border: 2px solid $red;
+      text-decoration: none;
+      box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    }
+  } 
+
+  // disabled state
+
 
   &:hover{
     // color: $gray-text;
     text-decoration: underline;
   }
 }
+
+// .btn-b-green {
+//   // use text color for border
+//   border: 1px solid $color-primary;
+//   border-radius: 10px;
+  
+// }
  
 
 .btn-danger{
@@ -225,7 +320,7 @@
   padding: 10px 20px;
   font-weight: 500;
   // font-size: $text;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   align-self: center;
   margin-bottom: 8px;
 
@@ -320,7 +415,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     color : $color-primary;
@@ -346,7 +441,7 @@
   cursor: pointer;
   border: none;
   padding: 10px;
-  font-family: "poppins", sans-serif;
+  // font-family: "poppins", sans-serif;
 
   &:hover{
     // color: $gray-text;
@@ -359,4 +454,6 @@
     font-size: 1.25rem;
   }
 }
+
+
 

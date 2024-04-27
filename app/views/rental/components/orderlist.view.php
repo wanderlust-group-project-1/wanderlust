@@ -27,7 +27,7 @@
         </div> -->
 
         <div class="filter-order-button">
-            <button class="btn btn-primary" id="filter-order-button">Filter</button>
+            <button class="btn-text-green border" id="filter-order-button"><i class="fa fa-filter" aria-hidden="true"></i>Filter</button>
         </div>
 
         <!-- by Cost -->
@@ -90,7 +90,9 @@
             </div>
             <div class="order-body">
                 <div class="order-dates" data-start="<?= $order->start_date ?>" data-end="<?= $order->end_date ?>" >Dates: <?= $order->start_date ?> - <?= $order->end_date ?></div>
-                <div class="order-total">Total: <?= $order->total ?></div>
+                <!-- <div class="order-total">Total: <?= $order->total ?></div> -->
+                                <div class="order-total">Paid Amount: <?= $order->paid_amount ?></div>
+
                 <div class="order-payment-status">Payment Status: <?= $order->payment_status ?></div>
             </div>
             <div class="order-actions flex-d gap-3">
@@ -121,16 +123,16 @@
                     
                     ?>
                     <div class="flex-d-c">
-                    <button class="btn btn-primary flex-d" id="mark-as-rented">
+                    <!-- <button class="btn btn-primary flex-d" id="mark-as-rented">
                     Mark as Rented
                     
 
-                </button>
+                </button> -->
                     <button class="btn-text-red" id="cancel-rented" hidden>Cancel</button>
                     </div>
                 <?php } }
                 elseif ($order->status == 'rented') { ?>
-                    <button class="btn btn-primary" id="mark-as-returned">Mark as Returned</button>
+                    <button class="btn-text-orange" id="mark-as-returned"><i class="fa fa-check" aria-hidden="true"></i>Mark as Returned</button>
                 <?php }
                 elseif ($order->status == 'pending') { ?>
                     <button class="btn-text-orange" id="accept-request"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
@@ -157,19 +159,21 @@
 <div id="mark-as-returned-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
+        <div class="flex-d-c justify-content-center text-center gap-3">
         <h2>Mark as Returned</h2>
         <p>Are you sure you want to mark this order as returned?</p>
         <div class="flex-d gap-3 mt-3">
-            <button class="btn btn-primary" id="mark-as-returned-confirm">Yes</button>
-            <button class="btn btn-danger modal-close" id="mark-as-returned-cancel">No</button>
+            <button class="btn-text-green border" id="mark-as-returned-confirm">Yes</button>
+            <button class="btn-text-orange border modal-close" id="mark-as-returned-cancel">No</button>
             <!-- Report Complaint -->
 
-            <button class="btn btn-danger" id="report-return-complaint">Report Complaint</button>
+            <button class="btn-text-red border" id="report-return-complaint">Report Complaint</button>
 
             
 
 
 
+        </div>
         </div>
     </div>
 </div>

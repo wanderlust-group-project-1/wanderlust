@@ -80,7 +80,7 @@
     <!-- Button to download report -->
     <div class="row m-2">
         <div class="col-lg-12 col-md-12 m-4">
-            <button id="download-report" class="btn btn-primary" data-id="<?= $order->id ?>" >Download Report</button>
+            <button id="download-report" class="btn-text-green border" data-id="<?= $order->id ?>" ><i class="fa fa-download" aria-hidden="true"></i> Order Details</button>
         </div>
     </div>
 

@@ -5,7 +5,7 @@
     <div class="col-lg-12 flex-d align-items-center gap-2" >
 
         <img src="<?php echo ROOT_DIR; ?>/uploads/images/rental_services/<?php echo htmlspecialchars($equipment->rentalservice_image); ?>" alt="Image" class="img-fluid mh-50px rounded-7">
-        <h1 class="rental-name"> <?php echo htmlspecialchars($equipment->rentalservice_name); ?> </h1>
+        <h3 class="rental-name"> <?php echo htmlspecialchars($equipment->rentalservice_name); ?> </h3>
        
         <!-- <?php show($equipment) ?> -->
     </div>
@@ -29,9 +29,9 @@
                 
 
 
-                <h5>Price: Rs. <?php echo htmlspecialchars($equipment->cost); ?></h5>
+                <h3 id="item-fee"   data-fee="<?php echo htmlspecialchars($equipment->total); ?>">Rs. <?php echo htmlspecialchars($equipment->total); ?></h3>
 
-                <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+                <button id="add-to-cart" class="btn-text-green border">Add to Cart</button>
                 <!-- <button  class="btn btn-primary">Add to Cart</button> -->
 
             </div>

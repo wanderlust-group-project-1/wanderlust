@@ -121,7 +121,7 @@
     margin:0 auto;
     position:relative;
     color: $gray-text-dark;
-    font-family: sans-serif, 'Poppins';
+    // font-family: sans-serif, 'Poppins';
     box-shadow: $box-shadow-default;
       
     *               { position:relative }
@@ -135,7 +135,8 @@
     }
 
     tbody tr        { height:48px; border-bottom:1px solid $color-lighter;
-                      color: $gray-text;
+                      color: $gray-text-dark;
+                      font-weight: 300;
                       &:last-child  { border:0; }
     }
 
