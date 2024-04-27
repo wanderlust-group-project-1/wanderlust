@@ -1,6 +1,6 @@
 <?php
 
-class GuideprofileModel {
+class GuideProfileModel {
     use Model;
 
     protected string $table = 'guide_profile';
