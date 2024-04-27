@@ -272,6 +272,14 @@ var cartClose = document.getElementById("cart-modal").querySelector(".close");
 // When the user clicks the button, open the modal
 cartModalBtn.onclick = function() {
 
+    // check if the user has selected the date
+    if ($('#date-change-phase').text() == "Select Date") {
+        alertmsg("Please select the date first",'error');
+        
+        // show the date modal
+        dateModal.style.display = "block";
+        return;
+    }
     // get cart items
    getCart()
 }
