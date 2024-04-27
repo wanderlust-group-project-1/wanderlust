@@ -5,27 +5,118 @@ require_once('../app/views/layout/footer.php');
 ?>
 
 
-<div class="profile">
-<div class="customer-bg-image">
-    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+<div class="profile col-lg-12 align-items-center">
+    
+    <div class="flex-d-c col-lg-12 profile-content align-items-center py-4 mt-6">
+    <div class="customer-bg-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
+        <div class="profile-details">
+            <div class="col-lg-3 profile-details-colum">
+                <div class="card-normal-glass mt-6 py-6 align-items-center justify-content-center mih-100"> 
+                    <div class="profile-picture">    
+                        <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img-fluid h-200px rounded-7">
+                    </div>
+                    <h1 class="mb-5"> Hello <?php echo $user->name?>!</h1>
+                    <div class="row">
+                        <h4><i class="fas fa-envelope"></i> <?php echo $user->email ?></h4> 
+                    </div>
+                    <div class="row">
+                        <h4><i class="fas fa-phone"></i> <?php echo $user->number ?></h4>
+                    </div>
+                    <div class="row">
+                        <h4><i class="fa fa-location-arrow"></i> <?php echo $user->address ?></h4>
+                    </div>
+                    <div class="row">
+                        <h4><i class="fas fa-id-card"></i> <?php echo $user->nic ?></h4>
+                    </div>
+                    <div class="row mt-4">
+                        <button type="submit" class="btn mt-4" id="edit-profile">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 flex-d-c mt-5 mh-50">
+                <div class="card-normal-glass "> 
+                    <div class="row justify-content-start ml-4">
+                        <h1>Recent Booking</h1>
+                    </div>
+                    <div class="flex-d-r">
+                        <div class="img-fluid h-200px rounded-7 ml-4">
+                            <img src="<?php echo ROOT_DIR ?>/uploads/images/equipment/<?php echo $rental->equipment_image; ?>" alt="Equipment Image" class="img-fluid h-200px">
+                        </div>
+                    </div>
+                    <div class="flex-d-r  justify-content-start">
+                        <div class="flex-d-c mr-5">
+                            <div class="row justify-content-end mt-6">
+                                <h3 class="mr-3"> <?php echo ucfirst($rental->rental_service_name) ?> </h3>
+                            </div>
+                            <div class="row justify-content-end mr-6">
+                                <p class="mr-3"> <?php echo $rental->rental_service_address ?> </p>
+                            </div>
+                            <div class="row justify-content-end mr-6">
+                                <p class="mr-3"> <?php echo $rental->rental_service_mobile ?> </p>
+                            </div>
+                            <div class="row justify-content-end mr-4">
+                            <a href="<?php echo ROOT_DIR ?>/myOrders">
+                                <button type="submit" class="btn-text-blue" id="see-more-bookings">View booking history</button></a>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                                    
+                                    
+                                       
+                </div>
+                <div class="card-normal-glass mt-4"> 
+                    <div class="row justify-content-start ml-4 mw-75">
+                        <h1>Usage</h1>
+                    </div> 
+                    <div class="flex-d-r mw-75 gap-0">
+                        <div class="card-normal usage-card">
+                            <div class="row justify-content-center">
+                                <h3 class="equipment-booking">Equipment Booking</h3>
+                            </div>
+                            <div class="row">
+                                <h2>11</h2>
+                            </div>
+                        </div>
+                        <div class="card-normal usage-card">
+                            <div class="row">
+                                <h3>Guide Booking</h3>
+                            </div>
+                            <div class="row">
+                                <h2>02</h2>
+                            </div>
+                        </div>
+                        <div class="card-normal usage-card">
+                            <div class="row">
+                                <h3>Complaints</h3>
+                            </div>
+                            <div class="row">
+                                <h2>00</h2>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-    <div class="dashboard-content">
 
 
-
-        <div class="flex-d-r mt-9 mw-100 ml-6">
+        <!-- <div class="flex-d-r mt-9 mw-100 ml-6">
         <div class="flex-d-c col-lg-2 mw-50 mh-75 ml-6">
             <div class="card-normal-glass flex-d-r ">
                 <div class="user-profile px-6 py-6">
 
-                    <div class="container">
+                    <div class="container"> -->
                         <!-- <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" class="img-fluid h-200px" alt="Profile Image"> -->
-                        <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img-fluid h-200px rounded-7">
+                        <!-- <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img-fluid h-200px rounded-7">
                     </div>
                     <div class="user-details py-6">
                         <h1 class="mb-5"> Hello <?php echo $user->name ?>!</h1>
                         <div class="details flex-d">
-                            <h4><i class="fas fa-phone"></i> <?php echo $user->number ?></h4>
+                            align-items-center
                         </div>
                         <div class="details flex-d">
                             <h4><i class="fa fa-location-arrow"></i> <?php echo $user->address ?></h4>
@@ -44,11 +135,13 @@ require_once('../app/views/layout/footer.php');
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-            <div class="card-normal flex-d-c col-lg-8 justify-content-center ">
+            <!-- <div class="card-normal flex-d-c col-lg-8 justify-content-center align-items-center">
                 
+                <div class="row">
                     <h1>Recent Booking</h1>
+                </div>
 
                     <div class=" flex-d-r gap-5">
                         <div class="img-fluid h-200px rounded-7">
@@ -134,16 +227,12 @@ require_once('../app/views/layout/footer.php');
             </div>
         </div>
 
-            </div>
+            </div> -->
 
 
-
-        </div>
-
-
-
-           </div>
-</div>
+<!-- 
+    </div>
+</div> -->
 
 
 
