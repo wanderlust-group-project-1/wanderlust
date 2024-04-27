@@ -16,7 +16,7 @@ require_once('../app/views/layout/footer.php');
             <div class="col-lg-3 profile-details-colum">
                 <div class="card-normal-glass mt-6 py-6 align-items-center justify-content-center mih-100"> 
                     <div class="profile-picture">    
-                        <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img">
+                        <img src="<?php echo htmlspecialchars(OSURL); ?>images/customers/<?php echo htmlspecialchars($user->image); ?>" alt="Image" class="img">
                     </div>
                     <h1 class="mb-5"> Hello <?php echo $user->name?>!</h1>
                     <div class="row">
