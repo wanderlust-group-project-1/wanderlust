@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 27, 2024 at 07:16 AM
+-- Generation Time: Apr 27, 2024 at 08:06 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -97,6 +97,34 @@ CREATE DEFINER=`root`@`%` PROCEDURE `CompleteRentProcess` (IN `customerID` INT) 
     -- Return the last inserted payment ID
     SELECT reference_number AS orderID , total_amount AS totalAmount;
 
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `CreatePaymentForGuide` (IN `package_id` INT)   BEGIN
+    DECLARE lastPaymentID INT;
+    DECLARE packagePrice DECIMAL(10, 2);
+    DECLARE reference_number VARCHAR(20);
+    DECLARE paymentID INT;
+
+    -- Inserting a new payment with status 'completed'
+    -- INSERT INTO payment (status) VALUES ('pending');
+
+    -- Retrieve price from package table
+    SELECT price INTO packagePrice FROM package WHERE package.id = package_id;
+    
+    -- Inserting into booking_pay table
+    INSERT INTO payment (amount, status) VALUES (packagePrice, 'pending');
+
+	SET lastPaymentID = LAST_INSERT_ID();
+
+    -- Generating reference number
+    SET reference_number = CONCAT('GD', LPAD(lastPaymentID, 5, '0'));
+	UPDATE payment SET reference_number = reference_number where id=lastPaymentID;
+
+    -- Retrieve the newly inserted payment ID
+    SET paymentID = lastPaymentID;
+    
+    -- Return reference number and payment ID
+    SELECT reference_number AS bookingID, paymentID AS payment_id, packagePrice AS amount;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `CreatePaymentForRent` (IN `rent_id` INT)   BEGIN
@@ -232,6 +260,18 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetCurrentAcceptedRents` (IN `equipmentID` 
         r.start_date ASC;
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `GetCustomerDetailsByBookingID` (IN `booking_id` INT)   BEGIN
+    SELECT
+        c.name AS customer_name,
+        c.number AS customer_number
+    FROM
+        guide_booking gb
+    INNER JOIN
+        customers c ON gb.customer_id = c.id
+    WHERE
+        gb.id = booking_id;
+END$$
+
 CREATE DEFINER=`root`@`%` PROCEDURE `GetEquipmentRentalCountByRental` (IN `start_date` DATE, IN `end_date` DATE, IN `rentalservice_id` INT)   BEGIN
     SELECT 
         e.name AS equipment_name,
@@ -343,6 +383,39 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetFirstUpcomingRentByRental` (IN `rentalse
       AND r.status = 'accepted'
     ORDER BY r.start_date ASC
     LIMIT 1;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetGuideIdByPackageId` (IN `p_package_id` INT)   BEGIN
+    SELECT
+        g.id AS guide_id, p.price AS totalAmount
+    FROM
+        guides g
+    INNER JOIN
+        package p ON g.id = p.guide_id
+    WHERE
+        p.id = p_package_id;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetGuideMonthlyIncome` (IN `guide_id` INT, IN `start_date` DATE, IN `end_date` DATE)   BEGIN
+    SELECT 
+        DATE_FORMAT(p.datetime, '%Y-%m') AS `Month`,
+        SUM(p.amount) AS `MonthlyIncome`
+    FROM 
+        `payment` p
+    JOIN
+        `guide_booking` gb ON p.id = gb.payment_id -- Assuming payment_id is the foreign key in guide_booking referencing payment.id
+    WHERE 
+        gb.guide_id = guide_id
+        AND p.status = 'completed'
+        AND p.datetime BETWEEN start_date AND end_date
+    GROUP BY 
+        DATE_FORMAT(p.datetime, '%Y-%m')
+    ORDER BY 
+        DATE_FORMAT(p.datetime, '%Y-%m');
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `GetGuidePackages` (IN `packageID` INT)   BEGIN
+    SELECT * FROM package WHERE package.id = packageID;
 END$$
 
 CREATE DEFINER=`root`@`%` PROCEDURE `GetItemListbyRentID` (IN `rent_id` INT)   BEGIN
@@ -589,6 +662,25 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetRentalStats` (IN `service_id` INT)   BEG
         v_equipment_count AS equipment_count;
 END$$
 
+CREATE DEFINER=`root`@`%` PROCEDURE `GetSuitableGuides` (IN `max_group_size` INT, IN `date` DATE, IN `places` VARCHAR(255), IN `transport_needed` BOOLEAN)   BEGIN
+    -- Retrieve available guides and their corresponding packages
+    SELECT g.id AS guide_id,
+           g.name AS guide_name,
+           GROUP_CONCAT(DISTINCT p.id) AS package_ids,
+           GROUP_CONCAT(DISTINCT p.places) AS places,
+           GROUP_CONCAT(DISTINCT gp.languages) AS languages
+    FROM package p
+    INNER JOIN guides g ON p.guide_id = g.id
+    INNER JOIN guide_profile gp ON g.id = gp.guide_id
+    INNER JOIN guide_availability ga ON g.id = ga.guide_id
+    WHERE p.max_group_size >= max_group_size
+      AND p.transport_needed = transport_needed
+      AND FIND_IN_SET(places, REPLACE(p.places, ', ', ',')) > 0
+      AND ga.date = date 
+      AND ga.availability = 1
+    GROUP BY g.id, g.name;
+END$$
+
 CREATE DEFINER=`root`@`%` PROCEDURE `IncreaseEquipmentCount` (IN `equipmentID` INT, IN `itemCount` INT)   BEGIN
     DECLARE i INT DEFAULT 0;
     
@@ -815,6 +907,30 @@ CREATE DEFINER=`root`@`%` PROCEDURE `ProcessRentOrders` (`customerID` INT)   BEG
     END LOOP;
 
     CLOSE curRentalService;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `RetrieveAvailableDays` (IN `p_guide_id` INT, IN `p_month` INT, IN `p_year` INT)   BEGIN
+    SELECT DATE_FORMAT(date, '%d') AS available_day
+    FROM guide_availability
+    WHERE guide_id = p_guide_id
+        AND MONTH(date) = p_month
+        AND YEAR(date) = p_year
+        AND availability = 1;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `RetrieveDaysByGuideIdMonthYear` (IN `p_guide_id` INT, IN `p_month` INT, IN `p_year` INT)   BEGIN
+    SELECT DISTINCT DATE_FORMAT(date, '%d') AS booked_day
+    FROM guide_booking
+    WHERE guide_id = p_guide_id
+        AND MONTH(date) = p_month
+        AND YEAR(date) = p_year;
+END$$
+
+CREATE DEFINER=`root`@`%` PROCEDURE `ViewGuideProfile` (IN `guide_id` INT)   BEGIN
+    SELECT cp.*, g.name AS guide_name
+    FROM guide_profile cp
+    JOIN guides g ON cp.guide_id = g.id
+    WHERE cp.guide_id = guide_id;
 END$$
 
 DELIMITER ;
@@ -1063,6 +1179,156 @@ INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_
 (51, 'Webster King', '53994 Dayna Estate', '200976880974', '0983237761', 'female', 207, 'waiting', '6621ea01ed5a8.pdf', 11),
 (52, 'Wendy Waelchi', '15847 Kilback Cove', '200976880972', '0983237767', 'male', 215, 'waiting', '66237b795c7f4.pdf', 15),
 (53, 'Thomas Baumbach', '27789 Price Shores', '200976810974', '0983237765', 'other', 216, 'waiting', '66289d3cef06f.pdf', 16);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guide_availability`
+--
+
+CREATE TABLE `guide_availability` (
+  `id` int NOT NULL,
+  `guide_id` int DEFAULT NULL,
+  `availability` tinyint(1) DEFAULT '0',
+  `date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `guide_availability`
+--
+
+INSERT INTO `guide_availability` (`id`, `guide_id`, `availability`, `date`) VALUES
+(1, 9, 1, '2024-04-25'),
+(2, 9, 0, '2024-04-29'),
+(3, 9, 1, '2024-04-28'),
+(4, 9, 1, '2024-04-16'),
+(5, 9, 1, '2024-03-31'),
+(6, 9, 1, '2024-04-19'),
+(7, 9, 0, '2024-04-24'),
+(8, 9, 1, '2024-04-08'),
+(9, 9, 1, '2024-04-10'),
+(10, 9, 1, '2024-04-07'),
+(11, 9, 1, '2024-04-15'),
+(12, 9, 1, '2024-04-26'),
+(13, 9, 0, '2024-05-22'),
+(14, 9, 0, '2024-05-17'),
+(15, 9, 0, '2024-05-31'),
+(16, 9, 0, '2024-05-11'),
+(17, 9, 1, '2024-04-20'),
+(18, 9, 1, '2024-06-06'),
+(19, 9, 1, '2024-05-27'),
+(20, 9, 1, '2024-05-19'),
+(21, 9, 0, '2024-05-15'),
+(22, 9, 0, '2024-05-29'),
+(23, 9, 1, '2024-06-19'),
+(24, 9, 1, '2024-06-07'),
+(25, 9, 1, '2024-06-14'),
+(26, 9, 1, '2024-06-09'),
+(27, 9, 1, '2024-06-08'),
+(28, 9, 1, '2024-06-11'),
+(29, 9, 1, '2024-06-27'),
+(30, 9, 1, '2024-06-22'),
+(31, 9, 1, '2024-06-23'),
+(32, 9, 1, '2024-07-24'),
+(33, 9, 1, '2024-06-24'),
+(34, 9, 1, '2024-07-14'),
+(35, 9, 1, '2024-07-10'),
+(36, 9, 1, '2024-07-19'),
+(37, 9, 1, '2024-07-18'),
+(38, 9, 0, '2024-05-21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guide_booking`
+--
+
+CREATE TABLE `guide_booking` (
+  `id` int NOT NULL,
+  `guide_id` int DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `package_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` date DEFAULT NULL,
+  `no_of_people` int DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `transport_supply` tinyint(1) DEFAULT NULL,
+  `payment_id` int DEFAULT NULL,
+  `status` enum('pending','completed','cancelled') NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `guide_booking`
+--
+
+INSERT INTO `guide_booking` (`id`, `guide_id`, `customer_id`, `package_id`, `created_at`, `date`, `no_of_people`, `location`, `transport_supply`, `payment_id`, `status`) VALUES
+(36, 9, 32, 30, '2024-04-25 07:47:32', '2024-05-29', 5, 'Kandy', 1, NULL, 'completed'),
+(38, 9, 32, 2, '2024-04-25 11:34:46', '2024-05-22', 6, 'Ella', 1, 54, 'completed'),
+(39, 9, 32, 2, '2024-04-25 12:45:36', '2024-05-31', 7, 'Ella', 1, 55, 'pending'),
+(40, 9, 32, 2, '2024-04-25 12:49:17', '2024-05-15', 7, 'Ella', 1, 57, 'pending'),
+(41, 9, 32, 30, '2024-04-25 12:51:58', '2024-05-17', 5, 'Ella', 1, 58, 'pending'),
+(42, 9, 32, 2, '2024-04-25 12:54:31', '2024-05-11', 6, 'Ella', 1, 59, 'completed'),
+(43, 9, 32, 30, '2024-04-26 10:25:00', '2024-05-21', 5, 'Kandy', 1, 60, 'pending'),
+(44, 9, 32, 2, '2024-04-26 14:14:44', '2024-04-24', 5, 'Kandy', 1, NULL, 'completed');
+
+--
+-- Triggers `guide_booking`
+--
+DELIMITER $$
+CREATE TRIGGER `after_guide_booking_delete` AFTER DELETE ON `guide_booking` FOR EACH ROW BEGIN
+    UPDATE guide_availability
+    SET availability = 1
+    WHERE guide_id = OLD.guide_id
+    AND date = OLD.date;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_guide_booking_insert` AFTER INSERT ON `guide_booking` FOR EACH ROW BEGIN
+    -- Update availability in guide_availability table to 0
+    UPDATE guide_availability
+    SET availability = 0
+    WHERE guide_id = NEW.guide_id AND date = NEW.date;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `before_guide_booking_insert` BEFORE INSERT ON `guide_booking` FOR EACH ROW BEGIN
+    DECLARE guide_count INT;
+
+    -- Check if the combination of guide_id and date already exists
+    SELECT COUNT(*) INTO guide_count
+    FROM guide_booking
+    WHERE guide_id = NEW.guide_id AND date = NEW.date;
+
+    -- If the count is greater than 0, it means there is already an entry for this guide on the same date
+    IF guide_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Only one booking is allowed per guide on the same date.';
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guide_profile`
+--
+
+CREATE TABLE `guide_profile` (
+  `guide_id` int NOT NULL,
+  `description` text,
+  `languages` text,
+  `certifications` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `guide_profile`
+--
+
+INSERT INTO `guide_profile` (`guide_id`, `description`, `languages`, `certifications`) VALUES
+(9, 'Hi, I\'m Nirmal, a professional tour guide with 5 years of experience. I have a passion for history and culture and love sharing my knowledge with others. I specialize in tours of ancient ruins, temples, and historical sites. I\'m also an expert in local cuisine and can recommend the best places to eat in town. Let me show you the beauty of my country and help you create memories that will last a lifetime.', 'Sinhala, English, Tamil', 'GOV certification');
 
 -- --------------------------------------------------------
 
@@ -4651,6 +4917,32 @@ INSERT INTO `locations` (`id`, `latitude`, `longitude`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `package`
+--
+
+CREATE TABLE `package` (
+  `id` int NOT NULL,
+  `guide_id` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `max_group_size` int NOT NULL,
+  `max_distance` int NOT NULL,
+  `transport_needed` tinyint(1) NOT NULL,
+  `places` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `package`
+--
+
+INSERT INTO `package` (`id`, `guide_id`, `price`, `max_group_size`, `max_distance`, `transport_needed`, `places`) VALUES
+(1, 9, 15000.00, 30, 30, 1, 'Nuwara Eliya, Ella'),
+(2, 9, 12000.00, 10, 20, 1, 'Kandy, Ella, Rathnapura'),
+(3, 23, 5000.00, 10, 20, 1, 'Kandy, Ella'),
+(30, 9, 10000.00, 5, 10, 1, 'Ella, Kandy');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payment`
 --
 
@@ -5931,6 +6223,28 @@ ALTER TABLE `guides`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `guide_availability`
+--
+ALTER TABLE `guide_availability`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `guide_id` (`guide_id`);
+
+--
+-- Indexes for table `guide_booking`
+--
+ALTER TABLE `guide_booking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `guide_id` (`guide_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `package_id` (`package_id`);
+
+--
+-- Indexes for table `guide_profile`
+--
+ALTER TABLE `guide_profile`
+  ADD PRIMARY KEY (`guide_id`);
+
+--
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
@@ -5942,6 +6256,13 @@ ALTER TABLE `item`
 --
 ALTER TABLE `locations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `package`
+--
+ALTER TABLE `package`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `guide_id` (`guide_id`);
 
 --
 -- Indexes for table `payment`
@@ -6062,6 +6383,18 @@ ALTER TABLE `guides`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
+-- AUTO_INCREMENT for table `guide_availability`
+--
+ALTER TABLE `guide_availability`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT for table `guide_booking`
+--
+ALTER TABLE `guide_booking`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
@@ -6072,6 +6405,12 @@ ALTER TABLE `item`
 --
 ALTER TABLE `locations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `package`
+--
+ALTER TABLE `package`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -6187,10 +6526,36 @@ ALTER TABLE `guides`
   ADD CONSTRAINT `guides_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `guide_availability`
+--
+ALTER TABLE `guide_availability`
+  ADD CONSTRAINT `guide_availability_ibfk_1` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`);
+
+--
+-- Constraints for table `guide_booking`
+--
+ALTER TABLE `guide_booking`
+  ADD CONSTRAINT `guide_booking_ibfk_1` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`),
+  ADD CONSTRAINT `guide_booking_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `guide_booking_ibfk_3` FOREIGN KEY (`package_id`) REFERENCES `package` (`id`);
+
+--
+-- Constraints for table `guide_profile`
+--
+ALTER TABLE `guide_profile`
+  ADD CONSTRAINT `guide_profile_ibfk_1` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`);
+
+--
 -- Constraints for table `item`
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `package`
+--
+ALTER TABLE `package`
+  ADD CONSTRAINT `package_ibfk_1` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`);
 
 --
 -- Constraints for table `rent`
