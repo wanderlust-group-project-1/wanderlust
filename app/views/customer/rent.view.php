@@ -604,6 +604,17 @@ function setNewDate(start, end) {
 
 
     })
+
+    // item count change price
+
+    $(document).on('change', '#item-count', function() {
+        var count = $(this).val();
+        console.log(count);
+        var fee = $('#item-fee').attr('data-fee');
+        console.log(fee);
+        var total = count * fee;
+        $('#item-fee').text("Rs. " + total);
+    });
   
 
 

@@ -189,7 +189,7 @@ require_once('../app/views/layout/header.php');
                     </div>
                 </div>
                 <div class="row">
-                    <input type="submit" class="btn-text-green border" value="Add Equipment">
+                    <input id="add-equipment-form-submit" type="submit" class="btn-text-green border" value="Add Equipment">
                 </div>
             </form>
         </div>
@@ -360,7 +360,9 @@ $(document).on('click', '#equipment-image-submit', function(e) {
 
 $(document).ready(function() {
     $("#add-equipment-form").trigger('reset');
-    $("#add-equipment-form").submit(function(e) {
+    // $("#add-equipment-form").submit(function(e) {
+        // $(document).on('submit', '#add-equipment-form', function(e) {
+            $('#add-equipment-form-submit').click(function(e) {
         e.preventDefault();
 
         var formData = new FormData();
@@ -472,6 +474,8 @@ $(document).ready(function() {
                 if(response.success) {
                     alertmsg('Equipment added successfully', 'success');
                     
+                    $("#add-equipment-form").trigger('reset');
+
                     // close
                     addEquipmentModal.style.display = "none";
 
@@ -479,7 +483,6 @@ $(document).ready(function() {
                     getEquipments();
 
                     // clear form
-                    $("#add-equipment-form").trigger('reset');
                     
 
                 }

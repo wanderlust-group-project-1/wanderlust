@@ -109,6 +109,8 @@ Class Rent{
         // foreach ($data['equipment'] as $equipment) {
         //     $equipment->total = $equipment->standard_fee + $equipment->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
         // }
+        // show($data['equipment']);
+
 
         $data['equipment']->total = $data['equipment']->standard_fee + $data['equipment']->fee * (strtotime($cart->end_date) - strtotime($cart->start_date)) / (60 * 60 * 24);
 
