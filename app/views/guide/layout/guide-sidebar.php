@@ -67,7 +67,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guideavailability" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guideAvailability" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Availability</span>
         <i class="menu-arrow"></i>
@@ -81,7 +81,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guidebookings" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/guideBookings" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Bookings</span>
         <i class="menu-arrow"></i>

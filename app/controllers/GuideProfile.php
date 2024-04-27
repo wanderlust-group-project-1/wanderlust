@@ -1,10 +1,11 @@
 <?php
 
-class Guideprofile {
+class GuideProfile {
     use Controller;
 
     public function index(string $a = '', string $b = '', string $c = ''): void {
         $user = $_SESSION['USER'];
+        echo "a";
 
         if ($user->role == 'guide') {
             $guideProfileModel = new GuideProfileModel();
@@ -32,3 +33,5 @@ class Guideprofile {
     }
     
 }
+
+?>
