@@ -14,8 +14,21 @@ class Guideprofile {
     }
 
     public function update(string $a = '', string $b = '', string $c = ''): void {
-        $guideProfileModel = new GuideprofileModel();
-        $guideProfileModel->updateGuideProfile($_POST);
-        redirect('guideprofile');
+        $request  = new JSONRequest;
+        $response = new JSONResponse;
+
+        $data = $request->getAll();
+        $data['guide_id'] = UserMiddleware::getUser()['id'];
+
+        $guideProfileModel = new GuideprofileModel;
+        $guideProfileModel->updateGuideProfile($data);
+
+        $response
+            ->data($data)
+            ->success(true)
+            ->message('Profile updated successfully')
+            ->statusCode(200)
+            ->send();
     }
+    
 }

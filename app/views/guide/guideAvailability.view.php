@@ -97,13 +97,16 @@ require_once('../app/views/layout/header.php');
                 //add data-id to each button
                 button.setAttribute('data-id', i);
                 button.classList.add("cal_day-button"); // Add class to style the button
-                button.addEventListener("click", () => openModalSchedule(i)); // Add click event listener to open modal
-                if (currentDate.getDate() === i && currentDate.getMonth() === currentMonth && currentDate.getFullYear() === currentYear) {
-                    button.classList.add("cal_current-date"); // Add class to highlight current date
+                if (new Date(currentYear, currentMonth, i) >= currentDate) { // Check if the date is after or equal to current date
+                    button.addEventListener("click", () => openModalSchedule(i));
+                } else {
+                    button.disabled = true;
                 }
-                calendar.appendChild(button); // Append button to calendar
+                if (currentDate.getDate() === i && currentDate.getMonth() === currentMonth && currentDate.getFullYear() === currentYear) {
+                    button.classList.add("cal_current-date");
+                }
+                calendar.appendChild(button);
             }
-
             // Fill in next month's days
             const numDaysToFill = 42 - numDaysInMonth - firstDayOfWeek;
             for (let i = 1; i <= numDaysToFill; i++) {
@@ -219,8 +222,8 @@ require_once('../app/views/layout/header.php');
 
     <script>
         const currentMonthName = currentDate.toLocaleString('en-US', {
-                month: 'long'
-            });
+            month: 'long'
+        });
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var currentMonthIndex = months.indexOf(currentMonthName);
 
@@ -268,9 +271,14 @@ require_once('../app/views/layout/header.php');
                 // var formData = new FormData(this);
                 var available = $('#availability').is(':checked') ? 1 : 0
 
+                // Assuming $('#selected-day').text() contains the date string in the format 'YYYY-MM-DD'
+                var currentDate = new Date($('#selected-day').text());
+                currentDate.setDate(currentDate.getDate() + 1);
+                var increasedDate = currentDate.toISOString().split('T')[0];
+
                 var jsonData = {
                     // date: $('#selected-day').text(), 'April 4, 2024 converted yyyy-mm-dd'
-                    date: new Date($('#selected-day').text()).toISOString().split('T')[0],
+                    date: increasedDate,
                     availability: available
                 }
                 console.log(jsonData);

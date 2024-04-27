@@ -2,7 +2,7 @@
 foreach ($data["package"] as $package) {
 ?>
     <div class="package-details" id="package-details-<?php echo htmlspecialchars($package->id); ?>" data-id="<?php echo htmlspecialchars($package->id); ?>">
-        <span class="close">&times;</span>
+        <span class="modal-close close">&times;</span>
         <div class="container flex-d-c gap-4 p-md-0 ">
             <h2 class="guide-h2-title">Package Details</h2>
 
@@ -52,7 +52,7 @@ foreach ($data["package"] as $package) {
 
 <div class="modal" id="edit-package-modal" style="display: none;">
     <div class="modal-content">
-        <span class="close-button">&times;</span>
+        <span class="modal-close close">&times;</span>
         <form id="update-package-form" packageId="<?php echo htmlspecialchars($package->id);?>" class="form" method="POST" enctype="multipart/form-data">
             <h2 class="guide-h2-title">Update Package</h2>
 
