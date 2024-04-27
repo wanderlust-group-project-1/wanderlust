@@ -48,9 +48,9 @@ class QueryBuilder
         return $this;
     }
 
-    public function delete(): self
+    public function delete(string $table= ''): self
     {
-        $this->query = "DELETE FROM $this->table";
+        $this->query = "DELETE $table FROM $this->table";
         return $this;
     }
 

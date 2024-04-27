@@ -74,6 +74,10 @@ class CartModel {
         $data['start_date'] = $cart->start_date;
         $data['end_date'] = $cart->end_date;
 
+
+        $cartItem->removeItemsByEquipmentId($data);
+
+
         $item = new ItemModel;
         $availableItems = $item->getAvailableItems($data);
         // show($availableItems);
@@ -159,6 +163,18 @@ class CartModel {
        
     }
 
+    public function removeItemsByEquipmentId(array $data) {
+        $q = new QueryBuilder();
+
+        $q->setTable('cart_item');
+        $q->delete()
+            ->join('item','cart.item_id','item.id')
+            ->where('item.equipment_id', $data['equipment_id'])
+            ->where('cart.customer_id', $data['customer_id']);
+
+        return $this->query($q->getQuery(), $q->getData());
+
+    }
 
 
 
