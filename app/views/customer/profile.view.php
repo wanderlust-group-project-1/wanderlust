@@ -11,11 +11,12 @@ require_once('../app/views/layout/footer.php');
     <div class="customer-bg-image">
         <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
     </div>
+    <!-- <?php show ($user);?> -->
         <div class="profile-details">
             <div class="col-lg-3 profile-details-colum">
                 <div class="card-normal-glass mt-6 py-6 align-items-center justify-content-center mih-100"> 
                     <div class="profile-picture">    
-                        <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img-fluid h-200px rounded-7">
+                        <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img">
                     </div>
                     <h1 class="mb-5"> Hello <?php echo $user->name?>!</h1>
                     <div class="row">
@@ -42,7 +43,7 @@ require_once('../app/views/layout/footer.php');
                     </div>
                     <div class="flex-d-r">
                         <div class="img-fluid h-200px rounded-7 ml-4">
-                            <img src="<?php echo ROOT_DIR ?>/uploads/images/equipment/<?php echo $rental->equipment_image; ?>" alt="Equipment Image" class="img-fluid h-200px">
+                            <img src="<?php echo ROOT_DIR ?>/uploads/images/equipment/<?php echo $rental->equipment_image; ?>" alt="Equipment Image" class="img-fluid h-200px p-3 rounded-8">
                         </div>
                     </div>
                     <div class="flex-d-r  justify-content-start">

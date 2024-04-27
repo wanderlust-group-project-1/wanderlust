@@ -739,15 +739,16 @@
     }
 
     .profile-picture{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      width: 100%;
-      border-radius: 10px;
-      transition: all 0.3s ease-in-out;
+      width: 200px; /* Adjust the width and height as needed */
+      height: 200px;
+      border-radius: 50%; /* Make it circular */
+      overflow: hidden;
+
+      .img {
+        width: 100%; /* Make the image fill the circular container */
+        height: 100%;
+        object-fit: cover; /* Ensure the image covers the entire container */
+      }
     }
 
     
@@ -763,5 +764,15 @@
         justify-content: center !important;
         align-items: center !important;
       }
+  }
+
+  .profile-image {
+    // width: 200px;
+    // height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
   }
 }
