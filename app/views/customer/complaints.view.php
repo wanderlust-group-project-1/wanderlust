@@ -29,6 +29,20 @@ require_once('../app/views/navbar/customer-navbar.php');
     
 </div>
 
+<!-- complaint cancel -->
+
+<div id="cancel-complaint-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Cancel Complaint</h2>
+        <p>Are you sure you want to cancel this complaint?</p>
+        <div class="flex-d gap-3 mt-3">
+            <button class="btn btn-primary" id="cancel-complaint-confirm">Yes</button>
+            <button class="btn btn-danger modal-close" id="cancel-complaint-cancel">No</button>
+        </div>
+    </div>
+</div>
+
 <script>
 
     function getComplaints(status) {
@@ -71,38 +85,6 @@ require_once('../app/views/navbar/customer-navbar.php');
             }
         });
     });
-
-    $(document).on('click', '#cancel-complaint', function() {
-        var complaintId = $(this).closest('.complaint').attr('data-id');
-        $('#cancel-complaint-confirm').attr('data-id', complaintId);
-        $('#cancel-complaint-modal').css('display', 'block');
-    });
-
-    $(document).on('click', '#cancel-complaint-confirm', function() {
-        var complaintId = $(this).attr('data-id');
-        $.ajax({
-            headers:{
-                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
-            },
-            url: '<?= ROOT_DIR ?>/api/complaints/cancelComplaint/' + complaintId,
-            type: 'GET',
-            success: function(response) {
-                console.log(response);
-                var id = response.data.complaint_id;
-                $('#complaint-card[data-id="' + id + '"]').remove();
-                $('#cancel-complaint-modal').css('display', 'none');
-
-                getComplaints('myComplaints');
-
-
-
-                
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        });
-    });
     
 </script>
 
@@ -137,4 +119,43 @@ $(document).on('click', '#mycom-view-button', function() {
             }
         });
     });
+</script>
+
+<!-- cancel complaint -->
+<script>
+    $(document).on('click', '#cancel-complaint', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $('#cancel-complaint-confirm').attr('data-id', complaintId);
+        $('#cancel-complaint-modal').css('display', 'block');
+    });
+
+
+
+
+    $(document).on('click', '#cancel-complaint-confirm', function() {
+        var complaintId = $(this).attr('data-id');
+        $.ajax({
+            headers:{
+                'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/complaints/cancelCustomerComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                var id = response.data.complaint_id;
+                $('#complaint-card[data-id="' + id + '"]').remove();
+                $('#cancel-complaint-modal').css('display', 'none');
+
+                // getComplaints('pending');
+                alertmsg ("Complaint cancelled successfully", 'success');
+
+
+                
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
 </script>
