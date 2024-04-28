@@ -7,10 +7,10 @@ require_once('../app/views/navbar/customer-navbar.php');
     <div class="customer-bg-image">
     <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
     </div>
-    <div class="cl-lg-12 flex-d-c gap-2 mt-5">
+    <div class="cl-lg-7 flex-d-c gap-2 mt-9">
             <div class="card card-normal-glass">
                 <!-- <button class="btn-text-green">hi</button> -->
-                <h2 class="justufy-content-ceneter flex-d"> Complaints </h2>
+                <h2 class="justufy-content-ceneter flex-d ml-3"> Complaints </h2>
 
                 <div class="section-switch flex-d gap-3 flex-wrap">
                     <button class="btn-selected" id="rentComplaints">My complaints</button>

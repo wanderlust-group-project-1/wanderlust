@@ -29,12 +29,12 @@
             $user = $_SESSION['USER']; ?>
 
             <div class="home_button">
-                <a href="#" class="btn">Get Started</a>
+                <a href="#" class="btn-text-green border">Get Started</a>
             </div>
 
         <?php } else {  ?>
             <div class="home_button">
-            <a href="<?= ROOT_DIR ?>/login" class="btn">Get Started</a>
+            <a href="<?= ROOT_DIR ?>/login" class="btn-text-green border">Get Started</a>
             </div>
         <?php } ?>
     </div>

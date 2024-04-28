@@ -35,11 +35,11 @@ if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER'
 <?php require_once('../app/views/sections/rental-service.php');
 ?>
 
-<?php require_once('../app/views/sections/blog.php');
-?>
+<!-- <?php require_once('../app/views/sections/blog.php');
+?> -->
 
-<?php require_once('../app/views/sections/tips.php');
-?>
+<!-- <?php require_once('../app/views/sections/tips.php');
+?> -->
 
 <?php require_once('../app/views/sections/complaints.php');
 ?>

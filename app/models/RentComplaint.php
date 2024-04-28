@@ -3,7 +3,7 @@ class RentComplaintModel
 {
     use Model;
 
-    protected string $table = 'rent_complaints';
+    protected string $table = 'rent_complaint';
 
     protected array $allowedColumns = [
         'rent_id',
