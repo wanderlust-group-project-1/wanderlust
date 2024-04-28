@@ -1,7 +1,7 @@
       
      <div class=" col profile-info">
         <div class="row">
-    <img src="<?php echo ROOT_DIR?>/assets/images/dp.jpg" alt="Profile Image" class="profile-image">
+    <img src="<?php echo OSURL?>images/guide/<?= $guide->image ?>" alt="Profile Image" class="profile-image">
     <div>
         <h2 id="profile-name"> <?php echo $guide->name ?> </h2>
         <p id="profile-email"><?php echo $guide->email ?></p>
@@ -9,26 +9,26 @@
         <p id="profile-status" class="status <?php echo $guide->status; ?>"><?php echo ucfirst($guide->status); ?></p>
     </div>
     </div>
-    <div class="status-links">
+    <div class="status-links flex-d gap-2">
         
         <?php 
-        // echo $guide->status;
+        // echo $rental->status;
        echo ($guide->status == "waiting") ?  
-        '<button class="change-status-btn accepted" data-status="accepted">Accepted</button>
-        <button class="change-status-btn rejected" data-status="rejected">Rejected</button>'
+        '<button class="btn-text-green border" data-status="accepted">Accept</button>
+        <button class="btn-text-red border" data-status="rejected">Reject</button>'
 
         :   ''
         ?>
 
         <?php echo ($guide->status == "accepted") ?  
-        '<button class="change-status-btn waiting" data-status="waiting">Waiting</button>
-        <button class="change-status-btn rejected" data-status="rejected">Rejected</button>'
+        '<button class="btn-text-orange border" data-status="waiting">Waiting</button>
+        <button class="btn-text-red border" data-status="rejected">Reject</button>'
         :   ''
         ?>
 
          <?php echo ($guide->status == "rejected") ?  
-        '<button class="change-status-btn waiting" data-status="waiting">Waiting</button>
-        <button class="change-status-btn accepted" data-status="accepted">Accepted</button>'
+        '<button class="btn-text-orange border" data-status="waiting">Waiting</button>
+        <button class="btn-text-green border" data-status="accepted">Accept</button>'
         :   ''
         ?> 
 
@@ -52,7 +52,7 @@
 <script>
    $(document).ready(function () {
         // Event listener for the button click
-        $('.change-status-btn').on('click', function () {
+        $('.status-links button').on('click', function () {
             // Assuming you have a server-side script to handle the status update
             var userId = <?php echo $guide->id; ?>; // Add the user ID here
             var newStatus = $(this).data('status');
@@ -67,10 +67,12 @@
                     // Update the status on the page
                     $('#profile-status').text(data.newStatus);
                     openModal(userId);
+                    alertmsg('Status updated successfully', 'success');
 
                 },
                 error: function (error) {
                     console.error('Error:', error);
+                    alertmsg('Error updating status', 'error');
                 }
             });
         });

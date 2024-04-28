@@ -127,6 +127,22 @@
         </ul>
       </div>
     </li>
+
+
+
+    <div class="guide-dash-prof">
+      <div class=" flex-d justify-content-center align-items-center">
+       
+        <a href="<?php echo ROOT_DIR ?>/logout"> <button type="submit" class="btn-edit edit-profile">
+          Logout
+        </button>
+      </div>
+    </div>
+
+
+
+
+
   </ul>
 </nav>
 

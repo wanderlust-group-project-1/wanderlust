@@ -43,7 +43,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/rentalServices">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -75,7 +75,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/guides">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -108,7 +108,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/customers">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -143,7 +143,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/charts">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -175,7 +175,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/complains">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -207,7 +207,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/tips">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -231,7 +231,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <!-- <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/charts">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -330,7 +330,7 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
                                           <a href="<?php echo ROOT_DIR ?>/admin/charts">
-                                                <button type=" submit" class="btn-success" id="see-more">
+                                                <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
                                           </a>
@@ -433,7 +433,7 @@ require_once('../app/views/layout/header.php');
 
                                           </div>
                                           <div class="col-lg-4">
-                                                <button class="btn-success" id="income-report">Generate</button>
+                                                <button class="btn-text-green   border " id="income-report">Generate</button>
                                           </div>
 
 
@@ -471,7 +471,7 @@ require_once('../app/views/layout/header.php');
 
                                           </div>
                                           <div class="col-lg-4">
-                                                <button class="btn-success" id="income-report">Generate</button>
+                                                <button class="btn-text-green   border " id="income-report">Generate</button>
                                           </div>
 
 

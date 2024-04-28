@@ -21,6 +21,14 @@ require_once('../app/views/layout/header.php');
         </ul>
 
 
+        <div class="flex-d-r mt-5 ml-3">
+            <div class="search-container">
+                <input type="text" placeholder="Search.." name="search" class="form-control-lg" id="search">
+                <!-- <button class="btn-text-green border" type="submit"><i class="fa fa-search"></i></button> -->
+            </div>
+        </div>  
+
+
         <div class="table-container">
             <table class="data-table table-custom">
                 <thead>
@@ -117,6 +125,20 @@ require_once('../app/views/layout/header.php');
                 }
             }
         </script>
+
+
+<script>
+    $(document).ready(function() {
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".data-table tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+
+</script>
 
 
 
