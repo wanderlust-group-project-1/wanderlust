@@ -112,7 +112,7 @@
     //   }
     // }
     border-spacing: 1; 
-    border-collapse: collapse; 
+    // border-collapse: collapse; 
     background: $color-white;
     border-radius:10px;
     overflow:hidden;
@@ -130,8 +130,9 @@
 
     thead tr        { 
       height:60px;
-      background: $color-lighter;
-      font-size: $header4;
+      background: $color-light2;
+      font-size: 1.5rem;
+      font-weight: $font-medium;
     }
 
     tbody tr        { height:48px; border-bottom:1px solid $color-lighter;

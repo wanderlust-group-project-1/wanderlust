@@ -1,10 +1,3 @@
-Chariot Path Kandy -2 3 hours
-Hanthana Mountain - 3 hours
-The Pekoe Trail - 3
-Sri Lanka Knuckles Hike - 3
-
-
-
 <?php
 require_once('../app/views/layout/header.php');
 ?>
@@ -44,29 +37,42 @@ require_once('../app/views/layout/header.php');
                 <form id="add-package-form" class="form" method="POST" enctype="multipart/form-data">
                     <h2 class="guide-h2-title">Add New Package</h2>
 
-                    <!-- <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2"> -->
-                    <div class="row-form-set flex-d-r p-2 gap-2">
-                            <label class="guide-form-lable" for="name">Name</label>
-                            <input type="text" id="name" class="form-control-lg" name="name" required>
+                    <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
-                            <label class="guide-form-lable" for="price">Price</label>
-                            <input type="text" id="price" class="form-control-lg" name="price" required>
+                        <label for="guide-name">Name</label>
+                        <input type="text" id="guide-name" class="form-control-lg" name="name" required>
+                        <label for="price">Price</label>
+                        <input type="text" id="price" class="form-control-lg" name="price" required>
 
-                            <label class="guide-form-lable" for="max_distance">Distance Covered</label>
-                            <input type="number" id="max_distance" class="form-control-lg" name="max_distance" required>
+                        <label for="max_group_size">Maximum Group Size</label>
+                        <input type="number" id="max_group_size" class="form-control-lg" name="max_group_size" required>
 
-                            <label class="guide-form-lable" for="max_group_size">Maximum Group Size</label>
-                            <input type="number" id="max_group_size" class="form-control-lg" name="max_group_size" required>
 
-                            <label class="guide-form-lable" for="transport_needed">Transport Needed</label>
-                            <input type="checkbox" id="transport_needed" class="form-control-lg" name="transport_needed">
+                        <label for="max_distance">Distance Covered</label>
+                        <input type="number" id="max_distance" class="form-control-lg" name="max_distance" required>
 
-                        </div>
+                        <label for="transport_needed">Transport Needed</label>
+                        <input type="checkbox" id="transport_needed" class="form-control-lg" name="transport_needed">
 
                     </div>
 
+
+                    <div id="dropdownContainer">
+                        <div class="dropdown">
+                            <label for="location1">Area 1:</label>
+                            <select id="location1" name="location1">
+                                <option value="Kandy">Kandy</option>
+                                <option value="Ella">Ella</option>
+                                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                            </select>
+                            <textarea id="textarea1" name="textarea1" rows="4" cols="50"></textarea>
+                            <button onclick="removeDropdown(this)">-</button>
+                        </div>
+                    </div>
+                    <button onclick="addDropdown()">+</button>
+
                     <div class="row">
-                        <input type="submit" class="btn" value="Add Package">
+                        <input type="submit" class="btn" id="add-button" value="Add Package">
                     </div>
                 </form>
             </div>
@@ -84,21 +90,53 @@ require_once('../app/views/layout/header.php');
 
     </div>
 
-    <script>
-        // Add an event listener to the "Places" select element
-        document.getElementById('places').addEventListener('change', function() {
-            // Get the selected value
-            var selectedPlace = this.value;
 
-            // Check if the selected place is "Kandy"
-            if (selectedPlace === 'kandy') {
-                // Show the div containing checkboxes for places in Kandy
-                document.getElementById('kandyPlaces').style.display = 'block';
-            } else {
-                // Hide the div if another place is selected
-                document.getElementById('kandyPlaces').style.display = 'none';
-            }
-        });
+    <script>
+        function addDropdown() {
+            const container = document.getElementById('dropdownContainer');
+            const dropdownCount = container.getElementsByClassName('dropdown').length;
+
+            const newDropdown = document.createElement('div');
+            newDropdown.classList.add('dropdown');
+
+            const label = document.createElement('label');
+            label.textContent = `Location ${dropdownCount + 1}:`;
+            newDropdown.appendChild(label);
+
+            const select = document.createElement('select');
+            select.name = `location${dropdownCount + 1}`;
+            select.id = `location${dropdownCount + 1}`;
+
+            const options = ['Kandy', 'Ella', 'Nuwara Eliya'];
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                select.appendChild(optionElement);
+            });
+
+            newDropdown.appendChild(select);
+
+            const textarea = document.createElement('textarea');
+            textarea.id = `textarea${dropdownCount + 1}`;
+            textarea.name = `textarea${dropdownCount + 1}`;
+            textarea.rows = "4";
+            textarea.cols = "50";
+            newDropdown.appendChild(textarea);
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = '-';
+            removeButton.onclick = function() {
+                removeDropdown(this);
+            };
+            newDropdown.appendChild(removeButton);
+
+            container.appendChild(newDropdown);
+        }
+
+        function removeDropdown(button) {
+            button.parentNode.remove();
+        }
     </script>
 
     <script>
@@ -133,31 +171,51 @@ require_once('../app/views/layout/header.php');
                 var formData = new FormData();
                 var transportNeeded = $('#transport_needed').is(':checked') ? 1 : 0
 
+                var dropdowns = document.getElementsByClassName('dropdown');
+                var places = [];
+
+                for (let i = 0; i < dropdowns.length; i++) {
+                    var dropdown = dropdowns[i];
+                    var location = dropdown.querySelector('select').value;
+                    var textarea = dropdown.querySelector('textarea').value;
+                    places.push({
+                        location,
+                        textarea
+                    });
+                }
+
+                console.log(places);
+
+                // Extract locations from the places array
+                var locations = places.map(place => place.location);
+
+                console.log(locations);
+
                 var jsonData = {
+                    name: $('#guide-name').val(),
                     price: $('#price').val(),
                     max_group_size: $('#max_group_size').val(),
                     max_distance: $('#max_distance').val(),
                     transport_needed: transportNeeded,
-                    places: $('#places').val()
+                    places: locations.join(','), // Join locations into a single string
                 };
+
                 console.log(transportNeeded)
                 formData.append('json', JSON.stringify(jsonData));
 
-                console.log(formData);
                 console.log(jsonData);
-
                 $.ajax({
                     headers: {
                         'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
                     },
                     url: '<?= ROOT_DIR ?>/api/package/addPackage',
                     type: 'POST',
-                    data: formData,
-                    contentType: false,
+                    data: JSON.stringify(jsonData),
+                    contentType: 'application/json',
                     processData: false,
-                    success: function(response) {
-                        console.log(response);
-                        if (response.success) {
+                    success: function(data) {
+                        console.log(data);
+                        if (data.success) {
                             alertmsg('Package added successfully', 'success');
 
                             addPackageModal.style.display = "none";
@@ -311,8 +369,22 @@ require_once('../app/views/layout/header.php');
 
             var transportNeeded = $('#transport_needed2').is(':checked') ? 1 : 0;
 
+            var places = [];
+            var dropdowns = document.getElementsByClassName('dropdown');
+            for (let i = 0; i < dropdowns.length; i++) {
+                var dropdown = dropdowns[i];
+                var location = dropdown.querySelector('select').value;
+                var textarea = dropdown.querySelector('textarea').value;
+                places.push({
+                    location,
+                    textarea
+                });
+            }
+
+
             var jsonData = {
                 id: id,
+                name: formData.get('name'),
                 price: formData.get('price'),
                 max_group_size: formData.get('max_group_size'),
                 max_distance: formData.get('max_distance'),

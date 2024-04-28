@@ -2,7 +2,7 @@
 
     <!-- Table filter for each column -->
     <!-- button for show filter -->
-    <div class="filter-btn mb-3">
+    <div class="filter-btn mb-3 ml-2">
         <button id="show-filter" class="btn-text-green border" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
     </div>
 

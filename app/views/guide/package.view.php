@@ -12,6 +12,17 @@ foreach ($data["package"] as $package) {
 
                     <table class="table-details">
                         <tr>
+                            <td><strong>Name:</strong></td>
+                            <td><?php echo htmlspecialchars($package->name); ?></td>
+
+                        </tr>
+
+                        <tr>
+                            <td><strong>Price:</strong></td>
+                            <td><?php echo htmlspecialchars($package->price); ?></td>
+                        </tr>
+
+                        <tr>
                             <td><strong>Maximum Group Size:</strong></td>
                             <td><?php echo htmlspecialchars($package->max_group_size); ?></td>
                         </tr>
@@ -58,6 +69,9 @@ foreach ($data["package"] as $package) {
 
             <div class="col-lg-5 col-md-12 p-2 flex-d-c gap-2">
 
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control-lg" name="name" required value="<?php echo htmlspecialchars($package->name); ?>">
+
                 <label for="price">Price</label>
                 <input type="text" id="price" class="form-control-lg" name="price" required value="<?php echo htmlspecialchars($package->price); ?>">
 
@@ -85,49 +99,48 @@ foreach ($data["package"] as $package) {
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const placesContainer = document.getElementById('places-container');
-    const addPlaceFieldBtn = document.getElementById('add-place-field');
+    $(document).ready(function() {
+        const placesContainer = document.getElementById('places-container');
+        const addPlaceFieldBtn = document.getElementById('add-place-field');
 
-    // Function to add a new place field
-    function addPlaceField() {
-        const newPlaceField = document.createElement('div');
-        newPlaceField.classList.add('place-fields');
-        newPlaceField.innerHTML = `
-            <select class="form-control-lg place-dropdown" name="places" required>
-                <option value="">Select a place</option>
-                <option value="place1">Place 1</option>
-                <option value="place2">Place 2</option>
-                <option value="place3">Place 3</option>
-            </select>
-            <input type="text" class="form-control place-details" placeholder="Enter details for selected place" disabled>
-            <button type="button" class="remove-place-field" onclick="removePlaceField(this)">Remove</button>
-        `;
-        placesContainer.appendChild(newPlaceField);
+        // Function to add a new place field
+        function addPlaceField() {
+            const newPlaceField = document.createElement('div');
+            newPlaceField.classList.add('place-fields');
+            newPlaceField.innerHTML = `
+                <select class="form-control-lg place-dropdown" name="places" required>
+                    <option value="">Select a place</option>
+                    <option value="place1">Place 1</option>
+                    <option value="place2">Place 2</option>
+                    <option value="place3">Place 3</option>
+                </select>
+                <input type="text" class="form-control place-details" placeholder="Enter details for selected place" disabled>
+                <button type="button" class="remove-place-field" onclick="removePlaceField(this)">Remove</button>
+            `;
+            placesContainer.appendChild(newPlaceField);
 
-        // Add event listener to new place dropdown
-        newPlaceField.querySelector('.place-dropdown').addEventListener('change', function() {
-            if (this.value !== '') {
-                enablePlaceDetailsField(this);
-            }
-        });
-    }
+            // Add event listener to new place dropdown
+            newPlaceField.querySelector('.place-dropdown').addEventListener('change', function() {
+                if (this.value !== '') {
+                    enablePlaceDetailsField(this);
+                }
+            });
+        }
 
-    // Function to enable place details field
-    function enablePlaceDetailsField(selectElement) {
-        const placeDetailsField = selectElement.parentElement.querySelector('.place-details');
-        placeDetailsField.disabled = false;
-    }
+        // Function to enable place details field
+        function enablePlaceDetailsField(selectElement) {
+            const placeDetailsField = selectElement.parentElement.querySelector('.place-details');
+            placeDetailsField.disabled = false;
+        }
 
-    // Function to remove a place field
-    function removePlaceField(button) {
-        button.parentElement.remove();
-    }
+        // Function to remove a place field
+        function removePlaceField(button) {
+            button.parentElement.remove();
+        }
 
-    // Add event listener to "Add Place Field" button
-    addPlaceFieldBtn.addEventListener('click', addPlaceField);
-});
-
+        // Add event listener to "Add Place Field" button
+        addPlaceFieldBtn.addEventListener('click', addPlaceField);
+    });
 </script>
 
 <div id="delete-package-modal" class="delete-package-modal modal">

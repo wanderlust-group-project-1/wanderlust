@@ -61,7 +61,6 @@ require_once('../app/views/navbar/customer-navbar.php');
             <div class="booking-details">
                     ${bookingDetails.map(booking => `
                         <div class="guide-card-new booking-history">
-                    <span class="label">Recent Bookings</span>
                         <div class=".flex-d mt-4 mb-2">
                             <p> Date: ${booking.date}</p>
                             <p> Place: ${booking.location}</p>
