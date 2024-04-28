@@ -91,15 +91,15 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     <div class=" col-lg-12 flex-d-c gap-2 location-container">
 
-    <div class="location-form-element">    
+    <div class="location-form-element mb-3 ml-2">    
     <input id="pac-input" class="controls " type="text" placeholder="Enter Location" />
     </div>
-        <div id="map-canvas" class="map-canvas"> </div>
+        <div id="map-canvas" class="map-canvas ml-2"> </div>
 
             <!-- <input type="text" class="form-control" id="latitude"  hidden/>
             <input type="text" class="form-control" id="longitude" hidden/> -->
 
-        <div class="location-button-container">
+        <div class="location-button-container mb-3 ml-2">
             <button id="confirm-location" class="location-button btn-text-green border center" type="button">Confirm Location</button>
         </div>
     </div>

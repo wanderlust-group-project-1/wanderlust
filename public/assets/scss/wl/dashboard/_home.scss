@@ -89,3 +89,20 @@
         }
     }
 }
+
+.error-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // height: 50%;
+    // width: 50%;
+    // // background-color: red;
+
+    .error-img {
+        height: 50%;
+        width: 50%;
+        object-fit: cover;
+        overflow: visible;
+    }
+}

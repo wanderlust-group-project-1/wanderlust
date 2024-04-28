@@ -93,7 +93,7 @@
 
 <!-- complaint cancel -->
 
-<div id="cancel-complaint-modal" class="modal">
+<!-- <div id="cancel-complaint-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Cancel Complaint</h2>
@@ -103,7 +103,7 @@
             <button class="btn btn-danger modal-close" id="cancel-complaint-cancel">No</button>
         </div>
     </div>
-</div>
+</div> -->
 
 <style>
  

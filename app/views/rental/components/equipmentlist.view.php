@@ -2,12 +2,19 @@
 
     <!-- Table filter for each column -->
     <!-- button for show filter -->
-    <div class="filter-btn mb-3 ml-2">
-        <button id="show-filter" class="btn-text-green border" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+    <div class="row justify-content-between">
+        <div class="filter-btn align-content-center">
+            <button id="show-filter" class="btn-text-green ml-3" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+        </div>
+        <div class="add-equipment">
+            <button type="submit" class="btn-text-green mr-4" id="add-equipment">
+                <i class="fa fa-plus" aria-hidden="true"></i>Add new
+            </button>
+        </div>
     </div>
 
 
-    <div class="table-filter ">
+    <div class="table-filter">
         <div class="row ">
             <div class="back-btn mb-3">
                 <button id="hide-filter" class="btn-icon" aria-expanded="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
@@ -42,7 +49,7 @@
         </div>
     </div>
 
-    <table class="data-table table-custom" id="equipment-table">
+    <table class="data-table table-custom align-items-center" id="equipment-table">
         <thead>
             <tr>
                 <th>Equipment Name</th>

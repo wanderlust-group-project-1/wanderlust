@@ -2,7 +2,7 @@
     <h2 class="justify-content-center flex-d">Cart</h2>
 
     <div class="row gap-2">
-        <h3> <?php echo htmlspecialchars($cart->start_date); ?> - <?php echo htmlspecialchars($cart->end_date); ?> </h3>
+        <h6 class="rent-item-view-price"> <?php echo htmlspecialchars($cart->start_date); ?> - <?php echo htmlspecialchars($cart->end_date); ?> </h6>
         </div>
     <div class="row gap-2 ">
         <!-- scrollable cart items -->
@@ -36,7 +36,7 @@
                         <!-- <div class="item-count">
                         </div> -->
                         <div class="cart-item-price">
-                            <h4>Rs. <?php echo htmlspecialchars($item->total); ?></h4>
+                            <h4 class="rent-item-view-price py-1">Rs. <?php echo htmlspecialchars($item->total); ?></h4>
                             <!-- <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="48"> -->
                         </div>
                     </div>

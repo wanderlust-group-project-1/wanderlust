@@ -13,12 +13,12 @@
             $user = $_SESSION['USER']; ?>
 
             <div class="home_button">
-                <a href="#" class="btn">Book Now</a>
+                <a href="#" class="btn-text-green border">Book Now</a>
             </div>
 
         <?php } else {  ?>
             <div class="home_button">
-            <a href="<?= ROOT_DIR ?>/login" class="btn">Book Now</a>
+            <a href="<?= ROOT_DIR ?>/login" class="btn-text-green border">Book Now</a>
             </div>
         <?php } ?>
     </div>

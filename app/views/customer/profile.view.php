@@ -7,18 +7,18 @@ require_once('../app/views/layout/footer.php');
 
 <div class="profile col-lg-12 align-items-center">
     
-    <div class="flex-d-c col-lg-12 profile-content align-items-center py-4 mt-6">
+    <div class="flex-d-c col-lg-12 profile-content align-items-center py-5 mt-9">
     <div class="customer-bg-image">
         <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
     </div>
     <!-- <?php show ($user);?> -->
         <div class="profile-details">
-            <div class="col-lg-3 profile-details-colum">
-                <div class="card-normal-glass mt-6 py-6 align-items-center justify-content-center mih-100"> 
+            <div class="col-lg-3 px-1 profile-details-colum">
+                <div class="card-normal-glass py-5 align-items-center justify-content-center mih-100"> 
                     <div class="profile-picture">    
                         <img src="<?php echo htmlspecialchars(OSURL); ?>images/customers/<?php echo htmlspecialchars($user->image); ?>" alt="Image" class="img">
                     </div>
-                    <h1 class="mb-5"> Hello <?php echo $user->name?>!</h1>
+                    <h1 class="mb-4"> Hello <?php echo $user->name?>!</h1>
                     <div class="row">
                         <h4><i class="fas fa-envelope"></i> <?php echo $user->email ?></h4> 
                     </div>
@@ -32,12 +32,12 @@ require_once('../app/views/layout/footer.php');
                         <h4><i class="fas fa-id-card"></i> <?php echo $user->nic ?></h4>
                     </div>
                     <div class="row mt-4">
-                        <button type="submit" class="btn mt-4" id="edit-profile">Edit Profile</button>
+                        <button type="submit" class="btn-text-green border mb-3" id="edit-profile">Edit Profile</button>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 flex-d-c mt-5 mh-50">
-                <div class="card-normal-glass "> 
+            <div class="col-lg-6 flex-d-c mh-50 gap-4">
+                <div class="card-normal-glass miw-50"> 
                     <div class="row justify-content-start ml-4">
                         <h1>Recent Booking</h1>
                     </div>
@@ -68,34 +68,42 @@ require_once('../app/views/layout/footer.php');
                                     
                                        
                 </div>
-                <div class="card-normal-glass mt-4"> 
+                <div class="card-normal-glass mt-4 miw-50"> 
                     <div class="row justify-content-start ml-4 mw-75">
                         <h1>Usage</h1>
                     </div> 
                     <div class="flex-d-r mw-75 gap-0">
-                        <div class="card-normal usage-card">
-                            <div class="row justify-content-center">
-                                <h3 class="equipment-booking">Equipment Booking</h3>
-                            </div>
-                            <div class="row">
-                                <h2>11</h2>
-                            </div>
+                        <div class="card-normal usage-card justify-content-center">
+                            <a href="<?php echo ROOT_DIR?>/myOrders">
+                                <div class="row">
+                                    <div class="btn-icon">    
+                                        <h3 class="equipment-booking">Equipment</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h2>11</h2>
+                                </div>
+                            </a>
                         </div>
-                        <div class="card-normal usage-card">
-                            <div class="row">
-                                <h3>Guide Booking</h3>
-                            </div>
-                            <div class="row">
-                                <h2>02</h2>
-                            </div>
+                        <div class="card-normal usage-card justify-content-center">
+                            <a href="<?php echo ROOT_DIR?>/myBookings">
+                                <div class="row">
+                                    <h3>Guides</h3>
+                                </div>
+                                <div class="row">
+                                    <h2>02</h2>
+                                </div>
+                            </a>
                         </div>
-                        <div class="card-normal usage-card">
-                            <div class="row">
-                                <h3>Complaints</h3>
-                            </div>
-                            <div class="row">
-                                <h2>00</h2>
-                            </div>
+                        <div class="card-normal usage-card  justify-content-center">
+                            <a href="<?php echo ROOT_DIR?>/complaints">
+                                <div class="row">
+                                    <h3>Complaints</h3>
+                                </div>
+                                <div class="row">
+                                    <h2>00</h2>
+                                </div>
+                            </a>
                         </div>
                     </div>  
                 </div>

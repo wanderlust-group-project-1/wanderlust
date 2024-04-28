@@ -10,8 +10,7 @@ class Complaints{
             $this->view('rental/complaints');
         }elseif (UserMiddleware::getUser()['role']=='customer') {
             $this->view('customer/complaints');
-        }
-        elseif(UserMiddleware::getUser()['role']=='guide'){
+        }elseif(UserMiddleware::getUser()['role']=='guide'){
             $this->view('guide/complaints');
         }
         
@@ -110,7 +109,7 @@ class Complaints{
         $rentcomplaint = new RentComplaintModel;
         $data = ['customer_id' => UserMiddleware::getUser()['id']];
         $data['complaints'] = $rentcomplaint->getComplaintsByCustomer($data);
-        show ($data['complaints']);
+        // show ($data['complaints']);
 
         $this->view('customer/components/customercomplaintlist', $data);
     }
