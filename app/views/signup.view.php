@@ -13,7 +13,7 @@ require_once('../app/views/components/navbar-auth.php');
         <div class="signup-form">
         <h2>Who are you?</h2>
         <p>It's time to start your journey, join us! Register here.</p>
-            <div class="main">
+            <div class="main gap-2">
                 <div class="row-btn">
                     <button class="signup-card zoom-inn zoom-out" onclick="signupToggleCustomer()" >
                         <div class="btn-div">

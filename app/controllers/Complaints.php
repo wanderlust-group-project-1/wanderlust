@@ -122,7 +122,7 @@ class Complaints{
 
         $rent = new RentModel;
         $data['rentitems'] = $rent->getItemListbyRentId($data['complaint']->rent_id);
-        show($data);
+        // show($data);
 
         $this->view('customer/components/customercomplaints', $data);
     }
