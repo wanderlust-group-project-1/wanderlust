@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 27, 2024 at 10:13 AM
+-- Generation Time: Apr 28, 2024 at 06:07 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -230,12 +230,13 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetAvailableItems` (IN `equipmentID` INT, I
     LEFT JOIN rent_item ON i.id = rent_item.item_id
     LEFT JOIN rent ON rent_item.rent_id = rent.id
     WHERE i.equipment_id = equipmentID AND 
+          i.status = 'available'  AND
           i.id NOT IN (
               SELECT ri.item_id
               FROM rent_item ri
               JOIN rent r ON ri.rent_id = r.id
               WHERE r.start_date <= endDate AND r.end_date >= startDate
-          )
+          ) 
     GROUP BY i.id;
 END$$
 
@@ -312,7 +313,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `GetFilteredPaidOrders` (IN `rentalserviceID
 
         
         WHEN filterType = 'today' THEN
-            SET @specificFilter = "AND rent.start_date = CURDATE() AND rent.status = 'accepted'";
+            SET @specificFilter = "AND rent.start_date <= CURDATE() AND rent.status = 'accepted'";
         
         WHEN filterType = 'upcoming' THEN
             SET @specificFilter = "AND rent.start_date > CURDATE() AND rent.status = 'accepted'";
@@ -954,7 +955,7 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `customer_id`, `start_date`, `end_date`) VALUES
 (43, 25, '2024-02-23', '2024-02-29'),
-(108, 32, '2024-04-28', '2024-04-29');
+(116, 32, '2024-06-10', '2024-06-11');
 
 -- --------------------------------------------------------
 
@@ -976,12 +977,7 @@ INSERT INTO `cart_item` (`id`, `cart_id`, `item_id`) VALUES
 (90, 40, 38),
 (91, 40, 4),
 (92, 40, 38),
-(93, 40, 38),
-(283, 108, 5697),
-(284, 108, 5696),
-(285, 108, 5695),
-(286, 108, 5694),
-(287, 108, 5693);
+(93, 40, 38);
 
 -- --------------------------------------------------------
 
@@ -1103,8 +1099,8 @@ INSERT INTO `equipment` (`id`, `rentalservice_id`, `name`, `cost`, `description`
 (78, 25, 'Zempire Mono Hiking Tent', 25000.00, 'A soaringly waterproof floor, unbendable pegs, ripstop fly and tough zippers all come together to make the Zempire Mono a tent you can rely on for any lightweight adventure.', 'Tent', 7, 400.00, 1000.00, '662627a4b4829.jpeg'),
 (79, 25, 'Camping Cookware Set', 11500.00, 'Camping Outdoor Cookware Set with cutlery, Package Size : 19 x 13 x 19 cm, Cook pot, pot lid, kettle, frying pan, carabiner, foldable fork', 'Cooking', 3, 400.00, 600.00, '66262824dc83c.jpeg'),
 (80, 62, 'Grace Botsford', 25514.00, 'Debitis quia fugiat explicabo qui omnis eius commodi.', 'Cooking', 0, 8521.00, 5935.00, '662c7d87928a4.jpg'),
-(81, 62, '4M Bell Tent Olive-Green', 45000.00, '4M Bell Tent Olive-Green - Kokoon Deluxe -100% cotton canvas', 'Tent', 5, 1200.00, 3000.00, '662c7e1f87ea9.jpg'),
-(82, 67, '4M Bell Tent Olive-Green', 45000.00, '4M Bell Tent Olive-Green - Kokoon Deluxe -100% cotton canvas', 'Tent', 5, 1000.00, 3500.00, '662c951d5c7e9.jpg');
+(81, 62, '4M Bell Tent Olive-Green', 45000.00, '4M Bell Tent Olive-Green - Kokoon Deluxe -100% cotton canvas', 'Tent', 0, 1200.00, 3000.00, '662c7e1f87ea9.jpg'),
+(82, 67, '4M Bell Tent Olive-Green', 45000.00, '4M Bell Tent Olive-Green - Kokoon Deluxe -100% cotton canvas', 'Tent', 6, 1000.00, 3500.00, '662c951d5c7e9.jpg');
 
 -- --------------------------------------------------------
 
@@ -1181,8 +1177,8 @@ INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_
 (49, 'Terence Shields', '60304 Hills Forges', '200976880974', '0983237761', 'other', 203, 'waiting', '', 9),
 (50, 'Gardner Feest', '18723 Buckridge Orchard', '200976880974', '0983237761', 'other', 206, 'waiting', '6621e963a0a7c.pdf', 10),
 (51, 'Webster King', '53994 Dayna Estate', '200976880974', '0983237761', 'female', 207, 'waiting', '6621ea01ed5a8.pdf', 11),
-(52, 'Wendy Waelchi', '15847 Kilback Cove', '200976880972', '0983237767', 'male', 215, 'waiting', '66237b795c7f4.pdf', 15),
-(53, 'Thomas Baumbach', '27789 Price Shores', '200976810974', '0983237765', 'other', 216, 'waiting', '66289d3cef06f.pdf', 16);
+(52, 'Wendy Waelchi', '15847 Kilback Cove', '200976880972', '0983237767', 'male', 215, 'accepted', '66237b795c7f4.pdf', 15),
+(53, 'Thomas Baumbach', '27789 Price Shores', '200976810974', '0983237765', 'other', 216, 'accepted', '66289d3cef06f.pdf', 16);
 
 -- --------------------------------------------------------
 
@@ -4831,16 +4827,18 @@ INSERT INTO `item` (`id`, `equipment_id`, `item_number`, `status`) VALUES
 (5685, 80, 'I000805120', 'removed'),
 (5686, 80, 'I000808051', 'removed'),
 (5687, 80, 'I000808980', 'removed'),
-(5688, 81, 'I000815782', 'available'),
-(5689, 81, 'I000817239', 'available'),
-(5690, 81, 'I000819309', 'available'),
-(5691, 81, 'I000815605', 'available'),
-(5692, 81, 'I000812612', 'available'),
+(5688, 81, 'I000815782', 'unavailable'),
+(5689, 81, 'I000817239', 'unavailable'),
+(5690, 81, 'I000819309', 'unavailable'),
+(5691, 81, 'I000815605', 'unavailable'),
+(5692, 81, 'I000812612', 'unavailable'),
 (5693, 82, 'I000828199', 'available'),
 (5694, 82, 'I000821594', 'available'),
 (5695, 82, 'I000822583', 'available'),
 (5696, 82, 'I000823514', 'available'),
-(5697, 82, 'I000829567', 'available');
+(5697, 82, 'I000829567', 'available'),
+(5698, 82, 'I000827855', 'unavailable'),
+(5699, 82, 'I000825716', 'available');
 
 --
 -- Triggers `item`
@@ -5035,7 +5033,10 @@ INSERT INTO `payment` (`id`, `datetime`, `status`, `amount`, `payment_method`, `
 (69, '2024-04-25 08:25:34', 'completed', 960.00, NULL, 'RNT00069'),
 (70, '2024-04-26 04:00:33', 'completed', 6800.00, NULL, 'RNT00070'),
 (71, '2024-04-26 14:43:32', 'pending', 0.00, NULL, 'RNT00071'),
-(72, '2024-04-26 14:46:58', 'pending', 0.00, NULL, 'RNT00072');
+(72, '2024-04-26 14:46:58', 'pending', 0.00, NULL, 'RNT00072'),
+(73, '2024-04-27 11:53:10', 'completed', 4500.00, NULL, 'RNT00073'),
+(74, '2024-04-27 12:18:15', 'completed', 700.00, NULL, 'RNT00074'),
+(75, '2024-04-27 14:02:50', 'completed', 700.00, NULL, 'RNT00075');
 
 --
 -- Triggers `payment`
@@ -5196,7 +5197,10 @@ INSERT INTO `rent` (`id`, `customer_id`, `rentalservice_id`, `start_date`, `end_
 (91, 32, 25, '2024-04-27', '2024-04-27', 'rented', NULL, 600.00, 1200.00, '2024-04-25 08:23:10', '2024-04-24 12:02:01'),
 (92, 32, 25, '2024-04-26', '2024-04-27', 'rented', NULL, 1000.00, 0.00, '2024-04-25 08:25:19', '2024-04-25 03:36:59'),
 (93, 32, 25, '2024-04-29', '2024-04-29', 'rented', NULL, 1200.00, 1200.00, '2024-04-25 08:25:34', '2024-04-25 03:43:37'),
-(94, 32, 25, '2024-06-19', '2024-07-23', 'rented', NULL, 34000.00, 6800.00, '2024-04-26 04:27:52', '2024-04-26 04:00:33');
+(94, 32, 25, '2024-06-19', '2024-07-23', 'rented', NULL, 34000.00, 6800.00, '2024-04-26 04:27:52', '2024-04-26 04:00:33'),
+(95, 32, 67, '2024-04-28', '2024-04-29', 'completed', NULL, 22500.00, 4500.00, '2024-04-27 12:07:40', '2024-04-27 11:53:10'),
+(96, 32, 67, '2024-05-11', '2024-05-11', 'rented', NULL, 3500.00, 700.00, '2024-04-27 12:24:53', '2024-04-27 12:18:14'),
+(97, 32, 67, '2024-04-27', '2024-04-30', 'accepted', NULL, 3500.00, 700.00, '2024-04-27 14:09:24', '2024-04-27 14:02:50');
 
 -- --------------------------------------------------------
 
@@ -5280,11 +5284,11 @@ INSERT INTO `rental_services` (`id`, `name`, `address`, `regNo`, `mobile`, `user
 (56, 'nirmal', 'Address is required', '200156273849', '0713458323', 182, 'waiting', '65d8ad691543f.pdf', 4, '1.webp'),
 (57, 'NS yudufc', 'No 255, Neluwa RD', '200187674509', '+94716024489', 188, 'waiting', '6618f1fe4bdb3.pdf', 7, '1.webp'),
 (58, 'Donavon Carter', '178 Dooley Inlet', '0786579984', '0983237761', 208, 'waiting', '662202d002d3e.pdf', 12, '1.webp'),
-(59, 'Assunta Upton', '237 Lessie Forest', '0786579984', '0983237761', 209, 'waiting', '6622065cd9035.pdf', 13, '1.webp'),
+(59, 'Assunta Upton', '237 Lessie Forest', '0786579984', '0983237761', 209, 'accepted', '6622065cd9035.pdf', 13, '1.webp'),
 (60, 'Ivah Hilpert', '678 Jackeline Vista', '078657998456', '0983237761', 213, 'waiting', '66223236b2958.pdf', 14, '1.webp'),
 (61, 'Damsini Backpacks', 'Not Earth', '200174996611', '0716024482', 217, 'waiting', '', 17, '662c78f0575e7.jpg'),
 (62, 'PineApple Renting', 'Dodangoda', '200174996615', '0716024455', 218, 'waiting', '662c7a50a776d.pdf', 18, '662c7a8c663c3.webp'),
-(67, 'Camp Here', '255 Neluwa Rd', '200174996619', '0788242718', 223, 'waiting', '662c920c8eef3.pdf', 23, '662c94caf3a18.webp');
+(67, 'Camp Here', '255 Neluwa Rd', '200174996619', '0788242718', 223, 'accepted', '662c920c8eef3.pdf', 23, '662c94caf3a18.webp');
 
 --
 -- Triggers `rental_services`
@@ -5317,7 +5321,8 @@ CREATE TABLE `rental_settings` (
 INSERT INTO `rental_settings` (`id`, `rentalservice_id`, `renting_status`, `recovery_period`) VALUES
 (1, 25, 0, 1),
 (2, 26, 1, 1),
-(3, 67, 1, 1);
+(3, 67, 1, 1),
+(4, 62, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5578,7 +5583,14 @@ INSERT INTO `rent_item` (`id`, `rent_id`, `item_id`) VALUES
 (246, 92, 4914),
 (247, 93, 4901),
 (248, 93, 4913),
-(250, 94, 1323);
+(250, 94, 1323),
+(251, 95, 5697),
+(252, 95, 5696),
+(253, 95, 5695),
+(254, 95, 5694),
+(255, 95, 5693),
+(258, 96, 5693),
+(259, 97, 5693);
 
 -- --------------------------------------------------------
 
@@ -5661,7 +5673,10 @@ INSERT INTO `rent_pay` (`id`, `rent_id`, `payment_id`, `amount`) VALUES
 (66, 93, 69, 960.00),
 (67, 94, 70, 6800.00),
 (68, 74, 71, 0.00),
-(69, 74, 72, 0.00);
+(69, 74, 72, 0.00),
+(70, 95, 73, 4500.00),
+(71, 96, 74, 700.00),
+(72, 97, 75, 700.00);
 
 --
 -- Triggers `rent_pay`
@@ -5737,7 +5752,10 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 (32, 91, 'rented', 'rented', '2024-04-25 08:22:08'),
 (33, 92, 'rented', 'rented', '2024-04-25 08:25:19'),
 (34, 93, 'rented', 'rented', '2024-04-25 08:25:22'),
-(35, 94, 'rented', 'accepted', '2024-04-26 04:08:29');
+(35, 94, 'rented', 'accepted', '2024-04-26 04:08:29'),
+(36, 95, NULL, 'completed', '2024-04-27 12:07:40'),
+(37, 96, NULL, 'rented', '2024-04-27 12:24:53'),
+(38, 97, NULL, 'accepted', '2024-04-27 14:03:40');
 
 --
 -- Triggers `rent_request`
@@ -5745,7 +5763,7 @@ INSERT INTO `rent_request` (`id`, `rent_id`, `customer_req`, `rentalservice_req`
 DELIMITER $$
 CREATE TRIGGER `RentStatus` AFTER UPDATE ON `rent_request` FOR EACH ROW BEGIN
     -- Check if both columns have the same value and it's 'rented'
-IF NEW.customer_req = 'rented' THEN
+IF NEW.rentalservice_req = 'rented' THEN
         UPDATE rent
         SET status = 'rented'
         WHERE id = NEW.rent_id;
@@ -5801,7 +5819,7 @@ CREATE TABLE `rent_return_complaints` (
 
 INSERT INTO `rent_return_complaints` (`id`, `rent_id`, `complains`, `charge`, `description`, `status`, `created_at`, `complaint_no`) VALUES
 (3, 68, '[{\"charge\": \"2830\", \"equipment_id\": \"25\", \"complaint_description\": \"Beer - Hyatt\"}, {\"charge\": \"2524\", \"equipment_id\": \"33\", \"complaint_description\": \"Schoen and Sons\"}]', 5354.00, NULL, 'cancelled', '2024-04-11 08:17:39', 'RC000001'),
-(4, 80, '[{\"charge\": \"4000\", \"equipment_id\": \"69\", \"complaint_description\": \"Damaged\"}, {\"charge\": \"2000\", \"equipment_id\": \"35\", \"complaint_description\": \"Damaged\"}]', 6000.00, NULL, 'pending', '2024-04-24 06:18:32', 'RC000001');
+(4, 80, '[{\"charge\": \"4000\", \"equipment_id\": \"69\", \"complaint_description\": \"Damaged\"}, {\"charge\": \"2000\", \"equipment_id\": \"35\", \"complaint_description\": \"Damaged\"}]', 6000.00, NULL, 'resolved', '2024-04-24 06:18:32', 'RC000001');
 
 --
 -- Triggers `rent_return_complaints`
@@ -5885,7 +5903,8 @@ INSERT INTO `tips` (`id`, `title`, `description`, `author`) VALUES
 (9, 'hello', 'sadfsdfdf', ''),
 (11, 'Going on a hike? Here\'s the must have medical kit', 'First Aid Kit:\r\n\r\nAlways carry a well-equipped first aid kit with items like bandages, antiseptic wipes, pain relievers, tweezers, and any necessary personal medications.\r\n\r\nKnow Basic First Aid:\r\n\r\nLearn basic first aid skills, such as how to treat minor injuries, manage blisters, and recognize signs of heat exhaustion, hypothermia, and altitude sickness.\r\n\r\n<br/>Sun Protection:\r\n\r\nUse sunscreen, wear a wide-brimmed hat, and cover exposed skin to protect against sunburn.\r\n\r\n<br/>Insect Repellent:\r\n\r\nUse insect repellent to prevent insect bites, and check for ticks regularly, especially in wooded areas.\r\n\r\n<br/>Foot Care:\r\n\r\nInvest in quality, moisture-wicking socks and well-fitting hiking boots to prevent blisters. Trim toenails to avoid ingrown nails.\r\n\r\n<br/>Proper Clothing:\r\n\r\nDress in layers, and choose moisture-wicking and breathable clothing to adapt to changing weather conditions. Don\'t forget to pack extra clothing in case of unexpected temperature drops.\r\n\r\n<br/>Stay Hydrated:\r\n\r\nDehydration can be a significant risk, especially in hot weather. Carry an adequate supply of clean water and drink regularly.', 'admin'),
 (13, 'Hello', 'abc adsdasda', 'admin'),
-(15, 'adsadasd', 'abc', 'admin');
+(15, 'adsadasd', 'abc', 'admin'),
+(17, 'dsfd', 'dfvggg', 'admin');
 
 -- --------------------------------------------------------
 
@@ -6374,13 +6393,13 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -6416,7 +6435,7 @@ ALTER TABLE `guide_booking`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5698;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5700;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -6434,13 +6453,13 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `rental_services`
@@ -6452,7 +6471,7 @@ ALTER TABLE `rental_services`
 -- AUTO_INCREMENT for table `rental_settings`
 --
 ALTER TABLE `rental_settings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rent_complaint`
@@ -6464,19 +6483,19 @@ ALTER TABLE `rent_complaint`
 -- AUTO_INCREMENT for table `rent_item`
 --
 ALTER TABLE `rent_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 
 --
 -- AUTO_INCREMENT for table `rent_pay`
 --
 ALTER TABLE `rent_pay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `rent_request`
 --
 ALTER TABLE `rent_request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `rent_return_complaints`
@@ -6494,7 +6513,7 @@ ALTER TABLE `reset_tokens`
 -- AUTO_INCREMENT for table `tips`
 --
 ALTER TABLE `tips`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
