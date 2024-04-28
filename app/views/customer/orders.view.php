@@ -18,14 +18,19 @@ require_once('../app/views/navbar/customer-navbar.php');
 
             <div class="section-switch flex-d  gap-3 flex-wrap" >
 
-                            <button class="btn-selected" id="all">All</button>
-                            <button class="btn-selected" id="unpaid">Unpaid</button>
 
-                            <button class="btn-selected" id="pending">Pending</button>
+            <button class="btn-selected active" id="pending">Pending</button>
+
+
+
                             <button class="btn-selected" id="upcoming">Upcoming</button>
                             <button class="btn-selected" id="rented">Rented</button>
                             <button class="btn-selected" id="completed">Completed</button>
+                            <button class="btn-selected" id="unpaid">Unpaid</button>
+
                             <button class="btn-selected" id="cancelled">Cancelled</button>
+                            <button class="btn-selected" id="all">All</button>
+
 
 
                             <!-- not rented yet -->
@@ -99,7 +104,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 <script>
     $(document).ready(function() {
         // loadOrders();
-        loadOrders('all');
+        loadOrders('pending');
         $('.section-switch button').click(function() {
             $('.section-switch button').removeClass('active');
             $(this).addClass('active');
@@ -180,14 +185,14 @@ require_once('../app/views/navbar/customer-navbar.php');
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
-            url: '<?= ROOT_DIR ?>/myOrders/cancelOrder/' + orderId,
+            url: '<?= ROOT_DIR ?>/api/myOrders/cancelOrder/' + orderId,
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
             type: 'GET',
             success: function(data) {
                 $('#confirm-cancel-modal').hide();
-                loadOrders();
+                loadOrders(window.currentStatus);
                 hideLoader();
             },
             error: function(data) {

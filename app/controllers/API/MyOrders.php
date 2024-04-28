@@ -28,7 +28,7 @@ class MyOrders {
         $response = new JSONResponse();
 
         $data = [
-            'customer_req' => NULL,
+            'customer_req' => 'cancelled',
         ];
 
         $rentReq = new RentRequestModel;
@@ -50,4 +50,7 @@ class MyOrders {
 
         $response->statusCode(200)->message('Complaint added successfully')->send();
     }
+
+
+
 }

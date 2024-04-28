@@ -130,6 +130,7 @@
         <a href="<?php echo ROOT_DIR ?>/logout"> <button type="submit" class="btn-edit edit-profile">
           Logout
         </button>
+        </a>
       </div>
     </div>
   </ul>

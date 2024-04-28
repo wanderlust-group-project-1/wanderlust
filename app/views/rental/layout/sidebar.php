@@ -120,23 +120,24 @@
 
     </li>
     <!-- Settings -->
-    <!-- <li data-id="settings" class="nav-item">
+    <li data-id="settings" class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/settings" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Settings</span>
         <i class="menu-arrow"></i>
       </a>
 
-    </li> -->
+    </li>
 
     <div class="guide-dash-prof">
       <div class="">
-        <a href="<?php echo ROOT_DIR ?>/settings" class="ml-7 mr-2">
+        <!-- <a href="<?php echo ROOT_DIR ?>/settings" class="ml-7 mr-2">
           <i class="fas fa-cog" aria-hidden="true"></i>
-        </a>
+        </a> -->
         <a href="<?php echo ROOT_DIR ?>/logout"> <button type="submit" class="btn-edit edit-profile">
           Logout
         </button>
+        </a>
       </div>
     </div>
 

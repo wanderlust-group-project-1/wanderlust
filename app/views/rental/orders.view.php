@@ -401,6 +401,8 @@ require_once('../app/views/layout/header.php');
             success: function(response) {
                 console.log(response);
                 $('#report-complaint-modal').hide();
+
+                alertmsg('Complaint Submitted Successfully', 'success');
             },
             error: function(err) {
                 console.log(err);

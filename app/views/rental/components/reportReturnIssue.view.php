@@ -12,6 +12,8 @@
 
 <h2> Report Complaint </h2>
 
+<div>
+
 <table class="table" id="report-complaint-table" data-order-id="<?= $order->id ?>">
     <thead>
         <tr>
@@ -30,7 +32,7 @@
     </thead>
     <tbody>
         <?php foreach($items as $item) { ?>
-            <tr data-id="<?= $item->equipment_id ?>">
+            <tr data-id="<?= $item->equipment_id ?>" >
                 <td><?= $item->item_number ?></td>
                 <td><?= $item->equipment_name ?></td>
                 <td>
@@ -38,7 +40,7 @@
                 </td>
                 <td>
                     <!-- <input type="text" name="complaint_description[]" class="form-control"> -->
-                    <textarea name="complaint_description[]" class="form-control-lg" disabled></textarea>
+                    <textarea rows="3" name="complaint_description[]" class="form-control-lg " disabled></textarea>
                 </td>
                 <td>
                     <!-- <input type="text" name="charge[]" class="form-control-lg" disabled> -->
@@ -76,4 +78,9 @@
     
 
 </table>
-<button class="btn btn-primary" id="report-complaint-submit">Report Complaint</button>
+</div>
+
+<div class="flex-d align-items-center justify-content-center">
+    
+<button class="btn-text-green border center" id="report-complaint-submit">Report Complaint</button>
+</div>
