@@ -19,16 +19,21 @@
         <!-- <div class="nav__menu" id="nav-menu"> -->
         <div class="nav__menu" id="nav-menu" >
             <ul class="nav__list">
-                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Home</a></li>
+                <li><a href="<?= ROOT_DIR ?>/" class="nav__link">Home</a></li>
 
                 <!--=============== DROPDOWN 1 ===============-->
                 
-                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Guides</a></li>
-                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Rental Services</a></li>
-                <li><a href="<?= ROOT_DIR ?>/login" class="nav__link">Blogs</a></li>
-                <li><a a href="<?= ROOT_DIR ?>/login" class="nav__link">Tips and Knowhows</a></li>
-                <li><a a href="<?= ROOT_DIR ?>/login" class="nav__link">Complains</a></li>
+                <li><a href="<?php echo ROOT_DIR ?>/findGuide" class="nav__link">Guides</a></li>
 
+<li><a href="<?php echo ROOT_DIR ?>/myBookings" class="nav__link">My Bookings</a></li>
+
+<li><a href="<?php echo ROOT_DIR ?>/rent" class="nav__link">Rent</a></li>
+
+<li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">My Orders</a></li>
+
+
+
+<li><a href="<?php echo ROOT_DIR ?>/complaints" class="nav__link">Complaints</a></li>
 
                 <!-- check role avalable or not -->
                 <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) &&    $_SESSION['USER']->role != 'admin') {
