@@ -44,47 +44,7 @@
 
                 <li><a href="<?php echo ROOT_DIR ?>/myOrders" class="nav__link">My Orders</a></li>
 
-                <!-- <li class="dropdown__item">
-                    <div class="nav__link">
-                        Blogs <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                    </div>
-
-                    <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                Add Blog
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                My Blogs
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-                <!-- <li><a href="#" class="nav__link">Tips and Knowhows</a></li> -->
-
-                <!--=============== DROPDOWN 2 ===============-->
-                <!-- <li class="dropdown__item">
-                    <div class="nav__link">
-                        Complains 
-                    </div>
-
-                    <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                Add Complain
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown__link">
-                                My Complains
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+              
 
                 <li><a href="<?php echo ROOT_DIR ?>/complaints" class="nav__link">Complaints</a></li>
 
