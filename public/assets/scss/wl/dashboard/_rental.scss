@@ -1,76 +1,70 @@
 /* Define Variables */
 $color-white: #fff;
 $color-black: #000000;
-$color-dark-green: #4C5039;
+$color-dark-green: #4c5039;
 $color-light-gray: #f2f2f2;
 $color-medium-gray: #ccc;
 $color-dark-gray: #333;
 $color-lighter-gray: rgba(0, 0, 0, 0.2);
 $color-darker-gray: rgba(0, 0, 0, 0.1);
-$color-green: #4CAF50;
+$color-green: #4caf50;
 $color-darker-green: #45a049;
-$color-orange: #FF5733;
-$color-yellow: #FFC107;
+$color-orange: #ff5733;
+$color-yellow: #ffc107;
 $modal-background: rgba(0, 0, 0, 0.4);
 $modal-content-border: 1px solid #888;
 $border-radius-default: 20px;
-$box-shadow-default: 0 4px 8px 0 rgba(0,0,0,0.2);
-$box-shadow-hover: 0 8px 16px 0 rgba(0,0,0,0.2);
+$box-shadow-default: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+$box-shadow-hover: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 $media-breakpoint: 768px;
 
-$primary-bg: #B2BDA0;
+$primary-bg: #b2bda0;
 $secondary-bg: #fff;
 $shadow-color: rgba(0, 0, 0, 0.3);
 $border-radius: 5px;
 $border-color: #ccc;
 $font-color: #526534;
-$font-gold: #C1A87D;
-$font-gold2: #C2AF7B;
-$font-grey:#6B6E70;
-$gray-text: #6B6E70;
+$font-gold: #c1a87d;
+$font-gold2: #c2af7b;
+$font-grey: #6b6e70;
+$gray-text: #6b6e70;
 $gray-text-lighter: #868a8d;
-$hover-bg: #8D9E6F;
+$hover-bg: #8d9e6f;
 $tooltip-bg: #fff;
-$tooltip-color: #BCAB86;
-$button-bg: #8D9E6F;
+$tooltip-color: #bcab86;
+$button-bg: #8d9e6f;
 $button-bg2: #e6e6e6;
 $button-hover-grey: #efefef;
 $button-color: #526534;
-$form-field-bg: #EBEFE3;
-$form-field-border: 2px solid rgba(255,255,255,.2);
+$form-field-bg: #ebefe3;
+$form-field-border: 2px solid rgba(255, 255, 255, 0.2);
 $form-field-radius: 5px;
 $form-field-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-$box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
-
-
-
-
-
+$box-shadow: 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
 @mixin form-styles {
-    display: flex;
-    flex-direction: column;
-    // gap: 10px; /* Space between form elements */
-  
-    // label {
-    //   font-weight: 400;
-    //   text-align: left;
-    //   font-size: 18px;
-    //   color: $gray-text;
-    //   padding: 10px;
-    // }
+  display: flex;
+  flex-direction: column;
+  // gap: 10px; /* Space between form elements */
 
-    // select {
-    //   background-color: $form-field-bg;
-    // }
+  // label {
+  //   font-weight: 400;
+  //   text-align: left;
+  //   font-size: 18px;
+  //   color: $gray-text;
+  //   padding: 10px;
+  // }
 
-    // textarea {
-    //   background-color: $form-field-bg;
-    //   resize: vertical;
-    //   border: none;
-    // }
-  }
+  // select {
+  //   background-color: $form-field-bg;
+  // }
 
+  // textarea {
+  //   background-color: $form-field-bg;
+  //   resize: vertical;
+  //   border: none;
+  // }
+}
 
 /* Mixins */
 @mixin modal-common {
@@ -115,34 +109,32 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   gap: 20px;
   flex-grow: inherit;
 
-
-    &:hover {
-        box-shadow: $box-shadow-hover;
+  &:hover {
+    box-shadow: $box-shadow-hover;
+  }
+  .user-image {
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 75px;
+      border: 3px solid $color-light;
+      padding: 3px;
+      margin-bottom: 20px;
     }
-    .user-image{
-
-        img {
-            width: 150px;
-            height: 150px;
-            border-radius: 75px;
-            border: 3px solid $color-light;
-            padding: 3px;
-            margin-bottom: 20px;
-        }
-    }
+  }
 }
 
-.filter-btn{
+.filter-btn {
   width: fit-content;
 }
 
-.back-btn{
+.back-btn {
   justify-content: left;
   right: 100%;
   transform: translate(-1000%, 95%);
 }
 
-.add-equipment{
+.add-equipment {
   width: fit-content;
   background-color: transparent;
   justify-content: right;
@@ -185,7 +177,6 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     opacity: 0.8;
     .camera-icon {
-                        
       position: absolute;
       top: 50%;
       left: 50%;
@@ -193,14 +184,13 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
       /* background-color: #fff; */
       padding: 5px;
       border-radius: 50%;
-      
-  }
-  .camera-icon i {
+    }
+    .camera-icon i {
       display: block;
       font-size: 30px;
       color: #fff;
+    }
   }
-}
   form {
     // display: flex;
     // flex-direction: column;
@@ -274,7 +264,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items:center;
+    align-items: center;
     justify-content: space-around;
     width: 90%;
     height: auto;
@@ -289,7 +279,7 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   }
 }
 
-.dashboard-heading{
+.dashboard-heading {
   font-size: $heading-text;
   font-weight: $font-semi-bold;
 }
@@ -315,14 +305,11 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   }
 
   .dashboard {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 100px;
     width: 90%;
   }
-
-  
-
 
   .dashboard-content .dashboard-card {
     min-width: 90%;
@@ -382,12 +369,10 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: auto;
     padding: 0;
-    background-color: $color-white;
+    background-color: $color-lightest2;
     border: 1px solid rgba($color-darker, 0.2);
     box-shadow: $box-shadow-default;
     border-radius: 10px;
-
-
 
     .add-equipment {
       .add-equipment-button {
@@ -474,15 +459,13 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
 /* Equipment List Styles */
 .dashboard-card .equipment-list {
-  display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: $color-white;
+  // background-color: $color-white;
 }
 
 /* Table Container */
@@ -499,9 +482,11 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
   border-spacing: 0;
   margin-top: 20px;
 
-  th, td {
+  th,
+  td {
     padding: 12px;
     text-align: left;
+    font-size: 1.5rem;
   }
 
   // tr:nth-child(even) {
@@ -521,50 +506,6 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
   &:hover {
     background-color: $color-dark-gray;
-  }
-}
-
-/* Responsive Table Styles */
-@media screen and (max-width: 600px) {
-  .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr {
-    display: block;
-  }
-
-  .data-table thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  .data-table tr {
-    margin: 0 0 1rem 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 0.5rem;
-  }
-
-  .data-table td {
-    border: none;
-    position: relative;
-    padding-left: 50%;
-    text-align: left;
-
-    &:before {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      content: attr(data-label);
-      font-weight: bold;
-    }
-  }
-
-  .equipment-view-button {
-    display: block;
-    width: 100%;
-    text-align: center;
   }
 }
 
@@ -592,16 +533,10 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
 /* Additional styles can be converted following the same pattern */
 
-
-
-
-
 // Orders
 
-.order-details{
-
+.order-details {
   tr {
-   
     &:last-child {
       td {
         border-bottom: 0; // Remove bottom border for the last row
@@ -613,18 +548,15 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
       font-weight: 300;
       // font-size: $header3;
 
-      
       &:last-child {
         text-align: end; // end-align the action buttons or last cell content
       }
     }
   }
-  
 }
 
-  // table class
+// table class
 .item-details {
-
   // table border
   border-collapse: collapse;
   width: 100%;
@@ -649,97 +581,97 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
     }
   }
   // table action buttons
-  
-
-
 }
 
-
-
-$view-equipment-modal-background: rgba(0,0,0,0.4);
+$view-equipment-modal-background: rgba(0, 0, 0, 0.4);
 $modal-content-background: #fefefe;
 $close-button-color: #aaa;
-$edit-equipment-button-bg: #4CAF50; // Green
+$edit-equipment-button-bg: #4caf50; // Green
 $delete-equipment-button-bg: #f44336; // Red
 $border-color: #888;
-$box-shadow-color: rgba(0,0,0,0.2);
+$box-shadow-color: rgba(0, 0, 0, 0.2);
 
 @keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .view-equipment-modal {
-    display: none; // Hidden by default
-    position: fixed; // Stay in place
-    z-index: 1000; // Sit on top
-    left: 0;
-    top: 0;
-    width: 100%; // Full width
-    height: 100%; // Full height
-    overflow: auto; // Enable scroll if needed
-    background-color: $view-equipment-modal-background; // Black with opacity
+  display: none; // Hidden by default
+  position: fixed; // Stay in place
+  z-index: 1000; // Sit on top
+  left: 0;
+  top: 0;
+  width: 100%; // Full width
+  height: 100%; // Full height
+  overflow: auto; // Enable scroll if needed
+  background-color: $view-equipment-modal-background; // Black with opacity
 
-    .modal-content {
-        position: relative;
-        // background-color:  $color-lighter;
-        margin: 10% auto; // 10% from the top and centered
-        padding: 20px;
-        border: 1px solid $border-color;
-        // width: 50%; // Width in desktop, commented out to follow the original CSS's intent
-        box-shadow: 0 4px 8px 0 $box-shadow-color;
-        animation: fadeIn 0.5s;
+  .modal-content {
+    position: relative;
+    // background-color:  $color-lighter;
+    margin: 10% auto; // 10% from the top and centered
+    padding: 20px;
+    border: 1px solid $border-color;
+    // width: 50%; // Width in desktop, commented out to follow the original CSS's intent
+    box-shadow: 0 4px 8px 0 $box-shadow-color;
+    animation: fadeIn 0.5s;
 
-        @media screen and (max-width: 600px) {
-            width: 95%; // Wider in mobile
-            margin: 20% auto; // More margin from the top in mobile
-        }
+    @media screen and (max-width: 850px) {
+      width: 95%; // Wider in mobile
+      margin: 20% auto; // More margin from the top in mobile
     }
+  }
 
-    .close-button {
-        color: $close-button-color;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
+  .close-button {
+    color: $close-button-color;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 
-        &:hover, &:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    &:hover,
+    &:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
     }
+  }
 
-    .equipment-details img {
-        max-width: 300px;
-        height: auto;
-    }
+  .equipment-details img {
+    max-width: 300px;
+    height: auto;
+  }
 }
 
 .edit-equipment-button {
-    background-color: $edit-equipment-button-bg;
-    width:90%;
-    border: none;
-    color: white;
-    height: 30px;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: auto;
+  background-color: $edit-equipment-button-bg;
+  width: 90%;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: auto;
 }
 
 .delete-equipment-button {
-    background-color: $delete-equipment-button-bg;
-    width:90%;
-    border: none;
-    color: white;
-    height: 30px;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
+  background-color: $delete-equipment-button-bg;
+  width: 90%;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
 }
 
 .order-payment-status {
@@ -754,7 +686,6 @@ $box-shadow-color: rgba(0,0,0,0.2);
   padding: 5px 2px;
 }
 
-
 .cart-notification {
   text-decoration: none;
   padding: 5px 5px;
@@ -764,7 +695,7 @@ $box-shadow-color: rgba(0,0,0,0.2);
 }
 
 .cart-notification .badge {
-  font-size:small;
+  font-size: small;
   // font-family: sans-serif, "Poppins";
   position: absolute;
   top: -0.5px;
@@ -775,17 +706,12 @@ $box-shadow-color: rgba(0,0,0,0.2);
   color: white;
 }
 
-
-
-.image-preview-container{
-
+.image-preview-container {
   .image-preview {
     width: 400px;
     height: 400px;
     margin-top: 10px;
-    
   }
-
 }
 
 .equipment-image-preview-container {
@@ -793,36 +719,33 @@ $box-shadow-color: rgba(0,0,0,0.2);
   gap: 10px;
 
   img {
-      max-width: 100%;
-      max-height: 200px;
-      margin-bottom: 10px;
+    max-width: 100%;
+    max-height: 200px;
+    margin-bottom: 10px;
   }
 
   .remove-icon {
-      margin-top: 10px;
-      position: fixed;
-      color: 'red'; // Note: Quotation marks are not necessary for CSS color properties
-      // move left a bit
-      transform: translateX(-15px);
+    margin-top: 10px;
+    position: fixed;
+    color: "red"; // Note: Quotation marks are not necessary for CSS color properties
+    // move left a bit
+    transform: translateX(-15px);
   }
 
   button {
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }
-
-
 
 .date {
   width: 50%;
   padding: 5px 2px;
 }
-
 
 .cart-notification {
   text-decoration: none;
@@ -833,7 +756,7 @@ $box-shadow-color: rgba(0,0,0,0.2);
 }
 
 .cart-notification .badge {
-  font-size:small;
+  font-size: small;
   // font-family: sans-serif, "Poppins";
   position: absolute;
   top: -0.5px;
@@ -844,7 +767,7 @@ $box-shadow-color: rgba(0,0,0,0.2);
   color: white;
 }
 
-.profile-update-element{
+.profile-update-element {
   padding: 10px;
   max-width: fit-content;
   justify-content: center;
@@ -854,7 +777,53 @@ $box-shadow-color: rgba(0,0,0,0.2);
   }
 }
 
-.table-header{
+.table-header {
   display: flex;
   justify-content: center;
+}
+
+// .filter-order-date {
+//   display: flex;
+//   height: 4rem;
+//   width: 100%;
+//   border-radius: 10px;
+//   background: $color-lightest;
+//   overflow-y: hidden;
+//   position: relative;
+//   align-items: center;
+//   padding-left: $header4;
+//   color: $color-darker;
+//   font-weight: $font-medium;
+//   border: 1px solid rgba($color-darker, 0.2);
+// }
+
+.section-switch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 20px;
+}
+
+.filter-order-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-order-date{
+  border: 1px solid rgba($color-darker,0.2);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-order-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+  }
+  
 }

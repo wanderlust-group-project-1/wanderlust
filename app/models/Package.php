@@ -6,6 +6,7 @@ class PackageModel
 
     protected string $table = 'package';
     protected array $allowedColumns = [
+        'name',
         'guide_id',
         'price',
         'max_group_size',

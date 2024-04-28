@@ -32,7 +32,7 @@ require_once('../app/views/layout/header.php');
             <div class="equipment p-4">
 
                 <div class="row justify-content-between">
-                    <h1 class="title">Equipment Details</h1> 
+                    <h3 class="guide-topics">Equipment Details</h3> 
 
 
 
