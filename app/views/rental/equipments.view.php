@@ -62,16 +62,7 @@ require_once('../app/views/layout/header.php');
                         </button>
                     </div> -->
                 </div>
-                <div class="row justify-content-end">
-                <div class="add-equipment mr-5">
-                        <button type="submit" class="btn-text-green border" id="add-equipment">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Add new
-                        </button>
-                    </div>
-                    
-
-                </div>
+                
 
                 <!-- Add Equipment -->
                 
@@ -108,7 +99,7 @@ require_once('../app/views/layout/header.php');
                         <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
 
                         <!-- <label for="email">Email</label>
-    <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
+                        <input type="text" name="email" id="email" value="<?= $user->email ?>" required> -->
 
                         <label for="mobile">Mobile No</label>
                         <input type="text" name="mobile" id="mobile" value="<?= $user->mobile ?>" required>
@@ -117,7 +108,7 @@ require_once('../app/views/layout/header.php');
                         <input type="text" name="regNo" id="regNo" value="<?= $user->regNo ?>" required>
 
                         <!-- <label for="password">Password</label>
-    <input type="password" name="password" id="password" required> -->
+                        <input type="password" name="password" id="password" required> -->
 
                         <input type="submit" class="btn mt-4" name="submit" value="Update">
                     </form>
@@ -146,7 +137,7 @@ require_once('../app/views/layout/header.php');
                         <input type="text" id="equipment-name" class="form-control-lg" name="equipment_name" required>
 
                         <!-- <label for="equipment-type">Type</label>
-            <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required> -->
+                        <input type="text" id="equipment-type" class="form-control-lg" name="equipment_type" required> -->
                         <label for="equipment-type">Type</label>
                         <select id="equipment-type" class="form-control-lg" name="equipment_type" required>
                             <option value="Tent">Tent</option>
@@ -339,9 +330,11 @@ $(document).on('click', '#equipment-image-submit', function(e) {
     var addEquipmentBtn = document.getElementById("add-equipment");
     var span = document.getElementsByClassName("close")[1]; // assuming this is the second modal
 
-    addEquipmentBtn.onclick = function() {
-        addEquipmentModal.style.display = "block";
-    }
+    // addEquipmentBtn.onclick = function() {
+        $(document).on('click', '#add-equipment', function(e) {           
+            addEquipmentModal.style.display = "block";
+        });
+        
 
     span.onclick = function() {
         addEquipmentModal.style.display = "none";

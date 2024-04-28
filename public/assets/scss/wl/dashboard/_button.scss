@@ -114,7 +114,7 @@
   width: fit-content;
   cursor: pointer;
   border: none;
-  padding: 10px;
+  padding: 5px;
   // font-family: "poppins", sans-serif;
 
   &:hover{
@@ -124,7 +124,7 @@
 
 .btn-text-green {
   background-color: transparent;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: $color-primary;
   width: fit-content;
@@ -176,7 +176,7 @@
 
 .btn-text-blue {
   background-color: transparent;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: $blue;
   width: fit-content;
@@ -209,7 +209,7 @@
 
 .btn-text-orange {
   background-color: transparent;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: $orange;
   width: fit-content;
@@ -243,7 +243,7 @@
 
 .btn-text-red {
   background-color: transparent;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: $red;
   width: fit-content;
@@ -413,7 +413,7 @@
 
 .btn-selected {
   background-color: transparent;
-  font-size: 14px;
+  font-size: 16px;
   color: $gray-text;
   width: fit-content;
   cursor: pointer;
