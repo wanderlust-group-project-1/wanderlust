@@ -69,8 +69,7 @@ class RentComplaintModel
     }
 
 
-    // public function getComplaints(array $data) 
-    // {
-    //     return $this->where($data);
-    // }
+ 
+
+
 }

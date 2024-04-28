@@ -28,7 +28,9 @@ class Cart {
 
 
 
-
+            // if($data['items']){
+               
+            
         foreach ($data['items'] as $equipment) {
             $equipment->total = $equipment->e_standard_fee + $equipment->e_fee * (strtotime($data['cart']->end_date) - strtotime($data['cart']->start_date)) / (60 * 60 * 24);
         }
@@ -42,6 +44,7 @@ class Cart {
             $data['total'] += $item->total;
         }
 
+    // }
 
     
         $this->view('customer/components/cart', $data); 

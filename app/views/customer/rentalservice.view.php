@@ -3,6 +3,7 @@ require_once('../app/views/layout/header.php');
 
 require_once('../app/views/navbar/customer-navbar.php');
 
+// show($data);
 ?>
 
 <div class="container flex-d-c justify-content-center gap-2">

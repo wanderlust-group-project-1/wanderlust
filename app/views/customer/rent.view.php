@@ -125,7 +125,7 @@ require_once('../app/views/navbar/customer-navbar.php');
         </div>
         </div>  
         <div class="row gap-2">
-            <div class="date"><button id="confirm-date" class="btn" type="button">Confirm Date</button></div>
+            <div class="date"><button id="confirm-date" class="btn-text-green border center" type="button">Confirm Date</button></div>
         </div>
     </div>
 </div>
@@ -272,6 +272,14 @@ var cartClose = document.getElementById("cart-modal").querySelector(".close");
 // When the user clicks the button, open the modal
 cartModalBtn.onclick = function() {
 
+    // check if the user has selected the date
+    if ($('#date-change-phase').text() == "Select Date") {
+        alertmsg("Please select the date first",'error');
+        
+        // show the date modal
+        dateModal.style.display = "block";
+        return;
+    }
     // get cart items
    getCart()
 }

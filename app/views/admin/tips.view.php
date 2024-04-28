@@ -28,7 +28,7 @@ require_once('../app/views/layout/header.php');
 
         <div class="table-container">
             <div>
-                <button class="btn ml-2">Add</button>
+                <button id="add-button" class="btn-text-green border">Add</button>
 
                 <!-- 
                 <div class="info-data mt-5">
@@ -58,18 +58,20 @@ require_once('../app/views/layout/header.php');
                             <tr>
                                 <td><?php echo $tip->title; ?></td>
                                 <td class="ll"><?php echo $tip->description; ?></td>
-                                <td><button key="<?php echo $tip->id; ?>" class="view-button">Update</button></td>
+                                <td><button key="<?php echo $tip->id; ?>" class="btn-text-orange border view_button">Update</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
 
             </div>
+            </div>
+
 
             <!-- Add Form Modal -->
             <div class="modal" id="add-modal">
                 <div class="modal-content">
-                    <span class="close">&times;</span>
+                    <span class="modal-close close">&times;</span>
                     <h2>Add Form</h2>
                     <form id="add-form" action="<?php echo ROOT_DIR ?>/admin/tips/add" method="post">
                         <label for="title">Title:</label>
@@ -78,7 +80,7 @@ require_once('../app/views/layout/header.php');
                         <label for="description">Description:</label>
                         <textarea id="description" name="description" rows="4" required></textarea><br>
 
-                        <button type="submit">Add</button>
+                        <button class="btn-text-green border center" type="submit">Add</button>
                     </form>
                 </div>
             </div>
@@ -97,13 +99,13 @@ require_once('../app/views/layout/header.php');
                         <label for="updated-description">Description:</label>
                         <textarea id="updated-description" name="description" rows="4" required></textarea><br>
 
-                        <button class="btn-success">Update</button>
-                        <button class="btn-danger"> <a id="delete-tip" href="<?php echo ROOT_DIR ?>/admin/tips/delete/  "> Delete </a> </button>
+                        
+                        <button class="btn-text-green border center">Update</button>
+                        <a class="text-center mt-2" id="delete-tip" href="<?php echo ROOT_DIR ?>/admin/tips/delete/  "> <button class="btn-text-red border center">  Delete </button> </a>
                     </form>
                 </div>
             </div>
 
-        </div>
 
 
         <script>
@@ -112,8 +114,8 @@ require_once('../app/views/layout/header.php');
             var updateModal = document.getElementById("update-modal");
 
             // Get the buttons that open the modals
-            var addButton = document.querySelector('.add-button');
-            var updateButtons = document.querySelectorAll('.view-button');
+            var addButton = document.querySelector('#add-button');
+            var updateButtons = document.querySelectorAll('.view_button');
 
             // Function to open add form modal
             function openAddModal() {
@@ -177,7 +179,7 @@ require_once('../app/views/layout/header.php');
 
 
         <?php
-        require_once('../app/views/admin/layout/footer.php');
+        require_once('../app/views/layout/footer.php');
 
 
         ?>

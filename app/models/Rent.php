@@ -49,15 +49,17 @@ class RentModel {
     }
 
 
-    public function getItems(array $data) {
+    public function getItems(array $data, $cart) {
 
         $q = new QueryBuilder();
 
+        // show($cart);
         $q->setTable('equipment');
         $q->select('equipment.*, rental_services.name As rental_service_name')
             ->join('rental_services', 'equipment.rentalservice_id', 'rental_services.id')
             ->join('rental_settings', 'equipment.rentalservice_id', 'rental_settings.rentalservice_id')
             ->join('locations', 'rental_services.location_id', 'locations.id')
+
             ->where('rental_settings.renting_status', 1)
 
             // if   $data['search']
@@ -76,8 +78,35 @@ class RentModel {
 
            
 
-            // show($q->getQuery());
+        $equipments = $this->query($q->getQuery(), $q->getData());
+        // show($equipments);
+        if (is_array($equipments)) {
+            $equipments = array_map(function ($equipment) use ($cart) {
+                $item = new ItemModel;
+                $items =  $item->getAvailableItems([
+                    'equipment_id' => $equipment->id,
+                    'start_date' => $cart->start_date,
+                    'end_date' => $cart->end_date
+                ]);
+                // only return equipment that has available items (item status = available)
 
+                if (count($items) > 0) {
+                    // $equipment->items = $items;
+                    return $equipment;
+                }
+
+
+            }, $equipments);
+        } else {
+            // Handle the case where $equipments is not an array
+            $equipments = [];
+        }
+        // remove null values
+        $equipments = array_filter($equipments);
+
+
+        // show($equipments);
+        return $equipments;
 
            return $this->query($q->getQuery(),$q->getData());
 
