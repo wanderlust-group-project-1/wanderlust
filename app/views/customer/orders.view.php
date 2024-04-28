@@ -6,53 +6,32 @@ require_once('../app/views/navbar/customer-navbar.php');
 ?>
 
 <div class="container flex-d flex-md-c justify-content-center mt-5">
-<div class="customer-bg-image">
-    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    <div class="customer-bg-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
     </div>
-    <div class=" col-lg-12 flex-d-c gap-2 mt-5 ">
-
-
+    <div class="col-lg-8 flex-d-c gap-2 mt-9 ">
         <div class="card card-normal-glass ">
-
-        <h2 class="justify-content-center flex-d"> Orders </h2>
-
+            <h2 class="justify-content-center flex-d ml-3"> Orders </h2>
             <div class="section-switch flex-d  gap-3 flex-wrap" >
-
-                            <button class="btn-selected" id="all">All</button>
-                            <button class="btn-selected" id="unpaid">Unpaid</button>
-
-                            <button class="btn-selected" id="pending">Pending</button>
-                            <button class="btn-selected" id="upcoming">Upcoming</button>
-                            <button class="btn-selected" id="rented">Rented</button>
-                            <button class="btn-selected" id="completed">Completed</button>
-                            <button class="btn-selected" id="cancelled">Cancelled</button>
-
-
-                            <!-- not rented yet -->
-
-                        </div>
-
-            <div class="row gap-2 ">
-                <!-- scrollable cart items -->
-                <!-- <div class="col-lg-12    " id="cart-items"> -->
-                <div class="col-lg-12 checkout-items overflow-scroll " >
-
-                    <div id="orders">
-    
-    
-    
-    
-    
-    
-    
-                    </div>
-
-                </div>
-
-
+                <button class="btn-selected" id="all">All</button>
+                <button class="btn-selected" id="unpaid">Unpaid</button>
+                <button class="btn-selected" id="pending">Pending</button>
+                <button class="btn-selected" id="upcoming">Upcoming</button>
+                <button class="btn-selected" id="rented">Rented</button>
+                <button class="btn-selected" id="completed">Completed</button>
+                <button class="btn-selected" id="cancelled">Cancelled</button>
+                <!-- not rented yet -->
             </div>
+            <div class="row gap-2 ">
+            <!-- scrollable cart items -->
+            <!-- <div class="col-lg-12    " id="cart-items"> -->
+                <div class="col-lg-12 checkout-items overflow-scroll " >
+                    <div id="orders">
 
-           
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -486,23 +465,26 @@ require_once('../app/views/navbar/customer-navbar.php');
             xhttp.send();
         }
 
-
-
-
-
-
-
-
-
 </script>
 
 <!-- Order Item Modal -->
-<div class="modal" id="order-item-modal">
+<!-- <div class="modal" id="order-item-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         
         <div id="order-data">   </div>
 
+    </div>
+</div> -->
+
+<!-- View modal -->
+    <div class="modal" id="order-item-modal" class
+>
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+        
+        <div id="order-data">   </div>
     </div>
 </div>
 

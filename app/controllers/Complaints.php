@@ -110,7 +110,7 @@ class Complaints{
         $rentcomplaint = new RentComplaintModel;
         $data = ['customer_id' => UserMiddleware::getUser()['id']];
         $data['complaints'] = $rentcomplaint->getComplaintsByCustomer($data);
-        show ($data['complaints']);
+        // show ($data['complaints']);
 
         $this->view('customer/components/customercomplaintlist', $data);
     }
@@ -122,7 +122,7 @@ class Complaints{
 
         $rent = new RentModel;
         $data['rentitems'] = $rent->getItemListbyRentId($data['complaint']->rent_id);
-        show($data);
+        // show($data);
 
         $this->view('customer/components/customercomplaints', $data);
     }

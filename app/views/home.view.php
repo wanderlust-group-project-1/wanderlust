@@ -19,6 +19,9 @@ if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER'
 }
 ?>
 
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+</div>
 
 <?php require_once('../app/views/sections/hero.php');
 ?>
@@ -32,11 +35,11 @@ if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER'
 <?php require_once('../app/views/sections/rental-service.php');
 ?>
 
-<?php require_once('../app/views/sections/blog.php');
-?>
+<!-- <?php require_once('../app/views/sections/blog.php');
+?> -->
 
-<?php require_once('../app/views/sections/tips.php');
-?>
+<!-- <?php require_once('../app/views/sections/tips.php');
+?> -->
 
 <?php require_once('../app/views/sections/complaints.php');
 ?>
