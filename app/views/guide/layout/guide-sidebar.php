@@ -115,18 +115,25 @@
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-        </ul>
+
       </div>
     </li>
 
+
+    <li data-id="settings" class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/settings" aria-expanded="false" aria-controls="ui-basic">
+        <i class="ti-palette menu-icon"></i>
+        <span class="menu-title">Settings</span>
+        <i class="menu-arrow"></i>
+      </a>
+
+    </li>
+
+
+
     <div class="guide-dash-prof">
       <div class="">
-        <a href="<?php echo ROOT_DIR ?>/settings" class="ml-7 mr-2">
-          <i class="fas fa-cog" aria-hidden="true"></i>
-        </a>
+        
         <a href="<?php echo ROOT_DIR ?>/logout"> <button type="submit" class="btn-edit edit-profile">
           Logout
         </button>
