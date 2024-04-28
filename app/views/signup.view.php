@@ -9,6 +9,9 @@ require_once('../app/views/components/navbar-auth.php');
 
 
 <div class="signup-container" id="blur">
+    <div class="customer-bg-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
     <div class="column">
         <div class="signup-form">
         <h2>Who are you?</h2>

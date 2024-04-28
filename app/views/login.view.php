@@ -4,6 +4,9 @@ require_once('../app/views/components/navbar-auth.php');
 ?>
 
     <div class="login-container">
+        <div class="customer-bg-image">
+            <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+        </div>
         
             <div class="column">
                 
