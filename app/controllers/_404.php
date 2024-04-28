@@ -5,7 +5,7 @@ class _404{
     public function index(){
         http_response_code(404);
         
-        echo "Controller not found";
+       $this->view('404');
     }
 }
 

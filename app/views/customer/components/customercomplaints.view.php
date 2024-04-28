@@ -119,8 +119,9 @@
         [equipment_name] => BBQ Grill
         [item_number] => I000539029
         [equipment_cost] => 5600.00 -->
-
-        <h3>Equipment List</h3>
+        <div class="row">
+            <h3>Equipment List</h3>
+        </div>
         <div class="table-container">
             <table class="table-custom">
                 <thead>

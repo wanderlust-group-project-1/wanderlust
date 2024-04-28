@@ -13,12 +13,12 @@
             $user = $_SESSION['USER']; ?>
 
             <div class="home_button">
-                <a href="#" class="btn">Add Complains</a>
+                <a href="#" class="btn-text-green border">Add Complains</a>
             </div>
 
         <?php } else {  ?>
             <div class="home_button">
-            <a href="<?= ROOT_DIR ?>/login" class="btn">Add Complain</a>
+            <a href="<?= ROOT_DIR ?>/login" class="btn-text-green border">Add Complain</a>
             </div>
         <?php } ?>
     </div>

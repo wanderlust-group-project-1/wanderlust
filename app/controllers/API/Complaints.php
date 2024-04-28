@@ -29,4 +29,16 @@ class Complaints
         $response = new JSONResponse;
         $response->statusCode(200)->success(true)->data(['complaint_id' => $a])->send();
     }
+
+    public function cancelCustomerComplaint(string $a = '', string $b = '', string $c = ''): void
+    {
+
+        $complaint = new RentComplaintModel;
+        $complaint->cancelComplaint($a);
+
+        $response = new JSONResponse;
+        $response->statusCode(200)->data(['complaint_id' => $a])->send();
+    }
+
+   
 }

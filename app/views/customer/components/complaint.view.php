@@ -94,7 +94,9 @@
     <!-- item list -->
 
     <div class="col-lg-12 col-md-12">
-        <h3>Equipment List</h3>
+        <div class="row">
+            <h3>Equipment List</h3>
+        </div>
         <div class="table-container">
             <table class="table-custom">
                 <thead>
@@ -119,20 +121,6 @@
         </div>
 
     </div>
-   
-        
-
-
-
-        
-
     </div>
-
-
-
-
-    </div>
-        
-
-
+ </div>
 </div>

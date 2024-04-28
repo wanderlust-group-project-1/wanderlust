@@ -23,41 +23,20 @@
 
             <div class="complaint-actions flex-d gap-3">
                 <button class="btn-text-green" id="mycom-view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
-                <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>  
+                
                 <!-- if status pending set show  -->
-                <!-- <?php if ($complaint->status == 'myComplaints') {
-                   
-
-                    
-                        
-                    
-                    ?>
-                    <div class="flex-d-c">
-                    <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>  
-
-
-                    <button class="btn-text-red" id="cancel-rented" hidden>Cancel</button>
-                    </div>
                 <?php 
-                 }
-                elseif ($complaint->status == 'rented') { ?>
-                    <button class="btn btn-primary" id="mark-as-returned">Mark as Returned</button>
-                <?php }
-                elseif ($complaint->status == 'pending') { ?>
-                    <button class="btn-text-orange" id="accept-complaint"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
-                    <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>  
-                <?php }
-                ?> -->
+                if ($complaint->status == 'pending') { ?>
+                    <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button> 
+                <?php }?>
+                
 
   
             </div>
         </div>
         </div>
-        <?php
+    <?php
     }
-
-
-
 ?>
 
 
@@ -73,21 +52,6 @@
         
         <div id="complaint-form-data">
 
-        </div>
-    </div>
-</div>
-
-
-<!-- complaint cancel -->
-
-<div id="cancel-complaint-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Cancel Complaint</h2>
-        <p>Are you sure you want to cancel this complaint?</p>
-        <div class="flex-d gap-3 mt-3">
-            <button class="btn btn-primary" id="cancel-complaint-confirm">Yes</button>
-            <button class="btn btn-danger modal-close" id="cancel-complaint-cancel">No</button>
         </div>
     </div>
 </div>
