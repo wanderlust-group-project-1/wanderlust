@@ -13,15 +13,27 @@ require_once('../app/views/navbar/customer-navbar.php');
         <div class="card card-normal-glass ">
             <h2 class="justify-content-center flex-d ml-3"> Orders </h2>
             <div class="section-switch flex-d  gap-3 flex-wrap" >
-                <button class="btn-selected" id="all">All</button>
-                <button class="btn-selected" id="unpaid">Unpaid</button>
-                <button class="btn-selected" id="pending">Pending</button>
-                <button class="btn-selected" id="upcoming">Upcoming</button>
-                <button class="btn-selected" id="rented">Rented</button>
-                <button class="btn-selected" id="completed">Completed</button>
-                <button class="btn-selected" id="cancelled">Cancelled</button>
-                <!-- not rented yet -->
-            </div>
+
+
+            <button class="btn-selected active" id="pending">Pending</button>
+
+
+
+                            <button class="btn-selected" id="upcoming">Upcoming</button>
+                            <button class="btn-selected" id="rented">Rented</button>
+                            <button class="btn-selected" id="completed">Completed</button>
+                            <button class="btn-selected" id="unpaid">Unpaid</button>
+
+                            <button class="btn-selected" id="cancelled">Cancelled</button>
+                            <button class="btn-selected" id="all">All</button>
+
+
+
+                            <!-- not rented yet -->
+
+                        </div>
+
+
             <div class="row gap-2 ">
             <!-- scrollable cart items -->
             <!-- <div class="col-lg-12    " id="cart-items"> -->
@@ -78,7 +90,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 <script>
     $(document).ready(function() {
         // loadOrders();
-        loadOrders('all');
+        loadOrders('pending');
         $('.section-switch button').click(function() {
             $('.section-switch button').removeClass('active');
             $(this).addClass('active');
@@ -159,14 +171,14 @@ require_once('../app/views/navbar/customer-navbar.php');
         var orderId = $(this).attr('data-id');
         console.log(orderId);
         $.ajax({
-            url: '<?= ROOT_DIR ?>/myOrders/cancelOrder/' + orderId,
+            url: '<?= ROOT_DIR ?>/api/myOrders/cancelOrder/' + orderId,
             headers: {
                 'Authorization': 'Bearer ' +  getCookie('jwt_auth_token')
             },
             type: 'GET',
             success: function(data) {
                 $('#confirm-cancel-modal').hide();
-                loadOrders();
+                loadOrders(window.currentStatus);
                 hideLoader();
             },
             error: function(data) {

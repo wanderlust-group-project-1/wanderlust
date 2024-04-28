@@ -69,7 +69,9 @@ class EquipmentModel {
      if (isset($files['image']) && $files['image']['name'] != '') {
         $data['image'] = upload($files['image'], 'images/equipment');
 
-    } 
+    } else {
+        unset($data['image']);
+    }
 
     // show($data);
     // filter data

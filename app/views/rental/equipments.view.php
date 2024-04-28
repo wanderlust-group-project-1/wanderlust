@@ -185,6 +185,7 @@ require_once('../app/views/layout/header.php');
                         <label for="equipment-image1">Equipment Image</label>
                         <input type="file" id="equipment-image" class="form-control-lg" name="equipment_image" hidden>
                         <button type="button" class="btn-text-green border" id="equipment-image-upload-button">Upload Image</button>
+                        
 
                     </div>
                 </div>
@@ -218,9 +219,14 @@ require_once('../app/views/layout/header.php');
         <h2>Upload Equipment Images</h2>
         <!-- Equipment image upload form -->
         <form method="post" class="flex-d-c text-center justify-content-center align-items-center" enctype="multipart/form-data">
-            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg , image/webp" required>
-            <div class="equipment-image-preview-container flex-d mt-2  align-items-center" id="equipment-image-preview"></div>
-            <input type="submit" class="btn-text-green border mt-4" name="submit" value="Select Images" id="equipment-image-submit">
+            <div class="flex-d mt-3 ">
+            <label for="equipment-image-input" class="btn-text-green border"> <i class="fa fa-file"></i> Select Images</label>
+            <input type="file" name="equipment_images[]" id="equipment-image-input" class="form-control-lg hidden" accept="image/png, image/jpg, image/gif, image/jpeg , image/webp" required >
+            </div>
+            <div class="equipment-image-preview-container flex-d mt-2  align-items-center" id="equipment-image-preview">
+
+            </div>
+            <input type="submit" class="btn-text-green border mt-4" name="submit" value="Upload" id="equipment-image-submit">
         </form>
 
         </div>
@@ -283,6 +289,8 @@ $(document).on('click', '#equipment-image-submit', function(e) {
     // $('#equipment-image').val($('#equipment-image-input').prop('files'));
     // equipment-image-input to equipment-image
     $('#equipment-image').prop('files', $('#equipment-image-input').prop('files'));
+
+    
 
 
 });
@@ -475,9 +483,32 @@ $(document).ready(function() {
                     alertmsg('Equipment added successfully', 'success');
                     
                     $("#add-equipment-form").trigger('reset');
+                    // another way to reset form
+                    // document.getElementById("add-equipment-form").reset();
+                    // not working 
+                    // $("#add-equipment-form").reset();
+                    // reset not a function
+
+
+                    // reset 
+                    $("#equipment-name").val('');
+                    $("#cost").val('');
+                    $("#standard-fee").val('');
+                    $("#rental-fee").val('');
+                    $("#description").val('');
+                    $("#quantity").val('');
+                    
+
+
+
+
+
 
                     // close
+
+                    setTimeout(() => {
                     addEquipmentModal.style.display = "none";
+                }, 1000);
 
                     // refresh equipment list
                     getEquipments();
@@ -824,7 +855,11 @@ $(document).ready(function() {
 
 
 
-            if (formData.get('equipment_image') != '') {
+            if (formData.get('equipment_image').name != '') {
+
+                console.log(formData.get('equipment_image'));
+
+                console.log(formData.get('equipment_image').name);
                 var image = formData.get('equipment_image');
 
                 // validate file type
