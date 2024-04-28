@@ -64,7 +64,7 @@ Class Rent{
         $data['cart'] = $cart;
         $data['request'] = $request->getAll();
 
-        $data['equipments'] = $rent->getItems($request->getAll());
+        $data['equipments'] = $rent->getItems($request->getAll(),$data['cart']);
 
 //         show($data['equipments']);
 
@@ -79,7 +79,7 @@ Class Rent{
         // show($data['equipments']);
 
 
-
+        // show($data['equipments']);
 
         // show($data['equipments']);
 

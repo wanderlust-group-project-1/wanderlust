@@ -1,6 +1,6 @@
 <div class=" col profile-info m-5">
     <div class="row">
-        <img src="<?php echo ROOT_DIR ?>/assets/images/dp.jpg" alt="Profile Image" class="mw-200px px-4 p-6">
+        <img src="<?php echo OSURL?>images/customer/<?= $customer->image ?>" alt="Profile Image" class="mw-200px px-4 p-6">
         <div>
             <h2 id="profile-name"> <?php echo $customer->name ?> </h2>
             <p id="profile-email"><i class="fas fa-envelope m-2"></i><?php echo $customer->email ?></p>
@@ -9,7 +9,7 @@
             <p id="profile-address"><i class="fa fa-location-arrow m-2"></i><?php echo $customer->address ?></p>
             <!-- <p id="profile-status" class="status <?php echo $customer->status; ?>"><?php echo ucfirst($customer->status); ?></p> -->
             <div class="row">
-                <button type="" class="btn-danger m-2 d-flex justify-content-end p-2 " id="see-more">
+                <button type="" class="btn-text-red border " id="see-more">
                     Remove User
                 </button>
             </div>

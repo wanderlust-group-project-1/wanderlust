@@ -192,8 +192,8 @@ class RentalServiceModel
         $q->setTable('rental_services');
         //  group by rental service id and count orders
         $q->select('count(distinct(rent.id)) as orders_count , count(distinct(equipment.id)) as equipments_count')
-            ->join('equipment', 'rental_services.id', 'equipment.rentalservice_id')
-            ->join('rent', 'rental_services.id', 'rent.rentalservice_id')
+            ->leftJoin('equipment', 'rental_services.id', 'equipment.rentalservice_id')
+            ->leftJoin('rent', 'rental_services.id', 'rent.rentalservice_id')
             ->where('rental_services.id', $id)
             ->groupBy('rental_services.id');
 
