@@ -170,13 +170,18 @@ $box-shadow : 2px 0 5px 2px rgba(0, 0, 0, 0.2);
 
         a {
             color: $font-color;
-            //font-style: italic;
+            // font-style: italic;
             text-decoration: none;
+            font-size: 14px;
             transition: color 0.3s ease;
             &:hover {
                 color: $hover-bg;
                 text-decoration: underline;
             }
+        }
+
+        h4 {
+            font-size: 14px !important;
         }
 
         #error-message {

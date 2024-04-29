@@ -11,15 +11,27 @@ class Complains
 
     public function listComplains(string $a = '', string $b = '', string $c = ''): void
     {
-        $complain = new RentReturnComplaintModel;
-        $data['complaints'] = $complain->getAdminRentalComplaints($b);
+        //who complaints
+        if($a == 'customer'){
+            $complaint = new RentComplaintModel;
+            $data['complaints'] = $complaint->getComplaints (['status' => $b]);
+            $data['view'] = '-customer';
 
-        $this->view('admin/components/complainlist', $data);
+            $this->view('admin/components/complainlist', $data);
+
+        }else if($a == 'rentalservice'){
+            $complain = new RentReturnComplaintModel;
+            $data['complaints'] = $complain->getAdminRentalComplaints($b);
+            $data['view'] = '';
+    
+            $this->view('admin/components/complainlist', $data);
+        }
+
+        
     }
+    
 
-
-
-    public function viewComplaint(string $a = '', string $b = '', string $c = ''): void
+    public function viewRentalComplaint(string $a = '', string $b = '', string $c = ''): void
     {
         $rentreturncomplaint = new RentReturnComplaintModel;
         $complaint = $rentreturncomplaint->getComplaint($a);
@@ -47,4 +59,6 @@ class Complains
 
         $this->view('admin/components/complaint', ['complaint' => $complaint, 'order' => $order, 'items' => $items]);
     }
+
+
 }

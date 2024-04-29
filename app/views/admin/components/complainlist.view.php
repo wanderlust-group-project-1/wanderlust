@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="complaint-actions flex-d gap-3">
-                    <button class="btn-text-green" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
+                    <button class="btn-text-green" id="view-button<?php echo $view;?>"><i class="fa fa-list" aria-hidden="true"></i> View</button>
                     <!-- if status pending set show  -->
                     <?php if ($complaint->status == 'pending') {
                     ?>

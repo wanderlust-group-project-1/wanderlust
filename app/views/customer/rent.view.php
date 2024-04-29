@@ -635,6 +635,9 @@ function setNewDate(start, end) {
 
 
 <?php
-require_once('../app/views/layout/footer.php');
+    require_once('../app/views/layout/footer-main.php');
+?>
 
+<?php
+    require_once('../app/views/layout/footer.php');
 ?>

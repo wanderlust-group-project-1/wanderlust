@@ -9,6 +9,7 @@ align-items-center text-center"><h2>No Orders</h2></div>');
 
 foreach ($orders as $order) {
     ?>
+    <!-- <?show ($orders);?> -->
    <div class="card card-normal3"  data-id="<?php echo $order->id; ?>">
         <div class="row gap-2 order-list">
 
@@ -20,6 +21,7 @@ foreach ($orders as $order) {
                 </div>
 
                 <div class="col-lg-3 col-md-12">
+                
                     <div class="text-overflow-ellipsis "> <?php echo $order->equipment_names; ?></div>
                     
                 </div>
@@ -41,7 +43,7 @@ foreach ($orders as $order) {
                 <?php } ?>
 
                 <!-- if rent_status accepted, mark as rented --> 
-                <?php if ($order->rent_status == 'accepted') { ?>
+                <?php if ($order->rent_status == 'accepted' || $order->rent_status == 'rented') { ?>
                     <!-- <button class="btn-text-green order-rent-button"><i class="fa fa-check-square" aria-hidden="true"></i> Mark as Rented</button> -->
                     <!-- Report button -->
                     <button class="btn-text-orange order-report-button"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Complain</button>

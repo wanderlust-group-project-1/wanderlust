@@ -90,7 +90,7 @@ require_once('../app/views/layout/header.php');
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h2>Tips Update Form</h2>
-                    <form id="update-form" action="<?php echo ROOT_DIR ?>/admin/tips/update" method="post">
+                    <form id="update-form" class="flex-d gap-3" action="<?php echo ROOT_DIR ?>/admin/tips/update" method="post">
                         <input name="id" id="tip-id" type="hidden" value="">
 
                         <label for="updated-title">Title:</label>
@@ -101,7 +101,7 @@ require_once('../app/views/layout/header.php');
 
                         
                         <button class="btn-text-green border center">Update</button>
-                        <a class="text-center mt-2" id="delete-tip" href="<?php echo ROOT_DIR ?>/admin/tips/delete/  "> <button class="btn-text-red border center">  Delete </button> </a>
+                        <button key=""  id="delete-tip" class="btn-text-red border center">  Delete </button> 
                     </form>
                 </div>
             </div>
@@ -128,9 +128,19 @@ require_once('../app/views/layout/header.php');
                 document.getElementById("updated-title").value = name;
                 document.getElementById("updated-description").value = email;
                 document.getElementById("tip-id").value = id;
-                document.getElementById("delete-tip").href = "<?php echo ROOT_DIR ?>/admin/tips/delete/" + id;
+                document.getElementById("delete-tip").setAttribute('key', id);
                 updateModal.style.display = "block";
             }
+
+            $(document).on('click','#delete-tip',function(e){
+e.preventDefault();
+                var id = $(this).attr('key');
+                console.log(id);
+                // goto the delete route
+                window.location.href = "<?php echo ROOT_DIR ?>/admin/tips/delete/" + id;
+            });
+
+            
 
             // Event listener for add button click
             addButton.addEventListener('click', function() {

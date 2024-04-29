@@ -36,13 +36,13 @@ require_once('../app/views/layout/header.php');
                             </button>
                             <!-- </a> -->
                         </div>
-                        <div class="flex-d-r mr-5">
-                            <!-- <a href="<?php echo ROOT_DIR ?>/admin/complainsGuides"> -->
+                        <!-- <div class="flex-d-r mr-5">
+                            <a href="<?php echo ROOT_DIR ?>/admin/complainsGuides">
                             <button type=" submit" class="btn-card" data-id="guide">
                                 Guides
                             </button>
-                            <!-- </a>    -->
-                        </div>
+                            </a>   
+                        </div> -->
                         <div class="flex-d-r mr-5">
                             <!-- <a href="<?php echo ROOT_DIR ?>/admin/complainsCustomers"> -->
                             <button type=" submit" class="btn-card" data-id="customer">
@@ -73,7 +73,7 @@ require_once('../app/views/layout/header.php');
 
                     <div class="section-switch flex-d  gap-3 flex-wrap">
                         <button class="btn-selected" id="pending">Pending</button>
-                        <button class="btn-selected" id="accepted">Accepted</button>
+                        <!-- <button class="btn-selected" id="accepted">Accepted</button> -->
                         <button class="btn-selected" id="rejected">Rejected</button>
                         <button class="btn-selected" id="resolved">Resolved</button>
 
@@ -149,7 +149,7 @@ require_once('../app/views/layout/header.php');
     });
 
 
-    // View Complaint
+    // View Complaint Rental
 
     $(document).on('click', '#view-button', function() {
         var complaintId = $(this).closest('.complaint').attr('data-id');
@@ -157,7 +157,24 @@ require_once('../app/views/layout/header.php');
             headers: {
                 'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
             },
-            url: '<?= ROOT_DIR ?>/admin/complains/viewComplaint/' + complaintId,
+            url: '<?= ROOT_DIR ?>/admin/complains/viewRentalComplaint/' + complaintId,
+            type: 'GET',
+            success: function(response) {
+                $('#complaint-data').html(response);
+                $('#complaint-view-modal').css('display', 'block');
+            }
+        });
+    });
+
+    // View Complaint Customer
+
+    $(document).on('click', '#view-button-customer', function() {
+        var complaintId = $(this).closest('.complaint').attr('data-id');
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/admin/complains/viewRentComplaint/' + complaintId,
             type: 'GET',
             success: function(response) {
                 $('#complaint-data').html(response);

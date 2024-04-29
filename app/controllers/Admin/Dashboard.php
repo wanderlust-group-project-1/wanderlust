@@ -25,6 +25,10 @@ class Dashboard
         $stats = new AdminStatsModel;
         $data['orders'] = $stats->getOrdersCount();
 
+
+        $equipment = new EquipmentModel;
+        $data['equipments'] = $equipment->count([], ['count' => '0']);
+
         $this->view('admin/dashboard', $data);
     }
 }

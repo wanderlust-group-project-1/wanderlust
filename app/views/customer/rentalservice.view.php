@@ -40,6 +40,11 @@ require_once('../app/views/navbar/customer-navbar.php');
         <h1 class="rental-name px-5 mt-6 mb-0"> <?php echo $rental->name; ?> </h1>
         <h4 class="mt-0 ml-5"><?php echo $rental->email?> | <?php echo $rental->mobile; ?></h4>
         <!-- Rental Service description -->
+
+        <!-- Location As google map  link -->
+        <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $rental->latitude; ?>,<?php echo $rental->longitude; ?>" target="_blank" class="mt-1 btn-text-green border center">Location</a>
+
+        
     <!-- Rental Service name -->
 </div>
 </div>
