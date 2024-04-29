@@ -26,7 +26,7 @@ require_once('../app/views/navbar/customer-navbar.php');
         </ul> -->
 
         <div class="guide-availability" id="guide-availability">
-            <a class="btn-text-black" href="<?= ROOT_DIR ?>/guideavailability"><i class="fas fa-calendar" aria-hidden="true"></i> Availability</i></a>
+            <a class="btn-text-black" ><i class="fas fa-calendar" aria-hidden="true"></i> Availability</i></a>
             <!-- <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>   -->
 
         </div>

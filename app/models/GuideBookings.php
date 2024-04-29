@@ -137,7 +137,6 @@ class GuideBookingsModel{
         $q->setTable($this->table);
         $q->delete()->where('guide_id', $guideId)->where('date', $date);
         return $this->query($q->getQuery(), $q->getData());
-
         
     }
     
@@ -146,5 +145,23 @@ class GuideBookingsModel{
         $q->setTable($this->table);
         $q->update(['status' => 'completed'])->where('guide_id', $guideId)->where('date', $date);
         return $this->query($q->getQuery(), $q->getData());
+    }
+
+    public function GetUserBookingDetails(int $userId): mixed {
+        $q = 'CALL GetUserBookingDetails(:userId)';
+        $params = [
+            'userId' => $userId
+        ];
+
+        return $this->query($q, $params);
+    }
+
+    public function GetMonthlyCompletedBookings(int $userId): mixed {
+        $q = 'CALL GetMonthlyCompletedBookings(:userId)';
+        $params = [
+            'userId' => $userId
+        ];
+
+        return $this->query($q, $params);
     }
 }

@@ -41,7 +41,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <label for="description">Description</label>
                 <textarea id="report-description" name="description" class="form-control-lg" required=""></textarea>
             </div>
-            <button class="btn-text-green border" id="report-submit" data-id="67">Submit</button>
+            <button class="btn-text-green border" id="report-submit" data-id="html">Submit</button>
         </form>
     </div>
 </div>
@@ -111,7 +111,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     $(document).ready(function() {
         // Get the modal
         var modal = document.getElementById("report-modal");
-        var viewModal = document.getElementById("view-modal")
+        var viewModal = document.getElementById("view-booking-modal")
 
         // When the user clicks the "Complain" button, open the modal
         $(document).on('click', '.order-report-button', function() {
@@ -137,10 +137,60 @@ require_once('../app/views/navbar/customer-navbar.php');
             }
         });
     });
+
+
+    $(document).on('click', '#report-submit', function(e) {
+        e.preventDefault();
+        var title = $('#report-title').val();
+        var description = $('#report-description').val();
+        var orderId = $(this).attr('data-id');
+        var data = {
+            title: title,
+            description: description,
+            orderId: orderId
+        };
+
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/complaints/addComplaint',
+            method: 'POST',
+            data: JSON.stringify(data),
+            success: function(response) {
+                alert('Complaint submitted successfully');
+                $('#report-modal').css('display', 'none');
+            }
+        });
+    });
 </script>
 
+
+
+<!-- Modal box to view booking details -->
+<div class="modal modal view-booking-modal" id="view-booking-modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <div class="booking-list" id="booking-list">
+            <h2>Booking Details</h2>
+
+            <!-- Booking list will be displayed here -->
+        </div>
+        <div class="flex-d gap-2 mt-5">
+            <button class="btn btn-danger delete-package-button">Cancel Booking</button>
+        </div>
+    </div>
+
+    <div id="delete-booking-modal" class="delete-booking-modal modal">
+        <div class="modal-content ">
+            <span class="close ">&times;</span>
+            <h2 class="guide-h2-title">Delete Booking</h2>
+            <p>Are you sure you want to cancel this booking?</p>
+
+        </div>
+    </div>
+</div>
+
 <?php
-
-
     require_once('../app/views/layout/footer.php');
 ?>
