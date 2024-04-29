@@ -303,7 +303,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
             <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
-                <h2>Update Customer Details</h2>
+                <h2 class="row">Update Customer Details</h2>
                 <?php if (isset($errors)) : ?>
                     <div> <?= implode('<br>', $errors) ?> </div>
                 <?php endif; ?>
@@ -322,7 +322,9 @@ require_once('../app/views/navbar/customer-navbar.php');
                 <label for="nic">NIC Number</label>
                 <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
                 <br />
-                <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
+                <div class="row">
+                    <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
+                </div>
             </form>
             <!-- </div> -->
         </div>

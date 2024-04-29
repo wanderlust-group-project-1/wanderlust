@@ -123,7 +123,7 @@ require_once('../app/views/layout/footer.php');
         },
         xaxis: {
             type: 'category', // Change type to 'category' for non-datetime values
-            categories: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"] // Use month names instead of date strings
+            // categories: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"] // Use month names instead of date strings
         },
         tooltip: {
             x: {
@@ -134,7 +134,6 @@ require_once('../app/views/layout/footer.php');
     };
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
 </script>
 
 <script>
@@ -188,8 +187,10 @@ require_once('../app/views/layout/footer.php');
                 options.series[1].name = 'Completed bookings';
                 options.series[1].data = completedBookingData;
 
-                xaxisCategories = data.data.map(entry => entry.month);
+                const xaxisCategories = data.data.map(entry => entry.month_year);
 
+                // Update the x-axis categories
+                options.xaxis.categories = xaxisCategories;
                 
 
 
