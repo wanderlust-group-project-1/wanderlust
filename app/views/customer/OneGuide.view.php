@@ -8,13 +8,16 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
-<div class="dashboard">
-
+<div class="dashboard customer-view">
+    <div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
 
     <?php
     // show(UserMiddleware::getUser());
     ?>
-    <div class="guide-dash-main flex-d-c m-6">
+    <div class="guide-dash-main customer-view flex-d-c m-6">
+    
         <!-- <h1 class="title mb-2">My Guide Profile</h1>
         <ul class="breadcrumbs">
             <li><a href="<?= ROOT_DIR ?>/home">Home</a></li>
@@ -28,7 +31,8 @@ require_once('../app/views/navbar/customer-navbar.php');
 
         </div>
 
-        <div class="guide-profile" id="guide-profile">
+        <div class="card-normal-glass">
+        <div class="guide-profile customer-view p-6" id="guide-profile">
             <div class="guide-profile-img">
                 <img src="<?= ROOT_DIR ?>/assets/images/7.png" alt="guide">
             </div>
@@ -40,10 +44,11 @@ require_once('../app/views/navbar/customer-navbar.php');
 
             </div>
         </div>
+        </div>
 
         <div class="Customer-guide-view">
             <div class="info-data mt-5 ml-5 mr-5">
-                <div class="guide-card-new">
+                <div class="guide-card-new customer-view-card">
                     <div class="package-list-selector">
                         <span class="label">Packages For You</span>
                         <?php
@@ -53,16 +58,16 @@ require_once('../app/views/navbar/customer-navbar.php');
                             <div class="mt-4 mb-2" data-id="<?= htmlspecialchars($packages[$loopIndex][0]->id) ?>">
                                 <span class="Guide-topics">Package <?= $loopIndex + 1 ?></span>
                                 <p class="booking-bar mt-3">Price: <?= htmlspecialchars($packages[$loopIndex][0]->price) ?></p>
-                                <p class="booking-bar">Maximum Group Size: <?= htmlspecialchars($packages[$loopIndex][0]->max_group_size) ?></p>
-                                <p class="booking-bar">Maximum Distance: <?= htmlspecialchars($packages[$loopIndex][0]->max_distance) ?></p>
-                                <button class="btn btn-primary mt-5" id="book-guide-btn">Book</button>
+                                <p class="booking-bar mt-3">Maximum Group Size: <?= htmlspecialchars($packages[$loopIndex][0]->max_group_size) ?></p>
+                                <p class="booking-bar mt-3">Maximum Distance: <?= htmlspecialchars($packages[$loopIndex][0]->max_distance) ?></p>
+                                <button class="btn-text-green border mt-5" id="book-guide-btn">Book</button>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
             <div class="info-data mt-5 ml-5 mr-5">
-                <div class="guide-card-new">
+                <div class="guide-card-new customer-view-card">
                     <span class="label">Languages</span>
 
                     <?php
@@ -75,7 +80,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="guide-card-new">
+                <div class="guide-card-new customer-view-card">
                     <span class="label">Certifications</span>
 
                     <?php
@@ -157,11 +162,11 @@ require_once('../app/views/navbar/customer-navbar.php');
 
         const tableHTML = `
         <div class="info-data mt-5 ml-5 mr-5 guide-profile-content">
-            <div class="guide-card-new booking-history">
+            <div class="guide-card-new customer-view-card booking-history">
                 <span class="label">Recent Bookings</span>
                 ${generateBookingHTML(recentBookings)}
             </div>
-            <div class="guide-card-new booking-history">
+            <div class="guide-card-new customer-view-card customer-view booking-history">
                 <span class="label">Upcoming Bookings</span>
                 ${generateBookingHTML(upcomingBookings)}
             </div>  
@@ -465,9 +470,6 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 
-<?php
-    require_once('../app/views/layout/footer-main.php');
-?>
 
 <?php
     require_once('../app/views/layout/footer.php');

@@ -4,16 +4,19 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
 
-<div class="dashboard">
+<div class="dashboard customer-view justify-content-center">
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+</div>
 
 
     <?php
     // show(UserMiddleware::getUser());
     ?>
-    <div class="guide-dash-main flex-d-c m-6">
+    <div class="guide-dash-main customer-view col-lg-8 flex-d-c m-6">
 
         <div class="info-data mt-5 ml-5 mr-5">
-            <div class="guide-card-new">
+            <div class="guide-card-new customer-view-card">
                 <div class="booking-list" id="booking-list">
                     <h2>Booking Details</h2>
 
@@ -77,9 +80,9 @@ require_once('../app/views/navbar/customer-navbar.php');
             // `;
 
             const bookingHTML = `
-            <div class="booking-details">
+            <div class="booking-details my-3 col-lg-11 ">
                     ${bookingDetails.map(booking => `
-                        <div class="guide-card-new booking-history">
+                        <div class="guide-card-new my-4 booking-history">
                         <div class=".flex-d mt-4 mb-2">
                             <p> Date: ${booking.date}</p>
                             <p> Place: ${booking.location}</p>
@@ -137,7 +140,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 </script>
 
 <?php
-    require_once('../app/views/layout/footer-main.php');
+
 
     require_once('../app/views/layout/footer.php');
 ?>
