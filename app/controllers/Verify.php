@@ -11,8 +11,13 @@ class Verify{
 
         if ($data) {
             echo "verified";
+            // redirect to login page 
+            echo "<script>window.location.href = '".ROOT_DIR."/login';</script>";
         } else {
             echo "not verified";
+
+            // redeirect with timeout 
+            echo "<script>setTimeout(function(){ window.location.href = '".ROOT_DIR."/login'; }, 2000);</script>";
         }
 
     }

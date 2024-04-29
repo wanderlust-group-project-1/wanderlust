@@ -55,7 +55,7 @@ class RentModel {
 
         // show($cart);
         $q->setTable('equipment');
-        $q->select('equipment.*, rental_services.name As rental_service_name, ')
+        $q->select('equipment.*, rental_services.name As rental_service_name ')
             ->join('rental_services', 'equipment.rentalservice_id', 'rental_services.id')
             ->join('rental_settings', 'equipment.rentalservice_id', 'rental_settings.rentalservice_id')
             ->join('locations', 'rental_services.location_id', 'locations.id')

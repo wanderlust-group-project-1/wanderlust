@@ -167,6 +167,34 @@ Trait Model  {
     }
 
 
+    public function count(array $data = [], array $data_not = []):int{
+
+        $keys = array_keys($data);
+        $query = "select count(*) as count from $this->table where ";
+        foreach ($keys as $key){
+            $query .= $key. " = :" . $key . " && ";
+
+        }
+        $keys = array_keys($data_not);
+        foreach ($keys as $key){
+            $query .= $key. " != :" . $key . " && ";
+
+        }
+
+
+        // show($query);
+
+        $query = trim($query, " && ");
+
+        $data = array_merge($data, $data_not);
+
+        $result = $this->query($query, $data);
+        if($result)
+            return $result[0]->count;
+        return 0;
+
+    }
+
 
     // Extended functions
     protected string $q = "";

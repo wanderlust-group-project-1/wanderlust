@@ -16,7 +16,7 @@ require_once('../app/views/components/navbar-auth.php');
         <div class="signup-form">
         <h2>Who are you?</h2>
         <p>It's time to start your journey, join us! Register here.</p>
-            <div class="main">
+            <div class="main gap-2">
                 <div class="row-btn">
                     <button class="signup-card zoom-inn zoom-out" onclick="signupToggleCustomer()" >
                         <div class="btn-div">
@@ -205,7 +205,7 @@ require_once('../app/views/components/navbar-auth.php');
                             <div class=""  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <label  id="select-location" class=" btn-text-green center miw-200px location-button w-100" type="button">
+                                        <label  id="select-location" class=" btn-text-green center border miw-200px location-button w-100" type="button">
                                        
                                             <!-- Select location in the map -->
                                             <i class="fa fa-map-marker" aria-hidden="true"></i> Select location
@@ -222,7 +222,7 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document" class="btn-text-green center miw-200px file-label w-100">Brows here</label>
+                                    <label for="verification_document" class="btn-text-green border center miw-200px file-label w-100">Browse here</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document" class="file-input">
 <!-- d -->
@@ -317,7 +317,7 @@ require_once('../app/views/components/navbar-auth.php');
                             <div class=""  id="location-button-container">
                                 <div class="select-location-btn">
                                     <div class="select-location-container">
-                                        <label  id="select-location" class=" btn-text-green center location-button w-100" type="button">
+                                        <label  id="select-location" class=" btn-text-green center border location-button w-100" type="button">
                                        
                                             <!-- Select location in the map -->
                                             <i class="fa fa-map-marker" aria-hidden="true"></i> Select location
@@ -334,7 +334,7 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document-rental" class="btn-text-green center file-label  file-label-rental w-100">Brows here</label>
+                                    <label for="verification_document-rental" class="btn-text-green center border file-label  file-label-rental w-100">Browse here</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document-rental" class="file-input">
 <!-- d -->

@@ -39,7 +39,10 @@ class Tips
         // show($b);
         // show($c);
         $tips = new TipsModel();
+        // show($tips->first(['id' => $a]));
+
         $tips->delete($a, 'id');
+        
 
         redirect('admin/tips'); 
     }
