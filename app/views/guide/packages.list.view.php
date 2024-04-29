@@ -1,12 +1,12 @@
 <?php
-$loopIndex = -1; // Initialize loop index
+// $loopIndex = -1; // Initialize loop index
 foreach ($packages as $package) :
-    $loopIndex++; // Increment loop index
+    // $loopIndex++; // Increment loop index
 ?>
     <div data-id="<?= htmlspecialchars($package->id) ?>" class="data">
         <div class="content-data">
             <div class="head">
-                <h3 class="guide-topics">Package <?= $loopIndex + 1 ?></h3>
+                <h3 class="guide-topics"><?= htmlspecialchars($package->name)?></h3>
                 <h3 class="guide-topics"><?= htmlspecialchars($package->price) ?></h3>
             </div>
 

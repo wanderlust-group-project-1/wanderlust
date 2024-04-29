@@ -83,65 +83,98 @@ foreach ($data["package"] as $package) {
                 <input type="number" id="max_distance" class="form-control-lg" name="max_distance" required value="<?php echo htmlspecialchars($package->max_distance); ?>">
 
                 <label for="transport_needed">Transport Needed</label>
-                <input type="checkbox" id="transport_needed2" class="form-control-lg" name="transport_needed" <?php echo $package->transport_needed == 1 ? 'checked' : ''; ?>>y
+                <input type="checkbox" id="transport_needed2" class="form-control-lg" name="transport_needed" <?php echo $package->transport_needed == 1 ? 'checked' : ''; ?>>
 
-                <label for="places">Places</label>
-                <textarea id="places" class="form-control-lg" name="places" required><?php echo htmlspecialchars($package->places); ?></textarea>
+                <div>
+    <?php
+    // Assuming $package->places is a comma-separated string of places
+    $places = explode(',', $package->places); // Split places string into an array
 
-            </div>
+    // Iterate through each place and generate dropdowns
+    foreach ($places as $index => $place) {
+    ?>
+        <div class="dropdown">
+            <label for="location<?php echo $index + 1; ?>">Area <?php echo $index + 1; ?>:</label>
+            <select id="location<?php echo $index + 1; ?>" name="location<?php echo $index + 1; ?>">
+                <!-- Populate options dynamically -->
+                <option value="Kandy" <?php echo ($place === "Kandy") ? 'selected' : ''; ?>>Kandy</option>
+                <option value="Ella" <?php echo ($place === "Ella") ? 'selected' : ''; ?>>Ella</option>
+                <option value="Nuwara Eliya" <?php echo ($place === "Nuwara Eliya") ? 'selected' : ''; ?>>Nuwara Eliya</option>
+            </select>
+            <textarea id="textarea<?php echo $index + 1; ?>" name="textarea<?php echo $index + 1; ?>" rows="4" cols="50"></textarea>
+            <button onclick="removeDropdown(this)">-</button>
+        </div>
+    <?php
+    }
+    ?>
+    <div id="dropdownContainer">
+        <!-- This is where dynamically added dropdowns will go -->
+    </div>
 
-            <div class="row">
-                <input type="submit" class="btn" value="Done">
-            </div>
-        </form>
+    <button onclick="editDropdown()">+</button>
+    <div class="row">
+        <input type="submit" class="btn" value="Done">
     </div>
 </div>
 
-
 <script>
     $(document).ready(function() {
-        const placesContainer = document.getElementById('places-container');
-        const addPlaceFieldBtn = document.getElementById('add-place-field');
-
-        // Function to add a new place field
-        function addPlaceField() {
-            const newPlaceField = document.createElement('div');
-            newPlaceField.classList.add('place-fields');
-            newPlaceField.innerHTML = `
-                <select class="form-control-lg place-dropdown" name="places" required>
-                    <option value="">Select a place</option>
-                    <option value="place1">Place 1</option>
-                    <option value="place2">Place 2</option>
-                    <option value="place3">Place 3</option>
-                </select>
-                <input type="text" class="form-control place-details" placeholder="Enter details for selected place" disabled>
-                <button type="button" class="remove-place-field" onclick="removePlaceField(this)">Remove</button>
-            `;
-            placesContainer.appendChild(newPlaceField);
-
-            // Add event listener to new place dropdown
-            newPlaceField.querySelector('.place-dropdown').addEventListener('change', function() {
-                if (this.value !== '') {
-                    enablePlaceDetailsField(this);
-                }
-            });
-        }
-
-        // Function to enable place details field
-        function enablePlaceDetailsField(selectElement) {
-            const placeDetailsField = selectElement.parentElement.querySelector('.place-details');
-            placeDetailsField.disabled = false;
-        }
-
-        // Function to remove a place field
-        function removePlaceField(button) {
-            button.parentElement.remove();
-        }
-
-        // Add event listener to "Add Place Field" button
-        addPlaceFieldBtn.addEventListener('click', addPlaceField);
+        const editDropdownButton = document.querySelector('button[onclick="editDropdown()"]');
+        editDropdownButton.click();
     });
+    function editDropdown(place = '') {
+        const container = document.getElementById('dropdownContainer');
+        const dropdownCount = container.getElementsByClassName('dropdown').length;
+
+        const newDropdown = document.createElement('div');
+        newDropdown.classList.add('dropdown');
+
+        const label = document.createElement('label');
+        label.textContent = `Location ${dropdownCount + 1}:`;
+        newDropdown.appendChild(label);
+
+        const select = document.createElement('select');
+        select.name = `location${dropdownCount + 1}`;
+        select.id = `location${dropdownCount + 1}`;
+
+        const options = ['Kandy', 'Ella', 'Nuwara Eliya'];
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            select.appendChild(optionElement);
+        });
+
+        newDropdown.appendChild(select);
+
+        const textarea = document.createElement('textarea');
+        textarea.id = `textarea${dropdownCount + 1}`;
+        textarea.name = `textarea${dropdownCount + 1}`;
+        textarea.rows = "4";
+        textarea.cols = "50";
+        newDropdown.appendChild(textarea);
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = '-';
+        removeButton.onclick = function() {
+            removeDropdown(this);
+        };
+        newDropdown.appendChild(removeButton);
+
+        container.appendChild(newDropdown);
+
+        // Set the default place if provided
+        if (place !== '') {
+            select.value = place;
+        }
+    }
+
+    function removeDropdown(button) {
+        button.parentNode.remove();
+    }
 </script>
+
+
 
 <div id="delete-package-modal" class="delete-package-modal modal">
     <div class="modal-content ">
