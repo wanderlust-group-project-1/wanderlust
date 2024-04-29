@@ -43,7 +43,9 @@ class Packages
     public function update(int $packageId): void
     {
         $packageModel = new PackageModel();
+        // show($_POST);
         $data = [
+            'name' => $_POST['name'],	
             'price' => $_POST['price'],
             'max_group_size' => $_POST['max_group_size'],
             'max_distance' => $_POST['max_distance'],
@@ -51,7 +53,7 @@ class Packages
             'places' => $_POST['places']
         ];
 
-        $packageModel->updatePackage($packageId, $data);
+        $packageModel->updatePackage($data, $packageId);
         redirect('packages');
     }
 

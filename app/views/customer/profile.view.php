@@ -18,7 +18,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                     <div class="profile-picture">    
                         <img src="<?php echo htmlspecialchars(OSURL); ?>images/customers/<?php echo htmlspecialchars($user->image); ?>" alt="Image" class="img">
                     </div>
-                    <h1 class="mb-4"> Hello <?php echo $user->name?>!</h1>
+                    <h1 class="mx-2 mb-4"> <?php echo $user->name?></h1>
                     <div class="row">
                         <h4><i class="fas fa-envelope"></i> <?php echo $user->email ?></h4> 
                     </div>
@@ -77,21 +77,21 @@ require_once('../app/views/navbar/customer-navbar.php');
                             <a href="<?php echo ROOT_DIR?>/myOrders">
                                 <div class="row">
                                     <div class="btn-icon">    
-                                        <h3 class="equipment-booking">Equipment</h3>
+                                        <h3 class="equipment-booking">Orders</h3>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h2>11</h2>
+                                    <h2> <?php echo $ordersCount; ?> </h2>
                                 </div>
                             </a>
                         </div>
                         <div class="card-normal usage-card justify-content-center">
                             <a href="<?php echo ROOT_DIR?>/myBookings">
                                 <div class="row">
-                                    <h3>Guides</h3>
+                                    <h3>Guide Bookings</h3>
                                 </div>
                                 <div class="row">
-                                    <h2>02</h2>
+                                    <h2> <?php echo $guideBookingsCount; ?> </h2>
                                 </div>
                             </a>
                         </div>
@@ -101,7 +101,7 @@ require_once('../app/views/navbar/customer-navbar.php');
                                     <h3>Complaints</h3>
                                 </div>
                                 <div class="row">
-                                    <h2>00</h2>
+                                    <h2> <?php echo $complaintCount; ?> </h2>
                                 </div>
                             </a>
                         </div>
@@ -249,7 +249,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 <!-- image Upload modal -->
 
-<div class="modal" id="image-upload">
+<div class="modal z-5" id="image-upload">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Upload Image</h2>

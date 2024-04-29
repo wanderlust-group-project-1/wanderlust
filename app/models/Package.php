@@ -14,42 +14,23 @@ class PackageModel
         'transport_needed',
         'places'
     ];
-    public function createPackage(JSONRequest $request, JSONResponse $response)
-    {
-        $data = $request->getAll();
-        $data['transport_needed'] = $data['transport_needed'] > 0 ? 1 : 0;
+    public function createPackage(array $data){
 
-        if ($this->validatePackageData($data)) {
-            $data['guide_id'] = UserMiddleware::getUser()['id'];
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
 
-            $data = array_filter($data, function ($key) {
-                return in_array($key, $this->allowedColumns);
-            }, ARRAY_FILTER_USE_KEY);
+        $data['guide_id'] = $_SESSION['USER']->id;
 
-            $id =  $this->insert($data);
+        // show($data);
 
-            $response->success(true)
-                ->message('Package created successfully')
-                ->statusCode(201)
-                ->send();
-        } else {
-            // Output data when validation fails
-            $response->success(false)
-                ->data([
-                    'errors' => $this->errors,
-                    'data' => $data,
-                    'keys' => array_keys($data),
-                    'allowed_columns' => $this->allowedColumns
-                ])
-                ->message('Validation failed')
-                ->statusCode(422)
-                ->send();
-        }
+        $this->insert($data);
     }
 
 
     public function updatePackage(array $data, int $id)
     {
+
         $data = array_filter($data, function ($key) {
             return in_array($key, $this->allowedColumns);
         }, ARRAY_FILTER_USE_KEY);

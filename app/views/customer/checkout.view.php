@@ -218,6 +218,13 @@ require_once('../app/views/navbar/customer-navbar.php');
                         console.log("Payment dismissed");
                         alertmsg("Payment dismissed", "error");
 
+                        setTimeout(() => {
+                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+
+                                    hideLoader();
+
+                                }, 1000);
+
                     };
 
                     // Error occurred
@@ -225,6 +232,12 @@ require_once('../app/views/navbar/customer-navbar.php');
                         // Note: show an error page
                         console.log("Error:" + error);
                         alertmsg("Error occured", "error");
+                        setTimeout(() => {
+                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+
+                                    hideLoader();
+
+                                }, 1000);
                     };
 
                     // Put the payment variables here

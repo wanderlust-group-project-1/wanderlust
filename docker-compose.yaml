@@ -26,8 +26,8 @@ services:
       dockerfile: mysql.Dockerfile
       context: .
     restart: always
-    # ports:
-    #   - 8006:3306
+    ports:
+      - 8006:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:

@@ -25,6 +25,25 @@ require_once('../app/views/navbar/customer-navbar.php');
 </div>
 
 
+<div class="modal" id="report-modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close">×</span>
+        <h2 id="report-order-id">Report for Order ID: 67</h2>
+        <form id="report-form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="report-title" name="title" class="form-control-lg" required="">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="report-description" name="description" class="form-control-lg" required=""></textarea>
+            </div>
+            <button class="btn-text-green border" id="report-submit" data-id="67">Submit</button>
+        </form>
+    </div>
+</div>
+
+
 <script>
     $(document).ready(function() {
         function bookingList() {
@@ -48,14 +67,14 @@ require_once('../app/views/navbar/customer-navbar.php');
             const modalContent = document.getElementById("booking-list");
             modalContent.innerHTML = "";
 
-            const userHTML = `
-            <div class="user-details">
-                <h2>User Details</h2>
-                <p>Name: ${userDetails.name}</p>
-                <p>Mobile No: ${userDetails.mobile}</p>
-                <!-- Add more user details as needed -->
-            </div>
-        `;
+            //     const userHTML = `
+            //     <div class="user-details">
+            //         <h2>Guide Details</h2>
+            //         <p>Name: ${userDetails.name}</p>
+            //         <p>Mobile No: ${userDetails.mobile}</p>
+            //         <!-- Add more user details as needed -->
+            //     </div>
+            // `;
 
             const bookingHTML = `
             <div class="booking-details">
@@ -66,25 +85,59 @@ require_once('../app/views/navbar/customer-navbar.php');
                             <p> Place: ${booking.location}</p>
                             <p> Group Size: ${booking.no_of_people}</p>
                             <p> Status: ${booking.status}</p>
+                        </div>
+                        <button class="btn-text-green order-view-button" id="view-button"><i class="fa fa-list" aria-hidden="true"></i> View</button>
+                        <button class="btn-text-orange order-report-button"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Complain</button>
 
                         </div>
-                        </div>
-
-                    `).join('')}
+                    `
+                ).join('')}
             </div>
+
+
         `;
 
-            modalContent.innerHTML = userHTML + bookingHTML;
+            modalContent.innerHTML = bookingHTML;
         }
         bookingList();
     });
 </script>
 
 
-<?php
-    require_once('../app/views/layout/footer-main.php');
-?>
+<script>
+    $(document).ready(function() {
+        // Get the modal
+        var modal = document.getElementById("report-modal");
+        var viewModal = document.getElementById("view-modal")
+
+        // When the user clicks the "Complain" button, open the modal
+        $(document).on('click', '.order-report-button', function() {
+            modal.style.display = "block";
+        });
+
+        // When the user clicks the "View" button, open the modal
+        $(document).on('click', '.order-view-button', function() {
+            viewModal.style.display = "block";
+        });
+
+        // When the user clicks the close button, close the modal
+        $(document).on('click', '.close', function() {
+            modal.style.display = "none";
+            viewModal.style.display = "none";
+        });
+
+        // When the user clicks anywhere outside of the modal, close it
+        $(window).click(function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                viewModal.style.display = "none";
+            }
+        });
+    });
+</script>
 
 <?php
+    require_once('../app/views/layout/footer-main.php');
+
     require_once('../app/views/layout/footer.php');
 ?>
