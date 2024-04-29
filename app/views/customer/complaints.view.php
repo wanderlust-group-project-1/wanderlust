@@ -29,9 +29,8 @@ require_once('../app/views/navbar/customer-navbar.php');
     
 </div>
 
-<!-- complaint cancel -->
 
-<div id="cancel-complaint-modal" class="modal">
+<!-- <div id="cancel-complaint-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Cancel Complaint</h2>
@@ -39,6 +38,24 @@ require_once('../app/views/navbar/customer-navbar.php');
         <div class="flex-d gap-3 mt-3">
             <button class="btn btn-primary" id="cancel-complaint-confirm">Yes</button>
             <button class="btn btn-danger modal-close" id="cancel-complaint-cancel">No</button>
+        </div>
+    </div>
+</div> -->
+
+<!-- Confirm cancel modal -->
+
+<div class="modal" id="cancel-complaint-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3 p-6">
+            <h2 class="text-center">Cancel Complaint</h2>
+            <div class="row">
+                <p>Are you sure you want to cancel this complaint?</p>
+            </div>
+            <div class="row flex-d gap-3 mt-3">
+                <button class="btn-text-green border" id="cancel-complaint-confirm">Yes</button>
+                <button class="btn-text-red border modal-close" id="cancel-complaint-cancel">No</button>
+            </div>
         </div>
     </div>
 </div>
