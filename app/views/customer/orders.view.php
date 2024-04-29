@@ -9,7 +9,17 @@ require_once('../app/views/navbar/customer-navbar.php');
     <div class="customer-bg-image">
         <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
     </div>
-    <div class="col-lg-8 flex-d-c gap-2 mt-9 ">
+    <div class="col-lg-8 col-md-12 flex-d-c gap-2 mt-9 ">
+
+
+    <div class="card card-normal-glass mw-600px align-self-center bg-transparent">
+       <!-- Tip -->
+       <div class="tips">
+        <h3><i class="fa fa-lightbulb-on"></i>  <?php echo $tip->title; ?> </h3>
+        <p>  <?php echo $tip->description; ?> </p>
+       </div>
+       
+    </div>
         <div class="card card-normal-glass ">
             <h2 class="justify-content-center flex-d ml-3"> Orders </h2>
             <div class="section-switch flex-d  gap-3 flex-wrap" >

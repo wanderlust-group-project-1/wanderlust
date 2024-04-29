@@ -269,7 +269,9 @@
     }
   } 
 
-  // disabled state
+  &.center {
+    align-self: center;
+  }
 
 
   &:hover{

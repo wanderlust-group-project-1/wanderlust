@@ -90,7 +90,7 @@
                 <?php 
                  }
                 elseif ($complaint->status == 'rented') { ?>
-                    <button class="btn btn-primary" id="mark-as-returned">Mark as Returned</button>
+                    <button class="btn-text-orange" id="mark-as-returned">Mark as Returned</button>
                 <?php }
                 elseif ($complaint->status == 'pending') { ?>
                     <button class="btn-text-orange" id="accept-complaint"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
@@ -149,8 +149,8 @@
         <h2>Cancel Complaint</h2>
         <p>Are you sure you want to cancel this complaint?</p>
         <div class="flex-d gap-3 mt-3">
-            <button class="btn btn-primary" id="cancel-complaint-confirm">Yes</button>
-            <button class="btn btn-danger modal-close" id="cancel-complaint-cancel">No</button>
+            <button class="btn-text-green border" id="cancel-complaint-confirm">Yes</button>
+            <button class="btn-text-red border modal-close" id="cancel-complaint-cancel">No</button>
         </div>
     </div>
 </div>
