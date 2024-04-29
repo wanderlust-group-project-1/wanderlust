@@ -22,8 +22,8 @@
                 <h3 class="rental-name"> <?php echo htmlspecialchars($equipment->name); ?> </h3>
                 <p class="rental-description"> <?php echo htmlspecialchars($equipment->description); ?> </p>
                 
-                <!-- set count input
-                <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="<?php echo htmlspecialchars($equipment->count); ?>"> -->
+                 <!-- set count input -->
+                <input class="form-control-lg" type="number" name="count" id="item-count" value="1" min="1" max="<?php echo htmlspecialchars($equipment->count); ?>">
 
 
                 

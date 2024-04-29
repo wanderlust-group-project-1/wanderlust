@@ -51,21 +51,21 @@ require_once('../app/views/layout/header.php');
 
 
         <?php if($rent && $rent[0]) : ?>
-            <div class="card">
+            <div class="guide-card-new">
+            <span class="label">Upcoming Booking</span>
 
-                <div class="head">
-                    <div>
+              
+                      
 
                        
-                        <h3> <?php echo (new DateTime($rent[0]->start_date))->format('jS F') ?></h3>
-                        <p>Upcoming Booking</p>
-                    </div>
-
-
-                </div>
-                <div class="booking-bar .flex-d mt-4 mb-2">
-                    <p><?php echo $rent[0]->customer_name ?></p>
-                </div>
+                    <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p>  <?php echo (new DateTime($rent[0]->start_date))->format('jS F') ?>  </p>
+                         </div>
+                        <!-- <p>Upcoming Booking</p> -->
+    
+                        <span class="label">
+                   <?php echo $rent[0]->customer_name ?>
+                </span>
              
             </div>
             <?php endif; ?>
