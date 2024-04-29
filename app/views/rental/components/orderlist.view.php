@@ -133,8 +133,8 @@
                     <button class="btn-text-orange" id="mark-as-returned"><i class="fa fa-check" aria-hidden="true"></i>Mark as Returned</button>
                 <?php }
                 elseif ($order->status == 'pending') { ?>
-                    <button class="btn-text-orange" id="accept-request"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
-                    <button class="btn-text-red" id="cancel-request"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>  
+                    <button class="btn-text-orange" id="accept-request"><i class="fa fa-check" aria-hidden="true"></i> Mark As Viewed</button>
+                    <!-- <button class="btn-text-red" id="cancel-request"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>   -->
                 <?php }
                 ?>
 

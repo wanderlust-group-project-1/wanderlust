@@ -14,10 +14,19 @@ require_once('../app/views/navbar/customer-navbar.php');
 
     <div class="card card-normal-glass mw-600px align-self-center bg-transparent">
        <!-- Tip -->
-       <div class="tips">
-        <h3><i class="fa fa-lightbulb-on"></i>  <?php echo $tip->title; ?> </h3>
-        <p>  <?php echo $tip->description; ?> </p>
-       </div>
+       <?php if (isset($tip) && !empty($tip)): ?>
+    <div class="tips">
+        <h3><i class="fa fa-lightbulb-on"></i> <?php echo htmlspecialchars($tip->title); ?></h3>
+        <p><?php echo htmlspecialchars($tip->description); ?></p>
+    </div>
+<?php else: ?>
+    <div class="tips">
+        <h3><i class="fa fa-lightbulb-on"></i> No Tips Available</h3>
+        <p>Check back later for more tips!</p>
+    </div>
+<?php endif; ?>
+
+
        
     </div>
         <div class="card card-normal-glass ">

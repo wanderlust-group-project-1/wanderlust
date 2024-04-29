@@ -4,21 +4,25 @@ class MyOrders {
     use Controller;
 
     
-    public function index(string $a = '', string $b = '', string $c = ''):void {
-
-        
+    public function index(string $a = '', string $b = '', string $c = ''): void {
 
         AuthorizationMiddleware::authorize(['customer']);
-
+    
         $tips = new TipsModel();
         $data['tips'] = $tips->findAll();
-
-        // randomly select 1 tip
-        $data['tip'] = $data['tips'][array_rand($data['tips'])];
-        // show($data['tip']);
+    
+        if (empty($data['tips'])) {
+            // Handle the case where no tips are found
+            $data['tip'] = '';
+        } else {
+            // Randomly select 1 tip if the array is not empty
+            $data['tip'] = $data['tips'][array_rand($data['tips'])];
+        }
       
+        // Load the view with the data
         $this->view('customer/orders', $data);
     }
+    
 
     public function list(string $a = '', string $b = '', string $c = ''):void {
         AuthorizationMiddleware::authorize(['customer']);
