@@ -4,10 +4,13 @@ require_once('../app/views/layout/header.php');
 require_once('../app/views/navbar/customer-navbar.php');
 
 ?>
-<div class="container flex-d-c justify-content-center gap-2">
+<div class="customer-bg-image">
+    <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+</div>
+<div class="container flex-d-c justify-content-center gap-2 mt-5">
     <div class="row gap-2 mt-7">
 
-        <form id="searchForm" class="searchForm form">
+        <form id="searchForm" class="searchForm form-bg-new">
             <label> Date: </label>
             <input type="date" name="date" id="date" required>
 
@@ -25,6 +28,7 @@ require_once('../app/views/navbar/customer-navbar.php');
         </form>
 
     </div>
+
 
 
     <div id="all-guides" class="row gap-2 justify-content-center mt-7">

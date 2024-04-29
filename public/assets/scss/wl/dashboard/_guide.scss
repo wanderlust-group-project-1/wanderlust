@@ -1,3 +1,13 @@
+.customer-view {
+  background: transparent !important;
+}
+
+.customer-view-card{
+  background-color: $color-lighter !important;
+  border-radius: 15px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
 .guide-dash-prof {
   display: flex;
   // margin-left: 3rem;
@@ -58,6 +68,29 @@
   }
 }
 
+.guide-card {
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: $color-lighter;
+    // background: linear-gradient(135deg, rgba(208, 51, 51, 0), rgba(255, 255, 255, 0));
+    // background: linear-gradient(to right, $color-light, $color-lightest);
+
+    backdrop-filter: blur(50px);
+
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
 .info-data {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -69,6 +102,9 @@
     background: $color-light2;
     border: 1px solid rgba(47, 59, 28, 0.2);
     // box-shadow: $box-shadow-default;
+
+
+    
 
     .head {
       display: flex;
@@ -533,6 +569,13 @@ $box-shadow-color: rgba(0, 0, 0, 0.2);
   width: 50rem;
   padding: 3rem;
   background-color: $color-light;
+
+}
+
+.form-bg-new{
+  background-color: $color-lightest !important;
+  border-radius: 15px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
 }
 
 .guide-h2-title{
