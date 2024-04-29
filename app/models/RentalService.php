@@ -172,9 +172,10 @@ class RentalServiceModel
         $q = new QueryBuilder;
         $q->setTable('rental_services');
         // with user table join
-        $q->select('rental_services.*,users.email,users.role')
+        $q->select('rental_services.*,users.email,users.role,locations.latitude,locations.longitude')
             // ->from('rental_services')
             ->join('users', 'rental_services.user_id', 'users.id')
+            ->join('locations', 'rental_services.location_id', 'locations.id')
             ->where('rental_services.id', $id);
         // return $this->query();
         // show($id);

@@ -2,6 +2,7 @@
 require_once('../app/views/layout/header.php');
 // require_once('../app/views/admin/components/navbar.php');
 ?>
+      <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <div class="dashboard">
       <?php require_once('../app/views/admin/layout/sidebar.php');
@@ -189,33 +190,194 @@ require_once('../app/views/layout/header.php');
                               <div class="flex-d-c">
                                     <div class="flex-d-r">
                                           <div>
-                                                <h3>Tips & Knowhows</h3>
+                                                <h3>Equipments</h3>
                                           </div>
                                     </div>
 
                                     <div class="flex-d-r">
                                           <h1>
-                                                <?php if ($tips && $tips[0] && $tips[0]->count > 0) : ?>
+                                                <!-- <?php if ($tips && $tips[0] && $tips[0]->count > 0) : ?>
                                                       <?php echo $tips[0]->count; ?>
                                                 <?php else : ?>
                                                       0
-                                                <?php endif; ?>
+                                                <?php endif; ?> -->
+                                                <?php echo $equipments; ?>
                                           </h1>
 
                                     </div>
                               </div>
                               <div class="flex-d-c">
                                     <div class="flex-d-r justify-content-end">
-                                          <a href="<?php echo ROOT_DIR ?>/admin/tips">
+                                          <!-- <a href="<?php echo ROOT_DIR ?>/admin/tips">
                                                 <button type=" submit" class="btn-text-green   border " id="see-more">
                                                       See More >>
                                                 </button>
-                                          </a>
+                                          </a> -->
                                     </div>
                               </div>
                         </div>
                   </div>
             </div>
+
+
+
+
+            <!-- Rental Services Bookings -->
+
+            <div class="data">
+                  <div class="content-data">
+                        <div class="head">
+                              <h3>Rental Services Bookings</h3>
+                              <div class="menu">
+                                    <ul class="menu-link">
+                                          <li><a href="#">Edit</a></li>
+                                          <li><a href="#">Save</a></li>
+                                          <li><a href="#">Remove</a></li>
+                                    </ul>
+                              </div>
+                        </div>
+                        <div class="chart">
+                              <div id="chart2"></div>
+                        </div>
+                  </div>
+            </div>
+
+
+
+            <script>
+                  $(document).ready(function() {
+
+
+                        // get monthly completed rental count
+
+                        $.ajax({
+                              headers: {
+                                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                              },
+                              url: '<?= ROOT_DIR ?>/api/statistics/adminRental',
+                              type: 'GET',
+                              success: function(response) {
+                                    console.log(response);
+                                    console.log(response.data);
+                                    console.log(response.data.rentalCount);
+                                    console.log(response.data.itemCount);
+
+                                    var options = {
+                                          series: [{
+                                                      name: 'Completed Rentals',
+                                                      data: response.data.rentalCount
+                                                },
+                                                {
+                                                      name: 'Items Rented',
+                                                      data: response.data.itemCount
+                                                }
+
+
+                                          ],
+                                          chart: {
+                                                height: 300,
+                                                type: 'area',
+                                                fontFamily: 'Poppins, sans-serif'
+                                          },
+                                          dataLabels: {
+                                                enabled: false
+                                          },
+                                          stroke: {
+                                                curve: 'smooth'
+                                          },
+                                          xaxis: {
+                                                type: 'category',
+                                                categories: response.data.months
+                                          },
+                                          tooltip: {
+                                                x: {
+                                                      format: 'dd/MM/yy HH:mm'
+                                                },
+                                          },
+                                          colors: ['#B2BDA0', '#2F3B1C']
+                                    };
+
+                                    var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+                                    chart2.render();
+
+
+                              }
+                        });
+
+
+                        // MENU
+                        $('main .content-data .head .menu').each(function() {
+                              var $icon = $(this).find('.icon');
+                              var $menuLink = $(this).find('.menu-link');
+
+                              $icon.click(function(e) {
+                                    $menuLink.toggleClass('show');
+                                    e.stopPropagation(); // Prevents the event from bubbling up the DOM tree
+                              });
+
+                              // Close menu when clicking outside
+                              $(window).click(function(e) {
+                                    if (!$(e.target).is($icon) && !$(e.target).is($menuLink) && $menuLink.hasClass('show')) {
+                                          $menuLink.removeClass('show');
+                                    }
+                              });
+                        });
+
+                        // PROGRESSBAR
+                        $('main .card .progress').each(function() {
+                              var value = $(this).data('value');
+                              $(this).css('--value', value);
+                        });
+
+                        // APEXCHART
+                        var options = {
+                              series: [{
+                                          name: 'You',
+                                          data: [5, 12, 15, 10, 8, 14, 11]
+                                    },
+                                    {
+                                          name: 'Rank #1',
+                                          data: [8, 10, 7, 12, 10, 20, 18]
+                                    }
+                              ],
+                              chart: {
+                                    height: 300,
+                                    type: 'area',
+                                    fontFamily: 'Poppins, sans-serif'
+                              },
+                              dataLabels: {
+                                    enabled: false
+                              },
+                              stroke: {
+                                    curve: 'smooth'
+                              },
+                              xaxis: {
+                                    type: 'category',
+                                    categories: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
+                              },
+                              tooltip: {
+                                    x: {
+                                          format: 'dd/MM/yy HH:mm'
+                                    },
+                              },
+                              colors: ['#B2BDA0', '#2F3B1C']
+                        };
+
+                        // var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+                        // chart2.render();
+                  });
+            </script>
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="info-data mt-5">
                   <div class="card">
