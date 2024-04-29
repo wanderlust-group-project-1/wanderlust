@@ -103,6 +103,7 @@ require_once('../app/views/navbar/customer-navbar.php');
     });
 </script>
 
+
 <script>
     $(document).ready(function() {
         // Get the modal
@@ -134,4 +135,9 @@ require_once('../app/views/navbar/customer-navbar.php');
         });
     });
 </script>
-<?php require_once('../app/views/layout/footer.php'); ?>
+
+<?php
+    require_once('../app/views/layout/footer-main.php');
+
+    require_once('../app/views/layout/footer.php');
+?>

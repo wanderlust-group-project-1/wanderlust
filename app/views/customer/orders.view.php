@@ -16,22 +16,14 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
             <button class="btn-selected active" id="pending">Pending</button>
-
-
-
-                            <button class="btn-selected" id="upcoming">Upcoming</button>
-                            <button class="btn-selected" id="rented">Rented</button>
-                            <button class="btn-selected" id="completed">Completed</button>
-                            <button class="btn-selected" id="unpaid">Unpaid</button>
-
-                            <button class="btn-selected" id="cancelled">Cancelled</button>
-                            <button class="btn-selected" id="all">All</button>
-
-
-
-                            <!-- not rented yet -->
-
-                        </div>
+            <button class="btn-selected" id="upcoming">Upcoming</button>
+            <button class="btn-selected" id="rented">Rented</button>
+            <button class="btn-selected" id="completed">Completed</button>
+            <button class="btn-selected" id="unpaid">Unpaid</button>
+            <button class="btn-selected" id="cancelled">Cancelled</button>
+            <button class="btn-selected" id="all">All</button>
+            <!-- not rented yet -->
+            </div>
 
 
             <div class="row gap-2 ">
@@ -490,8 +482,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 </div> -->
 
 <!-- View modal -->
-    <div class="modal" id="order-item-modal" class
->
+    <div class="modal" id="order-item-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         
@@ -506,13 +497,15 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="confirm-cancel-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3">
-        <h2 class="text-center">Cancel Order</h2>
-        <p>Are you sure you want to cancel this order?</p>
-        <div class="flex-d gap-3 mt-3">
-        <button class="btn-text-green border" id="confirm-cancel">Yes</button>
-        <button class="btn-text-red border modal-close" id="cancel-cancel">No</button>
-        </div>
+        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3 p-6">
+            <h2 class="text-center">Cancel Order</h2>
+            <div class="row">
+                <p>Are you sure you want to cancel this order?</p>
+            </div>
+            <div class="row flex-d gap-3 mt-3">
+                <button class="btn-text-green border" id="confirm-cancel">Yes</button>
+                <button class="btn-text-red border modal-close" id="cancel-cancel">No</button>
+            </div>
         </div>
     </div>
 </div>
@@ -523,14 +516,15 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="mark-as-rented-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3">
-
-        <h2 class="text-center">Mark as Rented</h2>
-        <p>Are you sure you want to mark this order as rented?</p>
-        <div class="flex-d gap-3 mt-3">
-        <button class="btn-text-green border" id="mark-as-rented-confirm">Yes</button>
-        <button class="btn-text-red border modal-close" id="mark-as-rented-cancel">No</button>
-        </div>
+        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3 p-6">
+            <h2 class="text-center">Mark as Rented</h2>
+            <div class="row">
+                <p>Are you sure you want to mark this order as rented?</p>
+            </div>
+            <div class="row flex-d gap-3 mt-3">
+                <button class="btn-text-green border" id="mark-as-rented-confirm">Yes</button>
+                <button class="btn-text-red border modal-close" id="mark-as-rented-cancel">No</button>
+            </div>
         </div>
     </div>
 </div>
@@ -542,18 +536,24 @@ require_once('../app/views/navbar/customer-navbar.php');
 <div class="modal" id="report-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2 id="report-order-id">Report for Order ID: </h2>
-        <form id="report-form">
-            <div class="form-group">
+        <div class="flex-d-c flex-md-c justify-content-center aligh-items-center gap-3 p-5">
+            <div class="row">
+                <h2 id="report-order-id">Add complaint</h2>
+            </div>
+        <form id="report-form" class="ml-4">
+            <div class="form-group mb-2">
                 <label for="title">Title</label>
                 <input type="text" id="report-title" name="title" class="form-control-lg" required>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
                 <label for="description">Description</label>
                 <textarea id="report-description" name="description" class="form-control-lg" required></textarea>
             </div>
-            <button class="btn-text-green border" id="report-submit">Submit</button>
+            <div class="row mt-5">
+                <button class="btn-text-green border" id="report-submit">Submit</button>
+            </div>
         </form>
+        </div>
     </div>
 </div>
 
@@ -572,4 +572,10 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
 
-<?php require_once('../app/views/layout/footer.php'); ?>
+<?php
+    require_once('../app/views/layout/footer-main.php');
+?>
+
+<?php
+    require_once('../app/views/layout/footer.php');
+?>
