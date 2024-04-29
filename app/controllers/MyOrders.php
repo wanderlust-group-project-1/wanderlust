@@ -9,8 +9,15 @@ class MyOrders {
         
 
         AuthorizationMiddleware::authorize(['customer']);
+
+        $tips = new TipsModel();
+        $data['tips'] = $tips->findAll();
+
+        // randomly select 1 tip
+        $data['tip'] = $data['tips'][array_rand($data['tips'])];
+        // show($data['tip']);
       
-        $this->view('customer/orders');
+        $this->view('customer/orders', $data);
     }
 
     public function list(string $a = '', string $b = '', string $c = ''):void {
