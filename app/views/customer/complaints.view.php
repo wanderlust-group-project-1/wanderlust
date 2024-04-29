@@ -116,10 +116,6 @@ require_once('../app/views/navbar/customer-navbar.php');
 </div>
 
 
-<?php
-require_once('../app/views/layout/footer.php');
-?>
-
 <!-- mycom-view-button -->
 <script>
 $(document).on('click', '#mycom-view-button', function() {
@@ -176,3 +172,11 @@ $(document).on('click', '#mycom-view-button', function() {
     });
 
 </script>
+
+<?php
+    require_once('../app/views/layout/footer-main.php');
+?>
+
+<?php
+    require_once('../app/views/layout/footer.php');
+    ?>

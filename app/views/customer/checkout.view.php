@@ -280,5 +280,9 @@ require_once('../app/views/navbar/customer-navbar.php');
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 
     <?php
+    require_once('../app/views/layout/footer-main.php');
+    ?>
+
+    <?php
     require_once('../app/views/layout/footer.php');
     ?>

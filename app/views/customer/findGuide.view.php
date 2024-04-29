@@ -74,3 +74,11 @@ require_once('../app/views/navbar/customer-navbar.php');
         });
     });
 </script>
+
+<?php
+    require_once('../app/views/layout/footer-main.php');
+?>
+
+<?php
+    require_once('../app/views/layout/footer.php');
+?>

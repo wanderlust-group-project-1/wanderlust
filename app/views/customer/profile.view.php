@@ -1,7 +1,7 @@
 <?php
 require_once('../app/views/layout/header.php');
 require_once('../app/views/navbar/customer-navbar.php');
-require_once('../app/views/layout/footer.php');
+// require_once('../app/views/layout/footer.php');
 ?>
 
 
@@ -449,3 +449,11 @@ require_once('../app/views/layout/footer.php');
         });
     });
 </script>
+
+<?php
+    require_once('../app/views/layout/footer-main.php');
+?>
+
+<?php
+    require_once('../app/views/layout/footer.php');
+?>

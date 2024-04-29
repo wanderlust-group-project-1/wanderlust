@@ -57,7 +57,9 @@ if (isset($_SESSION['USER']) && is_object($_SESSION['USER']) && $_SESSION['USER'
 <a href="<?= ROOT_DIR ?>/logout" title="Logout">Logout</a> -->
 
 <?php
-require_once('../app/views/layout/footer.php');
+    require_once('../app/views/layout/footer-main.php');
+?>
 
-
+<?php
+    require_once('../app/views/layout/footer.php');
 ?>
