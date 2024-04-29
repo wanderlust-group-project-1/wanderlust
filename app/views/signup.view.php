@@ -222,7 +222,7 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document" class="btn-text-green border center miw-200px file-label w-100">Browes here</label>
+                                    <label for="verification_document" class="btn-text-green border center miw-200px file-label w-100">Browse here</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document" class="file-input">
 <!-- d -->
@@ -334,7 +334,7 @@ require_once('../app/views/components/navbar-auth.php');
                                     <div><label>Upload verification Documents</label>
                                     </div>
                                     <div class="file-upload-button">
-                                    <label for="verification_document-rental" class="btn-text-green center border file-label  file-label-rental w-100">Browes here</label>
+                                    <label for="verification_document-rental" class="btn-text-green center border file-label  file-label-rental w-100">Browse here</label>
                                     </div>
                                     <input type="file" name="verification_document" id="verification_document-rental" class="file-input">
 <!-- d -->
