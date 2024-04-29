@@ -202,20 +202,22 @@ require_once('../app/views/layout/header.php');
         <div class="modal-content">
             <span class="modal-close close">&times;</span>
             <form id="availability-details">
-                <h2>Availability</h2>
+                <h2 class="row">Availability</h2>
                 <div class="schedule-details">
                     <table class="table-details">
-                        <tr>
-                            <td><strong>Date:</strong></td>
-                            <td id="selected-day"></td>
+                        <tr class="">
+                            <td class="row"><strong>Date:</strong></td>
+                            <td class="row" id="selected-day"></td>
                         </tr>
-                        <tr>
-                            <td><strong>Availability:</strong></td>
-                            <td><input type="checkbox" id="availability"></td>
+                        <tr class="row">
+                            <td class="row"><strong>Availability:</strong></td>
+                            <td class="row"><input type="checkbox" id="availability"></td>
                         </tr>
                     </table>
                 </div>
-                <input type="submit" class="btn mt-4" name="submit" value="Update">
+                <div class="row">
+                    <input type="submit" class="btn-text-green border" name="submit" value="Update">
+                </div>
             </form>
         </div>
     </div>

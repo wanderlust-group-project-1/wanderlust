@@ -170,4 +170,34 @@ class GuideBookings
             ->statusCode(200)
             ->send();
     }
+
+    public function GetUserBookingDetails(string $a = '', string $b = '', string $c = ''): void{
+
+        $response = new JSONResponse;
+
+        $GuideBookingsModel = new GuideBookingsModel;
+        $userId = UserMiddleware::getUser()['id'];
+        $bookingDetails = $GuideBookingsModel->GetUserBookingDetails($userId);
+
+        $response->success(true)
+            ->data($bookingDetails)
+            ->message('Booking details fetched successfully')
+            ->statusCode(200)
+            ->send();
+    }
+
+    public function GetMonthlyCompletedBookings(string $a = '', string $b = '', string $c = ''): void{
+
+        $response = new JSONResponse;
+
+        $GuideBookingsModel = new GuideBookingsModel;
+        $userId = UserMiddleware::getUser()['id'];
+        $bookingDetails = $GuideBookingsModel->GetMonthlyCompletedBookings($userId);
+
+        $response->success(true)
+            ->data($bookingDetails)
+            ->message('Booking details fetched successfully')
+            ->statusCode(200)
+            ->send();
+    }
 }

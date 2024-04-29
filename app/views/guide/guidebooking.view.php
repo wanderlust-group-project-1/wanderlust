@@ -275,7 +275,7 @@ require_once('../app/views/layout/header.php');
 
     <script>
         function openModalSchedule(bookedDay) {
-            $(document).on('click', '.delete-package-button', function() {
+            $(document).on('click', '#delete-package-button', function() {
                 var modal = document.getElementById("delete-booking-modal");
                 modal.style.display = "block";
             });
@@ -316,8 +316,8 @@ require_once('../app/views/layout/header.php');
 
             // Create HTML to display booking details
             const tableHTML = `
-                <h2 class="guide-h2-title">Booking Details</h2>
-                <div class="booking-details">
+                <h2 class="guide-h2-title row">Booking Details</h2>
+                <div class="booking-details row">
                     <table class="table-details">
                         <tr>
                             <td><strong>Date:</strong></td>
@@ -363,20 +363,20 @@ require_once('../app/views/layout/header.php');
             <div id="booking-details-container">
                 <!-- Booking details will be inserted here -->
             </div>
-            <div class="flex-d gap-2 mt-5">
-                <button class="btn btn-danger delete-package-button">Cancel Booking</button>
-                <button class="btn btn-success edit-package-button">Completed</button>
+            <div class="flex-d gap-2 mt-5 row">
+                <button class="btn-text-red border" id="delete-package-button">Cancel Booking</button>
+                <button class="btn-text-green border" id="edit-package-button">Completed</button>
             </div>
         </div>
 
         <div id="delete-booking-modal" class="delete-booking-modal modal">
-            <div class="modal-content ">
+            <div class="modal-content p-4">
                 <span class="close ">&times;</span>
-                <h2 class="guide-h2-title">Delete Booking</h2>
-                <p>Are you sure you want to cancel this booking?</p>
-                <div class="flex-d gap-2 mt-5">
-                    <button id="delete-booking" class="btn btn-danger">Confirm</button>
-                    <button id="cancel-delete" class="btn modal-close">Cancel</button>
+                <h2 class="guide-h2-title row">Delete Booking</h2>
+                <p class="row">Are you sure you want to cancel this booking?</p>
+                <div class="flex-d gap-2 mt-5 row">
+                    <button id="delete-booking" class="btn-text-red border">Confirm</button>
+                    <button id="cancel-delete" class="btn-text-green border">Cancel</button>
                 </div>
 
             </div>
@@ -401,7 +401,7 @@ require_once('../app/views/layout/header.php');
         <script>
             function deleteBooking(bookedDay) {
                 console.log('complete booking');
-                $(document).on('click', '.edit-package-button', function() {
+                $(document).on('click', '#edit-package-button', function() {
                     // Make AJAX request to delete the booking
                     $.ajax({
                         headers: {

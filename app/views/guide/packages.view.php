@@ -349,7 +349,7 @@ require_once('../app/views/layout/header.php');
 <script>
     // EDIT PACKAGE
 
-    $(document).on('click', '.edit-package-button', function() {
+    $(document).on('click', '#edit-package-button', function() {
         var modal = document.getElementById("edit-package-modal");
         modal.style.display = "block";
         var packageId = $(this).data('id');
@@ -430,7 +430,7 @@ require_once('../app/views/layout/header.php');
     // DELETE PACKAGE
 
 
-    $(document).on('click', '.delete-package-button', function() {
+    $(document).on('click', '#delete-package-button', function() {
         var modal = document.getElementById("delete-package-modal");
         modal.style.display = "block";
         var packageId = $(this).data('id');

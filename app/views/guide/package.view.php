@@ -45,11 +45,11 @@ foreach ($data["package"] as $package) {
             </div>
 
             <div class="edit-button">
-                <button class="edit-package-button btn btn-full m-1" data-id="<?php echo htmlspecialchars($package->id); ?>">Edit</button>
+                <button class="btn-text-green border btn-full m-1" id="edit-package-button" data-id="<?php echo htmlspecialchars($package->id); ?>">Edit</button>
             </div>
 
             <div class="delete-button">
-                <button class="delete-package-button btn btn-danger btn-full m-1" data-id="<?php echo htmlspecialchars($package->id); ?>">Delete</button>
+                <button class="btn-text-red border btn-full m-1" id="delete-package-button" data-id="<?php echo htmlspecialchars($package->id); ?>">Delete</button>
             </div>
 
         </div>
