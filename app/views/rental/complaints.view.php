@@ -32,8 +32,8 @@ require_once('../app/views/layout/header.php');
                     <!-- Section Switch  Upcoming lented Completed -->
 
                     <div class="section-switch flex-d  gap-3 flex-wrap" >
-                        <button class="btn-selected" id="pending">Pending</button>
-                        <button class="btn-selected" id="accepted">Accepted</button>
+                        <button class="btn-selected active" id="pending">Pending</button>
+                        <!-- <button class="btn-selected" id="accepted">Accepted</button> -->
                         <button class="btn-selected" id="rejected">Rejected</button>
                         <button class="btn-selected" id="resolved">Resolved</button>
                         <button class="btn-selected" id="cancelled">Cancelled</button>
