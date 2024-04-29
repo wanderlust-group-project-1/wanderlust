@@ -35,6 +35,8 @@
         font-weight: bold;
         cursor: pointer;
         padding: 10px;
+        position: relative;
+        z-index: +2;
 
         &:hover,
         &:focus {
