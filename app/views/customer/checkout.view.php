@@ -17,7 +17,7 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 <div class="container flex-d flex-md-c justify-content-center  mt-9 ml-8 p-6">
     <div class="customer-bg-image">
-        <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+        <img src="<?php echo ROOT_DIR ?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
     </div>
     <div class=" col-lg-8 col-md-12 flex-d-c gap-2 ">
 
@@ -81,23 +81,23 @@ require_once('../app/views/navbar/customer-navbar.php');
                         <!-- select pay fully or patial  -->
 
 
-<table class="payment-table">
-    
+                        <table class="payment-table">
 
-                        <!-- <h4> Total: Rs. <?php echo $total; ?> </h4>
+
+                            <!-- <h4> Total: Rs. <?php echo $total; ?> </h4>
                         <h4> Booking Fee: Rs. <?php echo $total * 0.2 ?> </h4> -->
-                     
-                        <tr>
-                            <td> Total: </td>
-                            <td> Rs. <?php echo $total; ?> </td>
-                        </tr>
-                        <tr>
-                            <td> Booking Fee: </td>
-                            <td> Rs. <?php echo $total * 0.2 ?> </td>
-                        </tr>
-                      
 
-</table>
+                            <tr>
+                                <td> Total: </td>
+                                <td> Rs. <?php echo $total; ?> </td>
+                            </tr>
+                            <tr>
+                                <td> Booking Fee: </td>
+                                <td> Rs. <?php echo $total * 0.2 ?> </td>
+                            </tr>
+
+
+                        </table>
 
                     </div>
                     <div class="row gap-2 ">
@@ -115,6 +115,8 @@ require_once('../app/views/navbar/customer-navbar.php');
 
 
     </div>
+
+</div>
 
     <script>
         $(document).ready(function() {
@@ -219,11 +221,11 @@ require_once('../app/views/navbar/customer-navbar.php');
                         alertmsg("Payment dismissed", "error");
 
                         setTimeout(() => {
-                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+                            window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
 
-                                    hideLoader();
+                            hideLoader();
 
-                                }, 1000);
+                        }, 1000);
 
                     };
 
@@ -233,11 +235,11 @@ require_once('../app/views/navbar/customer-navbar.php');
                         console.log("Error:" + error);
                         alertmsg("Error occured", "error");
                         setTimeout(() => {
-                                    window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
+                            window.location.href = "<?php echo ROOT_DIR ?>/myOrders";
 
-                                    hideLoader();
+                            hideLoader();
 
-                                }, 1000);
+                        }, 1000);
                     };
 
                     // Put the payment variables here

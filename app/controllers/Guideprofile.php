@@ -6,6 +6,7 @@ class Guideprofile {
     public function index(string $a = '', string $b = '', string $c = ''): void {
         $user = $_SESSION['USER'];
 
+        AuthorizationMiddleware::authorize(['guide']);
         if ($user->role == 'guide') {
             $guideProfileModel = new GuideProfileModel();
             $guideProfile = $guideProfileModel->getGuideProfileByUserId($user->id); // Assuming you have a method to fetch guide profile by user ID
