@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 29, 2024 at 02:48 PM
+-- Generation Time: Apr 29, 2024 at 11:59 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -1297,6 +1297,13 @@ INSERT INTO `guides` (`id`, `name`, `address`, `nic`, `mobile`, `gender`, `user_
 --
 -- Triggers `guides`
 --
+DELIMITER $$
+CREATE TRIGGER `AfterGuideInsert` AFTER INSERT ON `guides` FOR EACH ROW BEGIN
+    INSERT INTO `guide_profile` (`guide_id`, `description`, `languages`,`certifications`)
+    VALUES (NEW.id, ' ', ' ', ' ');  -- Assuming default values 
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `insert_guide_profile` AFTER INSERT ON `guides` FOR EACH ROW BEGIN
     INSERT INTO guide_profile (guide_id, description, languages, certifications)
@@ -5125,18 +5132,19 @@ CREATE TABLE `package` (
   `max_group_size` int NOT NULL,
   `max_distance` int NOT NULL,
   `transport_needed` tinyint(1) NOT NULL,
-  `places` text NOT NULL
+  `places` text NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `package`
 --
 
-INSERT INTO `package` (`id`, `guide_id`, `price`, `max_group_size`, `max_distance`, `transport_needed`, `places`) VALUES
-(1, 9, 15000.00, 30, 30, 1, 'Nuwara Eliya, Ella'),
-(2, 9, 12000.00, 10, 20, 1, 'Kandy, Ella, Rathnapura'),
-(3, 23, 5000.00, 10, 20, 1, 'Kandy, Ella'),
-(30, 9, 10000.00, 5, 10, 1, 'Ella, Kandy');
+INSERT INTO `package` (`id`, `guide_id`, `price`, `max_group_size`, `max_distance`, `transport_needed`, `places`, `name`) VALUES
+(1, 9, 15000.00, 30, 30, 1, 'Nuwara Eliya, Ella', ''),
+(2, 9, 12000.00, 10, 20, 1, 'Kandy, Ella, Rathnapura', ''),
+(3, 23, 5000.00, 10, 20, 1, 'Kandy, Ella', ''),
+(30, 9, 10000.00, 5, 10, 1, 'Ella, Kandy', '');
 
 -- --------------------------------------------------------
 
