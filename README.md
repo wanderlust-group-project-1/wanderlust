@@ -1,6 +1,6 @@
 # Wanderlust
 
-## Camping Equipment Rental and Guide Booking System
+## Camping Equipment Renting and Guide Booking System
 
 
 <p align="center">
