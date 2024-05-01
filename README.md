@@ -12,8 +12,6 @@
 - [Sandali Gunawardena](https://www.github.com/Sandali-Upekha)
 
 
-
-
 ## Features
 
 ### For Rental Service
@@ -70,6 +68,8 @@ Rename `example.env` to `.env`
 
 Rename `database/example.env` to `database/.env`
 
+
+
 ```bash
 docker-compose up -d --build
 ```
@@ -81,8 +81,8 @@ docker exec -it wl-mysql bash
 
 # inside container
 cd docker-entrypoint-initdb.d/
-# On Windows
 
+# On Windows (To remove CRLF)
 sed -i -e 's/\r$//' .env
 sed -i -e 's/\r$//' migrate.sh
 
