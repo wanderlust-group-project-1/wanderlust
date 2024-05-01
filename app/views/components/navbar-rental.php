@@ -1,4 +1,3 @@
-<!-- <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/navbar.css"> -->
 
 <header class="header">
     <!-- <nav class="nav__container"> -->

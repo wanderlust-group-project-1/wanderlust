@@ -6,7 +6,6 @@ require_once('../app/views/layout/header.php');
 
 ?>
 
-<!-- <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/RentalDashboard.css"> -->
 
 
 
