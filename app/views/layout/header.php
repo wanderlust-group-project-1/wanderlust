@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/style.css">
 
 
-    <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/scss/wl/dashboard/index.css">
+    <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/scss/index/index.css">
 
     <script src="<?= ROOT_DIR ?>/assets/js/script.js"></script>
 

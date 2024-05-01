@@ -5,7 +5,7 @@
         {
             "format": "expanded",
             "extensionName": ".css",
-            "savePath": "./public/assets/scss/wl/dashboard",
+            "savePath": "./public/assets/scss/index",
             "savePathReplacementPairs": null
         }
     ]
