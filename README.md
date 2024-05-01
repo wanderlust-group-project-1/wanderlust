@@ -48,7 +48,7 @@
 
 ## Tech Stack
 
-- HTML | SCSS | JavaScript | jQuery
+- HTML | JavaScript | jQuery | SCSS | CSS
 - PHP
 - MySQL
 - Apache
@@ -89,3 +89,9 @@ sed -i -e 's/\r$//' migrate.sh
 #import
 ./migrate.sh import
 ```
+
+
+## Compile SCSS
+
+Use Live Sass Compiler Extension in VSCode to compile SCSS to CSS
+
