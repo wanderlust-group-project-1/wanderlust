@@ -1,4 +1,68 @@
-# mvc
+# Wanderlust
+
+## Camping Equipment Rental and Guide Booking System
+
+
+
+## Group Members 
+
+- [Nirmal Savinda](https://www.github.com/nsavinda)
+- [Gayandee Rajapaksha](https://www.github.com/Gayandee)
+- [Sarani Hettiarachchi](https://www.github.com/Zaras00)
+- [Sandali Gunawardena](https://www.github.com/Sandali-Upekha)
+
+
+
+
+## Features
+
+### For Rental Service
+
+- Inventory Management
+- Rental Management
+- Complaint Management
+- Report Generation
+
+
+### For Guide
+
+- Package Management
+- Booking Calendar 
+- Report Generation
+
+
+### For Customer
+
+- Booking & Rent Equipment
+- Booking Guide
+- Complaint Management
+
+
+### For Admin
+
+- User Management
+- View Statistics
+- Handle Complaints
+- Report Generation
+
+
+## Tech Stack
+
+- HTML | SCSS | JavaScript | jQuery
+- PHP
+- MySQL
+- Apache
+- Docker
+
+
+### APIs and Other Integrations
+
+- Google Maps API
+- Payhere Sandbox
+- PHPMailer
+- Dompdf
+- ApexCharts
+
 
 # Setup
 
