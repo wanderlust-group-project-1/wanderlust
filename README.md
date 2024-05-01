@@ -49,6 +49,24 @@
 - Report Generation
 
 
+
+## Screenshots
+
+<!-- Center 2 column layout -->
+<p align="center">
+  <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/1.png?raw=true"  width="45%">
+    <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/2.png?raw=true" width="45%">
+    <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/3.png?raw=true"  width="45%">
+        <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/4.png?raw=true"  width="45%">
+    <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/5.png?raw=true"  width="45%">
+    <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/6.png?raw=true"  width="45%">
+    <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/7.png?raw=true"  width="45%">
+        <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/docs/8.png?raw=true"  width="45%">
+
+
+
+</p>
+
 ## Tech Stack
 
 - HTML | JavaScript | jQuery | SCSS | CSS
