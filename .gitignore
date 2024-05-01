@@ -11,3 +11,5 @@ server.env
 setup.sql
 public/assets/scss/wl/dashboard/index.css
 public/assets/scss/wl/dashboard/index.css.map
+public/assets/scss/index/index.css
+public/assets/scss/index/index.css.map
