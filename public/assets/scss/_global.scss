@@ -1,0 +1,410 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+
+}
+
+
+$header1: 3.4rem;
+$header2: 2.5rem;
+$header3: 2.3rem;
+$header4: 1.75rem;
+$header5: 4.5rem;
+
+
+
+$text: 1.68rem;
+$small-text: 1.4rem;
+$smaller-text: 1.05rem;
+$bigger-text: 5rem;
+$heading-text: 3.5rem;
+
+// $bg-color: #4C5039;
+// $bg-color-darker: #1a3842b9;
+// $half-opacity-bg-color: #27586880;
+
+// $line-color: #1a3d4971;
+
+// $gray-text: #060e11;
+// $white-text: #fcecee;
+// $shaded-grey-text: #31393b;
+// $sidebar-bg-color: #275868;
+// $sidebar-bg-header-color: #383e41;
+// $shaded-white: #efefef;
+
+// $loader-dark-color: #3498db;
+// $loader-light-color: #f3f3f3;
+
+// $loader-color: #275868;
+
+// $primary-blue-color: $sidebar-bg-color;
+// $danger-color: #ed5e68;
+
+// $info-color: #0dcaf0;
+
+
+// $bg-color: #7DA07D; // A soft, natural green
+// $bg-color-darker: rgba(#558B6E, 0.725); // A darker, earthy green with original opacity
+// $half-opacity-bg-color: rgba(#9DBF9E, 0.5); // Lighter green with original opacity
+
+// $line-color: rgba(#3D6657, 0.443); // Dark green with a hint of transparency
+
+// $gray-text: #4A504B; // Neutral grey, fitting the natural theme
+// $white-text: #FFFFFF; // Crisp white for contrast
+// $shaded-grey-text: #6E736F; // Warmer grey, complementing the earthy tones
+// $sidebar-bg-color: #558B6E; // Rich, leafy green
+// $sidebar-bg-header-color: #3D6657; // Deeper green, reminiscent of dense foliage
+// $shaded-white: #F0F0F0; // Soft off-white, maintaining neutrality
+
+// $loader-dark-color: #6D9078; // Muted green
+// $loader-light-color: #BFD1C1; // Light pastel green
+// $loader-color: #558B6E; // Green that matches the sidebar-bg-color
+
+// $primary-blue-color: $sidebar-bg-color; // Use the updated sidebar-bg-color
+// $danger-color: #A25656; // Earthy red, like autumn leaves
+// $info-color: #7DA07D; // Soft green, soothing and natural
+
+
+
+
+$color-primary:#8D9E6F;
+$color-dark:#526534;
+$color-darker:#2F3B1C;
+
+$color-light:#B2BDA0;
+$color-lighter:#EBEFE3;
+$color-light2:#D7DDCB;
+
+$color-lightest:#F3F3F3;
+$color-lightest2:#EBEFE3;
+$color-lightest3:#eff0eb;
+
+
+$color-white: #F5F5F5;
+$color-black: #000000;
+
+
+
+
+
+
+// text colors
+$white-text : #FFFFFF;
+$gray-text-lighter: #868a8d;
+$gray-text: #6B6E70;
+$gray-text-dark : #5C5E60;
+$gray-text-darker : #47494b;
+$black-text: #212016;
+$font-gold: #C1A87D;
+$font-gold2: #C2AF7B;
+$font-grey:#6B6E70;
+
+
+//button colors
+$red-lighter : #e5e5e5;
+$red-light : rgba(250, 163, 163, 0.866);
+$red : red;
+$orange : rgb(249, 143, 29);
+$blue : rgb(80, 189, 248);
+
+$bg-color:$color-primary;
+
+// $bg-color: #567356; // A darker, richer green
+$bg-color-darker: rgba(#3C5A4A, 0.725); // Even darker green, maintaining the opacity
+$half-opacity-bg-color: rgba(#6B9173, 0.5); // Medium green with original opacity
+
+$line-color: rgba(#294A38, 0.443); // Very dark green with a hint of transparency
+
+ // Crisp white for contrast
+$shaded-grey-text: #535956; // Darker grey, complementing the richer tones
+$sidebar-bg-color: #3C5A4A; // Deep, lush green
+$sidebar-bg-header-color: #294A38; // Very dark green, evoking dense forest
+$shaded-white: #E0E0E0; // Slightly darker off-white, for better contrast
+
+$loader-dark-color: #4F6D5B; // Deep and muted green
+$loader-light-color: #A8C1B0; // Dark pastel green
+$loader-color: #3C5A4A; // Green matching the sidebar-bg-color
+
+$primary-blue-color: $sidebar-bg-color; // Use the updated sidebar-bg-color
+$danger-color: #8F4548; // Dark, rich red, reminiscent of berries in the forest
+// danger lightest
+$danger-lightest-color: #F0D9D9;
+$info-color: #567356; // Dark, vibrant green
+// yello warning
+$warning-color: #FFC107;
+
+$breakpoint-sm: 576px; // Small devices (landscape phones, 576px and up)
+$breakpoint-md: 768px; // Medium devices (tablets, 768px and up)
+$breakpoint-lg: 992px;
+
+$body-font:"Poppins", sans-serif;
+$normal-font-size: .938rem;
+
+
+$font-regular: 400;
+$font-medium:500;
+$font-semi-bold: 600;
+
+$z-tooltip: 10;
+$z-fixed: 100;
+
+html {
+  font-size: 62.5%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  scroll-behavior: smooth;
+}
+
+// h2 {
+//   // font-family: sans-serif;
+//   font-weight: $font-regular;
+//   font-size: $header1;
+//   color: $color-black;
+// }
+// button,
+// input,
+// a,
+// li,
+// td,
+// h4,
+// textarea {
+//   font-size: $text;
+// }
+
+li {
+  font-size: $smaller-text;
+}
+
+span{
+  font-size: $text;
+  font-weight: $font-medium;
+}
+
+thead{
+  height:60px;
+  background: $color-lighter;
+  font-size: $header4;
+}
+tbody{
+  font-size: $header4;
+  font-weight: 200;
+  padding: 10px;
+}
+tfoot {
+  font-size: $header4;
+}
+
+h1 {
+  font-size: $header1;
+  font-weight: 500;
+  color: $gray-text-darker;
+}
+
+h2 {
+  font-size: $header2;
+  position: relative;
+  font-size: 3.4rem;
+  font-weight: 600;
+  // text-align: center;
+  // margin-top: 10px;
+  // margin-bottom: 15px;
+  // color: #526534;
+  // text-transform: uppercase;
+  // letter-spacing: 3px;
+}
+
+h3 {
+  font-size: $header3;
+  color: $color-darker;
+  font-weight: 100;
+}
+
+h4 {
+  font-size: $header4;
+  margin-top: 5px;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: center;
+}
+
+h5 {
+  font-size: $smaller-text;
+  margin-top: 5px;
+  // font-family: sans-serif;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: justify;
+  padding-left: 5px;
+}
+
+h6 {
+  // font-family: sans-serif;
+  font-weight: 200;
+  font-size: $header3;
+  color: $gray-text-dark;
+  font-style: italic;
+}
+
+p {
+  font-size: $text;
+  color: $color-darker;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: $gray-text;
+}
+
+ul,
+table {
+  list-style: none;
+}
+
+// input[type="text"],
+// input[type="password"],
+// input[type="number"],
+// textarea {
+//   padding: 1.5rem 1rem;
+//   border: none;
+//   border-radius: 12px;
+//   background-color: $shaded-white;
+//   font-size: $header4;
+//   font-family: "Poppins", sans-serif;
+
+//   &:focus {
+//     outline: none;
+//   }
+
+//   &::placeholder {
+//     color: $shaded-grey-text;
+//   }
+// }
+
+
+// thead th {
+//   border-bottom: 1px solid $line-color;
+// }
+
+.tbody-border-bottom {
+  border-bottom: 1px solid $line-color;
+}
+
+tfoot th {
+  font-weight: 200;
+}
+
+// select {
+//   background: none;
+//   border: 2px solid $bg-color;
+//   border-radius: 1rem;
+//   margin: 0.5rem;
+//   padding: 1rem 1.5rem;
+// }
+
+hr {
+  opacity: 0.5;
+}
+
+
+@mixin field-set-grid($row, $column) {
+  display: grid;
+  grid-template-columns: repeat($column, 1fr);
+  grid-template-rows: repeat($row, 1fr);
+  gap: 1rem;
+  align-content: center;
+  padding: 0 1rem;
+}
+
+.flex-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-sa {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.action-edit-color {
+  color: $primary-blue-color;
+}
+
+.action-delete-color {
+  color: $danger-color;
+}
+
+.action-view-color {
+  color: $info-color;
+}
+
+body {
+  scroll-behavior: smooth !important;
+  background-color: $color-lightest;
+
+}
+
+
+.form__radios {
+  display: grid;
+  gap: 1em;
+}
+
+.form__radio {
+  align-items: center;
+  background-color: #fefdfe;
+  border-radius: 1em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.0625);
+  display: flex;
+  padding: 1em;
+}
+
+// table {
+//   border-collapse: collapse;
+//   inline-size: 100%;
+// }
+
+// tbody {
+//   color: #b4b4b4;
+// }
+
+// td {
+//   padding-block: 0.125em;
+// }
+
+// tfoot {
+//   border-top: 1px solid #b4b4b4;
+//   font-weight: 600;
+// }
+.title{
+  font-size: $bigger-text;
+  
+}
+
+
+
+.password-toggle i{
+
+  // position: absolute;
+  // right: 20px;
+  // transform: translate(-120px,-25px);
+  font-size: large;
+  color: $color-primary;
+
+}
+
+label {
+  font-size: $header4;
+  margin-top: 5px;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: center; 
+  
+}

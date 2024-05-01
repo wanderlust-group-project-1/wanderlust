@@ -1,0 +1,174 @@
+.card {
+    box-shadow: var(--bs-card-box-shadow);
+    margin-bottom: 1.875rem;
+    --bs-card-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.125);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: var(--bs-card-bg);
+    background-clip: border-box;
+    border: var(--bs-card-border);
+    border-radius: var(--bs-card-border-radius);
+    font-size: 2rem;
+
+
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-normal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
+.card-normal2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: #d2cdcd;
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
+.card-normal3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 15px;
+    // box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+    border: $gray-text 3px inherit;
+}
+
+.card-normal-transparent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
+.card-normal-glass {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: $color-lighter;
+    // background: linear-gradient(135deg, rgba(208, 51, 51, 0), rgba(255, 255, 255, 0));
+    // background: linear-gradient(to right, $color-light, $color-lightest);
+
+    backdrop-filter: blur(50px);
+
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
+
+.card-invert {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    background-color: $color-primary;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}
+
+.card-grid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 10px;
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    background-color: #fff;
+    border-bottom:1px solid $color-lighter-gray;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+}  
+
+.card-grid-last{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin: 10px;
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    gap: 20px;
+    flex-grow: inherit;
+} 
+
+

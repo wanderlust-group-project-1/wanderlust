@@ -8,8 +8,11 @@ class UserModel {
     protected array $allowedColumns = [
         'email',
         'password',
-        'role'
+        'role',
+        'verified'
     ];
+
+
 
     // Update the hashing algorithm and salt length as needed
     private string $hashAlgorithm = "sha256";
@@ -18,8 +21,33 @@ class UserModel {
     public function registerUser(array $data){
         if ($this->validate($data)) {
             $data['password'] = $this->hashPassword($data['password']);
+
+            $id = $this->insert($data);
+
+
+           
+
+            $verify = new VerificationModel;
+            $tocken = $verify->generateToken($id, $data['email']);
+
+            // var_dump($id);
+            // die();
+
             
-            return $this->insert($data);
+
+            try {
+                $email = new EmailSender();
+                $email->sendEmail($data['email'], "Verify your email", "Click on the link to verify your email: http://localhost:8000/verify?token=$tocken");  
+                
+
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+            return $id;
+
+
+
+            
 
             // show($this->lastInsertedRow());
 
@@ -35,7 +63,7 @@ class UserModel {
         return false;
     }
 
-    private function hashPassword(string $password): string {
+    public function hashPassword(string $password): string {
         $salt = random_bytes($this->saltLength);
         $hashedPassword = hash_pbkdf2($this->hashAlgorithm, $password, $salt, 10000, 64);
         return base64_encode($salt) . ":" . $hashedPassword;
@@ -64,4 +92,24 @@ class UserModel {
          
         return empty($this->errors);
     }
+
+    // public function updateUser(array $data){
+    //     if ($this->validate($data)) {
+    //         $data['password'] = $this->hashPassword($data['password']);
+    //         $this->update($data['id'], $data);
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    public function verifyUser($id): mixed {
+
+        // $data['is_verified'] = 1;
+        $this->update($id, ['is_verified' => 1 ], 'id');
+        return true;
+        
+    }
+
+
+
+    
 }

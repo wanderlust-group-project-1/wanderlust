@@ -1,42 +1,36 @@
-<nav class="auth-nav">
-    <!-- <div class="auth-nav">  -->
-    <div class="logo" style="text-align: center;">
-    <img src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo" style="display: block; margin: auto;">
-    <!-- </div> -->
-</div>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
 
-</nav>
+<header class="header">
+    <!-- <nav class="nav__container"> -->
+    <nav class="nav__container flex-no" >
+        <div class="nav__data">
+            <a href="/" class="nav__logo">
+                <img class="nav__logo-pic" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
+            </a>
+
+            
+        </div>
+
+        <!--=============== NAV MENU ===============-->
+        <!-- <div class="nav__menu" id="nav-menu"> -->
+   
+    </nav>
+</header>
 
 <script>
-// Get the profile avatar element and the dropdown menu
-var profileAvatar = document.querySelector('.profile-avatar');
-var dropdownMenu = document.getElementById('nav-dropdown');
-
-// Toggle the dropdown menu when clicking on the profile avatar
-profileAvatar.addEventListener('click', function(event) {
-    // Prevent the default behavior of the anchor tags
-    event.preventDefault();
-
-    // Toggle the display style of the dropdown menu
-    if (dropdownMenu.style.display === 'block') {
-        dropdownMenu.style.display = 'none';
-    } else {
-        dropdownMenu.style.display = 'block';
-    }
-});
-
-// Close the dropdown menu if the user clicks outside of it
-document.addEventListener('click', function(event) {
-    if (!profileAvatar.contains(event.target) && !dropdownMenu.contains(event.target)) {
-        dropdownMenu.style.display = 'none';
-    }
-});
-
-// Prevent event propagation when clicking on dropdown links
-dropdownMenu.addEventListener('click', function(event) {
-    event.stopPropagation();
-});
-
-
-    </script>
+    const showMenu = (toggleId, navId) =>{
+    const toggle = document.getElementById(toggleId),
+          nav = document.getElementById(navId)
+ 
+    toggle.addEventListener('click', () =>{
+        // Add show-menu class to nav menu
+        nav.classList.toggle('show-menu')
+ 
+        // Add show-icon to show and hide the menu icon
+        toggle.classList.toggle('show-icon')
+    })
+ }
+ 
+ showMenu('nav-toggle','nav-menu')
+</script>

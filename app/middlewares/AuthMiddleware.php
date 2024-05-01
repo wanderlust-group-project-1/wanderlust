@@ -2,12 +2,19 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+interface AuthMiddlewareInterface {
+    public static function run_middleware(string $controller, string $method): mixed;
+    public static function is_authenticated():void;
+    public static function not_authenticated():void;
+}
 
-class AuthMiddleware {
+
+
+class AuthMiddleware  {
 
     static $user = [];
 
-    static $allowedColumns = ['id', 'email', 'name', 'role'];
+    static $allowedColumns = ['id', 'email', 'name', 'role', 'is_verified'];
 
     // filter user with allowed columns
 
@@ -27,22 +34,35 @@ class AuthMiddleware {
             'Controller2' => ['method3'],
             'Customer' => ['index', 'edit', 'update'],
             'Profile' => ['index', 'edit', 'update'],
+            'Dashboard' => ['index', 'edit', 'update'],
+            'Complaints' => 'ALL',
+            'Equipments' => 'ALL',
+            'Orders' => 'ALL',
+            'Statistics' => 'ALL',
+            'Settings' => 'ALL',
+            
+
+
+            
             // 'Profile' => ['index', 'edit', 'update'],
         ];
         $unauthRequired = [
             'Login' => ['index'],
-            'Signup' => ['index']
+            'Signup' => 'ALL'
         ];
 
         $currentController = ucfirst($controller);
 
-        if (isset($authRequired[$currentController]) &&
-            in_array($method, $authRequired[$currentController])) {
+        if (isset($authRequired[$currentController]) && ($authRequired[$currentController] == 'ALL' || in_array($method, $authRequired[$currentController]))) {
+            // in_array($method, $authRequired[$currentController])) {
             Self::is_authenticated();
         }
-        if (isset($unauthRequired[$currentController]) &&
-            in_array($method, $unauthRequired[$currentController])) {
+        if (isset($unauthRequired[$currentController]) && ($unauthRequired[$currentController] == 'ALL' || in_array($method, $unauthRequired[$currentController]))) {
+            // in_array($method, $unauthRequired[$currentController])) {
             Self::not_authenticated();
+                
+
+
         }else {
             Self::check();
         }

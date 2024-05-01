@@ -1,339 +1,213 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?php echo ROOT_DIR ?>GuideDashboard.css" rel="stylesheet">
-</head>
-
-<body> -->
-
 <?php
 require_once('../app/views/layout/header.php');
+// require_once('../app/views/navbar/rental-navbar.php');
 
-require_once('../app/views/components/navbar.php');
 ?>
-<div class="guide-dash">
-    <div class="frame">
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle" id="edit-profile">
-                Edit Profile
-            </button>
-        </div>
 
-        <div class="div-1">
-            <div class="div-12">
-                <div class="text-wrapper">Hello <?php echo $user->name ?>!</div>
-                <div class="img-1">
-                    <img src="<?php echo ROOT_DIR ?>/assets/images/7.png" alt="">
+
+
+
+<div class="dashboard">
+    <?php require_once('../app/views/guide/layout/guide-sidebar.php');
+    ?>
+
+    <div class="sidebar-flow"></div>
+
+    <div class="guide-dash-main">
+        <h1 class="title mb-2">Dashboard</h1>
+        <ul class="breadcrumbs">
+            <li><a href="<?= ROOT_DIR ?>/home">Home</a></li>
+            <li class="divider">/</li>
+            <li><a href="#" class="active">Dashboard</a></li>
+        </ul>
+        <div class="info-data mt-5">
+            <div class="guide-card-new">
+                <span class="label">No of Tours</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p id="guide-dash-1"></p>
                 </div>
             </div>
-
-            <form class="div-3">
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">NIC : <?php echo $user->nic ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Role : Guide</div>
-                    </div>
+            <div class="guide-card-new">
+                <span class="label">Income</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p id="guide-dash-2"></p>
                 </div>
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Email : <?php echo $user->email ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Mobile : <?php echo $user->mobile ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
-                    </div>
+            </div>
+            <div class="guide-card-new">
+                <span class="label">Upcoming Booking</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p id="guide-dash-3"></p>
                 </div>
-
-            </form>
-
+            </div>
+            <div class="guide-card-new">
+                <span class="label">Recent Booking</span>
+                <div class="booking-bar .flex-d mt-4 mb-2">
+                    <p id="guide-dash-4"></p>
+                </div>
+            </div>
         </div>
 
-    </div>
 
-
-
-
-    <!-- Modal Box -->
-    <div class="profile-editor" id="profile-editor">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-info">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/7.png" alt="Profile Image" class="profile-image">
-
-
-                <form id="guide" action="<?= ROOT_DIR ?>/guide/update" method="post">
-                    <h2>Update Guide Details</h2>
-                    <?php if (isset($errors)) : ?>
-                        <div> <?= implode('<br>', $errors) ?> </div>
-                    <?php endif; ?>
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                    <label for="address">Address</label>
-                    <input type="text" name="address" id="address" value="<?= $user->address ?>" disabled>
-
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
-
-                    <label for="number">Number</label>
-                    <input type="text" name="number" id="number" value="<?= $user->mobile ?>" required>
-
-                    <label for="nic">NIC Number</label>
-                    <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
-
-                    <!-- <label for="password">Password</label>
-    <input type="password" name="password" id="password" required> -->
-
-                    <input type="submit" name="submit" value="Update">
-                </form>
-
-
-
+        <div class="data">
+            <div class="content-data">
+                <div class="head">
+                    <h3 class="Guide-topics">Monthly Bookings</h3>
+                    <div class="menu">
+                        <ul class="menu-link">
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Save</a></li>
+                            <li><a href="#">Remove</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart">
+                    <div id="chart"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Box -->
+<?php
+require_once('../app/views/layout/footer.php');
 
-
-
-
-
-
-
-
-
-
-
-
-<div class="frame2">
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Total Tours</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">10</div>
-    </div>
-
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Tours per month</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-
-    <div class="yellow-card">
-        <div class="upper-card-text">
-            <div class="text-card-topic">Tours in last month</div>
-            <div class="edit-prof-button">
-                <button type="submit" class="small-button-middle">
-                    More &gt
-                </button>
-            </div>
-        </div>
-        <div class="number-card">03</div>
-    </div>
-</div>>
-
-
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="sec3-booking">
-        <div class="sec3-booking-main">
-            <div class="text-topic">Recent Booking</div>
-            <div class="img-2">
-                <img src="<?php echo ROOT_DIR ?>/assets/images/../imgs/2.png" alt="">
-            </div>
-        </div>
-
-        <div class="div-5">
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Place : Nuwara Eliya</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Name : Kamal Silva</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Date : 20/08/2023</div>
-            </div>
-            <div class="div-wrapper-2">
-                <div class="text-wrapper-2">Time : 10:00</div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
-<div class="frame">
-    <div class="edit-prof-button">
-        <button type="submit" class="small-button-middle">
-            More &gt
-        </button>
-    </div>
-
-    <div class="text-topic">Booking History</div>
-
-    <div class="div-6">
-        <div class="div-wrapper-3">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Place</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-
-                <tr>
-                    <td>Kamal Silva</td>
-                    <td>Upcoming</td>
-                    <td>Nuwara Eliya</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Kumara Perera</td>
-                    <td>Upcoming</td>
-                    <td>Kandy</td>
-                    <td>02/12/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-                <tr>
-                    <td>Sarath</td>
-                    <td>Done</td>
-                    <td>Nuwara Eliya</td>
-                    <td>01/09/2023</td>
-                    <td>10.00</td>
-                </tr>
-
-            </table>
-        </div>
-    </div>
-</div>
-</div>
-
-
-
-<!-- <form>
-                <div class="div-3">
-                    <div class="div-4">
-                        <div class="div-wrapper">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" value="Jenny Fernando">
-                        </div>
-                        <div class="div-wrapper">
-                            <label for="age">Age:</label>
-                            <input type="number" id="age" name="age" value="20">
-                        </div>
-                        <div class="div-wrapper">
-                            <label for="role">Role:</label>
-                            <select id="role" name="role">
-                                <option value="Customer" selected>Customer</option>
-                                <option value="Employee">Employee</option>
-                                <option value="Manager">Manager</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="div-4">
-                        <div class="div-wrapper">
-                            <label for="name2">Name:</label>
-                            <input type="text" id="name2" name="name2" value="Jenny Fernando">
-                        </div>
-                        <div class="div-wrapper">
-                            <label for="age2">Age:</label>
-                            <input type="number" id="age2" name="age2" value="20">
-                        </div>
-                        <div class="div-wrapper">
-                            <label for="role2">Role:</label>
-                            <select id="role2" name="role2">
-                                <option value="Customer" selected>Customer</option>
-                                <option value="Employee">Employee</option>
-                                <option value="Manager">Manager</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit">Submit</button>
-            </form> -->
-
+?>
+<!-- Include the ApexCharts library -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
-    var modal = document.getElementById("profile-editor");
+    // MENU
+    const allMenu = document.querySelectorAll('main .content-data .head .menu');
 
-    var span = document.getElementsByClassName("close")[0];
+    allMenu.forEach(item => {
+        const icon = item.querySelector('.icon');
+        const menuLink = item.querySelector('.menu-link');
 
-    // Get all view buttons
-    var viewButton = document.getElementById('edit-profile');
+        icon.addEventListener('click', function() {
+            menuLink.classList.toggle('show');
+        });
 
-    // Function to handle modal display
-    function openModal() {
-        // document.getElementById("modal-content").innerHTML = content;
-        modal.style.display = "block";
-    }
-
-    // Add click event listener to view buttons
-    viewButton.addEventListener('click', function() {
-
-        // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-        // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
-        openModal();
+        // Close menu when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target !== icon && e.target !== menuLink) {
+                if (menuLink.classList.contains('show')) {
+                    menuLink.classList.remove('show');
+                }
+            }
+        });
     });
 
 
+    // APEXCHART
+    var options = {
+        series: [{
+                name: 'You',
+                data: [5, 12, 15, 10, 8, 14, 11] // Adjusted data values, total less than 100
+            },
+            {
+                name: 'Rank #1',
+                data: [8, 10, 7, 12, 10, 20, 18] // Adjusted data values, total less than 100
+            }
+        ],
+        chart: {
+            height: 300,
+            type: 'area',
+            fontFamily: 'Poppins, sans-serif'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'category', // Change type to 'category' for non-datetime values
+            // categories: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"] // Use month names instead of date strings
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
+        },
+        colors: ['#B2BDA0', '#2F3B1C'] // Specify the colors you want here
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+</script>
+
+<script>
+    $(document).ready(function() {
+        // console.log(currentDate);
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/guideBookings/GetUserBookingDetails/',
+            type: 'GET',
+            success: function(data) {
+                console.log(data.data[0]);
+                $('#guide-dash-1').text(data.data[0].num_completed_tours);
+                $('#guide-dash-2').text(data.data[0].total_income);
+                $('#guide-dash-3').text(data.data[0].upcoming_booking_date + ' : ' + data.data[0].upcoming_booking_location);
+                $('#guide-dash-4').text(data.data[0].recent_booking_date + ' : ' + data.data[0].recent_booking_location);
+
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
 
 
-    // Close the modal when the close button is clicked
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+<script>
+    $(document).ready(function() {
+        // console.log(currentDate);
+        $.ajax({
+            headers: {
+                'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+            },
+            url: '<?= ROOT_DIR ?>/api/guideBookings/GetMonthlyCompletedBookings/',
+            type: 'GET',
+            success: function(data) {
+                console.log(data.data);
 
-    // Close the modal if the user clicks outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+
+                // Assuming data.data contains the result from your AJAX call
+
+                // Extracting num_bookings data from the response
+                const numBookingsData = data.data.map(entry => entry.num_bookings);
+                const completedBookingData = data.data.map(entry => entry.num_completed_bookings);
+
+                // Update the series name and data
+                options.series[0].name = 'All bookings';
+                options.series[0].data = numBookingsData;
+
+                options.series[1].name = 'Completed bookings';
+                options.series[1].data = completedBookingData;
+
+                const xaxisCategories = data.data.map(entry => entry.month_year);
+
+                // Update the x-axis categories
+                options.xaxis.categories = xaxisCategories;
+                
+
+
+                // Rendering the chart
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
 </script>
 
 
 
 <?php
 require_once('../app/views/layout/footer.php');
-
 
 ?>

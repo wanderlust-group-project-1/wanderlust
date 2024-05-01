@@ -118,13 +118,7 @@ Trait Model  {
     public function update($id, array $data, string $id_column = 'id'):mixed {
 
         // remove unwanted data 
-        if(!empty($this->allowedColumns)){
-            foreach($data as $key => $value){
-                if(!in_array($key,$this->allowedColumns)){
-                    unset($data[$key]);
-                }
-            }
-        }
+
 
         $keys = array_keys($data);
         $query = "update $this->table set ";
@@ -171,4 +165,42 @@ Trait Model  {
 
             return $result[0]->id;
     }
+
+
+    public function count(array $data = [], array $data_not = []):int{
+
+        $keys = array_keys($data);
+        $query = "select count(*) as count from $this->table where ";
+        foreach ($keys as $key){
+            $query .= $key. " = :" . $key . " && ";
+
+        }
+        $keys = array_keys($data_not);
+        foreach ($keys as $key){
+            $query .= $key. " != :" . $key . " && ";
+
+        }
+
+
+        // show($query);
+
+        $query = trim($query, " && ");
+
+        $data = array_merge($data, $data_not);
+
+        $result = $this->query($query, $data);
+        if($result)
+            return $result[0]->count;
+        return 0;
+
+    }
+
+
+    // Extended functions
+    protected string $q = "";
+
 }
+
+
+
+

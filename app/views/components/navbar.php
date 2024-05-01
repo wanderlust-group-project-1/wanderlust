@@ -51,7 +51,7 @@
 
 
 
-        <div class="login-button"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
+        <div class="btn-small"><a href="<?= ROOT_DIR ?>/login">Login</a></div>
 
     <?php } ?>
 </nav>

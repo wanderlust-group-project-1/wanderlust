@@ -1,287 +1,340 @@
 <?php
 require_once('../app/views/layout/header.php');
-
-require_once('../app/views/components/navbar.php');
-?>
-<?php
-echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+require_once('../app/views/navbar/customer-navbar.php');
+// require_once('../app/views/layout/footer.php');
 ?>
 
-<div>
 
-    <div class="frame">
-
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle" id="edit-profile">
-                Edit Profile
-            </button>
-        </div>
-
-        <div class="div-1">
-            <div class="div-12">
-                <div class="text-wrapper">Hello <?php echo $user->name ?>!</div>
-                <div class="img-1">
-                    <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="">
+<div class="profile col-lg-12 align-items-center">
+    
+    <div class="flex-d-c col-lg-12 profile-content align-items-center py-5 mt-9">
+    <div class="customer-bg-image">
+        <img src="<?php echo ROOT_DIR?>/assets/images/customerbg.jpg" alt="customer-bg-image" class="customer-bg-image">
+    </div>
+    <!-- <?php show ($user);?> -->
+        <div class="profile-details">
+            <div class="col-lg-3 px-1 profile-details-colum">
+                <div class="card-normal-glass py-5 align-items-center justify-content-center mih-100"> 
+                    <div class="profile-picture">    
+                        <img src="<?php echo htmlspecialchars(OSURL); ?>images/customers/<?php echo htmlspecialchars($user->image); ?>" alt="Image" class="img">
+                    </div>
+                    <h1 class="mx-2 mb-4"> <?php echo $user->name?></h1>
+                    <div class="row">
+                        <h4><i class="fas fa-envelope"></i> <?php echo $user->email ?></h4> 
+                    </div>
+                    <div class="row">
+                        <h4><i class="fas fa-phone"></i> <?php echo $user->number ?></h4>
+                    </div>
+                    <div class="row">
+                        <h4><i class="fa fa-location-arrow"></i> <?php echo $user->address ?></h4>
+                    </div>
+                    <div class="row">
+                        <h4><i class="fas fa-id-card"></i> <?php echo $user->nic ?></h4>
+                    </div>
+                    <div class="row mt-4">
+                        <button type="submit" class="btn-text-green border mb-3" id="edit-profile">Edit Profile</button>
+                    </div>
                 </div>
             </div>
-
-            <form class="div-3">
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Name : <?php echo $user->name ?></div>
+            <div class="col-lg-6 flex-d-c mh-50 gap-4">
+                <div class="card-normal-glass miw-50"> 
+                    <div class="row justify-content-start ml-4">
+                        <h1>Recent Booking</h1>
                     </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">NIC : <?php echo $user->nic ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Role : Customer</div>
-                    </div>
-                </div>
-
-                <div class="div-4">
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Email : <?php echo $user->email ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Mobile : <?php echo $user->number ?></div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="text-wrapper-2">Address : <?php echo $user->address ?></div>
-                    </div>
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- Modal Box -->
-    <div class="profile-editor" id="profile-editor">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-info">
-                <div class="profile-image-wrapper">
-                    <!-- <div  > -->
-                        <img src="<?php echo ROOT_DIR ?>/assets/images/1.png" alt="Profile Image" class="profile-image">
-                        <div class="profile-image-container">
-                        <input type="file" id="profile-image-upload" accept="image/*" style="display:none">
-                        <button for="profile-image-upload" id="change-profile-pic-button" class="change-profile-pic-button">Change Profile Picture</button>
+                    <div class="flex-d-r">
+                        <div class="img-fluid h-200px rounded-7 ml-4">
+                            <img src="<?php echo ROOT_DIR ?>/uploads/images/equipment/<?php echo $rental->equipment_image; ?>" alt="Equipment Image" class="img-fluid h-200px p-3 rounded-8">
                         </div>
-                    <!-- </div> -->
-
-                    <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
-                        <h2>Update Customer Details</h2>
-                        <?php if (isset($errors)) : ?>
-                            <div> <?= implode('<br>', $errors) ?> </div>
-                        <?php endif; ?>
-
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
-
-                        <label for="address">Address</label>
-                        <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
-
-                        <label for="email">Email</label>
-                        <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
-
-                        <label for="number">Number</label>
-                        <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
-
-                        <label for="nic">NIC Number</label>
-                        <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
-
-                        <!-- <label for="password">Password</label>
-    <input type="password" name="password" id="password" required> -->
-
-                        <input type="submit" name="submit" value="Update">
-                    </form>
-
-
-
+                    </div>
+                    <div class="flex-d-r  justify-content-start">
+                        <div class="flex-d-c mr-5">
+                            <div class="row justify-content-end mt-6">
+                                <h3 class="mr-3"> <?php echo ucfirst($rental->rental_service_name) ?> </h3>
+                            </div>
+                            <div class="row justify-content-end mr-6">
+                                <p class="mr-3"> <?php echo $rental->rental_service_address ?> </p>
+                            </div>
+                            <div class="row justify-content-end mr-6">
+                                <p class="mr-3"> <?php echo $rental->rental_service_mobile ?> </p>
+                            </div>
+                            <div class="row justify-content-end mr-4">
+                            <a href="<?php echo ROOT_DIR ?>/myOrders">
+                                <button type="submit" class="btn-text-blue" id="see-more-bookings">View booking history</button></a>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                                    
+                                    
+                                       
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Box -->
-
-
-
-
-
-    <div class="frame2">
-        <div class="yellow-card">
-            <div class="upper-card-text">
-                <div class="text-card-topic">Total Booking</div>
-                <div class="edit-prof-button">
-                    <button type="submit" class="small-button-middle">
-                        More &gt
-                    </button>
+                <div class="card-normal-glass mt-4 miw-50"> 
+                    <div class="row justify-content-start ml-4 mw-75">
+                        <h1>Usage</h1>
+                    </div> 
+                    <div class="flex-d-r mw-75 gap-0">
+                        <div class="card-normal usage-card justify-content-center">
+                            <a href="<?php echo ROOT_DIR?>/myOrders">
+                                <div class="row">
+                                    <div class="btn-icon">    
+                                        <h3 class="equipment-booking">Orders</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h2> <?php echo $ordersCount; ?> </h2>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-normal usage-card justify-content-center">
+                            <a href="<?php echo ROOT_DIR?>/myBookings">
+                                <div class="row">
+                                    <h3>Guide Bookings</h3>
+                                </div>
+                                <div class="row">
+                                    <h2> <?php echo $guideBookingsCount; ?> </h2>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-normal usage-card  justify-content-center">
+                            <a href="<?php echo ROOT_DIR?>/complaints">
+                                <div class="row">
+                                    <h3>Complaints</h3>
+                                </div>
+                                <div class="row">
+                                    <h2> <?php echo $complaintCount; ?> </h2>
+                                </div>
+                            </a>
+                        </div>
+                    </div>  
                 </div>
-            </div>
-            <div class="number-card">03</div>
-        </div>
-
-        <div class="yellow-card">
-            <div class="upper-card-text">
-                <div class="text-card-topic">Equipment Booking</div>
-                <div class="edit-prof-button">
-                    <button type="submit" class="small-button-middle">
-                        More &gt
-                    </button>
-                </div>
-            </div>
-            <div class="number-card">02</div>
-        </div>
-
-        <div class="yellow-card">
-            <div class="upper-card-text">
-                <div class="text-card-topic">Guide Booking</div>
-                <div class="edit-prof-button">
-                    <button type="submit" class="small-button-middle">
-                        More &gt
-                    </button>
-                </div>
-            </div>
-            <div class="number-card">01</div>
-        </div>
-    </div>>
-
-
-
-    <div class="frame">
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle">
-                More &gt
-            </button>
-        </div>
-
-        <div class="sec3-booking">
-            <div class="sec3-booking-main">
-                <div class="text-topic">Recent Booking</div>
-                <div class="img-2">
-                    <img src="<?php echo ROOT_DIR ?>/assets/images/2.png" alt="">
-                </div>
-            </div>
-
-            <div class="div-5">
-                <div class="div-wrapper-2">
-                    <div class="text-wrapper-2">Booking Type : Equipment Booking</div>
-                </div>
-                <div class="div-wrapper-2">
-                    <div class="text-wrapper-2">Name : Glazers Camping</div>
-                </div>
-                <div class="div-wrapper-2">
-                    <div class="text-wrapper-2">Date : 20/08/2023</div>
-                </div>
-                <div class="div-wrapper-2">
-                    <div class="text-wrapper-2">Time : 10:00</div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="frame">
-        <div class="edit-prof-button">
-            <button type="submit" class="small-button-middle">
-                More &gt
-            </button>
-        </div>
-
-        <div class="text-topic">Booking History</div>
-
-        <div class="div-6">
-            <div class="div-wrapper-3">
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
-
-                    <tr>
-                        <td>Glazers Camping</td>
-                        <td>Upcoming</td>
-                        <td>Equipment</td>
-                        <td>02/12/2023</td>
-                        <td>10.00</td>
-                    </tr>
-
-                    <tr>
-                        <td>Glazers Camping</td>
-                        <td>Upcoming</td>
-                        <td>Equipment</td>
-                        <td>02/12/2023</td>
-                        <td>10.00</td>
-                    </tr>
-
-                    <tr>
-                        <td>Sarath</td>
-                        <td>Done</td>
-                        <td>Guide</td>
-                        <td>01/09/2023</td>
-                        <td>10.00</td>
-                    </tr>
-
-                </table>
             </div>
         </div>
     </div>
 </div>
 
 
+        <!-- <div class="flex-d-r mt-9 mw-100 ml-6">
+        <div class="flex-d-c col-lg-2 mw-50 mh-75 ml-6">
+            <div class="card-normal-glass flex-d-r ">
+                <div class="user-profile px-6 py-6">
 
-<!-- <form>
-                <div class="div-3">
-                    <div class="div-4">
-                        <div class="div-wrapper">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" value="Jenny Fernando">
+                    <div class="container"> -->
+                        <!-- <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" class="img-fluid h-200px" alt="Profile Image"> -->
+                        <!-- <img src="<? echo OSURL?>images/customers/<?php echo $user->image; ?>" alt="Image" class="img-fluid h-200px rounded-7">
+                    </div>
+                    <div class="user-details py-6">
+                        <h1 class="mb-5"> Hello <?php echo $user->name ?>!</h1>
+                        <div class="details flex-d">
+                            align-items-center
                         </div>
-                        <div class="div-wrapper">
-                            <label for="age">Age:</label>
-                            <input type="number" id="age" name="age" value="20">
+                        <div class="details flex-d">
+                            <h4><i class="fa fa-location-arrow"></i> <?php echo $user->address ?></h4>
                         </div>
-                        <div class="div-wrapper">
-                            <label for="role">Role:</label>
-                            <select id="role" name="role">
-                                <option value="Customer" selected>Customer</option>
-                                <option value="Employee">Employee</option>
-                                <option value="Manager">Manager</option>
-                            </select>
+                        <div class="details flex-d">
+                            <h4><i class="fas fa-envelope"></i> <?php echo $user->email ?></h4>
+                        </div>
+                        <div class="details flex-d">
+                            <h4><i class="fas fa-id-card"></i> <?php echo $user->nic ?></h4>
                         </div>
                     </div>
-                    <div class="div-4">
-                        <div class="div-wrapper">
-                            <label for="name2">Name:</label>
-                            <input type="text" id="name2" name="name2" value="Jenny Fernando">
+                    <div class="justify-items-center">
+                        <button type="submit" class="btn mt-4" id="edit-profile">
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+            <!-- <div class="card-normal flex-d-c col-lg-8 justify-content-center align-items-center">
+                
+                <div class="row">
+                    <h1>Recent Booking</h1>
+                </div>
+
+                    <div class=" flex-d-r gap-5">
+                        <div class="img-fluid h-200px rounded-7">
+                            <img src="<?php echo ROOT_DIR ?>/uploads/images/equipment/<?php echo $rental->equipment_image; ?>" alt="Equipment Image" class="img-fluid h-200px">
                         </div>
-                        <div class="div-wrapper">
-                            <label for="age2">Age:</label>
-                            <input type="number" id="age2" name="age2" value="20">
+
+                        <div class="flex-d-r">
+                            <div class="flex-d">
+                                <div class="flex-d-c">
+                                    <h3 class="ml-3"> <?php echo ucfirst($rental->rental_service_name) ?> </h3>
+                                    <p class="ml-3"> <?php echo $rental->rental_service_address ?> </p>
+                                    <p class="ml-3"> <?php echo $rental->rental_service_mobile ?> </p>
+                                    <div class="d-flex align-items-end flex-column">
+                                    <a href="<?php echo ROOT_DIR ?>/myOrders">
+                                        <button type="submit" class="btn-text-blue" id="see-more-bookings">
+                                             View booking history
+                                        </button>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                
+                <div class="flex-d-r mh-25">
+            <div class="flex-d-c mw-100">
+                <div class="flex-d-c">
+                    <div class="mw-100">
+                        <h2> Usage </h2>
+                        <div class="flex-d-R mw-50 gap-0">
+                            <div class="usage-card flex-d-c">
+                                <div class="flex">
+                                    <span class="details justify-content-start">
+                                        Guide Bookings
+                                    </span>
+                                    <a href="<?php echo ROOT_DIR ?>/guide">
+                                        <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
+                                            See More >>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="flex-d">
+                                    <h1>01</h1>
+                                </div>
+                            </div>
+
+
+                            <div class="usage-card flex-d-c">
+                                <div class="flex-d-r">
+                                    <span class="details justify-content-start">
+                                        Equipment Booking
+                                    </span>
+                                    <a href="<?php echo ROOT_DIR ?>/rent">
+                                        <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
+                                            See More >>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="flex-d">
+                                    <h1>04</h1>
+                                </div>
+                            </div>
+
+                            <div class="usage-card flex-d-c">
+                                <div class="flex-d-r">
+                                    <span class="details justify-content-start">
+                                        Complaints
+                                    </span>
+                                    <a href="<?php echo ROOT_DIR ?>/myBlog">
+                                        <button type=" submit" class="btn d-flex justify-content-end " id="see-more">
+                                            See More >>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="flex-d">
+                                    <h1>00</h1>
+                                </div>
+                            </div>
                         </div>
-                        <div class="div-wrapper">
-                            <label for="role2">Role:</label>
-                            <select id="role2" name="role2">
-                                <option value="Customer" selected>Customer</option>
-                                <option value="Employee">Employee</option>
-                                <option value="Manager">Manager</option>
-                            </select>
-                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+            </div> -->
+
+
+<!-- 
+    </div>
+</div> -->
+
+
+
+
+
+<!-- image Upload modal -->
+
+<div class="modal z-5" id="image-upload">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Upload Image</h2>
+        <!-- <form action="<?= ROOT_DIR ?>/rentalService/uploadImage" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" id="image" required>
+                <input type="submit" class="btn mt-4" name="submit" value="Upload">
+            </form> -->
+        <!-- With image preview -->
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="image" id="profile-image-input" class="form-control-lg" accept="image/png, image/jpg, image/gif, image/jpeg" required>
+            <div class="image-preview-container flex-d-c align-items-center">
+
+
+                <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" alt="" id="image-preview" class="image-preview">
+            </div>
+            <input type="submit" class="btn mt-4" name="submit" value="Upload">
+        </form>
+
+
+    </div>
+</div>
+
+
+
+<!--  profile editor modal -->
+
+
+<div class="profile-editor modal" id="profile-editor">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="profile-info">
+ 
+
+
+
+            <div class="profile-image mh-400px">
+
+                <div class="profile-image-overlay">
+                    <img src="<?php echo ROOT_DIR ?>/uploads/images/customers/<?php echo $user->image; ?>" alt="Profile Image" class="profile-image mh-200px" id="profile-image">
+                    <div class="camera-icon">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
                     </div>
                 </div>
 
-                <button type="submit">Submit</button>
-            </form> -->
+
+
+            </div>
+
+
+
+
+
+            <form id="customer" action="<?= ROOT_DIR ?>/customer/update" method="post">
+                <h2 class="row">Update Customer Details</h2>
+                <?php if (isset($errors)) : ?>
+                    <div> <?= implode('<br>', $errors) ?> </div>
+                <?php endif; ?>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<?= $user->name ?>" required>
+
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" value="<?= $user->address ?>" required>
+
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="<?= $user->email ?>" required>
+
+                <label for="number">Number</label>
+                <input type="text" name="number" id="number" value="<?= $user->number ?>" required>
+
+                <label for="nic">NIC Number</label>
+                <input type="text" name="nic" id="nic" value="<?= $user->nic ?>" required>
+                <br />
+                <div class="row">
+                    <input type="submit" name="submit" value="Update" class="btn-edit-profile-pic">
+                </div>
+            </form>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 
@@ -304,12 +357,8 @@ echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     // Add click event listener to view buttons
     viewButton.addEventListener('click', function() {
 
-        // var name = this.parentElement.parentElement.querySelector('td:first-child').textContent;
-        // var email = this.parentElement.parentElement.querySelector('td:nth-child(2)').textContent;
         openModal();
     });
-
-
 
 
     // Close the modal when the close button is clicked
@@ -326,49 +375,87 @@ echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
 </script>
 
 
-<!-- changing profile picture
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+
 <script>
     $(document).ready(function() {
-        $('#profile-image-upload').on('change', function(e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#profile-image').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(file);
+        $('.profile-image').click(function() {
+            $('#image-upload').css('display', 'block');
         });
     });
-</script> -->
 
-<script>
-    // Get the button and the file input element by their IDs
-var changeProfilePicButton = document.getElementById('change-profile-pic-button');
-var profileImageUpload = document.getElementById('profile-image-upload');
+    // image preview jquery
+    $(document).ready(function() {
+        $('#profile-image-input').change(function() {
+            var reader = new FileReader();
 
-// Add a click event listener to the button
-changeProfilePicButton.addEventListener('click', function() {
-    // Trigger click event on the file input when the button is clicked
-    profileImageUpload.click();
-});
+            // file type validation
+            if (!/image\/\w+/.test(this.files[0].type)) {
+                alertmsg('File type not supported', 'error');
+                // clear file input
+                console.log('File type not supported');
+                $('#profile-image-input').val('');
 
-// Add an event listener to the file input to handle file selection
-profileImageUpload.addEventListener('change', function() {
-    // Code to handle the selected file (e.g., upload to server, display preview, etc.)
-    // You can add your logic here
-});
+                return;
+            }
 
 
+
+
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+
+            }
+            reader.readAsDataURL(this.files[0]);
+
+        });
+    });
+
+    // upload image  using ajax
+    $(document).ready(function() {
+        $('#image-upload form').submit(function(e) {
+            e.preventDefault();
+            showLoader();
+            var formData = new FormData(this);
+            $.ajax({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie('jwt_auth_token')
+                },
+                url: "<?= ROOT_DIR ?>/api/customer/uploadImage",
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    alertmsg('Image uploaded successfully', 'success');
+                    $('#image-upload').css('display', 'none');
+                    console.log(data.data);
+
+                    $('.profile-image').attr('src', '<?= ROOT_DIR ?>/uploads/images/customers/' + data.data.image);
+                    // $('#profile-image-input').val('');
+                    // $('#image-preview').attr('src', '');
+                    // location.reload();
+                    hideLoader();
+                },
+                error: function(data) {
+                    alertmsg('Image upload failed', 'error');
+                    console.log(data);
+                    hideLoader();
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+    });
 </script>
 
-
-
-
+<?php
+    require_once('../app/views/layout/footer-main.php');
+?>
 
 <?php
-require_once('../app/views/layout/footer.php');
-
-
+    require_once('../app/views/layout/footer.php');
 ?>

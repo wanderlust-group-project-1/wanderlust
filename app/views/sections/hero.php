@@ -1,4 +1,4 @@
-<div class="hero">
+<!-- <div class="main">
     <div class="home-container row">
         <div class="col col-2">
             <h1 class="hero-title">Campers,</h1>
@@ -12,4 +12,35 @@
 
     </div>
 
+</div> -->
+
+<div class="home_main">
+    <div class="home_container">
+        <div class="home_card">
+            <div class="home_text">
+                <div class="home_title">Campers,</div>
+                <div class="home_sub">
+                    <p>Your Gateway to Outdoor Adventures:</p>
+                    <p>Gear Up &amp; Go with Expert Guides!</p>
+                </div>
+            </div>
+
+        <?php if (isset($_SESSION['USER']) && is_object($_SESSION['USER'])) {
+            $user = $_SESSION['USER']; ?>
+
+            <div class="home_button">
+                <a href="#" class="btn-text-green border">Get Started</a>
+            </div>
+
+        <?php } else {  ?>
+            <div class="home_button">
+            <a href="<?= ROOT_DIR ?>/login" class="btn-text-green border">Get Started</a>
+            </div>
+        <?php } ?>
+    </div>
+
+        <div class="home_card">
+            <img class="home_img" src="<?= ROOT_DIR ?>/assets/images/hero.png" alt="Hero Image">
+        </div>
+    </div>
 </div>

@@ -1,4 +1,34 @@
 
+.alert {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    align-self: center;
+    position: fixed;
+    bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    z-index: 9999;
+    animation: fadeOutAlert 1s ease-in-out 3s forwards;
+}
+
+.alert-error {
+    background-color: #c71515;
+}
+
+@keyframes fadeOutAlert {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
 
 .border-box {
     box-sizing: border-box;
@@ -49,6 +79,8 @@
 }
 
 /* Auth Nav bar */
+
+
 
 .auth-nav {
     background-color: #F4F4F4; 
@@ -194,6 +226,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    width: 100%;
 }
 
 .col {
@@ -383,14 +416,13 @@ body {
 
 
 /* Login Page and Sign-up */
-
+/* 
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height:90%;
-    /* overflow-x: hidden; */
     border-radius: 10px;
     background: #ECECEC;
     backdrop-filter: blur(67px);
@@ -430,7 +462,7 @@ body {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
   
-  .login-form input[type="submit"] {
+  .login-form input[type="submit"], .login-form button[name="submit"] {
     display: block;
     width: 100%;
     padding: 10px;
@@ -444,7 +476,7 @@ body {
     
   }
   
-  .login-form input[type="submit"]:hover {
+  .login-form input[type="submit"]:hover , .login-form button[name="submit"]:hover {
     border: 1px solid #BCAB86;
     background-color: #ECECEC;
     color: #4C5039;
@@ -453,7 +485,6 @@ body {
   .login-form p {
     text-align: center;
     margin-top: 10px;
-    /* font-size: 12px; */
   }
   
   .login-form a {
@@ -474,7 +505,6 @@ body {
     font-size: 10px;
   }
 
-/* Signup */
 
 .signup-card {
     display: flex;
@@ -499,7 +529,6 @@ body {
     resize: none;
     font-family:'Times New Roman';
    }
-    /* backdrop-filter: blur(67px); */
 
 .login-container  .tooltip-container {
     position: relative;
@@ -537,7 +566,7 @@ body {
 }
 
 .login-container .hoverable-area {
-    padding: 10px; /* Adjust the padding to increase the hoverable area */
+    padding: 10px; 
 }
 
 .login-container .signup-card:hover {
@@ -555,12 +584,10 @@ form #error-message {
     font-size: 15px;
 }
 
-/* Style for the custom file input */
-.file-input-container {
+.file-input-container ,.location-button-container {
     position: relative;
     margin-top: 10px;
     padding: 10px;
-    /* align center */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -585,3 +612,122 @@ form #error-message {
     opacity: 0;
     cursor: pointer;
 }
+
+
+
+.location-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.location-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.location-modal .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.location-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.location-modal .close:hover,
+.location-modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.location-modal .map-canvas {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    position: fixed;
+}
+
+
+#description {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  #pac-container {
+    padding-bottom: 12px;
+    margin-right: 12px;
+  }
+  
+  .pac-container {
+    z-index: 1051 !important;
+  }
+  
+  .pac-card {
+    margin: 10px 10px 0 0;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    font-family: Roboto;
+  }
+  
+  .pac-controls {
+    display: inline-block;
+    padding: 5px 11px;
+  }
+  
+  .pac-controls label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  
+  #pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    max-width: 400px;
+  }
+  
+  #pac-input:focus {
+    border-color: #4d90fe;
+  }
+  
+  #title {
+    color: #fff;
+    background-color: #4d90fe;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
+  }
+  #target {
+    width: 345px;
+  } */

@@ -1,6 +1,7 @@
 <?php
 
-class CustomerModel {
+class CustomerModel
+{
     use Model;
 
     protected string $table = 'customers';
@@ -12,7 +13,37 @@ class CustomerModel {
         'user_id'
     ];
 
-    public function registerCustomer(array $data){
+    // public function registerCustomer(array $data){
+    //     if ($this->validateCustomerSignup($data)) {
+    //         $user = new UserModel;
+
+    //         $data['user_id'] = $user->registerUser([
+    //             'email' => $data['email'],
+    //             'password' => $data['password'],
+    //             'role' => 'customer',
+    //         ]);
+
+
+    //         if($data['user_id']){
+    //             $data = array_filter($data, function ($key) {
+    //                 return in_array($key, $this->allowedColumns);
+    //             }, ARRAY_FILTER_USE_KEY);
+
+
+    //             return $this->insert($data);
+
+    //         }
+
+
+    //     }
+    //     return false;
+    // }
+
+
+    public function registerCustomer(JSONRequest $request, JSONResponse $response)
+    {
+        $data = $request->getAll();
+
         if ($this->validateCustomerSignup($data)) {
             $user = new UserModel;
 
@@ -22,75 +53,130 @@ class CustomerModel {
                 'role' => 'customer',
             ]);
 
-
-            if($data['user_id']){
+            if ($data['user_id']) {
                 $data = array_filter($data, function ($key) {
                     return in_array($key, $this->allowedColumns);
                 }, ARRAY_FILTER_USE_KEY);
 
+                $this->insert($data);
 
-                return $this->insert($data);
-
+                $response->success(true)
+                    ->data(['user_id' => $data['user_id']])
+                    ->message('Customer registered successfully')
+                    ->statusCode(201)
+                    ->send();
+            } else {
+                $response->success(false)
+                    ->message('User registration failed')
+                    ->statusCode(500)
+                    ->send();
             }
-
-
+        } else {
+            $response->success(false)
+                ->data(['errors' => $this->errors])
+                ->message( isset($this->errors['msg']) ? $this->errors['msg'] : 'Validation failed')
+                ->statusCode(422)
+                ->send();
         }
-        return false;
     }
 
-    public function validateCustomerSignup(array $data){
+
+
+
+
+    public function validateCustomerSignup(array $data)
+    {
         $this->errors = [];
 
-        if(empty($data['name'])){
+        if (empty($data['name'])) {
             $this->errors['name'] = "Name is required";
         }
 
-        if(empty($data['address'])){
+        if (empty($data['address'])) {
             $this->errors['address'] = "Address is required";
         }
 
-        if(empty($data['email'])){
+        if (empty($data['email'])) {
             $this->errors['email'] = "Email is required";
-        } else if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+        } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "Email is not valid";
         }
 
-        if(empty($data['number'])){
+        if (empty($data['number'])) {
             $this->errors['number'] = "Number is required";
         }
 
-        if(empty($data['nic'])){
+        if (empty($data['nic'])) {
             $this->errors['nic'] = "NIC Number is required";
         }
 
-        if(empty($data['password'])){
+        if (empty($data['password'])) {
             $this->errors['password'] = "Password is required";
-        } else if(strlen($data['password']) < 6){
+        } else if (strlen($data['password']) < 6) {
             $this->errors['password'] = "Password must be at least 6 characters";
         }
+
+        // check if email already exists
+        $user = new UserModel;
+        if ($user->first(['email' => $data['email']])) {
+            $this->errors['email'] = "Email already exists";
+            $this->errors['msg'] = "Email already exists";
+        }
+        
+        $customer = new CustomerModel;
+        if($customer->first(['nic' => $data['nic']])){
+            $this->errors['nic'] = "NIC Number already exists";
+            $this->errors['msg'] = "NIC Number already exists";
+        }
+
+        if($customer->first(['number' => $data['number']])){
+            $this->errors['number'] = "Mobile Number already exists";
+            $this->errors['msg'] = "Mobile Number already exists";
+        }
+
 
         return empty($this->errors);
     }
 
-    public function updateCustomer(array $data){
-        
-            // $user = new UserModel;
+    public function updateCustomer(array $data)
+    {
 
-            $data['id'] = $_SESSION['USER']->id;
+        // $user = new UserModel;
 
-            // alowed column
-            $data = array_filter($data, function ($key) {
-                return in_array($key, $this->allowedColumns);
-            }, ARRAY_FILTER_USE_KEY);
+        $data['id'] = $_SESSION['USER']->id;
 
-            return $this->update($_SESSION['USER']->id,$data,'id');
+        // alowed column
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->allowedColumns);
+        }, ARRAY_FILTER_USE_KEY);
+
+        return $this->update($_SESSION['USER']->id, $data, 'id');
+    }
+
+
+    public function uploadImage(array $data, int $id): mixed
+    {
+        $data['image'] =  upload($data['image'], 'images/customers');
+        $this->update($id, ['image' => $data['image']]);
+        return $data;
+    }
 
 
 
 
-        
-
-    
+    public function getCustomer(int $id): mixed
+    {
+        $q = new QueryBuilder;
+        $q->setTable('customers');
+        // with user table join
+        $q->select('customers.*,users.email,users.role')
+            // ->from('rental_services')
+            ->join('users', 'customers.user_id', 'users.id')
+            ->where('customers.id', $id);
+        // return $this->query();
+        // show($id);
+        // show($q->getQuery());
+        return $this->query($q->getQuery(), $q->getData());
     }
 
     // public function validateCustomerUpdate($data){

@@ -1,13 +1,27 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
+
+
+    <div class="nav__data">
+      <a href="/home" class="nav__logo">
+        <img class="nav__logo-pic p-3 mb-5" src="<?= ROOT_DIR ?>/assets/images/logo.png" alt="logo">
+      </a>
+
+      <div class="nav__toggle" id="nav-toggle">
+        <i class="ri-menu-line nav__burger"></i>
+        <i class="ri-close-line nav__close"></i>
+      </div>
+    </div>
+
+
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/rentalServices">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/dashboard">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Users</span>
@@ -19,7 +33,7 @@
           <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices" aria-expanded="false" aria-controls="ui-basic">
@@ -63,7 +77,7 @@
       </div>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/blogs">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Blogs</span>
@@ -73,14 +87,16 @@
     <li class="nav-item">
       <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/tips">
         <i class="ti-shield menu-icon"></i>
-        <span class="menu-title">Tips and Know-hows</span>
+        <span class="menu-title">Tips and Knowhows</span>
       </a>
-    </li>
+    </li> -->
+
+
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/rentalServices/item" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/tips" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
-        <span class="menu-title">Items</span>
+        <span class="menu-title">Tips & Knowhows</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
@@ -92,14 +108,14 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/blogs">
+      <a class="nav-link" href="<?php echo ROOT_DIR ?>/admin/complains">
         <i class="ti-shield menu-icon"></i>
         <span class="menu-title">Complaints</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="charts" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" data-bs-toggle="collapse" href="<?php echo ROOT_DIR ?>/admin/charts" aria-expanded="false" aria-controls="ui-basic">
         <i class="ti-palette menu-icon"></i>
         <span class="menu-title">Statistics</span>
         <i class="menu-arrow"></i>
@@ -111,5 +127,33 @@
         </ul>
       </div>
     </li>
+
+
+
+    <div class="guide-dash-prof">
+      <div class=" flex-d justify-content-center align-items-center">
+       
+        <a href="<?php echo ROOT_DIR ?>/logout"> <button type="submit" class="btn-edit edit-profile">
+          Logout
+        </button>
+      </div>
+    </div>
+
+
+
+
+
   </ul>
 </nav>
+
+<script>
+  function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+  }
+
+  // function toggleSidebar() {
+  //     var sidebar = document.getElementById("sidebar");
+  //     sidebar.classList.toggle("sidebar-offcanvas");
+  // }
+</script>
