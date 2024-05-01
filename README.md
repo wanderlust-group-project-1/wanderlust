@@ -3,6 +3,11 @@
 ## Camping Equipment Rental and Guide Booking System
 
 
+<p align="center">
+  <img src="https://github.com/wanderlust-group-project-1/wanderlust/blob/main/Logo.png?raw=true" alt="Wanderlust Logo"  height="200">
+</p>
+
+
 
 ## Group Members 
 
