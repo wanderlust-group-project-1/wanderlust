@@ -1,12 +1,10 @@
 <?php
 require_once('../app/views/layout/header.php');
 
-// require_once('../app/views/admin/components/navbar.php');
-// require_once('../app/views/navbar/rental-navbar.php');
+
 
 ?>
 
-<!-- <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/RentalDashboard.css"> -->
 
 
 
