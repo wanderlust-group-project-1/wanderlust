@@ -43,8 +43,9 @@
                     <button class="btn btn-primary" id="mark-as-returned">Mark as Returned</button>
                 <?php }
                 elseif ($complaint->status == 'pending') { ?>
-                    <!-- <button class="btn-text-orange" id="accept-complaint"><i class="fa fa-check" aria-hidden="true"></i> Accept</button> -->
-                    <!-- <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>   -->
+
+                    <!-- <button class="btn-text-orange" id="accept-complaint"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+                    <button class="btn-text-red" id="cancel-complaint"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>   -->
                 <?php }
                 ?>
 
