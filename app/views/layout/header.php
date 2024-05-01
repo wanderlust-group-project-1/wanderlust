@@ -19,7 +19,6 @@
 
 
 
-    <link rel="stylesheet" type="text/css" href="<?= ROOT_DIR ?>/assets/css/signUp.css">
 </head>
 
 <body>
