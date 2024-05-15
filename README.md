@@ -112,9 +112,18 @@ sed -i -e 's/\r$//' migrate.sh
 #import
 ./migrate.sh import
 ```
-
+Or open PHPMyAdmin at `http://localhost:8007` and import the `wanderlust.sql` file
 
 ## Compile SCSS
 
 Use Live Sass Compiler Extension in VSCode to compile SCSS to CSS
 
+## Login Details
+
+customer@wl.com | Admin@1234
+
+rental@wl.com | Admin@1234
+
+guide@wl.com | Admin@1234
+
+admin@wl.com | Admin1234
