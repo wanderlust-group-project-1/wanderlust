@@ -97,6 +97,8 @@ Rename `database/example.env` to `database/.env`
 docker-compose up -d --build
 ```
 
+Site will be available at `http://localhost:8000`
+
 ## import database
 
 ```bash
